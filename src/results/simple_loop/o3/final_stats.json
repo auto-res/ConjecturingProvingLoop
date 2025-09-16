@@ -1,0 +1,26 @@
+{
+  "times": [
+    14.929080963134766
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1015,
+      "prompt_tokens": 73815,
+      "total_tokens": 74830,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 73600
+      }
+    }
+  ],
+  "responses": [
+    "namespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\ntheorem SemiOpen.closure_frontier_subset_closure_interior\n    {A : Set X} (hA : SemiOpen (A : Set X)) :\n    closure (frontier (A : Set X)) ⊆ closure (interior (A : Set X)) := by\n  -- The frontier is already contained in `closure (interior A)`.\n  have hsubset :\n      frontier (A : Set X) ⊆ closure (interior (A : Set X)) :=\n    SemiOpen.frontier_subset_closure_interior (A := A) hA\n  -- Taking closures preserves inclusions.\n  simpa [closure_closure] using closure_mono hsubset\n\nend Topology"
+  ],
+  "success": true
+}

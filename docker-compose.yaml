@@ -1,0 +1,23 @@
+services:
+  app:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: ${APPCONTAINER}
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    command: ["/bin/bash", "-c", "tail -f /dev/null"]
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/24
+          gateway: 10.10.0.1

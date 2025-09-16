@@ -1,0 +1,46 @@
+[project]
+name = "AI-Mathematician"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Ondanaoto", email = "n.onda.go20@gmail.com" }
+]
+dependencies = [
+    "fastapi>=0.115.6",
+    "jsonschema>=4.23.0",
+    "loguru>=0.7.3",
+    "openai>=1.58.1",
+    "pydantic>=2.10.3",
+    "pytest>=8.3.4",
+    "requests>=2.32.3",
+    "uvicorn>=0.33.0",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "black>=24.8.0",
+    "ruff>=0.6.4",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ai_mathematician"]
+
+[tool.rye.scripts]
+lint = { chain = ["lint:ruff", "lint:ruff_format", "lint:mypy" ] }
+"lint:ruff" = "ruff check ./ --diff"
+"lint:ruff_format" = "ruff format --check --diff"
+"lint:mypy" = "mypy ./ --explicit-package-bases"
+
+format = { chain = [ "format:ruff", "format:ruff_check" ] }
+"format:ruff" = "ruff format ./"
+"format:ruff_check" = "ruff check ./ --fix"
