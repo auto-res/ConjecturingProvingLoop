@@ -1,4 +1,22 @@
+# Conjecturing-Proving Loop
+
+This directory contains the experimental scripts and results for the following paper.
+
+- Kazumi Kasaura, Naoto Onda, Yuta Oriike, Masaya Taniguchi, Akiyoshi Sannai, Sho Sonoda. 2025, "Discovering New Theorems via LLMs with In-Context Proof Learning in Lean."
+
 ## Setup
+
+0. Clone the repository with submodules
+   ```bash
+   git clone --recursive git@github.com:auto-res/ConjecturingProvingLoop.git
+   cd ConjecturingProvingLoop
+   ```
+   
+   If you've already cloned without submodules:
+   ```bash
+   git submodule update --init --recursive
+   ```
+
 1. Copy the following files so that you can set your own settings.
 ```bash
 cp .env.example .env
