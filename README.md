@@ -31,7 +31,7 @@ docker compose up -d --build
 1. Enter the container.
 If you want to enter the container by a command, run:
 ```bash
-docker exec -it $APPCONTAINER /bin/bash
+docker compose exec -it app /bin/bash
 ```
 If you want to enter the container by VSCode, see [this page](https://code.visualstudio.com/docs/devcontainers/attach-container).
 
@@ -39,12 +39,13 @@ If you want to enter the container by VSCode, see [this page](https://code.visua
 In the docker container $APPCONTAINER, first run
 ```
 export PATH=/root/.elan/bin/:$PATH
-cd /workplace/mathlib4
+cd /workspace/mathlib4
+git config --global --add safe.directory /workspace/mathlib4
 lake exe cache get
 lake build
-cd /workplace/repl
+cd /workspace/repl
 lake build
-cd /workplace/src
+cd /workspace/src
 ```
 
 ## How to use
