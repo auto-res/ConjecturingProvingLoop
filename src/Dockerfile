@@ -6,6 +6,7 @@ RUN pip install uv
 
 COPY requirements.lock .
 COPY pyproject.toml .
+COPY README.md .
 
 RUN uv sync
 
