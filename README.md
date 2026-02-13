@@ -51,25 +51,27 @@ cd /workspace/src
 ## How to use
 ### Conjecturing-Proving Loop
 ```bash
-uv run python cmd_loop.py --seed_file notions/SemiOpen.lean --save_dir results/with_stats/4ogen
+uv run python cmd_loop.py --seed_file notions/P.lean --save_dir results/P/CPL/tmp
 ```
-The generated library in our experiment is stored in `results/with_stats/4ogen/generated_29.lean`.
+The generated library in our experiment is stored in `results/P/CPL/*`.
 
 ### Baseline Simple Loop
 ```bash
-uv run python simple_loop.py --seed_file notions/SemiOpen.lean --save_dir results/simple_loop/o3
+uv run python simple_loop.py --seed_file notions/P.lean --save_dir results/P/SL/tmp
 ```
-The generated library in our experiment is stored in `results/simple_loop/o3/final_generated.lean`.
+The generated library in our experiment is stored in `results/P/SL/*`.
+
+The script 'proof_lengths.py' is used for arrangement of results.
 
 ### Evaluation of Prover
 
 #### Reproving Generated Theorems
 ```bash
-uv run python eval_prover.py --input_file results/with_stats/4ogen/generated_29.lean --output_dir results/with_stats/4ogen/eval_result
+uv run python eval_prover.py --input_file results/P/CPL/0/upto_14000000.lean --output_dir results/P/CPL/0/eval_results
 ```
 #### Proof Ability for Alpha-Open Intersection
 ```bash
-uv run python eval_prover_2.py
+uv run python eval_prover_2.py --input_file results/P/CPL/8/upto_14000000.lean --target_theorem P2_inter --output_dir results/P/CPL/8/eval_results_2
 ```
 For natural language proof generation:
 ```bash
@@ -77,4 +79,4 @@ uv run python eval_NL.py --model gpt-4o
 uv run python eval_NL.py --model 3o
 ```
 ### View Results
-Please run `proof_lengths.py`.
+Please run `show_proof_lengths.py`.
