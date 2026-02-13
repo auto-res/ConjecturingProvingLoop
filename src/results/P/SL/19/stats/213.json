@@ -1,0 +1,60 @@
+{
+  "times": [
+    58.88654160499573,
+    77.24927639961243,
+    38.245529651641846
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4822,
+      "prompt_tokens": 33533,
+      "total_tokens": 38355,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 6538,
+      "prompt_tokens": 33724,
+      "total_tokens": 40262,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 3015,
+      "prompt_tokens": 33861,
+      "total_tokens": 36876,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_self_eq_self_diff_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A ∩ A = A \\ interior A := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hFront, hA⟩\n    have : x ∈ closure A ∧ x ∉ interior A := by\n      simpa [frontier] using hFront\n    exact And.intro hA this.2\n  · intro hx\n    rcases hx with ⟨hA, hNotInt⟩\n    have hClos : x ∈ closure A := subset_closure hA\n    have hFront : x ∈ frontier A := by\n      simpa [frontier] using And.intro hClos hNotInt\n    exact And.intro hFront hA",
+    "theorem Topology.frontier_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (Aᶜ) = frontier A := by\n  simpa using frontier_compl (s := A)\n\ntheorem Topology.frontier_interior_eq_closure_interior_diff_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (interior A) = closure (interior A) \\ interior A := by\n  simp [frontier, interior_interior]",
+    "theorem Topology.interior_subset_diff_frontier {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ A \\ frontier A := by\n  intro x hxInt\n  have hxA : x ∈ A := interior_subset hxInt\n  have hxNotFront : x ∉ frontier A := by\n    intro hxFront\n    have hNotInt : x ∉ interior A := hxFront.2\n    exact hNotInt hxInt\n  exact And.intro hxA hxNotFront"
+  ],
+  "success": true
+}

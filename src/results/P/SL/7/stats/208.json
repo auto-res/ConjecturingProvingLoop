@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.41423177719116
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3278,
+      "prompt_tokens": 31947,
+      "total_tokens": 35225,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_subset_closureInteriorClosureInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → A ⊆ closure (interior (closure (interior A))) := by\n  intro hP1 x hxA\n  -- From `P1` we get membership in `closure (interior A)`.\n  have hx_cl : x ∈ closure (interior A) := hP1 hxA\n  -- Use the established inclusion\n  -- `closure (interior A) ⊆ closure (interior (closure (interior A)))`.\n  have hIncl :\n      closure (interior A) ⊆ closure (interior (closure (interior A))) :=\n    Topology.closureInterior_subset_closureInteriorClosureInterior (A := A)\n  exact hIncl hx_cl"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    103.79874849319458,
+    101.61780858039856
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6090,
+      "prompt_tokens": 43425,
+      "total_tokens": 49515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 5838,
+      "prompt_tokens": 43600,
+      "total_tokens": 49438,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_subset_closure_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A : Set X) ∩ interior (B : Set X) ⊆ closure (A ∩ B : Set X) := by\n  intro x hx\n  rcases hx with ⟨hx_clA, hx_intB⟩\n  -- We show that `x` is a limit point of `A ∩ B`.\n  -- Unfold the definition of `closure`.\n  rw mem_closure_iff at hx_clA ⊢\n  intro U hU_open hxU\n  -- Intersect the neighbourhood `U` with `interior B`, which is itself open.\n  have h_open : IsOpen (U ∩ interior (B : Set X)) := hU_open.inter isOpen_interior\n  have hxUV : x ∈ U ∩ interior (B : Set X) := ⟨hxU, hx_intB⟩\n  -- Since `x ∈ closure A`, this new open set meets `A`.\n  have h_nonempty : ((U ∩ interior (B : Set X)) ∩ A).Nonempty :=\n    hx_clA _ h_open hxUV\n  -- Any point in this intersection is in `A ∩ B` and still in `U`.\n  rcases h_nonempty with ⟨y, ⟨hyU, hy_intB⟩, hyA⟩\n  have hyB : y ∈ (B : Set X) := interior_subset hy_intB\n  exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩",
+    "theorem P2_union_interior_right {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 A → Topology.P2 (A ∪ interior (B : Set X)) := by\n  intro hP2A\n  have hOpenInt : IsOpen (interior (B : Set X)) := isOpen_interior\n  exact\n    (Topology.P2_union_right_of_open\n      (X := X) (A := A) (B := interior (B : Set X))) hP2A hOpenInt"
+  ],
+  "success": true
+}

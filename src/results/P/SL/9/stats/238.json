@@ -1,0 +1,43 @@
+{
+  "times": [
+    70.30885887145996,
+    115.56904792785645
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4902,
+      "prompt_tokens": 39741,
+      "total_tokens": 44643,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 6183,
+      "prompt_tokens": 39847,
+      "total_tokens": 46030,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_union_interior_eq_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    frontier (A : Set X) ∪ interior A = closure A := by\n  have h := Topology.interior_union_closureDiffInterior_eq_closure (A := A)\n  simpa [frontier, Set.union_comm] using h",
+    "theorem Topology.frontier_subset_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) : frontier (A : Set X) ⊆ A := by\n  intro x hx\n  -- `hx` provides `x ∈ closure A`.\n  have hx_cl : x ∈ closure (A : Set X) := hx.1\n  -- Since `A` is closed, we have `closure A = A`.\n  have h_cl_eq : closure (A : Set X) = A := hA.closure_eq\n  -- The desired result follows by rewriting.\n  simpa [h_cl_eq] using hx_cl"
+  ],
+  "success": true
+}

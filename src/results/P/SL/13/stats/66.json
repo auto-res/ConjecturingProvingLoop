@@ -1,0 +1,60 @@
+{
+  "times": [
+    57.49402213096619,
+    306.6004967689514,
+    34.24908256530762
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3722,
+      "prompt_tokens": 10844,
+      "total_tokens": 14566,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    },
+    {
+      "completion_tokens": 19226,
+      "prompt_tokens": 10950,
+      "total_tokens": 30176,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    },
+    {
+      "completion_tokens": 3028,
+      "prompt_tokens": 11121,
+      "total_tokens": 14149,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_interior_closure_eq_interior_closureInteriorClosure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (X:=X) A →\n      interior (closure (A : Set X)) =\n        interior (closure (interior (closure A))) := by\n  intro hP3\n  have h :=\n    Topology.P3_implies_closure_eq_closureInteriorClosure (X:=X) (A:=A) hP3\n  simpa [h]",
+    "set_option maxRecDepth 2000\n\nreplace theorem Topology.isOpen_subset_closureInterior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen A) : Topology.P1 (X := X) A := by\n  dsimp [Topology.P1]\n  intro x hx\n  -- Rewriting with `simpa only` avoids the excessive recursion that caused\n  -- the previous `simp` failure.\n  have hx_int : x ∈ interior A := by\n    simpa only [hA.interior_eq] using hx\n  exact subset_closure hx_int\n\nreplace theorem Topology.Topology.isOpen_subset_closureInterior {X : Type*}\n    [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    Topology.P1 (X := X) A := by\n  dsimp [Topology.P1]\n  intro x hx\n  have hx_int : x ∈ interior A := by\n    simpa only [hA.interior_eq] using hx\n  exact subset_closure hx_int\n\ntheorem Topology.closure_interior_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior (A : Set X)) ⊆ closure (A : Set X) := by\n  intro x hx\n  have h_subset : (interior (A : Set X)) ⊆ A := interior_subset\n  exact (closure_mono h_subset) hx",
+    "theorem Topology.interior_interior_closure_eq_interior_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (interior (closure (A : Set X))) = interior (closure A) := by\n  simpa [interior_interior]"
+  ],
+  "success": true
+}

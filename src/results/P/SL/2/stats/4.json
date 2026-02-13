@@ -1,0 +1,26 @@
+{
+  "times": [
+    47.128490924835205
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3010,
+      "prompt_tokens": 653,
+      "total_tokens": 3663,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen A → Topology.P3 A := by\n  intro hA\n  intro x hxA\n  have hsubset : (A : Set X) ⊆ interior (closure A) := by\n    have hcl : (A : Set X) ⊆ closure A := subset_closure\n    exact interior_maximal hcl hA\n  exact hsubset hxA"
+  ],
+  "success": true
+}

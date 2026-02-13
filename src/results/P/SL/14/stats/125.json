@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.5865535736084
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2407,
+      "prompt_tokens": 21963,
+      "total_tokens": 24370,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_union_satisfies_P1_P2_P3\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    Topology.P1 (A ∪ B) ∧ Topology.P2 (A ∪ B) ∧ Topology.P3 (A ∪ B) := by\n  have hOpen : IsOpen (A ∪ B) := IsOpen.union hA hB\n  simpa using\n    Topology.isOpen_satisfies_P1_P2_P3 (X := X) (A := A ∪ B) hOpen"
+  ],
+  "success": true
+}

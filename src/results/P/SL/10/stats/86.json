@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.91785979270935
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4994,
+      "prompt_tokens": 13336,
+      "total_tokens": 18330,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13184
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior (closure A)) ⊆ closure A := by\n  have h₁ : interior (closure A) ⊆ closure A := interior_subset\n  have h₂ : closure (interior (closure A)) ⊆ closure (closure A) :=\n    closure_mono h₁\n  simpa [closure_closure] using h₂"
+  ],
+  "success": true
+}

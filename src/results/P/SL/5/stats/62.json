@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.73841118812561
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2874,
+      "prompt_tokens": 9532,
+      "total_tokens": 12406,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_self_of_closed_and_P2 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hClosed : IsClosed (A : Set X)) (hP2 : Topology.P2 (X := X) A) :\n    closure (interior A) = A := by\n  -- We obtain both inclusions separately and then use `le_antisymm`.\n  apply le_antisymm\n  · -- `closure (interior A)` is contained in `A` because `A` is closed.\n    exact\n      Topology.closure_interior_subset_of_closed (X := X) (A := A) hClosed\n  · -- The converse inclusion follows from `P2`.\n    intro x hxA\n    -- `P2` yields that `x` belongs to the interior of `closure (interior A)`.\n    have hx_int : x ∈ interior (closure (interior A)) := hP2 hxA\n    -- Hence `x` lies in `closure (interior A)`.\n    exact interior_subset hx_int"
+  ],
+  "success": true
+}

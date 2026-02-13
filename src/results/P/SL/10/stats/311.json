@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.804606914520264
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2847,
+      "prompt_tokens": 50370,
+      "total_tokens": 53217,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_interior_subset_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure A ∪ interior B ⊆ closure (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have h_subset : closure A ⊆ closure (A ∪ B) :=\n        closure_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n      exact h_subset hxA\n  | inr hxB =>\n      -- `x` lies in `interior B`, hence in `B`, and therefore in `A ∪ B`.\n      have hx_union : (x : X) ∈ A ∪ B := Or.inr (interior_subset hxB)\n      -- Every point of `A ∪ B` belongs to its closure.\n      exact subset_closure hx_union"
+  ],
+  "success": true
+}

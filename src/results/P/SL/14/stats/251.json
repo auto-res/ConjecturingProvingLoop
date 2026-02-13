@@ -1,0 +1,26 @@
+{
+  "times": [
+    98.51483702659607
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6018,
+      "prompt_tokens": 46496,
+      "total_tokens": 52514,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P2_and_P3_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    Topology.P1 A ↔ (Topology.P2 A ∧ Topology.P3 A) := by\n  -- Equivalences already available for open sets.\n  have h₁ : Topology.P1 A ↔ Topology.P2 A :=\n    Topology.P1_iff_P2_of_isOpen (X := X) (A := A) hA\n  have h₂ : Topology.P2 A ↔ Topology.P3 A :=\n    Topology.P2_iff_P3_of_isOpen (X := X) (A := A) hA\n  constructor\n  · intro hP1\n    -- Deduce `P2` from `P1`, then `P3` from `P2`.\n    have hP2 : Topology.P2 A := (h₁).1 hP1\n    have hP3 : Topology.P3 A := (h₂).1 hP2\n    exact And.intro hP2 hP3\n  · rintro ⟨hP2, _hP3⟩\n    -- From `P2` we recover `P1` using the first equivalence.\n    exact (h₁).2 hP2"
+  ],
+  "success": true
+}

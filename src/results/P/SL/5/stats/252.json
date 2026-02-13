@@ -1,0 +1,26 @@
+{
+  "times": [
+    113.96319484710693
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9545,
+      "prompt_tokens": 45863,
+      "total_tokens": 55408,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_four {X : Type*} [TopologicalSpace X] {A B C D : Set X} :\n    closure (A ∪ B ∪ C ∪ D : Set X) =\n      closure A ∪ closure B ∪ closure C ∪ closure D := by\n  -- First, distribute `closure` over `A ∪ B ∪ C`.\n  have hABC :\n      closure (A ∪ B ∪ C : Set X) =\n        closure A ∪ closure B ∪ closure C :=\n    closure_union_three (X := X) (A := A) (B := B) (C := C)\n  -- Now regroup the unions and apply `closure_union` once more.\n  calc\n    closure (A ∪ B ∪ C ∪ D : Set X)\n        = closure ((A ∪ B ∪ C) ∪ D : Set X) := by\n            simpa [Set.union_assoc]\n    _ = closure (A ∪ B ∪ C : Set X) ∪ closure D := by\n            simpa using\n              closure_union (A := (A ∪ B ∪ C : Set X)) (B := D)\n    _ = (closure A ∪ closure B ∪ closure C) ∪ closure D := by\n            simpa [hABC]\n    _ = closure A ∪ closure B ∪ closure C ∪ closure D := by\n            simpa [Set.union_assoc]"
+  ],
+  "success": true
+}

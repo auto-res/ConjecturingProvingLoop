@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.08287239074707
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6518,
+      "prompt_tokens": 33116,
+      "total_tokens": 39634,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_subset_compl_iff_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (A : Set X) \\ interior A ⊆ Aᶜ ↔ IsOpen A := by\n  classical\n  constructor\n  · intro h_boundary\n    -- We show `A` equals its interior.\n    have h_eq : interior A = A := by\n      apply subset_antisymm\n      · exact interior_subset\n      · intro x hxA\n        by_cases hx_int : x ∈ interior A\n        · exact hx_int\n        ·\n          -- Otherwise `x` lies in the boundary, contradicting `h_boundary`.\n          have hx_cl : x ∈ closure (A : Set X) := subset_closure hxA\n          have hx_bd : x ∈ closure (A : Set X) \\ interior A := ⟨hx_cl, hx_int⟩\n          have hx_compl : x ∈ (Aᶜ : Set X) := h_boundary hx_bd\n          exact (hx_compl hxA).elim\n    simpa [h_eq] using (isOpen_interior : IsOpen (interior A))\n  · intro hA_open\n    intro x hx_bd\n    -- Using `interior A = A` for open sets.\n    have h_int_eq : interior A = A := hA_open.interior_eq\n    have hx_not_int : x ∉ interior A := hx_bd.2\n    have hx_not_A : x ∉ A := by\n      simpa [h_int_eq] using hx_not_int\n    simpa using hx_not_A"
+  ],
+  "success": true
+}

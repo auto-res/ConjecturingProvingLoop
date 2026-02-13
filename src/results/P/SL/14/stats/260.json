@@ -1,0 +1,43 @@
+{
+  "times": [
+    113.38946962356567,
+    175.28533482551575
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8439,
+      "prompt_tokens": 48136,
+      "total_tokens": 56575,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8064,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    },
+    {
+      "completion_tokens": 11538,
+      "prompt_tokens": 48258,
+      "total_tokens": 59796,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure ((A : Set X) ∪ interior A) = closure A := by\n  -- First inclusion: `closure (A ∪ interior A) ⊆ closure A`.\n  have h₁ : closure ((A : Set X) ∪ interior A) ⊆ closure A := by\n    -- Since `A ⊆ closure A` and `interior A ⊆ A ⊆ closure A`,\n    -- the union is contained in `closure A`.\n    have h_subset : ((A : Set X) ∪ interior A) ⊆ closure A := by\n      intro x hx\n      cases hx with\n      | inl hA =>\n          exact subset_closure hA\n      | inr hInt =>\n          have : (x : X) ∈ (A : Set X) := interior_subset hInt\n          exact subset_closure this\n    exact closure_mono h_subset\n  -- Second inclusion: `closure A ⊆ closure (A ∪ interior A)`.\n  have h₂ : closure (A : Set X) ⊆ closure ((A : Set X) ∪ interior A) := by\n    -- Trivial set‐inclusion `A ⊆ A ∪ interior A`.\n    have h_subset : (A : Set X) ⊆ (A : Set X) ∪ interior A := by\n      intro x hx\n      exact Or.inl hx\n    exact closure_mono h_subset\n  exact Set.Subset.antisymm h₁ h₂",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.549795627593994
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3686,
+      "prompt_tokens": 21507,
+      "total_tokens": 25193,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_compl_closure_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior A = (closure (Aᶜ : Set X))ᶜ := by\n  -- Start with `closure (Aᶜ) = (interior A)ᶜ`.\n  have h : closure (Aᶜ : Set X) = (interior A)ᶜ :=\n    Topology.closure_compl_eq_compl_interior (X := X) (A := A)\n  -- Complement both sides to relate to `interior A`.\n  have h' : (closure (Aᶜ : Set X))ᶜ = interior A := by\n    simpa [Set.compl_compl] using congrArg (fun s : Set X => sᶜ) h\n  -- Rearrange to obtain the desired equality.\n  simpa [Set.compl_compl] using h'.symm"
+  ],
+  "success": true
+}

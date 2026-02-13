@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.50635385513306
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4074,
+      "prompt_tokens": 33446,
+      "total_tokens": 37520,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.eq_univ_of_isClosed_and_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hDense : Dense (interior A)) :\n    (A : Set X) = (Set.univ : Set X) := by\n  -- From density we know that the closure of `interior A` is the whole space.\n  have h_closure : closure (interior A) = (Set.univ : Set X) := hDense.closure_eq\n  -- Since `A` is closed and contains `interior A`, it contains the closure of `interior A`.\n  have h_subset : closure (interior A) ⊆ A :=\n    closure_minimal (interior_subset : interior A ⊆ A) hA_closed\n  -- Therefore `univ ⊆ A`.\n  have h_univ_subset : (Set.univ : Set X) ⊆ A := by\n    simpa [h_closure] using h_subset\n  -- The reverse inclusion is trivial.\n  have h_subset_univ : (A : Set X) ⊆ Set.univ := by\n    intro _ _; simp\n  exact Set.Subset.antisymm h_subset_univ h_univ_subset"
+  ],
+  "success": true
+}

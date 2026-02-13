@@ -1,0 +1,26 @@
+{
+  "times": [
+    114.01375007629395
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7754,
+      "prompt_tokens": 38148,
+      "total_tokens": 45902,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iUnion_closure_subset_closure_iUnion\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    (⋃ i, closure (A i) : Set X) ⊆ closure (⋃ i, A i) := by\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n  -- `closure (A i)` is contained in `closure (⋃ i, A i)` by monotonicity.\n  have h_closure_mono :\n      closure (A i : Set X) ⊆ closure (⋃ j, A j) := by\n    -- First, note `A i ⊆ ⋃ j, A j`.\n    have h_subset : (A i : Set X) ⊆ ⋃ j, A j := by\n      intro y hy\n      exact Set.mem_iUnion.2 ⟨i, hy⟩\n    -- Taking closures preserves inclusions.\n    exact closure_mono h_subset\n  exact h_closure_mono hx_i"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    41.633694648742676,
+    271.28495478630066
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3305,
+      "prompt_tokens": 6590,
+      "total_tokens": 9895,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 16392,
+      "prompt_tokens": 6714,
+      "total_tokens": 23106,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3968
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_idempotent {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  -- First inclusion: `closure (interior (closure (interior A))) ⊆ closure (interior A)`.\n  have h₁ : closure (interior (closure (interior A))) ⊆ closure (interior A) := by\n    have h_int_subset :\n        interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    simpa [closure_closure] using closure_mono h_int_subset\n  -- Second inclusion: `closure (interior A) ⊆ closure (interior (closure (interior A)))`.\n  have h₂ : closure (interior A) ⊆ closure (interior (closure (interior A))) := by\n    have h_sub : interior A ⊆ interior (closure (interior A)) := by\n      have h_cl : (interior A) ⊆ closure (interior A) := subset_closure\n      exact interior_mono h_cl\n    exact closure_mono h_sub\n  exact subset_antisymm h₁ h₂",
+    "theorem interior_closure_idempotent {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  -- Let `S = interior (closure A)`.\n  set S : Set X := interior (closure A) with hS_def\n  -- `closure S` is contained in `closure A`.\n  have h_closure_subset : closure S ⊆ closure A := by\n    -- Since `S ⊆ closure A`, taking closures yields the inclusion.\n    have hS_subset : S ⊆ closure A := by\n      dsimp [S] at *\n      exact interior_subset\n    simpa [closure_closure, hS_def] using closure_mono hS_subset\n  -- Hence `interior (closure S) ⊆ S`.\n  have h_int_subset : interior (closure S) ⊆ S := by\n    have h := interior_mono h_closure_subset\n    simpa [hS_def] using h\n  -- Because `S` is open, we also have `S ⊆ interior (closure S)`.\n  have h_subset_int : S ⊆ interior (closure S) := by\n    intro x hxS\n    -- `S` is open, so `interior S = S`.\n    have h_open : IsOpen S := by\n      dsimp [S] at *\n      exact isOpen_interior\n    have hx_int_S : x ∈ interior S := by\n      simpa [h_open.interior_eq] using hxS\n    -- Monotonicity of `interior`.\n    have h_int_mono : interior S ⊆ interior (closure S) :=\n      interior_mono subset_closure\n    exact h_int_mono hx_int_S\n  -- Combine the inclusions to obtain equality.\n  have h_eq : interior (closure S) = S :=\n    subset_antisymm h_int_subset h_subset_int\n  simpa [hS_def] using h_eq"
+  ],
+  "success": true
+}

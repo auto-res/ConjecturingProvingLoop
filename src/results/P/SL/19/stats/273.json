@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.3448166847229
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3446,
+      "prompt_tokens": 43675,
+      "total_tokens": 47121,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_iff_closure_eq_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) ↔ closure A = interior A := by\n  constructor\n  · intro hFront\n    -- Start from `interior A ∪ frontier A = closure A`\n    have hUnion := Topology.interior_union_frontier_eq_closure (A := A)\n    -- Replace `frontier A` with `∅`\n    have h' : interior A ∪ (∅ : Set X) = closure A := by\n      simpa [hFront] using hUnion\n    -- Simplify the left‐hand side\n    have hEq : interior A = closure A := by\n      simpa [Set.union_empty] using h'\n    -- Reorient equality\n    simpa using hEq.symm\n  · intro hEq\n    exact\n      Topology.frontier_eq_empty_of_closure_eq_interior\n        (A := A) hEq"
+  ],
+  "success": true
+}

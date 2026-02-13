@@ -1,0 +1,43 @@
+{
+  "times": [
+    30.510335206985474,
+    127.40239453315735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2499,
+      "prompt_tokens": 48247,
+      "total_tokens": 50746,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 9366,
+      "prompt_tokens": 48345,
+      "total_tokens": 57711,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_of_isClosed_and_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hP1 : Topology.P1 (X := X) A) :\n    IsOpen A := by\n  -- From the hypotheses we have the equality `closure (interior A) = A`.\n  have hEq :=\n    Topology.closure_interior_eq_self_of_closed_and_P1\n      (X := X) (A := A) hClosed hP1\n  -- Since `interior A` is open, the equality implies that `A` itself is open.\n  have hOpenInt : IsOpen (interior (A : Set X)) := isOpen_interior\n  simpa [hEq] using hOpenInt",
+    "theorem IsClosed.isOpen_compl {X : Type*} [TopologicalSpace X] {s : Set X}\n    (h : IsClosed (s : Set X)) : IsOpen ((s : Set X)ᶜ) := by\n  simpa using (isOpen_compl_iff).2 h"
+  ],
+  "success": true
+}

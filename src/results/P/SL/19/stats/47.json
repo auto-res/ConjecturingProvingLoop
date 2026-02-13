@@ -1,0 +1,43 @@
+{
+  "times": [
+    43.22230768203735,
+    38.91024732589722
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2332,
+      "prompt_tokens": 6801,
+      "total_tokens": 9133,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    },
+    {
+      "completion_tokens": 2178,
+      "prompt_tokens": 6923,
+      "total_tokens": 9101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_interior_eq_interior_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (closure (A ∪ interior A)) = interior (closure A) := by\n  -- First, show that the closures coincide.\n  have h_closure : closure (A ∪ interior A) = closure A := by\n    apply Set.Subset.antisymm\n    · -- `closure (A ∪ interior A) ⊆ closure A`\n      have h_sub : (A ∪ interior A : Set X) ⊆ closure A := by\n        intro x hx\n        cases hx with\n        | inl hA =>\n            exact subset_closure hA\n        | inr hInt =>\n            have hA : x ∈ A := interior_subset hInt\n            exact subset_closure hA\n      exact closure_mono h_sub\n    · -- `closure A ⊆ closure (A ∪ interior A)`\n      have h_sub : (A : Set X) ⊆ A ∪ interior A := by\n        intro x hx\n        exact Or.inl hx\n      exact closure_mono h_sub\n  simpa [h_closure]",
+    "theorem Topology.interior_subset_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ interior (closure (interior A)) := by\n  intro x hx\n  have hSub : (interior A : Set X) ⊆ interior (closure (interior A)) :=\n    interior_maximal (subset_closure : interior A ⊆ closure (interior A))\n      isOpen_interior\n  exact hSub hx"
+  ],
+  "success": true
+}

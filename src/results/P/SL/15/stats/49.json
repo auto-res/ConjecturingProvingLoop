@@ -1,0 +1,26 @@
+{
+  "times": [
+    115.18020153045654
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7180,
+      "prompt_tokens": 7428,
+      "total_tokens": 14608,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_union_has_P3 {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Dense A → Topology.P3 (A ∪ B) := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hx\n  have h_closureA : closure A = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  have h_subset : (Set.univ : Set X) ⊆ closure (A ∪ B) := by\n    have : closure A ⊆ closure (A ∪ B) := by\n      have h_sub : A ⊆ A ∪ B := Set.subset_union_left\n      exact closure_mono h_sub\n    simpa [h_closureA] using this\n  have h_closure_union : closure (A ∪ B) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro y _; exact Set.mem_univ y\n    · exact h_subset\n  simpa [h_closure_union, interior_univ] using Set.mem_univ x"
+  ],
+  "success": true
+}

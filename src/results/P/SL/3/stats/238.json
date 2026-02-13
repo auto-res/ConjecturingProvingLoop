@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.16119694709778
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3949,
+      "prompt_tokens": 39103,
+      "total_tokens": 43052,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem boundary_eq_boundary_complement {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) \\ interior (A : Set X) =\n      closure ((Aᶜ) : Set X) \\ interior ((Aᶜ) : Set X) := by\n  classical\n  -- Boundary of `A` described as an intersection of closures.\n  have h₁ :=\n    boundary_eq_closure_inter_closure_compl (A := A)\n  -- Boundary of `Aᶜ` described similarly, then simplified.\n  have h₂ :\n      closure ((Aᶜ) : Set X) \\ interior ((Aᶜ) : Set X) =\n        closure ((Aᶜ) : Set X) ∩ closure (A : Set X) := by\n    simpa [Set.compl_compl] using\n      (boundary_eq_closure_inter_closure_compl\n        (A := (Aᶜ : Set X)))\n  -- Compare the two characterisations.\n  calc\n    closure (A : Set X) \\ interior (A : Set X)\n        = closure (A : Set X) ∩ closure ((Aᶜ) : Set X) := by\n          simpa using h₁\n    _ = closure ((Aᶜ) : Set X) ∩ closure (A : Set X) := by\n          simpa [Set.inter_comm]\n    _ = closure ((Aᶜ) : Set X) \\ interior ((Aᶜ) : Set X) := by\n          simpa using h₂.symm"
+  ],
+  "success": true
+}

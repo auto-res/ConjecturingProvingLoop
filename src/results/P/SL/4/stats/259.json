@@ -1,0 +1,26 @@
+{
+  "times": [
+    20.126678228378296
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1620,
+      "prompt_tokens": 38699,
+      "total_tokens": 40319,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_interior_closure_subset_frontier\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (interior (closure A)) ⊆ frontier A := by\n  intro x hx\n  -- Unpack `hx` into the two conditions defining the frontier.\n  have hx_cl  : x ∈ closure (interior (closure A)) := hx.1\n  have hx_nint : x ∉ interior (interior (closure A)) := hx.2\n  -- `closure (interior (closure A))` is contained in `closure A`.\n  have h_sub_cl : closure (interior (closure A)) ⊆ closure A :=\n    closure_interior_closure_subset_closure (X := X) (A := A)\n  have hx_clA : x ∈ closure A := h_sub_cl hx_cl\n  -- Show that `x` is not in `interior A`.\n  have hx_nintA : x ∉ interior A := by\n    intro hx_intA\n    -- `interior A ⊆ interior (closure A)`.\n    have h_sub_int : (interior A : Set X) ⊆ interior (closure A) :=\n      interior_subset_interior_closure (A := A)\n    have hx_int_clA : x ∈ interior (closure A) := h_sub_int hx_intA\n    -- Rewrite `interior (closure A)` as `interior (interior (closure A))`.\n    have : x ∈ interior (interior (closure A)) := by\n      simpa [interior_interior] using hx_int_clA\n    exact hx_nint this\n  -- Conclude that `x` lies in the frontier of `A`.\n  exact And.intro hx_clA hx_nintA"
+  ],
+  "success": true
+}

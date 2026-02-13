@@ -1,0 +1,43 @@
+{
+  "times": [
+    149.0385298728943,
+    142.4698851108551
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8459,
+      "prompt_tokens": 47432,
+      "total_tokens": 55891,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    },
+    {
+      "completion_tokens": 6957,
+      "prompt_tokens": 47524,
+      "total_tokens": 54481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iInter_of_P3_closed_finite\n    {X : Type*} [TopologicalSpace X] {ι : Type*} [Finite ι] {S : ι → Set X}\n    (hClosed : ∀ i, IsClosed (S i))\n    (hP3 : ∀ i, Topology.P3 (S i)) :\n    Topology.P3 (⋂ i, S i) := by\n  classical\n  -- Each `S i` is open because it is both closed and satisfies `P3`.\n  have hOpen : ∀ i, IsOpen (S i) := by\n    intro i\n    exact (Topology.open_of_P3_closed (A := S i) (hClosed i)) (hP3 i)\n  -- A finite intersection of open sets is open.\n  have hOpenInter : IsOpen (⋂ i, S i : Set X) := by\n    simpa using isOpen_iInter (fun i => hOpen i)\n  -- Any open set satisfies `P3`.\n  exact Topology.open_satisfies_P3 (A := ⋂ i, S i) hOpenInter",
+    "theorem nonempty_of_nonempty_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (interior (A : Set X)).Nonempty → A.Nonempty := by\n  rintro ⟨x, hxInt⟩\n  exact ⟨x, (interior_subset : interior (A : Set X) ⊆ A) hxInt⟩"
+  ],
+  "success": true
+}

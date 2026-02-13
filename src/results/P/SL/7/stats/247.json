@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.48916149139404
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5724,
+      "prompt_tokens": 38201,
+      "total_tokens": 43925,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_iUnion_subset\n    {X : Type*} [TopologicalSpace X] {ι : Sort _} {F : ι → Set X} :\n    (⋃ i, closure (interior (F i))) ⊆ closure (interior (⋃ i, F i)) := by\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n  -- `interior (F i)` is contained in `⋃ i, F i`,\n  -- hence its closure is contained in the closure of the interior of that union.\n  have hSub :\n      closure (interior (F i)) ⊆ closure (interior (⋃ j, F j)) := by\n    apply closure_mono\n    apply interior_mono\n    intro y hy\n    exact Set.mem_iUnion_of_mem i hy\n  exact hSub hx_i"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.68798041343689
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1593,
+      "prompt_tokens": 35570,
+      "total_tokens": 37163,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34688
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iUnion_of_isOpen\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X}\n    (hA : ∀ i, IsOpen (A i)) :\n    Topology.P3 (⋃ i, A i) := by\n  -- Each open set `A i` satisfies `P3`.\n  have hP3 : ∀ i, Topology.P3 (A i) := by\n    intro i\n    exact Topology.isOpen_implies_P3 (X := X) (A := A i) (hA i)\n  -- Take the union over all indices.\n  exact Topology.P3_iUnion (X := X) (A := A) hP3"
+  ],
+  "success": true
+}

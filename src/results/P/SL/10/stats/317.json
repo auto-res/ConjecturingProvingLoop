@@ -1,0 +1,26 @@
+{
+  "times": [
+    172.0213794708252
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11575,
+      "prompt_tokens": 51119,
+      "total_tokens": 62694,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_union_interior_compl_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} : IsOpen (interior A ∪ (closure A)ᶜ) := by\n  -- First, identify the set with the complement of the (closed) boundary.\n  have h_eq :\n      interior A ∪ (closure A)ᶜ =\n        (closure A \\ interior A)ᶜ := by\n    simpa using\n      (Topology.compl_boundary_eq_union_interior_compl_closure\n        (X := X) (A := A)).symm\n  -- The boundary `closure A \\ interior A` is closed.\n  have h_closed : IsClosed (closure A \\ interior A) :=\n    Topology.isClosed_closure_diff_interior (X := X) (A := A)\n  -- Hence its complement is open.\n  have h_open : IsOpen ((closure A \\ interior A)ᶜ) :=\n    h_closed.isOpen_compl\n  simpa [h_eq] using h_open"
+  ],
+  "success": true
+}

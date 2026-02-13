@@ -1,0 +1,26 @@
+{
+  "times": [
+    176.52262783050537
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10937,
+      "prompt_tokens": 46933,
+      "total_tokens": 57870,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_union_subset_frontier_left_union_closure_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∪ B : Set X) ⊆ frontier A ∪ closure B := by\n  intro x hx\n  rcases hx with ⟨hx_cl_union, hx_not_int_union⟩\n  by_cases hB : x ∈ closure B\n  · exact Or.inr hB\n  ·\n    -- First, rewrite `closure (A ∪ B)` as `closure A ∪ closure B`\n    have hx_clA_or : x ∈ closure A ∪ closure B := by\n      have h_eq := closure_union (s := A) (t := B)\n      simpa [h_eq] using hx_cl_union\n    -- Since `x ∉ closure B`, we deduce `x ∈ closure A`\n    have hx_clA : x ∈ closure A := by\n      cases hx_clA_or with\n      | inl hA   => exact hA\n      | inr hB'  => exact (hB hB').elim\n    -- Show that `x ∉ interior A`\n    have hx_not_intA : x ∉ interior A := by\n      intro hx_intA\n      -- `interior A ⊆ interior (A ∪ B)` by monotonicity\n      have hx_int_union : x ∈ interior (A ∪ B) := by\n        have h_subset :\n            interior A ⊆ interior (A ∪ B) :=\n          interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n        exact h_subset hx_intA\n      exact hx_not_int_union hx_int_union\n    -- Therefore `x ∈ frontier A`\n    have hx_frontA : x ∈ frontier A := And.intro hx_clA hx_not_intA\n    exact Or.inl hx_frontA"
+  ],
+  "success": true
+}

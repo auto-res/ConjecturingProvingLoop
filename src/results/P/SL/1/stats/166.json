@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.02226233482361
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2980,
+      "prompt_tokens": 25858,
+      "total_tokens": 28838,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_union_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior A)) ∪ interior (closure (interior B)) ⊆\n      interior (closure (interior (A ∪ B))) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- Handle the case `x ∈ interior (closure (interior A))`.\n      have hsubset :\n          interior (closure (interior A)) ⊆\n            interior (closure (interior (A ∪ B))) := by\n        apply interior_mono\n        -- Show `closure (interior A) ⊆ closure (interior (A ∪ B))`.\n        have hcl : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n          apply closure_mono\n          -- Show `interior A ⊆ interior (A ∪ B)`.\n          have : interior A ⊆ interior (A ∪ B) := by\n            apply interior_mono\n            intro y hy\n            exact Or.inl hy\n          exact this\n        exact hcl\n      exact hsubset hxA\n  | inr hxB =>\n      -- Handle the case `x ∈ interior (closure (interior B))`.\n      have hsubset :\n          interior (closure (interior B)) ⊆\n            interior (closure (interior (A ∪ B))) := by\n        apply interior_mono\n        -- Show `closure (interior B) ⊆ closure (interior (A ∪ B))`.\n        have hcl : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n          apply closure_mono\n          -- Show `interior B ⊆ interior (A ∪ B)`.\n          have : interior B ⊆ interior (A ∪ B) := by\n            apply interior_mono\n            intro y hy\n            exact Or.inr hy\n          exact this\n        exact hcl\n      exact hsubset hxB"
+  ],
+  "success": true
+}

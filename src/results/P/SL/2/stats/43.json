@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.14580273628235
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2435,
+      "prompt_tokens": 6802,
+      "total_tokens": 9237,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P1_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → (Topology.P2 A ↔ Topology.P1 A) := by\n  intro hDense\n  have hP3 : Topology.P3 A := Topology.dense_implies_P3 (A := A) hDense\n  have hEquiv := (Topology.P2_iff_P1_and_P3 (A := A))\n  constructor\n  · intro hP2\n    exact (Topology.P2_implies_P1 (A := A) hP2)\n  · intro hP1\n    have : Topology.P1 A ∧ Topology.P3 A := And.intro hP1 hP3\n    exact (hEquiv).2 this"
+  ],
+  "success": true
+}

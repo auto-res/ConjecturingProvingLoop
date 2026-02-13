@@ -1,0 +1,26 @@
+{
+  "times": [
+    113.37221550941467
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7243,
+      "prompt_tokens": 54476,
+      "total_tokens": 61719,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_subset_interior_union_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (B : Set X) ⊆ interior (A ∪ B) := by\n  intro x hxB\n  -- `interior` is monotone with respect to set inclusion.\n  have h_subset : (B : Set X) ⊆ (A ∪ B : Set X) := by\n    intro y hy\n    exact Or.inr hy\n  exact (interior_mono h_subset) hxB"
+  ],
+  "success": true
+}

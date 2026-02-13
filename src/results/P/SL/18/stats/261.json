@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.42059111595154
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6790,
+      "prompt_tokens": 41310,
+      "total_tokens": 48100,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40832
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_interior_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (interior A ∪ interior B) ∧\n      Topology.P2 (interior A ∪ interior B) ∧\n      Topology.P3 (interior A ∪ interior B) := by\n  -- `interior A` and `interior B` are open sets.\n  have hOpenA : IsOpen (interior A) := isOpen_interior\n  have hOpenB : IsOpen (interior B) := isOpen_interior\n  -- Apply the existing lemma for the union of two open sets.\n  simpa using\n    (Topology.P123_union_open\n      (A := interior A) (B := interior B) hOpenA hOpenB)"
+  ],
+  "success": true
+}

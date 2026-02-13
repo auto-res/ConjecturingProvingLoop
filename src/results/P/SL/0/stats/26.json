@@ -1,0 +1,26 @@
+{
+  "times": [
+    68.01887512207031
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4279,
+      "prompt_tokens": 4979,
+      "total_tokens": 9258,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_isOpen_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (A : Set X))) :\n    Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x hxA\n  have hx_cl : x ∈ closure (A : Set X) := subset_closure hxA\n  simpa [hOpen.interior_eq] using hx_cl"
+  ],
+  "success": true
+}

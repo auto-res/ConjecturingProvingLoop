@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.18171048164368
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4288,
+      "prompt_tokens": 59330,
+      "total_tokens": 63618,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_of_subset {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP2A : Topology.P2 A) (hBsubset : B ⊆ interior (closure (interior A))) :\n    Topology.P2 (A ∪ B) := by\n  dsimp [Topology.P2] at hP2A ⊢\n  intro x hx\n  -- First locate `x` inside `interior (closure (interior A))`.\n  have hxIntA : x ∈ interior (closure (interior A)) := by\n    cases hx with\n    | inl hxA => exact hP2A hxA\n    | inr hxB => exact hBsubset hxB\n  -- Monotonicity of `interior` and `closure` gives the required inclusion.\n  have hMono :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior (A ∪ B))) := by\n    -- Step 1: `interior A ⊆ interior (A ∪ B)`.\n    have hIntSub : interior A ⊆ interior (A ∪ B) := by\n      have hSub : (A : Set X) ⊆ A ∪ B := Set.subset_union_left\n      exact interior_mono hSub\n    -- Step 2: take closures.\n    have hClosSub :\n        closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n      closure_mono hIntSub\n    -- Step 3: take interiors once more.\n    exact interior_mono hClosSub\n  exact hMono hxIntA"
+  ],
+  "success": true
+}

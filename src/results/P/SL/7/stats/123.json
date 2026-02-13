@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.53287124633789
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2638,
+      "prompt_tokens": 17607,
+      "total_tokens": 20245,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closed_iff_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    Topology.P3 A ↔ interior (A : Set X) = A := by\n  constructor\n  · intro hP3\n    exact Topology.interior_eq_of_P3_closed (A := A) hA hP3\n  · intro hInt\n    -- From `interior A = A` we get that `A` is open.\n    have hOpen : IsOpen A := by\n      have : IsOpen (interior (A : Set X)) := isOpen_interior\n      simpa [hInt] using this\n    -- An open set satisfies `P3`.\n    exact (Topology.IsOpen_P1_and_P3 (A := A) hOpen).2"
+  ],
+  "success": true
+}

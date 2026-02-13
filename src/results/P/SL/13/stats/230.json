@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.722482919692993
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1602,
+      "prompt_tokens": 40399,
+      "total_tokens": 42001,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (X:=X) A) :\n    Topology.P2 (X:=X) A ↔ Topology.P3 (X:=X) A := by\n  -- Start from the general equivalence `P2 ↔ P1 ∧ P3`.\n  have h := Topology.P2_iff_P1_and_P3 (X:=X) (A:=A)\n  -- Given `hP1`, the conjunction `P1 ∧ P3` is equivalent to `P3`.\n  have h_aux :\n      (Topology.P1 (X:=X) A ∧ Topology.P3 (X:=X) A) ↔\n        Topology.P3 (X:=X) A := by\n    constructor\n    · intro h'\n      exact h'.2\n    · intro hP3\n      exact And.intro hP1 hP3\n  -- Combine the two equivalences.\n  simpa using h.trans h_aux"
+  ],
+  "success": true
+}

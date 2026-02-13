@@ -1,0 +1,26 @@
+{
+  "times": [
+    108.72097277641296
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7410,
+      "prompt_tokens": 18267,
+      "total_tokens": 25677,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosureInterior_nonempty_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) (hA : A.Nonempty) :\n    (interior (closure (interior A))).Nonempty := by\n  -- Obtain a point in `interior A` from `P1` and the nonemptiness of `A`.\n  have hIntA : (interior A).Nonempty :=\n    Topology.interior_nonempty_of_P1 (A := A) hP1 hA\n  -- `interior A` is contained in `interior (closure (interior A))`.\n  have hIncl : interior A ⊆ interior (closure (interior A)) :=\n    Topology.interior_subset_interiorClosureInterior (A := A)\n  -- Transport the point along the inclusion.\n  rcases hIntA with ⟨x, hx⟩\n  exact ⟨x, hIncl hx⟩"
+  ],
+  "success": true
+}

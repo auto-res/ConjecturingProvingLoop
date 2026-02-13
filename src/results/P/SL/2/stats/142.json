@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.910157918930054
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3042,
+      "prompt_tokens": 22188,
+      "total_tokens": 25230,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_mono {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : (A : Set X) ⊆ B) :\n    closure (interior (closure (A : Set X))) ⊆\n      closure (interior (closure (B : Set X))) := by\n  -- Step 1: enlarge the inner `closure` using monotonicity.\n  have hCl : (closure (A : Set X)) ⊆ closure (B : Set X) := closure_mono hAB\n  -- Step 2: apply monotonicity of `interior`.\n  have hInt :\n      (interior (closure (A : Set X)) : Set X) ⊆\n        interior (closure (B : Set X)) :=\n    interior_mono hCl\n  -- Step 3: take closures again to obtain the desired inclusion.\n  exact closure_mono hInt"
+  ],
+  "success": true
+}

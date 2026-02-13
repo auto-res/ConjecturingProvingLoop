@@ -1,0 +1,26 @@
+{
+  "times": [
+    152.49260687828064
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8555,
+      "prompt_tokens": 55125,
+      "total_tokens": 63680,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8064,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_three_subset\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    closure (interior (A : Set X)) ∪ closure (interior B) ∪ closure (interior C) ⊆\n      closure (interior (A ∪ B ∪ C)) := by\n  intro x hx\n  -- Split the triple union into two cases.\n  rcases hx with hxAB | hxC\n  · -- Case `x ∈ closure (interior A) ∪ closure (interior B)`.\n    -- First, use the two–set lemma to upgrade the target set.\n    have hxAB' :\n        (x : X) ∈ closure (interior (A ∪ B)) :=\n      (Topology.closureInterior_union_subset (X := X) (A := A) (B := B)) hxAB\n    -- Next, enlarge from `A ∪ B` to `A ∪ B ∪ C` via monotonicity.\n    have h_incl :\n        closure (interior (A ∪ B)) ⊆\n          closure (interior (A ∪ B ∪ C)) := by\n      have h_subset : (A ∪ B : Set X) ⊆ A ∪ B ∪ C := by\n        intro y hy\n        exact Or.inl hy\n      exact\n        Topology.closureInterior_mono\n          (X := X) (A := A ∪ B) (B := A ∪ B ∪ C) h_subset\n    exact h_incl hxAB'\n  · -- Case `x ∈ closure (interior C)`.\n    have h_subset : (C : Set X) ⊆ A ∪ B ∪ C := by\n      intro y hy\n      exact Or.inr hy\n    have h_incl :\n        closure (interior C) ⊆\n          closure (interior (A ∪ B ∪ C)) :=\n      Topology.closureInterior_mono\n        (X := X) (A := C) (B := A ∪ B ∪ C) h_subset\n    exact h_incl hxC"
+  ],
+  "success": true
+}

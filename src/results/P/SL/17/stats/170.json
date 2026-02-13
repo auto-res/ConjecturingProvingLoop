@@ -1,0 +1,60 @@
+{
+  "times": [
+    91.26822710037231,
+    52.46521544456482,
+    114.14450263977051
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7233,
+      "prompt_tokens": 28825,
+      "total_tokens": 36058,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27520
+      }
+    },
+    {
+      "completion_tokens": 5186,
+      "prompt_tokens": 28899,
+      "total_tokens": 34085,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    },
+    {
+      "completion_tokens": 9137,
+      "prompt_tokens": 29013,
+      "total_tokens": 38150,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_idempotent_iter6\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior A)))))))))) =\n      closure (interior A) := by\n  calc\n    closure (interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior A)))))))))) =\n        closure (interior (closure (interior (closure (interior\n          (closure (interior (closure (interior A))))))))) := by\n          simpa using\n            (Topology.closure_interior_idempotent\n              (A := closure (interior (closure (interior (closure (interior\n                (closure (interior (closure (interior A))))))))))\n    _ = closure (interior A) := by\n          simpa using\n            (Topology.closure_interior_idempotent_iter5 (A := A))",
+    "theorem Topology.P3_inter_isOpen_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hP3A : Topology.P3 A) (hOpenB : IsOpen B) :\n    Topology.P3 (A ∩ B) := by\n  unfold Topology.P3 at *\n  intro x hxAB\n  rcases hxAB with ⟨hxA, hxB⟩\n  -- From `P3` for `A`, obtain membership in `interior (closure A)`.\n  have hxIntA : x ∈ interior (closure A) := hP3A hxA\n  -- Since `B` is open, `x` lies in `interior B`.\n  have hxIntB : x ∈ interior B := by\n    simpa [hOpenB.interior_eq] using hxB\n  -- Consider the open set `interior (closure A) ∩ B` that contains `x`.\n  have hxOpen : x ∈ interior (closure A) ∩ B := And.intro hxIntA hxB\n  have hOpenSet : IsOpen (interior (closure A) ∩ B) :=\n    isOpen_interior.inter hOpenB\n  -- Show this open set is contained in `closure (A ∩ B)`.\n  have hSubset : (interior (closure A) ∩ B) ⊆ closure (A ∩ B) := by\n    intro y hy\n    have hyIntA : y ∈ interior (closure A) := hy.1\n    have hyB : y ∈ B := hy.2\n    have hyClA : y ∈ closure A := interior_subset hyIntA\n    -- Use the neighbourhood characterization of the closure.\n    have : y ∈ closure (A ∩ B) := by\n      apply (mem_closure_iff).2\n      intro U hU_open hyU\n      -- Refine the neighbourhood to stay inside `B`.\n      have hUB_open : IsOpen (U ∩ B) := hU_open.inter hOpenB\n      have hyUB : y ∈ U ∩ B := ⟨hyU, hyB⟩\n      -- Since `y ∈ closure A`, the set `U ∩ B` meets `A`.\n      have hNonempty :=\n        (mem_closure_iff).1 hyClA (U ∩ B) hUB_open hyUB\n      rcases hNonempty with ⟨z, hzUB, hzA⟩\n      have hzU : z ∈ U := hzUB.1\n      have hzB : z ∈ B := hzUB.2\n      have hzAB : z ∈ A ∩ B := ⟨hzA, hzB⟩\n      exact ⟨z, hzAB, hzU⟩\n    exact this\n  -- `interior_maximal` upgrades the inclusion to the interior.\n  have hInteriorSubset :\n      (interior (closure A) ∩ B) ⊆ interior (closure (A ∩ B)) :=\n    interior_maximal hSubset hOpenSet\n  exact hInteriorSubset hxOpen",
+    "theorem Topology.interior_diff_closed {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsClosed B) :\n    interior (A \\ B) = interior A \\ B := by\n  ext x\n  constructor\n  · intro hx\n    have hxA : x ∈ interior A := by\n      -- `A \\ B ⊆ A`, hence `interior (A \\ B) ⊆ interior A`.\n      have h_subset : (A \\ B : Set X) ⊆ A := fun y hy => hy.1\n      exact (interior_mono h_subset) hx\n    have hxNotB : x ∉ B := by\n      -- Points in `interior (A \\ B)` are certainly not in `B`.\n      have hxAB : x ∈ A \\ B := interior_subset hx\n      exact hxAB.2\n    exact And.intro hxA hxNotB\n  · intro hx\n    rcases hx with ⟨hxIntA, hxNotB⟩\n    -- Construct an open neighborhood contained in `A \\ B`.\n    have hOpenIntA : IsOpen (interior A) := isOpen_interior\n    have hOpenComplB : IsOpen (Bᶜ) := hB.isOpen_compl\n    have hVopen : IsOpen (interior A ∩ Bᶜ) := hOpenIntA.inter hOpenComplB\n    have hxV : x ∈ interior A ∩ Bᶜ := And.intro hxIntA hxNotB\n    -- This neighborhood is included in `A \\ B`.\n    have hVsubset : (interior A ∩ Bᶜ) ⊆ (A \\ B) := by\n      intro y hy\n      have hyA : y ∈ A := interior_subset hy.1\n      exact And.intro hyA hy.2\n    -- Hence `x` lies in `interior (A \\ B)`.\n    have hVsubsetInterior : (interior A ∩ Bᶜ) ⊆ interior (A \\ B) :=\n      interior_maximal hVsubset hVopen\n    exact hVsubsetInterior hxV"
+  ],
+  "success": true
+}

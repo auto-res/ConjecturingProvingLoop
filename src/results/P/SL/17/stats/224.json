@@ -1,0 +1,43 @@
+{
+  "times": [
+    84.93946027755737,
+    146.51319479942322
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6317,
+      "prompt_tokens": 40005,
+      "total_tokens": 46322,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 10493,
+      "prompt_tokens": 40358,
+      "total_tokens": 50851,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_iff_isClosed_and_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) ↔ (IsClosed A ∧ IsOpen A) := by\n  constructor\n  · intro hFront\n    -- First, show `closure A ⊆ interior A`.\n    have hSubset : closure A ⊆ interior A := by\n      intro x hxCl\n      by_cases hxInt : x ∈ interior A\n      · exact hxInt\n      ·\n        have : x ∈ frontier A := ⟨hxCl, hxInt⟩\n        have : x ∈ (∅ : Set X) := by\n          simpa [hFront] using this\n        exact (Set.not_mem_empty _) this\n    -- The reverse inclusion `interior A ⊆ closure A` is standard.\n    have hSubset' : interior A ⊆ closure A := by\n      intro x hxInt\n      have : x ∈ A := interior_subset hxInt\n      exact subset_closure this\n    -- Hence `closure A = interior A`.\n    have hEq : closure A = interior A :=\n      Set.Subset.antisymm hSubset' hSubset\n    -- Deduce that `A` is both closed and open.\n    have hClosed : IsClosed A := by\n      have : IsClosed (closure A) := isClosed_closure\n      simpa [hEq] using this\n    have hOpen : IsOpen A := by\n      have : IsOpen (interior A) := isOpen_interior\n      simpa [hEq] using this\n    exact And.intro hClosed hOpen\n  · rintro ⟨hClosed, hOpen⟩\n    exact Topology.frontier_eq_empty_of_clopen (A := A) hClosed hOpen",
+    "theorem Topology.frontier_inter_subset_union_frontier\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∩ B) ⊆ frontier A ∪ frontier B := by\n  intro x hx\n  -- Decompose the hypothesis `hx : x ∈ frontier (A ∩ B)`\n  rcases hx with ⟨hClAB, hNotIntAB⟩\n  -- `x` is in the closures of both `A` and `B`\n  have hClA : x ∈ closure A :=\n    (Topology.closure_inter_subset_inter_closure\n        (A := A) (B := B)) hClAB |>.1\n  have hClB : x ∈ closure B :=\n    (Topology.closure_inter_subset_inter_closure\n        (A := A) (B := B)) hClAB |>.2\n  -- Case distinction on whether `x ∈ interior A`\n  by_cases hIntA : x ∈ interior A\n  · -- If `x ∈ interior A`, show that `x ∈ frontier B`\n    have hNotIntB : x ∉ interior B := by\n      intro hIntB\n      -- `x` would then lie in `interior (A ∩ B)`, contradicting `hNotIntAB`\n      have hOpen : IsOpen (interior A ∩ interior B) :=\n        isOpen_interior.inter isOpen_interior\n      have hSub : (interior A ∩ interior B) ⊆ (A ∩ B) := by\n        intro y hy\n        exact ⟨interior_subset hy.1, interior_subset hy.2⟩\n      have hIntSub :\n          (interior A ∩ interior B) ⊆ interior (A ∩ B) :=\n        interior_maximal hSub hOpen\n      have : x ∈ interior (A ∩ B) := hIntSub ⟨hIntA, hIntB⟩\n      exact hNotIntAB this\n    -- Assemble the frontier membership for `B`\n    have hFrontB : x ∈ frontier B := And.intro hClB hNotIntB\n    exact Or.inr hFrontB\n  · -- If `x ∉ interior A`, then `x ∈ frontier A`\n    have hNotIntA : x ∉ interior A := hIntA\n    have hFrontA : x ∈ frontier A := And.intro hClA hNotIntA\n    exact Or.inl hFrontA"
+  ],
+  "success": true
+}

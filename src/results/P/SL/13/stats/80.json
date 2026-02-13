@@ -1,0 +1,26 @@
+{
+  "times": [
+    77.20907282829285
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4620,
+      "prompt_tokens": 12552,
+      "total_tokens": 17172,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_subset_closure_interior_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    closure (interior (A : Set X)) ⊆ closure (interior (closure A)) := by\n  -- First, note that `A ⊆ closure A`.\n  have h_subset : (A : Set X) ⊆ closure A := subset_closure\n  -- Applying `interior` (which is monotone) to this inclusion yields\n  -- `interior A ⊆ interior (closure A)`.\n  have h_interior : interior (A : Set X) ⊆ interior (closure A) :=\n    interior_mono h_subset\n  -- Finally, taking `closure` (also monotone) on both sides gives the desired result.\n  exact closure_mono h_interior"
+  ],
+  "success": true
+}

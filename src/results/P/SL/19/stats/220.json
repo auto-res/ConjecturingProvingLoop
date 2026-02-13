@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.06832242012024
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6271,
+      "prompt_tokens": 34225,
+      "total_tokens": 40496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_of_isOpen_and_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hOpen : IsOpen A) (hClosed : IsClosed A) :\n    frontier A = (∅ : Set X) := by\n  have hClosure : closure A = A := hClosed.closure_eq\n  have hInterior : interior A = A := hOpen.interior_eq\n  simp [frontier, hClosure, hInterior]"
+  ],
+  "success": true
+}

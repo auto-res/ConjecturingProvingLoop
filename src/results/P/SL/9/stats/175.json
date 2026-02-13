@@ -1,0 +1,26 @@
+{
+  "times": [
+    18.803781270980835
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1128,
+      "prompt_tokens": 28114,
+      "total_tokens": 29242,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_three_of_open\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) (hC : IsOpen C) :\n    Topology.P3 (A := A ∩ B ∩ C) := by\n  have h_open : IsOpen (A ∩ B ∩ C) := by\n    have hAB : IsOpen (A ∩ B) := IsOpen.inter hA hB\n    exact IsOpen.inter hAB hC\n  exact Topology.P3_of_isOpen (A := A ∩ B ∩ C) h_open"
+  ],
+  "success": true
+}

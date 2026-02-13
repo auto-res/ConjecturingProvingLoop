@@ -1,0 +1,43 @@
+{
+  "times": [
+    223.4806182384491,
+    27.083483695983887
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 17121,
+      "prompt_tokens": 33690,
+      "total_tokens": 50811,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    },
+    {
+      "completion_tokens": 2074,
+      "prompt_tokens": 34252,
+      "total_tokens": 36326,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_inter_closure_compl {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) ⊆ closure (A : Set X) ∩ closure (Aᶜ : Set X) := by\n  intro x hx\n  -- `hx` gives the two defining properties of `frontier A`\n  have hx_clA : x ∈ closure (A : Set X) := hx.1\n  have hx_not_intA : x ∉ interior (A : Set X) := hx.2\n  -- We now show `x ∈ closure (Aᶜ)`\n  have hx_clAcompl : x ∈ closure (Aᶜ : Set X) := by\n    classical\n    by_contra hxc\n    -- Consider the open neighbourhood `U = (closure (Aᶜ))ᶜ` of `x`\n    have hU_open : IsOpen ((closure (Aᶜ : Set X))ᶜ) :=\n      (isClosed_closure (s := (Aᶜ : Set X))).isOpen_compl\n    have hxU : x ∈ (closure (Aᶜ : Set X))ᶜ := by\n      simp [hxc]\n    -- `U` is actually contained in `A`\n    have hU_sub_A : (closure (Aᶜ : Set X))ᶜ ⊆ (A : Set X) := by\n      intro y hy\n      by_contra hy_notA\n      have hy_in_Acompl : y ∈ (Aᶜ : Set X) := by\n        simpa [Set.mem_compl] using hy_notA\n      have : y ∈ closure (Aᶜ : Set X) := subset_closure hy_in_Acompl\n      exact (Set.mem_compl at hy; exact hy this).elim\n    -- Hence `x ∈ interior A`, contradicting `hx_not_intA`\n    have : x ∈ interior (A : Set X) := by\n      have hU_in_intA : (closure (Aᶜ : Set X))ᶜ ⊆ interior (A : Set X) :=\n        interior_maximal hU_sub_A hU_open\n      exact hU_in_intA hxU\n    exact hx_not_intA this\n  exact And.intro hx_clA hx_clAcompl",
+    "theorem Topology.frontier_closure_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → frontier (closure (A : Set X)) = (∅ : Set X) := by\n  intro hDense\n  simpa [hDense.closure_eq, frontier_univ]"
+  ],
+  "success": true
+}

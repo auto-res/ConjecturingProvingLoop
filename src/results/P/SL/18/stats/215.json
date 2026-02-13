@@ -1,0 +1,43 @@
+{
+  "times": [
+    50.6464741230011,
+    112.74027013778687
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4144,
+      "prompt_tokens": 33158,
+      "total_tokens": 37302,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 8045,
+      "prompt_tokens": 33250,
+      "total_tokens": 41295,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iInter_closed_of_finite {ι : Type*} [Fintype ι]\n    {X : Type*} [TopologicalSpace X] {A : ι → Set X}\n    (hClosed : ∀ i, IsClosed (A i))\n    (hP3 : ∀ i, Topology.P3 (A i)) :\n    Topology.P3 (⋂ i, A i) := by\n  -- Each `A i` is open because it is closed and satisfies `P3`.\n  have hOpen : ∀ i, IsOpen (A i) := by\n    intro i\n    exact\n      (Topology.P3_closed_iff_open (A := A i) (hClosed i)).1 (hP3 i)\n  -- The finite intersection of open sets is open.\n  have hOpenInter : IsOpen (⋂ i, A i) := isOpen_iInter hOpen\n  -- An open set satisfies `P3`.\n  exact Topology.P3_of_open hOpenInter",
+    "theorem interior_inter {α : Type*} [TopologicalSpace α] {A B : Set α} :\n    interior (A ∩ B) = interior A ∩ interior B := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    have hxA : x ∈ interior A :=\n      (interior_mono (Set.inter_subset_left : (A ∩ B : Set α) ⊆ A)) hx\n    have hxB : x ∈ interior B :=\n      (interior_mono (Set.inter_subset_right : (A ∩ B : Set α) ⊆ B)) hx\n    exact And.intro hxA hxB\n  · intro x hx\n    rcases hx with ⟨hxA, hxB⟩\n    -- The set `interior A ∩ interior B` is open and contained in `A ∩ B`.\n    have hOpen : IsOpen (interior A ∩ interior B) :=\n      (isOpen_interior).inter isOpen_interior\n    have hSub : (interior A ∩ interior B : Set α) ⊆ A ∩ B := by\n      intro y hy\n      exact ⟨(interior_subset : interior A ⊆ A) hy.1,\n             (interior_subset : interior B ⊆ B) hy.2⟩\n    have hIncl : (interior A ∩ interior B : Set α) ⊆ interior (A ∩ B) :=\n      interior_maximal hSub hOpen\n    exact hIncl ⟨hxA, hxB⟩"
+  ],
+  "success": true
+}

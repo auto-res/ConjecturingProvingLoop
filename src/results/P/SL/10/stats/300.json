@@ -1,0 +1,26 @@
+{
+  "times": [
+    110.82475972175598
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5737,
+      "prompt_tokens": 48414,
+      "total_tokens": 54151,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.nonempty_of_nonempty_interior_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    (interior (closure A)).Nonempty → A.Nonempty := by\n  intro hInt\n  rcases hInt with ⟨x, hxInt⟩\n  -- `x` lies in the closure of `A`.\n  have hxCl : (x : X) ∈ closure A := interior_subset hxInt\n  -- If `A` were empty, its closure would also be empty, contradicting `hxCl`.\n  by_cases hA : A.Nonempty\n  · exact hA\n  ·\n    have hAempty : (A : Set X) = ∅ :=\n      (Set.not_nonempty_iff_eq_empty).1 hA\n    have : (x : X) ∈ (∅ : Set X) := by\n      simpa [hAempty, closure_empty] using hxCl\n    cases this"
+  ],
+  "success": true
+}

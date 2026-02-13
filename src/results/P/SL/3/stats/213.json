@@ -1,0 +1,43 @@
+{
+  "times": [
+    147.23308777809143,
+    45.24498009681702
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11508,
+      "prompt_tokens": 33962,
+      "total_tokens": 45470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 3618,
+      "prompt_tokens": 34034,
+      "total_tokens": 37652,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_compl_eq_univ_iff_interior_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure ((Aᶜ) : Set X) = (Set.univ : Set X) ↔\n      interior (A : Set X) = (∅ : Set X) := by\n  -- Fundamental identity relating `closure (Aᶜ)` and `interior A`.\n  have h := closure_compl_eq_complement_interior (A := A)\n  -- Taking complements yields an expression for `interior A`.\n  have h' : interior (A : Set X) = (closure ((Aᶜ) : Set X))ᶜ := by\n    have hc := congrArg Set.compl h\n    simpa [Set.compl_compl] using hc.symm\n  -- Establish the desired equivalence.\n  constructor\n  · intro hCl\n    simpa [hCl] using h'\n  · intro hInt\n    simpa [hInt] using h",
+    "theorem closure_interior_iInter_subset_iInter_closure_interior\n    {X : Type*} [TopologicalSpace X] {ι : Sort _} (f : ι → Set X) :\n    closure (interior (⋂ i, f i : Set X)) ⊆ ⋂ i, closure (interior (f i : Set X)) := by\n  intro x hx\n  -- We prove that `x` belongs to each `closure (interior (f i))`.\n  apply Set.mem_iInter.2\n  intro i\n  -- Use monotonicity of `interior` to obtain the required inclusion.\n  have hSubset : interior (⋂ i, f i : Set X) ⊆ interior (f i : Set X) := by\n    apply interior_mono\n    exact Set.iInter_subset _ i\n  -- Apply `closure_mono` to transfer membership through the closure.\n  exact (closure_mono hSubset) hx"
+  ],
+  "success": true
+}

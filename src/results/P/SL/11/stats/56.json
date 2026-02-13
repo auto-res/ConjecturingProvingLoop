@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.055731773376465
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2670,
+      "prompt_tokens": 8007,
+      "total_tokens": 10677,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_closure_interior_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (closure (interior (closure A))) := by\n  -- First, `interior (closure A)` satisfies `P1`.\n  have hInt : Topology.P1 (interior (closure A)) := by\n    simpa using Topology.P1_of_interior_closure (A := A)\n  -- Taking the closure preserves `P1`.\n  have hCl : Topology.P1 (closure (interior (closure A))) :=\n    Topology.P1_closure_of_P1 (A := interior (closure A)) hInt\n  simpa using hCl"
+  ],
+  "success": true
+}

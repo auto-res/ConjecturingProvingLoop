@@ -1,0 +1,43 @@
+{
+  "times": [
+    47.76395058631897,
+    271.6050238609314
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5097,
+      "prompt_tokens": 17369,
+      "total_tokens": 22466,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    },
+    {
+      "completion_tokens": 21584,
+      "prompt_tokens": 17537,
+      "total_tokens": 39121,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 21568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_eq_union_closure_interiors\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  calc\n    closure (interior (A ∪ B))\n        = closure (interior A ∪ interior B) := by\n          simpa [interior_union] using rfl\n    _ = closure (interior A) ∪ closure (interior B) := by\n          simpa using\n            (Topology.closure_union_interiors_eq (A := A) (B := B))",
+    ""
+  ],
+  "success": true
+}

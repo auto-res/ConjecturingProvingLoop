@@ -1,0 +1,26 @@
+{
+  "times": [
+    110.33788514137268
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7214,
+      "prompt_tokens": 51590,
+      "total_tokens": 58804,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_open_diff_closed {X : Type*} [TopologicalSpace X] {U V : Set X}\n    (hU_open : IsOpen (U : Set X)) (hV_closed : IsClosed (V : Set X)) :\n    Topology.P1 (U \\ V) ∧ Topology.P2 (U \\ V) ∧ Topology.P3 (U \\ V) := by\n  -- The difference of an open set and a closed set is open.\n  have hOpenDiff : IsOpen (U \\ V : Set X) := IsOpen.diff hU_open hV_closed\n  -- Apply the combined `P123` result for open sets.\n  exact Topology.P123_of_open hOpenDiff"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.351053953170776
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4490,
+      "prompt_tokens": 53856,
+      "total_tokens": 58346,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interInterior_subset_closure_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A ∩ B) ⊆ closure A := by\n  -- The set `interior A ∩ B` is contained in `A`\n  have h : interior A ∩ B ⊆ A := by\n    intro x hx\n    exact (interior_subset : interior A ⊆ A) hx.1\n  -- Taking closures preserves inclusions\n  exact closure_mono h"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    164.28507375717163,
+    241.66213941574097
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9732,
+      "prompt_tokens": 51010,
+      "total_tokens": 60742,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 13010,
+      "prompt_tokens": 51126,
+      "total_tokens": 64136,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_of_subset_subset_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) (hBsubset : (B : Set X) ⊆ closure (A : Set X)) :\n    closure (A : Set X) = closure (B : Set X) := by\n  apply Set.Subset.antisymm\n  · -- `closure A ⊆ closure B`\n    have hSub : (A : Set X) ⊆ closure (B : Set X) :=\n      Set.Subset.trans hAB subset_closure\n    have h := closure_mono hSub\n    simpa [closure_closure] using h\n  · -- `closure B ⊆ closure A`\n    exact closure_mono hBsubset",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    292.62157797813416
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 19735,
+      "prompt_tokens": 35457,
+      "total_tokens": 55192,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_iff_closure_subset_self {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    IsClosed A ↔ closure A ⊆ A := by\n  constructor\n  · intro hClosed\n    -- If `A` is closed, its closure is itself, hence the desired inclusion.\n    have h_eq : closure A = A := hClosed.closure_eq\n    have h_subset : (A : Set X) ⊆ A := subset_rfl\n    simpa [h_eq] using (h_subset : (A : Set X) ⊆ A)\n  · intro h_subset\n    -- The inclusion `closure A ⊆ A` together with the opposite\n    -- inclusion `A ⊆ closure A` yields equality, hence closedness.\n    have h_eq : closure A = A := by\n      apply subset_antisymm h_subset\n      exact subset_closure\n    -- Rewriting with this equality turns the known closedness of\n    -- `closure A` into the closedness of `A`.\n    have h_closed_closure : IsClosed (closure A) := isClosed_closure\n    simpa [h_eq] using h_closed_closure"
+  ],
+  "success": true
+}

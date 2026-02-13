@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.723830223083496
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1980,
+      "prompt_tokens": 42748,
+      "total_tokens": 44728,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem isClopen_of_closure_eq_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = interior (A : Set X) →\n      (IsOpen (A : Set X) ∧ IsClosed (A : Set X)) := by\n  intro hEq\n  -- The boundary of `A` is empty, since `closure A = interior A`.\n  have hBoundary :\n      closure (A : Set X) \\ interior (A : Set X) = (∅ : Set X) := by\n    simpa [hEq, Set.diff_self]\n  -- Apply the characterisation of clopen sets via empty boundary.\n  exact (boundary_eq_empty_iff_isClopen (A := A)).1 hBoundary"
+  ],
+  "success": true
+}

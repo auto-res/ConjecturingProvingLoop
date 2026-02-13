@@ -1,0 +1,26 @@
+{
+  "times": [
+    135.5725874900818
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10294,
+      "prompt_tokens": 15533,
+      "total_tokens": 25827,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (closure (interior (closure A))))))) =\n      interior (closure A) := by\n  -- First, collapse the innermost three‐layer expression.\n  have h₁ :\n      interior (closure (interior (closure (interior (closure A))))) =\n        interior (closure A) := by\n    simpa using\n      (Topology.interior_closure_interior_closure_interior_closure_eq_interior_closure\n        (X := X) (A := A))\n  -- Second, recall the two‐layer idempotency of `interior ∘ closure`.\n  have h₂ :\n      interior (closure (interior (closure A))) = interior (closure A) := by\n    simpa using\n      (Topology.interior_closure_interior_closure_eq_interior_closure\n        (X := X) (A := A))\n  -- Combine the two simplifications to obtain the desired result.\n  calc\n    interior (closure (interior (closure (interior (closure (interior (closure A))))))) =\n        interior (closure (interior (closure (interior (closure A))))) := by\n          simpa [h₁]\n    _ = interior (closure (interior (closure A))) := by\n          simpa [h₁]\n    _ = interior (closure A) := by\n          simpa using h₂"
+  ],
+  "success": true
+}

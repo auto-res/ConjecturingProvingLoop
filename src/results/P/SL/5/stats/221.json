@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.56258964538574
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4803,
+      "prompt_tokens": 38757,
+      "total_tokens": 43560,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    }
+  ],
+  "responses": [
+    "theorem isClosed_of_closure_subset {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (A : Set X) ⊆ A) : IsClosed (A : Set X) := by\n  have hEq : closure (A : Set X) = A := by\n    apply le_antisymm\n    · exact h\n    · exact subset_closure\n  simpa [hEq] using (isClosed_closure : IsClosed (closure (A : Set X)))"
+  ],
+  "success": true
+}

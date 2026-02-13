@@ -1,0 +1,26 @@
+{
+  "times": [
+    130.89510488510132
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6967,
+      "prompt_tokens": 58995,
+      "total_tokens": 65962,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58112
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (A ∪ closure (A : Set X))) =\n      closure (interior (closure A)) := by\n  -- Since `A ⊆ closure A`, the union `A ∪ closure A` is just `closure A`.\n  have h_union : (A ∪ closure (A : Set X) : Set X) = closure A := by\n    have h_sub : (A : Set X) ⊆ closure A := subset_closure\n    exact (Set.union_eq_right.2 h_sub)\n  -- Rewriting with this equality yields the desired result.\n  simpa [h_union]"
+  ],
+  "success": true
+}

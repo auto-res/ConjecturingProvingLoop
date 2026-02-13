@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.7551474571228
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3699,
+      "prompt_tokens": 11816,
+      "total_tokens": 15515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iterate_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure A))))) =\n      interior (closure A) := by\n  -- First reduction using idempotence on `interior (closure A)`.\n  have hStep1 :\n      interior (closure (interior (closure (interior (closure A))))) =\n        interior (closure (interior (closure A))) := by\n    simpa using\n      (Topology.interiorClosure_idempotent (X := X) (A := interior (closure A)))\n  -- Second reduction using idempotence on `A`.\n  have hStep2 :\n      interior (closure (interior (closure A))) = interior (closure A) := by\n    simpa using\n      (Topology.interiorClosure_idempotent (X := X) (A := A))\n  -- Combine the two equalities.\n  simpa using (hStep1.trans hStep2)"
+  ],
+  "success": true
+}

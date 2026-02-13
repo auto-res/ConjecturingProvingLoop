@@ -1,0 +1,26 @@
+{
+  "times": [
+    92.85749411582947
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8019,
+      "prompt_tokens": 62721,
+      "total_tokens": 70740,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7872,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 62208
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_right_implies_dense_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    Dense B → Dense (A ∪ B) := by\n  intro hDenseB\n  -- Apply the corresponding lemma with the roles of `A` and `B` swapped,\n  -- then rewrite using the commutativity of the union.\n  have h : Dense (B ∪ A) :=\n    dense_left_implies_dense_union (X := X) (A := B) (B := A) hDenseB\n  simpa [Set.union_comm] using h"
+  ],
+  "success": true
+}

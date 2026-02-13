@@ -1,0 +1,43 @@
+{
+  "times": [
+    141.95583748817444,
+    102.47103643417358
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7804,
+      "prompt_tokens": 23258,
+      "total_tokens": 31062,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    },
+    {
+      "completion_tokens": 6130,
+      "prompt_tokens": 23380,
+      "total_tokens": 29510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_implies_dense_interior_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense (A : Set X) → Dense (interior (closure (A : Set X))) := by\n  intro hDense\n  dsimp [Dense] at *\n  have h :=\n    Topology.dense_implies_closure_interior_closure_eq_univ (X := X) (A := A) hDense\n  simpa using h",
+    "theorem Topology.closure_inter_interior_closure_eq_interior_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    (closure (A : Set X)) ∩ interior (closure A) = interior (closure A) := by\n  ext x\n  constructor\n  · intro hx\n    exact hx.2\n  · intro hx\n    exact And.intro (interior_subset hx) hx"
+  ],
+  "success": true
+}

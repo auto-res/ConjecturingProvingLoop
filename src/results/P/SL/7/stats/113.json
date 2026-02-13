@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.94274425506592
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5941,
+      "prompt_tokens": 16177,
+      "total_tokens": 22118,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_finite_iff_isOpen_of_T1\n    {X : Type*} [TopologicalSpace X] [T1Space X] {F : Set X}\n    (hF : F.Finite) :\n    Topology.P1 F ↔ IsOpen F := by\n  have hClosedF : IsClosed (F : Set X) := hF.isClosed\n  constructor\n  · intro hP1\n    -- From `P1` and closedness obtain `closure (interior F) = F`.\n    have hEq₁ : closure (interior F) = (F : Set X) :=\n      (Topology.P1_closed_iff_closureInterior_eq (A := F) hClosedF).1 hP1\n    -- `interior F` is finite, hence closed, so its closure is itself.\n    have hClosedInt : IsClosed (interior F) := (hF.subset interior_subset).isClosed\n    have hEq₂ : closure (interior F) = interior F := hClosedInt.closure_eq\n    -- Combining the equalities gives `interior F = F`.\n    have hIntEq : interior F = (F : Set X) := by\n      calc\n        interior F = closure (interior F) := by\n          simpa [hEq₂]\n        _ = F := hEq₁\n    -- Therefore `F` is open.\n    have : IsOpen (interior F) := isOpen_interior\n    simpa [hIntEq] using this\n  · intro hOpenF\n    exact Topology.IsOpen_P1 (A := F) hOpenF"
+  ],
+  "success": true
+}

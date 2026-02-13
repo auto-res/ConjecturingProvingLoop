@@ -1,0 +1,26 @@
+{
+  "times": [
+    47.5980749130249
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3371,
+      "prompt_tokens": 12323,
+      "total_tokens": 15694,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P2 A := by\n  dsimp [Topology.P2]\n  intro x hxA\n  have hInt : interior (closure (interior (A : Set X))) = (Set.univ : Set X) := by\n    simpa [hDense] using interior_univ\n  have hx_univ : (x : X) ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hInt] using hx_univ"
+  ],
+  "success": true
+}

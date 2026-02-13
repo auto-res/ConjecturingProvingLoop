@@ -1,0 +1,43 @@
+{
+  "times": [
+    12.675635576248169,
+    162.6018464565277
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1035,
+      "prompt_tokens": 2654,
+      "total_tokens": 3689,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 11004,
+      "prompt_tokens": 2776,
+      "total_tokens": 13780,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_closure_interior_closure_eq_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → closure (interior (closure A)) = closure A := by\n  intro hP3\n  apply subset_antisymm\n  · exact closure_mono (interior_subset : interior (closure A) ⊆ closure A)\n  · exact\n      Topology.P3_implies_closure_subset_closure_interior_closure (A := A) hP3",
+    "theorem Topology.isOpen_closure_interior_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    IsOpen A → closure (interior A) = closure A := by\n  intro hA\n  have hP2 : Topology.P2 A := Topology.isOpen_implies_P2 (A := A) hA\n  exact Topology.P2_implies_closure_interior_eq_closure (A := A) hP2"
+  ],
+  "success": true
+}

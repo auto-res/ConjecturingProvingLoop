@@ -1,0 +1,26 @@
+{
+  "times": [
+    98.87403655052185
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4640,
+      "prompt_tokens": 23290,
+      "total_tokens": 27930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closure_interior_of_dense_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hDense : Dense (interior A)) :\n    Topology.P2 (closure (interior A)) := by\n  -- Because `interior A` is dense, its closure is the whole space.\n  have hEq : closure (interior A) = (Set.univ : Set X) := hDense.closure_eq\n  -- `P2` holds for `Set.univ`; rewrite using `hEq`.\n  simpa [hEq] using (Topology.P2_univ (X := X))"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    18.01386570930481,
+    65.51127433776855
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1681,
+      "prompt_tokens": 2273,
+      "total_tokens": 3954,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 6209,
+      "prompt_tokens": 2376,
+      "total_tokens": 8585,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_isClosed_implies_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → IsClosed A → IsOpen A := by\n  intro hP3 hClosed\n  have h_subset : A ⊆ interior A := by\n    simpa [hClosed.closure_eq] using hP3\n  have h_eq : interior A = A := Set.Subset.antisymm interior_subset h_subset\n  simpa [h_eq] using (isOpen_interior : IsOpen (interior A))",
+    "theorem Topology.closure_interior_eq_of_P1_and_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 A) (hClosed : IsClosed A) :\n    closure (interior A) = A := by\n  apply Set.Subset.antisymm\n  ·\n    have h_subset : interior A ⊆ A := interior_subset\n    exact closure_minimal h_subset hClosed\n  ·\n    exact hP1"
+  ],
+  "success": true
+}

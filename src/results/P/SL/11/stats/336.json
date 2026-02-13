@@ -1,0 +1,26 @@
+{
+  "times": [
+    254.2508580684662
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11061,
+      "prompt_tokens": 54268,
+      "total_tokens": 65329,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_sUnion_open {X : Type*} [TopologicalSpace X] {𝔄 : Set (Set X)}\n    (hA : ∀ A, A ∈ 𝔄 → IsOpen (A : Set X)) :\n    Topology.P2 (⋃₀ 𝔄) := by\n  -- Every open set satisfies `P2`.\n  have hP2 : ∀ A, A ∈ 𝔄 → Topology.P2 A := by\n    intro A hA_mem\n    exact Topology.P2_of_open (A := A) (hA A hA_mem)\n  -- Apply the existing `sUnion` lemma for `P2`.\n  exact Topology.P2_sUnion hP2"
+  ],
+  "success": true
+}

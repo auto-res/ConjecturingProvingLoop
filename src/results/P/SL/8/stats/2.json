@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.86177730560303
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2729,
+      "prompt_tokens": 500,
+      "total_tokens": 3229,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_imp_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) :\n    Topology.P3 A := by\n  dsimp [Topology.P3]\n  have h : interior A ⊆ interior (closure A) := interior_mono subset_closure\n  simpa [hA.interior_eq] using h"
+  ],
+  "success": true
+}

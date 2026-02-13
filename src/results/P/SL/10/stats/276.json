@@ -1,0 +1,26 @@
+{
+  "times": [
+    161.29886436462402
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7398,
+      "prompt_tokens": 44948,
+      "total_tokens": 52346,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_univ_iff_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) ↔ closure A = Set.univ := by\n  constructor\n  · intro hInt\n    apply Set.Subset.antisymm\n    · exact Set.Subset_univ\n    · intro x _\n      -- Since `interior (closure A) = univ`, every point lies in this interior,\n      -- hence in `closure A`.\n      have hxInt : (x : X) ∈ interior (closure A) := by\n        simpa [hInt] using (by simp : x ∈ (Set.univ : Set X))\n      exact interior_subset hxInt\n  · intro hCl\n    exact\n      Topology.interior_closure_eq_univ_of_dense\n        (X := X) (A := A) hCl"
+  ],
+  "success": true
+}

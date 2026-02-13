@@ -1,0 +1,26 @@
+{
+  "times": [
+    218.363276720047
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 16749,
+      "prompt_tokens": 18694,
+      "total_tokens": 35443,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18304
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_compl_eq_compl_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (Aᶜ) = (interior A)ᶜ := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    -- We show that `x ∉ interior A`.\n    by_cases hxInt : x ∈ interior A\n    · -- Derive a contradiction from `hx` and `hxInt`.\n      have h_nonempty :=\n        (mem_closure_iff).1 hx (interior A) isOpen_interior hxInt\n      rcases h_nonempty with ⟨y, hy⟩\n      have h_inA  : y ∈ A     := interior_subset hy.1\n      have h_notA : y ∈ Aᶜ := hy.2\n      have : False := h_notA h_inA\n      exact (this.elim)\n    · -- If `x ∉ interior A`, this is exactly the desired statement.\n      exact hxInt\n  · intro hx\n    -- Here `hx` is `x ∉ interior A`; we prove `x ∈ closure (Aᶜ)`.\n    have hNotInt : x ∉ interior A := hx\n    -- Use the neighbourhood characterisation of the closure.\n    have h_closure : x ∈ closure (Aᶜ) := by\n      apply (mem_closure_iff).2\n      intro U hUopen hxU\n      -- We must show `(U ∩ Aᶜ).Nonempty`.\n      by_contra h_empty\n      -- `h_empty` says `U ⊆ A`.\n      have h_sub : U ⊆ A := by\n        intro y hyU\n        by_contra hyNotA\n        have h_inter : (U ∩ Aᶜ).Nonempty := ⟨y, ⟨hyU, hyNotA⟩⟩\n        exact h_empty h_inter\n      -- Hence `U ⊆ interior A` (since `U` is open and contained in `A`).\n      have hU_interior : U ⊆ interior A :=\n        interior_maximal h_sub hUopen\n      -- This puts `x` in `interior A`, contradicting `hNotInt`.\n      have : x ∈ interior A := hU_interior hxU\n      exact (hNotInt this).elim\n    exact h_closure"
+  ],
+  "success": true
+}

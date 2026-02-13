@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.022338151931763
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2140,
+      "prompt_tokens": 8534,
+      "total_tokens": 10674,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_sUnion {X : Type*} [TopologicalSpace X] (F : Set (Set X))\n    (hF : ∀ A : Set X, A ∈ F → Topology.P2 (X := X) A) :\n    Topology.P2 (X := X) (⋃₀ F) := by\n  dsimp [Topology.P2] at hF ⊢\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨A, hAF, hxA⟩\n  have hx_int : x ∈ interior (closure (interior A)) := hF A hAF hxA\n  have h_sub : interior (closure (interior A)) ⊆\n      interior (closure (interior (⋃₀ F))) := by\n    -- Step 1: relate the interiors.\n    have h1 : (interior A : Set X) ⊆ interior (⋃₀ F) := by\n      have hA_subset : (A : Set X) ⊆ ⋃₀ F := Set.subset_sUnion_of_mem hAF\n      exact interior_mono hA_subset\n    -- Step 2: take closures of both sides.\n    have h2 : closure (interior A : Set X) ⊆ closure (interior (⋃₀ F)) :=\n      closure_mono h1\n    -- Step 3: take interiors again.\n    exact interior_mono h2\n  exact h_sub hx_int"
+  ],
+  "success": true
+}

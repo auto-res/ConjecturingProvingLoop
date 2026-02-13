@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.34025430679321
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3468,
+      "prompt_tokens": 51534,
+      "total_tokens": 55002,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_subset_closure_interior_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) →\n      interior (closure (A : Set X)) ⊆ closure (interior A) := by\n  intro hP2\n  -- `P2` yields the equality of the two closures.\n  have hEq : closure (interior (A : Set X)) = closure A :=\n    Topology.P2_implies_closure_interior_eq_closure (A := A) hP2\n  -- Hence their interiors coincide.\n  have hIntEq :\n      interior (closure (A : Set X)) = interior (closure (interior A)) := by\n    simpa using congrArg interior hEq.symm\n  -- Use the equality together with `interior_subset`.\n  intro x hx\n  have hx' : x ∈ interior (closure (interior A)) := by\n    simpa [hIntEq] using hx\n  exact (interior_subset : interior (closure (interior A)) ⊆ closure (interior A)) hx'"
+  ],
+  "success": true
+}

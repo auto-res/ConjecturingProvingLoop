@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.412116289138794
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3472,
+      "prompt_tokens": 55141,
+      "total_tokens": 58613,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_of_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : (A : Set X) ⊆ B) :\n    frontier (A : Set X) ⊆ closure (B : Set X) := by\n  intro x hxFront\n  -- `x` lies in the closure of `A` by definition of the frontier.\n  have hxClA : (x : X) ∈ closure (A : Set X) :=\n    (Topology.frontier_subset_closure (A := A)) hxFront\n  -- Monotonicity of `closure` for the inclusion `A ⊆ B`.\n  have hClSub : (closure (A : Set X)) ⊆ closure (B : Set X) :=\n    closure_mono hAB\n  exact hClSub hxClA"
+  ],
+  "success": true
+}

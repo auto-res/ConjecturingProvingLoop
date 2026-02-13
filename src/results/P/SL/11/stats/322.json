@@ -1,0 +1,26 @@
+{
+  "times": [
+    226.60195684432983
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14740,
+      "prompt_tokens": 52349,
+      "total_tokens": 67089,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure A)))))) =\n      closure (interior (closure A)) := by\n  -- Apply `closure` to both sides of the interior-level equality and simplify.\n  have h :=\n    congrArg (fun s : Set X => closure s)\n      (interior_closure_interior_closure_interior_closure_eq (A := A))\n  simpa using h"
+  ],
+  "success": true
+}

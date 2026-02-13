@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.25362730026245
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2440,
+      "prompt_tokens": 51531,
+      "total_tokens": 53971,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_subset_closed_iff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsClosed B) :\n    closure (interior A) ⊆ B ↔ interior A ⊆ B := by\n  constructor\n  · intro h_subset\n    exact\n      Set.Subset.trans\n        (subset_closure : interior A ⊆ closure (interior A)) h_subset\n  · intro h_int_subset\n    exact closure_minimal h_int_subset hB"
+  ],
+  "success": true
+}

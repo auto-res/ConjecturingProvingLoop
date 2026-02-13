@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.02093458175659
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4052,
+      "prompt_tokens": 55788,
+      "total_tokens": 59840,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_empty_of_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : closure (A : Set X) = (Set.univ : Set X)) :\n    interior (Aᶜ : Set X) = (∅ : Set X) := by\n  -- We first show that `interior (Aᶜ)` is contained in `∅`.\n  have h_subset : (interior (Aᶜ : Set X)) ⊆ (∅ : Set X) := by\n    intro x hx_int\n    -- We will derive a contradiction from the assumption that\n    -- `x ∈ interior (Aᶜ)`.\n    have hx_closure : (x : X) ∈ closure (A : Set X) := by\n      -- Since `closure A = univ`, every point lies in `closure A`.\n      simpa [hA] using (by\n        have : (x : X) ∈ (Set.univ : Set X) := by simp\n        exact this)\n    -- Use the neighbourhood characterisation of the closure with the open set\n    -- `interior (Aᶜ)`, which contains `x`.\n    have h_nonempty :\n        ((interior (Aᶜ : Set X)) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hx_closure (interior (Aᶜ : Set X))\n        isOpen_interior hx_int\n    rcases h_nonempty with ⟨y, ⟨hy_int, hyA⟩⟩\n    -- But `y ∈ interior (Aᶜ)` implies `y ∉ A`, contradicting `hyA`.\n    have : (y : X) ∈ (Aᶜ : Set X) := interior_subset hy_int\n    exact (this hyA).elim\n  -- The reverse inclusion `∅ ⊆ interior (Aᶜ)` is trivial.\n  exact Set.Subset.antisymm h_subset (Set.empty_subset _)"
+  ],
+  "success": true
+}

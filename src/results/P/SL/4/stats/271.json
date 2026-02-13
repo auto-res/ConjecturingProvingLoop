@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.99242210388184
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7884,
+      "prompt_tokens": 40551,
+      "total_tokens": 48435,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_eq_empty_iff_clopen {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) ↔ (IsOpen A ∧ IsClosed A) := by\n  constructor\n  · intro hFrontierEmpty\n    -- Step 1: translate `frontier A = ∅` into `closure A \\ interior A = ∅`.\n    have hDiffEmpty : closure A \\ interior A = (∅ : Set X) := by\n      have hEq := (frontier_eq_closure_diff_interior (X := X) (A := A)).symm\n      simpa [hFrontierEmpty] using hEq\n    -- Step 2: deduce `closure A ⊆ interior A`.\n    have hSub : closure A ⊆ interior A := by\n      intro x hxCl\n      by_cases hxInt : x ∈ interior A\n      · exact hxInt\n      · have hxInDiff : x ∈ closure A \\ interior A := And.intro hxCl hxInt\n        have : x ∈ (∅ : Set X) := by\n          simpa [hDiffEmpty] using hxInDiff\n        exact (by cases this)\n    -- Step 3: establish `closure A = interior A`.\n    have hEq_cl_int : closure A = interior A := by\n      apply Set.Subset.antisymm hSub\n      -- `interior A ⊆ closure A`\n      intro x hxInt\n      have hxA : x ∈ A := interior_subset hxInt\n      exact subset_closure hxA\n    -- Step 4: derive `interior A = A` and `closure A = A`.\n    have hIntEqA : interior A = A := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      · intro x hxA\n        have hxCl : x ∈ closure A := subset_closure hxA\n        simpa [hEq_cl_int] using hxCl\n    have hClEqA : closure A = A := by\n      simpa [hIntEqA] using hEq_cl_int\n    -- Step 5: conclude that `A` is both open and closed.\n    have hOpen : IsOpen A := by\n      have hOpenInt : IsOpen (interior A) := isOpen_interior\n      simpa [hIntEqA] using hOpenInt\n    have hClosed : IsClosed A := by\n      have hClosedCl : IsClosed (closure A) := isClosed_closure\n      simpa [hClEqA] using hClosedCl\n    exact And.intro hOpen hClosed\n  · rintro ⟨hOpen, hClosed⟩\n    -- A set that is both open and closed has empty frontier.\n    simpa using\n      (frontier_eq_empty_of_clopen (A := A) hOpen hClosed)"
+  ],
+  "success": true
+}

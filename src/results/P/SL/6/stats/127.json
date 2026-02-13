@@ -1,0 +1,26 @@
+{
+  "times": [
+    165.67289400100708
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12542,
+      "prompt_tokens": 19661,
+      "total_tokens": 32203,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_mono\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B) :\n    closure (interior (closure (A : Set X))) ⊆\n      closure (interior (closure B)) := by\n  -- First, extend the inclusion through `closure`.\n  have h₁ : closure (A : Set X) ⊆ closure B := closure_mono hAB\n  -- Next, push it through `interior`.\n  have h₂ : interior (closure (A : Set X)) ⊆ interior (closure B) :=\n    interior_mono h₁\n  -- Finally, apply `closure` once more.\n  exact closure_mono h₂"
+  ],
+  "success": true
+}

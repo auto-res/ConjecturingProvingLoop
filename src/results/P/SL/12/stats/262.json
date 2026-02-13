@@ -1,0 +1,43 @@
+{
+  "times": [
+    172.32858777046204,
+    159.83904600143433
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7091,
+      "prompt_tokens": 49842,
+      "total_tokens": 56933,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 6674,
+      "prompt_tokens": 49954,
+      "total_tokens": 56628,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.subset_closure_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (A : Set X) ⊆ closure (interior (closure (interior A))) := by\n  intro x hxA\n  -- `x` lies in `closure (interior A)` since every set is contained in the closure of its interior.\n  have hx_cl : x ∈ closure (interior (A : Set X)) := subset_closure hxA\n  -- Enlarge the target set using the monotonicity lemma with `A := interior A`.\n  have h_incl :\n      closure (interior (A : Set X)) ⊆\n        closure (interior (closure (interior A))) := by\n    simpa [interior_interior] using\n      (Topology.closure_interior_subset_closure_interior_closure\n        (X := X) (A := interior A))\n  -- Conclude the desired membership.\n  exact h_incl hx_cl",
+    ""
+  ],
+  "success": true
+}

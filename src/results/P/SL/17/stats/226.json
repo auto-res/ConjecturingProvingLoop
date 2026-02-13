@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.580803871154785
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3332,
+      "prompt_tokens": 40622,
+      "total_tokens": 43954,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ B)) = interior (closure A ∪ closure B) := by\n  -- Since `closure` distributes over unions, rewrite and finish.\n  have h : closure (A ∪ B) = closure A ∪ closure B := by\n    simpa using closure_union (s := A) (t := B)\n  simpa using congrArg interior h"
+  ],
+  "success": true
+}

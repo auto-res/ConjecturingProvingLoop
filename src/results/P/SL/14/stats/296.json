@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.52529501914978
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4166,
+      "prompt_tokens": 55599,
+      "total_tokens": 59765,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_union_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Dense (B : Set X) → Dense (A ∪ B : Set X) := by\n  intro hDenseB\n  have h : Dense (B ∪ A : Set X) := by\n    simpa using\n      Topology.dense_union_left (X := X) (A := B) (B := A) hDenseB\n  simpa [Set.union_comm] using h"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    43.53052878379822,
+    303.85162019729614
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2620,
+      "prompt_tokens": 41876,
+      "total_tokens": 44496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40832
+      }
+    },
+    {
+      "completion_tokens": 15699,
+      "prompt_tokens": 41953,
+      "total_tokens": 57652,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P3_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    Topology.P1 A ↔ Topology.P3 A := by\n  -- Relate both sides to `P2` and combine the equivalences.\n  have h₁ : Topology.P1 A ↔ Topology.P2 A :=\n    Topology.P1_iff_P2_of_isClosed (A := A) hA_closed\n  have h₂ : Topology.P3 A ↔ Topology.P2 A :=\n    Topology.P3_iff_P2_of_isClosed (A := A) hA_closed\n  simpa using h₁.trans h₂.symm",
+    "theorem boundary_closed {X : Type*} [TopologicalSpace X] (A : Set X) :\n    IsClosed (closure (A : Set X) \\ interior (A : Set X)) := by\n  simpa using\n    (isClosed_closure_diff_interior (A := A))"
+  ],
+  "success": true
+}

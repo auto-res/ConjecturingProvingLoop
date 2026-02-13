@@ -1,0 +1,60 @@
+{
+  "times": [
+    49.98693084716797,
+    96.77422428131104,
+    196.78545904159546
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2995,
+      "prompt_tokens": 41136,
+      "total_tokens": 44131,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 7251,
+      "prompt_tokens": 41251,
+      "total_tokens": 48502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    },
+    {
+      "completion_tokens": 13594,
+      "prompt_tokens": 41331,
+      "total_tokens": 54925,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_mono\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B) :\n    Topology.P2 B → Topology.P2 A := by\n  intro hB\n  dsimp [Topology.P2] at hB ⊢\n  intro x hxA\n  exact hB (hAB hxA)",
+    "theorem Topology.Subset_interiorClosureInterior_of_P2\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B) (hP2 : Topology.P2 B) :\n    (A : Set X) ⊆ interior (closure (interior B)) := by\n  dsimp [Topology.P2] at hP2\n  intro x hxA\n  have hxB : (x : X) ∈ B := hAB hxA\n  exact hP2 hxB",
+    "theorem Topology.Subset_closureInteriorClosure_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → (A : Set X) ⊆ closure (interior (closure A)) := by\n  intro hP1\n  dsimp [Topology.P1] at hP1\n  have h_step :\n      closure (interior A) ⊆ closure (interior (closure A)) :=\n    Topology.closureInterior_subset_closureInteriorClosure (X := X) (A := A)\n  exact Set.Subset.trans hP1 h_step"
+  ],
+  "success": true
+}

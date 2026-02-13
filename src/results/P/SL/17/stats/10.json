@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.76736044883728
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2597,
+      "prompt_tokens": 1609,
+      "total_tokens": 4206,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P1 A := by\n  unfold Topology.P1\n  intro x hx\n  have : x ∈ closure A := subset_closure hx\n  simpa [hA.interior_eq] using this"
+  ],
+  "success": true
+}

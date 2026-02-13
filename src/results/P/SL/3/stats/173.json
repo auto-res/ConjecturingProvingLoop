@@ -1,0 +1,43 @@
+{
+  "times": [
+    150.10574340820312,
+    73.73146104812622
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11922,
+      "prompt_tokens": 26670,
+      "total_tokens": 38592,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    },
+    {
+      "completion_tokens": 5939,
+      "prompt_tokens": 26750,
+      "total_tokens": 32689,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_eq_of_isOpen_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen (A : Set X)) :\n    interior (A ∪ B : Set X) = A ∪ interior (B : Set X) := by\n  -- We prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- `interior (A ∪ B) ⊆ A ∪ interior B`\n    intro x hxInt\n    have hxUnion : (x : X) ∈ (A ∪ B : Set X) := interior_subset hxInt\n    by_cases hAx : (x : X) ∈ A\n    · exact Or.inl hAx\n    · -- Since `x ∈ interior (A ∪ B)` and `x ∉ A`, we will show `x ∈ interior B`.\n      rcases hxInt with ⟨U, hUopen, hxU, hU_sub⟩\n      -- Consider `V = U \\ A`, an open neighborhood of `x` contained in `B`.\n      set V : Set X := U \\ A\n      have hV_open : IsOpen V := hUopen.diff hA\n      have hxV : (x : X) ∈ V := by\n        refine And.intro hxU ?_\n        exact hAx\n      have hV_sub_B : (V : Set X) ⊆ B := by\n        intro y hy\n        have hyU : (y : X) ∈ U := hy.1\n        have hNotA : (y : X) ∉ A := hy.2\n        have hyUnion : (y : X) ∈ (A ∪ B : Set X) := hU_sub hyU\n        cases hyUnion with\n        | inl hyA => exact (False.elim (hNotA hyA))\n        | inr hyB => exact hyB\n      exact Or.inr ⟨V, hV_open, hxV, hV_sub_B⟩\n  · -- `A ∪ interior B ⊆ interior (A ∪ B)`\n    intro x hxUnion\n    -- The set `A ∪ interior B` is open.\n    have hOpen : IsOpen ((A : Set X) ∪ interior (B : Set X)) :=\n      hA.union isOpen_interior\n    -- It is contained in `A ∪ B`.\n    have hSub : (A ∪ interior (B : Set X)) ⊆ (A ∪ B : Set X) := by\n      intro y hy\n      cases hy with\n      | inl hyA => exact Or.inl hyA\n      | inr hyIntB => exact Or.inr (interior_subset hyIntB)\n    -- Hence it is contained in the interior of `A ∪ B`.\n    exact (interior_maximal hSub hOpen) hxUnion",
+    "theorem closure_iUnion_subset_closure {X : Type*} [TopologicalSpace X] {ι : Sort _}\n    (f : ι → Set X) :\n    (⋃ i, closure (f i : Set X)) ⊆ closure (⋃ i, f i : Set X) := by\n  intro x hx\n  rcases Set.mem_iUnion.mp hx with ⟨i, hxi⟩\n  have h_mono : closure (f i : Set X) ⊆ closure (⋃ j, f j : Set X) := by\n    apply closure_mono\n    intro y hy\n    exact Set.mem_iUnion.mpr ⟨i, hy⟩\n  exact h_mono hxi"
+  ],
+  "success": true
+}

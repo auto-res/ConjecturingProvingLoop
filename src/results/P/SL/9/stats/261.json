@@ -1,0 +1,43 @@
+{
+  "times": [
+    71.91320586204529,
+    140.97469210624695
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3992,
+      "prompt_tokens": 44729,
+      "total_tokens": 48721,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 7241,
+      "prompt_tokens": 44835,
+      "total_tokens": 52076,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_frontier_eq_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (A : Set X) ∩ frontier A = (∅ : Set X) := by\n  classical\n  -- The interior of `A` is disjoint from the frontier of `A`.\n  have hDisjoint : Disjoint (interior (A : Set X)) (frontier A) := by\n    -- `frontier A` is `closure A \\ interior A`.\n    simpa [frontier] using\n      (Topology.disjoint_interior_boundary (A := A))\n  -- Translate disjointness into the intersection being empty.\n  apply (Set.eq_empty_iff_forall_not_mem).2\n  intro x hx\n  have : False := (Set.disjoint_left).1 hDisjoint hx.1 hx.2\n  exact this.elim",
+    "theorem Topology.frontier_inter_subset_inter_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∩ B : Set X) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- `hx` gives that `x` is in the closure of `A ∩ B`.\n  have h_cl : x ∈ closure (A ∩ B : Set X) := hx.1\n  -- The closure of an intersection is contained in the intersection\n  -- of the closures.\n  have h_subset : closure (A ∩ B : Set X) ⊆ closure A ∩ closure B :=\n    Topology.closure_inter_subset (A := A) (B := B)\n  -- Combining the two facts yields the desired membership.\n  exact h_subset h_cl"
+  ],
+  "success": true
+}

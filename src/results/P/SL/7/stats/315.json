@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.17132544517517
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2332,
+      "prompt_tokens": 50007,
+      "total_tokens": 52339,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_union_interior_eq_interiorClosure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A ∪ interior A : Set X)) =\n      interior (closure (A : Set X)) := by\n  -- We apply the more general lemma with `B = interior A`.\n  refine\n    Topology.interiorClosure_union_eq_interiorClosure\n      (A := A) (B := interior A) ?_\n  -- Verify the required subset condition.\n  intro x hx\n  exact\n    (Topology.interior_subset_interiorClosure (A := A)) hx"
+  ],
+  "success": true
+}

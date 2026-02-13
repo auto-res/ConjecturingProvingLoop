@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.34068441390991
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7002,
+      "prompt_tokens": 38092,
+      "total_tokens": 45094,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_closed_eq {X : Type*} [TopologicalSpace X]\n    {A C : Set X} (hC : IsClosed (C : Set X)) :\n    interior (A \\ C : Set X) = interior A \\ C := by\n  -- First, prove the inclusion `⊆`.\n  have h₁ : interior (A \\ C : Set X) ⊆ interior A \\ C := by\n    intro x hx\n    -- From `x ∈ interior (A \\ C)` we get `x ∈ interior A`.\n    have hxA : x ∈ interior A :=\n      (interior_mono (Set.diff_subset : (A \\ C : Set X) ⊆ A)) hx\n    -- And `x ∉ C`, since `x` actually lies in `A \\ C`.\n    have hxNC : x ∉ C := by\n      have : x ∈ (A \\ C : Set X) := interior_subset hx\n      exact this.2\n    exact And.intro hxA hxNC\n  -- Next, prove the inclusion `⊇`.\n  have h₂ : interior A \\ C ⊆ interior (A \\ C : Set X) := by\n    intro x hx\n    rcases hx with ⟨hxA, hxNC⟩\n    -- Construct an open neighbourhood of `x` contained in `A \\ C`.\n    have h_open_int : IsOpen (interior (A : Set X)) := isOpen_interior\n    have h_open_compl : IsOpen (Cᶜ : Set X) := hC.isOpen_compl\n    have h_open : IsOpen (interior A ∩ Cᶜ : Set X) :=\n      h_open_int.inter h_open_compl\n    have hx_in : x ∈ (interior A ∩ Cᶜ : Set X) := And.intro hxA hxNC\n    -- Show this neighbourhood is contained in `A \\ C`.\n    have h_subset :\n        (interior A ∩ Cᶜ : Set X) ⊆ (A \\ C : Set X) := by\n      intro y hy\n      have hyA : y ∈ A := (interior_subset : interior A ⊆ A) hy.1\n      exact And.intro hyA hy.2\n    -- Apply maximality of the interior.\n    have h_interior :\n        (interior A ∩ Cᶜ : Set X) ⊆ interior (A \\ C : Set X) :=\n      interior_maximal h_subset h_open\n    exact h_interior hx_in\n  -- Combine the two inclusions.\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

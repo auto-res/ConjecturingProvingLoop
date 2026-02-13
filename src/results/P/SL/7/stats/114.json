@@ -1,0 +1,26 @@
+{
+  "times": [
+    93.6142590045929
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6450,
+      "prompt_tokens": 16533,
+      "total_tokens": 22983,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_exists_open_superset_subset_interiorClosureInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A ↔\n      ∃ U : Set X, IsOpen U ∧ A ⊆ U ∧ U ⊆ interior (closure (interior A)) := by\n  classical\n  -- Unfold the definition of `P2`.\n  unfold Topology.P2\n  constructor\n  · intro hP2\n    -- Choose `U = interior (closure (interior A))`.\n    refine ⟨interior (closure (interior A)), isOpen_interior, hP2, ?_⟩\n    exact Set.Subset.rfl\n  · rintro ⟨U, _hU_open, hA_subU, hU_sub⟩\n    -- Use the two inclusions to obtain the desired one.\n    intro x hxA\n    exact hU_sub (hA_subU hxA)"
+  ],
+  "success": true
+}

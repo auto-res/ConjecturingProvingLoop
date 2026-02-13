@@ -1,0 +1,26 @@
+{
+  "times": [
+    212.32992720603943
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 15854,
+      "prompt_tokens": 30763,
+      "total_tokens": 46617,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interiors_subset_closure_interior_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure ((interior (A : Set X)) ∩ interior B)\n      ⊆ closure (interior (A ∩ B)) := by\n  -- First, show that `interior A ∩ interior B ⊆ interior (A ∩ B)`.\n  have hSub :\n      ((interior (A : Set X)) ∩ interior B : Set X) ⊆\n        interior (A ∩ B) := by\n    intro x hx\n    -- `interior A ∩ interior B` is an open set contained in `A ∩ B`.\n    have hOpen : IsOpen ((interior (A : Set X)) ∩ interior B) :=\n      (isOpen_interior).inter isOpen_interior\n    have hIncl :\n        ((interior (A : Set X)) ∩ interior B : Set X) ⊆ (A ∩ B) := by\n      intro y hy\n      exact\n        And.intro\n          ((interior_subset : interior A ⊆ A) hy.1)\n          ((interior_subset : interior B ⊆ B) hy.2)\n    -- Apply `interior_maximal` to place `x` in `interior (A ∩ B)`.\n    have : x ∈ interior (A ∩ B) :=\n      (interior_maximal hIncl hOpen) hx\n    exact this\n  -- Finally, lift the inclusion through `closure`.\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.61882424354553
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5439,
+      "prompt_tokens": 50575,
+      "total_tokens": 56014,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_subset_boundary {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A \\ A ⊆ closure A \\ interior A := by\n  intro x hx\n  rcases hx with ⟨hxCl, hxNotA⟩\n  have hxNotInt : x ∉ interior A := by\n    intro hxInt\n    exact hxNotA (interior_subset hxInt)\n  exact And.intro hxCl hxNotInt"
+  ],
+  "success": true
+}

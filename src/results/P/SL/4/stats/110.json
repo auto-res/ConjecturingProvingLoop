@@ -1,0 +1,43 @@
+{
+  "times": [
+    67.1955075263977,
+    38.39080262184143
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4654,
+      "prompt_tokens": 15358,
+      "total_tokens": 20012,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    },
+    {
+      "completion_tokens": 2233,
+      "prompt_tokens": 15526,
+      "total_tokens": 17759,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_subset_union_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) ⊆\n      closure (interior A) ∪ closure (interior B) := by\n  intro x hx\n  -- Rewrite the left‐hand side using `interior_union` and\n  -- the fact that `closure` distributes over unions.\n  have h_eq :\n      closure (interior (A ∪ B)) =\n        closure (interior A) ∪ closure (interior B) := by\n    simpa [interior_union] using closure_union\n  simpa [h_eq] using hx",
+    "theorem closure_interior_subset_of_closed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsClosed A) :\n    closure (interior A) ⊆ A := by\n  have h₁ : interior A ⊆ A := interior_subset\n  have h₂ : closure (interior A) ⊆ closure A := closure_mono h₁\n  simpa [hA.closure_eq] using h₂"
+  ],
+  "success": true
+}

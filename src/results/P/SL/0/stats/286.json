@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.75098252296448
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4027,
+      "prompt_tokens": 48917,
+      "total_tokens": 52944,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_and_isClosed_iff_P3_and_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hClosed : IsClosed (A : Set X)) :\n    (Topology.P2 A ∧ IsClosed (A : Set X)) ↔\n      (Topology.P3 A ∧ IsClosed (A : Set X)) := by\n  -- Equivalence between `P2` and `P3` for closed sets.\n  have hEquiv :=\n    Topology.P2_iff_P3_of_isClosed (X := X) (A := A) hClosed\n  constructor\n  · rintro ⟨hP2, hC⟩\n    have hP3 : Topology.P3 A := hEquiv.1 hP2\n    exact And.intro hP3 hC\n  · rintro ⟨hP3, hC⟩\n    have hP2 : Topology.P2 A := hEquiv.2 hP3\n    exact And.intro hP2 hC"
+  ],
+  "success": true
+}

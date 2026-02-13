@@ -1,0 +1,26 @@
+{
+  "times": [
+    114.30423474311829
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4989,
+      "prompt_tokens": 36029,
+      "total_tokens": 41018,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_subset_closed_left\n    {X : Type*} [TopologicalSpace X] {U A : Set X} (hU : IsClosed U) :\n    closure (U ∩ A) ⊆ U := by\n  have h_subset : closure (U ∩ A) ⊆ closure U :=\n    closure_mono (Set.inter_subset_left : (U ∩ A) ⊆ U)\n  simpa [hU.closure_eq] using h_subset"
+  ],
+  "success": true
+}

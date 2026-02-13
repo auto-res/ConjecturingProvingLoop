@@ -1,0 +1,43 @@
+{
+  "times": [
+    37.08564829826355,
+    102.22264552116394
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2416,
+      "prompt_tokens": 13763,
+      "total_tokens": 16179,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    },
+    {
+      "completion_tokens": 9828,
+      "prompt_tokens": 13883,
+      "total_tokens": 23711,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_subset_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure A)) ⊆ closure A := by\n  -- The interior of `closure A` is contained in `closure A`.\n  have h : interior (closure A) ⊆ closure A := interior_subset\n  -- Taking closures preserves inclusions.\n  exact closure_mono h",
+    "theorem closure_interior_closure_subset_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (closure A)) ⊆ closure A := by\n  have h : interior (closure A) ⊆ closure A := interior_subset\n  simpa [closure_closure] using (closure_mono h)"
+  ],
+  "success": true
+}

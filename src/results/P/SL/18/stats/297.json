@@ -1,0 +1,26 @@
+{
+  "times": [
+    82.06464719772339
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5163,
+      "prompt_tokens": 48413,
+      "total_tokens": 53576,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_closed_of_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hInt : interior (A : Set X) = A) :\n    Topology.P1 (A : Set X) := by\n  -- Since `A = interior A`, the set `A` is open.\n  have hOpen : IsOpen (A : Set X) := by\n    simpa [hInt] using (isOpen_interior : IsOpen (interior (A : Set X)))\n  -- Apply the existing lemma for open sets.\n  exact Topology.P1_of_open (A := A) hOpen"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    64.69486832618713,
+    224.54260277748108,
+    29.426908493041992
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5187,
+      "prompt_tokens": 29915,
+      "total_tokens": 35102,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    },
+    {
+      "completion_tokens": 15719,
+      "prompt_tokens": 30006,
+      "total_tokens": 45725,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    },
+    {
+      "completion_tokens": 1835,
+      "prompt_tokens": 30085,
+      "total_tokens": 31920,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_eq_of_closed {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsClosed B) :\n    interior (A \\ B) = interior A \\ B := by\n  -- We establish mutual inclusion of the two sets.\n  apply Set.Subset.antisymm\n  · -- First, show `interior (A \\ B) ⊆ interior A \\ B`.\n    intro x hx\n    have h₁ :=\n      (interior_diff_subset (X := X) (A := A) (B := B)) hx\n    -- Since `B` is closed, `closure B = B`.\n    simpa [hB.closure_eq] using h₁\n  · -- Conversely, show `interior A \\ B ⊆ interior (A \\ B)`.\n    rintro x ⟨hxIntA, hxNotB⟩\n    -- Choose an open neighborhood `U` of `x` contained in `A`.\n    rcases (Set.mem_interior).1 hxIntA with ⟨U, hU_open, hU_subA, hxU⟩\n    -- Consider the open set `U \\ B`.\n    have hU'open : IsOpen (U \\ B) := by\n      -- `Bᶜ` is open because `B` is closed.\n      have hOpenCompl : IsOpen (Bᶜ) := hB.compl\n      -- `U \\ B = U ∩ Bᶜ`.\n      simpa [Set.diff_eq] using hU_open.inter hOpenCompl\n    -- `x` belongs to `U \\ B`.\n    have hxU' : x ∈ U \\ B := by\n      exact ⟨hxU, hxNotB⟩\n    -- `U \\ B` is contained in `A \\ B`.\n    have hU'subset : U \\ B ⊆ A \\ B := by\n      intro y hy\n      exact ⟨hU_subA hy.1, hy.2⟩\n    -- Hence `x ∈ interior (A \\ B)`.\n    exact\n      (Set.mem_interior).2 ⟨U \\ B, hU'open, hU'subset, hxU'⟩",
+    "import Mathlib\n\nopen Set\n\nvariable {α : Type*} [TopologicalSpace α]\n\ntheorem interior_inter_closure_self (s : Set α) :\n    interior s ∩ closure s = interior s := by\n  ext x\n  constructor\n  · intro hx\n    exact hx.1\n  · intro hx\n    exact And.intro hx (subset_closure hx)",
+    "theorem isOpen_diff_closed_imp_P1 {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsClosed B) :\n    Topology.P1 (A \\ B) := by\n  -- `A \\ B` can be written as the intersection of the open set `A`\n  -- and the open complement of the closed set `B`.\n  have hOpenDiff : IsOpen (A \\ B) := by\n    -- The complement of a closed set is open.\n    have hOpenCompl : IsOpen (Bᶜ) := by\n      simpa using (isOpen_compl_iff).2 hB\n    -- The intersection of two open sets is open.\n    simpa [Set.diff_eq] using hA.inter hOpenCompl\n  -- Any open set satisfies `P1`.\n  simpa using\n    Topology.isOpen_imp_P1 (X := X) (A := A \\ B) hOpenDiff"
+  ],
+  "success": true
+}

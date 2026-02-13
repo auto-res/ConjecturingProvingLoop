@@ -1,0 +1,43 @@
+{
+  "times": [
+    40.98388981819153,
+    30.43590021133423
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3102,
+      "prompt_tokens": 11042,
+      "total_tokens": 14144,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    },
+    {
+      "completion_tokens": 2608,
+      "prompt_tokens": 11112,
+      "total_tokens": 13720,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_eq {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (A ∪ B : Set X)) =\n      closure (interior A) ∪ closure (interior B) := by\n  -- Rewrite `interior (A ∪ B)` as the union of the interiors.\n  have h_int : interior (A ∪ B : Set X) = interior A ∪ interior B := by\n    simpa using interior_union\n  -- Apply `closure_union` after substituting with `h_int`.\n  simpa [h_int, closure_union]",
+    "theorem Topology.interior_closure_interior_inter_subset_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (closure (interior (A ∩ B : Set X))) ⊆\n      interior (closure (interior A)) ∩ interior (closure (interior B)) := by\n  intro x hx\n  have hxA : x ∈ interior (closure (interior A)) := by\n    -- `A ∩ B ⊆ A`\n    have h₁ : (A ∩ B : Set X) ⊆ A := Set.inter_subset_left\n    -- `interior (A ∩ B) ⊆ interior A`\n    have h₂ : (interior (A ∩ B : Set X) : Set X) ⊆ interior A :=\n      interior_mono h₁\n    -- `closure (interior (A ∩ B)) ⊆ closure (interior A)`\n    have h₃ : closure (interior (A ∩ B : Set X)) ⊆ closure (interior A) :=\n      closure_mono h₂\n    -- Taking interiors yields the desired inclusion\n    have h₄ :\n        interior (closure (interior (A ∩ B : Set X))) ⊆\n          interior (closure (interior A)) :=\n      interior_mono h₃\n    exact h₄ hx\n  have hxB : x ∈ interior (closure (interior B)) := by\n    -- `A ∩ B ⊆ B`\n    have h₁ : (A ∩ B : Set X) ⊆ B := Set.inter_subset_right\n    -- `interior (A ∩ B) ⊆ interior B`\n    have h₂ : (interior (A ∩ B : Set X) : Set X) ⊆ interior B :=\n      interior_mono h₁\n    -- `closure (interior (A ∩ B)) ⊆ closure (interior B)`\n    have h₃ : closure (interior (A ∩ B : Set X)) ⊆ closure (interior B) :=\n      closure_mono h₂\n    -- Taking interiors yields the desired inclusion\n    have h₄ :\n        interior (closure (interior (A ∩ B : Set X))) ⊆\n          interior (closure (interior B)) :=\n      interior_mono h₃\n    exact h₄ hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

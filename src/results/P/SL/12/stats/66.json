@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.08946919441223
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8415,
+      "prompt_tokens": 12956,
+      "total_tokens": 21371,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_idempotent {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior (closure (interior (closure (A : Set X))))) =\n      closure (interior (closure (A : Set X))) := by\n  -- We establish the two inclusions separately and conclude by antisymmetry.\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    have h1 :\n        interior (closure (interior (closure (A : Set X)))) ⊆\n          closure (interior (closure (A : Set X))) := by\n      -- An interior is always contained in the set it is taken from.\n      simpa using\n        (interior_subset :\n          interior (closure (interior (closure (A : Set X)))) ⊆\n            closure (interior (closure (A : Set X))))\n    -- Taking closures preserves inclusion; `closure (closure _)` simplifies.\n    simpa [closure_closure] using closure_mono h1\n  · -- `⊇` direction\n    have h2 :\n        closure (interior (closure (A : Set X))) ⊆\n          closure (interior (closure (interior (closure (A : Set X))))) := by\n      -- Use the generic monotonicity lemma with `A := interior (closure A)`.\n      have h :\n          closure (interior (interior (closure (A : Set X)))) ⊆\n            closure (interior (closure (interior (closure (A : Set X))))) :=\n        Topology.closure_interior_subset_closure_interior_closure\n          (X := X) (A := interior (closure (A : Set X)))\n      simpa [interior_interior] using h\n    exact h2"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.7265362739563
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3938,
+      "prompt_tokens": 30704,
+      "total_tokens": 34642,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_of_isOpen_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hB : IsOpen B) :\n    interior (A ∩ B) = interior A ∩ B := by\n  ext x\n  constructor\n  · intro hx\n    have hAB : x ∈ A ∩ B := interior_subset hx\n    have hxB : x ∈ B := hAB.2\n    have hSub : (A ∩ B : Set X) ⊆ A := by\n      intro y hy; exact hy.1\n    have hxIntA : x ∈ interior A := (interior_mono hSub) hx\n    exact And.intro hxIntA hxB\n  · rintro ⟨hxIntA, hxB⟩\n    -- Consider the open set `interior A ∩ B` containing `x`.\n    have hOpen : IsOpen (interior A ∩ B) := isOpen_interior.inter hB\n    have hxMem : x ∈ interior A ∩ B := And.intro hxIntA hxB\n    -- This open set is contained in `A ∩ B`.\n    have hSub : (interior A ∩ B : Set X) ⊆ A ∩ B := by\n      intro y hy; exact And.intro (interior_subset hy.1) hy.2\n    -- Hence `A ∩ B` belongs to the neighbourhoods of `x`.\n    have hNhd : (A ∩ B : Set X) ∈ nhds x :=\n      Filter.mem_of_superset (hOpen.mem_nhds hxMem) hSub\n    -- Conclude that `x` is in the interior of `A ∩ B`.\n    exact (mem_interior_iff_mem_nhds).2 hNhd"
+  ],
+  "success": true
+}

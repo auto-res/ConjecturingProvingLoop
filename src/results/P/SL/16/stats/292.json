@@ -1,0 +1,43 @@
+{
+  "times": [
+    69.42500448226929,
+    22.54953122138977
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4392,
+      "prompt_tokens": 51038,
+      "total_tokens": 55430,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 1300,
+      "prompt_tokens": 51184,
+      "total_tokens": 52484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_idempotent {X : Type*} [TopologicalSpace X] :\n    Function.Idempotent (fun S : Set X => (closure (interior S) : Set X)) := by\n  intro A\n  simpa using\n    (Topology.closure_interior_closure_interior_eq_closure_interior\n      (X := X) (A := A))",
+    "theorem Topology.interior_nonempty_iff_exists_open_subset\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (interior (A : Set X)).Nonempty ↔\n      ∃ U : Set X, IsOpen U ∧ U ⊆ A ∧ U.Nonempty := by\n  constructor\n  · rintro ⟨x, hx⟩\n    exact ⟨interior A, isOpen_interior, interior_subset, ⟨x, hx⟩⟩\n  · rintro ⟨U, hUopen, hUsub, ⟨x, hxU⟩⟩\n    have hUsubInt : U ⊆ interior A :=\n      interior_maximal hUsub hUopen\n    exact ⟨x, hUsubInt hxU⟩"
+  ],
+  "success": true
+}

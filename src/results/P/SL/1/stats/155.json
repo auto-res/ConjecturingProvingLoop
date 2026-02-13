@@ -1,0 +1,26 @@
+{
+  "times": [
+    108.9276225566864
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8606,
+      "prompt_tokens": 23757,
+      "total_tokens": 32363,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_subset_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∪ interior B ⊆ interior (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have hsubset : (A : Set X) ⊆ A ∪ B := by\n        intro y hy\n        exact Or.inl hy\n      have hInt : interior A ⊆ interior (A ∪ B) := interior_mono hsubset\n      exact hInt hA\n  | inr hB =>\n      have hsubset : (B : Set X) ⊆ A ∪ B := by\n        intro y hy\n        exact Or.inr hy\n      have hInt : interior B ⊆ interior (A ∪ B) := interior_mono hsubset\n      exact hInt hB"
+  ],
+  "success": true
+}

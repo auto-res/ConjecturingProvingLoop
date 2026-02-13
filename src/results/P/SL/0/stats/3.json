@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.30666089057922
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4443,
+      "prompt_tokens": 548,
+      "total_tokens": 4991,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_has_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (interior A) := by\n  dsimp [Topology.P2]\n  -- We want `interior A ⊆ interior (closure (interior (interior A)))`.\n  -- Since `interior (interior A) = interior A`, this is the same as\n  -- `interior A ⊆ interior (closure (interior A))`, which follows from\n  -- `interior_mono` applied to `subset_closure`.\n  have h : interior A ⊆ interior (closure (interior A)) := by\n    have h' : interior (interior A) ⊆ interior (closure (interior A)) :=\n      interior_mono subset_closure\n    simpa [interior_interior] using h'\n  simpa [interior_interior] using h"
+  ],
+  "success": true
+}

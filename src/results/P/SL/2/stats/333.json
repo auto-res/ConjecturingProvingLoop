@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.705137968063354
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5867,
+      "prompt_tokens": 57785,
+      "total_tokens": 63652,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interior_compl_eq_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) ∩ interior (Aᶜ : Set X) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · -- Show that the intersection is contained in `∅`.\n    intro x hx\n    rcases hx with ⟨hxCl, hxInt⟩\n    -- Use the neighbourhood formulation of `closure`.\n    have h :=\n      (mem_closure_iff.1 hxCl) (interior (Aᶜ : Set X)) isOpen_interior hxInt\n    rcases h with ⟨y, hyInt, hyA⟩\n    -- `y` is simultaneously in `A` and `Aᶜ`, contradiction.\n    have hyNotA : (y : X) ∉ (A : Set X) := by\n      have : (y : X) ∈ (Aᶜ : Set X) := interior_subset hyInt\n      simpa [Set.mem_compl] using this\n    exact (hyNotA hyA).elim\n  · -- The empty set is contained in every set.\n    exact Set.empty_subset _"
+  ],
+  "success": true
+}

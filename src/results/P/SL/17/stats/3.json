@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.54820799827576
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4449,
+      "prompt_tokens": 616,
+      "total_tokens": 5065,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 A → Topology.P1 B → Topology.P1 (A ∪ B) := by\n  intro hA hB\n  unfold Topology.P1 at *\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hx₁ : x ∈ closure (interior A) := hA hxA\n      have hsubset : interior A ⊆ interior (A ∪ B) :=\n        interior_mono (Set.subset_union_left)\n      have hclosure : closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono hsubset\n      exact hclosure hx₁\n  | inr hxB =>\n      have hx₁ : x ∈ closure (interior B) := hB hxB\n      have hsubset : interior B ⊆ interior (A ∪ B) :=\n        interior_mono (Set.subset_union_right)\n      have hclosure : closure (interior B) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono hsubset\n      exact hclosure hx₁"
+  ],
+  "success": true
+}

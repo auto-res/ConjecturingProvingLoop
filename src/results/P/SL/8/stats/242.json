@@ -1,0 +1,26 @@
+{
+  "times": [
+    140.100417137146
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12229,
+      "prompt_tokens": 37309,
+      "total_tokens": 49538,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_interior_subset_interior_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∩ interior B ⊆ interior (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hA, hB⟩\n  -- The set `U = interior A ∩ interior B` is an open neighbourhood of `x`\n  -- contained in `A ∩ B`.\n  have hU_open : IsOpen (interior A ∩ interior B) :=\n    isOpen_interior.inter isOpen_interior\n  have hU_subset : interior A ∩ interior B ⊆ A ∩ B := by\n    intro y hy\n    exact ⟨interior_subset hy.1, interior_subset hy.2⟩\n  -- Hence `x` belongs to the interior of `A ∩ B`.\n  exact\n    (Set.mem_interior).2 ⟨interior A ∩ interior B, hU_open, hU_subset, ⟨hA, hB⟩⟩"
+  ],
+  "success": true
+}

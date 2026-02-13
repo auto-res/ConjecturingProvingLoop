@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.83342790603638
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7399,
+      "prompt_tokens": 25635,
+      "total_tokens": 33034,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) ∪ interior B ⊆ interior (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hIntA =>\n      -- `interior A ⊆ interior (A ∪ B)` via monotonicity of `interior`.\n      have hIncl : interior (A : Set X) ⊆ interior (A ∪ B) := by\n        apply interior_mono\n        intro y hy\n        exact Or.inl hy\n      exact hIncl hIntA\n  | inr hIntB =>\n      -- Symmetric argument for `interior B`.\n      have hIncl : interior (B : Set X) ⊆ interior (A ∪ B) := by\n        apply interior_mono\n        intro y hy\n        exact Or.inr hy\n      exact hIncl hIntB"
+  ],
+  "success": true
+}

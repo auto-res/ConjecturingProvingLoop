@@ -1,0 +1,43 @@
+{
+  "times": [
+    104.60441303253174,
+    230.3148992061615
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7730,
+      "prompt_tokens": 12102,
+      "total_tokens": 19832,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    },
+    {
+      "completion_tokens": 14706,
+      "prompt_tokens": 12232,
+      "total_tokens": 26938,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_union_of_dense_left {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hDense : closure (A : Set X) = (Set.univ : Set X)) :\n    Topology.P3 (A ∪ B) := by\n  -- First, establish that `A ∪ B` is dense.\n  have hDenseUnion : closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n    -- Since `closure A = univ` and `closure A ⊆ closure (A ∪ B)`, we have\n    -- the inclusion `univ ⊆ closure (A ∪ B)`.\n    have h_subset : (Set.univ : Set X) ⊆ closure (A ∪ B : Set X) := by\n      have h_closure_mono :\n          closure (A : Set X) ⊆ closure (A ∪ B : Set X) :=\n        closure_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n      simpa [hDense] using h_closure_mono\n    -- The reverse inclusion is immediate.\n    have h_superset : closure (A ∪ B : Set X) ⊆ (Set.univ : Set X) :=\n      Set.subset_univ _\n    exact subset_antisymm h_subset h_superset\n  -- Apply the density lemma to obtain `P3` for `A ∪ B`.\n  exact\n    (Topology.P3_of_dense (X := X) (A := A ∪ B) hDenseUnion)",
+    "theorem P1_union_three {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    Topology.P1 A → Topology.P1 B → Topology.P1 C → Topology.P1 (A ∪ B ∪ C) := by\n  intro hA hB hC\n  -- First, combine `A` and `B` using the existing two‐set union lemma.\n  have hAB : Topology.P1 (A ∪ B) :=\n    Topology.P1_union (X := X) (A := A) (B := B) hA hB\n  -- Next, unite the result with `C`.\n  have hABC : Topology.P1 ((A ∪ B) ∪ C) :=\n    Topology.P1_union (X := X) (A := A ∪ B) (B := C) hAB hC\n  -- Use associativity of `∪` to rewrite the goal.\n  simpa [Set.union_assoc] using hABC"
+  ],
+  "success": true
+}

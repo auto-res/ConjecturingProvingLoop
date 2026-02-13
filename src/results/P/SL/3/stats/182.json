@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.08716702461243
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6299,
+      "prompt_tokens": 27997,
+      "total_tokens": 34296,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27520
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P3_of_dense_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X}\n    (h_dense : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P1 A ↔ Topology.P3 A := by\n  have h₁ := Topology.P1_iff_P2_of_dense_interior (A := A) h_dense\n  have h₂ := Topology.P3_iff_P2_of_dense_interior (A := A) h_dense\n  simpa using h₁.trans h₂.symm"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.93804144859314
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4480,
+      "prompt_tokens": 29990,
+      "total_tokens": 34470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_subset_closureInteriorClosure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → A ⊆ closure (interior (closure A)) := by\n  intro hP3\n  -- `P3` yields the inclusion `A ⊆ interior (closure A)`.\n  have h₁ : (A : Set X) ⊆ interior (closure A) := hP3\n  -- The interior of any set is contained in its closure.\n  have h₂ : interior (closure A) ⊆ closure (interior (closure A)) := by\n    intro x hx\n    exact subset_closure hx\n  -- Transitivity of inclusions gives the result.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

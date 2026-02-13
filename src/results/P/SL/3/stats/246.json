@@ -1,0 +1,43 @@
+{
+  "times": [
+    74.34002208709717,
+    433.56646275520325
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3295,
+      "prompt_tokens": 41332,
+      "total_tokens": 44627,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 25106,
+      "prompt_tokens": 41455,
+      "total_tokens": 66561,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 25088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_isOpen_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    Topology.P1 A ↔ IsOpen (A : Set X) := by\n  constructor\n  · intro hP1\n    have hEq :=\n      closure_interior_eq_of_isClosed_and_P1 (A := A) hA_closed hP1\n    exact isOpen_of_closure_interior_eq (A := A) hEq\n  · intro hOpen\n    exact P1_of_isOpen (A := A) hOpen",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.86942052841187
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8492,
+      "prompt_tokens": 20303,
+      "total_tokens": 28795,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_subset_closureInterior_of_subset_P1 {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) (hP1B : Topology.P1 B) :\n    closure A ⊆ closure (interior B) := by\n  -- First, use monotonicity of `closure` to enlarge from `A` to `B`.\n  have h₁ : closure A ⊆ closure B := closure_mono hAB\n  -- Unfold the definition of `P1` for `B`.\n  dsimp [Topology.P1] at hP1B\n  -- Since `closure (interior B)` is closed and contains `B`,\n  -- minimality of the closure yields the desired inclusion.\n  have h₂ : closure B ⊆ closure (interior B) :=\n    closure_minimal hP1B isClosed_closure\n  -- Combine the two inclusions.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

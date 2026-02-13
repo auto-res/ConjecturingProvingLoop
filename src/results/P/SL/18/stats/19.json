@@ -1,0 +1,26 @@
+{
+  "times": [
+    17.83435034751892
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1951,
+      "prompt_tokens": 3277,
+      "total_tokens": 5228,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 A → Topology.P2 B → Topology.P2 (A ∪ B) := by\n  intro hP2A hP2B\n  dsimp [Topology.P2] at hP2A hP2B ⊢\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hxA' : x ∈ interior (closure (interior A)) := hP2A hxA\n      have hIncl : interior (closure (interior A))\n          ⊆ interior (closure (interior (A ∪ B))) := by\n        apply interior_mono\n        have : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n          apply closure_mono\n          have : interior A ⊆ interior (A ∪ B) := by\n            apply interior_mono\n            intro y hy\n            exact Or.inl hy\n          exact this\n        exact this\n      exact hIncl hxA'\n  | inr hxB =>\n      have hxB' : x ∈ interior (closure (interior B)) := hP2B hxB\n      have hIncl : interior (closure (interior B))\n          ⊆ interior (closure (interior (A ∪ B))) := by\n        apply interior_mono\n        have : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n          apply closure_mono\n          have : interior B ⊆ interior (A ∪ B) := by\n            apply interior_mono\n            intro y hy\n            exact Or.inr hy\n          exact this\n        exact this\n      exact hIncl hxB'"
+  ],
+  "success": true
+}

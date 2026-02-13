@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.20710325241089
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4096,
+      "prompt_tokens": 21990,
+      "total_tokens": 26086,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_prod_left {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty Y]\n    {A : Set X} :\n    Topology.P2 (A ×ˢ (Set.univ : Set Y)) → Topology.P2 A := by\n  intro hProd\n  dsimp [Topology.P2] at hProd ⊢\n  intro x hxA\n  classical\n  -- Choose an arbitrary element of `Y` to form a point in the product.\n  let y : Y := Classical.arbitrary Y\n  have h_mem_prod : (x, y) ∈ A ×ˢ (Set.univ : Set Y) := by\n    exact ⟨hxA, Set.mem_univ y⟩\n  -- Apply the `P2` property of the product.\n  have h_int_prod :\n      (x, y) ∈ interior (closure (interior (A ×ˢ (Set.univ : Set Y)))) :=\n    hProd h_mem_prod\n  -- Identify `interior (A ×ˢ univ)` with a product of interiors.\n  have h_int_prod_eq :\n      interior (A ×ˢ (Set.univ : Set Y)) =\n        interior A ×ˢ (Set.univ : Set Y) := by\n    simpa [interior_univ] using\n      interior_prod_eq (s := A) (t := (Set.univ : Set Y))\n  -- Identify `closure` of this interior with a product of closures.\n  have h_closure_prod :\n      closure (interior (A ×ˢ (Set.univ : Set Y))) =\n        closure (interior A) ×ˢ (Set.univ : Set Y) := by\n    calc\n      closure (interior (A ×ˢ (Set.univ : Set Y)))\n          = closure (interior A ×ˢ (Set.univ : Set Y)) := by\n              simpa [h_int_prod_eq]\n      _ = closure (interior A) ×ˢ (Set.univ : Set Y) := by\n              simpa [closure_univ] using\n                closure_prod_eq\n                  (s := interior A) (t := (Set.univ : Set Y))\n  -- Rewrite the interior of this closure.\n  have h_interior_closure_prod :\n      interior (closure (interior (A ×ˢ (Set.univ : Set Y)))) =\n        interior (closure (interior A)) ×ˢ (Set.univ : Set Y) := by\n    calc\n      interior (closure (interior (A ×ˢ (Set.univ : Set Y))))\n          = interior ((closure (interior A)) ×ˢ (Set.univ : Set Y)) := by\n              simpa [h_closure_prod]\n      _ = interior (closure (interior A)) ×ˢ (Set.univ : Set Y) := by\n              simpa [interior_univ] using\n                interior_prod_eq\n                  (s := closure (interior A)) (t := (Set.univ : Set Y))\n  -- Transport membership through these identities.\n  have h_prod_mem' :\n      (x, y) ∈\n        interior (closure (interior A)) ×ˢ (Set.univ : Set Y) := by\n    simpa [h_interior_closure_prod] using h_int_prod\n  -- Extract the `X`-coordinate to conclude.\n  exact (Set.mem_prod.1 h_prod_mem').1"
+  ],
+  "success": true
+}

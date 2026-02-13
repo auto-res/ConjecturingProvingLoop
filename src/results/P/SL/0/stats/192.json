@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.21196722984314
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4181,
+      "prompt_tokens": 32043,
+      "total_tokens": 36224,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_closure_has_all_Ps {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen (closure (A : Set X)) →\n      Topology.P1 (closure (A : Set X)) ∧\n      Topology.P2 (closure (A : Set X)) ∧\n      Topology.P3 (closure (A : Set X)) := by\n  intro hOpen\n  have hP1 := P1_closure_of_isOpen_closure (X := X) (A := A) hOpen\n  have hP2 := P2_of_isOpen_closure (X := X) (A := A) hOpen\n  have hP3 := P3_closure_of_isOpen_closure (X := X) (A := A) hOpen\n  exact And.intro hP1 (And.intro hP2 hP3)"
+  ],
+  "success": true
+}

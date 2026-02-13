@@ -1,0 +1,26 @@
+{
+  "times": [
+    11.754853248596191
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 838,
+      "prompt_tokens": 12718,
+      "total_tokens": 13556,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_of_discrete\n    {X : Type*} [TopologicalSpace X] [DiscreteTopology X] {A : Set X} :\n    Topology.P2 (A := A) ↔ Topology.P3 (A := A) := by\n  -- Use the equivalences with `P1` already established for discrete spaces.\n  have h₁ : Topology.P2 (A := A) ↔ Topology.P1 (A := A) :=\n    (Topology.P1_iff_P2_of_discrete (A := A)).symm\n  have h₂ : Topology.P1 (A := A) ↔ Topology.P3 (A := A) :=\n    Topology.P1_iff_P3_of_discrete (A := A)\n  simpa using h₁.trans h₂"
+  ],
+  "success": true
+}

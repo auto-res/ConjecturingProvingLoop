@@ -1,0 +1,43 @@
+{
+  "times": [
+    116.5602958202362,
+    118.90128564834595
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7726,
+      "prompt_tokens": 25849,
+      "total_tokens": 33575,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    },
+    {
+      "completion_tokens": 6448,
+      "prompt_tokens": 25950,
+      "total_tokens": 32398,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_self_of_P3_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    Topology.P3 (A : Set X) → closure (interior A) = A := by\n  intro hP3\n  -- From `P3`, we obtain `A ⊆ interior A` because `A` is closed.\n  have hSub₁ : (A : Set X) ⊆ interior A := by\n    have h := hP3\n    simpa [hA_closed.closure_eq] using h\n  -- The interior is always contained in the set itself.\n  have hSub₂ : interior A ⊆ (A : Set X) := interior_subset\n  -- Hence, `interior A = A`.\n  have hIntEq : interior A = A := Set.Subset.antisymm hSub₂ hSub₁\n  -- Taking closures yields the desired equality.\n  have hClosEq : closure (interior A) = A := by\n    have h' : closure (interior A) = closure A := by\n      simpa using congrArg closure hIntEq\n    simpa [hA_closed.closure_eq] using h'\n  exact hClosEq",
+    "theorem closure_interior_closure_interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (A : Set X)))) ⊆\n      closure (interior (closure A)) := by\n  exact\n    closure_mono\n      (Topology.interior_closure_interior_subset_closure (A := A))"
+  ],
+  "success": true
+}

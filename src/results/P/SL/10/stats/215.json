@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.93278956413269
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2998,
+      "prompt_tokens": 34695,
+      "total_tokens": 37693,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_image_interior_subset_closure_image\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {f : X → Y} {A : Set X} :\n    closure (f '' interior A) ⊆ closure (f '' A) := by\n  -- First, note the obvious inclusion `f '' interior A ⊆ f '' A`.\n  have h_subset : f '' interior A ⊆ f '' A := by\n    intro y hy\n    rcases hy with ⟨x, hxInt, rfl⟩\n    exact ⟨x, interior_subset hxInt, rfl⟩\n  -- Taking closures preserves inclusions.\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

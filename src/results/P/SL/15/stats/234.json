@@ -1,0 +1,43 @@
+{
+  "times": [
+    132.08697772026062,
+    152.65905117988586
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7943,
+      "prompt_tokens": 50083,
+      "total_tokens": 58026,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 7288,
+      "prompt_tokens": 50264,
+      "total_tokens": 57552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_iff_interior_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure A) ↔ interior (closure A) = closure A := by\n  have h₁ :=\n    (Topology.P2_closure_iff_P3_closure (X := X) (A := A))\n  have h₂ :=\n    (Topology.P3_closure_iff_interior_eq (X := X) (A := A))\n  exact h₁.trans h₂",
+    "theorem denseInterior_implies_P2_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (interior A)) :\n    Topology.P2 (closure (interior A)) := by\n  -- From the density of `interior A`, we know that its closure is open.\n  have hOpen : IsOpen (closure (interior A)) :=\n    isOpen_closure_interior_of_denseInterior (X := X) (A := A) hDense\n  -- For a closed set, `P2` is equivalent to openness.\n  exact\n    (Topology.P2_closure_interior_iff_isOpen_closure_interior\n        (X := X) (A := A)).2 hOpen"
+  ],
+  "success": true
+}

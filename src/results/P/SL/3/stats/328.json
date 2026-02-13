@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.37567615509033
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3124,
+      "prompt_tokens": 55495,
+      "total_tokens": 58619,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_three {X : Type*} [TopologicalSpace X]\n    (A B C : Set X) :\n    closure ((A ∪ B ∪ C) : Set X) =\n      closure (A : Set X) ∪ closure B ∪ closure C := by\n  calc\n    closure ((A ∪ B ∪ C) : Set X)\n        = closure (((A ∪ B) ∪ C) : Set X) := by\n          simpa [Set.union_assoc]\n    _ = closure (A ∪ B : Set X) ∪ closure C := by\n          simpa using\n            (closure_union_eq_union_closure\n              (A := (A ∪ B)) (B := C))\n    _ = (closure A ∪ closure B) ∪ closure C := by\n          simpa\n            [closure_union_eq_union_closure (A := A) (B := B)]\n    _ = closure (A : Set X) ∪ closure B ∪ closure C := by\n          simpa [Set.union_assoc]"
+  ],
+  "success": true
+}

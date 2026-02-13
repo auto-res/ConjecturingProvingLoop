@@ -1,0 +1,26 @@
+{
+  "times": [
+    111.1204903125763
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4543,
+      "prompt_tokens": 52945,
+      "total_tokens": 57488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_self_of_clopen\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (A : Set X)) (hClosed : IsClosed (A : Set X)) :\n    closure (interior (A : Set X)) = A := by\n  -- Since `A` is open, its interior is itself.\n  have hInt : interior (A : Set X) = A := hOpen.interior_eq\n  -- Taking closures and rewriting via `hInt`.\n  have hClos : closure (interior (A : Set X)) = closure A := by\n    simpa [hInt]\n  -- As `A` is closed, its closure is itself.\n  simpa [hClosed.closure_eq] using hClos"
+  ],
+  "success": true
+}

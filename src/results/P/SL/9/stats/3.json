@@ -1,0 +1,60 @@
+{
+  "times": [
+    43.33821702003479,
+    122.50006413459778,
+    51.15496277809143
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3138,
+      "prompt_tokens": 562,
+      "total_tokens": 3700,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 8319,
+      "prompt_tokens": 688,
+      "total_tokens": 9007,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3429,
+      "prompt_tokens": 767,
+      "total_tokens": 4196,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_has_P3 {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P3 (A := interior A) := by\n  dsimp [Topology.P3]\n  intro x hx\n  have h_subset : interior A ⊆ interior (closure (interior A)) := by\n    have h_closure : interior A ⊆ closure (interior A) := subset_closure\n    exact interior_mono h_closure\n  exact h_subset hx",
+    "import Mathlib\nimport Aesop\n\nnamespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\ndef P1 (A : Set X) : Prop :=\n  A ⊆ closure (interior A)\n\ndef P2 (A : Set X) : Prop :=\n  A ⊆ interior (closure (interior A))\n\ndef P3 (A : Set X) : Prop :=\n  A ⊆ interior (closure A)\n\ntheorem P2_implies_P3 {A : Set X} (h : P2 A) : P3 A := by\n  dsimp [P2, P3] at *\n  intro x hxA\n  have hxInt : x ∈ interior (closure (interior A)) := h hxA\n  have h_closure_subset : closure (interior A) ⊆ closure A :=\n    closure_mono interior_subset\n  have h_int_subset : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono h_closure_subset\n  exact h_int_subset hxInt\n\ntheorem P2_implies_P1 {A : Set X} (h : P2 A) : P1 A := by\n  dsimp [P2, P1] at *\n  exact subset_trans h interior_subset\n\ntheorem P2_implies_P1_and_P3 {A : Set X} (h : P2 A) : P1 A ∧ P3 A := by\n  exact ⟨P2_implies_P1 h, P2_implies_P3 h⟩\n\n/-- If `A ⊆ interior (closure (interior A))`, then `closure A = closure (interior A)`. -/\ntheorem closure_eq_of_P2 {A : Set X} (h : P2 A) :\n    closure A = closure (interior A) := by\n  apply le_antisymm\n  · -- `closure A ⊆ closure (interior A)`\n    have hsub : A ⊆ closure (interior A) := (P2_implies_P1 (A := A) h)\n    exact closure_minimal hsub isClosed_closure\n  · -- `closure (interior A) ⊆ closure A`\n    exact closure_mono interior_subset\n\nend Topology",
+    "theorem Topology.P2_iff_P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 (A := A) ↔ Topology.P3 A := by\n  dsimp [Topology.P2, Topology.P3]\n  simpa [hA.interior_eq]"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    17.889248847961426
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1668,
+      "prompt_tokens": 27113,
+      "total_tokens": 28781,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iff_P1_and_P2_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    Topology.P3 A ↔ (Topology.P1 A ∧ Topology.P2 A) := by\n  -- Existing equivalences for open sets.\n  have h1 : Topology.P1 A ↔ Topology.P3 A :=\n    Topology.P1_iff_P3_of_isOpen (A := A) hA\n  have h2 : Topology.P1 A ↔ Topology.P2 A :=\n    Topology.P1_iff_P2_of_isOpen (A := A) hA\n  -- Prove each direction of the desired equivalence.\n  constructor\n  · intro hP3\n    -- Obtain `P1` from `P3` using `h1`.\n    have hP1 : Topology.P1 A := (h1.symm).mp hP3\n    -- Obtain `P2` from `P1` using `h2`.\n    have hP2 : Topology.P2 A := h2.mp hP1\n    exact And.intro hP1 hP2\n  · rintro ⟨hP1, _⟩\n    -- Derive `P3` from `P1` using `h1`.\n    exact h1.mp hP1"
+  ],
+  "success": true
+}

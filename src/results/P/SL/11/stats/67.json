@@ -1,0 +1,43 @@
+{
+  "times": [
+    156.64967441558838,
+    157.54897713661194
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8816,
+      "prompt_tokens": 9495,
+      "total_tokens": 18311,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    },
+    {
+      "completion_tokens": 8118,
+      "prompt_tokens": 9621,
+      "total_tokens": 17739,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply subset_antisymm\n  ·\n    -- `interior (closure (interior A))` is contained in `closure (interior A)`\n    have h₁ : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    -- Taking closures preserves the subset relation.\n    have : closure (interior (closure (interior A)))\n        ⊆ closure (closure (interior A)) := closure_mono h₁\n    simpa [closure_closure] using this\n  ·\n    -- `interior A` is contained in `interior (closure (interior A))`\n    have h₂ : interior A ⊆ interior (closure (interior A)) :=\n      interior_mono (subset_closure : (interior A : Set X) ⊆ closure (interior A))\n    -- Taking closures preserves the subset relation.\n    have : closure (interior A) ⊆ closure (interior (closure (interior A))) :=\n      closure_mono h₂\n    simpa using this",
+    "theorem P1_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P1 A := by\n  dsimp [Topology.P1]\n  intro x hxA\n  have : x ∈ (Set.univ : Set X) := Set.mem_univ x\n  simpa [hDense] using this"
+  ],
+  "success": true
+}

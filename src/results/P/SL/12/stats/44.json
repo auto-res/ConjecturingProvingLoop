@@ -1,0 +1,26 @@
+{
+  "times": [
+    108.8403091430664
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6265,
+      "prompt_tokens": 7702,
+      "total_tokens": 13967,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_sUnion {X : Type*} [TopologicalSpace X] (F : Set (Set X))\n    (hF : ∀ A : Set X, A ∈ F → Topology.P1 (X := X) A) :\n    Topology.P1 (X := X) (⋃₀ F) := by\n  dsimp [Topology.P1] at hF ⊢\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨A, hAF, hxA⟩\n  -- Apply `P1` for the witnessing set `A`.\n  have hx_cl : x ∈ closure (interior (A : Set X)) := hF A hAF hxA\n  -- Show that the relevant closure for `A` is contained in that for `⋃₀ F`.\n  have h_int : (interior (A : Set X)) ⊆ interior (⋃₀ F) := by\n    have h_subset : (A : Set X) ⊆ ⋃₀ F := Set.subset_sUnion_of_mem hAF\n    exact interior_mono h_subset\n  have h_sub : closure (interior (A : Set X)) ⊆ closure (interior (⋃₀ F)) :=\n    closure_mono h_int\n  exact h_sub hx_cl"
+  ],
+  "success": true
+}

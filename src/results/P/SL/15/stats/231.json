@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.48807120323181
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4500,
+      "prompt_tokens": 49182,
+      "total_tokens": 53682,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_prod_nonempty_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    (closure (A ×ˢ B)).Nonempty ↔\n      ((closure (A : Set X)).Nonempty ∧ (closure (B : Set Y)).Nonempty) := by\n  -- Express the closure of the product as a product of closures.\n  have hEq :\n      closure (A ×ˢ B) =\n        (closure (A : Set X)) ×ˢ (closure (B : Set Y)) := by\n    simpa using closure_prod_eq (s := A) (t := B)\n  constructor\n  · -- `→` direction\n    intro hProd\n    rcases hProd with ⟨p, hp⟩\n    -- Transport the membership through `hEq`.\n    have hp' : (p : X × Y) ∈ closure A ×ˢ closure B := by\n      simpa [hEq] using hp\n    rcases hp' with ⟨hpA, hpB⟩\n    exact ⟨⟨p.1, hpA⟩, ⟨p.2, hpB⟩⟩\n  · -- `←` direction\n    rintro ⟨hA, hB⟩\n    rcases hA with ⟨x, hx⟩\n    rcases hB with ⟨y, hy⟩\n    -- Build a point in the product of closures.\n    have hMem : ((x, y) : X × Y) ∈ closure A ×ˢ closure B := by\n      exact And.intro hx hy\n    -- Translate the membership back via `hEq`.\n    have hProdMem : ((x, y) : X × Y) ∈ closure (A ×ˢ B) := by\n      simpa [hEq] using hMem\n    exact ⟨(x, y), hProdMem⟩"
+  ],
+  "success": true
+}

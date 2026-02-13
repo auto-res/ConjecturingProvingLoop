@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.75869584083557
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4309,
+      "prompt_tokens": 57797,
+      "total_tokens": 62106,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_eq_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A = A → Topology.P3 A := by\n  intro hIntEq\n  -- From `interior A = A` we deduce that `A` is open.\n  have hOpen : IsOpen A := by\n    simpa [hIntEq] using (isOpen_interior : IsOpen (interior A))\n  -- Open sets satisfy `P3`.\n  exact Topology.isOpen_implies_P3 (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

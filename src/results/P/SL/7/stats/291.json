@@ -1,0 +1,43 @@
+{
+  "times": [
+    117.78483438491821,
+    29.462860345840454
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6795,
+      "prompt_tokens": 45432,
+      "total_tokens": 52227,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    },
+    {
+      "completion_tokens": 2505,
+      "prompt_tokens": 45506,
+      "total_tokens": 48011,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter8_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure (interior A))))))))))) =\n      interior (closure A) := by\n  -- First, reduce the seven–fold nest using the previously established lemma.\n  have h₁ :=\n    Topology.interiorClosure_iter7_idempotent (A := A)\n  -- Apply one additional `interior ∘ closure` pair to both sides of `h₁`.\n  have h₂ :\n      interior (closure (interior (closure\n        (interior (closure (interior (closure (interior\n          (closure (interior (closure (interior (closure A)))))))))))) =\n        interior (closure (interior (closure A))) := by\n    simpa using\n      congrArg (fun S : Set X =>\n        interior (closure (interior (closure S)))) h₁\n  -- Simplify the right–hand side with the basic idempotence lemma.\n  have h₃ :\n      interior (closure (interior (closure A))) =\n        interior (closure A) :=\n    Topology.interiorClosure_idempotent (A := A)\n  -- Combine the two equalities to obtain the desired result.\n  simpa [h₃] using h₂",
+    "theorem Topology.P3_interior_iff_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (interior A) ↔ IsOpen (interior A) := by\n  have hOpen : IsOpen (interior A) := isOpen_interior\n  have hP3 : Topology.P3 (interior A) := Topology.P3_interior (A := A)\n  exact ⟨fun _ => hOpen, fun _ => hP3⟩"
+  ],
+  "success": true
+}

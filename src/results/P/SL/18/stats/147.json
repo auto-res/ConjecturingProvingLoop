@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.01573276519775
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4446,
+      "prompt_tokens": 21017,
+      "total_tokens": 25463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_of_closure_interior_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (A : Set X))) = Set.univ →\n      Dense (A : Set X) := by\n  intro hUniv\n  -- `closure (A)` contains the dense set `interior (closure A)`,\n  -- whose closure is `univ` by hypothesis.\n  have hSub : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n    have hIncl :\n        closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) :=\n      Topology.closure_interior_closure_subset_closure (A := A)\n    simpa [hUniv] using hIncl\n  -- Hence `closure A = univ`.\n  have hEq : closure (A : Set X) = Set.univ := by\n    apply Set.Subset.antisymm\n    · intro x _; trivial\n    · exact hSub\n  -- Translate this equality into density of `A`.\n  exact (Topology.dense_iff_closure_eq_univ (A := A)).2 hEq"
+  ],
+  "success": true
+}

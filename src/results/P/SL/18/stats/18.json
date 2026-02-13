@@ -1,0 +1,43 @@
+{
+  "times": [
+    92.8332748413086,
+    140.63596320152283
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7310,
+      "prompt_tokens": 2828,
+      "total_tokens": 10138,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    },
+    {
+      "completion_tokens": 10194,
+      "prompt_tokens": 2959,
+      "total_tokens": 13153,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    have : interior (closure (interior A)) ⊆ closure (interior A) := by\n      exact interior_subset\n    exact closure_mono this\n  ·\n    have hSub : (interior A : Set X) ⊆ interior (closure (interior A)) := by\n      have hOpen : IsOpen (interior A) := isOpen_interior\n      simpa using\n        (interior_maximal (subset_closure : (interior A : Set X) ⊆ closure (interior A)) hOpen)\n    exact closure_mono hSub",
+    "theorem P3_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 A → Topology.P3 B → Topology.P3 (A ∪ B) := by\n  intro hP3A hP3B\n  -- Unfold the definition of `P3`.\n  dsimp [Topology.P3] at hP3A hP3B ⊢\n  -- Goal: `A ∪ B ⊆ interior (closure (A ∪ B))`.\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- From `P3` for `A`, we know `x ∈ interior (closure A)`.\n      have hxA' : x ∈ interior (closure A) := hP3A hxA\n      -- This interior is contained in the required interior.\n      have hIncl : interior (closure A) ⊆ interior (closure (A ∪ B)) := by\n        apply interior_mono\n        -- First, show `closure A ⊆ closure (A ∪ B)`.\n        have hSub : (A : Set X) ⊆ A ∪ B := by\n          intro y hy\n          exact Or.inl hy\n        exact closure_mono hSub\n      exact hIncl hxA'\n  | inr hxB =>\n      -- From `P3` for `B`, we know `x ∈ interior (closure B)`.\n      have hxB' : x ∈ interior (closure B) := hP3B hxB\n      -- This interior is contained in the required interior.\n      have hIncl : interior (closure B) ⊆ interior (closure (A ∪ B)) := by\n        apply interior_mono\n        -- First, show `closure B ⊆ closure (A ∪ B)`.\n        have hSub : (B : Set X) ⊆ A ∪ B := by\n          intro y hy\n          exact Or.inr hy\n        exact closure_mono hSub\n      exact hIncl hxB'"
+  ],
+  "success": true
+}

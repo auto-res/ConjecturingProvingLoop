@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.22349858283997
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3790,
+      "prompt_tokens": 18844,
+      "total_tokens": 22634,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18304
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_iff_closure_interior_closure_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (X := X) (closure A) ↔\n      closure (interior (closure A)) = closure A := by\n  have hClosed : IsClosed (closure A) := isClosed_closure\n  simpa using\n    (Topology.closed_P1_iff_closure_interior_eq_self\n      (X := X) (A := closure A) hClosed)"
+  ],
+  "success": true
+}

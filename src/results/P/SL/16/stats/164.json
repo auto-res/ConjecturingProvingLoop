@@ -1,0 +1,60 @@
+{
+  "times": [
+    138.3029363155365,
+    323.83038449287415,
+    56.86221218109131
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10440,
+      "prompt_tokens": 29253,
+      "total_tokens": 39693,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    },
+    {
+      "completion_tokens": 19746,
+      "prompt_tokens": 29345,
+      "total_tokens": 49091,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4562,
+      "prompt_tokens": 29461,
+      "total_tokens": 34023,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P3_iInter {ι X : Type*} [TopologicalSpace X] [Fintype ι]\n    {A : ι → Set X} (hClosed : ∀ i, IsClosed (A i))\n    (hP3 : ∀ i, Topology.P3 (X := X) (A i)) :\n    Topology.P3 (X := X) (⋂ i, A i) := by\n  classical\n  -- Each `A i` is open because it is closed and satisfies `P3`.\n  have hOpen : ∀ i, IsOpen (A i) := by\n    intro i\n    exact Topology.closed_P3_isOpen (X := X) (A := A i) (hClosed i) (hP3 i)\n  -- A finite intersection of open sets is open.\n  have hOpenInter : IsOpen (⋂ i, A i) := isOpen_iInter hOpen\n  -- Any open set satisfies `P3`.\n  exact Topology.isOpen_implies_P3 (X := X) (A := ⋂ i, A i) hOpenInter",
+    "Lean code generation failed; unable to provide a compiling theorem under current constraints.",
+    "theorem Topology.interior_closure_iInter_subset_iInter_interior_closure\n    {ι X : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    interior (closure (⋂ i, A i : Set X)) ⊆ ⋂ i, interior (closure (A i)) := by\n  intro x hx\n  -- Show that `x` belongs to `interior (closure (A i))` for each `i`.\n  have hx_i : ∀ i, x ∈ interior (closure (A i)) := by\n    intro i\n    -- Because `(⋂ i, A i) ⊆ A i`, we get the inclusion on closures.\n    have h_subset : closure (⋂ j, A j : Set X) ⊆ closure (A i) := by\n      apply closure_mono\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Use monotonicity of `interior` to transport `hx`.\n    exact (interior_mono h_subset) hx\n  -- Re-assemble the pointwise membership into an intersection.\n  exact Set.mem_iInter.2 hx_i"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.70589804649353
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9344,
+      "prompt_tokens": 53068,
+      "total_tokens": 62412,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_P1_between {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : Topology.P1 (X := X) A) (hAB₁ : (A : Set X) ⊆ B)\n    (hAB₂ : (B : Set X) ⊆ closure A) :\n    Topology.P1 (X := X) B := by\n  -- Unfold the definition of `P1`.\n  dsimp [Topology.P1] at *\n  intro x hxB\n  -- We will prove that `x ∈ closure (interior B)`.\n  -- First, show that `x ∈ closure (interior A)`.\n  have hx_cl_intA : x ∈ closure (interior A) := by\n    by_cases hxa : x ∈ A\n    · -- Case `x ∈ A`: use the `P1` hypothesis for `A`.\n      exact hA hxa\n    · -- Case `x ∉ A`: since `B ⊆ closure A`, we have `x ∈ closure A`;\n      -- then use `P1_closure_subset` to pass to `closure (interior A)`.\n      have hx_clA : x ∈ closure (A : Set X) := hAB₂ hxB\n      have h_cl_subset :\n          closure (A : Set X) ⊆ closure (interior A) :=\n        Topology.P1_closure_subset (X := X) (A := A) hA\n      exact h_cl_subset hx_clA\n  -- Next, enlarge to `closure (interior B)` using monotonicity.\n  have h_int_mono : (interior A : Set X) ⊆ interior B :=\n    interior_mono hAB₁\n  have h_cl_mono :\n      closure (interior A) ⊆ closure (interior B) :=\n    closure_mono h_int_mono\n  exact h_cl_mono hx_cl_intA"
+  ],
+  "success": true
+}

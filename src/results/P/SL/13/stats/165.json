@@ -1,0 +1,43 @@
+{
+  "times": [
+    63.80985617637634,
+    155.1789939403534
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4468,
+      "prompt_tokens": 28101,
+      "total_tokens": 32569,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    },
+    {
+      "completion_tokens": 10820,
+      "prompt_tokens": 28230,
+      "total_tokens": 39050,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_inter_of_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hB_closed : IsClosed (B : Set X))\n    (hPA : Topology.P1 (X:=X) A) (hPB : Topology.P1 (X:=X) B) :\n    Topology.P1 (X:=X) (A ∩ B) := by\n  -- From the closedness of `A` and `B` together with `P1`, deduce that both sets are open.\n  have hA_open : IsOpen (A : Set X) :=\n    Topology.closed_P1_implies_isOpen (X := X) (A := A) hA_closed hPA\n  have hB_open : IsOpen (B : Set X) :=\n    Topology.closed_P1_implies_isOpen (X := X) (A := B) hB_closed hPB\n  -- The intersection of two open sets is open.\n  have h_inter_open : IsOpen ((A ∩ B) : Set X) := hA_open.inter hB_open\n  -- Every open set satisfies `P1`.\n  exact Topology.isOpen_subset_closureInterior (X := X) (A := A ∩ B) h_inter_open",
+    "theorem Topology.closure_union_eq_of_closed {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA_closed : IsClosed (A : Set X)) (hB_closed : IsClosed (B : Set X)) :\n    closure ((A ∪ B) : Set X) = (A ∪ B) := by\n  have h_closed : IsClosed ((A ∪ B) : Set X) := hA_closed.union hB_closed\n  simpa using h_closed.closure_eq"
+  ],
+  "success": true
+}

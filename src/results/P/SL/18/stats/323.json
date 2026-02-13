@@ -1,0 +1,26 @@
+{
+  "times": [
+    14.960312843322754
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1173,
+      "prompt_tokens": 53002,
+      "total_tokens": 54175,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_subset_closure_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) :\n    interior (closure (A : Set X)) ⊆ closure (interior A) := by\n  -- `interior (closure A)` is contained in `closure A`.\n  have hIntSub : interior (closure (A : Set X)) ⊆ closure A :=\n    interior_subset\n  -- `closure A` is contained in `closure (interior A)` by `P1`.\n  have hClosSub : closure (A : Set X) ⊆ closure (interior A) :=\n    Topology.closure_subset_closure_interior_of_P1 (A := A) hP1\n  -- Combine the two inclusions.\n  exact Set.Subset.trans hIntSub hClosSub"
+  ],
+  "success": true
+}

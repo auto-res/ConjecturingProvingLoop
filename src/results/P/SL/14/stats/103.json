@@ -1,0 +1,26 @@
+{
+  "times": [
+    44.936517000198364
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3432,
+      "prompt_tokens": 17632,
+      "total_tokens": 21064,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_inter_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ B)) ⊆\n      interior (closure A) ∩ interior (closure B) := by\n  intro x hx\n  -- Show that `x ∈ interior (closure A)`.\n  have hxA : (x : X) ∈ interior (closure A) := by\n    -- Since `A ∩ B ⊆ A`, taking closures preserves the inclusion.\n    have h_sub : closure (A ∩ B) ⊆ closure A := by\n      have h₀ : (A ∩ B : Set X) ⊆ A := by\n        intro y hy; exact hy.1\n      exact closure_mono h₀\n    -- Monotonicity of `interior` then gives the desired inclusion.\n    have h_int : interior (closure (A ∩ B)) ⊆ interior (closure A) :=\n      interior_mono h_sub\n    exact h_int hx\n  -- Show that `x ∈ interior (closure B)`.\n  have hxB : (x : X) ∈ interior (closure B) := by\n    -- Since `A ∩ B ⊆ B`, taking closures preserves the inclusion.\n    have h_sub : closure (A ∩ B) ⊆ closure B := by\n      have h₀ : (A ∩ B : Set X) ⊆ B := by\n        intro y hy; exact hy.2\n      exact closure_mono h₀\n    -- Apply monotonicity of `interior` again.\n    have h_int : interior (closure (A ∩ B)) ⊆ interior (closure B) :=\n      interior_mono h_sub\n    exact h_int hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

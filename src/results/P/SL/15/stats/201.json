@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.00315451622009
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4514,
+      "prompt_tokens": 41683,
+      "total_tokens": 46197,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_prod_univ_left_of_dense\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty Y]\n    {A : Set X} :\n    Dense (A ×ˢ (Set.univ : Set Y)) → Dense A := by\n  intro hDenseProd\n  -- We will show that `closure A = univ`, which implies `Dense A`.\n  have h_closureA_univ : closure (A : Set X) = (Set.univ : Set X) := by\n    -- The closure of the product is `univ`.\n    have h_closure_prod_univ :\n        closure (A ×ˢ (Set.univ : Set Y) : Set (X × Y)) =\n          (Set.univ : Set (X × Y)) := by\n      simpa using hDenseProd.closure_eq\n    -- The closure of the product can also be written as a product of closures.\n    have h_closure_prod :\n        closure (A ×ˢ (Set.univ : Set Y) : Set (X × Y)) =\n          closure (A : Set X) ×ˢ (Set.univ : Set Y) := by\n      simpa [closure_univ] using\n        (closure_prod_eq (s := A) (t := (Set.univ : Set Y)))\n    -- Hence this product of closures is the whole space.\n    have h_prod_eq_univ :\n        closure (A : Set X) ×ˢ (Set.univ : Set Y) =\n          (Set.univ : Set (X × Y)) :=\n      (Eq.symm h_closure_prod).trans h_closure_prod_univ\n    -- Prove the reverse inclusion `univ ⊆ closure A`.\n    have h_univ_subset : (Set.univ : Set X) ⊆ closure A := by\n      intro x _\n      classical\n      let y : Y := Classical.arbitrary Y\n      have h_mem_univ : ((x, y) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n        trivial\n      have h_mem_prod :\n          ((x, y) : X × Y) ∈ closure (A : Set X) ×ˢ (Set.univ : Set Y) := by\n        simpa [h_prod_eq_univ] using h_mem_univ\n      exact (Set.mem_prod.1 h_mem_prod).1\n    -- Assemble the set equality.\n    apply Set.Subset.antisymm\n    · -- `closure A ⊆ univ`\n      intro _ _; trivial\n    · exact h_univ_subset\n  -- Conclude density from the characterization via closures.\n  exact (dense_iff_closure_eq).2 h_closureA_univ"
+  ],
+  "success": true
+}

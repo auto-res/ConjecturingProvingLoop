@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.33273220062256
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1952,
+      "prompt_tokens": 4077,
+      "total_tokens": 6029,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem closed_P3_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hP3 : Topology.P3 A) :\n    interior A = A := by\n  -- `closure A = A` since `A` is closed\n  have h_cl : closure A = A := hA_closed.closure_eq\n  -- From `P3`, we have `A ⊆ interior (closure A)`; rewrite using `h_cl`\n  have h₁ : A ⊆ interior A := by\n    dsimp [Topology.P3] at hP3\n    simpa [h_cl] using hP3\n  -- Always, `interior A ⊆ A`\n  have h₂ : interior A ⊆ A := interior_subset\n  -- Combine the two inclusions to get equality\n  exact Set.Subset.antisymm h₂ h₁"
+  ],
+  "success": true
+}

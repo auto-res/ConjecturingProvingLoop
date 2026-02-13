@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.31826114654541
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4594,
+      "prompt_tokens": 3958,
+      "total_tokens": 8552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A : Set X) → Topology.P1 (closure (A : Set X)) := by\n  intro hA\n  dsimp [Topology.P1] at hA ⊢\n  intro x hx\n  -- Using the equality of closures granted by `P1`\n  have hEq := closure_eq_closure_interior_of_P1 (A := A) hA\n  have hx_intA : (x : X) ∈ closure (interior (A : Set X)) := by\n    simpa [hEq] using hx\n  -- Monotonicity of closure with respect to set inclusion\n  have h_subset :\n      closure (interior (A : Set X)) ⊆\n        closure (interior (closure (A : Set X))) := by\n    apply closure_mono\n    exact interior_subset_interior_closure (A := A)\n  exact h_subset hx_intA"
+  ],
+  "success": true
+}

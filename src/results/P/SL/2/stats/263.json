@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.30410099029541
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4776,
+      "prompt_tokens": 44631,
+      "total_tokens": 49407,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interior_subset_inter_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ interior (B : Set X)) ⊆\n      closure (A : Set X) ∩ closure (B : Set X) := by\n  intro x hx\n  -- `A ∩ interior B ⊆ A`\n  have hSubA : (A ∩ interior (B : Set X) : Set X) ⊆ A := by\n    intro y hy\n    exact hy.1\n  -- `A ∩ interior B ⊆ B` (because `interior B ⊆ B`)\n  have hSubB : (A ∩ interior (B : Set X) : Set X) ⊆ B := by\n    intro y hy\n    exact (interior_subset : interior (B : Set X) ⊆ B) hy.2\n  -- Taking closures preserves inclusions.\n  have hxA : x ∈ closure (A : Set X) := (closure_mono hSubA) hx\n  have hxB : x ∈ closure (B : Set X) := (closure_mono hSubB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

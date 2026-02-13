@@ -1,0 +1,26 @@
+{
+  "times": [
+    133.64002084732056
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8078,
+      "prompt_tokens": 28793,
+      "total_tokens": 36871,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A \\ B) ⊆ interior A \\ closure B := by\n  intro x hx\n  -- Choose an open neighbourhood `U` of `x` contained in `A \\ B`.\n  rcases (Set.mem_interior).1 hx with ⟨U, hU_open, hU_sub, hxU⟩\n  -- `U` is contained in `A`.\n  have hU_subA : U ⊆ A := by\n    intro y hyU\n    have h := hU_sub hyU\n    exact h.1\n  -- Hence `x ∈ interior A`.\n  have hx_intA : x ∈ interior A :=\n    (Set.mem_interior).2 ⟨U, hU_open, hU_subA, hxU⟩\n  -- Show that `x ∉ closure B` using the open set `U` that avoids `B`.\n  have hx_notClB : x ∉ closure B := by\n    intro hxClB\n    -- Any open set containing `x` must meet `B`, contradicting `U ∩ B = ∅`.\n    have hNon : (U ∩ B).Nonempty :=\n      (mem_closure_iff).1 hxClB U hU_open hxU\n    rcases hNon with ⟨y, hyU, hyB⟩\n    have hNotB : y ∉ B := by\n      have h' := hU_sub hyU\n      exact h'.2\n    exact hNotB hyB\n  -- Assemble the membership in the difference set.\n  exact And.intro hx_intA hx_notClB"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    205.55662894248962,
+    104.02588891983032
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14005,
+      "prompt_tokens": 53350,
+      "total_tokens": 67355,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 5906,
+      "prompt_tokens": 53464,
+      "total_tokens": 59370,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_interior_complement {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) ∪ interior ((Aᶜ) : Set X) = (Set.univ : Set X) := by\n  classical\n  -- We prove the equality by showing mutual inclusion.\n  apply Set.Subset.antisymm\n  · -- Left-to-right inclusion is immediate.\n    intro x _\n    exact Set.mem_univ _\n  · -- For the converse inclusion, fix any `x : X`.\n    intro x _\n    by_cases hxCl : (x : X) ∈ closure (A : Set X)\n    · -- The easy case `x ∈ closure A`.\n      exact Or.inl hxCl\n    · -- Otherwise, `x ∉ closure A`.\n      have hxNotCl : (x : X) ∈ ((closure (A : Set X))ᶜ : Set X) := hxCl\n      -- The complement of `closure A` is open …\n      have hOpen :\n          IsOpen ((closure (A : Set X))ᶜ : Set X) :=\n        (isClosed_closure : IsClosed (closure (A : Set X))).isOpen_compl\n      -- … and contained in `Aᶜ`.\n      have hSub :\n          ((closure (A : Set X))ᶜ : Set X) ⊆ (Aᶜ : Set X) := by\n        intro y hyNotCl\n        by_contra hyA\n        have : (y : X) ∈ closure (A : Set X) := subset_closure hyA\n        exact hyNotCl this\n      -- Hence, every point of the open set belongs to `interior (Aᶜ)`.\n      have hInside :\n          ((closure (A : Set X))ᶜ : Set X) ⊆ interior ((Aᶜ) : Set X) :=\n        interior_maximal hSub hOpen\n      -- In particular, this holds for our point `x`.\n      have hxIntComp : (x : X) ∈ interior ((Aᶜ) : Set X) :=\n        hInside hxNotCl\n      exact Or.inr hxIntComp",
+    ""
+  ],
+  "success": true
+}

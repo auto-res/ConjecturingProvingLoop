@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.202048540115356
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3247,
+      "prompt_tokens": 38733,
+      "total_tokens": 41980,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iInter_subset\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    interior (⋂ i, A i) ⊆ ⋂ i, interior (A i) := by\n  intro x hx\n  -- We show that `x` belongs to the interior of each `A i`.\n  have h : ∀ i, x ∈ interior (A i) := by\n    intro i\n    -- Since `⋂ i, A i ⊆ A i`, monotonicity of `interior` yields the claim.\n    have hsubset : (⋂ j, A j : Set X) ⊆ A i := Set.iInter_subset _ i\n    have hInt : interior (⋂ j, A j) ⊆ interior (A i) := interior_mono hsubset\n    exact hInt hx\n  -- Combine the individual memberships into the intersection.\n  exact Set.mem_iInter.2 h"
+  ],
+  "success": true
+}

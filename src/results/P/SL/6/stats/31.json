@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.905308961868286
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4403,
+      "prompt_tokens": 3583,
+      "total_tokens": 7986,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_open_satisfies_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen (A : Set X)) : Topology.P1 (closure A) := by\n  dsimp [Topology.P1]\n  have hSub : (A : Set X) ⊆ interior (closure A) :=\n    interior_maximal subset_closure hA\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

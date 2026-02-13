@@ -1,0 +1,43 @@
+{
+  "times": [
+    114.97652554512024,
+    164.3122856616974
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7320,
+      "prompt_tokens": 19044,
+      "total_tokens": 26364,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 11731,
+      "prompt_tokens": 19241,
+      "total_tokens": 30972,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∪ interior B ⊆ interior (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- `A` is contained in `A ∪ B`, so the same holds for their interiors.\n      have h_sub : interior A ⊆ interior (A ∪ B) :=\n        interior_mono (by\n          intro y hy\n          exact Or.inl (interior_subset hy))\n      exact h_sub hxA\n  | inr hxB =>\n      -- Symmetric argument for `B`.\n      have h_sub : interior B ⊆ interior (A ∪ B) :=\n        interior_mono (by\n          intro y hy\n          exact Or.inr (interior_subset hy))\n      exact h_sub hxB",
+    ""
+  ],
+  "success": true
+}

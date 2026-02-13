@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.53313660621643
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2240,
+      "prompt_tokens": 1206,
+      "total_tokens": 3446,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 A := by\n  unfold Topology.P2\n  intro x hx\n  have hsubset : A ⊆ interior (closure A) :=\n    interior_maximal subset_closure hA\n  have : x ∈ interior (closure A) := hsubset hx\n  simpa [hA.interior_eq] using this"
+  ],
+  "success": true
+}

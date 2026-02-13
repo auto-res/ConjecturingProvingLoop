@@ -1,0 +1,604 @@
+[
+    {
+        "statement": "theorem P3_interior {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P3 (interior A) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                16.884447813034058
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 937,
+                    "prompt_tokens": 3488,
+                    "total_tokens": 4425,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 896,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                19.61021876335144,
+                150.31340193748474
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 2094,
+                    "prompt_tokens": 249,
+                    "total_tokens": 2343,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2048,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 9054,
+                    "prompt_tokens": 400,
+                    "total_tokens": 9454,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 8896,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem Topology.P3_closure_eq {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P3 A → closure A = closure (interior (closure A)) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                18.654258251190186
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 1365,
+                    "prompt_tokens": 3564,
+                    "total_tokens": 4929,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1216,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 2944
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                12.05871057510376,
+                12.368755578994751,
+                54.86903738975525
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 886,
+                    "prompt_tokens": 260,
+                    "total_tokens": 1146,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 832,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 699,
+                    "prompt_tokens": 428,
+                    "total_tokens": 1127,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 640,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 2746,
+                    "prompt_tokens": 597,
+                    "total_tokens": 3343,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2624,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem Topology.P3_empty {X : Type*} [TopologicalSpace X] : Topology.P3 (∅ : Set X) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                27.913705348968506
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 1692,
+                    "prompt_tokens": 3707,
+                    "total_tokens": 5399,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1664,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 2944
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                20.72218155860901
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 1443,
+                    "prompt_tokens": 246,
+                    "total_tokens": 1689,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1408,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P1_iff_P2_of_open {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) : P1 A ↔ P2 A :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                55.71099901199341
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 3011,
+                    "prompt_tokens": 3764,
+                    "total_tokens": 6775,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2944,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 2944
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                66.1494824886322,
+                31.92110848426819
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 6664,
+                    "prompt_tokens": 260,
+                    "total_tokens": 6924,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 6528,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 2491,
+                    "prompt_tokens": 510,
+                    "total_tokens": 3001,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2304,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P1_interior {X : Type*} [TopologicalSpace X] {A : Set X} : P1 (interior A) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                4.829816579818726
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 497,
+                    "prompt_tokens": 3843,
+                    "total_tokens": 4340,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 448,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 2944
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                8.791578769683838
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 694,
+                    "prompt_tokens": 247,
+                    "total_tokens": 941,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 640,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P2_univ {X : Type*} [TopologicalSpace X] : P2 (Set.univ : Set X) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                12.87123155593872
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 936,
+                    "prompt_tokens": 3895,
+                    "total_tokens": 4831,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 896,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 2944
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                25.60099506378174
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 1446,
+                    "prompt_tokens": 244,
+                    "total_tokens": 1690,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1408,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P1_closure {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P1 A → Topology.P1 (closure A) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                25.70601511001587,
+                24.110135316848755
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 2914,
+                    "prompt_tokens": 3958,
+                    "total_tokens": 6872,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2688,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 2944
+                    }
+                },
+                {
+                    "completion_tokens": 2029,
+                    "prompt_tokens": 4286,
+                    "total_tokens": 6315,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1728,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 2944
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                24.2293381690979,
+                58.71918320655823
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 2542,
+                    "prompt_tokens": 254,
+                    "total_tokens": 2796,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2432,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 4045,
+                    "prompt_tokens": 471,
+                    "total_tokens": 4516,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 3840,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P1_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X} (h : closure (interior A) = Set.univ) : Topology.P1 A :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                13.816912651062012
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 735,
+                    "prompt_tokens": 4402,
+                    "total_tokens": 5137,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 704,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                10.847556114196777
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 808,
+                    "prompt_tokens": 261,
+                    "total_tokens": 1069,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 768,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P2_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X} (h : closure (interior A) = Set.univ) : Topology.P2 A :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                28.26095724105835
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 1770,
+                    "prompt_tokens": 4470,
+                    "total_tokens": 6240,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1728,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 3840
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                30.64262366294861,
+                34.83441472053528
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 2599,
+                    "prompt_tokens": 261,
+                    "total_tokens": 2860,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2496,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 2417,
+                    "prompt_tokens": 452,
+                    "total_tokens": 2869,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2304,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P2_iff_P3_of_closure_eq {X : Type*} [TopologicalSpace X] {A : Set X} (h : closure A = closure (interior A)) : Topology.P2 A ↔ Topology.P3 A :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                38.53533625602722
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 2585,
+                    "prompt_tokens": 4551,
+                    "total_tokens": 7136,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2496,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 3840
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                47.204708099365234
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 4235,
+                    "prompt_tokens": 270,
+                    "total_tokens": 4505,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 4160,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    }
+]

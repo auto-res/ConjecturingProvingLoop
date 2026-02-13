@@ -1,0 +1,43 @@
+{
+  "times": [
+    91.11855983734131,
+    110.31979084014893
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7266,
+      "prompt_tokens": 15485,
+      "total_tokens": 22751,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    },
+    {
+      "completion_tokens": 8339,
+      "prompt_tokens": 15605,
+      "total_tokens": 23944,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply Set.Subset.antisymm\n  ·\n    -- `interior (closure (interior (closure A))) ⊆ interior (closure A)`\n    have hsubset : closure (interior (closure A)) ⊆ closure A := by\n      -- Because `interior (closure A) ⊆ closure A`, taking closures preserves the inclusion.\n      have : (interior (closure A) : Set X) ⊆ closure A := interior_subset\n      exact closure_mono this\n    exact interior_mono hsubset\n  ·\n    -- `interior (closure A) ⊆ interior (closure (interior (closure A)))`\n    have hsubset :\n        (interior (closure A) : Set X) ⊆\n          interior (closure (interior (closure A))) := by\n      -- The set `interior (closure A)` is open and contained in `closure (interior (closure A))`.\n      have h₁ : (interior (closure A) : Set X) ⊆ closure (interior (closure A)) :=\n        subset_closure\n      exact interior_maximal h₁ isOpen_interior\n    -- Since `interior (closure A)` is exactly the right-hand side, the inclusion gives the result.\n    exact hsubset",
+    "theorem Topology.isClosed_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (closure (interior (closure A))) := by\n  simpa using (isClosed_closure (s := interior (closure A)))"
+  ],
+  "success": true
+}

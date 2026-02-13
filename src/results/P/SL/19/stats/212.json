@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.45416879653931
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3856,
+      "prompt_tokens": 33278,
+      "total_tokens": 37134,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_subset_inter_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    frontier (A ∩ B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- From `hx` we know `x ∈ closure (A ∩ B)`.\n  have hxClos : x ∈ closure (A ∩ B) := hx.1\n  -- Deduce `x ∈ closure A` since `A ∩ B ⊆ A`.\n  have hxA : x ∈ closure A := by\n    have hSub : (A ∩ B : Set X) ⊆ A := fun y hy => hy.1\n    exact (closure_mono hSub) hxClos\n  -- Deduce `x ∈ closure B` since `A ∩ B ⊆ B`.\n  have hxB : x ∈ closure B := by\n    have hSub : (A ∩ B : Set X) ⊆ B := fun y hy => hy.2\n    exact (closure_mono hSub) hxClos\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

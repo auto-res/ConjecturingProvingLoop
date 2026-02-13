@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.38673281669617
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5029,
+      "prompt_tokens": 7028,
+      "total_tokens": 12057,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_idempotent {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply subset_antisymm\n  ·\n    have h₁ : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    simpa [closure_closure] using closure_mono h₁\n  ·\n    have h₂ : interior A ⊆ interior (closure (interior A)) := by\n      have h : interior (interior A) ⊆ interior (closure (interior A)) := by\n        have : (interior A : Set X) ⊆ closure (interior A) := subset_closure\n        exact interior_mono this\n      simpa [interior_interior] using h\n    simpa [closure_closure] using closure_mono h₂"
+  ],
+  "success": true
+}

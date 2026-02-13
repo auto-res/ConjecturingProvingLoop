@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.59460473060608
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6919,
+      "prompt_tokens": 23669,
+      "total_tokens": 30588,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_left_denseInterior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (h_dense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P3 (X := X) (A ∪ B) := by\n  -- From the density of `interior A`, deduce that `closure A = univ`.\n  have h_closure_univ : closure A = (Set.univ : Set X) :=\n    Topology.closure_eq_univ_of_dense_interior (X := X) (A := A) h_dense\n  -- Apply the existing lemma for sets whose closure is the whole space.\n  exact\n    Topology.P3_union_left_dense (X := X) (A := A) (B := B) h_closure_univ"
+  ],
+  "success": true
+}

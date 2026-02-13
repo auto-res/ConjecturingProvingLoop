@@ -1,0 +1,43 @@
+{
+  "times": [
+    42.85988736152649,
+    75.84037137031555
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3990,
+      "prompt_tokens": 27728,
+      "total_tokens": 31718,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5418,
+      "prompt_tokens": 27835,
+      "total_tokens": 33253,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem union_of_interiors_subset_interior_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    (interior (A : Set X) ∪ interior (B : Set X)) ⊆ interior (A ∪ B : Set X) := by\n  -- The set on the left is open.\n  have hOpen : IsOpen (interior (A : Set X) ∪ interior (B : Set X)) :=\n    (isOpen_interior : IsOpen (interior (A : Set X)))\n      .union (isOpen_interior : IsOpen (interior (B : Set X)))\n  -- It is contained in `A ∪ B`.\n  have hSub : (interior (A : Set X) ∪ interior (B : Set X)) ⊆ (A ∪ B : Set X) := by\n    intro x hx\n    cases hx with\n    | inl hxA => exact Or.inl (interior_subset hxA)\n    | inr hxB => exact Or.inr (interior_subset hxB)\n  -- By maximality of the interior, we obtain the desired inclusion.\n  exact interior_maximal hSub hOpen",
+    "theorem isOpen_interior_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsOpen (B : Set X)) :\n    IsOpen ((interior (A : Set X)) ∪ B) := by\n  have hA : IsOpen (interior (A : Set X)) := isOpen_interior\n  exact hA.union hB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.31718921661377
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2765,
+      "prompt_tokens": 47325,
+      "total_tokens": 50090,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_self_eq_diff_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) ∩ A = A \\ interior A := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hfront, hA⟩\n    exact ⟨hA, hfront.2⟩\n  · intro hx\n    rcases hx with ⟨hA, h_not_int⟩\n    have h_cl : x ∈ closure (A : Set X) := subset_closure hA\n    have h_front : x ∈ frontier (A : Set X) := ⟨h_cl, h_not_int⟩\n    exact ⟨h_front, hA⟩"
+  ],
+  "success": true
+}

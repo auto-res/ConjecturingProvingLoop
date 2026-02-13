@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.84995126724243
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7130,
+      "prompt_tokens": 49705,
+      "total_tokens": 56835,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_of_isClosed_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_closed : IsClosed (A : Set X)) (h_open : IsOpen (A : Set X)) :\n    Topology.P2 (X := X) A := by\n  -- Obtain the triple property for sets that are both closed and open.\n  have h := Topology.P1_P2_P3_of_isClosed_isOpen (X := X) (A := A) h_closed h_open\n  -- Extract the `P2` component from the conjunction.\n  exact h.2.1"
+  ],
+  "success": true
+}

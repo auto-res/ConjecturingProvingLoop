@@ -1,0 +1,26 @@
+{
+  "times": [
+    157.44710850715637
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10282,
+      "prompt_tokens": 6737,
+      "total_tokens": 17019,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_idempotent {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (closure (interior (closure (interior A)))) =\n      interior (closure (interior A)) := by\n  -- First inclusion: left ⊆ right.\n  have h₁ :\n      interior (closure (interior (closure (interior A)))) ⊆\n        interior (closure (interior A)) := by\n    simpa [closure_closure] using\n      (Topology.interior_closure_interior_subset_interior_closure\n        (X := X) (A := closure (interior A)))\n  -- Second inclusion: right ⊆ left.\n  have h₂ :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior (closure (interior A)))) := by\n    have hSub :\n        (interior (closure (interior A)) : Set X) ⊆\n          closure (interior (closure (interior A))) := subset_closure\n    have hOpen : IsOpen (interior (closure (interior A)) : Set X) :=\n      isOpen_interior\n    exact interior_maximal hSub hOpen\n  exact subset_antisymm h₁ h₂"
+  ],
+  "success": true
+}

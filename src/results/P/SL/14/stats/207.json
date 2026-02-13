@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.786983728408813
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2028,
+      "prompt_tokens": 38396,
+      "total_tokens": 40424,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iUnion_interior_subset_interior_iUnion\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    (⋃ i, interior (A i) : Set X) ⊆ interior (⋃ i, A i) := by\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hx_int⟩\n  -- `A i` is contained in `⋃ j, A j`\n  have h_subset : (A i : Set X) ⊆ ⋃ j, A j := by\n    intro y hy\n    exact Set.mem_iUnion.2 ⟨i, hy⟩\n  -- Monotonicity of `interior` yields the desired inclusion.\n  have h_mono : interior (A i) ⊆ interior (⋃ j, A j) :=\n    interior_mono h_subset\n  exact h_mono hx_int"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    21.675429344177246
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1878,
+      "prompt_tokens": 36797,
+      "total_tokens": 38675,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_eq_empty_iff_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure (A : Set X) \\ interior A = (∅ : Set X)) ↔ (IsClosed A ∧ IsOpen A) := by\n  constructor\n  · intro h\n    exact Topology.isClopen_of_boundary_eq_empty (A := A) h\n  · rintro ⟨hClosed, hOpen⟩\n    exact Topology.boundary_eq_empty_of_isClopen (A := A) hClosed hOpen"
+  ],
+  "success": true
+}

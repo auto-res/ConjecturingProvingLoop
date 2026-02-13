@@ -1,0 +1,26 @@
+{
+  "times": [
+    140.06784105300903
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9813,
+      "prompt_tokens": 50686,
+      "total_tokens": 60499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_three_closed\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsClosed A) (hB : IsClosed B) (hC : IsClosed C) :\n    Topology.P2 A → Topology.P2 B → Topology.P2 C →\n    Topology.P2 (A ∩ B ∩ C) := by\n  intro hP2A hP2B hP2C\n  -- Turn the `P2` hypotheses on the three closed sets into openness.\n  have hOpenA : IsOpen A :=\n    (Topology.P2_closed_iff_isOpen (A := A) hA).1 hP2A\n  have hOpenB : IsOpen B :=\n    (Topology.P2_closed_iff_isOpen (A := B) hB).1 hP2B\n  have hOpenC : IsOpen C :=\n    (Topology.P2_closed_iff_isOpen (A := C) hC).1 hP2C\n  -- The triple intersection of the open sets is itself open.\n  have hOpenABC : IsOpen (A ∩ B ∩ C) := by\n    have hOpenAB : IsOpen (A ∩ B) := hOpenA.inter hOpenB\n    exact hOpenAB.inter hOpenC\n  -- An open set satisfies `P2`.\n  exact IsOpen_P2 (A := A ∩ B ∩ C) hOpenABC"
+  ],
+  "success": true
+}

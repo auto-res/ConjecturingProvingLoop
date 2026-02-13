@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.18298101425171
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2385,
+      "prompt_tokens": 54482,
+      "total_tokens": 56867,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_P2_iff_P1_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed A → (Topology.P2 A ↔ (Topology.P1 A ∧ Topology.P3 A)) := by\n  intro hClosed\n  have h₁ := (Topology.isClosed_P2_iff_isOpen (A := A) hClosed)\n  have h₂ := (Topology.isClosed_isOpen_iff_P1_and_P3 (A := A) hClosed)\n  simpa using h₁.trans h₂"
+  ],
+  "success": true
+}

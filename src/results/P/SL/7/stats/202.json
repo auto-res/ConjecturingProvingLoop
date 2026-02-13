@@ -1,0 +1,60 @@
+{
+  "times": [
+    188.12149453163147,
+    98.52860927581787,
+    107.84314441680908
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12339,
+      "prompt_tokens": 31065,
+      "total_tokens": 43404,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 7181,
+      "prompt_tokens": 31139,
+      "total_tokens": 38320,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 7955,
+      "prompt_tokens": 31261,
+      "total_tokens": 39216,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter6_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure A)))))))))) =\n      interior (closure A) := by\n  -- Apply the 5-fold idempotence lemma to `interior (closure A)`.\n  have h :=\n    Topology.interiorClosure_iter5_idempotent\n      (A := interior (closure (A : Set X)))\n  -- Simplify the right-hand side using basic idempotence.\n  simpa [Topology.interiorClosure_idempotent (A := A)] using h",
+    "theorem Topology.closureInteriorClosure_eq_closure_of_isOpen_set\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  -- First inclusion: `closure (interior (closure A)) ⊆ closure A`.\n  have h₁ :\n      closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n    exact\n      closure_mono\n        (interior_subset :\n          (interior (closure (A : Set X)) : Set X) ⊆ closure (A : Set X))\n  -- Second inclusion: `closure A ⊆ closure (interior (closure A))`.\n  have h₂ :\n      closure (A : Set X) ⊆ closure (interior (closure (A : Set X))) := by\n    -- Since `A` is open, it sits inside `interior (closure A)`.\n    have hSub :\n        (A : Set X) ⊆ interior (closure (A : Set X)) :=\n      interior_maximal (subset_closure : (A : Set X) ⊆ closure (A : Set X)) hA\n    exact closure_mono hSub\n  -- Conclude equality of the two closures.\n  exact Set.Subset.antisymm h₁ h₂",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.84275150299072
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7679,
+      "prompt_tokens": 29257,
+      "total_tokens": 36936,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A ⊆ closure (Aᶜ) := by\n  intro x hx\n  rcases hx with ⟨_, hxNotInt⟩\n  -- We prove that `x ∈ closure (Aᶜ)` using the neighbourhood characterization\n  have : x ∈ closure (Aᶜ) := by\n    refine (mem_closure_iff).2 ?_\n    intro U hU hxU\n    by_cases hNon : ((U ∩ (Aᶜ)) : Set X).Nonempty\n    · exact hNon\n    · -- If the intersection is empty, then `U ⊆ A`\n      have hSub : (U : Set X) ⊆ A := by\n        intro y hy\n        by_contra hAy\n        have : (y : X) ∈ (U ∩ Aᶜ) := ⟨hy, hAy⟩\n        exact hNon ⟨y, this⟩\n      -- Hence `x ∈ interior A`, contradicting `hxNotInt`\n      have hxInt : x ∈ interior A :=\n        (interior_maximal hSub hU) hxU\n      exact (hxNotInt hxInt).elim\n  exact this"
+  ],
+  "success": true
+}

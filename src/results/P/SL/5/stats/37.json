@@ -1,0 +1,26 @@
+{
+  "times": [
+    83.44483399391174
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5686,
+      "prompt_tokens": 5471,
+      "total_tokens": 11157,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_univ_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : closure (A : Set X) = Set.univ) : P3 (X := X) A := by\n  dsimp [P3]\n  intro x hx\n  -- acknowledge the assumption to avoid unused variable warnings\n  have _ : x ∈ A := hx\n  -- since `closure A = univ`, its interior is also `univ`\n  have : x ∈ interior (closure (A : Set X)) := by\n    have : x ∈ (Set.univ : Set X) := by\n      trivial\n    simpa [hA, interior_univ] using this\n  exact this"
+  ],
+  "success": true
+}

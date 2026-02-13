@@ -1,0 +1,60 @@
+{
+  "times": [
+    84.43842077255249,
+    228.04887866973877,
+    94.00171542167664
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6303,
+      "prompt_tokens": 20320,
+      "total_tokens": 26623,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    },
+    {
+      "completion_tokens": 10883,
+      "prompt_tokens": 20440,
+      "total_tokens": 31323,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 5934,
+      "prompt_tokens": 20519,
+      "total_tokens": 26453,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_eq_closure_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  simpa [interior_union, closure_union]",
+    "import Mathlib\n\nnamespace Topology\n\ntheorem Topology.closure_interior_union_subset_closure_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A) ∪ closure (interior B) ⊆\n      closure (interior (A ∪ B)) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have hSub : interior A ⊆ interior (A ∪ B) := interior_mono (by\n        intro z hz; exact Or.inl hz)\n      exact\n        (closure_mono hSub : closure (interior A) ⊆\n          closure (interior (A ∪ B))) hA\n  | inr hB =>\n      have hSub : interior B ⊆ interior (A ∪ B) := interior_mono (by\n        intro z hz; exact Or.inr hz)\n      exact\n        (closure_mono hSub : closure (interior B) ⊆\n          closure (interior (A ∪ B))) hB",
+    "theorem Topology.closure_inter_interior_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure A ∩ interior B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxA, hxB⟩\n  -- We will use the characterization of the closure via open neighbourhoods.\n  refine (mem_closure_iff).2 ?_\n  intro U hU hxU\n  -- Consider the open set `U ∩ interior B`, which still contains `x`.\n  have hU' : IsOpen (U ∩ interior B) := hU.inter isOpen_interior\n  have hxU' : x ∈ U ∩ interior B := ⟨hxU, hxB⟩\n  -- Since `x ∈ closure A`, this open set intersects `A`.\n  have hNon : ((U ∩ interior B) ∩ A).Nonempty :=\n    (mem_closure_iff.1 hxA) _ hU' hxU'\n  rcases hNon with ⟨y, ⟨⟨hyU, hyIntB⟩, hyA⟩⟩\n  -- From `y ∈ interior B` we get `y ∈ B`.\n  have hyB : y ∈ B := interior_subset hyIntB\n  -- Hence `y ∈ U ∩ (A ∩ B)`.\n  exact ⟨y, ⟨hyU, hyA, hyB⟩⟩"
+  ],
+  "success": true
+}

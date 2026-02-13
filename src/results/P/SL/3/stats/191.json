@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.643171072006226
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3011,
+      "prompt_tokens": 29460,
+      "total_tokens": 32471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_eq_univ_of_dense_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (B : Set X) = (Set.univ : Set X) →\n      closure ((A ∪ B) : Set X) = (Set.univ : Set X) := by\n  intro hB\n  have h := closure_union_eq_univ_of_dense_left (A := B) (B := A) hB\n  simpa [Set.union_comm] using h"
+  ],
+  "success": true
+}

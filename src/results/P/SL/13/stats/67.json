@@ -1,0 +1,26 @@
+{
+  "times": [
+    93.33692502975464
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5416,
+      "prompt_tokens": 10910,
+      "total_tokens": 16326,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_implies_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_open : IsOpen (A : Set X)) :\n    Topology.P1 (X := X) (closure (A : Set X)) := by\n  dsimp [Topology.P1]\n  intro x hx_closure\n  have h_eq :\n      closure (interior (closure (A : Set X))) = closure (A : Set X) :=\n    Topology.closure_interior_closure_eq_closure_of_isOpen\n      (X := X) (A := A) hA_open\n  simpa [h_eq] using hx_closure"
+  ],
+  "success": true
+}

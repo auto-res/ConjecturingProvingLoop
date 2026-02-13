@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.032960414886475
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2579,
+      "prompt_tokens": 44464,
+      "total_tokens": 47043,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem subset_interior_closure_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen (A : Set X)) :\n    (A : Set X) ⊆ interior (closure (A : Set X)) := by\n  intro x hxA\n  -- Since `A` is open, `interior A = A`.\n  have hxIntA : (x : X) ∈ interior (A : Set X) := by\n    simpa [hA.interior_eq] using hxA\n  -- Monotonicity of `interior` gives the desired inclusion.\n  have hMono :\n      interior (A : Set X) ⊆ interior (closure (A : Set X)) :=\n    interior_mono (subset_closure : (A : Set X) ⊆ closure A)\n  exact hMono hxIntA"
+  ],
+  "success": true
+}

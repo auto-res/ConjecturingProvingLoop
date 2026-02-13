@@ -1,0 +1,43 @@
+{
+  "times": [
+    43.62193179130554,
+    132.00930070877075
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2570,
+      "prompt_tokens": 44485,
+      "total_tokens": 47055,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 8506,
+      "prompt_tokens": 44595,
+      "total_tokens": 53101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_interior_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    (closure A ∪ interior A : Set X) = closure A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    cases hx with\n    | inl hxCl => exact hxCl\n    | inr hxInt =>\n        exact (interior_subset : interior A ⊆ closure A) hxInt\n  · intro x hxCl\n    exact Or.inl hxCl",
+    "theorem Topology.interior_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ closure A := by\n  intro x hxInt\n  -- A point in the interior of `A` certainly lies in `A`.\n  have hxA : (x : X) ∈ A := interior_subset hxInt\n  -- Every point of `A` is in the closure of `A`.\n  exact subset_closure hxA"
+  ],
+  "success": true
+}

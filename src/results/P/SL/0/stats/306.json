@@ -1,0 +1,43 @@
+{
+  "times": [
+    137.36422276496887,
+    137.83692359924316
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7320,
+      "prompt_tokens": 53351,
+      "total_tokens": 60671,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 8466,
+      "prompt_tokens": 53456,
+      "total_tokens": 61922,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_closure_subset_inter_closures\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure ((A : Set X) ∩ closure (B : Set X)) ⊆\n      closure (A : Set X) ∩ closure (B : Set X) := by\n  intro x hx\n  -- `A ∩ closure B` is contained in `A`.\n  have hSubA :\n      ((A : Set X) ∩ closure (B : Set X)) ⊆ (A : Set X) := by\n    intro y hy\n    exact hy.1\n  have hxA : x ∈ closure (A : Set X) := (closure_mono hSubA) hx\n  -- `A ∩ closure B` is contained in `closure B`.\n  have hSubB :\n      ((A : Set X) ∩ closure (B : Set X)) ⊆ closure (B : Set X) := by\n    intro y hy\n    exact hy.2\n  have hxB : x ∈ closure (B : Set X) := (closure_mono hSubB) hx\n  exact And.intro hxA hxB",
+    ""
+  ],
+  "success": true
+}

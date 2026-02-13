@@ -1,0 +1,77 @@
+{
+  "times": [
+    168.00675177574158,
+    65.68461608886719,
+    223.58678936958313,
+    42.66349720954895
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9973,
+      "prompt_tokens": 51866,
+      "total_tokens": 61839,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    },
+    {
+      "completion_tokens": 3822,
+      "prompt_tokens": 51958,
+      "total_tokens": 55780,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    },
+    {
+      "completion_tokens": 11664,
+      "prompt_tokens": 52031,
+      "total_tokens": 63695,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    },
+    {
+      "completion_tokens": 2993,
+      "prompt_tokens": 52145,
+      "total_tokens": 55138,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iInter_of_isOpen_finite\n    {X : Type*} [TopologicalSpace X] {ι : Type*} [Fintype ι] {A : ι → Set X}\n    (hA : ∀ i, IsOpen (A i)) :\n    Topology.P3 (⋂ i, A i) := by\n  -- A finite intersection of open sets is open.\n  have hOpen : IsOpen (⋂ i, A i) := isOpen_iInter (by\n    intro i\n    exact hA i)\n  -- Any open set satisfies `P3`.\n  exact Topology.isOpen_implies_P3 (X := X) (A := ⋂ i, A i) hOpen",
+    "theorem Topology.interior_sUnion_eq_of_isOpen\n    {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)}\n    (h𝒜 : ∀ S : Set X, S ∈ 𝒜 → IsOpen S) :\n    interior (⋃₀ 𝒜 : Set X) = ⋃₀ 𝒜 := by\n  -- The union of open sets is open.\n  have hOpen : IsOpen (⋃₀ 𝒜 : Set X) := isOpen_sUnion.mpr h𝒜\n  -- For an open set, its interior is the set itself.\n  simpa using hOpen.interior_eq",
+    "theorem Topology.interior_compl_eq_compl_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior ((A : Set X)ᶜ) = (closure A)ᶜ := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    -- Show that `x` cannot be in `closure A`.\n    have hx_not : (x : X) ∉ closure A := by\n      by_contra hx_cl\n      -- Any neighbourhood of `x` meets `A`; apply this to `interior (Aᶜ)`.\n      have h_open : IsOpen (interior (Aᶜ)) := isOpen_interior\n      have h_nonempty :\n          ((interior (Aᶜ) : Set X) ∩ A).Nonempty :=\n        (mem_closure_iff).1 hx_cl (interior (Aᶜ)) h_open hx\n      rcases h_nonempty with ⟨y, hyInt, hyA⟩\n      -- But `interior (Aᶜ)` is contained in `Aᶜ`, contradiction.\n      have : (y : X) ∈ (A : Set X)ᶜ :=\n        (interior_subset : interior (Aᶜ) ⊆ Aᶜ) hyInt\n      exact this hyA\n    simpa [Set.mem_compl] using hx_not\n  · intro hx\n    -- Since `x ∉ closure A`, the open set `(closure A)ᶜ` contains `x`\n    -- and is contained in `Aᶜ`.\n    have h_open : IsOpen ((closure A)ᶜ) := isClosed_closure.isOpen_compl\n    have h_subset : ((closure A)ᶜ : Set X) ⊆ Aᶜ := by\n      intro y hy\n      by_contra hAy\n      have : (y : X) ∈ closure A := subset_closure hAy\n      exact hy this\n    -- Hence `(closure A)ᶜ` lies in the interior of `Aᶜ`.\n    have h_interior :\n        ((closure A)ᶜ : Set X) ⊆ interior (Aᶜ) :=\n      interior_maximal h_subset h_open\n    exact h_interior hx",
+    "theorem Topology.union_interior_three_subset_interior_union\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    (interior A ∪ interior B ∪ interior C : Set X) ⊆\n      interior (A ∪ B ∪ C) := by\n  -- We first handle the two–set case `A ∪ B`.\n  have h₁ :\n      (interior A ∪ interior B : Set X) ⊆ interior (A ∪ B) :=\n    Topology.union_interior_subset_interior_union'\n      (X := X) (A := A) (B := B)\n  -- Next, we enlarge to include `C`.\n  have h₂ :\n      (interior (A ∪ B) ∪ interior C : Set X) ⊆\n        interior ((A ∪ B) ∪ C) :=\n    Topology.union_interior_subset_interior_union'\n      (X := X) (A := A ∪ B) (B := C)\n  -- Now take an arbitrary point in the triple union.\n  intro x hx\n  -- The expression `interior A ∪ interior B ∪ interior C` is parsed as\n  -- `(interior A ∪ interior B) ∪ interior C`, so we can case–split.\n  cases hx with\n  | inl hAB =>\n      -- `x` lies in `interior A ∪ interior B`\n      have hxAB : (x : X) ∈ interior (A ∪ B) := h₁ hAB\n      -- Hence `x` lies in `interior (A ∪ B) ∪ interior C`\n      have hx₁ : (x : X) ∈ (interior (A ∪ B) ∪ interior C : Set X) :=\n        Or.inl hxAB\n      -- Apply the second inclusion.\n      exact h₂ hx₁\n  | inr hC =>\n      -- `x` lies in the `interior C` branch.\n      have hx₂ : (x : X) ∈ (interior (A ∪ B) ∪ interior C : Set X) :=\n        Or.inr hC\n      exact h₂ hx₂"
+  ],
+  "success": true
+}

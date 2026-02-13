@@ -1,0 +1,43 @@
+{
+  "times": [
+    166.69686245918274,
+    19.932024240493774
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13473,
+      "prompt_tokens": 29866,
+      "total_tokens": 43339,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    },
+    {
+      "completion_tokens": 1374,
+      "prompt_tokens": 30173,
+      "total_tokens": 31547,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ interior A \\ closure (B : Set X) := by\n  intro x hx\n  -- `x` lies in the interior of `A \\ B`.\n  have hx_int_diff : x ∈ interior (A \\ B : Set X) := hx\n  -- Hence `x` lies in the interior of `A`, since `A \\ B ⊆ A`.\n  have hx_intA : x ∈ interior A := by\n    have h_subset : (interior (A \\ B : Set X) : Set X) ⊆ interior A :=\n      interior_mono (Set.diff_subset _ _)\n    exact h_subset hx_int_diff\n  -- We now show `x ∉ closure B`.\n  have hx_not_closureB : x ∉ closure (B : Set X) := by\n    -- Suppose, towards a contradiction, that `x ∈ closure B`.\n    intro hx_cl\n    -- Use the neighbourhood characterization of `closure`.\n    have h_nonempty :=\n      (mem_closure_iff.1 hx_cl)\n        (interior (A \\ B : Set X)) isOpen_interior hx_int_diff\n    rcases h_nonempty with ⟨y, hyB, hyInt⟩\n    -- But `interior (A \\ B)` is contained in `A \\ B`, so `y ∉ B`.\n    have hy_notB : y ∉ (B : Set X) := by\n      have hy_in_diff : y ∈ (A \\ B : Set X) := interior_subset hyInt\n      exact hy_in_diff.2\n    exact hy_notB hyB\n  exact And.intro hx_intA hx_not_closureB",
+    "theorem Topology.interior_diff_subset_interior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ interior A := by\n  simpa using\n    interior_mono (Set.diff_subset : (A \\ B : Set X) ⊆ A)"
+  ],
+  "success": true
+}

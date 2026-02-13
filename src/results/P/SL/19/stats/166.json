@@ -1,0 +1,26 @@
+{
+  "times": [
+    116.2885069847107
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9418,
+      "prompt_tokens": 24955,
+      "total_tokens": 34373,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_frontier_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior A ∩ frontier A = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxInt, hxFront⟩\n    -- `hxFront` consists of membership in the closure and non-membership in the interior.\n    exact (hxFront.2 hxInt).elim\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

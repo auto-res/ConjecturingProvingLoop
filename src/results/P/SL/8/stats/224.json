@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.79562997817993
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3255,
+      "prompt_tokens": 33923,
+      "total_tokens": 37178,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_eq_self_imp_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_int : interior A = A) :\n    Topology.P3 A := by\n  have hOpen : IsOpen A := by\n    simpa [h_int] using (isOpen_interior : IsOpen (interior A))\n  simpa using Topology.isOpen_imp_P3 (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

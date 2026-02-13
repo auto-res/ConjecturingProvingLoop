@@ -1,0 +1,43 @@
+{
+  "times": [
+    38.573976278305054,
+    55.47073721885681
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3688,
+      "prompt_tokens": 51969,
+      "total_tokens": 55657,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4222,
+      "prompt_tokens": 52043,
+      "total_tokens": 56265,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_idempotent_six {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_idempotent]",
+    "theorem interior_union_closure_compl_eq_univ\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) ∪ closure ((A : Set X)ᶜ) = (Set.univ : Set X) := by\n  classical\n  -- Rewrite `closure (Aᶜ)` using the complement of an interior.\n  have h : closure ((A : Set X)ᶜ) = (interior (A : Set X))ᶜ := by\n    simpa using closure_compl_eq_compl_interior (X := X) (A := A)\n  -- The desired equality is now immediate.\n  calc\n    interior (A : Set X) ∪ closure ((A : Set X)ᶜ)\n        = interior (A : Set X) ∪ (interior (A : Set X))ᶜ := by\n          simpa [h]\n    _ = (Set.univ : Set X) := by\n          simpa using Set.union_compl_self (interior (A : Set X))"
+  ],
+  "success": true
+}

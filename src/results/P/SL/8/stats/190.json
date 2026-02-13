@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.35555648803711
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5424,
+      "prompt_tokens": 27867,
+      "total_tokens": 33291,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInteriorClosure_eq_closure_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h_open : IsOpen A) :\n    closure (interior (closure A)) = closure A := by\n  -- From the openness of `A`, we obtain `P1 (closure A)`.\n  have hP1 : Topology.P1 (closure A) :=\n    Topology.isOpen_imp_P1_closure (X := X) (A := A) h_open\n  -- Translate `P1 (closure A)` into the desired equality.\n  exact\n    (Topology.P1_closure_iff_closureInterior_eq_closure (X := X) (A := A)).1 hP1"
+  ],
+  "success": true
+}

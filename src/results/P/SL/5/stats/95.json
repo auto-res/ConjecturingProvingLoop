@@ -1,0 +1,43 @@
+{
+  "times": [
+    87.05949711799622,
+    52.27976894378662
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6189,
+      "prompt_tokens": 15134,
+      "total_tokens": 21323,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    },
+    {
+      "completion_tokens": 3063,
+      "prompt_tokens": 15208,
+      "total_tokens": 18271,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_idempotent_six {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_idempotent]",
+    "theorem closure_interior_nonempty_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (X := X) A) (hA : A.Nonempty) :\n    (closure (interior A)).Nonempty := by\n  rcases hA with ⟨x, hxA⟩\n  exact ⟨x, hP1 hxA⟩"
+  ],
+  "success": true
+}

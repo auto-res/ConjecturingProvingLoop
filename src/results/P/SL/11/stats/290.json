@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.10421109199524
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1642,
+      "prompt_tokens": 47589,
+      "total_tokens": 49231,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_prod_left_open_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA_open : IsOpen A) (hA_nonempty : A.Nonempty) :\n    Topology.P3 (A ×ˢ B) ↔ Topology.P3 B := by\n  constructor\n  · intro hProd\n    exact Topology.P3_of_P3_prod_right (A := A) (B := B) hA_nonempty hProd\n  · intro hPB\n    exact Topology.P3_prod_left_open (A := A) (B := B) hA_open hPB"
+  ],
+  "success": true
+}

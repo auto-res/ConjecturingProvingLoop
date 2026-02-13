@@ -1,0 +1,77 @@
+{
+  "times": [
+    81.42996954917908,
+    73.80205011367798,
+    59.599857330322266,
+    30.93217945098877
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5882,
+      "prompt_tokens": 64023,
+      "total_tokens": 69905,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 63232
+      }
+    },
+    {
+      "completion_tokens": 6095,
+      "prompt_tokens": 64157,
+      "total_tokens": 70252,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 63232
+      }
+    },
+    {
+      "completion_tokens": 4935,
+      "prompt_tokens": 64236,
+      "total_tokens": 69171,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 63232
+      }
+    },
+    {
+      "completion_tokens": 2508,
+      "prompt_tokens": 64489,
+      "total_tokens": 66997,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 63232
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_interiorClosure_mem_nhds {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A ↔ ∀ x ∈ A, interior (closure A) ∈ 𝓝 x := by\n  classical\n  constructor\n  · intro hP3 x hx\n    have hx_int : x ∈ interior (closure A) := hP3 hx\n    exact (isOpen_interior.mem_nhds hx_int)\n  · intro h\n    dsimp [Topology.P3]\n    intro x hx\n    have h_nhds : interior (closure A) ∈ 𝓝 x := h x hx\n    exact (mem_interior_iff_mem_nhds).2 h_nhds",
+    "theorem dense_implies_P3_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 (interior (closure A)) := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x _hx\n  -- Since `A` is dense, its closure is the whole space.\n  have h_closure : (closure A : Set X) = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  -- Consequently, the interior of this closure is also the whole space.\n  have h_int : interior (closure A) = (Set.univ : Set X) := by\n    simpa [h_closure, interior_univ]\n  -- The goal follows immediately.\n  simpa [h_int] using (Set.mem_univ x)",
+    "theorem P2_iff_interiorClosureInterior_mem_nhds\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A ↔ ∀ x ∈ A, interior (closure (interior A)) ∈ 𝓝 x := by\n  classical\n  constructor\n  · intro hP2 x hx\n    have hxInt : x ∈ interior (closure (interior A)) := hP2 hx\n    exact (mem_interior_iff_mem_nhds).1 hxInt\n  · intro h\n    dsimp [Topology.P2]\n    intro x hx\n    have hNhds : interior (closure (interior A)) ∈ 𝓝 x := h x hx\n    exact (mem_interior_iff_mem_nhds).2 hNhds",
+    "theorem interior_idempotent {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (interior A : Set X) = interior A := by\n  simpa using (isOpen_interior (A := A)).interior_eq"
+  ],
+  "success": true
+}

@@ -1,0 +1,77 @@
+{
+  "times": [
+    40.432361125946045,
+    179.63915610313416,
+    135.08615589141846,
+    93.45856857299805
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3327,
+      "prompt_tokens": 19949,
+      "total_tokens": 23276,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 12887,
+      "prompt_tokens": 20182,
+      "total_tokens": 33069,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 9625,
+      "prompt_tokens": 20435,
+      "total_tokens": 30060,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 5965,
+      "prompt_tokens": 20503,
+      "total_tokens": 26468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_prod_univ_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} :\n    Topology.P1 (A ×ˢ (Set.univ : Set Y)) ↔ Topology.P1 A := by\n  classical\n  constructor\n  · intro hProd\n    dsimp [Topology.P1] at hProd ⊢\n    intro x hxA\n    -- Consider the point `(x, y₀)` with an arbitrary `y₀ : Y`.\n    have h_mem_prod :\n        (x, (Classical.arbitrary Y)) ∈ (A ×ˢ (Set.univ : Set Y)) := by\n      exact ⟨hxA, by trivial⟩\n    -- Apply the `P1` property in the product.\n    have h_cl_prod :\n        (x, Classical.arbitrary Y) ∈\n          closure (interior (A ×ˢ (Set.univ : Set Y))) :=\n      hProd h_mem_prod\n    -- Compute `interior` and `closure` of the product.\n    have h_int_prod :\n        interior (A ×ˢ (Set.univ : Set Y)) =\n          interior A ×ˢ (Set.univ : Set Y) := by\n      simpa [interior_univ] using\n        (interior_prod_eq (s := A) (t := (Set.univ : Set Y)))\n    have h_closure_prod :\n        closure (interior (A ×ˢ (Set.univ : Set Y))) =\n          closure (interior A) ×ˢ (Set.univ : Set Y) := by\n      simpa [h_int_prod, closure_univ] using\n        (closure_prod_eq (s := interior A) (t := (Set.univ : Set Y)))\n    -- Project onto the first coordinate.\n    have : (x, Classical.arbitrary Y) ∈\n        closure (interior A) ×ˢ (Set.univ : Set Y) := by\n      simpa [h_closure_prod] using h_cl_prod\n    exact this.1\n  · intro hA\n    -- `univ` satisfies `P1`.\n    have hUniv : Topology.P1 (Set.univ : Set Y) :=\n      Topology.P1_univ (X := Y)\n    -- Use the product lemma.\n    simpa using\n      (Topology.P1_prod (X := X) (Y := Y) (A := A) (B := (Set.univ : Set Y))\n        hA hUniv)",
+    "```lean\nnonrec theorem Topology.P3_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    Topology.P3 A → Topology.P3 B → Topology.P3 (A ×ˢ B) := by\n  intro hA hB\n  dsimp [Topology.P3] at hA hB ⊢\n  intro p hp\n  -- Provide the required `Nonempty` instances using the coordinates of `p`.\n  haveI : Nonempty X := ⟨p.1⟩\n  haveI : Nonempty Y := ⟨p.2⟩\n  -- Coordinates of the point `p`.\n  have hAx : p.1 ∈ A := hp.1\n  have hBy : p.2 ∈ B := hp.2\n  -- Apply the `P3` property to each coordinate.\n  have hIntA : p.1 ∈ interior (closure A) := hA hAx\n  have hIntB : p.2 ∈ interior (closure B) := hB hBy\n  -- The product of these interiors is an open neighbourhood of `p`.\n  have hOpen :\n      IsOpen (Set.prod (interior (closure A)) (interior (closure B))) :=\n    (isOpen_interior).prod isOpen_interior\n  have hMem :\n      (p : X × Y) ∈ Set.prod (interior (closure A)) (interior (closure B)) :=\n    ⟨hIntA, hIntB⟩\n  -- This neighbourhood is contained in `closure (A ×ˢ B)`.\n  have hSub :\n      Set.prod (interior (closure A)) (interior (closure B)) ⊆\n        closure (A ×ˢ B) := by\n    intro q hq\n    rcases hq with ⟨hqA, hqB⟩\n    have hqA_cl : q.1 ∈ closure A := interior_subset hqA\n    have hqB_cl : q.2 ∈ closure B := interior_subset hqB\n    have h_eq :\n        closure (A ×ˢ B) = (closure A) ×ˢ (closure B) := by\n      simpa using closure_prod_eq\n    have : (q : X × Y) ∈ (closure A) ×ˢ (closure B) :=\n      ⟨hqA_cl, hqB_cl⟩\n    simpa [h_eq] using this\n  -- Turn the neighbourhood into an interior membership.\n  have h_nhds :\n      closure (A ×ˢ B) ∈ 𝓝 p :=\n    Filter.mem_of_superset (hOpen.mem_nhds hMem) hSub\n  exact (mem_interior_iff_mem_nhds).2 h_nhds\n\nnonrec theorem Topology.P1_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    Topology.P1 A → Topology.P1 B → Topology.P1 (A ×ˢ B) := by\n  intro hA hB\n  dsimp [Topology.P1] at hA hB ⊢\n  intro p hp\n  -- Provide the required `Nonempty` instances using the coordinates of `p`.\n  haveI : Nonempty X := ⟨p.1⟩\n  haveI : Nonempty Y := ⟨p.2⟩\n  rcases hp with ⟨hpA, hpB⟩\n  -- Apply the `P1` property coordinate-wise.\n  have hA' : p.1 ∈ closure (interior A) := hA hpA\n  have hB' : p.2 ∈ closure (interior B) := hB hpB\n  -- Identify the target closure set using `interior_prod_eq` and `closure_prod_eq`.\n  have h_closure_prod :\n      closure (interior (A ×ˢ B)) =\n        closure (interior A) ×ˢ closure (interior B) := by\n    have hIntProd : interior (A ×ˢ B) = interior A ×ˢ interior B := by\n      simpa using interior_prod_eq\n    simpa [hIntProd] using\n      (closure_prod_eq : closure (interior A ×ˢ interior B) =\n        closure (interior A) ×ˢ closure (interior B))\n  -- Conclude the desired membership.\n  have : (p : X × Y) ∈ closure (interior A) ×ˢ closure (interior B) :=\n    ⟨hA', hB'⟩\n  simpa [h_closure_prod] using this\n\nnonrec theorem Topology.P2_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    Topology.P2 A → Topology.P2 B → Topology.P2 (A ×ˢ B) := by\n  intro hA hB\n  dsimp [Topology.P2] at hA hB ⊢\n  intro p hp\n  -- Provide the required `Nonempty` instances using the coordinates of `p`.\n  haveI : Nonempty X := ⟨p.1⟩\n  haveI : Nonempty Y := ⟨p.2⟩\n  -- Apply the `P2` property to both coordinates of `p`.\n  have hpA : p.1 ∈ interior (closure (interior A)) := hA hp.1\n  have hpB : p.2 ∈ interior (closure (interior B)) := hB hp.2\n  -- The product of these interiors is an open neighbourhood of `p`.\n  have hOpen :\n      IsOpen (Set.prod (interior (closure (interior A)))\n                       (interior (closure (interior B)))) := by\n    have h1 : IsOpen (interior (closure (interior A))) := isOpen_interior\n    have h2 : IsOpen (interior (closure (interior B))) := isOpen_interior\n    exact h1.prod h2\n  have hMem :\n      (p : X × Y) ∈\n        Set.prod (interior (closure (interior A)))\n                 (interior (closure (interior B))) := by\n    exact ⟨hpA, hpB⟩\n  -- Show that this neighbourhood is contained in `closure (interior (A ×ˢ B))`.\n  have hSubset :\n      Set.prod (interior (closure (interior A)))\n               (interior (closure (interior B))) ⊆\n        closure (interior (A ×ˢ B)) := by\n    intro q hq\n    rcases hq with ⟨hqA, hqB⟩\n    -- Each coordinate lies in the corresponding closure.\n    have hqA_cl : q.1 ∈ closure (interior A) := interior_subset hqA\n    have hqB_cl : q.2 ∈ closure (interior B) := interior_subset hqB\n    have hProdMem :\n        (q : X × Y) ∈ closure (interior A) ×ˢ closure (interior B) :=\n      ⟨hqA_cl, hqB_cl⟩\n    -- Relate product closures to the closure of a product.\n    have h_closure_prod :\n        closure ((interior A) ×ˢ (interior B)) =\n          closure (interior A) ×ˢ closure (interior B) := by\n      simpa using\n        (closure_prod_eq :\n          closure (interior A ×ˢ interior B) =\n            closure (interior A) ×ˢ closure (interior B))\n    have hq_mem_closure_prod :\n        (q : X × Y) ∈ closure ((interior A) ×ˢ (interior B)) := by\n      simpa [h_closure_prod] using hProdMem\n    -- Identify `interior (A ×ˢ B)`.\n    have h_int_prod :\n        interior (A ×ˢ B) = (interior A) ×ˢ (interior B) := by\n      simpa using interior_prod_eq\n    simpa [h_int_prod] using hq_mem_closure_prod\n  -- Turn the neighbourhood inclusion into an interior membership.\n  have hNhds :\n      closure (interior (A ×ˢ B)) ∈ 𝓝 p :=\n    Filter.mem_of_superset (hOpen.mem_nhds hMem) hSubset\n  exact (mem_interior_iff_mem_nhds).2 hNhds\n```",
+    "Lean code is too long; truncated",
+    "theorem P3_prod_left {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty Y]\n    {A : Set X} :\n    Topology.P3 (A ×ˢ (Set.univ : Set Y)) → Topology.P3 A := by\n  intro hProd\n  dsimp [Topology.P3] at hProd\n  dsimp [Topology.P3]\n  intro x hxA\n  classical\n  -- Choose an arbitrary element of `Y` to build a point in the product.\n  let y : Y := Classical.arbitrary Y\n  have h_mem_prod : (x, y) ∈ A ×ˢ (Set.univ : Set Y) := by\n    exact ⟨hxA, Set.mem_univ y⟩\n  -- Apply the `P3` property of the product.\n  have h_int_prod : (x, y) ∈ interior (closure (A ×ˢ (Set.univ : Set Y))) :=\n    hProd h_mem_prod\n  -- Identify the closure of the product with a product of closures.\n  have h_closure_prod :\n      closure (A ×ˢ (Set.univ : Set Y)) = (closure A) ×ˢ (Set.univ : Set Y) := by\n    simpa using closure_prod_eq (s := A) (t := (Set.univ : Set Y))\n  -- Rewrite the interior of this product.\n  have h_int_prod_eq :\n      interior ((closure A) ×ˢ (Set.univ : Set Y)) =\n        interior (closure A) ×ˢ (Set.univ : Set Y) := by\n    simpa using interior_prod_eq (s := closure A) (t := (Set.univ : Set Y))\n  -- Transport membership through these equalities.\n  have h_int_prod' : (x, y) ∈ interior ((closure A) ×ˢ (Set.univ : Set Y)) := by\n    simpa [h_closure_prod] using h_int_prod\n  have h_int_prod'' : (x, y) ∈ interior (closure A) ×ˢ (Set.univ : Set Y) := by\n    simpa [h_int_prod_eq] using h_int_prod'\n  -- Conclude the desired membership for `x`.\n  exact (Set.mem_prod.1 h_int_prod'').1"
+  ],
+  "success": true
+}

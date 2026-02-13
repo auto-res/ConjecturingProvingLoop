@@ -1,0 +1,26 @@
+{
+  "times": [
+    100.1559145450592
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6072,
+      "prompt_tokens": 29343,
+      "total_tokens": 35415,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A ∪ closure A) = interior (closure A) := by\n  -- First, observe that `A ∪ closure A` coincides with `closure A`.\n  have h_union : (A ∪ closure A : Set X) = closure A := by\n    ext x\n    constructor\n    · intro hx\n      cases hx with\n      | inl hA   => exact subset_closure hA\n      | inr hClA => exact hClA\n    · intro hx\n      exact Or.inr hx\n  -- Rewrite the goal using the equality just established.\n  simpa [h_union]"
+  ],
+  "success": true
+}

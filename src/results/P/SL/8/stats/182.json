@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.9059579372406
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5906,
+      "prompt_tokens": 26532,
+      "total_tokens": 32438,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_univ_iff_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) ↔\n      closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    have h_subset : (Set.univ : Set X) ⊆ closure A := by\n      have h_sub : interior (closure A) ⊆ closure A := interior_subset\n      simpa [hInt] using h_sub\n    exact Set.Subset.antisymm (Set.subset_univ _) h_subset\n  · intro hCl\n    have : interior (closure A) = interior (Set.univ : Set X) := by\n      simpa [hCl]\n    simpa [interior_univ] using this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.79680013656616
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2053,
+      "prompt_tokens": 57490,
+      "total_tokens": 59543,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.image_interior_subset_image_closure\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}\n    {A : Set X} :\n    f '' interior (A : Set X) ⊆ f '' closure A := by\n  intro y hy\n  rcases hy with ⟨x, hx_int, rfl⟩\n  -- From `x ∈ interior A` we obtain `x ∈ A`.\n  have hxA : (x : X) ∈ A := interior_subset hx_int\n  -- Hence `x ∈ closure A`.\n  have hx_cl : (x : X) ∈ closure (A : Set X) := subset_closure hxA\n  exact ⟨x, hx_cl, rfl⟩"
+  ],
+  "success": true
+}

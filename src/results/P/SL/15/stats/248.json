@@ -1,0 +1,26 @@
+{
+  "times": [
+    96.89378809928894
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7318,
+      "prompt_tokens": 53189,
+      "total_tokens": 60507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_nonempty_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure (A : Set X)).Nonempty ↔ A.Nonempty := by\n  classical\n  constructor\n  · intro hClosure\n    by_cases hA : (A : Set X).Nonempty\n    · exact hA\n    · -- If `A` is empty, its closure is also empty, contradicting `hClosure`.\n      have hA_eq : (A : Set X) = (∅ : Set X) :=\n        (Set.not_nonempty_iff_eq_empty).1 hA\n      have hClosure_eq : closure (A : Set X) = (∅ : Set X) := by\n        simpa [hA_eq, closure_empty]\n      have hEmptyNonempty : (∅ : Set X).Nonempty := by\n        simpa [hClosure_eq] using hClosure\n      rcases hEmptyNonempty with ⟨x, hx⟩\n      cases hx\n  · intro hA\n    rcases hA with ⟨x, hx⟩\n    exact ⟨x, subset_closure hx⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.19595265388489
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5282,
+      "prompt_tokens": 25441,
+      "total_tokens": 30723,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_inter_right_of_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_open : IsOpen (A : Set X)) (hPB : Topology.P1 (X:=X) B) :\n    Topology.P1 (X:=X) (A ∩ B) := by\n  -- Use commutativity of `∩` and the existing lemma `P1_inter_left_of_open`.\n  have h := Topology.P1_inter_left_of_open (X:=X) (A:=B) (B:=A) hPB hA_open\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

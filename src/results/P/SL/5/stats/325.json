@@ -1,0 +1,60 @@
+{
+  "times": [
+    68.4594042301178,
+    8.49384593963623,
+    14.737754106521606
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5505,
+      "prompt_tokens": 68395,
+      "total_tokens": 73900,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 67456
+      }
+    },
+    {
+      "completion_tokens": 659,
+      "prompt_tokens": 68474,
+      "total_tokens": 69133,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 67456
+      }
+    },
+    {
+      "completion_tokens": 926,
+      "prompt_tokens": 68590,
+      "total_tokens": 69516,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 67456
+      }
+    }
+  ],
+  "responses": [
+    "theorem subset_interior_closure_of_subset_P3\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP3 : Topology.P3 (X := X) B) (hAB : (A : Set X) ⊆ B) :\n    (A : Set X) ⊆ interior (closure B) := by\n  intro x hxA\n  have hxB : x ∈ B := hAB hxA\n  exact hP3 hxB",
+    "theorem closure_subset_of_subset_interior_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (h : (A : Set X) ⊆ interior (closure (B : Set X))) :\n    closure (A : Set X) ⊆ closure B := by\n  -- First, upgrade the given inclusion to `A ⊆ closure B`.\n  have h₁ : (A : Set X) ⊆ closure B :=\n    (Set.Subset.trans h interior_subset)\n  -- Taking closures preserves inclusions.\n  exact closure_mono h₁",
+    "theorem subset_closure_interior_of_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 (X := X) A) :\n    (A : Set X) ⊆ closure (interior A) := by\n  intro x hx\n  exact hP1 hx"
+  ],
+  "success": true
+}

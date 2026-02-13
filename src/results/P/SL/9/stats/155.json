@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.38525581359863
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5135,
+      "prompt_tokens": 24342,
+      "total_tokens": 29477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_inter_interiorCompl_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) ∩ interior (Aᶜ) = (∅ : Set X) := by\n  classical\n  -- We show that every point is *not* in the intersection.\n  apply (Set.eq_empty_iff_forall_not_mem).2\n  intro x hx\n  rcases hx with ⟨hx_closure, hx_int_compl⟩\n  -- `interior (Aᶜ)` is an open neighbourhood of `x`.\n  -- Since `x` lies in the closure of `interior A`, this neighbourhood\n  -- meets `interior A`.\n  have h_nonempty : ((interior (Aᶜ)) ∩ interior A).Nonempty := by\n    have hx := (mem_closure_iff).1 hx_closure\n    exact hx _ isOpen_interior hx_int_compl\n  rcases h_nonempty with ⟨y, ⟨hy_int_compl, hy_intA⟩⟩\n  -- Derive the contradiction `y ∈ A` and `y ∈ Aᶜ`.\n  have hyA : y ∈ A := interior_subset hy_intA\n  have hyA_compl : y ∈ Aᶜ := interior_subset hy_int_compl\n  exact hyA_compl hyA"
+  ],
+  "success": true
+}

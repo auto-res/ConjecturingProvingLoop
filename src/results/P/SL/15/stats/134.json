@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.371317625045776
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3291,
+      "prompt_tokens": 26927,
+      "total_tokens": 30218,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_prod_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hAne : A.Nonempty) (hBne : B.Nonempty) :\n    Topology.P3 (A ×ˢ B) ↔ (Topology.P3 A ∧ Topology.P3 B) := by\n  constructor\n  · intro hProd\n    exact\n      (Topology.P3_prod_implies_P3_left_and_right\n        (X := X) (Y := Y) (A := A) (B := B) hProd hAne hBne)\n  · rintro ⟨hP3A, hP3B⟩\n    exact\n      Topology.P3_prod (X := X) (Y := Y) (A := A) (B := B) hP3A hP3B"
+  ],
+  "success": true
+}

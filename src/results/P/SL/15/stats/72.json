@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.493260860443115
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3059,
+      "prompt_tokens": 11430,
+      "total_tokens": 14489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_P3_and_closure_eq_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P2 A ↔ (Topology.P3 A ∧ closure A = closure (interior A)) := by\n  constructor\n  · intro hP2\n    have hP3 : Topology.P3 A :=\n      Topology.P2_implies_P3 (X := X) (A := A) hP2\n    have hEq : closure A = closure (interior A) :=\n      Topology.P2_implies_closure_eq_closure_interior (X := X) (A := A) hP2\n    exact ⟨hP3, hEq⟩\n  · rintro ⟨hP3, hEq⟩\n    dsimp [Topology.P2]\n    intro x hx\n    have hxInt : x ∈ interior (closure A) := hP3 hx\n    simpa [hEq] using hxInt"
+  ],
+  "success": true
+}

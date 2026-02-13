@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.470120191574097
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2375,
+      "prompt_tokens": 16958,
+      "total_tokens": 19333,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_interior_closure_interior_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P3 (X := X) A) :\n    interior (closure (A : Set X)) =\n      interior (closure (interior (closure A))) := by\n  -- `P3` for `A` gives `P1` for `closure A`.\n  have hP1 : Topology.P1 (X := X) (closure A) :=\n    Topology.P3_implies_P1_closure (X := X) (A := A) hA\n  -- Apply the existing equality for `P1`.\n  have h_eq :\n      interior (closure (closure (A : Set X))) =\n        interior (closure (interior (closure A))) :=\n    Topology.interior_closure_eq_interior_closure_interior_of_P1\n      (X := X) (A := closure A) hP1\n  -- Simplify `closure (closure A)` to `closure A`.\n  simpa [closure_closure] using h_eq"
+  ],
+  "success": true
+}

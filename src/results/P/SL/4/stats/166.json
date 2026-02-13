@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.96502542495728
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6289,
+      "prompt_tokens": 23201,
+      "total_tokens": 29490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_univ_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) ↔ closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    -- Show the two sets are equal by extensionality.\n    ext x\n    constructor\n    · intro _hx\n      -- Any point in `closure A` is trivially in `univ`.\n      trivial\n    · intro _hx\n      -- Since `interior (closure A) = univ`, every point of `univ` lies in\n      -- `interior (closure A)`, and hence in `closure A`.\n      have : x ∈ interior (closure A) := by\n        simpa [hInt] using (by\n          -- `x` is an arbitrary point of `univ`.\n          trivial : x ∈ (Set.univ : Set X))\n      exact interior_subset this\n  · intro hCl\n    -- Rewrite the left‐hand side using `hCl` and simplify.\n    simpa [hCl, interior_univ]"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    90.12823843955994,
+    178.47784876823425
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7572,
+      "prompt_tokens": 20039,
+      "total_tokens": 27611,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 11733,
+      "prompt_tokens": 20246,
+      "total_tokens": 31979,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_eq_empty_iff_isOpen_and_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure A \\ interior A = (∅ : Set X)) ↔ (IsOpen A ∧ IsClosed A) := by\n  constructor\n  · intro hBoundary\n    -- First, show `closure A ⊆ interior A`\n    have hSub : closure A ⊆ interior A := by\n      intro x hxClos\n      by_contra hxInt\n      have hMem : x ∈ closure A \\ interior A := And.intro hxClos hxInt\n      have : x ∈ (∅ : Set X) := by\n        simpa [hBoundary] using hMem\n      cases this\n    -- From the inclusions `interior A ⊆ A` and `A ⊆ closure A ⊆ interior A`\n    -- we deduce `interior A = A` and `closure A = A`\n    have hIntSubset : interior A ⊆ A := interior_subset\n    have hASubInt : A ⊆ interior A := by\n      intro x hxA\n      have hxClos : x ∈ closure A := subset_closure hxA\n      exact hSub hxClos\n    have hIntEq : interior A = A := Set.Subset.antisymm hASubInt hIntSubset\n    have hClosEq : closure A = A := by\n      have hClosSub : closure A ⊆ A := by\n        simpa [hIntEq] using hSub\n      have hASubClos : A ⊆ closure A := subset_closure\n      exact Set.Subset.antisymm hClosSub hASubClos\n    -- Conclude that `A` is both open and closed\n    have hOpen : IsOpen A := by\n      simpa [← hIntEq] using (isOpen_interior : IsOpen (interior A))\n    have hClosed : IsClosed A := by\n      have : IsClosed (closure A) := isClosed_closure\n      simpa [hClosEq] using this\n    exact And.intro hOpen hClosed\n  · rintro ⟨hOpen, hClosed⟩\n    -- Using `IsOpen` and `IsClosed` to rewrite the boundary\n    have hIntEq : interior A = A := hOpen.interior_eq\n    have hClosEq : closure A = A := hClosed.closure_eq\n    have : closure A \\ interior A = A \\ A := by\n      simpa [hIntEq, hClosEq]\n    simpa [Set.diff_self] using this",
+    "theorem Topology.interior_closure_union_eq_interior_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ B)) = interior (closure A ∪ closure B) := by\n  simpa [closure_union]"
+  ],
+  "success": true
+}

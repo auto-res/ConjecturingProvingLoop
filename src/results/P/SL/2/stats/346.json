@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.493654251098633
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2309,
+      "prompt_tokens": 60802,
+      "total_tokens": 63111,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_frontier_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (A : Set X) ∪ frontier (A : Set X)) = closure (A : Set X) := by\n  -- We prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- `⊆` : the left‐hand side is contained in `closure A`\n    intro x hx\n    -- First note that `interior A ⊆ A` and `frontier A ⊆ closure A`.\n    have h₁ : (interior (A : Set X) ∪ frontier (A : Set X) : Set X) ⊆\n        closure (A : Set X) := by\n      intro y hy\n      cases hy with\n      | inl hyInt =>\n          exact subset_closure (interior_subset hyInt)\n      | inr hyFront =>\n          exact (Topology.frontier_subset_closure (A := A)) hyFront\n    -- Taking closures preserves inclusions; simplify with `closure_closure`.\n    have : (closure (interior (A : Set X) ∪ frontier (A : Set X)) : Set X) ⊆\n        closure (closure (A : Set X)) := closure_mono h₁\n    simpa [closure_closure] using this hx\n  · -- `⊇` : `closure A` is contained in the left‐hand side\n    intro x hxClA\n    -- It suffices to show `A ⊆ interior A ∪ frontier A`, because\n    -- then monotonicity of `closure` yields the result.\n    have hIncl : (A : Set X) ⊆ interior (A : Set X) ∪ frontier (A : Set X) := by\n      intro y hyA\n      by_cases hyInt : y ∈ interior (A : Set X)\n      · exact Or.inl hyInt\n      ·\n        have hyFront : (y : X) ∈ frontier (A : Set X) :=\n          And.intro (subset_closure hyA) hyInt\n        exact Or.inr hyFront\n    -- Apply monotonicity of `closure` to the inclusion `A ⊆ interior A ∪ frontier A`.\n    have hClIncl :\n        (closure (A : Set X) : Set X) ⊆\n          closure (interior (A : Set X) ∪ frontier (A : Set X)) :=\n      closure_mono hIncl\n    exact hClIncl hxClA"
+  ],
+  "success": true
+}

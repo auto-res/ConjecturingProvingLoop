@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.96324849128723
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3619,
+      "prompt_tokens": 50452,
+      "total_tokens": 54071,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_P1_and_P3_of_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (interior (A : Set X)) ↔\n      (Topology.P1 (interior (A : Set X)) ∧\n        Topology.P3 (interior (A : Set X))) := by\n  -- The set `interior A` is open.\n  have hOpen : IsOpen (interior (A : Set X)) := isOpen_interior\n  -- For open sets, `P1` and `P2` are equivalent.\n  have h₁ :=\n    Topology.P1_iff_P2_of_isOpen\n      (X := X) (A := interior (A : Set X)) hOpen\n  -- For open sets, `P2` and `P3` are equivalent.\n  have h₂ :=\n    Topology.P2_iff_P3_of_isOpen\n      (X := X) (A := interior (A : Set X)) hOpen\n  -- Assemble the desired equivalence.\n  constructor\n  · intro hP2\n    -- Derive `P1` from `P2` using `h₁`.\n    have hP1 : Topology.P1 (interior (A : Set X)) := (h₁).2 hP2\n    -- Derive `P3` from `P2` using `h₂`.\n    have hP3 : Topology.P3 (interior (A : Set X)) := (h₂).1 hP2\n    exact And.intro hP1 hP3\n  · rintro ⟨hP1, _⟩\n    -- Convert `P1` back into `P2` using `h₁`.\n    exact (h₁).1 hP1"
+  ],
+  "success": true
+}

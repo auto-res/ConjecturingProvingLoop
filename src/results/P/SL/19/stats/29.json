@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.273399114608765
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2231,
+      "prompt_tokens": 4116,
+      "total_tokens": 6347,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 (A := A)) (hB : Topology.P1 (A := B)) :\n    Topology.P1 (A := A ∪ B) := by\n  dsimp [Topology.P1] at hA hB ⊢\n  intro x hx\n  cases hx with\n  | inl hA_mem =>\n      have hxA : x ∈ closure (interior A) := hA hA_mem\n      have hSubA : (A : Set X) ⊆ A ∪ B := by\n        intro z hz; exact Or.inl hz\n      have hIntSub : interior A ⊆ interior (A ∪ B) := interior_mono hSubA\n      have hClosSub : closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono hIntSub\n      exact hClosSub hxA\n  | inr hB_mem =>\n      have hxB : x ∈ closure (interior B) := hB hB_mem\n      have hSubB : (B : Set X) ⊆ A ∪ B := by\n        intro z hz; exact Or.inr hz\n      have hIntSub : interior B ⊆ interior (A ∪ B) := interior_mono hSubB\n      have hClosSub : closure (interior B) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono hIntSub\n      exact hClosSub hxB"
+  ],
+  "success": true
+}

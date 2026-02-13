@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.97361516952515
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4361,
+      "prompt_tokens": 29148,
+      "total_tokens": 33509,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_P2_of_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (interior (A : Set X)) ↔ Topology.P2 (interior (A : Set X)) := by\n  have hOpen : IsOpen (interior (A : Set X)) := isOpen_interior\n  simpa using\n    (Topology.P1_iff_P2_of_isOpen (X := X) (A := interior (A : Set X)) hOpen)"
+  ],
+  "success": true
+}

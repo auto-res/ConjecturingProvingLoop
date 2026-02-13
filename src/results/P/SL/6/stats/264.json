@@ -1,0 +1,60 @@
+{
+  "times": [
+    63.25631523132324,
+    54.499160289764404,
+    79.51286196708679
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4495,
+      "prompt_tokens": 41777,
+      "total_tokens": 46272,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 2844,
+      "prompt_tokens": 41885,
+      "total_tokens": 44729,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 4870,
+      "prompt_tokens": 41954,
+      "total_tokens": 46824,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_union_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure ((A ∪ interior A) : Set X)) = interior (closure A) := by\n  -- Since `interior A ⊆ A`, their union is just `A`.\n  have hUnion : (A ∪ interior A : Set X) = A :=\n    Set.union_eq_self_of_subset_left\n      (interior_subset : interior (A : Set X) ⊆ A)\n  simpa [hUnion]",
+    "theorem union_interior_eq_self {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (A : Set X) ∪ interior A = A := by\n  simpa [union_comm] using\n    (Set.union_eq_self_of_subset_left\n      (interior_subset : interior A ⊆ A))",
+    "theorem interior_iInter_subset_iInter_interior\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {S : ι → Set X} :\n    interior (⋂ i, S i : Set X) ⊆ ⋂ i, interior (S i) := by\n  intro x hx\n  -- For each index `i`, show `x ∈ interior (S i)`.\n  have hx_i : ∀ i, x ∈ interior (S i) := by\n    intro i\n    -- The intersection is contained in `S i`.\n    have hSub : (⋂ j, S j : Set X) ⊆ S i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Apply monotonicity of `interior`.\n    have hIncl : interior (⋂ j, S j : Set X) ⊆ interior (S i) :=\n      interior_mono hSub\n    exact hIncl hx\n  -- Combine the pointwise fact into membership in the intersection of interiors.\n  exact Set.mem_iInter.2 hx_i"
+  ],
+  "success": true
+}

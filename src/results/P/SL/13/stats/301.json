@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.652605056762695
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2730,
+      "prompt_tokens": 53768,
+      "total_tokens": 56498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_eq_univ_of_dense_and_emptyInterior {X : Type*}\n    [TopologicalSpace X] {A : Set X} (hDense : Dense (A : Set X))\n    (hInt : interior (A : Set X) = (∅ : Set X)) :\n    closure (A : Set X) \\ interior A = (Set.univ : Set X) := by\n  -- The density of `A` says that `closure A = univ`.\n  have h_cl : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Substitute both equalities and simplify.\n  simpa [h_cl, hInt]"
+  ],
+  "success": true
+}

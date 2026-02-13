@@ -1,0 +1,60 @@
+{
+  "times": [
+    255.2481644153595,
+    137.26385831832886,
+    136.85809302330017
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 15719,
+      "prompt_tokens": 51736,
+      "total_tokens": 67455,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    },
+    {
+      "completion_tokens": 9367,
+      "prompt_tokens": 52295,
+      "total_tokens": 61662,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 10195,
+      "prompt_tokens": 52369,
+      "total_tokens": 62564,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_compl_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ : Set X) = (closure A)ᶜ := by\n  ext x\n  constructor\n  · intro hxInt\n    -- Suppose, for a contradiction, `x ∈ closure A`.\n    by_contra hxCl\n    -- From `hxCl` and the characterization of the closure we obtain\n    -- an element of `(interior (Aᶜ)) ∩ A`, contradicting the fact that\n    -- these two sets are disjoint.\n    have h := (mem_closure_iff).1 (by\n        -- `hxCl` is the assumption `¬ x ∉ closure A`.\n        -- Convert it to the positive statement required by `mem_closure_iff`.\n        have : x ∉ closure A := hxCl\n        exact (not_not.mp (by\n          -- `by_contra` gave us `hxCl : x ∈ closure A → False`, hence\n          -- `x ∉ closure A` is contradictory. We rewrite it to obtain\n          -- `x ∈ closure A` (otherwise contradiction) which is impossible,\n          -- thus we revert to the required form.\n          have : ¬ x ∈ closure A := hxCl\n          exact (Classical.byContradiction fun h' => this h')).elim))\n        (interior (Aᶜ)) isOpen_interior hxInt\n    rcases h with ⟨y, hyInt, hyA⟩\n    have : (y : X) ∈ (Aᶜ : Set X) := interior_subset hyInt\n    exact this hyA\n  · intro hxCompl\n    -- Let `U = (closure A)ᶜ`, an open neighbourhood of `x` contained in `Aᶜ`.\n    let U := ((closure A)ᶜ : Set X)\n    have hUopen : IsOpen U := isClosed_closure.isOpen_compl\n    have hxU : x ∈ U := by\n      simpa [U] using hxCompl\n    have hUsubset : U ⊆ (Aᶜ : Set X) := by\n      intro y hyU\n      by_contra hAy\n      have : (y : X) ∈ closure A := subset_closure (show y ∈ A from by\n        -- `hAy` is the negated membership, but we are in the `by_contra` block.\n        -- Turning the negation around gives the required membership.\n        simpa using (Classical.byContradiction hAy))\n      have : y ∈ U := hyU\n      exact this.2 this\n    -- Using `U`, show that `x ∈ interior (Aᶜ)`.\n    have : x ∈ interior (Aᶜ : Set X) :=\n      mem_interior.2 ⟨U, hUsubset, hUopen, hxU⟩\n    simpa using this",
+    "theorem Topology.closure_diff_closure_subset_closure_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure A \\ closure B ⊆ closure (A \\ B) := by\n  intro x hx\n  rcases hx with ⟨hxA, hxNotB⟩\n  -- We will use the neighbourhood characterisation of the closure.\n  have h : ∀ U : Set X, IsOpen U → x ∈ U → (U ∩ (A \\ B)).Nonempty := by\n    intro U hU hxU\n    -- Refine the neighbourhood so that it avoids `closure B`.\n    let V : Set X := U ∩ (closure B)ᶜ\n    have hVopen : IsOpen V := hU.inter isClosed_closure.isOpen_compl\n    have hxV : x ∈ V := by\n      have : x ∈ (closure B)ᶜ := by\n        simpa using hxNotB\n      exact And.intro hxU this\n    -- Since `x ∈ closure A`, this refined neighbourhood meets `A`.\n    have hV : (V ∩ A).Nonempty :=\n      (mem_closure_iff).1 hxA V hVopen hxV\n    rcases hV with ⟨y, ⟨hyV, hyA⟩,⟩\n    rcases hyV with ⟨hyU, hyNotClB⟩\n    -- Show that the witness actually lies outside `B`.\n    have hyNotB : (y : X) ∉ B := by\n      intro hyB\n      have : (y : X) ∈ closure B := subset_closure hyB\n      exact hyNotClB this\n    -- Assemble the required witness in `U ∩ (A \\ B)`.\n    exact ⟨y, And.intro hyU ⟨hyA, hyNotB⟩⟩\n  -- Conclude using the closure characterisation.\n  exact (mem_closure_iff).2 h",
+    ""
+  ],
+  "success": true
+}

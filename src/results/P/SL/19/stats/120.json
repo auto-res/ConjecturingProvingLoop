@@ -1,0 +1,26 @@
+{
+  "times": [
+    92.74748969078064
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6859,
+      "prompt_tokens": 18136,
+      "total_tokens": 24995,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_diff_closure_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) \\ closure A = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    have h_in_closure : x ∈ closure A :=\n      (interior_subset : interior (closure A) ⊆ closure A) hx.1\n    exact (hx.2 h_in_closure)\n  · intro x hx\n    cases hx"
+  ],
+  "success": true
+}

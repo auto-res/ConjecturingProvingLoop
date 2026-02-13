@@ -1,0 +1,26 @@
+{
+  "times": [
+    131.53405022621155
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9384,
+      "prompt_tokens": 24741,
+      "total_tokens": 34125,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_interior_inter_interior_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A \\ interior A) ∩ interior A = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxClos, hxInt⟩\n    -- Using the characterization of the closure with an open neighbourhood.\n    have hNon :\n        ((interior A) ∩ (A \\ interior A)).Nonempty :=\n      (mem_closure_iff).1 hxClos (interior A) isOpen_interior hxInt\n    rcases hNon with ⟨y, ⟨hyInt, hyDiff⟩⟩\n    -- `hyDiff` yields `y ∉ interior A`, contradicting `hyInt`.\n    exact False.elim (hyDiff.2 hyInt)\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.6091148853302
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1541,
+      "prompt_tokens": 44298,
+      "total_tokens": 45839,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_inter_closure_closureCompl\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (A : Set X) = closure A ∩ closure (Aᶜ) := by\n  have h₁ := Topology.frontier_eq_closure_diff_interior (A := A)\n  have h₂ := (Topology.closure_inter_closureCompl_eq_closure_diff_interior (A := A)).symm\n  simpa using h₁.trans h₂"
+  ],
+  "success": true
+}

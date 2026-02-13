@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.962780714035034
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4572,
+      "prompt_tokens": 51692,
+      "total_tokens": 56264,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iUnion_interior_subset_interior_iUnion\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    (⋃ i, interior (A i)) ⊆ interior (⋃ i, A i) := by\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxInt⟩\n  have hsubset : interior (A i) ⊆ interior (⋃ i, A i) :=\n    interior_mono (Set.subset_iUnion A i)\n  exact hsubset hxInt"
+  ],
+  "success": true
+}

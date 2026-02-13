@@ -1,0 +1,26 @@
+{
+  "times": [
+    166.3150999546051
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6481,
+      "prompt_tokens": 49249,
+      "total_tokens": 55730,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_union_frontier {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A = A ∪ frontier A := by\n  apply Set.Subset.antisymm\n  · intro x hx_cl\n    by_cases hA : x ∈ A\n    · exact Or.inl hA\n    ·\n      have hx_not_int : x ∉ interior A := by\n        intro hxInt\n        have : x ∈ A := interior_subset hxInt\n        exact hA this\n      have hx_frontier : x ∈ frontier A := And.intro hx_cl hx_not_int\n      exact Or.inr hx_frontier\n  · intro x hx_union\n    cases hx_union with\n    | inl hxA =>\n        exact subset_closure hxA\n    | inr hxFrontier =>\n        exact hxFrontier.1"
+  ],
+  "success": true
+}

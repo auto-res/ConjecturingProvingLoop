@@ -1,0 +1,77 @@
+{
+  "times": [
+    88.18397760391235,
+    120.21033120155334,
+    33.413273096084595,
+    123.08684277534485
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5656,
+      "prompt_tokens": 49259,
+      "total_tokens": 54915,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 7959,
+      "prompt_tokens": 49381,
+      "total_tokens": 57340,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 2114,
+      "prompt_tokens": 49462,
+      "total_tokens": 51576,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 6471,
+      "prompt_tokens": 49582,
+      "total_tokens": 56053,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_closure_of_open\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen (A : Set X)) :\n    closure (interior (closure (A : Set X))) = closure A := by\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    exact closure_mono\n      (interior_subset : interior (closure (A : Set X)) ⊆ closure A)\n  · -- `⊇` direction\n    -- Since `A` is open, it sits inside `interior (closure A)`.\n    have hSub : (A : Set X) ⊆ interior (closure A) :=\n      interior_maximal (subset_closure : (A : Set X) ⊆ closure A) hA\n    -- Taking closures preserves inclusions.\n    exact closure_mono hSub",
+    "nonrec theorem interior_closure_interior_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (A : Set X))) ⊆\n      interior (closure A) := by\n  -- Since `interior A ⊆ A`, taking closures preserves the inclusion.\n  have h : closure (interior (A : Set X)) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  -- Applying monotonicity of `interior` finishes the proof.\n  exact interior_mono h",
+    "theorem P3_implies_closure_eq_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (A : Set X) →\n      closure (A : Set X) = closure (interior (closure A)) := by\n  intro hP3\n  apply Set.Subset.antisymm\n  · -- `closure A ⊆ closure (interior (closure A))`\n    have h : (A : Set X) ⊆ interior (closure A) := hP3\n    exact (closure_mono h)\n  · -- `closure (interior (closure A)) ⊆ closure A`\n    have h : interior (closure A) ⊆ closure A := interior_subset\n    exact (closure_mono h)",
+    "theorem interior_union_satisfies_all_Ps\n    {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    Topology.P1 (interior A ∪ interior B) ∧\n      Topology.P2 (interior A ∪ interior B) ∧\n      Topology.P3 (interior A ∪ interior B) := by\n  -- The interiors of any sets are open.\n  have hOpenA : IsOpen (interior A) := isOpen_interior\n  have hOpenB : IsOpen (interior B) := isOpen_interior\n  -- Apply the existing lemma for unions of open sets.\n  simpa using\n    (Topology.open_union_satisfies_all_Ps\n      (A := interior A) (B := interior B) hOpenA hOpenB)"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    43.132155656814575,
+    37.2909038066864
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4269,
+      "prompt_tokens": 22035,
+      "total_tokens": 26304,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 2187,
+      "prompt_tokens": 22109,
+      "total_tokens": 24296,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_idempotent_six {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_idempotent]",
+    "theorem interior_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) ∪ interior B ⊆ interior (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have hsubset : (interior A : Set X) ⊆ interior (A ∪ B) :=\n        interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n      exact hsubset hA\n  | inr hB =>\n      have hsubset : (interior B : Set X) ⊆ interior (A ∪ B) :=\n        interior_mono (Set.subset_union_right : (B : Set X) ⊆ A ∪ B)\n      exact hsubset hB"
+  ],
+  "success": true
+}

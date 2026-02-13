@@ -1,0 +1,26 @@
+{
+  "times": [
+    145.7115774154663
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6337,
+      "prompt_tokens": 50521,
+      "total_tokens": 56858,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closureInteriorClosure_iff_P3_closureInteriorClosure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (interior (closure (A : Set X)))) ↔\n      Topology.P3 (closure (interior (closure A))) := by\n  -- Both properties are equivalent to the set being open.\n  have h₁ :=\n    Topology.P2_closureInteriorClosure_iff_isOpen_closureInteriorClosure\n      (X := X) (A := A)\n  have h₂ :=\n    Topology.P3_closureInteriorClosure_iff_isOpen_closureInteriorClosure\n      (X := X) (A := A)\n  -- Chain the equivalences.\n  exact h₁.trans h₂.symm"
+  ],
+  "success": true
+}

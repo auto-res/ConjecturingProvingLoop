@@ -1,0 +1,60 @@
+{
+  "times": [
+    112.30516338348389,
+    136.31566405296326,
+    19.900410413742065
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8893,
+      "prompt_tokens": 11751,
+      "total_tokens": 20644,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    },
+    {
+      "completion_tokens": 9048,
+      "prompt_tokens": 11857,
+      "total_tokens": 20905,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    },
+    {
+      "completion_tokens": 1436,
+      "prompt_tokens": 11940,
+      "total_tokens": 13376,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → Topology.P1 (closure (A : Set X)) := by\n  intro hP3\n  dsimp [Topology.P1]\n  intro x hx\n  have hEq :=\n    Topology.closure_eq_closure_interior_closure_of_P3 (A := A) hP3\n  simpa [hEq] using hx",
+    "theorem interior_closure_eq_interior_closure_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) :\n    interior (closure A) = interior (closure (interior A)) := by\n  -- `P1` gives an equality of closures.\n  have hEq : closure A = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 hP1\n  -- Applying `interior` to both sides yields the result.\n  simpa using congrArg interior hEq",
+    "theorem interior_closure_inter_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ B : Set X)) ⊆\n      interior (closure A) ∩ interior (closure B) := by\n  intro x hx\n  -- The closure of `A ∩ B` is contained in the closure of `A`.\n  have hA : interior (closure (A ∩ B : Set X)) ⊆ interior (closure A) :=\n    interior_mono (closure_mono (Set.inter_subset_left))\n  -- The closure of `A ∩ B` is contained in the closure of `B`.\n  have hB : interior (closure (A ∩ B : Set X)) ⊆ interior (closure B) :=\n    interior_mono (closure_mono (Set.inter_subset_right))\n  exact ⟨hA hx, hB hx⟩"
+  ],
+  "success": true
+}

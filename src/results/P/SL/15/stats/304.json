@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.76841640472412
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5828,
+      "prompt_tokens": 64671,
+      "total_tokens": 70499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 63232
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_inter_interior_closure_eq_self {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → (A ∩ interior (closure A)) = A := by\n  intro hP3\n  ext x\n  constructor\n  · intro hx\n    exact hx.1\n  · intro hxA\n    have hxInt : x ∈ interior (closure A) := hP3 hxA\n    exact ⟨hxA, hxInt⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    42.042325496673584,
+    270.07121443748474
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2823,
+      "prompt_tokens": 1051,
+      "total_tokens": 3874,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 17142,
+      "prompt_tokens": 1154,
+      "total_tokens": 18296,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iff_isOpen_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) : Topology.P3 (A := A) ↔ IsOpen A := by\n  constructor\n  · intro hP3\n    have h₁ : A ⊆ interior A := by\n      simpa [hA.closure_eq] using hP3\n    have h₂ : interior A ⊆ A := interior_subset\n    have hEq : interior A = A := subset_antisymm h₂ h₁\n    have : IsOpen (interior A) := isOpen_interior\n    simpa [hEq] using this\n  · intro hOpen\n    dsimp [Topology.P3]\n    intro x hxA\n    have hMono : interior A ⊆ interior (closure A) :=\n      interior_mono (subset_closure : A ⊆ closure A)\n    have hxInt : x ∈ interior A := by\n      simpa [hOpen.interior_eq] using hxA\n    exact hMono hxInt",
+    "theorem Topology.P3_iff_isOpen_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) : Topology.P3 (A := A) ↔ IsOpen A := by\n  dsimp [Topology.P3] at *\n  have h_closure_eq : closure A = A := hA_closed.closure_eq\n  constructor\n  · intro hP3\n    -- Rewrite using the fact that `closure A = A`.\n    have h_subset : A ⊆ interior A := by\n      simpa [h_closure_eq] using hP3\n    -- `interior A` is always a subset of `A`.\n    have h_subset' : interior A ⊆ A := interior_subset\n    -- Hence `interior A = A`.\n    have h_eq : interior A = A := subset_antisymm h_subset' h_subset\n    -- An interior is open, and equality gives the desired openness of `A`.\n    simpa [h_eq] using (isOpen_interior : IsOpen (interior A))\n  · intro hA_open\n    -- Since `A` is open, it is contained in its own interior.\n    have h1 : A ⊆ interior A := by\n      simpa [hA_open.interior_eq] using (subset_rfl : A ⊆ A)\n    -- The interior is monotone with respect to set inclusion.\n    have h2 : interior A ⊆ interior (closure A) :=\n      interior_mono subset_closure\n    -- Combining the two inclusions yields the desired result.\n    exact subset_trans h1 h2"
+  ],
+  "success": true
+}

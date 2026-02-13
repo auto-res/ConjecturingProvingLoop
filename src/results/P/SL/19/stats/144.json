@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.0774199962616
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5065,
+      "prompt_tokens": 21280,
+      "total_tokens": 26345,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_subset_closure_of_subset_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (h : A ⊆ interior (closure B)) :\n    closure A ⊆ closure B := by\n  -- First, take closures on both sides of the inclusion `h`.\n  have h₁ : closure A ⊆ closure (interior (closure B)) := closure_mono h\n  -- Then, use the previously proved inclusion\n  -- `closure (interior (closure B)) ⊆ closure B`.\n  have h₂ : closure (interior (closure B)) ⊆ closure B :=\n    Topology.closure_interior_closure_subset_closure (A := B)\n  -- Assemble the two inclusions.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

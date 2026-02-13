@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.72554349899292
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3574,
+      "prompt_tokens": 14677,
+      "total_tokens": 18251,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_and_P3_iff_isOpen_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsClosed A) :\n    (Topology.P2 A ∧ Topology.P3 A) ↔ IsOpen A := by\n  have hP2 := Topology.P2_closed_iff_isOpen (A := A) hA\n  have hP3 := Topology.P3_closed_iff_isOpen (A := A) hA\n  constructor\n  · intro h\n    exact (hP2).1 h.1\n  · intro hOpen\n    exact ⟨(hP2).2 hOpen, (hP3).2 hOpen⟩"
+  ],
+  "success": true
+}

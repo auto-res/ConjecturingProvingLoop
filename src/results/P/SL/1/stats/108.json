@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.80086016654968
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3077,
+      "prompt_tokens": 16804,
+      "total_tokens": 19881,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_closure_iff\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (closure A)) ↔ Topology.P3 (closure A) := by\n  have hEq : closure (closure A) = closure A := closure_closure\n  constructor\n  · intro hP3\n    simpa [hEq] using hP3\n  · intro hP3\n    simpa [hEq] using hP3"
+  ],
+  "success": true
+}

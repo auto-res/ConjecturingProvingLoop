@@ -1,0 +1,26 @@
+{
+  "times": [
+    132.17729544639587
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8676,
+      "prompt_tokens": 31236,
+      "total_tokens": 39912,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iUnion_eq_iUnion_of_isOpen\n    {X ι : Type*} [TopologicalSpace X] (A : ι → Set X)\n    (hA : ∀ i, IsOpen (A i)) :\n    interior (⋃ i, A i : Set X) = ⋃ i, A i := by\n  -- The union of open sets is open.\n  have h_open : IsOpen (⋃ i, A i : Set X) := isOpen_iUnion (fun i ↦ hA i)\n  -- For an open set `U`, `interior U = U`.\n  simpa [h_open.interior_eq]"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    82.33522391319275
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5382,
+      "prompt_tokens": 9151,
+      "total_tokens": 14533,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_sUnion {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)}\n    (h𝒜 : ∀ S : Set X, S ∈ 𝒜 → Topology.P1 S) :\n    Topology.P1 (⋃₀ 𝒜) := by\n  dsimp [Topology.P1] at h𝒜 ⊢\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨S, hS𝒜, hxS⟩\n  -- From `P1` for `S`, `x` is in `closure (interior S)`.\n  have hx_closure_int : (x : X) ∈ closure (interior S) :=\n    (h𝒜 S hS𝒜) hxS\n  -- Show that `closure (interior S)` is contained in `closure (interior (⋃₀ 𝒜))`.\n  have h_incl : closure (interior S) ⊆ closure (interior (⋃₀ 𝒜)) := by\n    -- First, upgrade the inclusion on the level of interiors.\n    have h_subset : (S : Set X) ⊆ ⋃₀ 𝒜 := by\n      intro y hy\n      exact Set.mem_sUnion.2 ⟨S, hS𝒜, hy⟩\n    have h_int : interior S ⊆ interior (⋃₀ 𝒜) :=\n      interior_mono h_subset\n    -- Taking closures yields the desired inclusion.\n    exact closure_mono h_int\n  exact h_incl hx_closure_int"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    131.25850582122803
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11202,
+      "prompt_tokens": 12729,
+      "total_tokens": 23931,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_eq_empty_of_closure_interior_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior A) = (∅ : Set X) → interior A = (∅ : Set X) := by\n  intro h\n  ext x\n  constructor\n  · intro hx\n    have : x ∈ closure (interior A) := subset_closure hx\n    simpa [h] using this\n  · intro hx\n    cases hx"
+  ],
+  "success": true
+}

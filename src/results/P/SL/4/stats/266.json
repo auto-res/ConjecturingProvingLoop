@@ -1,0 +1,26 @@
+{
+  "times": [
+    21.195913553237915
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1476,
+      "prompt_tokens": 39908,
+      "total_tokens": 41384,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_eq_empty_of_clopen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hAopen : IsOpen A) (hAclosed : IsClosed A) :\n    frontier A = (∅ : Set X) := by\n  have hInt : interior A = A := hAopen.interior_eq\n  have hClos : closure A = A := hAclosed.closure_eq\n  calc\n    frontier A = closure A \\ interior A := by\n      simpa using frontier_eq_closure_diff_interior (X := X) (A := A)\n    _ = A \\ interior A := by\n      simpa [hClos]\n    _ = A \\ A := by\n      simpa [hInt]\n    _ = (∅ : Set X) := by\n      simp"
+  ],
+  "success": true
+}

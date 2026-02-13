@@ -1,0 +1,43 @@
+{
+  "times": [
+    72.22025275230408,
+    63.97874402999878
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7144,
+      "prompt_tokens": 50438,
+      "total_tokens": 57582,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    },
+    {
+      "completion_tokens": 5310,
+      "prompt_tokens": 50663,
+      "total_tokens": 55973,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_compl_eq_compl_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior ((A : Set X)ᶜ) = (closure (A : Set X))ᶜ := by\n  classical\n  -- First, apply the existing lemma to `Aᶜ`.\n  have h :\n      closure (A : Set X) = (interior ((A : Set X)ᶜ))ᶜ := by\n    simpa [Set.compl_compl] using\n      (Topology.closure_compl_eq_compl_interior\n          (X := X) (A := ((A : Set X)ᶜ)))\n  -- Taking complements of both sides yields the desired equality.\n  have h' : (closure (A : Set X))ᶜ = interior ((A : Set X)ᶜ) :=\n    congrArg Set.compl h\n  simpa [Set.compl_compl] using h'.symm",
+    "theorem Set.compl_compl {α : Type*} (s : Set α) : sᶜᶜ = (s : Set α) := by\n  ext x\n  simp"
+  ],
+  "success": true
+}

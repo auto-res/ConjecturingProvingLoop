@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.032164335250854
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2686,
+      "prompt_tokens": 9622,
+      "total_tokens": 12308,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iUnion {X : Type*} [TopologicalSpace X] {ι : Sort*} {𝒜 : ι → Set X}\n    (h𝒜 : ∀ i, Topology.P2 (A := 𝒜 i)) :\n    Topology.P2 (A := ⋃ i, 𝒜 i) := by\n  dsimp [Topology.P2] at *\n  intro x hx_union\n  -- Pick an index `i` such that `x ∈ 𝒜 i`.\n  rcases Set.mem_iUnion.1 hx_union with ⟨i, hx_i⟩\n  -- Apply `P2` for this particular set.\n  have hx_int : x ∈ interior (closure (interior (𝒜 i))) := h𝒜 i hx_i\n  -- Show that this interior is contained in the required one.\n  have h_subset :\n      interior (closure (interior (𝒜 i))) ⊆\n        interior (closure (interior (⋃ j, 𝒜 j))) := by\n    -- `interior` is monotone with respect to set inclusion.\n    have h_int_mono : interior (𝒜 i) ⊆ interior (⋃ j, 𝒜 j) := by\n      have h_set_subset : (𝒜 i) ⊆ ⋃ j, 𝒜 j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact interior_mono h_set_subset\n    -- Apply monotonicity of `closure` and `interior` successively.\n    have h_closure_mono :\n        closure (interior (𝒜 i)) ⊆ closure (interior (⋃ j, 𝒜 j)) :=\n      closure_mono h_int_mono\n    exact interior_mono h_closure_mono\n  exact h_subset hx_int"
+  ],
+  "success": true
+}

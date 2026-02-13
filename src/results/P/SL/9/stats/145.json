@@ -1,0 +1,43 @@
+{
+  "times": [
+    60.67505860328674,
+    113.63783144950867
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4827,
+      "prompt_tokens": 22901,
+      "total_tokens": 27728,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    },
+    {
+      "completion_tokens": 8152,
+      "prompt_tokens": 23014,
+      "total_tokens": 31166,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.disjoint_closure_interior_of_disjoint\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (h : Disjoint (A) (B)) :\n    Disjoint (closure A) (interior B) := by\n  -- Expand the desired disjointness using `Set.disjoint_left`.\n  refine (Set.disjoint_left).2 ?_\n  intro x hx_cl hx_int\n  -- Every neighbourhood of `x` meets `A`; take `interior B`, which is open.\n  have h_nonempty : ((interior B) ∩ A).Nonempty := by\n    have h_closure := (mem_closure_iff).1 hx_cl\n    exact h_closure (interior B) isOpen_interior hx_int\n  rcases h_nonempty with ⟨y, ⟨hy_intB, hyA⟩⟩\n  -- The point `y` lies in `B` as well as `A`, contradicting disjointness.\n  have hyB : y ∈ B := interior_subset hy_intB\n  have h_disj := (Set.disjoint_left).1 h\n  exact h_disj y hyA hyB",
+    "theorem Topology.P2_of_interiorClosure_eq_self\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (closure A) = A) : Topology.P2 (A := A) := by\n  -- From the hypothesis we immediately obtain that `A` is open.\n  have hA_open : IsOpen A := by\n    simpa [h] using (isOpen_interior : IsOpen (interior (closure A)))\n  -- Every open set satisfies `P2`.\n  exact Topology.P2_of_isOpen (A := A) hA_open"
+  ],
+  "success": true
+}

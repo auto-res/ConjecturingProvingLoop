@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.50941824913025
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1982,
+      "prompt_tokens": 53542,
+      "total_tokens": 55524,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_closure_complement_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A : Set X) ∪ closure (Aᶜ) = (Set.univ : Set X) := by\n  classical\n  have h : closure (Aᶜ : Set X) = (interior A)ᶜ :=\n    closure_compl_eq_compl_interior (α := X) (s := A)\n  calc\n    interior A ∪ closure (Aᶜ)\n        = interior A ∪ (interior A)ᶜ := by\n          simpa [h]\n    _ = (Set.univ : Set X) := by\n          simpa using Set.union_compl_self (interior A)"
+  ],
+  "success": true
+}

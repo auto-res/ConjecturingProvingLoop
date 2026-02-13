@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.74613666534424
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2402,
+      "prompt_tokens": 28215,
+      "total_tokens": 30617,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_self_of_isClopen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_open : IsOpen (A : Set X)) (hA_closed : IsClosed (A : Set X)) :\n    interior (closure (A : Set X)) = A := by\n  -- First, use the closedness of `A` to simplify `interior (closure A)`.\n  have h₁ : interior (closure (A : Set X)) = interior A :=\n    Topology.interior_closure_eq_interior_of_isClosed (X := X) (A := A) hA_closed\n  -- Next, use the openness of `A` to identify `interior A` with `A` itself.\n  have h₂ : interior (A : Set X) = A := hA_open.interior_eq\n  -- Combine the two equalities.\n  simpa [h₂] using h₁"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    46.29210352897644,
+    124.99653244018555
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4077,
+      "prompt_tokens": 55967,
+      "total_tokens": 60044,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 9434,
+      "prompt_tokens": 56070,
+      "total_tokens": 65504,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_open_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) :\n    closure (A ∩ B : Set X) = closure (A ∩ closure (B : Set X)) := by\n  -- First inclusion: monotonicity of `closure`.\n  have h₁ : (A ∩ B : Set X) ⊆ A ∩ closure (B : Set X) := by\n    intro x hx\n    exact ⟨hx.1, subset_closure hx.2⟩\n  have hSub₁ : closure (A ∩ B : Set X) ⊆\n      closure (A ∩ closure (B : Set X)) :=\n    closure_mono h₁\n  -- Second inclusion: use the neighbourhood characterisation of `closure`.\n  have hSub₂ :\n      closure (A ∩ closure (B : Set X)) ⊆ closure (A ∩ B : Set X) := by\n    intro x hx\n    -- `x ∈ A ∩ closure B`.\n    rcases hx with ⟨hxA, hxClB⟩\n    -- We show `x ∈ closure (A ∩ B)` via `mem_closure_iff`.\n    have hx' : x ∈ closure (A ∩ B : Set X) := by\n      -- Neighbourhood argument.\n      have : ∀ U : Set X, IsOpen U → x ∈ U →\n          (U ∩ (A ∩ B) : Set X).Nonempty := by\n        intro U hU_open hxU\n        -- Intersect the neighbourhood with `A`, still open and contains `x`.\n        let V : Set X := U ∩ A\n        have hV_open : IsOpen V := hU_open.inter hA\n        have hxV : x ∈ V := ⟨hxU, hxA⟩\n        -- Density property from `hxClB`.\n        have hNonempty : (V ∩ B : Set X).Nonempty :=\n          (mem_closure_iff).1 hxClB V hV_open hxV\n        -- Repackage the point for the required intersection.\n        rcases hNonempty with ⟨y, ⟨⟨hyU, hyA⟩, hyB⟩⟩\n        exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩\n      -- Apply the characterisation of the closure.\n      exact (mem_closure_iff).2 this\n    exact hx'\n  -- Combine the two inclusions.\n  exact Set.Subset.antisymm hSub₁ hSub₂",
+    "theorem closure_inter_closure_subset_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ closure (B : Set X) : Set X) ⊆ closure (A : Set X) := by\n  -- The set `A ∩ closure B` is obviously contained in `A`.\n  have hSub : (A ∩ closure (B : Set X) : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  -- Taking closures preserves inclusions, yielding the desired result.\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

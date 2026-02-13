@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.59541416168213
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1292,
+      "prompt_tokens": 39133,
+      "total_tokens": 40425,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_sUnion {X : Type*} [TopologicalSpace X] {𝔄 : Set (Set X)}\n    (hA : ∀ A, A ∈ 𝔄 → Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A) :\n    Topology.P1 (⋃₀ 𝔄) ∧ Topology.P2 (⋃₀ 𝔄) ∧ Topology.P3 (⋃₀ 𝔄) := by\n  -- Extract each component property for every `A ∈ 𝔄`.\n  have hP1 : ∀ A, A ∈ 𝔄 → Topology.P1 A := fun A h => (hA A h).1\n  have hP2 : ∀ A, A ∈ 𝔄 → Topology.P2 A := fun A h => (hA A h).2.1\n  have hP3 : ∀ A, A ∈ 𝔄 → Topology.P3 A := fun A h => (hA A h).2.2\n  -- Apply the existing `sUnion` lemmas for each property.\n  have hP1s : Topology.P1 (⋃₀ 𝔄) := Topology.P1_sUnion hP1\n  have hP2s : Topology.P2 (⋃₀ 𝔄) := Topology.P2_sUnion hP2\n  have hP3s : Topology.P3 (⋃₀ 𝔄) := Topology.P3_sUnion hP3\n  exact ⟨hP1s, hP2s, hP3s⟩"
+  ],
+  "success": true
+}

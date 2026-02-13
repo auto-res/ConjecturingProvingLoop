@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.48895239830017
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4069,
+      "prompt_tokens": 27364,
+      "total_tokens": 31433,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_eq_empty_of_closure_interior_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h : closure (interior (A : Set X)) = (∅ : Set X)) :\n    interior (A : Set X) = (∅ : Set X) := by\n  -- First, show `interior A ⊆ ∅`.\n  have hsub : interior (A : Set X) ⊆ (∅ : Set X) := by\n    intro x hx\n    -- Any point of `interior A` lies in `closure (interior A)`.\n    have hx' : x ∈ closure (interior (A : Set X)) := subset_closure hx\n    -- Rewrite using the hypothesis that this closure is empty.\n    simpa [h] using hx'\n  -- The reverse inclusion `∅ ⊆ interior A` is trivial.\n  exact le_antisymm hsub (Set.empty_subset _)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    275.49902391433716
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14973,
+      "prompt_tokens": 54311,
+      "total_tokens": 69284,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_union_three_eq\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    interior (closure (A ∪ B ∪ C : Set X)) =\n      interior (closure (A : Set X) ∪ closure B ∪ closure C) := by\n  -- First, rewrite using the two–set union lemma with the block `(A ∪ B)` and `C`.\n  have h₁ :\n      interior (closure ((A ∪ B) ∪ C : Set X)) =\n        interior (closure (A ∪ B : Set X) ∪ closure C) := by\n    simpa using\n      (Topology.interiorClosure_union_eq (X := X) (A := A ∪ B) (B := C))\n  -- Next, rewrite `interior (closure (A ∪ B))` using the same lemma for `A` and `B`.\n  have h₂ :\n      interior (closure (A ∪ B : Set X)) =\n        interior (closure (A : Set X) ∪ closure B) := by\n    simpa using\n      (Topology.interiorClosure_union_eq (X := X) (A := A) (B := B))\n  -- Combine the two equalities and simplify with associativity of `∪`.\n  simpa [Set.union_assoc, h₂] using h₁"
+  ],
+  "success": true
+}

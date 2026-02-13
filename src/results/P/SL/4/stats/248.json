@@ -1,0 +1,77 @@
+{
+  "times": [
+    63.1622531414032,
+    118.60778760910034,
+    46.736191749572754,
+    26.078606367111206
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2660,
+      "prompt_tokens": 36604,
+      "total_tokens": 39264,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    },
+    {
+      "completion_tokens": 8297,
+      "prompt_tokens": 36710,
+      "total_tokens": 45007,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    },
+    {
+      "completion_tokens": 4315,
+      "prompt_tokens": 36788,
+      "total_tokens": 41103,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    },
+    {
+      "completion_tokens": 1877,
+      "prompt_tokens": 36970,
+      "total_tokens": 38847,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_closure_subset_inter_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ closure B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  have hxA : x ∈ closure A :=\n    (closure_mono (Set.inter_subset_left : (A ∩ closure B : Set X) ⊆ A)) hx\n  have hxB : x ∈ closure B :=\n    (closure_mono (Set.inter_subset_right : (A ∩ closure B : Set X) ⊆ closure B)) hx\n  exact And.intro hxA hxB",
+    "theorem closure_inter_interior_subset_closure_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A ∩ interior B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- `closure (A ∩ interior B)` is contained in `closure A`\n  have hxA : x ∈ closure A := by\n    have h_sub : (A ∩ interior B : Set X) ⊆ A := Set.inter_subset_left\n    exact (closure_mono h_sub) hx\n  -- `closure (A ∩ interior B)` is contained in `closure B`\n  have hxB : x ∈ closure B := by\n    -- First, land in `closure (interior B)`\n    have hx_int : x ∈ closure (interior B) := by\n      have h_sub : (A ∩ interior B : Set X) ⊆ interior B := Set.inter_subset_right\n      exact (closure_mono h_sub) hx\n    -- Then use monotonicity of `closure` once more\n    have h_cl : closure (interior B) ⊆ closure B :=\n      closure_mono (interior_subset : interior B ⊆ B)\n    exact h_cl hx_int\n  exact And.intro hxA hxB",
+    "theorem frontier_eq_empty_iff_isOpen_and_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) ↔ (IsOpen A ∧ IsClosed A) := by\n  constructor\n  · intro hFront\n    -- From `frontier A = ∅` we deduce `closure A ⊆ interior A`.\n    have hDiff : closure A \\ interior A = (∅ : Set X) := by\n      simpa [frontier_eq_closure_diff_interior] using hFront\n    have hSub : closure A ⊆ interior A := by\n      intro x hxCl\n      by_cases hxInt : x ∈ interior A\n      · exact hxInt\n      · have : x ∈ closure A \\ interior A := And.intro hxCl hxInt\n        have : x ∈ (∅ : Set X) := by\n          simpa [hDiff] using this\n        exact (Set.not_mem_empty x) this\n    -- Chain of inclusions: `interior A ⊆ A ⊆ closure A ⊆ interior A`.\n    have hIntEq : interior A = A := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      · intro x hxA\n        have : x ∈ closure A := subset_closure hxA\n        exact hSub this\n    have hClEq : closure A = A := by\n      apply Set.Subset.antisymm\n      · intro x hxCl\n        have : x ∈ interior A := hSub hxCl\n        simpa [hIntEq] using this\n      · exact subset_closure\n    -- Conclude that `A` is both open and closed.\n    have hOpen : IsOpen A := by\n      simpa [hIntEq] using (isOpen_interior : IsOpen (interior A))\n    have hClosed : IsClosed A := by\n      simpa [hClEq] using (isClosed_closure : IsClosed (closure A))\n    exact And.intro hOpen hClosed\n  · rintro ⟨hOpen, hClosed⟩\n    -- For a clopen set, the frontier is empty.\n    have hInt : interior A = A := hOpen.interior_eq\n    have hCl  : closure A = A := hClosed.closure_eq\n    calc\n      frontier A = closure A \\ interior A := by\n        simpa using frontier_eq_closure_diff_interior (A := A)\n      _ = A \\ A := by\n        simpa [hInt, hCl]\n      _ = (∅ : Set X) := by\n        simp",
+    "theorem closure_eq_closure_interior_closure_of_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P3 A → closure A = closure (interior (closure A)) := by\n  intro hP3\n  -- First, `P3 A` yields `P1 (closure A)`.\n  have hP1 : Topology.P1 (closure A) :=\n    Topology.P3_imp_P1_closure (A := A) hP3\n  -- Apply the `P1` result to `closure A`.\n  have hEq : closure (closure A) = closure (interior (closure A)) :=\n    Topology.closure_eq_closure_interior_of_P1 (A := closure A) hP1\n  -- Simplify `closure (closure A)` to `closure A`.\n  simpa [closure_closure] using hEq"
+  ],
+  "success": true
+}

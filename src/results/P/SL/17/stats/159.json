@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.80844235420227
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6718,
+      "prompt_tokens": 25506,
+      "total_tokens": 32224,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_subset_interior_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A \\ B) ⊆ interior A := by\n  -- Since `A \\ B ⊆ A`, apply the monotonicity of `interior`.\n  have h_subset : (A \\ B : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  exact interior_mono h_subset"
+  ],
+  "success": true
+}

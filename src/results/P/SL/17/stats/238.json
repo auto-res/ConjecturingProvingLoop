@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.997944831848145
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5075,
+      "prompt_tokens": 42948,
+      "total_tokens": 48023,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_interior_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} : frontier A ∩ interior A = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hFront, hInt⟩\n    -- From `x ∈ frontier A` we know `x ∉ interior A`,\n    -- contradicting `x ∈ interior A`.\n    exact (hFront.2 hInt).elim\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

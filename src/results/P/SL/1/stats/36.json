@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.32476019859314
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5066,
+      "prompt_tokens": 4946,
+      "total_tokens": 10012,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → closure A = closure (interior A) := by\n  intro hP2\n  apply Set.Subset.antisymm\n  ·\n    -- First, `closure A ⊆ closure (interior (closure (interior A)))`\n    have h1 : closure A ⊆ closure (interior (closure (interior A))) :=\n      closure_mono hP2\n    -- Next, `closure (interior (closure (interior A))) ⊆ closure (interior A)`\n    have h2 : closure (interior (closure (interior A))) ⊆ closure (interior A) := by\n      have hinner : interior (closure (interior A)) ⊆ closure (interior A) :=\n        interior_subset\n      have hclosure : closure (interior (closure (interior A))) ⊆\n          closure (closure (interior A)) :=\n        closure_mono hinner\n      simpa [closure_closure] using hclosure\n    exact Set.Subset.trans h1 h2\n  ·\n    -- The reverse inclusion `closure (interior A) ⊆ closure A`\n    have hsub : interior A ⊆ (A : Set X) := interior_subset\n    exact closure_mono hsub"
+  ],
+  "success": true
+}

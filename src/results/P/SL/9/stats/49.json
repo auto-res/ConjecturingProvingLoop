@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.45093655586243
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4283,
+      "prompt_tokens": 7672,
+      "total_tokens": 11955,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closureInterior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (A := closure (interior A)) := by\n  dsimp [Topology.P1]\n  intro x hx\n  have h_id : closure (interior (closure (interior A))) = closure (interior A) :=\n    closure_interior_closure_idempotent (A := A)\n  simpa [h_id] using hx"
+  ],
+  "success": true
+}

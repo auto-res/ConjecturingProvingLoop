@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.61097455024719
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7779,
+      "prompt_tokens": 23761,
+      "total_tokens": 31540,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_nonempty_iff_interiorClosure_nonempty {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP2 : Topology.P2 A) :\n    A.Nonempty ↔ (interior (closure A)).Nonempty := by\n  classical\n  constructor\n  · intro hA\n    exact\n      Topology.P2_nonempty_interiorClosure (X := X) (A := A) hP2 hA\n  · intro hInt\n    by_cases hA : A.Nonempty\n    · exact hA\n    · -- Derive a contradiction from `hInt`\n      have hA_eq : A = (∅ : Set X) :=\n        (Set.not_nonempty_iff_eq_empty).1 hA\n      have hIntEq : interior (closure A) = (∅ : Set X) := by\n        simpa [hA_eq, closure_empty, interior_empty]\n      rcases hInt with ⟨x, hx⟩\n      have hFalse : False := by\n        have : (x : X) ∈ (∅ : Set X) := by\n          simpa [hIntEq] using hx\n        simpa using this\n      exact False.elim hFalse"
+  ],
+  "success": true
+}

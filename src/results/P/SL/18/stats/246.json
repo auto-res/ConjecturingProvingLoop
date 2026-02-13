@@ -1,0 +1,43 @@
+{
+  "times": [
+    38.10598540306091,
+    42.486674785614014
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3192,
+      "prompt_tokens": 38744,
+      "total_tokens": 41936,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    },
+    {
+      "completion_tokens": 3378,
+      "prompt_tokens": 38850,
+      "total_tokens": 42228,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_interior_closure_interior_closure_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP3 : Topology.P3 A) :\n    interior (closure (A : Set X)) =\n      interior (closure (interior (closure (A : Set X)))) := by\n  have hEq :\n      closure (A : Set X) =\n        closure (interior (closure (A : Set X))) :=\n    Topology.closure_eq_closure_interior_closure_of_P3 (A := A) hP3\n  simpa [hEq] using\n    (rfl :\n      interior (closure (A : Set X)) =\n        interior (closure (A : Set X)))",
+    "theorem closure_interior_eq_self_of_clopen\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (A : Set X)) (hClosed : IsClosed (A : Set X)) :\n    closure (interior (A : Set X)) = A := by\n  have hInt : interior (A : Set X) = A := hOpen.interior_eq\n  have hClos : closure (A : Set X) = A := hClosed.closure_eq\n  calc\n    closure (interior (A : Set X)) = closure (A : Set X) := by\n      simpa [hInt]\n    _ = A := by\n      simpa [hClos]"
+  ],
+  "success": true
+}

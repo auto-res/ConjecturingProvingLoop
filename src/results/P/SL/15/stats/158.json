@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.61182999610901
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2836,
+      "prompt_tokens": 31393,
+      "total_tokens": 34229,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_univ_prod_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    [Nonempty X] {B : Set Y} :\n    Topology.P1 ((Set.univ : Set X) ×ˢ B) ↔ Topology.P1 B := by\n  constructor\n  · intro hProd\n    exact\n      (Topology.P1_prod_right (X := X) (Y := Y) (B := B)) hProd\n  · intro hB\n    have hUniv : Topology.P1 (Set.univ : Set X) := Topology.P1_univ (X := X)\n    have hProd :=\n      Topology.P1_prod\n        (X := X) (Y := Y)\n        (A := (Set.univ : Set X)) (B := B) hUniv hB\n    simpa using hProd"
+  ],
+  "success": true
+}

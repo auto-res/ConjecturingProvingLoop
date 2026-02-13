@@ -1,0 +1,26 @@
+{
+  "times": [
+    187.35205268859863
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13257,
+      "prompt_tokens": 35739,
+      "total_tokens": 48996,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 A → Topology.P1 B → Topology.P1 (closure A ∪ closure B) := by\n  intro hP1A hP1B\n  -- First, upgrade `P1` for `A` and `B` to their closures.\n  have hP1ClosA : Topology.P1 (closure A) :=\n    Topology.P1_closure (A := A) hP1A\n  have hP1ClosB : Topology.P1 (closure B) :=\n    Topology.P1_closure (A := B) hP1B\n  -- Apply the union lemma to the two closures.\n  exact Topology.P1_union hP1ClosA hP1ClosB"
+  ],
+  "success": true
+}

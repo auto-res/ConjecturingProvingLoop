@@ -1,0 +1,43 @@
+{
+  "times": [
+    101.69518995285034,
+    77.64581346511841
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4376,
+      "prompt_tokens": 34358,
+      "total_tokens": 38734,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 3562,
+      "prompt_tokens": 34553,
+      "total_tokens": 38115,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_interior_union_frontier\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (closure A : Set X) = interior A ∪ frontier A := by\n  ext x\n  constructor\n  · intro hx_cl\n    by_cases hx_int : x ∈ interior A\n    · exact Or.inl hx_int\n    · have hx_front : x ∈ frontier A := by\n        have h : x ∈ closure A ∧ x ∉ interior A := And.intro hx_cl hx_int\n        simpa [frontier] using h\n      exact Or.inr hx_front\n  · intro hx_union\n    cases hx_union with\n    | inl hx_int =>\n        exact (interior_subset : interior A ⊆ closure A) hx_int\n    | inr hx_front =>\n        exact (frontier_subset_closure (A := A)) hx_front",
+    "theorem frontier_compl_eq_frontier {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (Aᶜ) = frontier A := by\n  -- First, rewrite both frontiers using the `closure \\ interior` characterisation.\n  have h₁ :\n      frontier (Aᶜ) = closure (Aᶜ) \\ interior (Aᶜ) := by\n    simpa using\n      (frontier_eq_closure_diff_interior (X := X) (A := Aᶜ))\n  have h₂ :\n      frontier A = closure A \\ interior A := by\n    simpa using\n      (frontier_eq_closure_diff_interior (X := X) (A := A))\n  -- Next, express `closure (Aᶜ)` and `interior (Aᶜ)` in terms of `A`.\n  have h_cl :\n      (closure (Aᶜ) : Set X) = (interior A)ᶜ :=\n    closure_compl_eq_compl_interior (A := A)\n  have h_int :\n      interior (Aᶜ) = (closure A)ᶜ :=\n    interior_compl_eq_compl_closure (A := A)\n  -- Substitute these identities into `h₁`.\n  have h₁' :\n      frontier (Aᶜ) = (interior A)ᶜ \\ (closure A)ᶜ := by\n    simpa [h_cl, h_int] using h₁\n  -- Re-express the set difference as an intersection with a complement.\n  have h₁'' :\n      frontier (Aᶜ) = closure A ∩ (interior A)ᶜ := by\n    simpa [Set.diff_eq, Set.compl_compl, Set.inter_comm, Set.inter_left_comm]\n      using h₁'\n  -- Do the same for `h₂`.\n  have h₂' :\n      frontier A = closure A ∩ (interior A)ᶜ := by\n    simpa [Set.diff_eq] using h₂\n  -- Conclude by transitivity.\n  simpa [h₂'] using h₁''"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    169.25910806655884
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7994,
+      "prompt_tokens": 38860,
+      "total_tokens": 46854,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_closureInterior_inter_self_eq_self\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A : Set X) ↔ closure (interior A) ∩ A = A := by\n  constructor\n  · intro hP1\n    exact closureInterior_inter_self_eq_self_of_P1 (A := A) hP1\n  · intro hEq\n    dsimp [Topology.P1]\n    intro x hxA\n    -- Using the assumed equality to place `x` in the required closure.\n    have hxInter : x ∈ closure (interior (A : Set X)) ∩ A := by\n      simpa [hEq] using hxA\n    exact hxInter.1"
+  ],
+  "success": true
+}

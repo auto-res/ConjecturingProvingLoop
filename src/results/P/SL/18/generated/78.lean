@@ -1,0 +1,8 @@
+
+
+theorem P1_closure_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :
+    Dense (A : Set X) → Topology.P1 (closure (A : Set X)) := by
+  intro hDense
+  have hCl : closure (A : Set X) = (Set.univ : Set X) :=
+    (Topology.dense_iff_closure_eq_univ (A := A)).1 hDense
+  simpa [hCl] using (Topology.P1_univ (X := X))

@@ -1,0 +1,43 @@
+{
+  "times": [
+    195.6286096572876,
+    165.51912999153137
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 15256,
+      "prompt_tokens": 31048,
+      "total_tokens": 46304,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    },
+    {
+      "completion_tokens": 8717,
+      "prompt_tokens": 31122,
+      "total_tokens": 39839,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iter_six_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior\n      (closure (interior\n        (closure (interior\n          (closure (interior\n            (closure (interior\n              (closure (interior (A : Set X))))))))))) =\n      closure (interior A) := by\n  -- Rewrite the innermost five iterations using the previously proved lemma.\n  have h₅ :=\n    Topology.closure_interior_iter_five_eq (X := X) (A := A)\n  -- Apply the rewrite and finish with the idempotence lemma.\n  calc\n    closure (interior\n      (closure (interior\n        (closure (interior\n          (closure (interior\n            (closure (interior\n              (closure (interior (A : Set X))))))))))) =\n        closure (interior (closure (interior A))) := by\n          simpa [h₅]\n    _ = closure (interior A) := by\n          simpa using\n            Topology.closure_interior_closure_interior_eq (X := X) (A := A)",
+    "theorem Topology.interior_subset_interior_closure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) :\n    interior (A : Set X) ⊆ interior (closure B) := by\n  intro x hxA\n  -- Step 1: `x` belongs to `interior B` because `A ⊆ B`.\n  have hxB : x ∈ interior B := (interior_mono hAB) hxA\n  -- Step 2: `interior B` is contained in `interior (closure B)`.\n  have h_sub : (interior B : Set X) ⊆ interior (closure B) :=\n    interior_mono (subset_closure : (B : Set X) ⊆ closure B)\n  exact h_sub hxB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    11.535234212875366
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 979,
+      "prompt_tokens": 31520,
+      "total_tokens": 32499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_of_P2_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 (A : Set X)) (hB : IsOpen (B : Set X)) :\n    Topology.P2 (A ∪ B) := by\n  have hB₂ : Topology.P2 (B : Set X) :=\n    Topology.open_satisfies_P2 (A := B) hB\n  exact Topology.P2_union_of_P2 (A := A) (B := B) hA hB₂"
+  ],
+  "success": true
+}

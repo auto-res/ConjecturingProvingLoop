@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.487744092941284
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3715,
+      "prompt_tokens": 2776,
+      "total_tokens": 6491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem union_interior_closure_subset_interior_closure_union {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    interior (closure A) ∪ interior (closure B) ⊆ interior (closure (A ∪ B)) := by\n  intro x hx\n  rcases hx with hxA | hxB\n  · -- Case: `x ∈ interior (closure A)`\n    have hA : closure A ⊆ closure (A ∪ B) :=\n      closure_mono (Set.subset_union_left)\n    have hA_int : interior (closure A) ⊆ interior (closure (A ∪ B)) :=\n      interior_mono hA\n    exact hA_int hxA\n  · -- Case: `x ∈ interior (closure B)`\n    have hB : closure B ⊆ closure (A ∪ B) :=\n      closure_mono (Set.subset_union_right)\n    have hB_int : interior (closure B) ⊆ interior (closure (A ∪ B)) :=\n      interior_mono hB\n    exact hB_int hxB"
+  ],
+  "success": true
+}

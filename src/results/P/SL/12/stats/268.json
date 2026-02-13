@@ -1,0 +1,26 @@
+{
+  "times": [
+    27.391003370285034
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1740,
+      "prompt_tokens": 51047,
+      "total_tokens": 52787,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_inter_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior (A ∩ B : Set X))) =\n      interior (closure (interior A ∩ interior B)) := by\n  have h : interior (A ∩ B : Set X) = interior A ∩ interior B := by\n    simpa using Topology.interior_inter_eq (X := X) (A := A) (B := B)\n  simpa [h]"
+  ],
+  "success": true
+}

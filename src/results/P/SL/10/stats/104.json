@@ -1,0 +1,60 @@
+{
+  "times": [
+    99.47947978973389,
+    25.086094617843628,
+    79.95800566673279
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8576,
+      "prompt_tokens": 17494,
+      "total_tokens": 26070,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1563,
+      "prompt_tokens": 17600,
+      "total_tokens": 19163,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 4554,
+      "prompt_tokens": 17679,
+      "total_tokens": 22233,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → Topology.P1 (closure A) := by\n  intro hP3\n  have h_eq :=\n    Topology.closure_eq_closure_interior_closure_of_P3 (X := X) (A := A) hP3\n  dsimp [Topology.P1]\n  intro x hx\n  simpa [h_eq] using hx",
+    "theorem Topology.interior_closure_eq_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsClosed A) :\n    interior (closure A) = interior A := by\n  simpa using congrArg (fun s : Set X => interior s) hA.closure_eq",
+    "theorem Topology.closure_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (closure (interior A)) = closure (interior A) := by\n  simpa [closure_closure]"
+  ],
+  "success": true
+}

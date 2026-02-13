@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.05631732940674
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3057,
+      "prompt_tokens": 37311,
+      "total_tokens": 40368,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_interior_closure_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (closure A) = (Set.univ : Set X)) :\n    Topology.P3 (X := X) A := by\n  -- First, turn the hypothesis into the density statement `closure A = univ`.\n  have h_closure : closure A = (Set.univ : Set X) :=\n    (Topology.interior_closure_eq_univ_iff (X := X) (A := A)).1 h\n  -- Conclude using the existing lemma for dense sets.\n  exact Topology.P3_of_dense (X := X) (A := A) h_closure"
+  ],
+  "success": true
+}

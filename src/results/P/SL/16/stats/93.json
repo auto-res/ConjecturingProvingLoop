@@ -1,0 +1,26 @@
+{
+  "times": [
+    122.88196873664856
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7661,
+      "prompt_tokens": 16716,
+      "total_tokens": 24377,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hP2 : Topology.P2 (X := X) A) :\n    Topology.P1 (X := X) A := by\n  -- From `hClosed` and `hP2`, we know `A` is open.\n  have hOpen : IsOpen A := Topology.closed_P2_isOpen (X := X) (A := A) hClosed hP2\n  -- Every open set satisfies `P1`.\n  exact Topology.isOpen_implies_P1 (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    98.7310037612915,
+    184.57883548736572,
+    91.93030548095703
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6889,
+      "prompt_tokens": 22696,
+      "total_tokens": 29585,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    },
+    {
+      "completion_tokens": 13541,
+      "prompt_tokens": 22809,
+      "total_tokens": 36350,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    },
+    {
+      "completion_tokens": 5987,
+      "prompt_tokens": 22877,
+      "total_tokens": 28864,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_of_subset_of_dense {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hDenseA : Dense A) (hAB : A ⊆ B) : Dense B := by\n  -- `A` is dense, hence its closure is the whole space.\n  have h_closureA : closure A = (Set.univ : Set X) := hDenseA.closure_eq\n  -- Monotonicity of `closure` along the inclusion `A ⊆ B`.\n  have h_subset : closure A ⊆ closure B := closure_mono hAB\n  -- Rewriting with `h_closureA`, we obtain `Set.univ ⊆ closure B`.\n  have h_univ_subset : (Set.univ : Set X) ⊆ closure B := by\n    simpa [h_closureA] using h_subset\n  -- The reverse inclusion is trivial, giving the desired equality.\n  have h_closureB : closure B = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro _x _hx; simp\n    · exact h_univ_subset\n  -- Reformulate the equality as the `Dense` property.\n  simpa [Dense] using h_closureB",
+    "I’m sorry – I’m not able to fix the code in the time provided.",
+    "theorem Topology.P2_union_isOpen {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP2A : Topology.P2 A) (hOpenB : IsOpen B) :\n    Topology.P2 (A ∪ B) := by\n  -- Obtain `P2` for the open set `B`.\n  have hP2B : Topology.P2 B := Topology.P2_of_isOpen (A := B) hOpenB\n  -- Apply the existing union lemma for `P2`.\n  exact Topology.P2_union (A := A) (B := B) hP2A hP2B"
+  ],
+  "success": true
+}

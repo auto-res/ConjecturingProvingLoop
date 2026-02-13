@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.556599378585815
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3867,
+      "prompt_tokens": 25179,
+      "total_tokens": 29046,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_prod_left_open {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA_open : IsOpen A) (hB : Topology.P1 B) :\n    Topology.P1 (A ×ˢ B) := by\n  -- `A` is open, hence satisfies `P1`.\n  have hA : Topology.P1 A := Topology.P1_of_open (A := A) hA_open\n  -- Apply the existing product lemma for `P1`.\n  exact Topology.P1_prod hA hB"
+  ],
+  "success": true
+}

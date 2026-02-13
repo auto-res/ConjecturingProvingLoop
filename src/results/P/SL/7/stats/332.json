@@ -1,0 +1,60 @@
+{
+  "times": [
+    214.17121601104736,
+    68.22400069236755,
+    80.4141755104065
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11169,
+      "prompt_tokens": 52419,
+      "total_tokens": 63588,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 4114,
+      "prompt_tokens": 52493,
+      "total_tokens": 56607,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 4972,
+      "prompt_tokens": 52573,
+      "total_tokens": 57545,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter8_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure (interior\n        (closure A)))))))))))) =\n      interior (closure A) := by\n  -- Use the 7-fold idempotence lemma to simplify the innermost part.\n  have h₁ :=\n    Topology.interiorClosure_iter7_idempotent (A := A)\n  -- Apply one more `interior ∘ closure` to both sides of `h₁`.\n  have h₂ :\n      interior (closure\n        (interior (closure (interior (closure (interior\n          (closure (interior (closure (interior (closure (interior\n            (closure A)))))))))))) =\n        interior (closure (interior (closure A))) := by\n    simpa using\n      congrArg (fun S : Set X => interior (closure S)) h₁\n  -- A final application of the basic idempotence lemma completes the proof.\n  simpa [Topology.interiorClosure_idempotent (A := A)] using h₂",
+    "theorem interior_union_open_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hB : IsOpen B) :\n    interior (A ∪ B : Set X) = interior A ∪ B := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    by_cases hxB : x ∈ B\n    · exact Or.inr hxB\n    · -- `x ∉ B`; we will show `x ∈ interior A`.\n      rcases hx with ⟨U, hUopen, hxU, hUsub⟩\n      -- Consider the open set `U \\ B`.\n      have hVopen : IsOpen (U \\ B) := hUopen.diff hB\n      have hxV : x ∈ U \\ B := ⟨hxU, hxB⟩\n      -- Points of `U \\ B` cannot lie in `B`; hence they must lie in `A`.\n      have hVsubA : (U \\ B : Set X) ⊆ A := by\n        intro y hy\n        have h_yU : y ∈ U := hy.1\n        have h_yNotB : y ∉ B := hy.2\n        have hyUnion : y ∈ A ∪ B := hUsub h_yU\n        cases hyUnion with\n        | inl hA => exact hA\n        | inr hBmem => exact False.elim (h_yNotB hBmem)\n      exact Or.inl ⟨U \\ B, hVopen, hxV, hVsubA⟩\n  · intro hx\n    cases hx with\n    | inl hxIntA =>\n        -- `interior A ⊆ interior (A ∪ B)` by monotonicity.\n        exact (interior_mono\n                (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)) hxIntA\n    | inr hxB =>\n        -- Since `B` is open and contained in `A ∪ B`, it lies in the interior.\n        have hBsubset : (B : Set X) ⊆ interior (A ∪ B) :=\n          interior_maximal\n            (by\n              intro y hy\n              exact Or.inr hy)\n            hB\n        exact hBsubset hxB",
+    "theorem Topology.isClosed_of_closureInterior_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (interior A) = (A : Set X)) :\n    IsClosed (A : Set X) := by\n  have hClosed : IsClosed (closure (interior A)) := isClosed_closure\n  simpa [h] using hClosed"
+  ],
+  "success": true
+}

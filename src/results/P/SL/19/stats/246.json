@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.12284064292908
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3104,
+      "prompt_tokens": 38477,
+      "total_tokens": 41581,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_compl_interior_of_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hDense : closure A = (Set.univ : Set X)) :\n    frontier A = (interior A)ᶜ := by\n  ext x\n  constructor\n  · intro hx\n    exact hx.2\n  · intro hxNotInt\n    have hxClos : x ∈ closure A := by\n      have : x ∈ (Set.univ : Set X) := Set.mem_univ x\n      simpa [hDense] using this\n    exact And.intro hxClos hxNotInt"
+  ],
+  "success": true
+}

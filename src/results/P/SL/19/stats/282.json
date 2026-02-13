@@ -1,0 +1,77 @@
+{
+  "times": [
+    34.55677270889282,
+    52.309043407440186,
+    17.935117483139038,
+    16.869279861450195
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2494,
+      "prompt_tokens": 44960,
+      "total_tokens": 47454,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 3767,
+      "prompt_tokens": 45083,
+      "total_tokens": 48850,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    },
+    {
+      "completion_tokens": 1062,
+      "prompt_tokens": 45163,
+      "total_tokens": 46225,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    },
+    {
+      "completion_tokens": 965,
+      "prompt_tokens": 45267,
+      "total_tokens": 46232,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_inter_closure_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ closure B)) ⊆\n      interior (closure A) ∩ interior (closure B) := by\n  intro x hx\n  have hA : x ∈ interior (closure A) := by\n    -- `A ∩ closure B ⊆ A`, hence their closures satisfy the same inclusion.\n    have hSub : closure (A ∩ closure B) ⊆ closure A := by\n      have hSub' : (A ∩ closure B : Set X) ⊆ A := by\n        intro z hz; exact hz.1\n      exact closure_mono hSub'\n    exact (interior_mono hSub) hx\n  have hB : x ∈ interior (closure B) := by\n    -- `A ∩ closure B ⊆ closure B`, giving the second inclusion.\n    have hSub : closure (A ∩ closure B) ⊆ closure B := by\n      have hSub' : (A ∩ closure B : Set X) ⊆ closure B := by\n        intro z hz; exact hz.2\n      exact closure_mono hSub'\n    exact (interior_mono hSub) hx\n  exact And.intro hA hB",
+    "theorem Topology.closure_inter_closure_subset_inter_closure {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ closure B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- First show `x ∈ closure A`.\n  have hSubA : (A ∩ closure B : Set X) ⊆ A := by\n    intro y hy; exact hy.1\n  have hxA : x ∈ closure A := (closure_mono hSubA) hx\n  -- Next show `x ∈ closure B`.\n  have hSubB : (A ∩ closure B : Set X) ⊆ closure B := by\n    intro y hy; exact hy.2\n  have hxB' : x ∈ closure (closure B) := (closure_mono hSubB) hx\n  have hxB : x ∈ closure B := by\n    simpa [closure_closure] using hxB'\n  exact And.intro hxA hxB",
+    "theorem Topology.closure_inter_closure_subset_inter_closure' {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ closure B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- First, obtain `x ∈ closure A` using monotonicity of `closure`.\n  have hxA : x ∈ closure A := by\n    have hSub : (A ∩ closure B : Set X) ⊆ A := fun y hy => hy.1\n    exact (closure_mono hSub) hx\n  -- Next, obtain `x ∈ closure B` in a similar way.\n  have hxB : x ∈ closure B := by\n    have hSub : (A ∩ closure B : Set X) ⊆ closure B := fun y hy => hy.2\n    exact (closure_mono hSub) hx\n  exact And.intro hxA hxB",
+    "theorem Topology.closure_inter_closure_subset_inter_closure₁\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ closure B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- First, show `x ∈ closure A`.\n  have hxA : x ∈ closure A := by\n    have hSub : (A ∩ closure B : Set X) ⊆ A := fun y hy => hy.1\n    exact (closure_mono hSub) hx\n  -- Next, show `x ∈ closure B`.\n  have hxB : x ∈ closure B := by\n    have hSub : (A ∩ closure B : Set X) ⊆ closure B := fun y hy => hy.2\n    -- This gives `x ∈ closure (closure B)`, which simplifies to `closure B`.\n    have : x ∈ closure (closure B) := (closure_mono hSub) hx\n    simpa [closure_closure] using this\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

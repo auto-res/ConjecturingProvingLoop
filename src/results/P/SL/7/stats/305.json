@@ -1,0 +1,26 @@
+{
+  "times": [
+    170.1995449066162
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8639,
+      "prompt_tokens": 48032,
+      "total_tokens": 56671,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_union_three_subset\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    interior (closure A) ∪ interior (closure B) ∪ interior (closure C) ⊆\n      interior (closure (A ∪ B ∪ C)) := by\n  intro x hx\n  cases hx with\n  | inl hAB =>\n      cases hAB with\n      | inl hA =>\n          have hSub : interior (closure A) ⊆ interior (closure (A ∪ B ∪ C)) := by\n            apply interior_mono\n            apply closure_mono\n            intro y hy\n            exact Or.inl (Or.inl hy)\n          exact hSub hA\n      | inr hB =>\n          have hSub : interior (closure B) ⊆ interior (closure (A ∪ B ∪ C)) := by\n            apply interior_mono\n            apply closure_mono\n            intro y hy\n            exact Or.inl (Or.inr hy)\n          exact hSub hB\n  | inr hC =>\n      have hSub : interior (closure C) ⊆ interior (closure (A ∪ B ∪ C)) := by\n        apply interior_mono\n        apply closure_mono\n        intro y hy\n        exact Or.inr hy\n      exact hSub hC"
+  ],
+  "success": true
+}

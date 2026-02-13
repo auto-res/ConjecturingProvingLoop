@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.62183976173401
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4194,
+      "prompt_tokens": 24875,
+      "total_tokens": 29069,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_open_left {X : Type*} [TopologicalSpace X]\n    {U A : Set X} (hU : IsOpen U) :\n    interior (U ∩ A) = U ∩ interior A := by\n  apply Set.Subset.antisymm\n  · -- `interior (U ∩ A) ⊆ U ∩ interior A`\n    intro x hx\n    have hxUA : x ∈ U ∩ A := interior_subset hx\n    have hxU : x ∈ U := hxUA.1\n    have hxIntA : x ∈ interior A := by\n      have h_mono : interior (U ∩ A) ⊆ interior A :=\n        interior_mono (Set.inter_subset_right : (U ∩ A) ⊆ A)\n      exact h_mono hx\n    exact And.intro hxU hxIntA\n  · -- `U ∩ interior A ⊆ interior (U ∩ A)`\n    intro x hx\n    rcases hx with ⟨hxU, hxIntA⟩\n    -- Define the open set `U ∩ interior A`.\n    have h_open : IsOpen (U ∩ interior A) := hU.inter isOpen_interior\n    -- It sits inside `U ∩ A`.\n    have h_subset : (U ∩ interior A) ⊆ (U ∩ A) := by\n      intro y hy\n      exact And.intro hy.1 (interior_subset hy.2)\n    -- Hence every point of `U ∩ interior A` belongs to the interior of `U ∩ A`.\n    have h_into : (U ∩ interior A) ⊆ interior (U ∩ A) :=\n      interior_maximal h_subset h_open\n    exact h_into ⟨hxU, hxIntA⟩"
+  ],
+  "success": true
+}

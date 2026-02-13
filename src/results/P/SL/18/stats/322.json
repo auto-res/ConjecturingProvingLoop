@@ -1,0 +1,77 @@
+{
+  "times": [
+    109.19897294044495,
+    24.89459800720215,
+    34.58887529373169,
+    32.78555369377136
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6725,
+      "prompt_tokens": 52845,
+      "total_tokens": 59570,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 1572,
+      "prompt_tokens": 52954,
+      "total_tokens": 54526,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 1393,
+      "prompt_tokens": 53029,
+      "total_tokens": 54422,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 1390,
+      "prompt_tokens": 53157,
+      "total_tokens": 54547,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem clopen_of_closed_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hP3 : Topology.P3 (A : Set X)) :\n    IsClopen (A : Set X) := by\n  have hOpen : IsOpen (A : Set X) :=\n    (Topology.isOpen_of_closed_P3 (A := A) hClosed hP3)\n  exact ⟨hOpen, hClosed⟩",
+    "theorem clopen_of_closed_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hP2 : Topology.P2 A) :\n    IsClopen (A : Set X) := by\n  -- First, obtain that `A` is open from `P2` and its closedness.\n  have hOpen : IsOpen (A : Set X) :=\n    isOpen_of_closed_P2 (A := A) hClosed hP2\n  -- Combine openness and closedness into the `IsClopen` structure.\n  exact ⟨hOpen, hClosed⟩",
+    "theorem clopen_of_closed_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hP3 : Topology.P3 (A : Set X)) :\n    IsClopen (A : Set X) := by\n  exact ⟨isOpen_of_closed_P3 (A := A) hClosed hP3, hClosed⟩",
+    "theorem clopen_of_closed_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hP3 : Topology.P3 A) :\n    IsClopen (A : Set X) := by\n  -- From `P3` and the closedness of `A`, we deduce that `A` is open.\n  have hOpen : IsOpen (A : Set X) :=\n    (Topology.P3_closed_iff_open (A := A) hClosed).1 hP3\n  -- Combine the closedness and openness to obtain that `A` is clopen.\n  exact ⟨hClosed, hOpen⟩"
+  ],
+  "success": true
+}

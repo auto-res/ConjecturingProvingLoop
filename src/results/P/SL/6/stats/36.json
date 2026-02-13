@@ -1,0 +1,43 @@
+{
+  "times": [
+    50.97235298156738,
+    61.30259108543396
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4940,
+      "prompt_tokens": 4391,
+      "total_tokens": 9331,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    },
+    {
+      "completion_tokens": 2591,
+      "prompt_tokens": 4590,
+      "total_tokens": 7181,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (A : Set X) → Topology.P1 (B : Set X) → Topology.P1 (A ∪ B) := by\n  intro hA hB\n  dsimp [Topology.P1] at hA hB ⊢\n  intro x hx\n  cases hx with\n  | inl hAx =>\n      have hxA : x ∈ closure (interior A) := hA hAx\n      have hInt : interior A ⊆ interior (A ∪ B) := by\n        intro y hy\n        have : y ∈ A := interior_subset hy\n        exact Or.inl this\n      have hClos : closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono hInt\n      exact hClos hxA\n  | inr hBx =>\n      have hxB : x ∈ closure (interior B) := hB hBx\n      have hInt : interior B ⊆ interior (A ∪ B) := by\n        intro y hy\n        have : y ∈ B := interior_subset hy\n        exact Or.inr this\n      have hClos : closure (interior B) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono hInt\n      exact hClos hxB",
+    "theorem P1_union_of_P1 {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 (A : Set X)) (hB : Topology.P1 (B : Set X)) :\n    Topology.P1 (A ∪ B) := by\n  dsimp [Topology.P1] at hA hB ⊢\n  intro x hx\n  cases hx with\n  | inl hAx =>\n      have hxA : x ∈ closure (interior A) := hA hAx\n      have hIncl : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        apply interior_mono\n        intro y hy\n        exact Or.inl hy\n      exact hIncl hxA\n  | inr hBx =>\n      have hxB : x ∈ closure (interior B) := hB hBx\n      have hIncl : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        apply interior_mono\n        intro y hy\n        exact Or.inr hy\n      exact hIncl hxB"
+  ],
+  "success": true
+}

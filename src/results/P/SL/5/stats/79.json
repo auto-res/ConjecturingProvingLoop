@@ -1,0 +1,26 @@
+{
+  "times": [
+    6.2043616771698
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 549,
+      "prompt_tokens": 12591,
+      "total_tokens": 13140,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12160
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (A : Set X) = Set.univ) :\n    Topology.P3 (X := X) A := by\n  -- First, dense interior implies `P2`.\n  have hP2 : Topology.P2 (X := X) A :=\n    Topology.P2_of_dense_interior (X := X) (A := A) h\n  -- Since `P2` implies `P3`, we obtain the desired result.\n  exact Topology.P2_implies_P3 (X := X) (A := A) hP2"
+  ],
+  "success": true
+}

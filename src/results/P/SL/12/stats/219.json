@@ -1,0 +1,43 @@
+{
+  "times": [
+    53.13950300216675,
+    61.42510223388672
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4388,
+      "prompt_tokens": 41581,
+      "total_tokens": 45969,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 4225,
+      "prompt_tokens": 41664,
+      "total_tokens": 45889,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P1_and_P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen (A : Set X)) :\n    Topology.P2 (X := X) A ↔\n      (Topology.P1 (X := X) A ∧ Topology.P3 (X := X) A) := by\n  -- Equivalences available for open sets\n  have h₁ : Topology.P1 (X := X) A ↔ Topology.P2 (X := X) A :=\n    Topology.P1_iff_P2_of_isOpen (X := X) (A := A) hA\n  have h₂ : Topology.P1 (X := X) A ↔ Topology.P3 (X := X) A :=\n    Topology.P1_iff_P3_of_isOpen (X := X) (A := A) hA\n  constructor\n  · intro hP2\n    -- Derive `P1` from `P2`, then `P3` from `P1`.\n    have hP1 : Topology.P1 (X := X) A := h₁.mpr hP2\n    have hP3 : Topology.P3 (X := X) A := h₂.mp hP1\n    exact And.intro hP1 hP3\n  · rintro ⟨hP1, _⟩\n    -- Recover `P2` from `P1`.\n    exact h₁.mp hP1",
+    "theorem Topology.closure_interior_empty {X : Type*} [TopologicalSpace X] :\n    closure (interior (∅ : Set X)) = (∅ : Set X) := by\n  simp"
+  ],
+  "success": true
+}

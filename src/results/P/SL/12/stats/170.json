@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.9692976474762
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4521,
+      "prompt_tokens": 31878,
+      "total_tokens": 36399,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_univ_of_P1_and_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 (X := X) A)\n    (h_dense : closure (A : Set X) = (Set.univ : Set X)) :\n    closure (interior A) = (Set.univ : Set X) := by\n  -- From `P1` we know the two closures coincide.\n  have h_eq : closure (A : Set X) = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 (X := X) (A := A) hP1\n  -- Rewrite `h_dense` via `h_eq` to obtain the desired equality.\n  calc\n    closure (interior A) = closure (A : Set X) := by\n      simpa using h_eq.symm\n    _ = (Set.univ : Set X) := h_dense"
+  ],
+  "success": true
+}

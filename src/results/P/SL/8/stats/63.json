@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.36815023422241
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2602,
+      "prompt_tokens": 8804,
+      "total_tokens": 11406,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8064
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_imp_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → Topology.P1 (closure A) := by\n  intro hP1\n  -- First, rewrite `P1 A` as an inclusion of closures.\n  have h₁ : closure A ⊆ closure (interior A) :=\n    (P1_iff_closure_subset_closureInterior (X := X) (A := A)).1 hP1\n  -- Then, use the general inclusion `closure (interior A) ⊆ closure (interior (closure A))`.\n  have h₂ : closure (interior A) ⊆ closure (interior (closure A)) :=\n    closure_interior_subset_closure_interior_closure (X := X) (A := A)\n  -- Compose the two inclusions to obtain the desired result.\n  dsimp [Topology.P1]\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

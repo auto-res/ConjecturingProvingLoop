@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.863168478012085
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1633,
+      "prompt_tokens": 33965,
+      "total_tokens": 35598,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_implies_P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 A → Topology.P2 B → Topology.P1 (A ∪ B) := by\n  intro hP2A hP2B\n  -- From `P2` we derive `P1` for each set.\n  have hP1A : Topology.P1 A :=\n    Topology.P2_implies_P1 (X := X) (A := A) hP2A\n  have hP1B : Topology.P1 B :=\n    Topology.P2_implies_P1 (X := X) (A := B) hP2B\n  -- The union of two `P1` sets again satisfies `P1`.\n  exact\n    Topology.P1_union (X := X) (A := A) (B := B) hP1A hP1B"
+  ],
+  "success": true
+}

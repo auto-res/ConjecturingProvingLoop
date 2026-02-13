@@ -1,0 +1,26 @@
+{
+  "times": [
+    160.4295313358307
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9445,
+      "prompt_tokens": 37554,
+      "total_tokens": 46999,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem sUnion_open_satisfies_all_Ps\n    {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)}\n    (h𝒜 : ∀ A, A ∈ 𝒜 → IsOpen (A : Set X)) :\n    Topology.P1 (⋃₀ 𝒜 : Set X) ∧ Topology.P2 (⋃₀ 𝒜) ∧ Topology.P3 (⋃₀ 𝒜) := by\n  classical\n  -- First, show that the `sUnion` is an open set.\n  have hOpen : IsOpen (⋃₀ 𝒜 : Set X) := by\n    -- Re-express `⋃₀ 𝒜` as an `iUnion` over a subtype and apply `isOpen_iUnion`.\n    simpa [Set.sUnion_eq_iUnion] using\n      isOpen_iUnion (fun A : {B : Set X // B ∈ 𝒜} =>\n        h𝒜 A A.property)\n  -- Open sets satisfy all three properties simultaneously.\n  simpa using\n    Topology.open_satisfies_all_Ps (A := ⋃₀ 𝒜) hOpen"
+  ],
+  "success": true
+}

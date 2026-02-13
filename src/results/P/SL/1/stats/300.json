@@ -1,0 +1,43 @@
+{
+  "times": [
+    158.016215801239,
+    31.475698709487915
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8359,
+      "prompt_tokens": 46301,
+      "total_tokens": 54660,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 3001,
+      "prompt_tokens": 46377,
+      "total_tokens": 49378,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_open_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) :\n    interior (A ∩ B) = A ∩ interior B := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    -- From the interior we descend to the set itself.\n    have hAB : x ∈ A ∩ B := interior_subset hx\n    have hxA : x ∈ A := hAB.1\n    -- Monotonicity of `interior` upgrades membership to `interior B`.\n    have hxIntB : x ∈ interior B := by\n      have hsubset : (A ∩ B : Set X) ⊆ B := by\n        intro y hy; exact hy.2\n      exact (interior_mono hsubset) hx\n    exact And.intro hxA hxIntB\n  · intro x hx\n    rcases hx with ⟨hxA, hxIntB⟩\n    -- Construct an open neighbourhood of `x` contained in `A ∩ B`.\n    have hOpenV : IsOpen (A ∩ interior B) := hA.inter isOpen_interior\n    have hVsubset : (A ∩ interior B : Set X) ⊆ A ∩ B := by\n      intro y hy\n      have hB : y ∈ B := (interior_subset : interior B ⊆ B) hy.2\n      exact And.intro hy.1 hB\n    have hxV : x ∈ A ∩ interior B := And.intro hxA hxIntB\n    -- Use the maximality property of the interior.\n    have : x ∈ interior (A ∩ B) :=\n      (interior_maximal hVsubset hOpenV) hxV\n    exact this",
+    "theorem Topology.interior_inter_open_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsOpen B) :\n    interior (A ∩ B) = interior A ∩ B := by\n  -- First we show  `interior (A ∩ B) ⊆ interior A ∩ B`.\n  have h₁ : interior (A ∩ B) ⊆ interior A ∩ B := by\n    intro x hx\n    -- `x` belongs to the interior of `A`, because `A ∩ B ⊆ A`.\n    have hxA : x ∈ interior A := by\n      have hsub : (A ∩ B : Set X) ⊆ A := by\n        intro y hy; exact hy.1\n      exact (interior_mono hsub) hx\n    -- `x` belongs to the interior of `B`, because `A ∩ B ⊆ B`.\n    have hxB_int : x ∈ interior B := by\n      have hsub : (A ∩ B : Set X) ⊆ B := by\n        intro y hy; exact hy.2\n      exact (interior_mono hsub) hx\n    -- Since `B` is open, `interior B = B`.\n    have hxB : x ∈ B := by\n      simpa [hB.interior_eq] using hxB_int\n    exact And.intro hxA hxB\n  -- Now we prove the reverse inclusion `interior A ∩ B ⊆ interior (A ∩ B)`.\n  have h₂ : interior A ∩ B ⊆ interior (A ∩ B) := by\n    intro x hx\n    have hxA : x ∈ interior A := hx.1\n    have hxB : x ∈ B := hx.2\n    -- The set `interior A ∩ B` is open since it is the intersection of two open sets.\n    have hOpen : IsOpen (interior A ∩ B) :=\n      isOpen_interior.inter hB\n    -- Moreover, it is contained in `A ∩ B`.\n    have hsubset : (interior A ∩ B : Set X) ⊆ A ∩ B := by\n      intro y hy\n      exact And.intro (interior_subset hy.1) hy.2\n    -- Therefore every point of `interior A ∩ B` lies in `interior (A ∩ B)`.\n    have hIntSubset :\n        (interior A ∩ B : Set X) ⊆ interior (A ∩ B) :=\n      interior_maximal hsubset hOpen\n    exact hIntSubset (And.intro hxA hxB)\n  -- Combine the two inclusions.\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

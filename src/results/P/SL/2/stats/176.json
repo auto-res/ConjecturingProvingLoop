@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.37099146842957
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7605,
+      "prompt_tokens": 29150,
+      "total_tokens": 36755,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_implies_closure_interior_closure_eq_closure {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 A → Topology.P3 B →\n      closure (interior (closure (A ∪ B))) = closure (A ∪ B) := by\n  intro hP3A hP3B\n  have hP3Union : Topology.P3 (A ∪ B) :=\n    Topology.P3_union (A := A) (B := B) hP3A hP3B\n  exact\n    Topology.P3_implies_closure_interior_closure_eq_closure\n      (A := A ∪ B) hP3Union"
+  ],
+  "success": true
+}

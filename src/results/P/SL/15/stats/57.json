@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.160834312438965
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1795,
+      "prompt_tokens": 9095,
+      "total_tokens": 10890,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closed_inter {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_closed : IsClosed A) (hB_closed : IsClosed B) :\n    Topology.P2 A → Topology.P2 B → Topology.P2 (A ∩ B) := by\n  intro hP2A hP2B\n  -- Using the closedness of `A` and `B`, translate the `P2` property into openness.\n  have hOpenA : IsOpen A :=\n    (Topology.P2_closed_iff_isOpen (X := X) (A := A) hA_closed).1 hP2A\n  have hOpenB : IsOpen B :=\n    (Topology.P2_closed_iff_isOpen (X := X) (A := B) hB_closed).1 hP2B\n  -- The intersection of two open sets is open.\n  have hOpenInter : IsOpen (A ∩ B) := hOpenA.inter hOpenB\n  -- The intersection of two closed sets is closed.\n  have hClosedInter : IsClosed (A ∩ B) := hA_closed.inter hB_closed\n  -- Convert the openness of the intersection back to the `P2` property.\n  exact\n    (Topology.P2_closed_iff_isOpen (X := X) (A := A ∩ B) hClosedInter).2 hOpenInter"
+  ],
+  "success": true
+}

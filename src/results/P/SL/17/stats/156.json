@@ -1,0 +1,26 @@
+{
+  "times": [
+    47.016485929489136
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4205,
+      "prompt_tokens": 24896,
+      "total_tokens": 29101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_compl_eq_compl_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (Aᶜ)) = (interior (closure A))ᶜ := by\n  -- Start with the known relation for complements of closures of interiors.\n  have h :\n      (closure (interior (Aᶜ)))ᶜ = interior (closure A) := by\n    simpa [compl_compl] using\n      (Topology.compl_closure_interior_eq_interior_closure_compl (A := Aᶜ))\n  -- Take complements of both sides of the equality `h`.\n  have h' :\n      ((closure (interior (Aᶜ)))ᶜ)ᶜ = (interior (closure A))ᶜ :=\n    congrArg Set.compl h\n  -- Simplify double complements to obtain the desired statement.\n  simpa [compl_compl] using h'"
+  ],
+  "success": true
+}

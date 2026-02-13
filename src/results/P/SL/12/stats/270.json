@@ -1,0 +1,26 @@
+{
+  "times": [
+    221.59984302520752
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13977,
+      "prompt_tokens": 51410,
+      "total_tokens": 65387,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_three_eq_closure_union_interiors\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    closure (interior (A : Set X)) ∪ closure (interior B) ∪ closure (interior C) =\n      closure (interior A ∪ interior B ∪ interior C) := by\n  -- First, regroup the unions for convenient rewriting.\n  calc\n    closure (interior A) ∪ closure (interior B) ∪ closure (interior C)\n        = closure (interior A) ∪ (closure (interior B) ∪ closure (interior C)) := by\n          simp [Set.union_assoc]\n    _ = closure (interior A) ∪ closure (interior B ∪ interior C) := by\n          -- Use the two‐set equality on the last two terms.\n          simpa using\n            congrArg (fun s : Set X ↦ closure (interior A) ∪ s)\n              (closure_union (interior (B : Set X)) (interior C))\n    _ = closure (interior A ∪ (interior B ∪ interior C)) := by\n          -- Apply the two‐set equality again.\n          simpa using\n            (closure_union (interior (A : Set X)) (interior B ∪ interior C)).symm\n    _ = closure (interior A ∪ interior B ∪ interior C) := by\n          simpa [Set.union_assoc]"
+  ],
+  "success": true
+}

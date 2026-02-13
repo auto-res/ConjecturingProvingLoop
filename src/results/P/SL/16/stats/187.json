@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.91090488433838
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6555,
+      "prompt_tokens": 32840,
+      "total_tokens": 39395,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_iff_subset_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen A ↔ A ⊆ interior A := by\n  constructor\n  · intro hOpen\n    -- For an open set, its interior is itself.\n    have h_eq : interior A = A := hOpen.interior_eq\n    -- Rewriting with this equality yields the inclusion.\n    simpa [h_eq]\n  · intro hSubset\n    -- `interior A` is open, and the assumed inclusion together with `interior_subset`\n    -- gives equality of the two sets.\n    have h_eq : interior A = A := by\n      apply subset_antisymm\n      · exact interior_subset\n      · exact hSubset\n    -- Conclude that `A` is open by rewriting.\n    simpa [h_eq] using (isOpen_interior : IsOpen (interior A))"
+  ],
+  "success": true
+}

@@ -1,0 +1,128 @@
+{
+  "times": [
+    91.67154502868652,
+    132.35432028770447,
+    23.813543558120728,
+    46.21703362464905,
+    56.91233468055725,
+    37.595709800720215,
+    61.343806982040405
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7251,
+      "prompt_tokens": 29591,
+      "total_tokens": 36842,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    },
+    {
+      "completion_tokens": 9725,
+      "prompt_tokens": 29790,
+      "total_tokens": 39515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    },
+    {
+      "completion_tokens": 1561,
+      "prompt_tokens": 29896,
+      "total_tokens": 31457,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    },
+    {
+      "completion_tokens": 4100,
+      "prompt_tokens": 30059,
+      "total_tokens": 34159,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    },
+    {
+      "completion_tokens": 4470,
+      "prompt_tokens": 30264,
+      "total_tokens": 34734,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    },
+    {
+      "completion_tokens": 2824,
+      "prompt_tokens": 30370,
+      "total_tokens": 33194,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    },
+    {
+      "completion_tokens": 4713,
+      "prompt_tokens": 30605,
+      "total_tokens": 35318,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem compl_frontier_eq_union_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (frontier A)ᶜ = interior A ∪ interior (Aᶜ) := by\n  calc\n    (frontier A)ᶜ\n        = (closure A \\ interior A)ᶜ := by\n          simpa [frontier_eq_closure_diff_interior (X := X) (A := A)]\n    _ = (closure A)ᶜ ∪ interior A := by\n          simpa [Set.compl_diff]\n    _ = interior (Aᶜ) ∪ interior A := by\n          simpa [interior_compl_eq_compl_closure (X := X) (A := A)]\n    _ = interior A ∪ interior (Aᶜ) := by\n          simpa [Set.union_comm]",
+    "theorem compl_frontier_eq_closure_compl_union_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (frontier A)ᶜ = (closure A)ᶜ ∪ interior A := by\n  classical\n  -- First, rewrite the frontier in terms of a set difference.\n  have h₁ : frontier A = closure A \\ interior A :=\n    frontier_eq_closure_diff_interior (X := X) (A := A)\n  -- Translate the set difference into an intersection with a complement.\n  have h₂ : (closure A \\ interior A : Set X) = closure A ∩ (interior A)ᶜ := by\n    simp [Set.diff_eq, Set.inter_comm]\n  -- Now transform the left‐hand side step‐by‐step.\n  calc\n    (frontier A)ᶜ\n        = (closure A \\ interior A)ᶜ := by\n          simpa [h₁]\n    _ = (closure A ∩ (interior A)ᶜ)ᶜ := by\n          simpa [h₂]\n    _ = (closure A)ᶜ ∪ ((interior A)ᶜ)ᶜ := by\n          simpa [Set.compl_inter]\n    _ = (closure A)ᶜ ∪ interior A := by\n          simp",
+    "theorem compl_frontier_eq_closure_compl_union_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (frontier A)ᶜ = (closure A)ᶜ ∪ interior A := by\n  simpa [frontier_def, Set.compl_diff]",
+    "theorem interior_closure_union_closure_right_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ closure B)) = interior (closure (A ∪ B)) := by\n  -- First, express both closures in terms of `closure A ∪ closure B`.\n  have h₁ : closure (A ∪ closure B) = closure A ∪ closure B :=\n    closure_union (s := A) (t := closure B)\n  have h₂ : closure (A ∪ B) = closure A ∪ closure B :=\n    closure_union (s := A) (t := B)\n  -- From the two equalities, deduce that the two closures coincide.\n  have h : closure (A ∪ closure B) = closure (A ∪ B) := by\n    simpa [h₁, h₂.symm]\n      using (rfl : (closure A ∪ closure B) = closure A ∪ closure B)\n  -- Taking interiors preserves the equality.\n  simpa using congrArg (fun s : Set X => interior s) h",
+    "theorem compl_frontier_eq_interior_union_interior_compl\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (frontier A)ᶜ = interior A ∪ interior (Aᶜ) := by\n  -- Expand the definition of `frontier` and use basic set identities.\n  simpa [frontier, Set.compl_diff, interior_compl_eq_compl_closure,\n        Set.union_comm]",
+    "theorem compl_frontier_eq_union_interior_compl {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    (frontier A)ᶜ = interior A ∪ interior (Aᶜ) := by\n  -- Rewrite the frontier in terms of `closure` and `interior`.\n  have h₁ : frontier A = closure A \\ interior A :=\n    frontier_eq_closure_diff_interior (X := X) (A := A)\n  -- Take complements and apply De Morgan.\n  calc\n    (frontier A)ᶜ\n        = (closure A \\ interior A)ᶜ := by\n          simpa [h₁]\n    _ = (closure A)ᶜ ∪ interior A := by\n          simpa using Set.compl_diff\n    _ = interior (Aᶜ) ∪ interior A := by\n          simpa [interior_compl_eq_compl_closure (X := X) (A := A),\n                 Set.union_comm]\n    _ = interior A ∪ interior (Aᶜ) := by\n          simpa [Set.union_comm]",
+    "theorem interior_inter_of_isOpen_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : IsOpen A) :\n    interior (A ∩ B) = A ∩ interior B := by\n  ext x\n  constructor\n  · intro hx\n    have hAB : x ∈ A ∩ B := interior_subset hx\n    have hxA : x ∈ A := hAB.1\n    have hxIntB : x ∈ interior B := by\n      have hSub : (A ∩ B : Set X) ⊆ B := by\n        intro y hy; exact hy.2\n      exact (interior_mono hSub) hx\n    exact And.intro hxA hxIntB\n  · rintro ⟨hxA, hxIntB⟩\n    -- Consider the open set `A ∩ interior B` containing `x`.\n    have hOpen : IsOpen (A ∩ interior B) := hA.inter isOpen_interior\n    have hMem₁ : x ∈ (A ∩ interior B) := And.intro hxA hxIntB\n    -- This open set is contained in `A ∩ B`.\n    have hSub : (A ∩ interior B : Set X) ⊆ A ∩ B := by\n      intro y hy\n      exact And.intro hy.1 (interior_subset hy.2)\n    -- Hence `A ∩ B` belongs to the neighbourhoods of `x`.\n    have hMem₂ : (A ∩ B : Set X) ∈ nhds x :=\n      Filter.mem_of_superset (hOpen.mem_nhds hMem₁) hSub\n    -- Conclude that `x` is in the interior of `A ∩ B`.\n    exact (mem_interior_iff_mem_nhds).2 hMem₂"
+  ],
+  "success": true
+}

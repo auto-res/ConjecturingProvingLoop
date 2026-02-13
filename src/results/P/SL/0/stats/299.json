@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.81728482246399
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4376,
+      "prompt_tokens": 51479,
+      "total_tokens": 55855,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_nonempty_iff_interior_nonempty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (interior (closure (interior (A : Set X)))).Nonempty ↔\n      (interior (A : Set X)).Nonempty := by\n  classical\n  constructor\n  · -- `←` direction: from non‐emptiness of the larger set deduce that of `interior A`.\n    intro hIntCl\n    -- A point in `interior (closure (interior A))` lies in `closure (interior A)`.\n    have hCl : (closure (interior (A : Set X))).Nonempty := by\n      rcases hIntCl with ⟨x, hx⟩\n      exact ⟨x, interior_subset hx⟩\n    -- Non‐emptiness of a closure is equivalent to that of the set itself.\n    exact\n      ((Topology.closure_nonempty_iff\n          (X := X) (A := interior (A : Set X))).1) hCl\n  · -- `→` direction: enlarge `interior A` using monotonicity.\n    intro hIntA\n    -- `interior A` sits inside `interior (closure (interior A))`.\n    have hSub :\n        (interior (A : Set X) : Set X) ⊆\n          interior (closure (interior (A : Set X))) := by\n      have hMono :\n          interior (interior (A : Set X)) ⊆\n            interior (closure (interior (A : Set X))) :=\n        interior_mono\n          (subset_closure :\n            (interior (A : Set X)) ⊆ closure (interior (A : Set X)))\n      simpa [interior_interior] using hMono\n    -- Transfer any point of `interior A` along the inclusion.\n    rcases hIntA with ⟨x, hxIntA⟩\n    exact ⟨x, hSub hxIntA⟩"
+  ],
+  "success": true
+}

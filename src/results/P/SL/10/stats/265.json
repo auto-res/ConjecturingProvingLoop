@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.66975259780884
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2951,
+      "prompt_tokens": 42861,
+      "total_tokens": 45812,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.diff_closure_subset_interior_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A \\ closure B ⊆ interior (A \\ B) := by\n  intro x hx\n  rcases hx with ⟨hxIntA, hxNotClB⟩\n  -- `interior A` is open, and so is the complement of `closure B`.\n  have h_open₁ : IsOpen (interior A) := isOpen_interior\n  have h_open₂ : IsOpen ((closure B)ᶜ) :=\n    (isClosed_closure : IsClosed (closure B)).isOpen_compl\n  let S : Set X := interior A ∩ (closure B)ᶜ\n  have hS_open : IsOpen S := h_open₁.inter h_open₂\n  have hxS : x ∈ S := And.intro hxIntA hxNotClB\n  -- Show that `S ⊆ A \\ B`.\n  have h_subset : S ⊆ A \\ B := by\n    intro y hy\n    rcases hy with ⟨hyIntA, hyNotClB⟩\n    have hyA : y ∈ A := interior_subset hyIntA\n    have hyNotB : y ∉ B := by\n      intro hyB\n      have : y ∈ closure B := subset_closure hyB\n      exact hyNotClB this\n    exact And.intro hyA hyNotB\n  -- Apply the maximality property of the interior.\n  have : x ∈ interior (A \\ B) :=\n    (interior_maximal h_subset hS_open) hxS\n  exact this"
+  ],
+  "success": true
+}

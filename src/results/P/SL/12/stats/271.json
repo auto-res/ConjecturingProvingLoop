@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.709587812423706
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1699,
+      "prompt_tokens": 51739,
+      "total_tokens": 53438,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P1_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_dense : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P2 (X := X) A ↔ Topology.P1 (X := X) A := by\n  constructor\n  · intro hP2\n    exact Topology.P2_implies_P1 (X := X) (A := A) hP2\n  · intro _\n    exact Topology.P2_of_dense_interior (X := X) (A := A) h_dense"
+  ],
+  "success": true
+}

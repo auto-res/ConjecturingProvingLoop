@@ -1,0 +1,26 @@
+{
+  "times": [
+    217.37966299057007
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10186,
+      "prompt_tokens": 35602,
+      "total_tokens": 45788,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_union_three_subset\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    (interior (closure (A : Set X)) ∪ interior (closure (B : Set X)) ∪\n        interior (closure (C : Set X))) ⊆\n      interior (closure (A ∪ B ∪ C : Set X)) := by\n  intro x hx\n  -- Split according to the part of the three‐way union that contains `x`.\n  cases hx with\n  | inl hAB =>\n      -- `x` lies in the union of the first two interiors.\n      have h₁ :\n          interior (closure (A : Set X)) ∪ interior (closure (B : Set X)) ⊆\n            interior (closure (A ∪ B : Set X)) :=\n        interior_closure_union_subset (X := X) (A := A) (B := B)\n      have hxAB : x ∈ interior (closure (A ∪ B : Set X)) := h₁ hAB\n      -- Enlarge `A ∪ B` to `A ∪ B ∪ C`.\n      have hMono :\n          interior (closure (A ∪ B : Set X)) ⊆\n            interior (closure (A ∪ B ∪ C : Set X)) := by\n        have hCl :\n            closure (A ∪ B : Set X) ⊆ closure (A ∪ B ∪ C : Set X) := by\n          have hSub : (A ∪ B : Set X) ⊆ A ∪ B ∪ C := by\n            intro y hy\n            cases hy with\n            | inl hyA => exact Or.inl (Or.inl hyA)\n            | inr hyB => exact Or.inl (Or.inr hyB)\n          exact closure_mono hSub\n        exact interior_mono hCl\n      exact hMono hxAB\n  | inr hC =>\n      -- `x` lies in the third interior.\n      have hCl :\n          closure (C : Set X) ⊆ closure (A ∪ B ∪ C : Set X) := by\n        have hSub : (C : Set X) ⊆ A ∪ B ∪ C := by\n          intro y hy\n          exact Or.inr hy\n        exact closure_mono hSub\n      have hMono :\n          interior (closure (C : Set X)) ⊆\n            interior (closure (A ∪ B ∪ C : Set X)) :=\n        interior_mono hCl\n      exact hMono hC"
+  ],
+  "success": true
+}

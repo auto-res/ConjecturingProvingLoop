@@ -1,0 +1,43 @@
+{
+  "times": [
+    33.91773200035095,
+    141.86252760887146
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2278,
+      "prompt_tokens": 48191,
+      "total_tokens": 50469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    },
+    {
+      "completion_tokens": 6705,
+      "prompt_tokens": 48271,
+      "total_tokens": 54976,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interior_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ interior B) ⊆ closure (A ∩ B) := by\n  -- First, show the basic set inclusion before taking closures.\n  have h_subset : (A ∩ interior B : Set X) ⊆ A ∩ B := by\n    intro x hx\n    rcases hx with ⟨hxA, hxIntB⟩\n    exact And.intro hxA (interior_subset hxIntB)\n  -- Taking closures preserves inclusions.\n  exact closure_mono h_subset",
+    "theorem Topology.closure_interior_inter_subset_closure_inter_interiors\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∩ B)) ⊆ closure (interior A ∩ interior B) := by\n  -- First, observe that `interior (A ∩ B)` is contained in `interior A ∩ interior B`.\n  have h_subset : interior (A ∩ B) ⊆ interior A ∩ interior B := by\n    intro x hx\n    have hxA : x ∈ interior A :=\n      (interior_mono (Set.inter_subset_left : (A ∩ B) ⊆ A)) hx\n    have hxB : x ∈ interior B :=\n      (interior_mono (Set.inter_subset_right : (A ∩ B) ⊆ B)) hx\n    exact And.intro hxA hxB\n  -- Taking closures preserves inclusions, giving the desired result.\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

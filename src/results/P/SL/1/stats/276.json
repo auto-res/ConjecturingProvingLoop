@@ -1,0 +1,26 @@
+{
+  "times": [
+    118.60993719100952
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6784,
+      "prompt_tokens": 42149,
+      "total_tokens": 48933,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_eq_univ_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Dense (interior A)) :\n    closure (interior (closure (interior A))) = (Set.univ : Set X) := by\n  -- Since `interior A` is dense, its closure is the whole space.\n  have h1 : closure (interior A) = (Set.univ : Set X) := h.closure_eq\n  -- Rewriting with `h1` and using the facts that both `interior` and `closure`\n  -- of `univ` yield `univ`, we obtain the desired equality.\n  simpa [h1, interior_univ, closure_univ]"
+  ],
+  "success": true
+}

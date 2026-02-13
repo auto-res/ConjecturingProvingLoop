@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.07537698745728
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5429,
+      "prompt_tokens": 28307,
+      "total_tokens": 33736,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior A))) ⊆ closure A := by\n  -- Step 1: we already know that\n  --   `interior (closure (interior A)) ⊆ closure A`.\n  have h :\n      (interior (closure (interior A)) : Set X) ⊆ closure A :=\n    Topology.interior_closure_interior_subset_closure (A := A)\n  -- Step 2: taking closures preserves inclusions and `closure (closure A) = closure A`.\n  simpa [closure_closure] using closure_mono h"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    90.69177269935608,
+    172.78295588493347
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8258,
+      "prompt_tokens": 26254,
+      "total_tokens": 34512,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    },
+    {
+      "completion_tokens": 11382,
+      "prompt_tokens": 26396,
+      "total_tokens": 37778,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_iUnion_of_P1_closure\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {S : ι → Set X}\n    (hS : ∀ i, Topology.P1 (closure (S i : Set X))) :\n    Topology.P1 (closure (⋃ i, S i : Set X)) := by\n  -- `P1` holds for the union of the individual closures.\n  have hUnion : Topology.P1 (⋃ i, closure (S i) : Set X) :=\n    Topology.P1_iUnion_of_P1 (S := fun i ↦ closure (S i)) hS\n  -- Taking the closure preserves `P1`.\n  have hClosure :\n      Topology.P1 (closure (⋃ i, closure (S i) : Set X)) :=\n    Topology.P1_closure_of_P1 (A := ⋃ i, closure (S i)) hUnion\n  -- Show that the two closures coincide.\n  have hEq :\n      closure (⋃ i, closure (S i) : Set X) =\n        closure (⋃ i, S i : Set X) := by\n    apply Set.Subset.antisymm\n    · -- `⊆` direction\n      have hSub :\n          (⋃ i, closure (S i) : Set X) ⊆ closure (⋃ i, S i) := by\n        intro x hx\n        rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n        have hSub_i :\n            closure (S i : Set X) ⊆ closure (⋃ i, S i) := by\n          have hIncl : (S i : Set X) ⊆ ⋃ i, S i := by\n            intro y hy\n            exact Set.mem_iUnion.2 ⟨i, hy⟩\n          exact closure_mono hIncl\n        exact hSub_i hx_i\n      exact closure_mono hSub\n    · -- `⊇` direction\n      have hSub :\n          (⋃ i, S i : Set X) ⊆ ⋃ i, closure (S i) := by\n        intro x hx\n        rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n        exact Set.mem_iUnion.2 ⟨i, subset_closure hx_i⟩\n      exact closure_mono hSub\n  -- Reinterpret the goal using the equality of closures.\n  simpa [hEq] using hClosure",
+    "theorem iUnion_closure_subset_closure_iUnion\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} (S : ι → Set X) :\n    (⋃ i, closure (S i) : Set X) ⊆ closure (⋃ i, S i) := by\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n  -- `S i` is included in the total union.\n  have hSub : (S i : Set X) ⊆ ⋃ j, S j := by\n    intro y hy\n    exact Set.mem_iUnion.2 ⟨i, hy⟩\n  -- Since `x ∈ closure (S i)` and `S i ⊆ ⋃ j, S j`,\n  -- monotonicity of `closure` yields the desired membership.\n  have : x ∈ closure (⋃ j, S j) :=\n    (closure_mono hSub) hx_i\n  exact this"
+  ],
+  "success": true
+}

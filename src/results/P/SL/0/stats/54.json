@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.505698919296265
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3674,
+      "prompt_tokens": 9420,
+      "total_tokens": 13094,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_has_all_Ps {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (interior (A : Set X)) ∧\n    Topology.P2 (interior (A : Set X)) ∧\n    Topology.P3 (interior (A : Set X)) := by\n  -- `P1` and `P3` for `interior A` are already bundled together.\n  have hP1P3 := Topology.interior_has_P1_and_P3 (X := X) (A := A)\n  -- `P2` for `interior A` is provided separately.\n  have hP2 := Topology.interior_has_P2 (X := X) (A := A)\n  -- Combine the three properties.\n  exact And.intro hP1P3.1 (And.intro hP2 hP1P3.2)"
+  ],
+  "success": true
+}

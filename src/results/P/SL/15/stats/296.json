@@ -1,0 +1,26 @@
+{
+  "times": [
+    96.47495675086975
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8874,
+      "prompt_tokens": 63220,
+      "total_tokens": 72094,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 62208
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_has_all_P {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (interior A ∩ interior B) ∧\n      Topology.P2 (interior A ∩ interior B) ∧\n        Topology.P3 (interior A ∩ interior B) := by\n  have hA : IsOpen (interior A) := isOpen_interior\n  have hB : IsOpen (interior B) := isOpen_interior\n  simpa using\n    (Topology.isOpen_inter_has_all_P\n      (X := X) (A := interior A) (B := interior B) hA hB)"
+  ],
+  "success": true
+}

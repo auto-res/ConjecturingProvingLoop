@@ -1,0 +1,26 @@
+{
+  "times": [
+    100.04825377464294
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6930,
+      "prompt_tokens": 21776,
+      "total_tokens": 28706,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_eq_inter\n    {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    interior (A ∩ B) = interior A ∩ interior B := by\n  ext x\n  constructor\n  · intro hx\n    have hxA : x ∈ interior A := by\n      have h_subset : (A ∩ B : Set X) ⊆ A := by\n        intro y hy; exact hy.1\n      exact (interior_mono h_subset) hx\n    have hxB : x ∈ interior B := by\n      have h_subset : (A ∩ B : Set X) ⊆ B := by\n        intro y hy; exact hy.2\n      exact (interior_mono h_subset) hx\n    exact ⟨hxA, hxB⟩\n  · intro hx\n    have h_open : IsOpen (interior A ∩ interior B) :=\n      IsOpen.inter isOpen_interior isOpen_interior\n    have h_subset : (interior A ∩ interior B : Set X) ⊆ A ∩ B := by\n      intro y hy\n      exact ⟨interior_subset hy.1, interior_subset hy.2⟩\n    have h_incl : (interior A ∩ interior B : Set X) ⊆\n        interior (A ∩ B) := interior_maximal h_subset h_open\n    exact h_incl hx"
+  ],
+  "success": true
+}

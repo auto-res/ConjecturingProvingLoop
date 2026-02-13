@@ -1,0 +1,26 @@
+{
+  "times": [
+    104.4892086982727
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6502,
+      "prompt_tokens": 43359,
+      "total_tokens": 49861,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iUnion_subset {X : Type*} [TopologicalSpace X]\n    {ι : Sort _} {F : ι → Set X} :\n    (⋃ i, closure (F i) : Set X) ⊆ closure (⋃ i, F i) := by\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxFi⟩\n  have hIncl : closure (F i) ⊆ closure (⋃ j, F j) := by\n    apply closure_mono\n    intro y hy\n    exact Set.mem_iUnion_of_mem i hy\n  exact hIncl hxFi"
+  ],
+  "success": true
+}

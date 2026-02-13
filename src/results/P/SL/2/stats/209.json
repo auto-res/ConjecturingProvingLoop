@@ -1,0 +1,26 @@
+{
+  "times": [
+    111.76023983955383
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7194,
+      "prompt_tokens": 34259,
+      "total_tokens": 41453,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_self_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A = (A : Set X) → Topology.P1 A := by\n  intro hIntEq\n  -- From `interior A = A`, we deduce that `A` is open.\n  have hOpen : IsOpen (A : Set X) :=\n    (isOpen_iff_interior_eq (A := A)).2 hIntEq\n  -- Every open set satisfies `P1`.\n  exact Topology.isOpen_implies_P1 (A := A) hOpen"
+  ],
+  "success": true
+}

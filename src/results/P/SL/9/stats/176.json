@@ -1,0 +1,43 @@
+{
+  "times": [
+    166.71577644348145,
+    246.01453804969788
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9606,
+      "prompt_tokens": 28265,
+      "total_tokens": 37871,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    },
+    {
+      "completion_tokens": 17077,
+      "prompt_tokens": 28484,
+      "total_tokens": 45561,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.disjoint_closure_closureCompl_iff_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Disjoint (closure (A : Set X)) (closure (Aᶜ : Set X)) ↔\n      (IsClosed A ∧ IsOpen A) := by\n  classical\n  constructor\n  · intro h_disj\n    -- First, show `closure A ⊆ A`.\n    have h_closure_subset_A : closure (A : Set X) ⊆ A := by\n      intro x hx_cl\n      by_contra hx_notA\n      have hx_in_compl : x ∈ (Aᶜ : Set X) := hx_notA\n      have hx_cl_compl : x ∈ closure (Aᶜ : Set X) :=\n        subset_closure hx_in_compl\n      exact (Set.disjoint_left).1 h_disj hx_cl hx_cl_compl\n    -- Hence `A` is closed.\n    have h_closed : IsClosed A := by\n      have h_eq : closure (A : Set X) = A :=\n        subset_antisymm h_closure_subset_A subset_closure\n      simpa [h_eq] using (isClosed_closure : IsClosed (closure A))\n    -- Show that `Aᶜ` is closed, hence `A` is open.\n    have h_closure_compl_subset : closure (Aᶜ : Set X) ⊆ (Aᶜ : Set X) := by\n      intro x hx_cl\n      by_contra hx_inA\n      have hx_clA : x ∈ closure (A : Set X) := subset_closure hx_inA\n      exact (Set.disjoint_left).1 h_disj hx_clA hx_cl\n    have h_closed_compl : IsClosed (Aᶜ : Set X) := by\n      have h_eq : closure (Aᶜ : Set X) = Aᶜ :=\n        subset_antisymm h_closure_compl_subset subset_closure\n      simpa [h_eq] using\n        (isClosed_closure : IsClosed (closure (Aᶜ : Set X)))\n    have h_open : IsOpen A := by\n      simpa [Set.compl_compl] using h_closed_compl.isOpen_compl\n    exact ⟨h_closed, h_open⟩\n  · rintro ⟨h_closed, h_open⟩\n    -- `A` and `Aᶜ` are closed, so their closures are themselves.\n    have h₁ : closure (A : Set X) = A := h_closed.closure_eq\n    have h₂ : closure (Aᶜ : Set X) = Aᶜ := by\n      have : IsClosed (Aᶜ : Set X) := h_open.isClosed_compl\n      simpa using this.closure_eq\n    -- `A` and `Aᶜ` are disjoint.\n    have : Disjoint (A : Set X) (Aᶜ : Set X) := Set.disjoint_compl_left\n    simpa [h₁, h₂] using this",
+    "theorem Set.compl_compl {α : Type*} (s : Set α) : (sᶜ)ᶜ = s := by\n  ext x\n  simp\n\ntheorem Set.disjoint_compl_left {α : Type*} (s : Set α) : Disjoint s sᶜ := by\n  exact (Set.disjoint_left).2 (by\n    intro x hxS hxSc\n    exact hxSc hxS)"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    37.18502759933472,
+    324.0120439529419
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2801,
+      "prompt_tokens": 14245,
+      "total_tokens": 17046,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    },
+    {
+      "completion_tokens": 19188,
+      "prompt_tokens": 14351,
+      "total_tokens": 33539,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (A : Set X)))) =\n      interior (closure (A : Set X)) := by\n  classical\n  -- We establish the two inclusions.\n  apply Set.Subset.antisymm\n  · -- `⊆` direction: left to right.\n    have hSub : closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n      apply closure_mono\n      exact (interior_subset : interior (closure (A : Set X)) ⊆ closure A)\n    exact interior_mono hSub\n  · -- `⊇` direction: right to left.\n    have hSub' : interior (closure (A : Set X))\n        ⊆ closure (interior (closure (A : Set X))) := by\n      intro x hx\n      -- Any point of `interior (closure A)` is in the closure of that set.\n      exact subset_closure hx\n    have hOpen : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    -- An open set contained in a set lies in its interior.\n    exact interior_maximal hSub' hOpen",
+    "theorem interior_closure_subset_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    interior (closure A) ⊆ A := by\n  -- Since `A` is closed, `closure A = A`.\n  simpa [hA_closed.closure_eq] using\n    (interior_subset : interior (closure A) ⊆ closure A)"
+  ],
+  "success": true
+}

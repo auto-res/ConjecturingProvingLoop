@@ -1,0 +1,60 @@
+{
+  "times": [
+    73.08572936058044,
+    124.67533373832703,
+    65.98069453239441
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4938,
+      "prompt_tokens": 39581,
+      "total_tokens": 44519,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 6724,
+      "prompt_tokens": 39681,
+      "total_tokens": 46405,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 3357,
+      "prompt_tokens": 39763,
+      "total_tokens": 43120,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_interior_iff_closure_interior_eq_univ {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) ↔\n      closure (interior A) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    exact\n      Topology.closure_interior_eq_univ_of_dense_interior (A := A) hDense\n  · intro hEq\n    exact ⟨hEq⟩",
+    "theorem Topology.P3_iff_forall_open_nbhd_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A ↔\n      ∀ x : X, x ∈ (A : Set X) →\n        ∃ U : Set X, IsOpen U ∧ x ∈ U ∧ U ⊆ closure (A : Set X) := by\n  constructor\n  · intro hP3 x hxA\n    -- From `P3`, obtain that `x` is in the interior of `closure A`.\n    have hx_int : x ∈ interior (closure (A : Set X)) := hP3 hxA\n    -- Unpack the definition of `interior`.\n    rcases mem_interior.1 hx_int with ⟨U, hU_open, hxU, hU_sub⟩\n    exact ⟨U, hU_open, hxU, hU_sub⟩\n  · intro h x hxA\n    -- Obtain an open neighbourhood of `x` contained in `closure A`.\n    rcases h x hxA with ⟨U, hU_open, hxU, hU_sub⟩\n    -- Turn this neighbourhood into the required interior membership.\n    have hxInt : x ∈ interior (closure (A : Set X)) := by\n      -- `U` is a neighbourhood of `x`.\n      have hU_nhds : (U : Set X) ∈ 𝓝 x := hU_open.mem_nhds hxU\n      -- Since `U ⊆ closure A`, `closure A` is also a neighbourhood of `x`.\n      have hCl_nhds : (closure (A : Set X)) ∈ 𝓝 x :=\n        Filter.mem_of_superset hU_nhds hU_sub\n      -- Use the neighbourhood characterisation of the interior.\n      exact (mem_interior_iff_mem_nhds).2 hCl_nhds\n    exact hxInt",
+    "theorem Topology.interior_union_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) :\n    interior (A ∪ B : Set X) = interior A ∪ interior B := by\n  -- Evaluate the interiors of the open sets `A` and `B`.\n  have hIntA : interior A = A := hA.interior_eq\n  have hIntB : interior B = B := hB.interior_eq\n  -- The union of two open sets is open, so its interior is itself.\n  have hIntUnion : interior (A ∪ B : Set X) = A ∪ B :=\n    (hA.union hB).interior_eq\n  -- Rewrite everything using the computed equalities.\n  simpa [hIntA, hIntB, hIntUnion]"
+  ],
+  "success": true
+}

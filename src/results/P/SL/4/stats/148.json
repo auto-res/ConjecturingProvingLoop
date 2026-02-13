@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.23036813735962
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4971,
+      "prompt_tokens": 20462,
+      "total_tokens": 25433,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_interior_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Topology.P1 A := by\n  intro hDense\n  dsimp [Topology.P1]\n  intro x hxA\n  -- Since `interior A` is dense, its closure is `univ`.\n  have h_closure : (closure (interior A) : Set X) = Set.univ := hDense.closure_eq\n  -- Every point lies in `univ`.\n  have hx_univ : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_closure] using hx_univ"
+  ],
+  "success": true
+}

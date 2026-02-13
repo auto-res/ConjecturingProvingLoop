@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.79346466064453
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4993,
+      "prompt_tokens": 20768,
+      "total_tokens": 25761,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_closure_of_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P3 A →\n      closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  intro hP3\n  -- `closure A` is contained in `closure (interior (closure A))` by `P3`.\n  have h₁ : closure (A : Set X) ⊆\n      closure (interior (closure (A : Set X))) := by\n    have hSub : (A : Set X) ⊆ interior (closure (A : Set X)) := hP3\n    exact closure_mono hSub\n  -- The reverse inclusion holds by monotonicity of `closure`.\n  have h₂ :\n      closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) :=\n    Topology.closure_interior_closure_subset_closure (X := X) (A := A)\n  exact subset_antisymm h₂ h₁"
+  ],
+  "success": true
+}

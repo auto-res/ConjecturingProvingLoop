@@ -1,0 +1,26 @@
+{
+  "times": [
+    27.25657367706299
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1847,
+      "prompt_tokens": 44305,
+      "total_tokens": 46152,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_interior_of_subset_P2\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hP2B : Topology.P2 B) :\n    frontier A ⊆ closure (interior B) := by\n  intro x hx\n  -- From `x ∈ frontier A`, we get `x ∈ closure A`.\n  have hx_clA : x ∈ closure A := hx.1\n  -- Using the inclusion `A ⊆ B`, deduce `x ∈ closure B`.\n  have hx_clB : x ∈ closure B := (closure_mono hAB) hx_clA\n  -- For a set satisfying `P2`, its two closures coincide.\n  have h_eq : closure (interior B) = closure B :=\n    Topology.closure_interior_eq_closure_of_P2 (A := B) hP2B\n  -- Rewrite and conclude.\n  simpa [h_eq] using hx_clB"
+  ],
+  "success": true
+}

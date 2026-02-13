@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.88947796821594
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6321,
+      "prompt_tokens": 36075,
+      "total_tokens": 42396,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_eq_empty_iff\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (A : Set X))) = (∅ : Set X) ↔\n      interior (A : Set X) = ∅ := by\n  classical\n  constructor\n  · intro h\n    -- `interior A` is contained in `interior (closure (interior A))`,\n    -- hence it must also be empty.\n    have hSub :\n        interior (A : Set X) ⊆ (∅ : Set X) := by\n      intro x hx\n      have : x ∈ interior (closure (interior (A : Set X))) :=\n        Topology.interior_subset_interior_closure_interior (A := A) hx\n      simpa [h] using this\n    exact Set.Subset.antisymm hSub (Set.empty_subset _)\n  · intro hInt\n    -- If `interior A` is empty, so is its closure, and consequently\n    -- the interior of that closure is also empty.\n    have hClos : closure (interior (A : Set X)) = (∅ : Set X) := by\n      simpa [hInt, closure_empty]\n    simpa [hClos, interior_empty]"
+  ],
+  "success": true
+}

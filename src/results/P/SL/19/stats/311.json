@@ -1,0 +1,60 @@
+{
+  "times": [
+    92.20719957351685,
+    195.40686178207397,
+    40.30788445472717
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5733,
+      "prompt_tokens": 49269,
+      "total_tokens": 55002,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    },
+    {
+      "completion_tokens": 11984,
+      "prompt_tokens": 49407,
+      "total_tokens": 61391,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    },
+    {
+      "completion_tokens": 1839,
+      "prompt_tokens": 49660,
+      "total_tokens": 51499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_frontier_eq_closure_diff_self_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    closure (frontier A) = closure A \\ A := by\n  -- First, rewrite `frontier A` in terms of `closure A` and `A`,\n  -- using the fact that `A` is open.\n  have hFront : frontier A = closure A \\ A := by\n    simpa [hA.interior_eq] using\n      (Topology.frontier_eq_closure_diff_self_of_isOpen (A := A) hA)\n  -- Since the frontier is a closed set, its closure is itself.\n  have hClosFront : closure (frontier A) = frontier A :=\n    Topology.closure_frontier_eq_frontier (A := A)\n  -- Combine the two equalities to obtain the desired statement.\n  simpa [hClosFront, hFront]",
+    "@[simp] theorem Topology.closure_diff_self_eq_self_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    closure (closure A \\ A) = closure A \\ A := by\n  -- First, show that `closure A \\ A` is a closed set.\n  have hClosed : IsClosed (closure A \\ A) := by\n    -- `closure A` is closed.\n    have h₁ : IsClosed (closure A) := isClosed_closure\n    -- The complement of an open set is closed.\n    have h₂ : IsClosed ((A : Set X)ᶜ) := hA.isOpen_compl\n    -- Rewrite the set difference as an intersection to combine the two facts.\n    have : closure A \\ A = closure A ∩ Aᶜ := by\n      simp [Set.diff_eq, Set.inter_comm, Set.inter_left_comm]\n    -- The intersection of two closed sets is closed.\n    simpa [this] using h₁.inter h₂\n  -- The closure of a closed set is the set itself.\n  simpa [hClosed.closure_eq]",
+    "theorem Topology.frontier_eq_closure_inter_compl_of_isOpen' {X : Type*}\n    [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    frontier A = closure A ∩ Aᶜ := by\n  have h := Topology.frontier_eq_closure_diff_self_of_isOpen (A := A) hA\n  simpa [Set.diff_eq] using h"
+  ],
+  "success": true
+}

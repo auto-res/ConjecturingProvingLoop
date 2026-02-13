@@ -1,0 +1,26 @@
+{
+  "times": [
+    93.85160660743713
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7191,
+      "prompt_tokens": 34659,
+      "total_tokens": 41850,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClopen_of_isClosed_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hP3 : Topology.P3 A) :\n    IsClopen A := by\n  -- From `P3` and closedness we obtain that `A` is open.\n  have hA_open : IsOpen A :=\n    (Topology.P3_iff_isOpen_of_isClosed (A := A) hA_closed).1 hP3\n  exact ⟨hA_closed, hA_open⟩"
+  ],
+  "success": true
+}

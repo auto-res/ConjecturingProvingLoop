@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.98332691192627
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1108,
+      "prompt_tokens": 2021,
+      "total_tokens": 3129,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P1 A := by\n  -- Since `A` is open, its interior coincides with itself.\n  have hInt : interior A = A := hA.interior_eq\n  -- Every set is contained in the closure of itself.\n  have : (A : Set X) ⊆ closure (interior A) := by\n    simpa [hInt] using (subset_closure : A ⊆ closure A)\n  exact this"
+  ],
+  "success": true
+}

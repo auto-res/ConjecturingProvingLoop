@@ -1,0 +1,26 @@
+{
+  "times": [
+    57.61652064323425
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3529,
+      "prompt_tokens": 45307,
+      "total_tokens": 48836,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_subset_closure_diff_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A \\ B) ⊆ closure A \\ closure B := by\n  intro x hx\n  -- `x` lies in `closure A` by an existing lemma.\n  have hxClA : x ∈ closure A :=\n    interior_diff_subset_closure_left (X := X) (A := A) (B := B) hx\n  -- `x` is not in `closure B`, using another established lemma.\n  have hxNotClB : x ∉ closure B := by\n    have h := (interior_diff_subset (X := X) (A := A) (B := B)) hx\n    exact h.2\n  exact And.intro hxClA hxNotClB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.43310236930847
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3921,
+      "prompt_tokens": 50073,
+      "total_tokens": 53994,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_closure_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense A ↔ closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    exact hDense.closure_eq\n  · intro hEq\n    have hDense : Dense A := by\n      intro x\n      have : (x : X) ∈ (Set.univ : Set X) := by\n        simp\n      simpa [hEq] using this\n    exact hDense"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    44.19283413887024,
+    31.42800998687744
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2918,
+      "prompt_tokens": 49944,
+      "total_tokens": 52862,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    },
+    {
+      "completion_tokens": 2658,
+      "prompt_tokens": 50021,
+      "total_tokens": 52679,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_eq_closure_diff_of_open {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen A) :\n    frontier (A : Set X) = closure A \\ A := by\n  have h := frontier_eq_closure_inter_compl_of_open (A := A) hA\n  simpa [Set.diff_eq] using h",
+    "theorem isOpen_of_frontier_subset_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) ⊆ Aᶜ → IsOpen A := by\n  intro hFront\n  -- First, show `A ⊆ interior A`.\n  have hSub : (A : Set X) ⊆ interior A := by\n    intro x hxA\n    by_cases hxInt : x ∈ interior A\n    · exact hxInt\n    · -- Otherwise `x` lies in the frontier, contradicting the hypothesis.\n      have hxFrontier : x ∈ frontier A := by\n        have hxCl : x ∈ closure A := subset_closure hxA\n        exact And.intro hxCl hxInt\n      have hxCompl : x ∈ Aᶜ := hFront hxFrontier\n      exact (hxCompl hxA).elim\n  -- Hence `interior A = A`.\n  have hEq : interior A = A := by\n    apply subset_antisymm\n    · exact interior_subset\n    · exact hSub\n  -- Conclude that `A` is open.\n  simpa [hEq] using (isOpen_interior : IsOpen (interior A))"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    76.45679116249084,
+    135.12380361557007,
+    41.45870018005371
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5200,
+      "prompt_tokens": 52337,
+      "total_tokens": 57537,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 7272,
+      "prompt_tokens": 52427,
+      "total_tokens": 59699,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 2858,
+      "prompt_tokens": 52536,
+      "total_tokens": 55394,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_open_right_eq\n    {X : Type*} [TopologicalSpace X] {A U : Set X} (hU : IsOpen U) :\n    interior (A ∪ U) = interior A ∪ U := by\n  -- We prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- `interior (A ∪ U) ⊆ interior A ∪ U`\n    intro x hx\n    by_cases hxU : x ∈ U\n    · -- If `x ∈ U`, we are done.\n      exact Or.inr hxU\n    · -- Otherwise `x ∉ U`; we show `x ∈ interior A`.\n      -- Choose an open neighbourhood `V` of `x` contained in `A ∪ U`.\n      rcases mem_interior_iff_mem_nhds.1 hx with ⟨V, hVopen, hxV, hVsub⟩\n      -- Consider the open set `W = V \\ U`.\n      have hWopen : IsOpen (V \\ U) := hVopen.diff hU\n      have hxW    : x ∈ V \\ U      := ⟨hxV, hxU⟩\n      -- Show that `W ⊆ A`.\n      have hWsub  : (V \\ U) ⊆ A := by\n        intro y hy\n        have hyV : y ∈ V := hy.1\n        have hyAU : (y : X) ∈ A ∪ U := hVsub hyV\n        cases hyAU with\n        | inl hA  => exact hA\n        | inr hU' => exact (hy.2 hU').elim\n      -- Hence every point of `W` lies in `interior A`.\n      have hWint : (V \\ U) ⊆ interior A :=\n        interior_maximal hWsub hWopen\n      -- In particular, `x ∈ interior A`.\n      have hxIntA : x ∈ interior A := hWint hxW\n      exact Or.inl hxIntA\n  · -- `interior A ∪ U ⊆ interior (A ∪ U)`\n    intro x hx\n    cases hx with\n    | inl hxIntA =>\n        -- `interior A` is contained in `interior (A ∪ U)` by monotonicity.\n        exact\n          (interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ U)) hxIntA\n    | inr hxU =>\n        -- The open set `U` is contained in `interior (A ∪ U)`.\n        have hSub : (U : Set X) ⊆ interior (A ∪ U) :=\n          interior_maximal\n            (by\n              intro y hy\n              exact Or.inr hy)\n            hU\n        exact hSub hxU",
+    "theorem Topology.closure_interior_closure_iterate_five_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure A)))))) =\n      closure (interior A) := by\n  simpa [Topology.closure_interior_closure_interior_eq_closure_interior]",
+    "theorem Topology.P3_union_interior {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 (interior A ∪ interior B) := by\n  -- Both `interior A` and `interior B` are open,\n  -- hence their union is open as well.\n  have h_open : IsOpen (interior A ∪ interior B) :=\n    (isOpen_interior : IsOpen (interior A)).union isOpen_interior\n  -- Open sets satisfy `P3`.\n  exact\n    Topology.isOpen_implies_P3\n      (X := X)\n      (A := interior A ∪ interior B)\n      h_open"
+  ],
+  "success": true
+}

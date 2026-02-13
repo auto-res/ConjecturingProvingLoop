@@ -1,0 +1,60 @@
+{
+  "times": [
+    72.61444902420044,
+    116.91672921180725,
+    33.750112771987915
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5933,
+      "prompt_tokens": 36876,
+      "total_tokens": 42809,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 8511,
+      "prompt_tokens": 36981,
+      "total_tokens": 45492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 2258,
+      "prompt_tokens": 37057,
+      "total_tokens": 39315,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_dense_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hDenseB : Dense (B : Set X)) :\n    Topology.P3 (A ∪ B) := by\n  dsimp [Topology.P3]\n  intro x hx\n  -- `closure B` is the whole space because `B` is dense.\n  have h_closureB : closure (B : Set X) = (Set.univ : Set X) :=\n    hDenseB.closure_eq\n  -- Hence `closure (A ∪ B)` is also the whole space.\n  have h_closure_union : closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n    calc\n      closure (A ∪ B : Set X)\n          = closure A ∪ closure B := by\n            simpa [closure_union]\n      _ = closure A ∪ (Set.univ : Set X) := by\n            simp [h_closureB]\n      _ = (Set.univ : Set X) := by\n            simp\n  -- Therefore the interior of this closure is the whole space.\n  have h_int_union :\n      interior (closure (A ∪ B : Set X)) = (Set.univ : Set X) := by\n    simpa [h_closure_union, interior_univ]\n  -- Every point belongs to the whole space, so the inclusion holds.\n  have : (x : X) ∈ (Set.univ : Set X) := by\n    simp\n  simpa [h_int_union] using this",
+    "theorem Topology.interiorClosure_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ B : Set X)) = interior (closure A ∪ closure B) := by\n  -- First inclusion: `interior (closure (A ∪ B)) ⊆ interior (closure A ∪ closure B)`.\n  have h₁ :\n      interior (closure (A ∪ B : Set X)) ⊆ interior (closure A ∪ closure B) := by\n    intro x hx\n    simpa [closure_union] using hx\n  -- Second inclusion: `interior (closure A ∪ closure B) ⊆ interior (closure (A ∪ B))`.\n  have h₂ :\n      interior (closure A ∪ closure B) ⊆ interior (closure (A ∪ B : Set X)) := by\n    intro x hx\n    simpa [closure_union] using hx\n  -- Combine the inclusions to obtain the desired equality.\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem Topology.interior_closure_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ B : Set X)) = interior (closure A ∪ closure B) := by\n  simpa [closure_union]"
+  ],
+  "success": true
+}

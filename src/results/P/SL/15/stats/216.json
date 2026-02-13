@@ -1,0 +1,26 @@
+{
+  "times": [
+    187.75412511825562
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8611,
+      "prompt_tokens": 45364,
+      "total_tokens": 53975,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure_eq_univ_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hDense : Dense A) :\n    interior (closure (interior (closure A))) = (Set.univ : Set X) := by\n  -- The density of `A` gives `closure A = univ`.\n  have hClosure : (closure A : Set X) = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  -- Rewrite using `hClosure` and evaluate with `simp`.\n  simpa [hClosure, closure_univ, interior_univ]"
+  ],
+  "success": true
+}

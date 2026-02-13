@@ -1,0 +1,26 @@
+{
+  "times": [
+    57.5779070854187
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2775,
+      "prompt_tokens": 42022,
+      "total_tokens": 44797,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_compl {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (Aᶜ : Set X) = frontier (A : Set X) := by\n  classical\n  -- Express the closure and interior of a complement via complements.\n  have h_cl : closure (Aᶜ : Set X) = (interior (A : Set X))ᶜ :=\n    Topology.closure_compl_eq_compl_interior (A := A)\n  have h_int : interior (Aᶜ : Set X) = (closure (A : Set X))ᶜ :=\n    Topology.interior_compl_eq_compl_closure (A := A)\n  -- Substitute the formulas and simplify.\n  simp [frontier, h_cl, h_int, Set.diff_eq, Set.compl_compl,\n        Set.inter_comm, Set.inter_left_comm, Set.inter_assoc]"
+  ],
+  "success": true
+}

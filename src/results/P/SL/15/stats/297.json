@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.81992435455322
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5252,
+      "prompt_tokens": 63373,
+      "total_tokens": 68625,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 62208
+      }
+    }
+  ],
+  "responses": [
+    "theorem denseInterior_implies_dense_interior_closureInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Dense (interior (closure (interior A))) := by\n  intro hDense\n  -- First, identify `interior (closure (interior A))` with `univ`.\n  have h_eq :\n      interior (closure (interior A)) = (Set.univ : Set X) :=\n    interior_closure_interior_eq_univ_of_dense (X := X) (A := A) hDense\n  -- The closure of `univ` is `univ`, so the closure of our set is `univ`.\n  have h_closure :\n      (closure (interior (closure (interior A)) : Set X)) =\n        (Set.univ : Set X) := by\n    simpa [h_eq, closure_univ]\n  -- Conclude density from the characterisation via closures.\n  exact\n    (dense_iff_closure_eq\n        (s := interior (closure (interior A)))).2 h_closure"
+  ],
+  "success": true
+}

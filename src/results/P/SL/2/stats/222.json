@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.270141124725342
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2566,
+      "prompt_tokens": 36195,
+      "total_tokens": 38761,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_closure_interior_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → closure (interior (closure A)) = closure (interior A) := by\n  intro hP2\n  -- From `P2`, we know both `closure (interior (closure A)) = closure A`\n  -- and `closure (interior A) = closure A`.\n  have h₁ :=\n    Topology.P2_implies_closure_interior_closure_eq_closure (A := A) hP2\n  have h₂ :=\n    Topology.P2_implies_closure_interior_eq_closure (A := A) hP2\n  -- Rearrange `h₂` to match the direction needed for the calculation.\n  have h₃ : closure A = closure (interior A) := by\n    simpa using h₂.symm\n  calc\n    closure (interior (closure A)) = closure A := h₁\n    _ = closure (interior A) := h₃"
+  ],
+  "success": true
+}

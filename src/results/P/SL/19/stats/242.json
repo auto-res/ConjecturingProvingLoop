@@ -1,0 +1,43 @@
+{
+  "times": [
+    83.2611014842987,
+    101.31141996383667
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4654,
+      "prompt_tokens": 37991,
+      "total_tokens": 42645,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 6097,
+      "prompt_tokens": 38070,
+      "total_tokens": 44167,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_frontier_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior A ∪ frontier A = closure A := by\n  ext x\n  constructor\n  · intro hx\n    cases hx with\n    | inl hxInt =>\n        exact (Topology.interior_subset_closure (A := A)) hxInt\n    | inr hxFront =>\n        exact hxFront.1\n  · intro hxClos\n    by_cases hxInt : x ∈ interior A\n    · exact Or.inl hxInt\n    ·\n      have hxFront : x ∈ frontier A := And.intro hxClos hxInt\n      exact Or.inr hxFront",
+    "theorem Topology.frontier_eq_compl_of_open_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen A) (hDense : closure A = (Set.univ : Set X)) :\n    frontier A = Aᶜ := by\n  calc\n    frontier A = closure A \\ interior A := rfl\n    _ = (Set.univ : Set X) \\ A := by\n      simpa [hOpen.interior_eq, hDense]\n    _ = Aᶜ := by\n      ext x\n      simp"
+  ],
+  "success": true
+}

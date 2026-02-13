@@ -1,0 +1,26 @@
+{
+  "times": [
+    107.5092990398407
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6152,
+      "prompt_tokens": 16946,
+      "total_tokens": 23098,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_of_closed_and_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hP2 : Topology.P2 A) :\n    closure (interior A) = A := by\n  -- First, `interior A` coincides with `A` under the given assumptions.\n  have h_int : interior A = A :=\n    Topology.interior_eq_self_of_closed_and_P2 (A := A) hA_closed hP2\n  -- Rewrite `closure (interior A)` using the above equality\n  -- and use that `A` is closed.\n  calc\n    closure (interior A) = closure A := by\n      simpa [h_int]\n    _ = A := hA_closed.closure_eq"
+  ],
+  "success": true
+}

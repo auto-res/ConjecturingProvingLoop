@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.11158847808838
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3832,
+      "prompt_tokens": 23525,
+      "total_tokens": 27357,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_univ_iff_closure_compl_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A = (Set.univ : Set X) ↔ closure (Aᶜ) = (∅ : Set X) := by\n  -- Core relation between the two sets\n  have h_rel : closure (Aᶜ) = (interior A)ᶜ :=\n    Topology.closure_compl_eq_compl_interior (X := X) (A := A)\n  constructor\n  · intro hInt\n    -- Substitute `interior A = univ` into the core relation\n    simpa [hInt] using h_rel\n  · intro hCl\n    -- Use `h_rel` and the hypothesis `closure (Aᶜ) = ∅`\n    have h_compl : (interior A)ᶜ = (∅ : Set X) := by\n      simpa [hCl] using h_rel.symm\n    -- Complement both sides to get `interior A = univ`\n    have hInt : interior A = (∅ : Set X)ᶜ := by\n      have := congrArg (fun s : Set X => sᶜ) h_compl\n      simpa using this\n    simpa using hInt"
+  ],
+  "success": true
+}

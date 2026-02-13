@@ -1,0 +1,77 @@
+{
+  "times": [
+    51.833470821380615,
+    35.10126709938049,
+    129.24072980880737,
+    40.17813444137573
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3910,
+      "prompt_tokens": 35057,
+      "total_tokens": 38967,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 2698,
+      "prompt_tokens": 35201,
+      "total_tokens": 37899,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 9955,
+      "prompt_tokens": 35285,
+      "total_tokens": 45240,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 2651,
+      "prompt_tokens": 35484,
+      "total_tokens": 38135,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_closure_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A = (Set.univ : Set X) ↔ interior (closure A) = (Set.univ : Set X) := by\n  constructor\n  · intro h_dense\n    simpa [h_dense] using\n      (Topology.interior_closure_eq_univ_of_dense (X := X) (A := A) h_dense)\n  · intro h_int\n    have h_subset : (Set.univ : Set X) ⊆ closure A := by\n      have : interior (closure A) ⊆ closure A := interior_subset\n      simpa [h_int] using this\n    exact Set.Subset.antisymm (Set.Subset_univ _) h_subset",
+    "theorem Topology.closure_eq_univ_of_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (interior A) = (Set.univ : Set X)) :\n    closure A = (Set.univ : Set X) := by\n  -- Prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- `closure A` is clearly contained in `univ`.\n    exact Set.Subset_univ _\n  · -- Since `closure (interior A) ⊆ closure A`, the hypothesis gives the other inclusion.\n    have h_subset : closure (interior A) ⊆ closure A :=\n      Topology.closure_interior_subset_closure (X := X) (A := A)\n    simpa [h] using h_subset",
+    "theorem Topology.closure_eq_univ_iff_interior_compl_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A = (Set.univ : Set X) ↔ interior (Aᶜ) = (∅ : Set X) := by\n  constructor\n  · intro h_closure\n    exact\n      Topology.interior_compl_eq_empty_of_dense\n        (X := X) (A := A) h_closure\n  · intro h_int_empty\n    classical\n    by_contra h_not_dense\n    -- Define the open set `U := (closure A)ᶜ`.\n    set U : Set X := (closure A)ᶜ with hUdef\n    have hU_open : IsOpen U := isClosed_closure.isOpen_compl\n    -- Since `A ⊆ closure A`, we have `U ⊆ Aᶜ`.\n    have hU_subset : U ⊆ Aᶜ := by\n      intro x hxU\n      have hx_A : x ∈ A := by\n        by_contra h_notA\n        exact (hxU ((subset_closure : (A : Set X) ⊆ closure A) (by\n          by_cases h : x ∈ A\n          · exact h\n          · exact (False.elim (h_notA h))))) \n      exact (hxU (subset_closure hx_A)).elim\n    -- Because `U` is open and contained in `Aᶜ`, it is contained in `interior (Aᶜ)`.\n    have hU_in_int : U ⊆ interior (Aᶜ) :=\n      interior_maximal hU_subset hU_open\n    -- The complement `U` is nonempty, since `closure A ≠ univ`.\n    have hU_nonempty : U.Nonempty := by\n      have : (closure A)ᶜ.Nonempty := by\n        have hc : closure A ≠ (Set.univ : Set X) := h_not_dense\n        by_contra h_empty\n        have h_eq : (closure A)ᶜ = (∅ : Set X) :=\n          Set.not_nonempty_iff_eq_empty.1 h_empty\n        have h_closure_univ : closure A = (Set.univ : Set X) := by\n          simpa [hUdef, h_eq] using congrArg (fun s : Set X => sᶜ) h_eq\n        exact hc h_closure_univ\n      simpa [hUdef] using this\n    -- Therefore `interior (Aᶜ)` is nonempty, contradicting the hypothesis.\n    rcases hU_nonempty with ⟨x, hxU⟩\n    have hx_int : x ∈ interior (Aᶜ) := hU_in_int hxU\n    have : x ∈ (∅ : Set X) := by\n      simpa [h_int_empty] using hx_int\n    exact this.elim\n",
+    "theorem Topology.isClosed_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (closure (interior (closure A))) := by\n  -- `closure (interior (closure A))` is a closure, hence closed.\n  exact isClosed_closure"
+  ],
+  "success": true
+}

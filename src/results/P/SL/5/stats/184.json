@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.29428315162659
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6875,
+      "prompt_tokens": 31628,
+      "total_tokens": 38503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_subset_of_superset {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP1 : Topology.P1 (X := X) A) (hSub : closure (interior A) ⊆ B) :\n    closure (A : Set X) ⊆ B := by\n  intro x hx\n  have hx' : x ∈ closure (interior A) := by\n    have hsubset := Topology.P1_closure_subset (X := X) (A := A) hP1\n    exact hsubset hx\n  exact hSub hx'"
+  ],
+  "success": true
+}

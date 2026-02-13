@@ -1,0 +1,43 @@
+{
+  "times": [
+    109.39519929885864,
+    20.08922052383423
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7940,
+      "prompt_tokens": 31796,
+      "total_tokens": 39736,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    },
+    {
+      "completion_tokens": 1777,
+      "prompt_tokens": 31915,
+      "total_tokens": 33692,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_inter_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Set.frontier A = closure A ∩ closure (Aᶜ) := by\n  -- Unfold the definition of the frontier and rewrite using the existing lemma.\n  unfold Set.frontier\n  simpa [Set.diff_eq] using\n    Topology.closure_diff_interior_eq_closure_inter_closure_compl\n      (X := X) (A := A)",
+    "theorem Topology.interior_inter_open_right {X : Type*} [TopologicalSpace X]\n    {A U : Set X} (hU : IsOpen U) :\n    interior (A ∩ U) = interior A ∩ U := by\n  have h :=\n    Topology.interior_inter_open_left (X := X) (U := U) (A := A) hU\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

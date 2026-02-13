@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.12603998184204
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7376,
+      "prompt_tokens": 41200,
+      "total_tokens": 48576,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_prod_nonempty_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    (interior (A ×ˢ B)).Nonempty ↔\n      ((interior A).Nonempty ∧ (interior B).Nonempty) := by\n  -- We use the characterization of the interior of a product.\n  have h : interior (A ×ˢ B) = interior A ×ˢ interior B := by\n    simpa using interior_prod_eq (s := A) (t := B)\n  constructor\n  · intro hNonempty\n    rcases hNonempty with ⟨p, hp⟩\n    have hp' : (p : X × Y) ∈ interior A ×ˢ interior B := by\n      simpa [h] using hp\n    rcases Set.mem_prod.1 hp' with ⟨hpA, hpB⟩\n    exact ⟨⟨p.1, hpA⟩, ⟨p.2, hpB⟩⟩\n  · rintro ⟨hIntA, hIntB⟩\n    rcases hIntA with ⟨x, hx⟩\n    rcases hIntB with ⟨y, hy⟩\n    have hp : ((x, y) : X × Y) ∈ interior A ×ˢ interior B :=\n      And.intro hx hy\n    have : ((x, y) : X × Y) ∈ interior (A ×ˢ B) := by\n      simpa [h] using hp\n    exact ⟨(x, y), this⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.22231578826904
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4698,
+      "prompt_tokens": 11267,
+      "total_tokens": 15965,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_P1_and_open_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) (hOpenCl : IsOpen (closure A)) :\n    Topology.P3 A := by\n  dsimp [Topology.P3] at *\n  intro x hxA\n  -- From `P1`, obtain membership in `closure (interior A)`.\n  have hx_closure_int : x ∈ closure (interior A) := hP1 hxA\n  -- `P1` gives an equality of closures.\n  have hEq : closure A = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 (A := A) hP1\n  -- Transfer membership to `closure A`.\n  have hx_closure : x ∈ closure A := by\n    simpa [hEq] using hx_closure_int\n  -- Since `closure A` is open, its interior is itself.\n  have hIntEq : interior (closure A) = closure A := hOpenCl.interior_eq\n  -- Conclude the desired membership in the interior.\n  simpa [hIntEq] using hx_closure"
+  ],
+  "success": true
+}

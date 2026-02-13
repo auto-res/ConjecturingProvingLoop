@@ -1,0 +1,43 @@
+{
+  "times": [
+    106.53399610519409,
+    117.49966192245483
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5792,
+      "prompt_tokens": 15403,
+      "total_tokens": 21195,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    },
+    {
+      "completion_tokens": 7305,
+      "prompt_tokens": 15509,
+      "total_tokens": 22814,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_finite_iff_isOpen_of_T1\n    {X : Type*} [TopologicalSpace X] [T1Space X] {F : Set X}\n    (hF : F.Finite) :\n    Topology.P1 F ↔ IsOpen F := by\n  have hClosed : IsClosed (F : Set X) := hF.isClosed\n  constructor\n  · intro hP1\n    -- First, show `closure (interior F) = F`.\n    have hSub₁ : closure (interior F) ⊆ F := by\n      have : closure (interior F) ⊆ closure (F : Set X) :=\n        closure_mono (interior_subset : interior F ⊆ F)\n      simpa [hClosed.closure_eq] using this\n    have hEq₁ : closure (interior F) = F :=\n      Set.Subset.antisymm hSub₁ hP1\n    -- Since `interior F` is finite, it is closed in a `T1` space.\n    have hFinInt : (interior F).Finite := hF.subset interior_subset\n    have hClosedInt : IsClosed (interior F) := hFinInt.isClosed\n    have hEq₂ : interior F = closure (interior F) := (hClosedInt.closure_eq).symm\n    -- Combining the equalities yields `interior F = F`.\n    have hIntEq : interior F = F := by\n      simpa [hEq₁.symm] using hEq₂\n    -- Hence `F` is open.\n    have : IsOpen (interior F) := isOpen_interior\n    simpa [hIntEq] using this\n  · intro hOpen\n    exact Topology.IsOpen_P1 (A := F) hOpen",
+    "theorem IsOpen_P2' {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    Topology.P2 A := by\n  -- Unfold the definition of `P2`.\n  dsimp [Topology.P2]\n  -- Prove the inclusion pointwise.\n  intro x hxA\n  -- Since `A` is open, we can place `x` inside `interior (closure A)`.\n  have hx_in_int_closureA : x ∈ interior (closure A) := by\n    have hIncl : (A : Set X) ⊆ interior (closure A) :=\n      interior_maximal subset_closure hA\n    exact hIncl hxA\n  -- Relate `interior (closure (interior A))` to `interior (closure A)`\n  -- using the fact that `interior A = A`.\n  have hEq : interior (closure (interior A)) = interior (closure A) := by\n    simpa [hA.interior_eq]\n  -- Rewrite and finish.\n  simpa [hEq] using hx_in_int_closureA"
+  ],
+  "success": true
+}

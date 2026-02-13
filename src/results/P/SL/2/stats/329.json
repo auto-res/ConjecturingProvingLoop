@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.45640683174133
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4745,
+      "prompt_tokens": 56740,
+      "total_tokens": 61485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_implies_frontier_interior_closure_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → frontier (interior (closure (A : Set X))) = (∅ : Set X) := by\n  intro hDense\n  have hInt : interior (closure (A : Set X)) = (Set.univ : Set X) := by\n    simp [hDense.closure_eq, interior_univ]\n  simpa [hInt, frontier_univ]"
+  ],
+  "success": true
+}

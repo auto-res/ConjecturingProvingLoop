@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.87074041366577
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5251,
+      "prompt_tokens": 31420,
+      "total_tokens": 36671,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iUnionClosure_subset_interiorClosure_iUnion\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {𝒜 : ι → Set X} :\n    interior (⋃ i, closure (𝒜 i)) ⊆ interior (closure (⋃ i, 𝒜 i)) := by\n  -- Use the previously proven inclusion between the unions themselves.\n  have h_subset :\n      (⋃ i, closure (𝒜 i) : Set X) ⊆ closure (⋃ i, 𝒜 i) :=\n    Topology.iUnion_closure_subset_closure_iUnion (𝒜 := 𝒜)\n  -- Monotonicity of `interior` yields the desired inclusion.\n  exact interior_mono h_subset"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    144.51312899589539
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10776,
+      "prompt_tokens": 24522,
+      "total_tokens": 35298,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_eq {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B : Set X) = interior A ∩ interior B := by\n  apply subset_antisymm\n  ·\n    intro x hx\n    -- `interior (A ∩ B)` is contained in both `interior A` and `interior B`\n    have hA : (interior (A ∩ B : Set X) : Set X) ⊆ interior A := by\n      have hSub : ((A ∩ B) : Set X) ⊆ (A : Set X) := by\n        intro y hy\n        exact hy.1\n      exact interior_mono hSub\n    have hB : (interior (A ∩ B : Set X) : Set X) ⊆ interior B := by\n      have hSub : ((A ∩ B) : Set X) ⊆ (B : Set X) := by\n        intro y hy\n        exact hy.2\n      exact interior_mono hSub\n    exact And.intro (hA hx) (hB hx)\n  ·\n    intro x hx\n    -- The reverse inclusion is given by an existing lemma.\n    have hsubset :\n        (interior A ∩ interior B : Set X) ⊆ interior (A ∩ B : Set X) :=\n      interior_inter_subset (A := A) (B := B)\n    exact hsubset hx"
+  ],
+  "success": true
+}

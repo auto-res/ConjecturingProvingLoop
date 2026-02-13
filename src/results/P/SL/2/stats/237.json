@@ -1,0 +1,43 @@
+{
+  "times": [
+    36.940958976745605,
+    191.1321952342987
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2489,
+      "prompt_tokens": 38731,
+      "total_tokens": 41220,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    },
+    {
+      "completion_tokens": 10898,
+      "prompt_tokens": 38846,
+      "total_tokens": 49744,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_interior_union_frontier {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) = interior A ∪ frontier (A : Set X) := by\n  ext x\n  constructor\n  · intro hxCl\n    by_cases hxInt : x ∈ interior A\n    · exact Or.inl hxInt\n    · have hxFrontier : x ∈ frontier (A : Set X) := by\n        exact And.intro hxCl hxInt\n      exact Or.inr hxFrontier\n  · intro hx\n    cases hx with\n    | inl hxInt =>\n        exact interior_subset hxInt\n    | inr hxFrontier =>\n        exact hxFrontier.1",
+    ""
+  ],
+  "success": true
+}

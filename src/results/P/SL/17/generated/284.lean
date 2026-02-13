@@ -1,0 +1,25 @@
+
+
+theorem Topology.interior_closure_interior_inter_subset_inter_interior_closure_interior
+    {X : Type*} [TopologicalSpace X] {A B : Set X} :
+    interior (closure (interior (A ∩ B))) ⊆
+      interior (closure (interior A)) ∩ interior (closure (interior B)) := by
+  intro x hx
+  -- `interior (A ∩ B)` is contained in both `interior A` and `interior B`.
+  have h_subset_A : interior (A ∩ B) ⊆ interior A :=
+    interior_mono (Set.inter_subset_left : (A ∩ B) ⊆ A)
+  have h_subset_B : interior (A ∩ B) ⊆ interior B :=
+    interior_mono (Set.inter_subset_right : (A ∩ B) ⊆ B)
+  -- Taking closures preserves these inclusions.
+  have h_closure_A :
+      closure (interior (A ∩ B)) ⊆ closure (interior A) :=
+    closure_mono h_subset_A
+  have h_closure_B :
+      closure (interior (A ∩ B)) ⊆ closure (interior B) :=
+    closure_mono h_subset_B
+  -- Applying `interior_mono` gives the desired inclusions on interiors of closures.
+  have hx_A : x ∈ interior (closure (interior A)) :=
+    (interior_mono h_closure_A) hx
+  have hx_B : x ∈ interior (closure (interior B)) :=
+    (interior_mono h_closure_B) hx
+  exact And.intro hx_A hx_B

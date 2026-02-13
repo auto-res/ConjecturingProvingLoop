@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.80557227134705
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5161,
+      "prompt_tokens": 34723,
+      "total_tokens": 39884,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closure_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Topology.P3 (closure (A : Set X)) := by\n  intro hDenseInt\n  -- From the density of `interior A`, deduce the density of `A`.\n  have hDenseA : Dense (A : Set X) :=\n    Topology.dense_of_dense_interior (A := A) hDenseInt\n  -- Apply the existing result that dense sets yield `P3` for their closures.\n  exact Topology.P3_closure_of_dense (A := A) hDenseA"
+  ],
+  "success": true
+}

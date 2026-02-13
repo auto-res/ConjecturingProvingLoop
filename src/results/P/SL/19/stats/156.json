@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.73020076751709
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2550,
+      "prompt_tokens": 23169,
+      "total_tokens": 25719,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_P3_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (A := closure A) → Topology.P3 (A := A) := by\n  intro hP3_cl\n  dsimp [Topology.P3] at *\n  intro x hxA\n  -- First, move `x` into `closure A`.\n  have hx_closure : (x : X) ∈ closure A := subset_closure hxA\n  -- Apply the assumption `P3` for `closure A`.\n  have hx_int_closure_closure : x ∈ interior (closure (closure A)) :=\n    hP3_cl hx_closure\n  -- Simplify the double closure inside the interior.\n  have hIntEq :\n      interior (closure (closure A)) = interior (closure A) :=\n    Topology.interior_closure_closure_eq_interior_closure\n      (X := X) (A := A)\n  simpa [hIntEq] using hx_int_closure_closure"
+  ],
+  "success": true
+}

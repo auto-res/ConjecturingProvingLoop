@@ -1,0 +1,43 @@
+{
+  "times": [
+    29.182645797729492,
+    174.94034600257874
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2418,
+      "prompt_tokens": 33509,
+      "total_tokens": 35927,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 13586,
+      "prompt_tokens": 33605,
+      "total_tokens": 47191,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iff_interior_closure_eq_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    Topology.P3 A ↔ interior (closure A) = A := by\n  constructor\n  · intro hP3\n    exact Topology.interior_closure_eq_of_isClosed_of_P3 (A := A) hA hP3\n  · intro hEq\n    have hOpen : IsOpen A := by\n      have : IsOpen (interior (closure A)) := isOpen_interior\n      simpa [hEq] using this\n    exact Topology.P3_of_isOpen (A := A) hOpen",
+    ""
+  ],
+  "success": true
+}

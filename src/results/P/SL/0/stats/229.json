@@ -1,0 +1,26 @@
+{
+  "times": [
+    21.437692165374756
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1743,
+      "prompt_tokens": 38946,
+      "total_tokens": 40689,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_P3_of_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (interior (A : Set X))) ↔\n      Topology.P3 (closure (interior (A : Set X))) := by\n  have hClosed : IsClosed (closure (interior (A : Set X))) := isClosed_closure\n  have h₁ :\n      Topology.P2 (closure (interior (A : Set X))) ↔\n        IsOpen (closure (interior (A : Set X))) :=\n    Topology.P2_iff_isOpen_of_isClosed\n      (X := X) (A := closure (interior (A : Set X))) hClosed\n  have h₂ :\n      Topology.P3 (closure (interior (A : Set X))) ↔\n        IsOpen (closure (interior (A : Set X))) :=\n    Topology.P3_iff_isOpen_of_isClosed\n      (X := X) (A := closure (interior (A : Set X))) hClosed\n  exact h₁.trans h₂.symm"
+  ],
+  "success": true
+}

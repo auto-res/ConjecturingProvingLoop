@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.89625239372253
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5245,
+      "prompt_tokens": 28843,
+      "total_tokens": 34088,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_subset_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) ⊆ interior (closure A) := by\n  -- The inclusion `A ⊆ closure A` is basic.\n  have hSub : (A : Set X) ⊆ closure A := subset_closure\n  -- Monotonicity of `interior` yields the desired inclusion.\n  exact interior_mono hSub"
+  ],
+  "success": true
+}

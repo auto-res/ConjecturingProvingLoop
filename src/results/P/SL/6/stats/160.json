@@ -1,0 +1,26 @@
+{
+  "times": [
+    294.93412137031555
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 23208,
+      "prompt_tokens": 24621,
+      "total_tokens": 47829,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 22784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_subset_interior_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) ∪ interior B ⊆ interior (closure (A ∪ B : Set X)) := by\n  intro x hx\n  cases hx with\n  | inl hAx =>\n      -- First, lift `x ∈ interior A` to `x ∈ interior (A ∪ B)`.\n      have hx_int_union : x ∈ interior (A ∪ B) := by\n        have hSub : (A : Set X) ⊆ A ∪ B := by\n          intro y hy\n          exact Or.inl hy\n        exact (interior_mono hSub) hAx\n      -- Then, use monotonicity of `interior` with `A ∪ B ⊆ closure (A ∪ B)`.\n      have hIncl :\n          interior (A ∪ B) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono (subset_closure : (A ∪ B : Set X) ⊆ closure (A ∪ B))\n      exact hIncl hx_int_union\n  | inr hBx =>\n      -- Symmetric argument for the `B` component.\n      have hx_int_union : x ∈ interior (A ∪ B) := by\n        have hSub : (B : Set X) ⊆ A ∪ B := by\n          intro y hy\n          exact Or.inr hy\n        exact (interior_mono hSub) hBx\n      have hIncl :\n          interior (A ∪ B) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono (subset_closure : (A ∪ B : Set X) ⊆ closure (A ∪ B))\n      exact hIncl hx_int_union"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.27644085884094
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5289,
+      "prompt_tokens": 55380,
+      "total_tokens": 60669,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_closure_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) ∩ closure (B : Set X) ⊆ closure (A ∩ B : Set X) := by\n  intro x hx\n  rcases hx with ⟨hx_intA, hx_clB⟩\n  -- We prove that every open neighbourhood of `x` intersects `A ∩ B`.\n  have : x ∈ closure (A ∩ B : Set X) := by\n    apply (mem_closure_iff).2\n    intro V hV_open hxV\n    -- Consider the open neighbourhood `V ∩ interior A` of `x`.\n    have hU_open : IsOpen (V ∩ interior (A : Set X)) :=\n      hV_open.inter isOpen_interior\n    have hxU : x ∈ V ∩ interior (A : Set X) := ⟨hxV, hx_intA⟩\n    -- Since `x ∈ closure B`, this neighbourhood meets `B`.\n    have h_nonempty :\n        ((V ∩ interior (A : Set X)) ∩ B).Nonempty :=\n      (mem_closure_iff).1 hx_clB (V ∩ interior (A : Set X)) hU_open hxU\n    -- Extract a witness and show it lies in `V ∩ (A ∩ B)`.\n    rcases h_nonempty with ⟨y, ⟨⟨hyV, hy_intA⟩, hyB⟩⟩\n    have hyA : y ∈ A := interior_subset hy_intA\n    exact ⟨y, ⟨hyV, ⟨hyA, hyB⟩⟩⟩\n  exact this"
+  ],
+  "success": true
+}

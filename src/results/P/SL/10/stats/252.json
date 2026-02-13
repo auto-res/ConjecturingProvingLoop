@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.10065984725952
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3828,
+      "prompt_tokens": 40834,
+      "total_tokens": 44662,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_subset_closure_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A \\ interior A ⊆ closure (Aᶜ) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxNotIntA⟩\n  -- We verify the neighbourhood criterion for `x ∈ closure (Aᶜ)`.\n  apply (mem_closure_iff).2\n  intro V hVopen hxV\n  -- Assume, for contradiction, that `V ∩ Aᶜ` is empty.\n  by_contra hEmpty\n  -- Then every point of `V` lies in `A`.\n  have hSub : V ⊆ A := by\n    intro y hyV\n    by_contra hyNotA\n    have : (V ∩ Aᶜ).Nonempty := ⟨y, ⟨hyV, hyNotA⟩⟩\n    exact hEmpty this\n  -- Hence `V` is an open neighbourhood of `x` contained in `A`,\n  -- so `x ∈ interior A`, contradicting `hxNotIntA`.\n  have : x ∈ interior A :=\n    interior_maximal hSub hVopen hxV\n  exact hxNotIntA this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.61676096916199
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3674,
+      "prompt_tokens": 33785,
+      "total_tokens": 37459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_eq_interior_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed A) :\n    interior (closure (interior A)) = interior A := by\n  apply Set.Subset.antisymm\n  ·\n    have h_subset : closure (interior A) ⊆ A :=\n      closure_interior_subset_of_isClosed (X := X) (A := A) hA_closed\n    exact interior_mono h_subset\n  ·\n    exact interior_subset_interiorClosureInterior (X := X) (A := A)"
+  ],
+  "success": true
+}

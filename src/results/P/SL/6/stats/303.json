@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.45828199386597
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2686,
+      "prompt_tokens": 48007,
+      "total_tokens": 50693,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_subset_closure_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A : Set X) → closure A ⊆ closure (interior A) := by\n  intro hP1\n  -- `P1` gives the inclusion `A ⊆ closure (interior A)`.\n  have hSub : (A : Set X) ⊆ closure (interior A) := hP1\n  -- Taking closures preserves inclusions.\n  have hClos : closure (A : Set X) ⊆ closure (closure (interior A)) :=\n    closure_mono hSub\n  -- Simplify using idempotence of `closure`.\n  simpa [closure_closure] using hClos"
+  ],
+  "success": true
+}

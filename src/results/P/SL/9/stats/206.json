@@ -1,0 +1,26 @@
+{
+  "times": [
+    70.48956441879272
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5700,
+      "prompt_tokens": 33473,
+      "total_tokens": 39173,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_union_subset_union_boundary {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A ∪ B) \\ interior (A ∪ B) ⊆\n      (closure A \\ interior A) ∪ (closure B \\ interior B) := by\n  intro x hx\n  rcases hx with ⟨hx_cl_union, hx_not_int_union⟩\n  -- From `x ∈ closure (A ∪ B)` deduce `x ∈ closure A ∪ closure B`.\n  have hx_closure_union : x ∈ closure A ∪ closure B := by\n    have h_eq := (Topology.closure_union_eq (A) (B))\n    have : x ∈ closure (A ∪ B) := hx_cl_union\n    simpa [h_eq] using this\n  -- `x` is not in `interior A` (otherwise it would be in `interior (A ∪ B)`).\n  have h_not_intA : x ∉ interior A := by\n    intro hx_intA\n    have h_subset : interior A ⊆ interior (A ∪ B) := by\n      have h_sub : (A : Set X) ⊆ A ∪ B := by\n        intro y hy; exact Or.inl hy\n      exact interior_mono h_sub\n    exact hx_not_int_union (h_subset hx_intA)\n  -- Likewise, `x` is not in `interior B`.\n  have h_not_intB : x ∉ interior B := by\n    intro hx_intB\n    have h_subset : interior B ⊆ interior (A ∪ B) := by\n      have h_sub : (B : Set X) ⊆ A ∪ B := by\n        intro y hy; exact Or.inr hy\n      exact interior_mono h_sub\n    exact hx_not_int_union (h_subset hx_intB)\n  -- Finish by cases on membership in `closure A ∪ closure B`.\n  cases hx_closure_union with\n  | inl hx_clA =>\n      exact Or.inl ⟨hx_clA, h_not_intA⟩\n  | inr hx_clB =>\n      exact Or.inr ⟨hx_clB, h_not_intB⟩"
+  ],
+  "success": true
+}

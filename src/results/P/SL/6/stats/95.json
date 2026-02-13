@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.99973034858704
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6920,
+      "prompt_tokens": 14326,
+      "total_tokens": 21246,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem union_interior_closure_subset_interior_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A : Set X)) ∪ interior (closure B) ⊆\n      interior (closure (A ∪ B : Set X)) := by\n  intro x hx\n  cases hx with\n  | inl hAx =>\n      -- `x` lies in `interior (closure A)`\n      -- Show that this interior is contained in the desired interior.\n      have hIncl : closure (A : Set X) ⊆ closure (A ∪ B) := by\n        apply closure_mono\n        intro y hy\n        exact Or.inl hy\n      have hIntIncl :\n          interior (closure (A : Set X))\n            ⊆ interior (closure (A ∪ B)) :=\n        interior_mono hIncl\n      exact hIntIncl hAx\n  | inr hBx =>\n      -- Analogous argument for the `B` component.\n      have hIncl : closure (B : Set X) ⊆ closure (A ∪ B) := by\n        apply closure_mono\n        intro y hy\n        exact Or.inr hy\n      have hIntIncl :\n          interior (closure (B : Set X))\n            ⊆ interior (closure (A ∪ B)) :=\n        interior_mono hIncl\n      exact hIntIncl hBx"
+  ],
+  "success": true
+}

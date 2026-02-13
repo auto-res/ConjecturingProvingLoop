@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.45396375656128
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4244,
+      "prompt_tokens": 50481,
+      "total_tokens": 54725,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_closure_interior_eq_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior ((A : Set X) \\ closure (interior A)) = (∅ : Set X) := by\n  classical\n  apply le_antisymm\n  · intro x hx\n    rcases mem_interior.1 hx with ⟨U, hUsub, hUopen, hxU⟩\n    -- `U ⊆ A`\n    have hUsubA : (U : Set X) ⊆ A := fun y hy => (hUsub hy).1\n    -- Hence `U ⊆ interior A`\n    have hUsubInt : (U : Set X) ⊆ interior (A : Set X) :=\n      interior_maximal hUsubA hUopen\n    -- So `x ∈ interior A ⊆ closure (interior A)`\n    have hxInClInt : x ∈ closure (interior (A : Set X)) :=\n      subset_closure (hUsubInt hxU)\n    -- But `x ∉ closure (interior A)` since `U ⊆ (closure (interior A))ᶜ`\n    have hxNotClInt : x ∉ closure (interior (A : Set X)) :=\n      (hUsub hxU).2\n    exact (hxNotClInt hxInClInt).elim\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

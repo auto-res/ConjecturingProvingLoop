@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.24407458305359
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4796,
+      "prompt_tokens": 34768,
+      "total_tokens": 39564,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_iInter_subset_iInter_interior_closure\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {S : ι → Set X} :\n    interior (closure (⋂ i, S i : Set X)) ⊆ ⋂ i, interior (closure (S i)) := by\n  classical\n  intro x hx\n  -- For each index `i`, show that `x` belongs to `interior (closure (S i))`.\n  have hx_i : ∀ i, x ∈ interior (closure (S i)) := by\n    intro i\n    -- `⋂ i, S i ⊆ S i`, hence their closures satisfy the same inclusion.\n    have hSub : closure (⋂ j, S j : Set X) ⊆ closure (S i) := by\n      apply closure_mono\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Monotonicity of `interior` turns this into an inclusion of interiors.\n    have hIncl :\n        interior (closure (⋂ j, S j : Set X))\n          ⊆ interior (closure (S i)) :=\n      interior_mono hSub\n    exact hIncl hx\n  -- Combine the pointwise memberships into one for the intersection.\n  exact Set.mem_iInter.2 hx_i"
+  ],
+  "success": true
+}

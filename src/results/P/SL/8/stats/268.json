@@ -1,0 +1,43 @@
+{
+  "times": [
+    78.60978817939758,
+    215.7342450618744
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5196,
+      "prompt_tokens": 41817,
+      "total_tokens": 47013,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 12690,
+      "prompt_tokens": 41933,
+      "total_tokens": 54623,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_subset_closure_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure A ∩ interior B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxIntB⟩\n  -- We will show that every open set containing `x` meets `A ∩ B`.\n  have h_goal : x ∈ closure (A ∩ B) := by\n    -- Use the neighborhood characterization of `closure`.\n    refine (mem_closure_iff).2 ?_\n    intro U hUopen hxU\n    -- From `hxIntB`, obtain an open set `V` with `x ∈ V ⊆ B`.\n    rcases (Set.mem_interior).1 hxIntB with ⟨V, hVopen, hVsubB, hxV⟩\n    -- Consider the open set `W = U ∩ V` containing `x`.\n    set W := U ∩ V with hWdef\n    have hWopen : IsOpen W := hUopen.inter hVopen\n    have hxW : x ∈ W := by\n      have : x ∈ U ∩ V := And.intro hxU hxV\n      simpa [hWdef] using this\n    -- Because `x ∈ closure A`, `W` meets `A`.\n    have hNon : (A ∩ W).Nonempty :=\n      (mem_closure_iff).1 hxClA W hWopen hxW\n    -- Extract a witness `y`.\n    rcases hNon with ⟨y, hyA, hyW⟩\n    have hyU : y ∈ U := by\n      have : y ∈ W := hyW\n      simpa [hWdef] using this.1\n    have hyV : y ∈ V := by\n      have : y ∈ W := hyW\n      simpa [hWdef] using this.2\n    have hyB : y ∈ B := hVsubB hyV\n    -- `y` lies in `U ∩ (A ∩ B)`.\n    exact ⟨y, hyU, And.intro hyA hyB⟩\n  exact h_goal",
+    ""
+  ],
+  "success": true
+}

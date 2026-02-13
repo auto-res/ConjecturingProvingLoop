@@ -1,0 +1,43 @@
+{
+  "times": [
+    71.48986053466797,
+    96.99680685997009
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4978,
+      "prompt_tokens": 38513,
+      "total_tokens": 43491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    },
+    {
+      "completion_tokens": 5812,
+      "prompt_tokens": 38619,
+      "total_tokens": 44431,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_frontier_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ∩ frontier A = (∅ : Set X) := by\n  -- By definition, `frontier A = closure A \\ interior A`.\n  -- Intersecting `interior A` with this set yields the empty set.\n  simpa [frontier, Set.inter_diff_self]",
+    "theorem Topology.interior_diff_closed_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hOpenA : IsOpen A) (hClosedB : IsClosed B) :\n    interior (A \\ B) = A \\ B := by\n  simpa [hOpenA.interior_eq] using\n    (Topology.interior_diff_closed (A := A) (B := B) hClosedB)"
+  ],
+  "success": true
+}

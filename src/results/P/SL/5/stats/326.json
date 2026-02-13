@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.174628973007202
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2279,
+      "prompt_tokens": 68472,
+      "total_tokens": 70751,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 67456
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_closure_interior_eq_left_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : (A : Set X) ⊆ B) :\n    closure (interior A) ∩ closure (interior B) = closure (interior A) := by\n  -- `interior` is monotone, hence so is `closure ∘ interior`.\n  have hsubset : closure (interior (A : Set X)) ⊆ closure (interior B) := by\n    have h₁ : (interior (A : Set X) : Set X) ⊆ interior B :=\n      interior_mono hAB\n    exact closure_mono h₁\n  -- Establish the desired set equality via double inclusion.\n  ext x\n  constructor\n  · intro hx\n    exact hx.1\n  · intro hxA\n    exact ⟨hxA, hsubset hxA⟩"
+  ],
+  "success": true
+}

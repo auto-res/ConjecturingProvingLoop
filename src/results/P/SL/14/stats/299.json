@@ -1,0 +1,26 @@
+{
+  "times": [
+    148.470064163208
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8236,
+      "prompt_tokens": 55822,
+      "total_tokens": 64058,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55168
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_interior_eq_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (A \\ interior A : Set X) = (∅ : Set X) := by\n  -- `interior (A \\ interior A)` is an open subset of `A`\n  have h_subset_int :\n      (interior (A \\ interior A : Set X) : Set X) ⊆ interior A := by\n    -- First, note it lies in `A`\n    have h_sub_A :\n        (interior (A \\ interior A : Set X) : Set X) ⊆ A := by\n      intro x hx\n      have hx_diff : (x : X) ∈ A \\ interior A :=\n        (interior_subset : interior (A \\ interior A : Set X) ⊆ A \\ interior A) hx\n      exact hx_diff.1\n    -- Then use maximality of the interior\n    exact\n      interior_maximal h_sub_A\n        (isOpen_interior : IsOpen (interior (A \\ interior A : Set X)))\n  -- It is also disjoint from `interior A`\n  have h_subset_compl :\n      (interior (A \\ interior A : Set X) : Set X) ⊆ (interior A)ᶜ := by\n    intro x hx\n    have hx_diff : (x : X) ∈ A \\ interior A :=\n      (interior_subset : interior (A \\ interior A : Set X) ⊆ A \\ interior A) hx\n    exact hx_diff.2\n  -- Hence it is contained in the empty set\n  have h_subset_empty :\n      (interior (A \\ interior A : Set X) : Set X) ⊆ (∅ : Set X) := by\n    intro x hx\n    have hx_in : (x : X) ∈ interior A := h_subset_int hx\n    have hx_not : (x : X) ∉ interior A := h_subset_compl hx\n    exact (hx_not hx_in).elim\n  -- Equality with `∅`\n  exact Set.Subset.antisymm h_subset_empty (Set.empty_subset _)"
+  ],
+  "success": true
+}

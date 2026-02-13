@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.657405614852905
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4611,
+      "prompt_tokens": 17803,
+      "total_tokens": 22414,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_and_dense_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → Dense A → Topology.P2 A := by\n  intro hP1 hDense\n  dsimp [Topology.P2]\n  intro x hx\n  -- From `P1` and density we know `closure (interior A)` is the whole space.\n  have h_closure_univ :\n      closure (interior A) = (Set.univ : Set X) :=\n    Topology.closure_interior_eq_univ_of_P1_and_dense\n      (X := X) (A := A) hP1 hDense\n  -- Hence its interior is also the whole space.\n  have h_int_univ :\n      interior (closure (interior A)) = (Set.univ : Set X) := by\n    simpa [h_closure_univ, interior_univ]\n  -- Conclude the desired membership.\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_int_univ] using this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.407580852508545
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1804,
+      "prompt_tokens": 44993,
+      "total_tokens": 46797,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_subset_closure_interior_of_frontier_subset\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) ⊆ closure (interior A) →\n      closure (A : Set X) ⊆ closure (interior A) := by\n  intro hFront x hxCl\n  by_cases hxInt : x ∈ interior (A : Set X)\n  · -- If `x` is already in `interior A`, the result is immediate.\n    exact subset_closure hxInt\n  · -- Otherwise, `x` lies in the frontier of `A`, hence in the target by `hFront`.\n    have hxFront : x ∈ frontier (A : Set X) := by\n      exact And.intro hxCl hxInt\n    exact hFront hxFront"
+  ],
+  "success": true
+}

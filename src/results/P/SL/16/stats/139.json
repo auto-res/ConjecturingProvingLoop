@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.02505135536194
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5282,
+      "prompt_tokens": 24700,
+      "total_tokens": 29982,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (X := X) (closure (interior (closure (interior A)))) := by\n  -- First, rewrite the set using the idempotence lemma.\n  have h_eq :\n      closure (interior (closure (interior A))) = closure (interior A) :=\n    Topology.closure_interior_closure_interior_eq_closure_interior (X := X) (A := A)\n  -- We already know that `closure (interior A)` satisfies `P1`.\n  have hP1 : Topology.P1 (X := X) (closure (interior A)) :=\n    Topology.P1_closure_interior (X := X) (A := A)\n  -- Transport `P1` along the established equality.\n  simpa [h_eq] using hP1"
+  ],
+  "success": true
+}

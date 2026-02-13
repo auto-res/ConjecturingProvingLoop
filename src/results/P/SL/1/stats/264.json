@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.49056124687195
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4011,
+      "prompt_tokens": 40173,
+      "total_tokens": 44184,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_of_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure A = closure (interior A)) :\n    Topology.P1 (closure A) := by\n  dsimp [Topology.P1]\n  intro x hx\n  -- Rewrite `x ∈ closure A` using the given equality.\n  have hx' : x ∈ closure (interior A) := by\n    simpa [h] using hx\n  -- Show that this closure is contained in `closure (interior (closure A))`.\n  have hsubset : closure (interior A) ⊆ closure (interior (closure A)) := by\n    have hinner : interior A ⊆ interior (closure A) := by\n      apply interior_mono\n      exact (subset_closure : (A : Set X) ⊆ closure A)\n    exact closure_mono hinner\n  exact hsubset hx'"
+  ],
+  "success": true
+}

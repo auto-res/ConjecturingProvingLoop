@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.78728365898132
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4484,
+      "prompt_tokens": 12373,
+      "total_tokens": 16857,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closure_iff_P2_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P3 (closure (A : Set X)) ↔ Topology.P2 (closure (A : Set X)) := by\n  have hClosed : IsClosed (closure (A : Set X)) := isClosed_closure\n  simpa using\n    (Topology.P3_iff_P2_of_isClosed\n      (A := closure (A : Set X)) hClosed)"
+  ],
+  "success": true
+}

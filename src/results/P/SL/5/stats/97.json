@@ -1,0 +1,43 @@
+{
+  "times": [
+    133.38087677955627,
+    36.63987469673157
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10933,
+      "prompt_tokens": 15360,
+      "total_tokens": 26293,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    },
+    {
+      "completion_tokens": 2274,
+      "prompt_tokens": 15688,
+      "total_tokens": 17962,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_iterate_eq {X : Type*} [TopologicalSpace X] (A : Set X) {n : ℕ}\n    (hn : 0 < n) :\n    (Function.iterate (fun S : Set X => closure (interior S)) n) A = closure (interior A) := by\n  -- Set up the operator `T := closure ∘ interior`.\n  let T : Set X → Set X := fun S => closure (interior S)\n  -- We will prove the desired equality by induction on `n`.\n  -- The base case `n = 1` is immediate by unfolding `Function.iterate`.\n  -- For the inductive step we use the idempotency of `T`, namely\n  -- `closure (interior (closure (interior S))) = closure (interior S)`.\n  -- This is given by `Topology.closure_interior_idempotent`.\n  cases n with\n  | zero =>\n      exact (Nat.lt_asymm hn hn).elim\n  | succ n =>\n      induction n with\n      | zero =>\n          simp [T, Function.iterate]  -- `n = 1`\n      | succ n ih =>\n          -- Use the inductive hypothesis together with `iterate_succ_apply'`.\n          have : (Function.iterate T (n.succ.succ)) A =\n              T (Function.iterate T (n.succ)) A := by\n            simpa [Function.iterate_succ_apply'] using rfl\n          -- Rewrite using the inductive hypothesis and idempotency of `T`.\n          simpa [T, ih, Topology.closure_interior_idempotent] using this",
+    "theorem interior_inter_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B : Set X) ⊆ interior A ∩ interior B := by\n  intro x hx\n  have hxA : x ∈ interior A :=\n    (interior_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)) hx\n  have hxB : x ∈ interior B :=\n    (interior_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hx\n  exact ⟨hxA, hxB⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    177.46662521362305,
+    214.3185133934021
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9914,
+      "prompt_tokens": 38937,
+      "total_tokens": 48851,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    },
+    {
+      "completion_tokens": 12963,
+      "prompt_tokens": 39048,
+      "total_tokens": 52011,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P2_implies_isClopen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hP2 : Topology.P2 (X:=X) A) :\n    IsClopen (A : Set X) := by\n  -- From `P2` and the closedness of `A`, we obtain that `A` is open.\n  have hA_open : IsOpen (A : Set X) :=\n    Topology.closed_P2_implies_isOpen (X := X) (A := A) hA_closed hP2\n  -- Combining openness and closedness gives a clopen set.\n  exact ⟨hA_open, hA_closed⟩",
+    "theorem Topology.closure_eq_univ_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (A : Set X) = (Set.univ : Set X)) :\n    Topology.P3 (X := X) A := by\n  dsimp [Topology.P3]\n  intro x hxA\n  -- `x` is certainly in the closure of `A`.\n  have hx_cl : (x : X) ∈ closure (A : Set X) := subset_closure hxA\n  -- Rewrite using the hypothesis `h` and simplify.\n  simpa [h, interior_univ] using hx_cl"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    177.11439108848572,
+    15.203675031661987
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14654,
+      "prompt_tokens": 28188,
+      "total_tokens": 42842,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    },
+    {
+      "completion_tokens": 929,
+      "prompt_tokens": 28338,
+      "total_tokens": 29267,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem iterate_interior_closure_eq {X : Type*} [TopologicalSpace X]\n    (n : ℕ) (A : Set X) :\n    Function.iterate (fun S : Set X => interior (closure S)) (n.succ) A =\n      interior (closure A) := by\n  induction n with\n  | zero =>\n      simp\n  | succ n ih =>\n      simpa [Function.iterate_succ_apply', ih, Topology.interior_closure_idempotent]",
+    "theorem interior_subset_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) ⊆ closure (A : Set X) := by\n  intro x hxInt\n  -- From `x ∈ interior A` we infer `x ∈ A`.\n  have hxA : x ∈ (A : Set X) := interior_subset hxInt\n  -- The set `A` is contained in its closure.\n  have : (A : Set X) ⊆ closure (A : Set X) := subset_closure\n  -- Therefore, `x ∈ closure A`.\n  exact this hxA"
+  ],
+  "success": true
+}

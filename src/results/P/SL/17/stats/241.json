@@ -1,0 +1,26 @@
+{
+  "times": [
+    126.51214027404785
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6118,
+      "prompt_tokens": 43306,
+      "total_tokens": 49424,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_eq_union_interior_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    interior (A ∪ B) = interior A ∪ interior B := by\n  -- For open sets, the interior coincides with the set itself.\n  have hIntA : interior A = A := hA.interior_eq\n  have hIntB : interior B = B := hB.interior_eq\n  -- Likewise, `A ∪ B` is open, so its interior is itself.\n  have hIntUnion : interior (A ∪ B) = A ∪ B :=\n    Topology.interior_union_eq_of_isOpen (A := A) (B := B) hA hB\n  -- Rewrite each interior using the equalities above and simplify.\n  simpa [hIntA, hIntB, hIntUnion]"
+  ],
+  "success": true
+}

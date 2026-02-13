@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.30270552635193
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3316,
+      "prompt_tokens": 967,
+      "total_tokens": 4283,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_P2_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P3 A ↔ Topology.P2 A := by\n  have h₁ : Topology.P3 A → Topology.P2 A := by\n    intro h3\n    dsimp [Topology.P3, Topology.P2] at h3 ⊢\n    simpa [hA.interior_eq] using h3\n  have h₂ : Topology.P2 A → Topology.P3 A := by\n    intro h2\n    exact P2_implies_P3 h2\n  exact ⟨h₁, h₂⟩"
+  ],
+  "success": true
+}

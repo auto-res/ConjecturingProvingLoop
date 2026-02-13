@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.83742260932922
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5369,
+      "prompt_tokens": 40850,
+      "total_tokens": 46219,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_of_dense_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : Dense (interior B)) :\n    Topology.P2 (A ∪ B) := by\n  -- First, obtain density of `interior (A ∪ B)` by symmetry.\n  have hDense : Dense (interior (A ∪ B)) := by\n    have h := Topology.dense_interior_union_of_dense_left (A := B) (B := A) hB\n    simpa [Set.union_comm] using h\n  -- Apply the existing lemma to conclude the `P2` property.\n  exact Topology.P2_of_dense_interior (A := A ∪ B) hDense"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.458973169326782
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2462,
+      "prompt_tokens": 13414,
+      "total_tokens": 15876,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_subset_closureInterior\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B)\n    (hBsubset : (B : Set X) ⊆ closure (interior A)) :\n    Topology.P1 B := by\n  dsimp [Topology.P1] at *\n  intro x hxB\n  -- First, `x` lies in `closure (interior A)` by assumption.\n  have hx_closure_intA : (x : X) ∈ closure (interior A) := hBsubset hxB\n  -- Since `interior A ⊆ interior B`, we have\n  -- `closure (interior A) ⊆ closure (interior B)`.\n  have h_enlarge : closure (interior A) ⊆ closure (interior B) := by\n    have h_int_mono : (interior A : Set X) ⊆ interior B :=\n      interior_mono hAB\n    exact closure_mono h_int_mono\n  -- Hence `x` lies in `closure (interior B)`, as required.\n  exact h_enlarge hx_closure_intA"
+  ],
+  "success": true
+}

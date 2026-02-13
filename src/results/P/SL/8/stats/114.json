@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.52897095680237
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3432,
+      "prompt_tokens": 15448,
+      "total_tokens": 18880,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem denseInterior_imp_P3_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_dense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P3 (closure A) := by\n  -- We will show that `interior (closure A) = univ`, which makes `P3` trivial.\n  have hIntUniv : interior (closure A) = (Set.univ : Set X) :=\n    interior_closure_eq_univ_of_denseInterior (X := X) (A := A) h_dense\n  -- Unfold `P3` for the set `closure A`.\n  dsimp [Topology.P3]\n  intro x hx\n  -- Every point belongs to `univ`, and hence to `interior (closure A)`.\n  have : (x : X) ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [hIntUniv] using this"
+  ],
+  "success": true
+}

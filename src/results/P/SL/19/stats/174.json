@@ -1,0 +1,26 @@
+{
+  "times": [
+    17.736775875091553
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1354,
+      "prompt_tokens": 26981,
+      "total_tokens": 28335,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_mono_left {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} (hAB : (A : Set X) ⊆ B) :\n    closure (A ∩ C) ⊆ closure (B ∩ C) := by\n  have hSub : (A ∩ C : Set X) ⊆ B ∩ C := by\n    intro x hx\n    exact And.intro (hAB hx.1) hx.2\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

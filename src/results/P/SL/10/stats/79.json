@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.1257472038269
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6034,
+      "prompt_tokens": 12056,
+      "total_tokens": 18090,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_eq_univ_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP3 : Topology.P3 A) (h_dense : closure A = Set.univ) :\n    closure (interior (closure A)) = Set.univ := by\n  -- First, relate the two closures via `P3`.\n  have h_eq :=\n    Topology.closure_eq_closure_interior_closure_of_P3\n      (X := X) (A := A) hP3\n  -- Rewrite the equality so that the desired set appears on the left.\n  have h_symm : closure (interior (closure A)) = closure A := by\n    simpa using h_eq.symm\n  -- Combine with the density hypothesis to reach the conclusion.\n  simpa [h_dense] using h_symm"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.33502459526062
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8792,
+      "prompt_tokens": 14571,
+      "total_tokens": 23363,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_inter_open_left {X : Type*} [TopologicalSpace X]\n    {U A : Set X} (hU : IsOpen U) :\n    Topology.P1 A → Topology.P1 (U ∩ A) := by\n  intro hP1\n  dsimp [Topology.P1] at hP1 ⊢\n  intro x hx\n  rcases hx with ⟨hxU, hxA⟩\n  have hx_cl : x ∈ closure (interior A) := hP1 hxA\n  -- First, prove `x ∈ closure (U ∩ interior A)`.\n  have hx_cl₂ : x ∈ closure (U ∩ interior A) := by\n    -- Use the neighbourhood characterization of the closure.\n    have h_mem_closure := (mem_closure_iff).1 hx_cl\n    have h_goal : ∀ V, IsOpen V → x ∈ V → (V ∩ (U ∩ interior A)).Nonempty := by\n      intro V hV hxV\n      -- Intersect the neighbourhood with `U`, which is open and contains `x`.\n      have hVU_open : IsOpen (V ∩ U) := hV.inter hU\n      have hxVU : x ∈ V ∩ U := ⟨hxV, hxU⟩\n      -- Apply the characterization of `hx_cl`.\n      have h_nonempty : (V ∩ U ∩ interior A).Nonempty :=\n        h_mem_closure (V ∩ U) hVU_open hxVU\n      -- Rearrange the intersection to match the goal.\n      simpa [Set.inter_assoc, Set.inter_left_comm] using h_nonempty\n    exact (mem_closure_iff).2 h_goal\n  -- Next, upgrade to `closure (interior (U ∩ A))` via monotonicity.\n  have h_subset : (U ∩ interior A) ⊆ interior (U ∩ A) := by\n    have h_open : IsOpen (U ∩ interior A) := hU.inter isOpen_interior\n    have h_sub : (U ∩ interior A) ⊆ U ∩ A := by\n      intro y hy\n      exact ⟨hy.1, interior_subset hy.2⟩\n    exact interior_maximal h_sub h_open\n  have hx_final : x ∈ closure (interior (U ∩ A)) := by\n    have h_closure_mono : closure (U ∩ interior A) ⊆ closure (interior (U ∩ A)) :=\n      closure_mono h_subset\n    exact h_closure_mono hx_cl₂\n  exact hx_final"
+  ],
+  "success": true
+}

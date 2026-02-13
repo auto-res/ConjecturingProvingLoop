@@ -1,0 +1,94 @@
+{
+  "times": [
+    50.66723084449768,
+    127.61923050880432,
+    75.82945442199707,
+    61.7964231967926,
+    56.308932304382324
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3401,
+      "prompt_tokens": 23600,
+      "total_tokens": 27001,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 8078,
+      "prompt_tokens": 23855,
+      "total_tokens": 31933,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 6081,
+      "prompt_tokens": 23934,
+      "total_tokens": 30015,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 3116,
+      "prompt_tokens": 24053,
+      "total_tokens": 27169,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 4883,
+      "prompt_tokens": 24280,
+      "total_tokens": 29163,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_interiorClosureInterior_mem_nhds\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A ↔ ∀ x ∈ A, interior (closure (interior A)) ∈ 𝓝 x := by\n  classical\n  constructor\n  · intro hP2 x hx\n    have hx_int : x ∈ interior (closure (interior A)) := hP2 hx\n    exact (mem_interior_iff_mem_nhds).1 hx_int\n  · intro h\n    dsimp [Topology.P2]\n    intro x hx\n    have h_nhds : interior (closure (interior A)) ∈ 𝓝 x := h x hx\n    exact (mem_interior_iff_mem_nhds).2 h_nhds",
+    "import Mathlib\nimport Aesop\n\ntheorem closure_interior_subset_closure_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) ⊆ closure (interior (closure (interior A))) := by\n  -- First, show `interior A ⊆ interior (closure (interior A))`.\n  have h₁ : interior A ⊆ interior (closure (interior A)) := by\n    -- We have `interior (interior A) ⊆ interior (closure (interior A))`\n    -- by monotonicity of `interior`.\n    have h₂ : interior (interior A) ⊆ interior (closure (interior A)) :=\n      interior_mono (subset_closure : (interior A : Set X) ⊆ closure (interior A))\n    -- Since `interior (interior A) = interior A`, the claim follows.\n    simpa [((isOpen_interior (A := A)).interior_eq)] using h₂\n  -- Taking closures preserves inclusions.\n  exact closure_mono h₁",
+    "theorem closure_interior_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) ⊆ closure (interior A) ∪ closure (interior B) := by\n  intro x hx\n  open Set in\n  have h_union : interior (A ∪ B) = interior A ∪ interior B := by\n    simpa using interior_union\n  have hx' : x ∈ closure (interior A ∪ interior B) := by\n    simpa [h_union] using hx\n  have h_subset :\n      closure (interior A ∪ interior B) ⊆\n        closure (interior A) ∪ closure (interior B) :=\n    closure_union_subset\n  exact h_subset hx'",
+    "theorem P3_prod_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    [Nonempty X] [Nonempty Y] {A : Set X} {B : Set Y} :\n    Topology.P3 (A ×ˢ B) ↔ (Topology.P3 A ∧ Topology.P3 B) := by\n  constructor\n  · intro hProd\n    have hA : Topology.P3 A :=\n      (Topology.P3_prod_left (X := X) (Y := Y) (A := A)) hProd\n    have hB : Topology.P3 B :=\n      (Topology.P3_prod_right (X := X) (Y := Y) (B := B)) hProd\n    exact And.intro hA hB\n  · rintro ⟨hA, hB⟩\n    exact (Topology.P3_prod (X := X) (Y := Y) (A := A) (B := B)) hA hB",
+    "theorem P3_prod_implies_P3_left_and_right\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y}\n    (hProd : Topology.P3 (A ×ˢ B))\n    (hAne : A.Nonempty) (hBne : B.Nonempty) :\n    Topology.P3 A ∧ Topology.P3 B := by\n  -- First, derive `P3 A`.\n  have hP3A : Topology.P3 A := by\n    dsimp [Topology.P3] at hProd\n    dsimp [Topology.P3]\n    intro x hx\n    rcases hBne with ⟨y, hy⟩\n    have h_mem_prod : ((x, y) : X × Y) ∈ A ×ˢ B := ⟨hx, hy⟩\n    have h_int_prod : ((x, y) : X × Y) ∈ interior (closure (A ×ˢ B)) :=\n      hProd h_mem_prod\n    -- Rewrite the interior of the closure of the product.\n    have h_closure_prod :\n        closure (A ×ˢ B) = closure A ×ˢ closure B := by\n      simpa using closure_prod_eq (s := A) (t := B)\n    have h_int_prod' :\n        ((x, y) : X × Y) ∈\n          interior ((closure A) ×ˢ (closure B)) := by\n      simpa [h_closure_prod] using h_int_prod\n    have h_int_eq :\n        interior ((closure A) ×ˢ (closure B)) =\n          interior (closure A) ×ˢ interior (closure B) := by\n      simpa using interior_prod_eq (s := closure A) (t := closure B)\n    have h_mem :\n        ((x, y) : X × Y) ∈\n          interior (closure A) ×ˢ interior (closure B) := by\n      simpa [h_int_eq] using h_int_prod'\n    exact (Set.mem_prod.1 h_mem).1\n  -- Next, derive `P3 B`.\n  have hP3B : Topology.P3 B := by\n    dsimp [Topology.P3] at hProd\n    dsimp [Topology.P3]\n    intro y hy\n    rcases hAne with ⟨x, hx⟩\n    have h_mem_prod : ((x, y) : X × Y) ∈ A ×ˢ B := ⟨hx, hy⟩\n    have h_int_prod : ((x, y) : X × Y) ∈ interior (closure (A ×ˢ B)) :=\n      hProd h_mem_prod\n    -- Rewrite as above.\n    have h_closure_prod :\n        closure (A ×ˢ B) = closure A ×ˢ closure B := by\n      simpa using closure_prod_eq (s := A) (t := B)\n    have h_int_prod' :\n        ((x, y) : X × Y) ∈\n          interior ((closure A) ×ˢ (closure B)) := by\n      simpa [h_closure_prod] using h_int_prod\n    have h_int_eq :\n        interior ((closure A) ×ˢ (closure B)) =\n          interior (closure A) ×ˢ interior (closure B) := by\n      simpa using interior_prod_eq (s := closure A) (t := closure B)\n    have h_mem :\n        ((x, y) : X × Y) ∈\n          interior (closure A) ×ˢ interior (closure B) := by\n      simpa [h_int_eq] using h_int_prod'\n    exact (Set.mem_prod.1 h_mem).2\n  exact ⟨hP3A, hP3B⟩"
+  ],
+  "success": true
+}

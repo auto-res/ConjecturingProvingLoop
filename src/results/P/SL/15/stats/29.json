@@ -1,0 +1,43 @@
+{
+  "times": [
+    58.60199213027954,
+    16.125288009643555
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3948,
+      "prompt_tokens": 4654,
+      "total_tokens": 8602,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3968
+      }
+    },
+    {
+      "completion_tokens": 1398,
+      "prompt_tokens": 4732,
+      "total_tokens": 6130,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_iff_P3_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure A) ↔ Topology.P3 (closure A) := by\n  have h₁ : Topology.P2 (closure A) ↔ IsOpen (closure A) :=\n    Topology.P2_closure_iff_isOpen_closure (X := X) (A := A)\n  have h₂ : Topology.P3 (closure A) ↔ IsOpen (closure A) :=\n    Topology.P3_closure_iff_isOpen_closure (X := X) (A := A)\n  exact h₁.trans h₂.symm",
+    "theorem P2_closure_iff_P3_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure A) ↔ Topology.P3 (closure A) := by\n  have h_closed : IsClosed (closure A) := isClosed_closure\n  simpa using\n    (Topology.P2_closed_iff_P3_closed (X := X) (A := closure A) h_closed)"
+  ],
+  "success": true
+}

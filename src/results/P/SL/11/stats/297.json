@@ -1,0 +1,26 @@
+{
+  "times": [
+    120.72174429893494
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5918,
+      "prompt_tokens": 48981,
+      "total_tokens": 54899,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_univ_prod_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty X]\n    {B : Set Y} (hB : B.Nonempty) :\n    (Topology.P1 ((Set.univ : Set X) ×ˢ B) ∧\n      Topology.P2 ((Set.univ : Set X) ×ˢ B) ∧\n      Topology.P3 ((Set.univ : Set X) ×ˢ B)) ↔\n      (Topology.P1 B ∧ Topology.P2 B ∧ Topology.P3 B) := by\n  -- `Set.univ : Set X` is nonempty by assumption.\n  have hA : (Set.univ : Set X).Nonempty := Set.nonempty_univ\n  -- Use the general product equivalence for the triple of properties.\n  have hEquiv :=\n    (Topology.P123_prod_iff\n        (A := (Set.univ : Set X)) (B := B) hA hB)\n  -- The triple of properties holds for the universal set.\n  have hTripleUniv :\n      Topology.P1 (Set.univ : Set X) ∧\n        Topology.P2 (Set.univ : Set X) ∧\n        Topology.P3 (Set.univ : Set X) :=\n    Topology.P123_univ (X := X)\n  constructor\n  · intro hProd\n    -- Extract the triple for `B` from the equivalence.\n    exact (hEquiv.mp hProd).2\n  · intro hTripleB\n    -- Combine the triple for `B` with the one for `univ`\n    -- and reassemble via the equivalence.\n    exact\n      hEquiv.mpr ⟨hTripleUniv, hTripleB⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    92.83056831359863
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6396,
+      "prompt_tokens": 13153,
+      "total_tokens": 19549,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12160
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_eq_interior_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    interior (closure (interior (A : Set X))) = interior A := by\n  apply le_antisymm\n  · -- `interior (closure (interior A)) ⊆ interior A`\n    -- Since `interior A ⊆ A` and `A` is closed, the closure of `interior A`\n    -- is contained in `A`.\n    have hsubset : closure (interior (A : Set X)) ⊆ A := by\n      have h₁ : (interior (A : Set X) : Set X) ⊆ A := interior_subset\n      have h₂ : closure (interior (A : Set X)) ⊆ closure A := closure_mono h₁\n      simpa [hA_closed.closure_eq] using h₂\n    -- Applying monotonicity of `interior` yields the desired inclusion.\n    exact interior_mono hsubset\n  · -- `interior A ⊆ interior (closure (interior A))`\n    -- `interior A` is open and contained in `closure (interior A)`.\n    have hsubset : (interior (A : Set X) : Set X) ⊆ closure (interior (A : Set X)) :=\n      subset_closure\n    have h_open : IsOpen (interior (A : Set X)) := isOpen_interior\n    -- Use the maximality property of `interior`.\n    exact interior_maximal hsubset h_open"
+  ],
+  "success": true
+}

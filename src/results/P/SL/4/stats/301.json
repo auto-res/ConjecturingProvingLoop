@@ -1,0 +1,43 @@
+{
+  "times": [
+    41.383610248565674,
+    24.46966528892517
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2988,
+      "prompt_tokens": 46349,
+      "total_tokens": 49337,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    },
+    {
+      "completion_tokens": 1576,
+      "prompt_tokens": 46455,
+      "total_tokens": 48031,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    }
+  ],
+  "responses": [
+    "theorem compl_frontier_eq_interior_union_interior_compl\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (frontier A)ᶜ = interior A ∪ interior (Aᶜ) := by\n  -- Start from the existing description of the complement of the frontier.\n  have h₁ : (frontier A)ᶜ = (closure A)ᶜ ∪ interior A :=\n    compl_frontier_eq_compl_closure_union_interior (X := X) (A := A)\n  -- Rewrite the complement of a closure using `interior (Aᶜ)`.\n  have h₂ : (closure A)ᶜ = interior (Aᶜ) := by\n    simpa using\n      (interior_compl_eq_compl_closure (X := X) (A := A)).symm\n  -- Substitute and rearrange the two interior terms.\n  simpa [h₂, Set.union_comm] using h₁",
+    "theorem frontier_subset_compl_of_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) :\n    frontier (A : Set X) ⊆ Aᶜ := by\n  have h := frontier_subset_compl_interior (X := X) (A := A)\n  simpa [hA.interior_eq] using h"
+  ],
+  "success": true
+}

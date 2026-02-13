@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.88973569869995
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10601,
+      "prompt_tokens": 4311,
+      "total_tokens": 14912,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_exists_open_dense_subset {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A ↔ ∃ U : Set X, IsOpen U ∧ U ⊆ A ∧ closure U = closure A := by\n  classical\n  have hEq := Topology.P1_iff_closure_eq_closureInterior (A := A)\n  constructor\n  · intro hP1\n    refine ⟨interior A, isOpen_interior, interior_subset, ?_⟩\n    have h : closure A = closure (interior A) := (hEq).1 hP1\n    exact h.symm\n  · rintro ⟨U, hU_open, hU_subset, hClosureEq⟩\n    dsimp [Topology.P1]\n    intro x hxA\n    have hx_closureU : x ∈ closure U := by\n      have hx_closureA : x ∈ closure A := subset_closure hxA\n      simpa [hClosureEq.symm] using hx_closureA\n    have hU_subset_int : U ⊆ interior A := by\n      intro y hyU\n      have hy_intU : y ∈ interior U := by\n        simpa [hU_open.interior_eq] using hyU\n      exact (interior_mono hU_subset) hy_intU\n    have hClosure_subset : closure U ⊆ closure (interior A) := closure_mono hU_subset_int\n    exact hClosure_subset hx_closureU"
+  ],
+  "success": true
+}

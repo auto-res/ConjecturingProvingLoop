@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.09169507026672
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5813,
+      "prompt_tokens": 39133,
+      "total_tokens": 44946,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_union_left {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Dense A → Dense (A ∪ B) := by\n  intro hA\n  have hclosure : closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n    simp [closure_union, hA.closure_eq]\n  exact (dense_iff_closure_eq).2 hclosure"
+  ],
+  "success": true
+}

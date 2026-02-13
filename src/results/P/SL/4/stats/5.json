@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.155023336410522
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1415,
+      "prompt_tokens": 917,
+      "total_tokens": 2332,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_subset_interior_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (closure (interior A)) ⊆ interior (closure A) := by\n  intro x hx\n  -- First, note that `closure (interior A)` is contained in `closure A`\n  have h_closure_subset : closure (interior A) ⊆ closure A := by\n    have h_int_subset : interior A ⊆ A := interior_subset\n    exact closure_mono h_int_subset\n  -- Taking interiors preserves this inclusion\n  have h_interiors : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono h_closure_subset\n  -- Apply the inclusion to the given point `x`\n  exact h_interiors hx"
+  ],
+  "success": true
+}

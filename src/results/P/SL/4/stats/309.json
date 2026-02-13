@@ -1,0 +1,43 @@
+{
+  "times": [
+    48.244544506073,
+    78.46442866325378
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4815,
+      "prompt_tokens": 47894,
+      "total_tokens": 52709,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 5522,
+      "prompt_tokens": 48000,
+      "total_tokens": 53522,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_frontier_eq_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A \\ frontier A = interior A := by\n  -- We prove the two inclusions separately via set extensionality.\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hx_cl, hx_not_front⟩\n    by_cases hx_int : x ∈ interior A\n    · exact hx_int\n    · -- If `x ∉ interior A` but `x ∈ closure A`, then `x ∈ frontier A`,\n      -- contradicting `hx_not_front`.\n      have h_front_eq :\n          (frontier A : Set X) = closure A \\ interior A :=\n        frontier_eq_closure_diff_interior (X := X) (A := A)\n      have hx_front : x ∈ frontier A := by\n        have : x ∈ (closure A \\ interior A) := And.intro hx_cl hx_int\n        simpa [h_front_eq] using this\n      exact (hx_not_front hx_front).elim\n  · intro hx_int\n    have hx_cl : x ∈ closure A := subset_closure (interior_subset hx_int)\n    have hx_not_front : x ∉ frontier A := by\n      intro hx_front\n      -- A point in the frontier is outside `interior A`, contradiction.\n      exact hx_front.2 hx_int\n    exact And.intro hx_cl hx_not_front",
+    ""
+  ],
+  "success": true
+}

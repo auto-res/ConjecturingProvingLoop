@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.63180375099182
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2912,
+      "prompt_tokens": 16214,
+      "total_tokens": 19126,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_right_dense {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (h_dense : closure B = (Set.univ : Set X)) :\n    Topology.P3 (X := X) (A ∪ B) := by\n  -- Use commutativity of `∪` to apply the existing `P3_union_left_dense`.\n  have h : Topology.P3 (X := X) (B ∪ A) :=\n    Topology.P3_union_left_dense (X := X) (A := B) (B := A) h_dense\n  simpa [Set.union_comm] using h"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    68.71452641487122
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4660,
+      "prompt_tokens": 36876,
+      "total_tokens": 41536,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_closure_subset_frontier {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (closure A) ⊆ frontier A := by\n  intro x hx\n  -- `hx` gives `x ∈ closure (closure A)` and `x ∉ interior (closure A)`.\n  have hx_closureA : x ∈ closure A := by\n    simpa [closure_closure] using hx.1\n  -- Show that `x` is not in `interior A`.\n  have hx_not_intA : x ∉ interior A := by\n    intro hx_intA\n    -- Since `interior A ⊆ interior (closure A)`, this contradicts `hx.2`.\n    have : x ∈ interior (closure A) := by\n      have h_subset : interior A ⊆ interior (closure A) :=\n        interior_subset_interior_closure\n      exact h_subset hx_intA\n    exact hx.2 this\n  exact And.intro hx_closureA hx_not_intA"
+  ],
+  "success": true
+}

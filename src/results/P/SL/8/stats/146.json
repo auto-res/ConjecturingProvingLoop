@@ -1,0 +1,26 @@
+{
+  "times": [
+    181.9423041343689
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13632,
+      "prompt_tokens": 20673,
+      "total_tokens": 34305,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem closed_P3_imp_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hP3 : Topology.P3 A) :\n    Topology.P2 A := by\n  have h_eq : Topology.P2 A ↔ Topology.P3 A :=\n    Topology.closed_P2_iff_P3 (X := X) (A := A) hA_closed\n  exact (h_eq.mpr hP3)"
+  ],
+  "success": true
+}

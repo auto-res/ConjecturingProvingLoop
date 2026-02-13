@@ -1,0 +1,26 @@
+{
+  "times": [
+    123.4933693408966
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7626,
+      "prompt_tokens": 46726,
+      "total_tokens": 54352,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_interior_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (interior A) ⊆ closure A := by\n  intro x hx\n  -- First, upgrade the membership to `frontier A` using the existing lemma.\n  have hFrontA : x ∈ frontier A :=\n    (Topology.frontier_interior_subset_frontier (A := A)) hx\n  -- Points in the frontier of `A` lie in `closure A`.\n  exact hFrontA.1"
+  ],
+  "success": true
+}

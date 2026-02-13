@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.03457140922546
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3915,
+      "prompt_tokens": 9357,
+      "total_tokens": 13272,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x _hxA\n  -- `Dense` gives `closure A = univ`.\n  have hCl : closure (A : Set X) = Set.univ :=\n    (Topology.dense_iff_closure_eq_univ).1 hDense\n  -- Hence `interior (closure A)` is `univ`, and the goal is immediate.\n  have : x ∈ interior (closure (A : Set X)) := by\n    have : x ∈ (Set.univ : Set X) := by\n      trivial\n    simpa [hCl, interior_univ] using this\n  exact this"
+  ],
+  "success": true
+}

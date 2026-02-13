@@ -1,0 +1,60 @@
+{
+  "times": [
+    64.54885983467102,
+    139.10315084457397,
+    105.57528281211853
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4003,
+      "prompt_tokens": 43607,
+      "total_tokens": 47610,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 9003,
+      "prompt_tokens": 43778,
+      "total_tokens": 52781,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 6829,
+      "prompt_tokens": 43851,
+      "total_tokens": 50680,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_closure_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∩ closure B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxIntA, hxClB⟩\n  -- We prove the desired membership using the neighbourhood\n  -- characterization of the closure.\n  have : x ∈ closure (A ∩ B) := by\n    -- Apply the `mem_closure_iff` criterion.\n    apply (mem_closure_iff).2\n    intro U hU_open hxU\n    -- Refine the neighbourhood by intersecting with `interior A`,\n    -- which is open and contains `x`.\n    have hV_open : IsOpen (U ∩ interior A) := hU_open.inter isOpen_interior\n    have hxV : x ∈ U ∩ interior A := And.intro hxU hxIntA\n    -- Since `x ∈ closure B`, this refined neighbourhood meets `B`.\n    have hNon : (U ∩ interior A ∩ B).Nonempty := by\n      have :=\n        (mem_closure_iff).1 hxClB (U ∩ interior A) hV_open hxV\n      simp [Set.inter_assoc, Set.inter_left_comm] at this\n      exact this\n    -- Extract a witnessing point and show that it lies in\n    -- `U ∩ (A ∩ B)`, certifying non‐emptiness.\n    rcases hNon with ⟨y, hyU, hyIntA, hyB⟩\n    have hyA : y ∈ A := interior_subset hyIntA\n    exact ⟨y, And.intro hyU (And.intro hyA hyB)⟩\n  exact this",
+    "theorem interior_diff_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A \\ B) ⊆ interior A \\ closure B := by\n  intro x hx\n  -- Choose an open neighbourhood `U` of `x` contained in `A \\ B`.\n  rcases (Set.mem_interior).1 hx with ⟨U, hU_open, hU_sub, hxU⟩\n  -- `U` is contained in `A`.\n  have hU_subA : U ⊆ A := by\n    intro y hyU\n    have hy := hU_sub hyU\n    exact hy.1\n  -- Hence `x ∈ interior A`.\n  have hx_intA : x ∈ interior A :=\n    (Set.mem_interior).2 ⟨U, hU_open, hU_subA, hxU⟩\n  -- Show that `x ∉ closure B` using the open set `U` that avoids `B`.\n  have hx_notClB : x ∉ closure B := by\n    intro hxClB\n    -- Any open set containing `x` must meet `B`, contradicting that `U` avoids `B`.\n    have hNon : (U ∩ B).Nonempty :=\n      (mem_closure_iff).1 hxClB U hU_open hxU\n    rcases hNon with ⟨y, ⟨hyU, hyB⟩⟩\n    have hyNotB : y ∉ B := by\n      -- Since `y ∈ U` and `U ⊆ A \\\\ B`, `y ∉ B`.\n      have h := hU_sub hyU\n      exact h.2\n    exact hyNotB hyB\n  -- Assemble the membership in the desired set.\n  exact And.intro hx_intA hx_notClB",
+    "theorem closure_inter_eq_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsClosed A) (hB : IsClosed B) :\n    closure (A ∩ B) = A ∩ B := by\n  have hClosed : IsClosed (A ∩ B) := hA.inter hB\n  simpa [hClosed.closure_eq]"
+  ],
+  "success": true
+}

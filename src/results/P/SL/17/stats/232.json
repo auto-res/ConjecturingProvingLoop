@@ -1,0 +1,26 @@
+{
+  "times": [
+    91.81903219223022
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5520,
+      "prompt_tokens": 41978,
+      "total_tokens": 47498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_eq_closure_union_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    closure (interior (A ∪ B)) = closure (A ∪ B) := by\n  have hUnion : IsOpen (A ∪ B) := hA.union hB\n  simpa using\n    (Topology.closure_interior_eq_closure_of_isOpen (A := A ∪ B) hUnion)"
+  ],
+  "success": true
+}

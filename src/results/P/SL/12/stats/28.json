@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.79614043235779
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4575,
+      "prompt_tokens": 4526,
+      "total_tokens": 9101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_P2_P3_empty {X : Type*} [TopologicalSpace X] :\n    Topology.P1 (X := X) (∅ : Set X) ∧\n      Topology.P2 (X := X) (∅ : Set X) ∧\n      Topology.P3 (X := X) (∅ : Set X) := by\n  have h1 : Topology.P1 (X := X) (∅ : Set X) := by\n    dsimp [Topology.P1]\n    simp\n  have h2 : Topology.P2 (X := X) (∅ : Set X) := by\n    dsimp [Topology.P2]\n    simp\n  have h3 : Topology.P3 (X := X) (∅ : Set X) := by\n    dsimp [Topology.P3]\n    simp\n  exact And.intro h1 (And.intro h2 h3)"
+  ],
+  "success": true
+}

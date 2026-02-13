@@ -1,0 +1,26 @@
+{
+  "times": [
+    112.0822389125824
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8413,
+      "prompt_tokens": 28503,
+      "total_tokens": 36916,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8064,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_subset_interior_diff_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ interior A \\ closure B := by\n  intro x hx\n  rcases mem_interior.1 hx with ⟨U, hUsub, hUopen, hxU⟩\n  -- `x` belongs to the interior of `A`\n  have hUsubA : (U : Set X) ⊆ A := by\n    intro y hy\n    exact (hUsub hy).1\n  have hx_intA : x ∈ interior A :=\n    mem_interior.2 ⟨U, hUsubA, hUopen, hxU⟩\n  -- `x` does not belong to the closure of `B`\n  have hx_notClB : x ∉ closure B := by\n    intro hxClB\n    -- Using the neighbourhood `U`, derive a contradiction with `U ⊆ A \\ B`\n    have hNon : ((U : Set X) ∩ B).Nonempty :=\n      (mem_closure_iff).1 hxClB U hUopen hxU\n    rcases hNon with ⟨y, ⟨hyU, hyB⟩⟩\n    have : y ∉ B := (hUsub hyU).2\n    exact this hyB\n  exact ⟨hx_intA, hx_notClB⟩"
+  ],
+  "success": true
+}

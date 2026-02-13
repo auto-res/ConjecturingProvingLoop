@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.53815007209778
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2279,
+      "prompt_tokens": 46343,
+      "total_tokens": 48622,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_forall_open_neighborhood {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A ↔\n      ∀ x ∈ (A : Set X), ∃ U : Set X, IsOpen U ∧ x ∈ U ∧ U ⊆ closure (A : Set X) := by\n  -- Forward implication: construct a single open set that works for every point.\n  constructor\n  · intro hP3 x hxA\n    refine\n      ⟨interior (closure (A : Set X)), isOpen_interior, ?_, interior_subset⟩\n    exact hP3 hxA\n  -- Reverse implication: each point has an appropriate neighbourhood, hence lies in the interior.\n  · intro h\n    dsimp [Topology.P3]\n    intro x hxA\n    rcases h x hxA with ⟨U, hU_open, hxU, hU_sub⟩\n    -- Any open set contained in `closure A` is contained in its interior.\n    have hU_in_int :\n        (U : Set X) ⊆ interior (closure (A : Set X)) :=\n      interior_maximal hU_sub hU_open\n    exact hU_in_int hxU"
+  ],
+  "success": true
+}

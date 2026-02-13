@@ -1,0 +1,26 @@
+{
+  "times": [
+    100.2335946559906
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5802,
+      "prompt_tokens": 7984,
+      "total_tokens": 13786,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_P2_of_closed_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosedInt : IsClosed (interior A)) :\n    Topology.P1 A ↔ Topology.P2 A := by\n  -- `closure (interior A)` collapses to `interior A` because this interior is closed.\n  have hClosEq : closure (interior A) = interior A := hClosedInt.closure_eq\n  constructor\n  · intro hP1\n    dsimp [Topology.P2] at *\n    intro x hxA\n    -- From `P1`, `x` lies in `closure (interior A) = interior A`.\n    have hxIntA : x ∈ interior A := by\n      have hxClos : x ∈ closure (interior A) := hP1 hxA\n      simpa [hClosEq] using hxClos\n    -- Re-interpret this membership in the desired interior.\n    simpa [hClosEq, interior_interior] using hxIntA\n  · intro hP2\n    dsimp [Topology.P1] at *\n    intro x hxA\n    -- `P2` gives `x` in `interior (closure (interior A))`.\n    have hxInt : x ∈ interior (closure (interior A)) := hP2 hxA\n    -- The interior is contained in the closure.\n    have hIncl : interior (closure (interior A))\n        ⊆ closure (interior A) := interior_subset\n    exact hIncl hxInt"
+  ],
+  "success": true
+}

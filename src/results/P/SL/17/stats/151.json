@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.04841947555542
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6409,
+      "prompt_tokens": 24322,
+      "total_tokens": 30731,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_interior_subset_frontier {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (interior A) ⊆ frontier A := by\n  intro x hx\n  rcases hx with ⟨h_clos, h_not_int⟩\n  -- `x` lies in the closure of `A` because `interior A ⊆ A`.\n  have h_closA : x ∈ closure A :=\n    (closure_mono (interior_subset : interior A ⊆ A)) h_clos\n  -- `x` is not in the interior of `A`.\n  have h_not_intA : x ∉ interior A := by\n    simpa [interior_interior] using h_not_int\n  exact And.intro h_closA h_not_intA"
+  ],
+  "success": true
+}

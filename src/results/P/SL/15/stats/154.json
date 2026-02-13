@@ -1,0 +1,60 @@
+{
+  "times": [
+    68.94730377197266,
+    169.7182059288025,
+    40.48548078536987
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4218,
+      "prompt_tokens": 30796,
+      "total_tokens": 35014,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 10413,
+      "prompt_tokens": 30909,
+      "total_tokens": 41322,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2829,
+      "prompt_tokens": 31020,
+      "total_tokens": 33849,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_of_denseInterior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Dense A := by\n  intro hDenseInt\n  -- `closure (interior A)` is the whole space.\n  have h_closure_int : closure (interior A) = (Set.univ : Set X) := by\n    simpa using hDenseInt.closure_eq\n  -- Hence `closure A` contains the whole space.\n  have h_subset : (Set.univ : Set X) ⊆ closure A := by\n    simpa [h_closure_int] using\n      (closure_mono (interior_subset : interior A ⊆ A))\n  -- Therefore `closure A` is the whole space.\n  have h_closureA : closure (A : Set X) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro x _; exact Set.mem_univ x\n    · exact h_subset\n  simpa [Dense] using h_closureA",
+    "theorem P3_mono {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    A ⊆ B → Topology.P3 B → Topology.P3 A := by\n  intro hAB hP3B\n  dsimp [Topology.P3] at hP3B ⊢\n  intro x hxA\n  exact hP3B (hAB hxA)",
+    "theorem closure_interior_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    closure (interior (A ×ˢ B)) = closure (interior A) ×ˢ closure (interior B) := by\n  have h : interior (A ×ˢ B) = interior A ×ˢ interior B := by\n    simpa using interior_prod_eq (s := A) (t := B)\n  calc\n    closure (interior (A ×ˢ B))\n        = closure (interior A ×ˢ interior B) := by\n          simpa [h]\n    _ = closure (interior A) ×ˢ closure (interior B) := by\n          simpa using closure_prod_eq (s := interior A) (t := interior B)"
+  ],
+  "success": true
+}

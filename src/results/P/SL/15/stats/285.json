@@ -1,0 +1,43 @@
+{
+  "times": [
+    59.29278254508972,
+    76.12217712402344
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4891,
+      "prompt_tokens": 61362,
+      "total_tokens": 66253,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 60288
+      }
+    },
+    {
+      "completion_tokens": 6226,
+      "prompt_tokens": 61484,
+      "total_tokens": 67710,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 60288
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_closure_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    closure (interior (closure A)) = closure A := by\n  -- `interior (closure A)` is contained in `closure A`,\n  -- hence the same holds for their closures.\n  have h₁ : closure (interior (closure A)) ⊆ closure A :=\n    closure_mono (interior_subset : interior (closure A) ⊆ closure A)\n  -- Because `A` is open and contained in `closure A`,\n  -- every point of `A` lies in `interior (closure A)`.\n  have hA_sub : (A : Set X) ⊆ interior (closure A) := by\n    intro x hx\n    have h_nhds : (closure A : Set X) ∈ 𝓝 x := by\n      have hA_nhds : A ∈ 𝓝 x := hA.mem_nhds hx\n      exact Filter.mem_of_superset hA_nhds subset_closure\n    exact (mem_interior_iff_mem_nhds).2 h_nhds\n  -- Taking closures of both sides yields `closure A ⊆ closure (interior (closure A))`.\n  have h₂ : closure A ⊆ closure (interior (closure A)) :=\n    closure_mono hA_sub\n  exact Set.Subset.antisymm h₁ h₂",
+    ""
+  ],
+  "success": true
+}

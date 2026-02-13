@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.21934366226196
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3421,
+      "prompt_tokens": 9219,
+      "total_tokens": 12640,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iUnion_interior {X : Type*} [TopologicalSpace X] {ι : Sort*}\n    (A : ι → Set X) : Topology.P2 (⋃ i, interior (A i)) := by\n  -- The union of the interiors is an open set.\n  have hOpen : IsOpen (⋃ i, interior (A i)) := by\n    apply isOpen_iUnion\n    intro i\n    exact isOpen_interior\n  -- Any open set satisfies `P2`.\n  exact Topology.P2_of_isOpen (A := ⋃ i, interior (A i)) hOpen"
+  ],
+  "success": true
+}

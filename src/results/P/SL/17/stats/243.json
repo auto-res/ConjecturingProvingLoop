@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.43936896324158
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5706,
+      "prompt_tokens": 43705,
+      "total_tokens": 49411,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_interior_closure_eq_diff\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A ∩ interior (closure A) = interior (closure A) \\ interior A := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hFront, hIntClos⟩\n    -- `hFront` gives both `x ∈ closure A` and `x ∉ interior A`;\n    -- `hIntClos` is `x ∈ interior (closure A)`.\n    exact ⟨hIntClos, hFront.2⟩\n  · intro hx\n    rcases hx with ⟨hIntClos, hNotIntA⟩\n    -- From `x ∈ interior (closure A)` we deduce `x ∈ closure A`.\n    have hClA : x ∈ closure A := interior_subset hIntClos\n    -- Assemble the frontier membership.\n    have hFront : x ∈ frontier A := And.intro hClA hNotIntA\n    exact And.intro hFront hIntClos"
+  ],
+  "success": true
+}

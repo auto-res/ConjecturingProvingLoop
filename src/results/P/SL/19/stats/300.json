@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.11138606071472
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1931,
+      "prompt_tokens": 47746,
+      "total_tokens": 49677,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_closure_subset_interior_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A ∩ closure B) ⊆ interior A := by\n  intro x hx\n  -- Since `A ∩ closure B ⊆ A`, monotonicity of `interior` yields the result.\n  have hSub : (A ∩ closure B : Set X) ⊆ A := fun y hy => hy.1\n  exact (interior_mono hSub) hx"
+  ],
+  "success": true
+}

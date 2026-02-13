@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.750900506973267
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1691,
+      "prompt_tokens": 45055,
+      "total_tokens": 46746,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_between_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B) (hBclosure : B ⊆ closure A) (hP1 : Topology.P1 A) :\n    Topology.P1 B := by\n  dsimp [Topology.P1] at hP1 ⊢\n  intro x hxB\n  -- Step 1: promote `x ∈ B` to `x ∈ closure A`.\n  have hx_closureA : x ∈ closure A := hBclosure hxB\n  -- Step 2: use `P1` for `A` to move into `closure (interior A)`.\n  have hClA_sub_ClIntA : closure A ⊆ closure (interior A) := by\n    -- Since `A ⊆ closure (interior A)`, taking closures yields the claim.\n    have hA_sub : (A : Set X) ⊆ closure (interior A) := hP1\n    have h := closure_mono hA_sub\n    simpa [closure_closure] using h\n  have hx_closureIntA : x ∈ closure (interior A) :=\n    hClA_sub_ClIntA hx_closureA\n  -- Step 3: enlarge to `closure (interior B)` using monotonicity.\n  have hIntA_sub_IntB : interior A ⊆ interior B :=\n    interior_mono hAB\n  have hClIntA_sub_ClIntB : closure (interior A) ⊆ closure (interior B) :=\n    closure_mono hIntA_sub_IntB\n  exact hClIntA_sub_ClIntB hx_closureIntA"
+  ],
+  "success": true
+}

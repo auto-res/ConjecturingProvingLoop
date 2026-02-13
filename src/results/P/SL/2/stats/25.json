@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.605660438537598
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2630,
+      "prompt_tokens": 2878,
+      "total_tokens": 5508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_closure_interior_closure_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → closure (interior (closure A)) = closure A := by\n  intro hP3\n  apply subset_antisymm\n  ·\n    have h : (interior (closure A) : Set X) ⊆ closure A := interior_subset\n    have h' : closure (interior (closure A)) ⊆ closure A := by\n      have h₁ := closure_mono h\n      simpa [closure_closure] using h₁\n    exact h'\n  ·\n    exact\n      Topology.P3_implies_closure_subset_closure_interior_closure\n        (A := A) hP3"
+  ],
+  "success": true
+}

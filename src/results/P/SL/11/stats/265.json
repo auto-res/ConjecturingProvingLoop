@@ -1,0 +1,26 @@
+{
+  "times": [
+    168.6783549785614
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9631,
+      "prompt_tokens": 42956,
+      "total_tokens": 52587,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem exists_open_superset_same_closure_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A →\n      ∃ U : Set X, IsOpen U ∧ A ⊆ U ∧ closure U = closure A := by\n  intro hP3\n  refine ⟨interior (closure A), isOpen_interior, ?_, ?_⟩\n  ·\n    exact hP3\n  ·\n    simpa using\n      (Topology.closure_eq_closure_interior_closure_of_P3 (A := A) hP3).symm"
+  ],
+  "success": true
+}

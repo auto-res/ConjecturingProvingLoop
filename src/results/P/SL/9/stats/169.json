@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.93470335006714
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1546,
+      "prompt_tokens": 27240,
+      "total_tokens": 28786,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interior_eq_closureInterior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A ∩ interior A) = closure (interior A) := by\n  -- Since `interior A ⊆ A`, the intersection simplifies.\n  have h_inter : (A ∩ interior A : Set X) = interior A := by\n    have : interior A ⊆ A := interior_subset\n    exact Set.inter_eq_right.mpr this\n  simpa [h_inter]"
+  ],
+  "success": true
+}

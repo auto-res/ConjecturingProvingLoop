@@ -1,0 +1,26 @@
+{
+  "times": [
+    124.49457287788391
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7209,
+      "prompt_tokens": 8634,
+      "total_tokens": 15843,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P1 (X := X) A) :\n    interior (closure (A : Set X)) = interior (closure (interior A)) := by\n  -- From `P1`, we know the closures coincide.\n  have hEq : closure (A : Set X) = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closure_interior (X := X) (A := A)).1 hA\n  -- Taking `interior` of both sides yields the desired equality.\n  simpa using congrArg interior hEq"
+  ],
+  "success": true
+}

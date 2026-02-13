@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.37653255462646
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7389,
+      "prompt_tokens": 41406,
+      "total_tokens": 48795,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_closure_subset_closure_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) \\ closure (B : Set X) ⊆ closure (A \\ B) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxNotClB⟩\n  -- We will show `x ∈ closure (A \\ B)` via `mem_closure_iff`.\n  have : x ∈ closure (A \\ B : Set X) := by\n    -- Reformulate membership in the closure using open neighbourhoods.\n    refine (mem_closure_iff).2 ?_\n    intro U hUopen hxU\n    -- Choose an open neighbourhood of `x` that avoids `B`.\n    let V : Set X := (closure (B : Set X))ᶜ\n    have hVopen : IsOpen V := isClosed_closure.isOpen_compl\n    have hxV : x ∈ V := by\n      dsimp [V]\n      exact hxNotClB\n    -- The neighbourhood `U ∩ V` is open, contains `x`, and is disjoint from `B`.\n    have hWopen : IsOpen (U ∩ V) := hUopen.inter hVopen\n    have hxW : x ∈ U ∩ V := ⟨hxU, hxV⟩\n    -- Since `x ∈ closure A`, this neighbourhood meets `A`.\n    have hNonempty : ((U ∩ V) ∩ (A : Set X)).Nonempty := by\n      have h := (mem_closure_iff).1 hxClA\n      have h' := h (U ∩ V) hWopen hxW\n      simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm] using h'\n    -- Extract a witness `y`.\n    rcases hNonempty with ⟨y, ⟨⟨hyU, hyV⟩, hyA⟩⟩\n    -- Show that `y ∉ B`.\n    have hyNotB : y ∉ B := by\n      intro hyB\n      have hyClB : y ∈ closure (B : Set X) := subset_closure hyB\n      have : y ∈ V := hyV\n      dsimp [V] at this\n      exact this hyClB\n    -- Hence `y ∈ U ∩ (A \\ B)`, proving the required non‐emptiness.\n    exact ⟨y, ⟨hyU, ⟨hyA, hyNotB⟩⟩⟩\n  exact this"
+  ],
+  "success": true
+}

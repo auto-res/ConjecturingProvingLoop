@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.30962562561035
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6072,
+      "prompt_tokens": 55926,
+      "total_tokens": 61998,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_prod_right_of_nonempty\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hAne : A.Nonempty) :\n    Dense (A ×ˢ B) → Dense B := by\n  intro hDenseProd\n  -- `closure (A ×ˢ B)` is the whole space.\n  have h_closure_prod :\n      closure (A ×ˢ B : Set (X × Y)) = (Set.univ : Set (X × Y)) := by\n    simpa using hDenseProd.closure_eq\n  -- Express this closure as a product of closures.\n  have h_prod_closure :\n      closure (A ×ˢ B : Set (X × Y)) =\n        (closure (A : Set X)) ×ˢ closure (B : Set Y) := by\n    simpa using closure_prod_eq (s := A) (t := B)\n  -- We prove `closure B = univ`, which implies `Dense B`.\n  have h_closureB_univ : closure (B : Set Y) = (Set.univ : Set Y) := by\n    -- First, the trivial inclusion.\n    apply Set.Subset.antisymm\n    · intro _ _; trivial\n    · intro y _\n      -- Choose an arbitrary `x ∈ A`.\n      rcases hAne with ⟨x, hxA⟩\n      -- The point `(x, y)` lies in `univ`, hence in `closure (A ×ˢ B)`.\n      have h_mem_closure_prod :\n          ((x, y) : X × Y) ∈ closure (A ×ˢ B) := by\n        have : ((x, y) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n          trivial\n        simpa [h_closure_prod] using this\n      -- Transport this membership through `h_prod_closure`.\n      have h_mem_prod_closures :\n          ((x, y) : X × Y) ∈\n            (closure (A : Set X)) ×ˢ closure (B : Set Y) := by\n        simpa [h_prod_closure] using h_mem_closure_prod\n      -- Extract the `Y`-component.\n      exact (Set.mem_prod.1 h_mem_prod_closures).2\n  -- Conclude density via the characterisation using closures.\n  exact (dense_iff_closure_eq (s := B)).2 h_closureB_univ"
+  ],
+  "success": true
+}

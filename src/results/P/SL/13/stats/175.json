@@ -1,0 +1,43 @@
+{
+  "times": [
+    56.49392127990723,
+    193.4442744255066
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3666,
+      "prompt_tokens": 30982,
+      "total_tokens": 34648,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    },
+    {
+      "completion_tokens": 11684,
+      "prompt_tokens": 31052,
+      "total_tokens": 42736,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_open_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA_open : IsOpen (A : Set X)) :\n    interior ((A ∪ B) : Set X) = A ∪ interior B := by\n  calc\n    interior ((A ∪ B) : Set X)\n        = interior A ∪ interior B := by\n          simpa using interior_union (A := A) (B := B)\n    _ = A ∪ interior B := by\n          simpa [hA_open.interior_eq]",
+    "theorem Topology.interior_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) ∪ interior B ⊆ interior (A ∪ B) := by\n  simpa using\n    (Topology.union_interior_subset_interior_union (X := X) (A := A) (B := B))"
+  ],
+  "success": true
+}

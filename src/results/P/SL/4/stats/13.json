@@ -1,0 +1,43 @@
+{
+  "times": [
+    60.80173921585083,
+    146.16551089286804
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5626,
+      "prompt_tokens": 1765,
+      "total_tokens": 7391,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 9540,
+      "prompt_tokens": 1874,
+      "total_tokens": 11414,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_imp_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → Topology.P1 (closure A) := by\n  intro hP1\n  dsimp [Topology.P1] at hP1\n  dsimp [Topology.P1]\n  intro x hx_closA\n  -- From `P1 A` we obtain `closure A ⊆ closure (interior A)`\n  have h₁ : closure A ⊆ closure (interior A) := by\n    have h := closure_mono hP1\n    simpa [closure_closure] using h\n  -- `interior` is monotone, so `interior A ⊆ interior (closure A)`\n  have h_int_subset : interior A ⊆ interior (closure A) := by\n    apply interior_mono\n    intro y hy\n    have hA : y ∈ A := interior_subset hy\n    exact subset_closure hA\n  -- Taking closures preserves inclusion\n  have h₂ : closure (interior A) ⊆ closure (interior (closure A)) :=\n    closure_mono h_int_subset\n  -- Combine the two inclusions to reach the goal\n  have : x ∈ closure (interior A) := h₁ hx_closA\n  exact h₂ this",
+    "theorem interior_subset_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ interior (closure A) := by\n  exact interior_mono subset_closure"
+  ],
+  "success": true
+}

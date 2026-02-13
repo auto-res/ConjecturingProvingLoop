@@ -1,0 +1,43 @@
+{
+  "times": [
+    155.4439733028412,
+    104.44046068191528
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7698,
+      "prompt_tokens": 54811,
+      "total_tokens": 62509,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    },
+    {
+      "completion_tokens": 3543,
+      "prompt_tokens": 54880,
+      "total_tokens": 58423,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_sUnion {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    (∀ A, A ∈ 𝒜 → Topology.P1 A) → Topology.P1 (closure (⋃₀ 𝒜 : Set X)) := by\n  intro h𝒜\n  -- First obtain `P1` for the union of the family.\n  have hUnion : Topology.P1 (⋃₀ 𝒜 : Set X) :=\n    Topology.P1_sUnion (X := X) (𝒜 := 𝒜) h𝒜\n  -- Taking closures preserves `P1`.\n  exact\n    Topology.P1_implies_P1_closure\n      (X := X) (A := ⋃₀ 𝒜 : Set X) hUnion",
+    "theorem P2_closure_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (closure (A : Set X))) ↔\n      Topology.P2 (closure (A : Set X)) := by\n  simpa [closure_closure]"
+  ],
+  "success": true
+}

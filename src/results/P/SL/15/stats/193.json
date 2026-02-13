@@ -1,0 +1,26 @@
+{
+  "times": [
+    77.42895436286926
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5709,
+      "prompt_tokens": 39164,
+      "total_tokens": 44873,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_right_and_P3_left_implies_P3_prod\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y}\n    (hDenseB : Dense B) (hP3A : Topology.P3 A) :\n    Topology.P3 (A ×ˢ B) := by\n  -- Apply the existing lemma to the swapped product `B ×ˢ A`.\n  have hSymm :\n      Topology.P3 (B ×ˢ A) :=\n    dense_left_and_P3_right_implies_P3_prod\n      (X := Y) (Y := X) (A := B) (B := A) hDenseB hP3A\n  -- Unfold the definition of `P3`.\n  dsimp [Topology.P3] at hSymm ⊢\n  intro p hp\n  -- Use the result for the swapped point `(p.2, p.1)`.\n  have hSwapped : (p.2, p.1) ∈ B ×ˢ A := And.intro hp.2 hp.1\n  have hIntSwapped := hSymm hSwapped\n  -- Identify the interiors of the relevant closures.\n  have hEqSource :\n      interior (closure (B ×ˢ A)) =\n        interior (closure B) ×ˢ interior (closure A) :=\n    interior_closure_prod (X := Y) (Y := X) (A := B) (B := A)\n  have hEqTarget :\n      interior (closure (A ×ˢ B)) =\n        interior (closure A) ×ˢ interior (closure B) :=\n    interior_closure_prod (X := X) (Y := Y) (A := A) (B := B)\n  -- Transport membership through `hEqSource`.\n  have hMemSource :\n      (p.2, p.1) ∈ interior (closure B) ×ˢ interior (closure A) := by\n    simpa [hEqSource] using hIntSwapped\n  -- Extract coordinate-wise information.\n  have hpB : p.2 ∈ interior (closure B) := (Set.mem_prod.1 hMemSource).1\n  have hpA : p.1 ∈ interior (closure A) := (Set.mem_prod.1 hMemSource).2\n  -- Assemble the membership for the original point.\n  have hMemTarget :\n      (p.1, p.2) ∈ interior (closure A) ×ˢ interior (closure B) :=\n    And.intro hpA hpB\n  simpa [hEqTarget] using hMemTarget"
+  ],
+  "success": true
+}

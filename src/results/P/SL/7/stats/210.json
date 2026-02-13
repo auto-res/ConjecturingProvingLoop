@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.29966950416565
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5928,
+      "prompt_tokens": 32183,
+      "total_tokens": 38111,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_sUnion {X : Type*} [TopologicalSpace X] {𝒞 : Set (Set X)} :\n    (∀ s, s ∈ 𝒞 → Topology.P1 s) → Topology.P1 (⋃₀ 𝒞) := by\n  intro h𝒞\n  dsimp [Topology.P1] at *\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨S, hS_mem, hxS⟩\n  -- From `P1 S` we obtain membership in `closure (interior S)`.\n  have hx_closureS : x ∈ closure (interior S) := (h𝒞 S hS_mem) hxS\n  -- We show that `closure (interior S)` is contained in\n  -- `closure (interior (⋃₀ 𝒞))`.\n  have hSub : closure (interior S) ⊆ closure (interior (⋃₀ 𝒞)) := by\n    apply closure_mono\n    apply interior_mono\n    intro y hy\n    exact Set.mem_sUnion.2 ⟨S, hS_mem, hy⟩\n  exact hSub hx_closureS"
+  ],
+  "success": true
+}

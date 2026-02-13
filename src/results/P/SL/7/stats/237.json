@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.5363883972168
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6601,
+      "prompt_tokens": 36585,
+      "total_tokens": 43186,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter6_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure A))))))))))) =\n      interior (closure A) := by\n  -- Apply the 5-fold idempotence lemma.\n  have h₁ :\n      interior (closure (interior (closure (interior (closure (interior\n        (closure (interior (closure A))))))))) = interior (closure A) :=\n    Topology.interiorClosure_iter5_idempotent (A := A)\n  -- Substitute `h₁` and finish with the basic idempotence lemma.\n  have :\n      interior (closure (interior (closure (interior (closure (interior\n        (closure (interior (closure (interior (closure A))))))))))) =\n        interior (closure (interior (closure A))) := by\n    simpa [h₁]\n  simpa [Topology.interiorClosure_idempotent (A := A)] using this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.14747333526611
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3849,
+      "prompt_tokens": 57087,
+      "total_tokens": 60936,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_eq_union_frontier_inter_of_closed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed A) (hB : IsClosed B) :\n    frontier (A ∩ B : Set X) =\n      (frontier A ∩ B) ∪ (frontier B ∩ A) := by\n  classical\n  -- Useful rewrites for frontiers of closed sets.\n  have hFrontA :\n      frontier (A : Set X) = A \\ interior A :=\n    (Topology.frontier_eq_diff_interior_of_isClosed (A := A) hA)\n  have hFrontB :\n      frontier (B : Set X) = B \\ interior B :=\n    (Topology.frontier_eq_diff_interior_of_isClosed (A := B) hB)\n  have hClosedAB : IsClosed (A ∩ B : Set X) := IsClosed.inter hA hB\n  have hFrontAB :\n      frontier (A ∩ B : Set X) = (A ∩ B) \\ interior (A ∩ B) :=\n    (Topology.frontier_eq_diff_interior_of_isClosed\n      (A := A ∩ B) hClosedAB)\n  -- The interior of an intersection.\n  have hIntAB :\n      interior (A ∩ B : Set X) = interior A ∩ interior B :=\n    Topology.interior_inter_eq_inter (A := A) (B := B)\n\n  -- Establish the set equality.\n  ext x; constructor\n  · -- `→`  direction.\n    intro hx\n    -- Rewrite membership in `frontier (A ∩ B)`.\n    have hxAB : x ∈ (A ∩ B) \\ interior (A ∩ B) := by\n      simpa [hFrontAB] using hx\n    rcases hxAB with ⟨⟨hxA, hxB⟩, hNotIntAB⟩\n    -- `x` fails to lie in `interior A ∩ interior B`.\n    have hNotBoth : x ∉ interior A ∩ interior B := by\n      simpa [hIntAB] using hNotIntAB\n    -- Hence, `¬ x ∈ interior A ∧ x ∈ B` or `¬ x ∈ interior B ∧ x ∈ A`.\n    have hCase : x ∉ interior A ∨ x ∉ interior B := by\n      by_cases hIntA : x ∈ interior A\n      · right\n        intro hIntB; exact hNotBoth ⟨hIntA, hIntB⟩\n      · left; exact hIntA\n    cases hCase with\n    | inl hNotIntA =>\n        -- Build membership in `frontier A ∩ B`.\n        have hxFrontA : x ∈ frontier A := by\n          have : x ∈ A \\ interior A := ⟨hxA, hNotIntA⟩\n          simpa [hFrontA] using this\n        exact Or.inl ⟨hxFrontA, hxB⟩\n    | inr hNotIntB =>\n        -- Build membership in `frontier B ∩ A`.\n        have hxFrontB : x ∈ frontier B := by\n          have : x ∈ B \\ interior B := ⟨hxB, hNotIntB⟩\n          simpa [hFrontB] using this\n        exact Or.inr ⟨hxFrontB, hxA⟩\n  · -- `←` direction.\n    intro hx\n    cases hx with\n    | inl hLeft =>\n        rcases hLeft with ⟨hxFrontA, hxB⟩\n        -- Extract data from `hxFrontA`.\n        have hxA : x ∈ A := by\n          have : x ∈ A \\ interior A := by\n            simpa [hFrontA] using hxFrontA\n          exact this.1\n        have hNotIntA : x ∉ interior A := by\n          have : x ∈ A \\ interior A := by\n            simpa [hFrontA] using hxFrontA\n          exact this.2\n        -- Show `x ∉ interior (A ∩ B)`.\n        have hNotIntAB : x ∉ interior (A ∩ B) := by\n          intro hIntAB\n          have : x ∈ interior A ∩ interior B := by\n            simpa [hIntAB] using hIntAB\n          exact hNotIntA this.1\n        -- Conclude membership in `frontier (A ∩ B)`.\n        have : x ∈ (A ∩ B) \\ interior (A ∩ B) :=\n          ⟨⟨hxA, hxB⟩, hNotIntAB⟩\n        simpa [hFrontAB] using this\n    | inr hRight =>\n        rcases hRight with ⟨hxFrontB, hxA⟩\n        -- Extract data from `hxFrontB`.\n        have hxB : x ∈ B := by\n          have : x ∈ B \\ interior B := by\n            simpa [hFrontB] using hxFrontB\n          exact this.1\n        have hNotIntB : x ∉ interior B := by\n          have : x ∈ B \\ interior B := by\n            simpa [hFrontB] using hxFrontB\n          exact this.2\n        -- Show `x ∉ interior (A ∩ B)`.\n        have hNotIntAB : x ∉ interior (A ∩ B) := by\n          intro hIntAB\n          have : x ∈ interior A ∩ interior B := by\n            simpa [hIntAB] using hIntAB\n          exact hNotIntB this.2\n        -- Conclude membership in `frontier (A ∩ B)`.\n        have : x ∈ (A ∩ B) \\ interior (A ∩ B) :=\n          ⟨⟨hxA, hxB⟩, hNotIntAB⟩\n        simpa [hFrontAB] using this"
+  ],
+  "success": true
+}

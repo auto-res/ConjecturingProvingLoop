@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.607521772384644
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1635,
+      "prompt_tokens": 40699,
+      "total_tokens": 42334,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem subset_interiorClosure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hAB : A ⊆ interior (closure B)) (hBC : B ⊆ C) :\n    A ⊆ interior (closure C) := by\n  intro x hxA\n  have hxIntB : x ∈ interior (closure B) := hAB hxA\n  have hClos : closure B ⊆ closure C := closure_mono hBC\n  have hInt : interior (closure B) ⊆ interior (closure C) := interior_mono hClos\n  exact hInt hxIntB"
+  ],
+  "success": true
+}

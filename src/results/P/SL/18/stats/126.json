@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.08138632774353
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4450,
+      "prompt_tokens": 17873,
+      "total_tokens": 22323,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closed_iff_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    Topology.P2 A ↔ interior A = A := by\n  -- First, translate `P2` into openness for a closed set.\n  have hP2_open : Topology.P2 A ↔ IsOpen A :=\n    Topology.P2_closed_iff_open (A := A) hA_closed\n  -- Next, characterize openness via the interior.\n  have hOpen_int : IsOpen A ↔ interior A = A := by\n    constructor\n    · intro hOpen\n      simpa using hOpen.interior_eq\n    · intro hEq\n      have hOpenInt : IsOpen (interior A) := isOpen_interior\n      simpa [hEq] using hOpenInt\n  -- Combine the two equivalences.\n  exact hP2_open.trans hOpen_int"
+  ],
+  "success": true
+}

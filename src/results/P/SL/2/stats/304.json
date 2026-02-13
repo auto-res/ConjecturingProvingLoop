@@ -1,0 +1,60 @@
+{
+  "times": [
+    147.10437417030334,
+    243.8149483203888,
+    188.59472107887268
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6569,
+      "prompt_tokens": 51954,
+      "total_tokens": 58523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 10636,
+      "prompt_tokens": 52082,
+      "total_tokens": 62718,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    },
+    {
+      "completion_tokens": 12305,
+      "prompt_tokens": 52161,
+      "total_tokens": 64466,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_interior_subset_frontier {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure ((A \\ interior A) : Set X) ⊆ frontier (A : Set X) := by\n  intro x hx\n  -- 1. `x` belongs to `closure A` because `A \\ interior A ⊆ A`.\n  have hx_clA : (x : X) ∈ closure (A : Set X) := by\n    have hSub : ((A \\ interior A) : Set X) ⊆ (A : Set X) := by\n      intro y hy; exact hy.1\n    exact (closure_mono hSub) hx\n  -- 2. Show that `x` is *not* in `interior A`.\n  have hx_not_int : x ∉ interior (A : Set X) := by\n    intro hxInt\n    -- Use the characterization of closure with open neighbourhoods.\n    have hNonempty :\n        ((interior (A : Set X)) ∩ (A \\ interior A) : Set X).Nonempty := by\n      have h := (mem_closure_iff.1 hx) isOpen_interior hxInt\n      simpa [Set.inter_comm] using h\n    rcases hNonempty with ⟨y, ⟨hyInt, hyDiff⟩⟩\n    exact (hyDiff.2) hyInt\n  -- Combine the two facts to obtain membership in the frontier.\n  exact And.intro hx_clA hx_not_int",
+    "import Mathlib\n\ntheorem Topology.dense_interior_implies_interior_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) →\n      interior (closure (interior A)) = (Set.univ : Set X) := by\n  intro hDense\n  have h : closure (interior (A : Set X)) = (Set.univ : Set X) := hDense.closure_eq\n  simpa [h, interior_univ]",
+    "theorem Topology.interior_subset_interior_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    (interior (A : Set X)) ⊆ interior (A ∪ B) := by\n  intro x hx\n  -- Since `A ⊆ A ∪ B`, monotonicity of `interior` yields the claim.\n  have hSub : (A : Set X) ⊆ A ∪ B := by\n    intro y hy\n    exact Or.inl hy\n  exact (interior_mono hSub) hx"
+  ],
+  "success": true
+}

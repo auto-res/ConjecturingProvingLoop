@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.24786138534546
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4658,
+      "prompt_tokens": 15647,
+      "total_tokens": 20305,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_unionInterior_subset_closure_interiorUnion\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A ∪ interior B) ⊆ closure (interior (A ∪ B)) := by\n  -- First, show that `interior A ∪ interior B ⊆ interior (A ∪ B)`.\n  have h_sub : (interior A ∪ interior B : Set X) ⊆ interior (A ∪ B) := by\n    intro y hy\n    cases hy with\n    | inl hA =>\n        -- Points of `interior A` are certainly in `interior (A ∪ B)`.\n        have : interior A ⊆ interior (A ∪ B) :=\n          interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n        exact this hA\n    | inr hB =>\n        -- Symmetric argument for `interior B`.\n        have : interior B ⊆ interior (A ∪ B) :=\n          interior_mono (Set.subset_union_right : (B : Set X) ⊆ A ∪ B)\n        exact this hB\n  -- Taking closures preserves inclusions.\n  exact fun x hx => (closure_mono h_sub) hx"
+  ],
+  "success": true
+}

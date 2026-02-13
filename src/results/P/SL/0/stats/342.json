@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.947933673858643
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1553,
+      "prompt_tokens": 61251,
+      "total_tokens": 62804,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closures_union_four_eq_closure_union_four {X : Type*} [TopologicalSpace X]\n    {A B C D : Set X} :\n    closure (A : Set X) ∪ closure (B : Set X) ∪ closure (C : Set X) ∪ closure (D : Set X) =\n      closure (A ∪ B ∪ C ∪ D : Set X) := by\n  calc\n    (closure (A : Set X)) ∪ closure (B : Set X) ∪ closure (C : Set X) ∪ closure (D : Set X)\n        = ((closure (A : Set X) ∪ closure (B : Set X)) ∪ closure (C : Set X)) ∪\n            closure (D : Set X) := by\n          simpa [Set.union_assoc]\n    _ = (closure (A ∪ B : Set X) ∪ closure (C : Set X)) ∪ closure (D : Set X) := by\n          simpa [closure_union]\n    _ = closure (A ∪ B ∪ C : Set X) ∪ closure (D : Set X) := by\n          simpa [Set.union_assoc, closure_union]\n    _ = closure ((A ∪ B ∪ C) ∪ D : Set X) := by\n          simpa [closure_union]\n    _ = closure (A ∪ B ∪ C ∪ D : Set X) := by\n          simpa [Set.union_assoc]"
+  ],
+  "success": true
+}

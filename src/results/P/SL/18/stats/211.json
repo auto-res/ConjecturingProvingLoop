@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.820290088653564
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2067,
+      "prompt_tokens": 32162,
+      "total_tokens": 34229,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_union_of_dense {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hDenseA : Dense (A : Set X)) (hDenseB : Dense (B : Set X)) :\n    Topology.P3 (A ∪ B) := by\n  have hDenseUnion : Dense (A ∪ B : Set X) :=\n    Topology.dense_union (A := A) (B := B) hDenseA hDenseB\n  exact Topology.P3_of_dense (X := X) (A := A ∪ B) hDenseUnion"
+  ],
+  "success": true
+}

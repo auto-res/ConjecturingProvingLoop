@@ -1,0 +1,43 @@
+{
+  "times": [
+    149.69833850860596,
+    103.65340089797974
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7999,
+      "prompt_tokens": 47622,
+      "total_tokens": 55621,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    },
+    {
+      "completion_tokens": 6937,
+      "prompt_tokens": 47863,
+      "total_tokens": 54800,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_boundary {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (closure A \\ interior A : Set X) := by\n  -- `closure A` is closed.\n  have h₁ : IsClosed (closure A) := isClosed_closure\n  -- The complement of an open set is closed.\n  have h₂ : IsClosed ((interior A)ᶜ : Set X) := (isOpen_interior.compl)\n  -- The intersection of two closed sets is closed.\n  have h_inter : IsClosed (closure A ∩ (interior A)ᶜ : Set X) := h₁.inter h₂\n  -- Rewrite the intersection as a set difference.\n  simpa [Set.diff_eq] using h_inter",
+    "theorem _root_.IsOpen.compl {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : IsClosed (Aᶜ) := by\n  simpa [isClosed_compl_iff] using (isClosed_compl_iff).2 hA"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    115.33697938919067,
+    141.25651812553406
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6323,
+      "prompt_tokens": 33635,
+      "total_tokens": 39958,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    },
+    {
+      "completion_tokens": 5132,
+      "prompt_tokens": 33741,
+      "total_tokens": 38873,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_frontier_eq_empty {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior A ∩ frontier A = (∅ : Set X) := by\n  -- `frontier A` is `closure A \\ interior A`, so the intersection is\n  -- `interior A ∩ (closure A \\ interior A)`, which is empty.\n  simpa [frontier, Set.inter_diff_self]",
+    "theorem closure_eq_union_frontier {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A = A ∪ frontier A := by\n  ext x\n  constructor\n  · intro hx\n    by_cases hA : x ∈ A\n    · exact Or.inl hA\n    · -- `x` is not in `A`, so it must lie in the frontier.\n      have h_not_int : x ∉ interior A := by\n        intro hxInt\n        exact hA (interior_subset hxInt)\n      have h_front : x ∈ frontier A := And.intro hx h_not_int\n      exact Or.inr h_front\n  · intro h\n    cases h with\n    | inl hA =>\n        exact subset_closure hA\n    | inr hFront =>\n        exact hFront.1"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.39468216896057
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1318,
+      "prompt_tokens": 36654,
+      "total_tokens": 37972,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_iff_isOpen_and_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) ↔ (IsOpen A ∧ IsClosed A) := by\n  constructor\n  · intro h\n    exact\n      Topology.isOpen_and_isClosed_of_frontier_eq_empty\n        (X := X) (A := A) h\n  · rintro ⟨hOpen, hClosed⟩\n    exact\n      Topology.frontier_eq_empty_of_isOpen_and_isClosed\n        (X := X) (A := A) hOpen hClosed"
+  ],
+  "success": true
+}

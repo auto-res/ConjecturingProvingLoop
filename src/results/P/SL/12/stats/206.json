@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.338388204574585
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3011,
+      "prompt_tokens": 39236,
+      "total_tokens": 42247,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_subset_closure_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P1 (X := X) A) :\n    interior (closure (A : Set X)) ⊆ closure (interior A) := by\n  -- From `P1` we have `closure A = closure (interior A)`.\n  have h_eq : closure (A : Set X) = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 (X := X) (A := A) hA\n  -- Now show the required inclusion.\n  intro x hx\n  -- `x` lies in `closure A` because interiors are contained in the set itself.\n  have hx_cl : x ∈ closure (A : Set X) :=\n    (interior_subset : interior (closure (A : Set X)) ⊆ closure (A : Set X)) hx\n  -- Rewrite with the equality of closures obtained from `P1`.\n  simpa [h_eq] using hx_cl"
+  ],
+  "success": true
+}

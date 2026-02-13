@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.73575782775879
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7052,
+      "prompt_tokens": 10898,
+      "total_tokens": 17950,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_open_closure_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hEq : closure (interior (A : Set X)) = closure A)\n    (hOpen : IsOpen (closure (interior A))) :\n    Topology.P2 (A : Set X) := by\n  -- From the equality of closures, deduce `P1` for `A`.\n  have hP1 : Topology.P1 (A : Set X) :=\n    ((Topology.P1_iff_closure_interior_eq_closure (A := A)).2 hEq)\n  -- Combine `P1` with the openness assumption to obtain `P2`.\n  exact\n    Topology.P1_and_open_closure_interior_implies_P2\n      (A := A) hP1 hOpen"
+  ],
+  "success": true
+}

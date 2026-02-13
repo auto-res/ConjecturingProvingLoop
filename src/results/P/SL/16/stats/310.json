@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.075031757354736
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2989,
+      "prompt_tokens": 54226,
+      "total_tokens": 57215,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_diff_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior ((closure A) \\ A : Set X) = (∅ : Set X) := by\n  apply Set.eq_empty_iff_forall_not_mem.2\n  intro x hxInt\n  have hxDiff : (x : X) ∈ (closure A \\ A : Set X) := by\n    exact interior_subset hxInt\n  have hxCl : x ∈ closure A := hxDiff.1\n  -- Consider the open neighbourhood `interior (closure A \\ A)` of `x`.\n  have h_open :\n      IsOpen (interior ((closure A) \\ A : Set X)) := isOpen_interior\n  -- By density of `A` in its closure, this neighbourhood meets `A`.\n  have h_nonempty :\n      ((interior ((closure A) \\ A : Set X)) ∩ A : Set X).Nonempty :=\n    (mem_closure_iff.1 hxCl) _ h_open hxInt\n  rcases h_nonempty with ⟨y, ⟨hyInt, hyA⟩⟩\n  -- But each point of `interior (closure A \\ A)` lies outside `A`.\n  have h_subset :\n      (interior ((closure A) \\ A : Set X) : Set X) ⊆ (closure A \\ A) :=\n    interior_subset\n  have hyNotA : (y : X) ∉ A := (h_subset hyInt).2\n  exact hyNotA hyA"
+  ],
+  "success": true
+}

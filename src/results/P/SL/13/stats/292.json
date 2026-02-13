@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.750964403152466
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2162,
+      "prompt_tokens": 51798,
+      "total_tokens": 53960,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_compl_eq_boundary {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure ((A : Set X)ᶜ) \\ interior (Aᶜ) = closure (A : Set X) \\ interior A := by\n  -- Express `closure (Aᶜ)` and `interior (Aᶜ)` via complements.\n  have h₁ : closure ((A : Set X)ᶜ) = (interior (A : Set X))ᶜ :=\n    Topology.closure_compl_eq_compl_interior (X := X) (A := A)\n  have h₂ : interior ((A : Set X)ᶜ) = (closure (A : Set X))ᶜ :=\n    Topology.interior_compl_eq_compl_closure (X := X) (A := A)\n  -- Substitute and simplify.\n  simp [h₁, h₂, Set.diff_eq, Set.inter_comm, Set.inter_left_comm, Set.inter_assoc]"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    47.14526844024658
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4208,
+      "prompt_tokens": 30680,
+      "total_tokens": 34888,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_isOpen_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsOpen B) :\n    interior (A ∩ B) = interior A ∩ B := by\n  -- First inclusion: `interior (A ∩ B) ⊆ interior A ∩ B`.\n  have h₁ : interior (A ∩ B : Set X) ⊆ interior A ∩ B := by\n    have h := Topology.interior_inter_subset (X := X) (A := A) (B := B)\n    simpa [hB.interior_eq] using h\n  -- Second inclusion: `interior A ∩ B ⊆ interior (A ∩ B)`.\n  have h₂ : interior A ∩ B ⊆ interior (A ∩ B) := by\n    intro x hx\n    rcases hx with ⟨hx_intA, hxB⟩\n    -- The set `interior A ∩ B` is open and contains `x`.\n    have h_open : IsOpen (interior A ∩ B) :=\n      IsOpen.inter isOpen_interior hB\n    -- This set is contained in `A ∩ B`.\n    have h_subset : (interior A ∩ B : Set X) ⊆ A ∩ B := by\n      intro y hy; exact ⟨interior_subset hy.1, hy.2⟩\n    -- Hence it lies in the interior of `A ∩ B`.\n    have h_max : (interior A ∩ B : Set X) ⊆ interior (A ∩ B) :=\n      interior_maximal h_subset h_open\n    exact h_max ⟨hx_intA, hxB⟩\n  -- Combine the inclusions to obtain equality.\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

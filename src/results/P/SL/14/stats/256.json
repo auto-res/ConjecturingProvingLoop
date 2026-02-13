@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.8048620223999
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4816,
+      "prompt_tokens": 47291,
+      "total_tokens": 52107,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosureInterior_union_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior A)) ∪ interior (closure (interior B)) ⊆\n      interior (closure (interior (A ∪ B))) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- `interior (closure (interior A)) ⊆ interior (closure (interior (A ∪ B)))`\n      have h_mono :\n          interior (closure (interior A)) ⊆\n            interior (closure (interior (A ∪ B))) := by\n        -- Step 1: `interior A ⊆ interior (A ∪ B)`\n        have h_int_subset : interior A ⊆ interior (A ∪ B) := by\n          have h_subset : (A : Set X) ⊆ A ∪ B := by\n            intro y hy; exact Or.inl hy\n          exact interior_mono h_subset\n        -- Step 2: take closures\n        have h_closure_subset :\n            closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n          closure_mono h_int_subset\n        -- Step 3: take interiors again\n        exact interior_mono h_closure_subset\n      exact h_mono hxA\n  | inr hxB =>\n      -- The argument is symmetric for `B`.\n      have h_mono :\n          interior (closure (interior B)) ⊆\n            interior (closure (interior (A ∪ B))) := by\n        -- Step 1: `interior B ⊆ interior (A ∪ B)`\n        have h_int_subset : interior B ⊆ interior (A ∪ B) := by\n          have h_subset : (B : Set X) ⊆ A ∪ B := by\n            intro y hy; exact Or.inr hy\n          exact interior_mono h_subset\n        -- Step 2: take closures\n        have h_closure_subset :\n            closure (interior B) ⊆ closure (interior (A ∪ B)) :=\n          closure_mono h_int_subset\n        -- Step 3: take interiors again\n        exact interior_mono h_closure_subset\n      exact h_mono hxB"
+  ],
+  "success": true
+}

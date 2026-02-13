@@ -1,0 +1,43 @@
+{
+  "times": [
+    64.9198944568634,
+    254.32248425483704
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4843,
+      "prompt_tokens": 31382,
+      "total_tokens": 36225,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 13874,
+      "prompt_tokens": 31664,
+      "total_tokens": 45538,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_frontier_eq_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior A ∪ frontier A = closure A := by\n  -- Express the frontier in terms of a difference.\n  have h_front : frontier A = closure A \\ interior A :=\n    frontier_eq_closure_diff_interior (X := X) (A := A)\n  -- Prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · intro x hx\n    cases hx with\n    | inl hxInt =>\n        exact subset_closure hxInt\n    | inr hxFront =>\n        -- Reinterpret membership in the frontier using `h_front`.\n        have hxFront' : x ∈ closure A \\ interior A := by\n          simpa [h_front] using hxFront\n        exact hxFront'.1\n  · intro x hxCl\n    by_cases hInt : x ∈ interior A\n    · exact Or.inl hInt\n    · -- Build membership in `frontier A` via the difference characterization.\n      have hxDiff : x ∈ closure A \\ interior A := And.intro hxCl hInt\n      have hxFront : x ∈ frontier A := by\n        simpa [h_front] using hxDiff\n      exact Or.inr hxFront",
+    "theorem interior_inter_compl_eq_empty {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior A ∩ (Aᶜ) = (∅ : Set X) := by\n  -- First, observe that `interior A` is contained in `A`.\n  have h_subset : interior A ⊆ (A : Set X) := interior_subset\n  -- Establish the two inclusions needed for set equality.\n  apply Set.Subset.antisymm\n  · -- `interior A ∩ Aᶜ ⊆ ∅`\n    intro x hx\n    -- `x` lies in both `interior A` and `Aᶜ`.\n    have hA : x ∈ A := h_subset hx.1\n    have hAc : x ∈ Aᶜ := hx.2\n    -- Contradiction.\n    exact (hAc hA).elim\n  · -- `∅ ⊆ interior A ∩ Aᶜ`\n    exact Set.empty_subset _"
+  ],
+  "success": true
+}

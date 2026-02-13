@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.65647792816162
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2477,
+      "prompt_tokens": 38424,
+      "total_tokens": 40901,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_four_eq {X : Type*} [TopologicalSpace X]\n    (A B C D : Set X) :\n    closure (A ∪ B ∪ C ∪ D) =\n      closure A ∪ closure B ∪ closure C ∪ closure D := by\n  classical\n  -- Regroup to apply the binary union lemma.\n  have h₁ : (A ∪ B ∪ C ∪ D : Set X) = ((A ∪ B ∪ C) ∪ D) := by\n    simpa [Set.union_assoc]\n  -- Use the three–set lemma for the inner union.\n  have h₂ :\n      closure (A ∪ B ∪ C) = closure A ∪ closure B ∪ closure C :=\n    Topology.closure_union_three_eq (A := A) (B := B) (C := C)\n  calc\n    closure (A ∪ B ∪ C ∪ D)\n        = closure ((A ∪ B ∪ C) ∪ D) := by\n          simpa [h₁]\n    _ = closure (A ∪ B ∪ C) ∪ closure D := by\n          simpa using\n            (Topology.closure_union_eq (A := A ∪ B ∪ C) (B := D))\n    _ = (closure A ∪ closure B ∪ closure C) ∪ closure D := by\n          simpa [h₂]\n    _ = closure A ∪ closure B ∪ closure C ∪ closure D := by\n          simpa [Set.union_assoc, Set.union_left_comm, Set.union_comm]"
+  ],
+  "success": true
+}

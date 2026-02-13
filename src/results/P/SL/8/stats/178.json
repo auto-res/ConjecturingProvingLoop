@@ -1,0 +1,26 @@
+{
+  "times": [
+    166.2938277721405
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13850,
+      "prompt_tokens": 25852,
+      "total_tokens": 39702,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_subset_closureInteriorClosureInterior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 A) :\n    A ⊆ closure (interior (closure (interior A))) := by\n  -- Expand the definition of `P1` to obtain the starting inclusion.\n  dsimp [Topology.P1] at hP1\n  intro x hxA\n  have hxClInt : x ∈ closure (interior A) := hP1 hxA\n  -- Use monotonicity to enlarge the ambient set.\n  have h_subset :\n      closure (interior A) ⊆ closure (interior (closure (interior A))) := by\n    simpa [interior_interior] using\n      closure_interior_subset_closure_interior_closure\n        (X := X) (A := interior A)\n  exact h_subset hxClInt"
+  ],
+  "success": true
+}

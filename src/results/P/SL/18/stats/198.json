@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.28405022621155
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8540,
+      "prompt_tokens": 30025,
+      "total_tokens": 38565,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_interior_of_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (interior (A : Set X)))) :\n    Topology.P2 (closure (interior (A : Set X))) := by\n  have hEquiv :\n      Topology.P2 (closure (interior (A : Set X))) ↔\n        IsOpen (closure (interior (A : Set X))) :=\n    Topology.P2_closure_interior_iff_open_closure_interior (A := A)\n  exact (hEquiv.mpr hOpen)"
+  ],
+  "success": true
+}

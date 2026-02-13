@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.89316987991333
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5825,
+      "prompt_tokens": 38993,
+      "total_tokens": 44818,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_complement_of_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    Topology.P1 (Aᶜ) := by\n  -- The complement of a closed set is open.\n  have hOpen : IsOpen (Aᶜ : Set X) := hA_closed.isOpen_compl\n  -- Apply the lemma asserting `P1` for open sets.\n  exact Topology.P1_of_open hOpen"
+  ],
+  "success": true
+}

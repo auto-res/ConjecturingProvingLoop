@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.2028546333313
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3372,
+      "prompt_tokens": 17671,
+      "total_tokens": 21043,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interior_subset_inter_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ interior B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- `A ∩ interior B` is contained in `A`\n  have hSubA : (A ∩ interior B : Set X) ⊆ A := fun z hz => hz.1\n  -- `A ∩ interior B` is also contained in `B`\n  have hSubB : (A ∩ interior B : Set X) ⊆ B := by\n    intro z hz\n    exact interior_subset hz.2\n  -- Monotonicity of `closure`\n  have hxA : x ∈ closure A := (closure_mono hSubA) hx\n  have hxB : x ∈ closure B := (closure_mono hSubB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

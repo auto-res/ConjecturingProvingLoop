@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.256771087646484
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2894,
+      "prompt_tokens": 52174,
+      "total_tokens": 55068,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) = (∅ : Set X) → Topology.P1 A := by\n  intro hFrontier\n  have hSubset : frontier (A : Set X) ⊆ closure (interior A) := by\n    simpa [hFrontier] using (Set.empty_subset _)\n  exact\n    Topology.P1_of_frontier_subset_closure_interior (A := A) hSubset"
+  ],
+  "success": true
+}

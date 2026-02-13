@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.30662631988525
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5087,
+      "prompt_tokens": 23300,
+      "total_tokens": 28387,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : Topology.P1 A) (hB : Topology.P1 B) :\n    Topology.P1 (A ×ˢ B) := by\n  dsimp [Topology.P1] at hA hB ⊢\n  intro p hpAB\n  rcases hpAB with ⟨hpA, hpB⟩\n  -- Send each coordinate into the corresponding closure.\n  have hclA : p.1 ∈ closure (interior A) := hA hpA\n  have hclB : p.2 ∈ closure (interior B) := hB hpB\n  -- Combine them to obtain membership in the product of closures.\n  have hProd : p ∈ closure (interior A) ×ˢ closure (interior B) := ⟨hclA, hclB⟩\n  -- Rewrite the goal using `closure_prod_eq`.\n  have hProdIn :\n      p ∈ closure ((interior A) ×ˢ (interior B)) := by\n    simpa [closure_prod_eq] using hProd\n  -- Show that this closure is contained in the desired one.\n  have hSubset :\n      closure ((interior A) ×ˢ (interior B)) ⊆\n        closure (interior (A ×ˢ B)) := by\n    -- First, establish the inclusion on the underlying sets.\n    have hInnerSub :\n        (interior A ×ˢ interior B : Set (X × Y)) ⊆\n          interior (A ×ˢ B) := by\n      -- `interior A ×ˢ interior B` is open and contained in `A ×ˢ B`.\n      have hOpen : IsOpen (interior A ×ˢ interior B) :=\n        (isOpen_interior).prod isOpen_interior\n      have hSub : (interior A ×ˢ interior B : Set _) ⊆ A ×ˢ B := by\n        intro q hq\n        exact ⟨(interior_subset hq.1), (interior_subset hq.2)⟩\n      exact interior_maximal hSub hOpen\n    -- Taking closures preserves inclusions.\n    exact closure_mono hInnerSub\n  exact hSubset hProdIn"
+  ],
+  "success": true
+}

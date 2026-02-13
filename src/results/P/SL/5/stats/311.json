@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.87522077560425
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3523,
+      "prompt_tokens": 63084,
+      "total_tokens": 66607,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closureInterior_diff_self_eq_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (closure (interior (A : Set X)) \\ A) = (∅ : Set X) := by\n  classical\n  apply le_antisymm\n  · intro x hx\n    rcases mem_interior.1 hx with ⟨U, hUsub, hUopen, hxU⟩\n    -- `x` lies in the closure of `interior A`.\n    have hxClInt : x ∈ closure (interior (A : Set X)) := (hUsub hxU).1\n    -- Hence every open neighbourhood of `x`, in particular `U`,\n    -- meets `interior A`.\n    have hNon : ((U : Set X) ∩ interior (A : Set X)).Nonempty := by\n      have h := (mem_closure_iff).1 hxClInt\n      simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm]\n        using h U hUopen hxU\n    rcases hNon with ⟨y, ⟨hyU, hyIntA⟩⟩\n    -- But `U` is contained in `closure (interior A) \\ A`, so `y ∉ A`,\n    -- contradicting `y ∈ interior A ⊆ A`.\n    have hyA : y ∈ (A : Set X) := interior_subset hyIntA\n    have hyNotA : y ∉ (A : Set X) := (hUsub hyU).2\n    exact (hyNotA hyA).elim\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

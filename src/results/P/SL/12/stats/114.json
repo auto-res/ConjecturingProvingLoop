@@ -1,0 +1,43 @@
+{
+  "times": [
+    98.79550623893738,
+    107.92964792251587
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7368,
+      "prompt_tokens": 22691,
+      "total_tokens": 30059,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    },
+    {
+      "completion_tokens": 7442,
+      "prompt_tokens": 22815,
+      "total_tokens": 30257,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_eq_closure_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen (A : Set X)) :\n    closure (interior (closure (A : Set X))) = closure A := by\n  -- We establish the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- `closure (interior (closure A)) ⊆ closure A`\n    have h₁ : (interior (closure (A : Set X)) : Set X) ⊆ closure A :=\n      interior_subset\n    exact closure_mono h₁\n  · -- `closure A ⊆ closure (interior (closure A))`\n    -- Since `A` is open and contained in `closure A`, it is also contained in the interior.\n    have h₂ : (A : Set X) ⊆ interior (closure A) :=\n      interior_maximal (subset_closure : (A : Set X) ⊆ closure A) hA\n    -- Taking closures yields the desired inclusion.\n    exact closure_mono h₂",
+    ""
+  ],
+  "success": true
+}

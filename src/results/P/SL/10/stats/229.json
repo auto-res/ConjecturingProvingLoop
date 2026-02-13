@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.01620531082153
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5208,
+      "prompt_tokens": 37061,
+      "total_tokens": 42269,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.nonempty_interior_closure_of_nonempty_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (interior A).Nonempty → (interior (closure A)).Nonempty := by\n  intro hIntA\n  rcases hIntA with ⟨x, hxIntA⟩\n  have hxIntCl : x ∈ interior (closure A) :=\n    (Topology.interior_subset_interior_closure (X := X) (A := A)) hxIntA\n  exact ⟨x, hxIntCl⟩"
+  ],
+  "success": true
+}

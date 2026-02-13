@@ -1,0 +1,26 @@
+{
+  "times": [
+    93.7181441783905
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7466,
+      "prompt_tokens": 29423,
+      "total_tokens": 36889,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_union_satisfies_P3\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 (interior (closure (A : Set X)) ∪ interior (closure B)) := by\n  -- `interior (closure A)` and `interior (closure B)` are both open.\n  have hOpenA : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n  have hOpenB : IsOpen (interior (closure (B : Set X))) := isOpen_interior\n  -- Their union is therefore open.\n  have hOpen : IsOpen (interior (closure (A : Set X)) ∪ interior (closure B)) :=\n    hOpenA.union hOpenB\n  -- Any open set satisfies `P3`.\n  exact Topology.open_satisfies_P3\n    (A := interior (closure (A : Set X)) ∪ interior (closure B)) hOpen"
+  ],
+  "success": true
+}

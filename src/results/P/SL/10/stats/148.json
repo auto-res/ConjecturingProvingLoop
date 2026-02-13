@@ -1,0 +1,26 @@
+{
+  "times": [
+    81.61941456794739
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5050,
+      "prompt_tokens": 24184,
+      "total_tokens": 29234,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior A) ∩ interior (Aᶜ) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxClInt, hxIntCompl⟩\n    -- `closure (interior A)` sits inside `closure A`.\n    have h_closure_mono :\n        closure (interior A) ⊆ closure A :=\n      Topology.closure_interior_subset_closure (X := X) (A := A)\n    have hxClA : x ∈ closure A := h_closure_mono hxClInt\n    -- Rewrite `interior (Aᶜ)` as the complement of `closure A`.\n    have h_eq :\n        interior (Aᶜ) = (closure A)ᶜ :=\n      Topology.interior_compl_eq_compl_closure (X := X) (A := A)\n    have hxNotClA : x ∈ (closure A)ᶜ := by\n      simpa [h_eq] using hxIntCompl\n    -- Contradiction.\n    exact (hxNotClA hxClA).elim\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

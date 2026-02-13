@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.58851599693298
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4607,
+      "prompt_tokens": 31686,
+      "total_tokens": 36293,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iUnion_interior_eq {X : Type*} [TopologicalSpace X]\n    {ι : Sort*} {A : ι → Set X} :\n    interior (⋃ i, interior (A i)) = ⋃ i, interior (A i) := by\n  have h_open : IsOpen (⋃ i, interior (A i)) := by\n    refine isOpen_iUnion (fun _ => isOpen_interior)\n  simpa using h_open.interior_eq"
+  ],
+  "success": true
+}

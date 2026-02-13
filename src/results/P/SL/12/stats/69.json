@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.41755986213684
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7949,
+      "prompt_tokens": 13889,
+      "total_tokens": 21838,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_idempotent\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (A : Set X))))) =\n      interior (closure (interior A)) := by\n  -- We establish the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    -- Step 1: `interior (closure (interior A)) ⊆ closure (interior A)`.\n    have h₁ :\n        (interior (closure (interior A)) : Set X) ⊆ closure (interior A) :=\n      interior_subset\n    -- Step 2: take closures of both sides.\n    have h₂ :\n        closure (interior (closure (interior A))) ⊆\n          closure (closure (interior A)) :=\n      closure_mono h₁\n    -- Step 3: simplify the right‐hand side.\n    have h₂' :\n        closure (interior (closure (interior A))) ⊆\n          closure (interior A) := by\n      simpa [closure_closure] using h₂\n    -- Step 4: take interiors once more.\n    exact interior_mono h₂'\n  · -- `⊇` direction\n    -- The set `interior (closure (interior A))` is open.\n    have h_open : IsOpen (interior (closure (interior A))) := isOpen_interior\n    -- It is contained in its own closure, hence in the larger closure that appears.\n    have h_subset :\n        (interior (closure (interior A)) : Set X) ⊆\n          closure (interior (closure (interior (A : Set X)))) := by\n      simpa using\n        (subset_closure :\n          (interior (closure (interior A)) : Set X) ⊆\n            closure (interior (closure (interior A))))\n    -- Apply maximality of the interior for an open set.\n    have h_incl :\n        interior (closure (interior A)) ⊆\n          interior (closure (interior (closure (interior A)))) :=\n      interior_maximal h_subset h_open\n    -- Conclude the desired inclusion.\n    simpa using h_incl"
+  ],
+  "success": true
+}

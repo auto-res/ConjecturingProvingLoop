@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.463088035583496
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1586,
+      "prompt_tokens": 21674,
+      "total_tokens": 23260,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iUnion_interior_eq_iUnion_interior\n    {ι X : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    interior (⋃ i, interior (A i) : Set X) = ⋃ i, interior (A i) := by\n  classical\n  -- The union of the open sets `interior (A i)` is open.\n  have hOpen : IsOpen (⋃ i, interior (A i) : Set X) := by\n    apply isOpen_iUnion\n    intro i\n    exact isOpen_interior\n  -- For an open set `U`, we have `interior U = U`.\n  simpa [hOpen.interior_eq]"
+  ],
+  "success": true
+}

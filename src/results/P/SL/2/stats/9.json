@@ -1,0 +1,26 @@
+{
+  "times": [
+    20.093624114990234
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1753,
+      "prompt_tokens": 1167,
+      "total_tokens": 2920,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_implies_closure_interior_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 A → closure (interior A) = closure A := by\n  intro hP1\n  have h₁ : closure (interior A) ⊆ closure A := closure_mono interior_subset\n  have h₂ : closure A ⊆ closure (interior A) :=\n    Topology.P1_implies_closure_subset_closure_interior (A := A) hP1\n  exact subset_antisymm h₁ h₂"
+  ],
+  "success": true
+}

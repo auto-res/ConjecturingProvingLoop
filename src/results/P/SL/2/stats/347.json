@@ -1,0 +1,60 @@
+{
+  "times": [
+    42.34160566329956,
+    67.951251745224,
+    39.40413951873779
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3924,
+      "prompt_tokens": 61366,
+      "total_tokens": 65290,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 60160
+      }
+    },
+    {
+      "completion_tokens": 5454,
+      "prompt_tokens": 61472,
+      "total_tokens": 66926,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    },
+    {
+      "completion_tokens": 2706,
+      "prompt_tokens": 61642,
+      "total_tokens": 64348,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 60288
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_interior_diff_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A →\n      frontier (A : Set X) = closure (interior A) \\ interior (A : Set X) := by\n  intro hP1\n  have hEq : closure (interior A) = closure (A : Set X) :=\n    Topology.P1_implies_closure_interior_eq_closure (A := A) hP1\n  simpa [frontier, hEq]",
+    "```lean\ntheorem Set.compl_compl {α : Type*} (s : Set α) : sᶜᶜ = s := by\n  ext x\n  by_cases hxs : x ∈ s\n  <;> simp [hxs]\n```",
+    ""
+  ],
+  "success": true
+}

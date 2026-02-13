@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.24574065208435
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3166,
+      "prompt_tokens": 26866,
+      "total_tokens": 30032,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P3 (X := X) A) :\n    interior (closure (A : Set X)) =\n      interior (closure (interior (closure A))) := by\n  -- `P3` gives an equality between the two closures.\n  have h :=\n    Topology.closure_eq_closure_interior_closure_of_P3\n      (X := X) (A := A) hA\n  -- Taking `interior` of both sides yields the desired result.\n  simpa using congrArg interior h"
+  ],
+  "success": true
+}

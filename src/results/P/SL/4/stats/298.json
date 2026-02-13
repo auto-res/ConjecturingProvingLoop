@@ -1,0 +1,43 @@
+{
+  "times": [
+    159.33229660987854,
+    69.20861029624939
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14536,
+      "prompt_tokens": 45816,
+      "total_tokens": 60352,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5123,
+      "prompt_tokens": 45896,
+      "total_tokens": 51019,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_frontier_eq_empty_of_open {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen A) :\n    interior (frontier A) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    -- `hx` gives an open set `U` with `x ∈ U ⊆ frontier A`.\n    rcases hx with ⟨U, hU_open, hxU, hU_subset⟩\n    have hx_front : x ∈ frontier A := hU_subset hxU\n    -- Therefore `x` lies in `closure A`.\n    have hx_closure : x ∈ closure A :=\n      (frontier_subset_closure (X := X) (A := A)) hx_front\n    -- Any open neighbourhood of `x` meets `A`.\n    have h_nonempty : (U ∩ A).Nonempty :=\n      (mem_closure_iff).1 hx_closure U hU_open hxU\n    -- Pick a point `y ∈ U ∩ A`.\n    rcases h_nonempty with ⟨y, hyU, hyA⟩\n    have hy_front : y ∈ frontier A := hU_subset hyU\n    -- Since `A` is open, `y ∈ interior A`.\n    have hy_intA : y ∈ interior A := by\n      simpa [hA.interior_eq] using hyA\n    -- But `frontier A ∩ interior A = ∅`, contradiction.\n    have h_empty : frontier A ∩ interior A = (∅ : Set X) :=\n      frontier_inter_interior_eq_empty (X := X) (A := A)\n    have : y ∈ (∅ : Set X) := by\n      have : y ∈ frontier A ∩ interior A := And.intro hy_front hy_intA\n      simpa [h_empty] using this\n    exact this.elim\n  · exact Set.empty_subset _",
+    "theorem closure_diff_subset_closure_left {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A \\ B) ⊆ closure A := by\n  -- The set difference `A \\ B` is clearly contained in `A`.\n  have h_sub : (A \\ B : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  -- Monotonicity of `closure` yields the desired inclusion.\n  exact closure_mono h_sub"
+  ],
+  "success": true
+}

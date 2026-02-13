@@ -1,0 +1,43 @@
+{
+  "times": [
+    100.13875603675842,
+    16.35750102996826
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7535,
+      "prompt_tokens": 63453,
+      "total_tokens": 70988,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 62208
+      }
+    },
+    {
+      "completion_tokens": 1566,
+      "prompt_tokens": 63583,
+      "total_tokens": 65149,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 62208
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_subset {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : Topology.P3 (X := X) B) (hAB : A ⊆ B) :\n    Topology.P3 (X := X) A := by\n  dsimp [Topology.P3] at *\n  intro x hxA\n  -- From the inclusion `A ⊆ B`, we obtain `x ∈ B`.\n  have hxB : x ∈ B := hAB hxA\n  -- Apply `P3` for `B`.\n  have hxIntClB : x ∈ interior (closure (B : Set X)) := hB hxB\n  -- Use monotonicity of `closure` and `interior` to pass from `B` to `A`.\n  have hsubset : closure (A : Set X) ⊆ closure (B : Set X) := closure_mono hAB\n  exact (interior_mono hsubset) hxIntClB",
+    "theorem closureInterior_inter_interiorClosure_subset_closure_inter₂\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A) ∩ interior (closure B) ⊆ closure (A ∩ closure B) := by\n  intro x hx\n  rcases hx with ⟨hxClIntA, hxIntClB⟩\n  -- We will show `x ∈ closure (A ∩ closure B)` using `mem_closure_iff`.\n  refine (mem_closure_iff).2 ?_\n  intro U hUopen hxU\n  -- Set `V = U ∩ interior (closure B)`, an open neighbourhood of `x`.\n  let V : Set X := U ∩ interior (closure B)\n  have hVopen : IsOpen V := hUopen.inter isOpen_interior\n  have hxV : x ∈ V := ⟨hxU, hxIntClB⟩\n  -- `x ∈ closure (interior A)` ⇒ `V` meets `interior A`.\n  have hNon : (V ∩ interior A).Nonempty := by\n    have h := (mem_closure_iff).1 hxClIntA\n    simpa [V] using h V hVopen hxV\n  -- Extract a witness `y` in `V ∩ interior A`.\n  rcases hNon with ⟨y, ⟨⟨hyU, hyIntClB⟩, hyIntA⟩⟩\n  -- `y ∈ A` because `y ∈ interior A`.\n  have hyA : y ∈ A := interior_subset hyIntA\n  -- `y ∈ closure B` because `y ∈ interior (closure B)`.\n  have hyClB : y ∈ closure B := interior_subset hyIntClB\n  -- Therefore `y ∈ U ∩ (A ∩ closure B)`.\n  exact ⟨y, ⟨hyU, ⟨hyA, hyClB⟩⟩⟩"
+  ],
+  "success": true
+}

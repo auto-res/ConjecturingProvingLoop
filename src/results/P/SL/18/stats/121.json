@@ -1,0 +1,60 @@
+{
+  "times": [
+    100.59525918960571,
+    110.01314544677734,
+    33.093772888183594
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6381,
+      "prompt_tokens": 17116,
+      "total_tokens": 23497,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    },
+    {
+      "completion_tokens": 10161,
+      "prompt_tokens": 17238,
+      "total_tokens": 27399,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    },
+    {
+      "completion_tokens": 3321,
+      "prompt_tokens": 17358,
+      "total_tokens": 20679,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n  exact\n    closure_mono\n      (interior_subset :\n        interior (closure (A : Set X)) ⊆ closure (A : Set X))",
+    "theorem interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (A : Set X)))) =\n      interior (closure (A : Set X)) := by\n  apply Set.Subset.antisymm\n  ·\n    have hSub :\n        closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n      have : interior (closure (A : Set X)) ⊆ closure (A : Set X) :=\n        interior_subset\n      exact closure_mono this\n    exact interior_mono hSub\n  ·\n    have hOpen : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    have hSub :\n        (interior (closure (A : Set X)) : Set X) ⊆\n          closure (interior (closure (A : Set X))) := subset_closure\n    exact interior_maximal hSub hOpen",
+    "theorem closure_interior_closure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (A : Set X))) ⊆ closure A := by\n  -- `interior (closure A)` is contained in `closure A`.\n  have h₁ : interior (closure (A : Set X)) ⊆ closure A := interior_subset\n  -- The closure operator preserves inclusions.\n  have h₂ :\n      closure (interior (closure (A : Set X)))\n        ⊆ closure (closure (A : Set X)) :=\n    closure_mono h₁\n  -- Simplify `closure (closure A)` to `closure A`.\n  simpa [closure_closure] using h₂"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    101.90479779243469,
+    127.36535787582397
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6605,
+      "prompt_tokens": 43824,
+      "total_tokens": 50429,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 6846,
+      "prompt_tokens": 43904,
+      "total_tokens": 50750,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem closed_P1_compl_iff_P2_compl {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    Topology.P1 (Aᶜ) ↔ Topology.P2 (Aᶜ) := by\n  have h1 : Topology.P1 (Aᶜ) ↔ Topology.P3 (Aᶜ) :=\n    closed_P1_compl_iff_P3_compl (X := X) (A := A) hA_closed\n  have h2 : Topology.P2 (Aᶜ) ↔ Topology.P3 (Aᶜ) :=\n    closed_P2_compl_iff_P3_compl (X := X) (A := A) hA_closed\n  simpa using h1.trans h2.symm",
+    "theorem closure_interior_empty {X : Type*} [TopologicalSpace X] :\n    closure (interior (∅ : Set X)) = (∅ : Set X) := by\n  simp"
+  ],
+  "success": true
+}

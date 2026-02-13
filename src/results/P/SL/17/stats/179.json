@@ -1,0 +1,26 @@
+{
+  "times": [
+    130.81249475479126
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8394,
+      "prompt_tokens": 31371,
+      "total_tokens": 39765,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_of_dense_interior_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hDense : Dense (interior A)) (hAB : interior A ⊆ B) :\n    Topology.P2 B := by\n  unfold Topology.P2\n  intro x hxB\n  -- Step 1: `interior A ⊆ interior B`\n  have hIntSubset : interior A ⊆ interior B :=\n    interior_maximal hAB isOpen_interior\n  -- Step 2: `closure (interior A) = univ`\n  have hClosureA : closure (interior A) = (Set.univ : Set X) := hDense.closure_eq\n  -- Step 3: `closure (interior B) = univ`\n  have hClosureB : closure (interior B) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro _ _; simp\n    ·\n      have h_inc : closure (interior A) ⊆ closure (interior B) :=\n        closure_mono hIntSubset\n      simpa [hClosureA] using h_inc\n  -- Step 4: `interior (closure (interior B)) = univ`\n  have hInterior : interior (closure (interior B)) = (Set.univ : Set X) := by\n    simpa [hClosureB] using\n      (interior_univ : interior (Set.univ : Set X) = Set.univ)\n  -- Step 5: Conclude membership\n  have : x ∈ (Set.univ : Set X) := by simp\n  simpa [hInterior] using this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    47.91621160507202
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3759,
+      "prompt_tokens": 33183,
+      "total_tokens": 36942,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_eq_of_P3_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) (hP3 : Topology.P3 A) : closure (interior A) = A := by\n  -- First, derive `P1 A` from `P3 A` and the closedness of `A`.\n  have hP1 : Topology.P1 A := Topology.P1_of_P3_closed (A := A) hA hP3\n  -- Then apply the closed‐set characterisation of `P1`.\n  exact (Topology.P1_closed_iff_closureInterior_eq (A := A) hA).1 hP1"
+  ],
+  "success": true
+}

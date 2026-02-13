@@ -1,0 +1,43 @@
+{
+  "times": [
+    162.83031177520752,
+    218.72730469703674
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12392,
+      "prompt_tokens": 11769,
+      "total_tokens": 24161,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    },
+    {
+      "completion_tokens": 15698,
+      "prompt_tokens": 11900,
+      "total_tokens": 27598,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply subset_antisymm\n  ·\n    -- `interior (closure (interior A))` is contained in `closure (interior A)`,\n    -- hence the same is true after taking closures.\n    have h : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    exact closure_mono h\n  ·\n    -- By monotonicity of `interior`, `interior A` is contained in\n    -- `interior (closure (interior A))`; taking closures yields the reverse inclusion.\n    have h : interior A ⊆ interior (closure (interior A)) :=\n      interior_subset_interior_closure_interior (X := X) (A := A)\n    exact closure_mono h",
+    ""
+  ],
+  "success": true
+}

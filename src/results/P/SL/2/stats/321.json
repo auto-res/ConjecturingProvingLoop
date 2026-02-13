@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.580811023712158
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2198,
+      "prompt_tokens": 55332,
+      "total_tokens": 57530,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_closure_frontier_subset_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A →\n      closure (frontier (A : Set X)) ⊆ closure (interior A) := by\n  intro hP2\n  have hP1 : Topology.P1 A := Topology.P2_implies_P1 (A := A) hP2\n  exact\n    Topology.P1_implies_closure_frontier_subset_closure_interior\n      (A := A) hP1"
+  ],
+  "success": true
+}

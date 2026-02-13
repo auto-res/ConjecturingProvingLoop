@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.6227445602417
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4563,
+      "prompt_tokens": 21465,
+      "total_tokens": 26028,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_subset_interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ interior (closure (interior (closure A))) := by\n  intro x hx\n  -- First inclusion: `interior A ⊆ interior (closure A)`\n  have h₁ : (interior A : Set X) ⊆ interior (closure A) :=\n    Topology.interior_subset_interior_closure (A := A)\n  have hx₁ : x ∈ interior (closure A) := h₁ hx\n  -- Second inclusion:\n  -- `interior (closure A) ⊆ interior (closure (interior (closure A)))`\n  have h₂ :\n      (interior (closure A) : Set X) ⊆\n        interior (closure (interior (closure A))) := by\n    -- This follows from the same lemma applied to `interior (closure A)`\n    have h :=\n      Topology.interior_subset_interior_closure\n        (A := interior (closure A))\n    simpa [interior_interior] using h\n  exact h₂ hx₁"
+  ],
+  "success": true
+}

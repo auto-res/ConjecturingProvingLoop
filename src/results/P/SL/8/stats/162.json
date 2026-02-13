@@ -1,0 +1,26 @@
+{
+  "times": [
+    47.405043840408325
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3987,
+      "prompt_tokens": 23200,
+      "total_tokens": 27187,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iUnion {X ι : Type*} [TopologicalSpace X] {A : ι → Set X}\n    (hA : ∀ i, Topology.P2 (A i)) :\n    Topology.P2 (⋃ i, A i) := by\n  dsimp [Topology.P2] at hA ⊢\n  intro x hxUnion\n  rcases Set.mem_iUnion.mp hxUnion with ⟨i, hxAi⟩\n  -- Apply `P2` to obtain membership in the appropriate interior.\n  have hxP2 : x ∈ interior (closure (interior (A i))) := (hA i) hxAi\n  -- Relate the successive interiors and closures for `A i` and the union.\n  have h_int_subset : interior (A i) ⊆ interior (⋃ j, A j) := by\n    have h_sub : A i ⊆ ⋃ j, A j := Set.subset_iUnion _ _\n    exact interior_mono h_sub\n  have h_closure_subset :\n      closure (interior (A i)) ⊆ closure (interior (⋃ j, A j)) :=\n    closure_mono h_int_subset\n  have h_interior_subset :\n      interior (closure (interior (A i))) ⊆\n        interior (closure (interior (⋃ j, A j))) :=\n    interior_mono h_closure_subset\n  exact h_interior_subset hxP2"
+  ],
+  "success": true
+}

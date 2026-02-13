@@ -1,0 +1,26 @@
+{
+  "times": [
+    186.51677632331848
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14503,
+      "prompt_tokens": 35718,
+      "total_tokens": 50221,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_subset_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) ⊆ closure A ∪ closure B := by\n  intro x hx\n  -- `interior (A ∪ B)` is contained in `A ∪ B`.\n  have h_subset : (interior (A ∪ B) : Set X) ⊆ A ∪ B := interior_subset\n  -- Taking closures preserves inclusions.\n  have h_closure_subset :\n      closure (interior (A ∪ B)) ⊆ closure (A ∪ B) :=\n    closure_mono h_subset\n  -- Transport the membership of `x`.\n  have hx_closure : x ∈ closure (A ∪ B) := h_closure_subset hx\n  -- Rewriting the right‐hand side using `closure_union`.\n  simpa [closure_union] using hx_closure"
+  ],
+  "success": true
+}

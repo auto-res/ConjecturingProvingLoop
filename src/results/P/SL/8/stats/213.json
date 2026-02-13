@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.56191563606262
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8632,
+      "prompt_tokens": 31883,
+      "total_tokens": 40515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_subset_closure_diff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B) ⊆ closure A \\ B := by\n  intro x hx\n  -- From `hx : x ∈ interior (A \\ B)` we deduce `x ∈ A \\ B`.\n  have h_mem : x ∈ A \\ B := interior_subset hx\n  -- Using the existing lemma, we know `x ∈ closure A`.\n  have h_cl : x ∈ closure A :=\n    interior_diff_subset_closure_left (X := X) (A := A) (B := B) hx\n  -- Assemble the membership in the required difference set.\n  exact And.intro h_cl h_mem.2"
+  ],
+  "success": true
+}

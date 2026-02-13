@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.162472009658813
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1705,
+      "prompt_tokens": 48209,
+      "total_tokens": 49914,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_prod\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    interior (closure (interior (A ×ˢ B))) =\n      interior (closure (interior A)) ×ˢ\n        interior (closure (interior B)) := by\n  -- First, rewrite the closure of the interior of the product.\n  have h₁ :\n      closure (interior (A ×ˢ B)) =\n        closure (interior A) ×ˢ closure (interior B) := by\n    simpa using\n      (closure_interior_prod (X := X) (Y := Y) (A := A) (B := B))\n  -- Next, identify the interior of a product of sets.\n  have h₂ :\n      interior ((closure (interior A)) ×ˢ (closure (interior B))) =\n        interior (closure (interior A)) ×ˢ\n          interior (closure (interior B)) := by\n    simpa using\n      (interior_prod_eq\n        (s := closure (interior A)) (t := closure (interior B)))\n  -- Combine the two equalities.\n  simpa [h₁, h₂]"
+  ],
+  "success": true
+}

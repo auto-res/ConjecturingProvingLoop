@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.516801834106445
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4145,
+      "prompt_tokens": 10245,
+      "total_tokens": 14390,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (A : Set X)))) =\n      interior (closure A) := by\n  -- We show the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- First inclusion: `⊆`\n    have h_cl :\n        closure (interior (closure (A : Set X))) ⊆ closure A := by\n      -- `interior (closure A) ⊆ closure A`\n      have h₁ : (interior (closure (A : Set X)) : Set X) ⊆ closure A :=\n        interior_subset\n      -- Taking closures preserves this inclusion.\n      have h₂ :\n          closure (interior (closure (A : Set X))) ⊆\n            closure (closure (A : Set X)) :=\n        closure_mono h₁\n      simpa [closure_closure] using h₂\n    -- Monotonicity of `interior` yields the desired inclusion.\n    exact interior_mono h_cl\n  · -- Second inclusion: `⊇`\n    -- `interior (closure A)` is open.\n    have h_open : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    -- It is contained in `closure (interior (closure A))`.\n    have h_sub :\n        (interior (closure (A : Set X)) : Set X) ⊆\n          closure (interior (closure (A : Set X))) :=\n      subset_closure\n    -- An open set contained in a set lies in its interior.\n    have h_incl :\n        interior (closure (A : Set X)) ⊆\n          interior (closure (interior (closure (A : Set X)))) :=\n      interior_maximal h_sub h_open\n    exact h_incl"
+  ],
+  "success": true
+}

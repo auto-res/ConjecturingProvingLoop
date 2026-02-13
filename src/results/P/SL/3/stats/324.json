@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.661304712295532
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1751,
+      "prompt_tokens": 54808,
+      "total_tokens": 56559,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_of_isClosed_and_boundary_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hClosed : IsClosed (A : Set X))\n    (hBoundary : closure (A : Set X) \\ interior (A : Set X) = (∅ : Set X)) :\n    IsOpen (A : Set X) := by\n  have hClopen : IsOpen (A : Set X) ∧ IsClosed (A : Set X) :=\n    (boundary_eq_empty_iff_isClopen (A := A)).1 hBoundary\n  exact hClopen.1"
+  ],
+  "success": true
+}

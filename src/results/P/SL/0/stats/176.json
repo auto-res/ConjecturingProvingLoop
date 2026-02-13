@@ -1,0 +1,43 @@
+{
+  "times": [
+    41.44550561904907,
+    54.131733417510986
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2985,
+      "prompt_tokens": 29641,
+      "total_tokens": 32626,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    },
+    {
+      "completion_tokens": 3669,
+      "prompt_tokens": 29765,
+      "total_tokens": 33434,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_closure_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A →\n      closure (A : Set X) = closure (interior (closure (A : Set X))) := by\n  intro hP1\n  -- First inclusion: `closure A ⊆ closure (interior (closure A))`.\n  have h₁ :\n      closure (A : Set X) ⊆\n        closure (interior (closure (A : Set X))) := by\n    have hSub :\n        (A : Set X) ⊆ closure (interior (closure (A : Set X))) :=\n      Topology.P1_implies_subset_closure_interior_closure\n        (X := X) (A := A) hP1\n    exact closure_mono hSub\n  -- Second inclusion: `closure (interior (closure A)) ⊆ closure A`.\n  have h₂ :\n      closure (interior (closure (A : Set X))) ⊆\n        closure (A : Set X) :=\n    Topology.closure_interior_closure_subset_closure\n      (X := X) (A := A)\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem isOpen_union_interiors {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    IsOpen ((interior (A : Set X)) ∪ interior (B : Set X)) := by\n  -- Both `interior A` and `interior B` are open sets.\n  have hA : IsOpen (interior (A : Set X)) := isOpen_interior\n  have hB : IsOpen (interior (B : Set X)) := isOpen_interior\n  -- The union of two open sets is open.\n  exact hA.union hB"
+  ],
+  "success": true
+}

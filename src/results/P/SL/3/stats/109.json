@@ -1,0 +1,26 @@
+{
+  "times": [
+    148.2516872882843
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9593,
+      "prompt_tokens": 16639,
+      "total_tokens": 26232,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_of_isClosed_and_P2 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed (A : Set X)) (hP2 : Topology.P2 (A : Set X)) :\n    closure (interior (A : Set X)) = A := by\n  -- A set that is both closed and satisfies `P2` is open.\n  have hOpen : IsOpen (A : Set X) :=\n    isOpen_of_isClosed_and_P2 (A := A) hA_closed hP2\n  -- Hence `interior A = A`.\n  have hInt : interior (A : Set X) = A := hOpen.interior_eq\n  -- Use the facts that `closure A = A` (since `A` is closed) and `interior A = A`.\n  calc\n    closure (interior (A : Set X))\n        = closure (A : Set X) := by\n          simpa [hInt]\n    _ = A := hA_closed.closure_eq"
+  ],
+  "success": true
+}

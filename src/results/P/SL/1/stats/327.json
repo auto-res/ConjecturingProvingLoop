@@ -1,0 +1,26 @@
+{
+  "times": [
+    182.54237842559814
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10154,
+      "prompt_tokens": 50086,
+      "total_tokens": 60240,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_closure_diff_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (closure A \\ interior A) := by\n  -- `closure A` is closed.\n  have hClosedCl : IsClosed (closure A) := isClosed_closure\n  -- The complement of an open set is closed.\n  have hClosedCompl : IsClosed ((interior A)ᶜ) :=\n    (isOpen_interior : IsOpen (interior A)).isClosed_compl\n  -- Rewrite the set difference as an intersection and use `IsClosed.inter`.\n  simpa [Set.diff_eq] using hClosedCl.inter hClosedCompl"
+  ],
+  "success": true
+}

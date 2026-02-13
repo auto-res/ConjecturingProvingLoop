@@ -1,0 +1,77 @@
+{
+  "times": [
+    97.65081310272217,
+    69.96467876434326,
+    138.02369785308838,
+    44.413724422454834
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7084,
+      "prompt_tokens": 46023,
+      "total_tokens": 53107,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 5145,
+      "prompt_tokens": 46137,
+      "total_tokens": 51282,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 8985,
+      "prompt_tokens": 46255,
+      "total_tokens": 55240,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    },
+    {
+      "completion_tokens": 2946,
+      "prompt_tokens": 46377,
+      "total_tokens": 49323,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem nonempty_of_closure_nonempty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure (A : Set X)).Nonempty → (A : Set X).Nonempty := by\n  classical\n  intro hClos\n  by_cases hA : (A : Set X).Nonempty\n  · exact hA\n  ·\n    have hAeq : (A : Set X) = (∅ : Set X) :=\n      Set.not_nonempty_iff_eq_empty.mp hA\n    have : (∅ : Set X).Nonempty := by\n      simpa [hAeq, closure_empty] using hClos\n    exact this.elim",
+    "theorem open_and_closed_of_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (A : Set X) = closure A) :\n    IsOpen (A : Set X) ∧ IsClosed (A : Set X) := by\n  -- First, turn the given equality around.\n  have h_cl : closure (A : Set X) = interior A := by\n    simpa using h.symm\n  -- We show that `interior A = A`.\n  have h₁ : interior (A : Set X) ⊆ A := interior_subset\n  have h₂ : (A : Set X) ⊆ interior A := by\n    have : (A : Set X) ⊆ closure A := subset_closure\n    simpa [h_cl] using this\n  have hInt_eq : interior (A : Set X) = A :=\n    Set.Subset.antisymm h₂ h₁\n  -- Likewise, deduce `closure A = A`.\n  have hClos_eq : closure (A : Set X) = A := by\n    simpa [hInt_eq] using h_cl\n  -- `A` is open because it equals its interior.\n  have hOpen : IsOpen (A : Set X) := by\n    have : IsOpen (interior (A : Set X)) := isOpen_interior\n    simpa [hInt_eq] using this\n  -- `A` is closed because it equals its closure.\n  have hClosed : IsClosed (A : Set X) := by\n    have : IsClosed (closure (A : Set X)) := isClosed_closure\n    simpa [hClos_eq] using this\n  exact ⟨hOpen, hClosed⟩",
+    "theorem closure_inter_eq_closure_of_dense_open {X : Type*} [TopologicalSpace X]\n    {A U : Set X} (hDense : Dense (A : Set X)) (hU_open : IsOpen U) :\n    closure (A ∩ U : Set X) = closure (U : Set X) := by\n  classical\n  -- One inclusion is immediate because `A ∩ U ⊆ U`.\n  have h₁ : closure (A ∩ U : Set X) ⊆ closure (U : Set X) :=\n    closure_mono (Set.inter_subset_right : (A ∩ U : Set X) ⊆ U)\n  -- For the reverse inclusion, it suffices to show `U ⊆ closure (A ∩ U)`.\n  have h₂ : (U : Set X) ⊆ closure (A ∩ U : Set X) := by\n    intro y hyU\n    -- Density of `A` gives `y ∈ closure A`.\n    have hyClA : y ∈ closure (A : Set X) := hDense y\n    -- Use the neighbourhood characterization of the closure.\n    have : (∀ V : Set X, IsOpen V → y ∈ V → (V ∩ (A ∩ U) : Set X).Nonempty) := by\n      intro V hVopen hyV\n      -- Consider the open set `V ∩ U`, which contains `y`.\n      have hWopen : IsOpen (V ∩ U) := hVopen.inter hU_open\n      have hyW : y ∈ V ∩ U := ⟨hyV, hyU⟩\n      -- Since `y ∈ closure A`, the intersection with `A` is nonempty.\n      have hNonempty : ((V ∩ U) ∩ A).Nonempty :=\n        (mem_closure_iff).1 hyClA (V ∩ U) hWopen hyW\n      -- Repackage the witness to fit `V ∩ (A ∩ U)`.\n      rcases hNonempty with ⟨z, ⟨⟨hzV, hzU⟩, hzA⟩⟩\n      exact ⟨z, ⟨hzV, ⟨hzA, hzU⟩⟩⟩\n    exact (mem_closure_iff).2 this\n  -- Taking closures preserves inclusions, yielding the second inclusion.\n  have h₃ : closure (U : Set X) ⊆ closure (A ∩ U : Set X) :=\n    closure_mono h₂\n  exact Set.Subset.antisymm h₁ h₃",
+    "theorem P2_of_P1_and_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (A : Set X)) (hDense : Dense (A : Set X)) :\n    Topology.P2 (A : Set X) := by\n  -- First, `closure (interior A) = univ` by the existing lemma.\n  have hClos : closure (interior (A : Set X)) = (Set.univ : Set X) :=\n    Topology.closure_interior_eq_univ_of_P1_and_dense (A := A) hP1 hDense\n  -- Consequently, `interior (closure (interior A)) = univ`.\n  have hInt : interior (closure (interior (A : Set X))) = (Set.univ : Set X) := by\n    simpa [hClos, interior_univ]\n  -- Apply the lemma that turns this interior equality into `P2`.\n  exact\n    Topology.P2_of_interior_closure_interior_eq_univ (A := A) hInt"
+  ],
+  "success": true
+}

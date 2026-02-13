@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.77047061920166
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5216,
+      "prompt_tokens": 29837,
+      "total_tokens": 35053,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_interior_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Topology.P3 A := by\n  intro hDenseInt\n  intro x hxA\n  -- `closure (interior A) = univ`\n  have hCl_eq_univ : closure (interior (A : Set X)) = (Set.univ : Set X) :=\n    hDenseInt.closure_eq\n  -- hence `interior (closure (interior A)) = univ`\n  have hInt_eq_univ :\n      interior (closure (interior (A : Set X))) = (Set.univ : Set X) := by\n    simpa [hCl_eq_univ, interior_univ]\n  -- and so `univ ⊆ interior (closure A)`\n  have hSub_univ :\n      (Set.univ : Set X) ⊆ interior (closure (A : Set X)) := by\n    intro y hy\n    have : y ∈ interior (closure (interior (A : Set X))) := by\n      simpa [hInt_eq_univ] using hy\n    exact\n      (Topology.interior_closure_interior_subset_interior_closure (A := A)) this\n  -- therefore `interior (closure A) = univ`\n  have hIntCl_eq_univ :\n      interior (closure (A : Set X)) = (Set.univ : Set X) := by\n    apply subset_antisymm\n    · intro y hy; simp\n    · exact hSub_univ\n  -- conclude `x ∈ interior (closure A)`\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hIntCl_eq_univ] using this"
+  ],
+  "success": true
+}

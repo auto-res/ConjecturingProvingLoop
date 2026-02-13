@@ -1,0 +1,43 @@
+{
+  "times": [
+    24.060497283935547,
+    288.6859564781189
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1797,
+      "prompt_tokens": 36107,
+      "total_tokens": 37904,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    },
+    {
+      "completion_tokens": 17890,
+      "prompt_tokens": 36230,
+      "total_tokens": 54120,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_of_isClosed_and_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hP1 : Topology.P1 (A : Set X)) :\n    IsOpen (A : Set X) := by\n  -- From `hA_closed` and `hP1` we have `closure (interior A) = A`.\n  have hEq : closure (interior (A : Set X)) = A :=\n    closure_interior_eq_of_isClosed_and_P1 (A := A) hA_closed hP1\n  -- An equality of the form `closure (interior A) = A` implies that `A` is open.\n  exact isOpen_of_closure_interior_eq (A := A) hEq",
+    "theorem isClosed_closure_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    IsClosed (closure (interior (A : Set X))) := by\n  -- The closure of any set is closed.\n  simpa using\n    (isClosed_closure : IsClosed (closure (interior (A : Set X))))"
+  ],
+  "success": true
+}

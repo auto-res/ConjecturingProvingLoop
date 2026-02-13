@@ -1,0 +1,43 @@
+{
+  "times": [
+    82.85981488227844,
+    161.14932298660278
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4876,
+      "prompt_tokens": 46495,
+      "total_tokens": 51371,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 8850,
+      "prompt_tokens": 47106,
+      "total_tokens": 55956,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_inter_three_subset\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    interior (closure (A ∩ B ∩ C : Set X)) ⊆\n      interior (closure A) ∩ interior (closure B) ∩ interior (closure C) := by\n  intro x hx\n  -- `x` lies in `interior (closure A)`\n  have hxA : (x : X) ∈ interior (closure A) := by\n    -- `A ∩ B ∩ C ⊆ A`\n    have h_subset : (A ∩ B ∩ C : Set X) ⊆ A := by\n      intro y hy; exact hy.1\n    -- Monotonicity of `closure` and `interior`\n    have h_int :\n        interior (closure (A ∩ B ∩ C : Set X)) ⊆ interior (closure A) :=\n      interior_mono (closure_mono h_subset)\n    exact h_int hx\n  -- `x` lies in `interior (closure B)`\n  have hxB : (x : X) ∈ interior (closure B) := by\n    -- `A ∩ B ∩ C ⊆ B`\n    have h_subset : (A ∩ B ∩ C : Set X) ⊆ B := by\n      intro y hy; exact hy.2.1\n    have h_int :\n        interior (closure (A ∩ B ∩ C : Set X)) ⊆ interior (closure B) :=\n      interior_mono (closure_mono h_subset)\n    exact h_int hx\n  -- `x` lies in `interior (closure C)`\n  have hxC : (x : X) ∈ interior (closure C) := by\n    -- `A ∩ B ∩ C ⊆ C`\n    have h_subset : (A ∩ B ∩ C : Set X) ⊆ C := by\n      intro y hy; exact hy.2.2\n    have h_int :\n        interior (closure (A ∩ B ∩ C : Set X)) ⊆ interior (closure C) :=\n      interior_mono (closure_mono h_subset)\n    exact h_int hx\n  exact And.intro hxA (And.intro hxB hxC)",
+    ""
+  ],
+  "success": true
+}

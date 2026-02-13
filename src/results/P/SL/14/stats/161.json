@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.20536589622498
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5472,
+      "prompt_tokens": 29497,
+      "total_tokens": 34969,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closureInterior_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (closure (interior (closure (interior A)))) ↔\n      Topology.P1 (closure (interior A)) := by\n  -- `closure ∘ interior` is idempotent, hence the two sets coincide.\n  have hEq :\n      (closure (interior (closure (interior A))) : Set X) =\n        closure (interior A) :=\n    Topology.closureInterior_idempotent (X := X) (A := A)\n  -- After rewriting with this equality, both sides are definitionally equal.\n  simpa [hEq] using\n    (Iff.rfl :\n      Topology.P1 (closure (interior (closure (interior A)))) ↔\n        Topology.P1 (closure (interior (closure (interior A)))))"
+  ],
+  "success": true
+}

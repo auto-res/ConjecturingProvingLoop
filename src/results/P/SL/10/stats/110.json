@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.08560609817505
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3407,
+      "prompt_tokens": 18351,
+      "total_tokens": 21758,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_of_P2_and_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A) (hClosed : IsClosed A) : IsOpen A := by\n  have h_eq : interior A = A :=\n    Topology.interior_eq_of_P2_and_isClosed (X := X) (A := A) hP2 hClosed\n  have h_open_int : IsOpen (interior A) := isOpen_interior\n  simpa [h_eq] using h_open_int"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    26.87879204750061,
+    143.57790565490723
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3011,
+      "prompt_tokens": 18477,
+      "total_tokens": 21488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    },
+    {
+      "completion_tokens": 9684,
+      "prompt_tokens": 18583,
+      "total_tokens": 28267,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18304
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → Topology.P1 (closure A) := by\n  intro hP3\n  dsimp [Topology.P1]\n  intro x hx_cl\n  have h_eq :=\n    Topology.closure_eq_closure_interior_closure_of_P3 (X := X) (A := A) hP3\n  simpa [h_eq] using hx_cl",
+    "theorem Topology.closure_interior_eq_closure_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    closure (interior A) = closure A := by\n  simpa [hA.interior_eq]"
+  ],
+  "success": true
+}

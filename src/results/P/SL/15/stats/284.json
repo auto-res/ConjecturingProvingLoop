@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.01643705368042
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5368,
+      "prompt_tokens": 61131,
+      "total_tokens": 66499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 60288
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_prod_closure_of_isOpen\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y}\n    (hA : IsOpen (closure A)) (hB : IsOpen (closure B)) :\n    Topology.P2 (closure A ×ˢ closure B) := by\n  -- Each open closure separately satisfies `P2`.\n  have hP2A : Topology.P2 (closure A) :=\n    Topology.isOpen_implies_P2 (X := X) (A := closure A) hA\n  have hP2B : Topology.P2 (closure B) :=\n    Topology.isOpen_implies_P2 (X := Y) (A := closure B) hB\n  -- Combine them via the product rule for `P2`.\n  simpa using\n    (Topology.P2_prod\n      (X := X) (Y := Y)\n      (A := closure A) (B := closure B) hP2A hP2B)"
+  ],
+  "success": true
+}

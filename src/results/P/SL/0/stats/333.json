@@ -1,0 +1,26 @@
+{
+  "times": [
+    70.82844996452332
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5123,
+      "prompt_tokens": 59206,
+      "total_tokens": 64329,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union_four {X : Type*} [TopologicalSpace X] {A B C D : Set X} :\n    Topology.P1 A → Topology.P1 B → Topology.P1 C → Topology.P1 D →\n      Topology.P1 (A ∪ B ∪ C ∪ D) := by\n  intro hA hB hC hD\n  -- First, unite `A`, `B`, and `C`.\n  have hABC : Topology.P1 (A ∪ B ∪ C) :=\n    Topology.P1_union_three (X := X) (A := A) (B := B) (C := C) hA hB hC\n  -- Next, union the result with `D`.\n  have hABCD : Topology.P1 ((A ∪ B ∪ C) ∪ D) :=\n    Topology.P1_union (X := X) (A := A ∪ B ∪ C) (B := D) hABC hD\n  -- Reassociate unions to match the goal.\n  simpa [Set.union_assoc] using hABCD"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    162.42110919952393,
+    152.69700360298157
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6238,
+      "prompt_tokens": 45356,
+      "total_tokens": 51594,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    },
+    {
+      "completion_tokens": 10328,
+      "prompt_tokens": 45606,
+      "total_tokens": 55934,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_interior_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A \\ interior A) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · -- We show that `interior (A \\ interior A)` is empty.\n    intro x hx\n    -- `interior (A \\ interior A)` is open and contained in `A`.\n    have h_open : IsOpen (interior (A \\ interior A)) := isOpen_interior\n    have h_subsetA : (A \\ interior A) ⊆ A := Set.diff_subset\n    have h_into_intA :\n        interior (A \\ interior A) ⊆ interior A :=\n      interior_maximal h_subsetA h_open\n    -- Membership of `x` in the interior of the difference yields a contradiction.\n    have hx_in_intA : x ∈ interior A := h_into_intA hx\n    have hx_in_diff : x ∈ A ∧ x ∉ interior A := interior_subset hx\n    exact (hx_in_diff.2 hx_in_intA).elim\n  · -- Trivial inclusion `∅ ⊆ _`.\n    exact Set.empty_subset _",
+    "theorem Topology.closure_union_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure A ∪ closure B ⊆ closure (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      -- `A ⊆ A ∪ B`, so the monotonicity of `closure` yields the result.\n      have h_subset : closure A ⊆ closure (A ∪ B) :=\n        closure_mono (Set.subset_union_left : A ⊆ A ∪ B)\n      exact h_subset hA\n  | inr hB =>\n      -- Symmetric argument for the second summand.\n      have h_subset : closure B ⊆ closure (A ∪ B) :=\n        closure_mono (Set.subset_union_right : B ⊆ A ∪ B)\n      exact h_subset hB"
+  ],
+  "success": true
+}

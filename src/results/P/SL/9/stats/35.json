@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.13929796218872
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2296,
+      "prompt_tokens": 5009,
+      "total_tokens": 7305,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 (A := A)) (hB : Topology.P2 (A := B)) :\n    Topology.P2 (A := A ∪ B) := by\n  dsimp [Topology.P2] at *\n  intro x hxAB\n  cases hxAB with\n  | inl hxA =>\n      -- Use `P2` on `A`\n      have hxIntA : x ∈ interior (closure (interior A)) := hA hxA\n      -- Show this interior is contained in the desired one\n      have h_subset : interior (closure (interior A)) ⊆\n                      interior (closure (interior (A ∪ B))) := by\n        -- Monotonicity of `interior` and `closure`\n        have h_int_subset : interior A ⊆ interior (A ∪ B) := by\n          have h_sub : A ⊆ A ∪ B := by\n            intro y hy; exact Or.inl hy\n          exact interior_mono h_sub\n        have h_closure_subset : closure (interior A) ⊆\n                                closure (interior (A ∪ B)) :=\n          closure_mono h_int_subset\n        exact interior_mono h_closure_subset\n      exact h_subset hxIntA\n  | inr hxB =>\n      -- Symmetric case for `B`\n      have hxIntB : x ∈ interior (closure (interior B)) := hB hxB\n      have h_subset : interior (closure (interior B)) ⊆\n                      interior (closure (interior (A ∪ B))) := by\n        have h_int_subset : interior B ⊆ interior (A ∪ B) := by\n          have h_sub : B ⊆ A ∪ B := by\n            intro y hy; exact Or.inr hy\n          exact interior_mono h_sub\n        have h_closure_subset : closure (interior B) ⊆\n                                closure (interior (A ∪ B)) :=\n          closure_mono h_int_subset\n        exact interior_mono h_closure_subset\n      exact h_subset hxIntB"
+  ],
+  "success": true
+}

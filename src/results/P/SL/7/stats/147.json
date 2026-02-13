@@ -1,0 +1,26 @@
+{
+  "times": [
+    137.64627528190613
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9879,
+      "prompt_tokens": 23058,
+      "total_tokens": 32937,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_nonempty_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A) (hA : A.Nonempty) : (interior A).Nonempty := by\n  -- `P2` implies `P1`.\n  have hP1 : Topology.P1 A := Topology.P2_implies_P1 (A := A) hP2\n  -- Use the existing result for `P1`.\n  exact Topology.interior_nonempty_of_P1 (A := A) hP1 hA"
+  ],
+  "success": true
+}

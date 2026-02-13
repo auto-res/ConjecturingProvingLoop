@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.34522366523743
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1923,
+      "prompt_tokens": 57620,
+      "total_tokens": 59543,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem subset_closure_interior_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → (A ⊆ closure (interior (A : Set X))) := by\n  intro hP2\n  have hP1 : Topology.P1 (A : Set X) :=\n    Topology.P2_implies_P1 (A := A) hP2\n  simpa [Topology.P1] using hP1"
+  ],
+  "success": true
+}

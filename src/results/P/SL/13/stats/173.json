@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.814120054244995
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3612,
+      "prompt_tokens": 30687,
+      "total_tokens": 34299,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.denseInterior_implies_P2_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Topology.P2 (X := X) (closure (A : Set X)) := by\n  intro hDense\n  have h_closure : closure (A : Set X) = (Set.univ : Set X) :=\n    Topology.denseInterior_implies_closure_eq_univ (X := X) (A := A) hDense\n  simpa [h_closure] using Topology.P2_univ (X := X)"
+  ],
+  "success": true
+}

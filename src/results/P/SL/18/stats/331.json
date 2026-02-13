@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.673628091812134
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2853,
+      "prompt_tokens": 54379,
+      "total_tokens": 57232,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_closure_left_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ closure (B : Set X) : Set X)) ⊆\n      interior (closure (A : Set X)) := by\n  -- `closure` is monotone with respect to set inclusion.\n  have h :\n      closure (A ∩ closure (B : Set X) : Set X) ⊆ closure (A : Set X) := by\n    apply closure_mono\n    intro x hx\n    exact hx.1\n  -- Taking interiors preserves inclusions.\n  exact interior_mono h"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.83211541175842
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5070,
+      "prompt_tokens": 40971,
+      "total_tokens": 46041,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iInter_subset_iInter_interior\n    {X : Type*} [TopologicalSpace X] {ι : Type*} {s : ι → Set X} :\n    interior (⋂ i, s i : Set X) ⊆ ⋂ i, interior (s i) := by\n  intro x hx\n  -- For each index `i`, we will show that `x ∈ interior (s i)`.\n  have h : ∀ i, x ∈ interior (s i) := by\n    intro i\n    -- Since `⋂ j, s j ⊆ s i`, monotonicity of `interior` yields the claim.\n    have hSub : (⋂ j, s j : Set X) ⊆ s i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    have hInt : interior (⋂ j, s j : Set X) ⊆ interior (s i) :=\n      interior_mono hSub\n    exact hInt hx\n  -- Combine the pointwise facts into membership of the intersection.\n  exact Set.mem_iInter.2 h"
+  ],
+  "success": true
+}

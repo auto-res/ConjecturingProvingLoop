@@ -1,0 +1,43 @@
+{
+  "times": [
+    65.4968478679657,
+    233.59932398796082
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4523,
+      "prompt_tokens": 49432,
+      "total_tokens": 53955,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 13074,
+      "prompt_tokens": 49534,
+      "total_tokens": 62608,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_of_dense_interiorClosure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (closure (A : Set X)) = (Set.univ : Set X)) : Topology.P2 A := by\n  -- First, deduce that `closure A = univ`.\n  have hClosure_eq_univ : closure (A : Set X) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · exact Set.Subset_univ _\n    · intro x _\n      have hx_int : (x : X) ∈ interior (closure (A : Set X)) := by\n        have : (x : X) ∈ (Set.univ : Set X) := by\n          trivial\n        simpa [h] using this\n      exact (interior_subset : interior (closure (A : Set X)) ⊆ closure (A : Set X)) hx_int\n  -- Hence `closure A` is open.\n  have hOpen : IsOpen (closure (A : Set X)) := by\n    simpa [hClosure_eq_univ] using isOpen_univ\n  -- Apply the auxiliary lemma for open closures.\n  exact Topology.P2_of_open_closure (A := A) hOpen",
+    ""
+  ],
+  "success": true
+}

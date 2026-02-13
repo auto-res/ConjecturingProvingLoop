@@ -1,0 +1,26 @@
+{
+  "times": [
+    105.99193692207336
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5907,
+      "prompt_tokens": 42082,
+      "total_tokens": 47989,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closure_interior_of_isOpen_closure_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X}\n    (h_open : IsOpen (closure (interior (A : Set X)))) :\n    Topology.P2 (X := X) (closure (interior A)) := by\n  -- Use the equivalence previously established for closed sets.\n  have h_equiv :=\n    Topology.P2_closure_interior_iff_isOpen_closure_interior (X := X) (A := A)\n  exact h_equiv.mpr h_open"
+  ],
+  "success": true
+}

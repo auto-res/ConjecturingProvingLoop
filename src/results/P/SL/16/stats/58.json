@@ -1,0 +1,43 @@
+{
+  "times": [
+    204.67427229881287,
+    241.92893886566162
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12585,
+      "prompt_tokens": 10589,
+      "total_tokens": 23174,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    },
+    {
+      "completion_tokens": 14574,
+      "prompt_tokens": 10717,
+      "total_tokens": 25291,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_sUnion {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)}\n    (hP : ∀ A, A ∈ 𝒜 → Topology.P1 (X := X) A) :\n    Topology.P1 (X := X) (⋃₀ 𝒜) := by\n  dsimp [Topology.P1] at hP ⊢\n  intro x hxSUnion\n  rcases Set.mem_sUnion.1 hxSUnion with ⟨A, hA𝒜, hxA⟩\n  have hx_cl : x ∈ closure (interior A) := (hP A hA𝒜) hxA\n  have h_int_subset : interior A ⊆ interior (⋃₀ 𝒜) := by\n    -- First, note that `interior A ⊆ ⋃₀ 𝒜`.\n    have h_sub : interior A ⊆ (⋃₀ 𝒜) := by\n      intro y hy\n      have hyA : y ∈ A := interior_subset hy\n      exact Set.mem_sUnion.2 ⟨A, hA𝒜, hyA⟩\n    -- Apply monotonicity of `interior`.\n    exact interior_mono h_sub\n  have h_closure_subset :\n      closure (interior A) ⊆ closure (interior (⋃₀ 𝒜)) :=\n    closure_mono h_int_subset\n  exact h_closure_subset hx_cl",
+    "theorem Topology.interior_inter_subset_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B : Set X) ⊆ interior (A ∪ B) := by\n  -- `interior` is monotone with respect to set inclusion.\n  refine interior_mono ?_\n  intro x hx\n  exact Or.inl hx.1"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    80.15437459945679,
+    88.39676690101624
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6536,
+      "prompt_tokens": 48278,
+      "total_tokens": 54814,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 6455,
+      "prompt_tokens": 48508,
+      "total_tokens": 54963,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_frontier_eq_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) \\ frontier A = interior A := by\n  classical\n  -- Express the frontier via closure and interior.\n  have hfront : (frontier (A : Set X)) = closure A \\ interior A :=\n    Topology.frontier_eq_closure_diff_interior (A := A)\n  -- Rewrite the left–hand side using `hfront` and simplify step by step.\n  calc\n    closure (A : Set X) \\ frontier A\n        = closure A \\ (closure A \\ interior A) := by\n          simpa [hfront]\n    _ = (closure A \\ closure A) ∪ (closure A ∩ interior A) := by\n          simpa using Set.diff_diff (closure A) (closure A) (interior A)\n    _ = closure A ∩ interior A := by\n          simp [Set.diff_self, Set.empty_union]\n    _ = interior A := by\n          -- Since `interior A ⊆ closure A`, the intersection reduces to `interior A`.\n          have h_subset : (interior A : Set X) ⊆ closure A := by\n            intro x hx\n            have : x ∈ A := interior_subset hx\n            exact subset_closure this\n          simpa [Set.inter_eq_right.mpr h_subset]",
+    "theorem Topology.interior_diff_eq_diff_closure_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : IsOpen (A : Set X)) :\n    interior (A \\ B) = A \\ closure B := by\n  classical\n  -- First inclusion: `interior (A \\ B) ⊆ A \\ closure B`.\n  have h₁ : interior (A \\ B) ⊆ A \\ closure B := by\n    intro x hxInt\n    -- `x` lies in `A \\ B`.\n    have hxDiff : x ∈ A \\ B := interior_subset hxInt\n    have hxA    : x ∈ A := hxDiff.1\n    -- Show `x ∉ closure B`.\n    have hxNotCl : x ∉ closure B := by\n      intro hxCl\n      -- Any open neighbourhood of `x` meets `B`.\n      have h_closure := (mem_closure_iff).1 hxCl\n      -- The open set `interior (A \\ B)` contains `x` and is disjoint from `B`,\n      -- contradicting the previous statement.\n      have h_nonempty : (interior (A \\ B) ∩ B).Nonempty :=\n        h_closure _ isOpen_interior hxInt\n      rcases h_nonempty with ⟨y, ⟨hyInt, hyB⟩⟩\n      have : y ∈ A \\ B := interior_subset hyInt\n      exact this.2 hyB\n    exact ⟨hxA, hxNotCl⟩\n  -- Second inclusion: `A \\ closure B ⊆ interior (A \\ B)`.\n  have h₂ : A \\ closure B ⊆ interior (A \\ B) := by\n    -- The set `A \\ closure B` is open.\n    have hOpenDiff : IsOpen (A \\ closure B) := by\n      have hOpenCompl : IsOpen ((closure B)ᶜ) :=\n        (isClosed_closure : IsClosed (closure B)).isOpen_compl\n      simpa [Set.diff_eq] using hA.inter hOpenCompl\n    -- And it is contained in `A \\ B`.\n    have hSubset : (A \\ closure B : Set X) ⊆ A \\ B := by\n      intro x hx\n      have hxNotB : x ∉ B := by\n        intro hxB\n        have : x ∈ closure B := subset_closure hxB\n        exact hx.2 this\n      exact ⟨hx.1, hxNotB⟩\n    -- Use maximality of the interior.\n    exact interior_maximal hSubset hOpenDiff\n  -- Combine the two inclusions to obtain equality.\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

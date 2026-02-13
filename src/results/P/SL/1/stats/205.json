@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.33403778076172
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2183,
+      "prompt_tokens": 31747,
+      "total_tokens": 33930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 (interior (A ∪ B)) := by\n  -- The set `interior (A ∪ B)` is open.\n  have hOpen : IsOpen (interior (A ∪ B)) := isOpen_interior\n  -- Any open set satisfies `P2`.\n  exact Topology.P2_of_isOpen (A := interior (A ∪ B)) hOpen"
+  ],
+  "success": true
+}

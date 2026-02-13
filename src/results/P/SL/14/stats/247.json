@@ -1,0 +1,43 @@
+{
+  "times": [
+    118.81116795539856,
+    164.51984071731567
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5956,
+      "prompt_tokens": 45879,
+      "total_tokens": 51835,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    },
+    {
+      "completion_tokens": 11312,
+      "prompt_tokens": 45994,
+      "total_tokens": 57306,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_subset_interiorClosureInterior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) ⊆ interior (closure (interior A)) := by\n  intro x hx\n  -- `interior A` is contained in `closure (interior A)`.\n  have h_subset : (interior A : Set X) ⊆ closure (interior A) := subset_closure\n  -- Monotonicity of `interior` upgrades the inclusion.\n  have h_mono : interior (interior A) ⊆ interior (closure (interior A)) :=\n    interior_mono h_subset\n  -- Rewrite `interior (interior A)` and conclude.\n  simpa [interior_interior] using h_mono hx",
+    "theorem Topology.interior_inter_three_eq_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) (hC : IsOpen (C : Set X)) :\n    interior (A ∩ B ∩ C : Set X) = A ∩ B ∩ C := by\n  have hOpen : IsOpen (A ∩ B ∩ C : Set X) := by\n    -- `A ∩ B` is open since both `A` and `B` are open.\n    have hAB : IsOpen (A ∩ B : Set X) := IsOpen.inter hA hB\n    -- Intersect once more with `C`, which is also open.\n    simpa [Set.inter_assoc] using IsOpen.inter hAB hC\n  -- The interior of an open set coincides with the set itself.\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

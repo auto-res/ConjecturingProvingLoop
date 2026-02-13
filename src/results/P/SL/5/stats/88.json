@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.85592770576477
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4272,
+      "prompt_tokens": 13983,
+      "total_tokens": 18255,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P2 (X := X) (closure (A : Set X))) :\n    Topology.P3 (X := X) A := by\n  dsimp [Topology.P3] at *\n  intro x hxA\n  -- Every point of `A` lies in `closure A`.\n  have hx_closure : x ∈ closure (A : Set X) := subset_closure hxA\n  -- Apply the `P2` hypothesis for `closure A`.\n  have hx_int :\n      x ∈ interior (closure (interior (closure (A : Set X)))) :=\n    h hx_closure\n  -- Use monotonicity of `interior` to pass to `interior (closure A)`.\n  have h_subset :\n      interior (closure (interior (closure (A : Set X))))\n        ⊆ interior (closure (A : Set X)) := by\n    have h_closure :\n        closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) :=\n      Topology.closure_interior_closure_subset_closure (X := X) (A := A)\n    exact interior_mono h_closure\n  exact h_subset hx_int"
+  ],
+  "success": true
+}

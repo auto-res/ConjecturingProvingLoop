@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.97101879119873
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1261,
+      "prompt_tokens": 52364,
+      "total_tokens": 53625,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_closure_subset_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A ↔ closure A ⊆ closure (interior A) := by\n  constructor\n  · intro hP1\n    -- From `A ⊆ closure (interior A)` we get the desired inclusion by taking closures.\n    have h : (A : Set X) ⊆ closure (interior A) := hP1\n    have : closure A ⊆ closure (closure (interior A)) := closure_mono h\n    simpa [closure_closure] using this\n  · intro hSub\n    -- Use the assumed inclusion and the fact that `x ∈ A` implies `x ∈ closure A`.\n    dsimp [Topology.P1] at *\n    intro x hxA\n    have hx_closure : x ∈ closure A := subset_closure hxA\n    exact hSub hx_closure"
+  ],
+  "success": true
+}

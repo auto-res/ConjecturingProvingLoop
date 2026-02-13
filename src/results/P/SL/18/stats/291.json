@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.86392855644226
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7248,
+      "prompt_tokens": 46915,
+      "total_tokens": 54163,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_eq_diff_closure_of_open\n    {X : Type*} [TopologicalSpace X] {U V : Set X}\n    (hU : IsOpen (U : Set X)) :\n    interior (U \\ V : Set X) = U \\ closure V := by\n  ext x\n  constructor\n  · intro hx\n    -- From `x ∈ interior (U \\ V)` we get `x ∈ U \\ V`.\n    have hxUV : x ∈ U \\ V :=\n      (interior_subset : interior (U \\ V : Set X) ⊆ U \\ V) hx\n    have hxU : x ∈ U := hxUV.1\n    -- Show that `x ∉ closure V`.\n    have hxNotCl : x ∉ closure V := by\n      by_contra hxCl\n      -- `interior (U \\ V)` is an open neighbourhood of `x`\n      -- contained in `U \\ V`, hence disjoint from `V`.\n      have hOpenInt : IsOpen (interior (U \\ V : Set X)) := isOpen_interior\n      have hNonempty :\n          ((interior (U \\ V : Set X)) ∩ V : Set X).Nonempty :=\n        (mem_closure_iff).1 hxCl (interior (U \\ V : Set X)) hOpenInt hx\n      rcases hNonempty with ⟨y, ⟨hyInt, hyV⟩⟩\n      have : y ∈ U \\ V :=\n        (interior_subset : interior (U \\ V : Set X) ⊆ U \\ V) hyInt\n      exact this.2 hyV\n    exact ⟨hxU, hxNotCl⟩\n  · rintro ⟨hxU, hxNotCl⟩\n    -- Construct an open neighbourhood of `x` contained in `U \\ V`.\n    have hOpenCompl : IsOpen ((closure V)ᶜ : Set X) :=\n      isClosed_closure.isOpen_compl\n    have hOpenN : IsOpen (U ∩ (closure V)ᶜ : Set X) :=\n      hU.inter hOpenCompl\n    have hxN : x ∈ (U ∩ (closure V)ᶜ : Set X) := ⟨hxU, hxNotCl⟩\n    have hSub :\n        (U ∩ (closure V)ᶜ : Set X) ⊆ U \\ V := by\n      intro y hy\n      rcases hy with ⟨hyU, hyNotCl⟩\n      have hyNotV : y ∉ V := by\n        intro hyV\n        have : y ∈ closure V := subset_closure hyV\n        exact hyNotCl this\n      exact ⟨hyU, hyNotV⟩\n    exact\n      (interior_maximal hSub hOpenN) hxN"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.5738480091095
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3070,
+      "prompt_tokens": 1593,
+      "total_tokens": 4663,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_closure_eq_closureInterior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (X := X) A ↔ closure (A : Set X) = closure (interior A) := by\n  constructor\n  · intro hP1\n    have h₁ : closure (A : Set X) ⊆ closure (interior A) := by\n      -- Take closure on both sides of the inclusion provided by hP1\n      have := closure_mono hP1\n      simpa using this\n    have h₂ : closure (interior A) ⊆ closure (A : Set X) :=\n      closure_mono (interior_subset : interior A ⊆ A)\n    exact Set.Subset.antisymm h₁ h₂\n  · intro h_eq\n    dsimp [Topology.P1]\n    intro x hxA\n    have : (x : X) ∈ closure (A : Set X) := subset_closure hxA\n    simpa [h_eq] using this"
+  ],
+  "success": true
+}

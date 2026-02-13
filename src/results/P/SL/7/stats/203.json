@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.54416346549988
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8387,
+      "prompt_tokens": 31066,
+      "total_tokens": 39453,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8064,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_P2_P3_singleton_iff_isOpen_of_T1\n    {X : Type*} [TopologicalSpace X] [T1Space X] {x : X} :\n    (Topology.P1 ({x} : Set X) ∧ Topology.P2 ({x} : Set X) ∧ Topology.P3 ({x} : Set X))\n      ↔ IsOpen ({x} : Set X) := by\n  have hP1 : Topology.P1 ({x} : Set X) ↔ IsOpen ({x} : Set X) :=\n    Topology.P1_singleton_iff_isOpen_of_T1 (x := x)\n  have hP2 : Topology.P2 ({x} : Set X) ↔ IsOpen ({x} : Set X) :=\n    Topology.P2_singleton_iff_isOpen_of_T1 (x := x)\n  have hP3 : Topology.P3 ({x} : Set X) ↔ IsOpen ({x} : Set X) :=\n    Topology.P3_singleton_iff_isOpen_of_T1 (x := x)\n  constructor\n  · intro hTriple\n    exact (hP1).1 hTriple.1\n  · intro hOpen\n    exact ⟨(hP1).2 hOpen, (hP2).2 hOpen, (hP3).2 hOpen⟩"
+  ],
+  "success": true
+}

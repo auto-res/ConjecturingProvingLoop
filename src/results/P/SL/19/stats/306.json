@@ -1,0 +1,43 @@
+{
+  "times": [
+    40.45814561843872,
+    233.04689931869507
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2260,
+      "prompt_tokens": 48437,
+      "total_tokens": 50697,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 10322,
+      "prompt_tokens": 48632,
+      "total_tokens": 58954,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_closure_frontier_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ∪ closure (frontier A) = closure A := by\n  -- Show the left‐hand side is contained in `closure A`.\n  apply Set.Subset.antisymm\n  · intro x hx\n    cases hx with\n    | inl hInt =>\n        -- `interior A ⊆ closure A`\n        exact (interior_subset : interior A ⊆ closure A) hInt\n    | inr hClosFront =>\n        -- `closure (frontier A) ⊆ closure A`\n        have hSub : (frontier A : Set X) ⊆ closure A :=\n          Topology.frontier_subset_closure (A := A)\n        exact (closure_mono hSub) hClosFront\n  · intro x hxClos\n    -- Decompose `closure A` as `interior A ∪ frontier A`.\n    have hDecomp := Topology.interior_union_frontier_eq_closure (A := A)\n    have hxUnion : x ∈ interior A ∪ frontier A := by\n      simpa [hDecomp] using hxClos\n    cases hxUnion with\n    | inl hInt =>\n        exact Or.inl hInt\n    | inr hFront =>\n        -- `frontier A ⊆ closure (frontier A)`\n        exact Or.inr (subset_closure hFront)",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.7174117565155
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3920,
+      "prompt_tokens": 27818,
+      "total_tokens": 31738,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_implies_P2_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → Topology.P2 (interior (A : Set X)) := by\n  intro _\n  -- `interior A` is open, hence it satisfies `P2`.\n  have hOpen : IsOpen (interior (A : Set X)) := isOpen_interior\n  exact\n    (Topology.isOpen_implies_P2\n        (X := X)\n        (A := interior (A : Set X))) hOpen"
+  ],
+  "success": true
+}

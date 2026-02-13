@@ -1,0 +1,26 @@
+{
+  "times": [
+    150.69781470298767
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10621,
+      "prompt_tokens": 32568,
+      "total_tokens": 43189,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_inter_closure_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure A ∩ closure B) ⊆\n      interior (closure A) ∩ interior (closure B) := by\n  intro x hx\n  -- `closure A ∩ closure B ⊆ closure A`\n  have hsubA : closure A ∩ closure B ⊆ closure A := by\n    intro y hy\n    exact hy.1\n  -- `closure A ∩ closure B ⊆ closure B`\n  have hsubB : closure A ∩ closure B ⊆ closure B := by\n    intro y hy\n    exact hy.2\n  -- Use monotonicity of `interior` to upgrade the membership.\n  have hxA : x ∈ interior (closure A) := (interior_mono hsubA) hx\n  have hxB : x ∈ interior (closure B) := (interior_mono hsubB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

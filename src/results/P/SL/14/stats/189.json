@@ -1,0 +1,26 @@
+{
+  "times": [
+    146.31462121009827
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9466,
+      "prompt_tokens": 35274,
+      "total_tokens": 44740,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34688
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ B : Set X) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- Show `x ∈ closure A`.\n  have hxA : (x : X) ∈ closure A := by\n    -- `A ∩ B ⊆ A`\n    have h_subset : (A ∩ B : Set X) ⊆ A := by\n      intro y hy; exact hy.1\n    -- Taking closures preserves the inclusion.\n    have h_closure : closure (A ∩ B : Set X) ⊆ closure A :=\n      closure_mono h_subset\n    exact h_closure hx\n  -- Show `x ∈ closure B`.\n  have hxB : (x : X) ∈ closure B := by\n    -- `A ∩ B ⊆ B`\n    have h_subset : (A ∩ B : Set X) ⊆ B := by\n      intro y hy; exact hy.2\n    -- Taking closures preserves the inclusion.\n    have h_closure : closure (A ∩ B : Set X) ⊆ closure B :=\n      closure_mono h_subset\n    exact h_closure hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

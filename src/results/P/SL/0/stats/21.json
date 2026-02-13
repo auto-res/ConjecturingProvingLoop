@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.17742586135864
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4402,
+      "prompt_tokens": 3973,
+      "total_tokens": 8375,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2816
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_isOpen_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    Topology.P3 A ↔ IsOpen (A : Set X) := by\n  dsimp [Topology.P3]\n  have h_closure : closure (A : Set X) = A := hA.closure_eq\n  constructor\n  · intro hP3\n    have h_subset : (A : Set X) ⊆ interior A := by\n      simpa [h_closure] using hP3\n    have h_eq : interior A = A := by\n      apply subset_antisymm\n      · exact interior_subset\n      · exact h_subset\n    simpa [h_eq] using\n      (isOpen_interior : IsOpen (interior (A : Set X)))\n  · intro hOpen\n    exact (Topology.isOpen_has_all_Ps (X := X) (A := A) hOpen).2.2"
+  ],
+  "success": true
+}

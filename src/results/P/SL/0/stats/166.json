@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.91376233100891
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5394,
+      "prompt_tokens": 27944,
+      "total_tokens": 33338,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_subset_interiors {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior ((A ∩ B) : Set X) ⊆ interior (A : Set X) ∩ interior (B : Set X) := by\n  intro x hx\n  -- `A ∩ B` is contained in `A`, hence so is its interior.\n  have hA : (A ∩ B : Set X) ⊆ (A : Set X) := by\n    intro y hy\n    exact hy.1\n  -- Symmetrically, `A ∩ B` is contained in `B`.\n  have hB : (A ∩ B : Set X) ⊆ (B : Set X) := by\n    intro y hy\n    exact hy.2\n  -- Apply monotonicity of `interior` to transfer the membership.\n  have hxA : x ∈ interior (A : Set X) := (interior_mono hA) hx\n  have hxB : x ∈ interior (B : Set X) := (interior_mono hB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

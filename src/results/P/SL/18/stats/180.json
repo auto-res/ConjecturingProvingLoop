@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.61878776550293
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3571,
+      "prompt_tokens": 27304,
+      "total_tokens": 30875,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_union_left {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hDenseA : Dense (A : Set X)) :\n    Dense (A ∪ B : Set X) := by\n  -- Via the existing lemma, the closure of the union is the whole space.\n  have hClosUnion :\n      closure (A ∪ B : Set X) = (Set.univ : Set X) :=\n    Topology.closure_union_eq_univ_of_dense_left\n      (A := A) (B := B) hDenseA\n  -- Translate the closure equality back into density.\n  exact\n    (Topology.dense_iff_closure_eq_univ (A := A ∪ B)).2 hClosUnion"
+  ],
+  "success": true
+}

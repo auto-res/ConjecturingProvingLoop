@@ -1,0 +1,43 @@
+{
+  "times": [
+    74.4168062210083,
+    124.6749746799469
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5464,
+      "prompt_tokens": 12592,
+      "total_tokens": 18056,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 9943,
+      "prompt_tokens": 12712,
+      "total_tokens": 22655,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInteriorClosure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure A)) ⊆ closure A := by\n  have h : interior (closure A) ⊆ closure A := interior_subset\n  exact closure_mono h",
+    "theorem P3_closure_closure_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (closure A)) ↔ Topology.P3 (closure A) := by\n  dsimp [Topology.P3]\n  simpa [closure_closure]"
+  ],
+  "success": true
+}

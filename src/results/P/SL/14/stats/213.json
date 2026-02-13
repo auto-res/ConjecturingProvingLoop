@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.03914594650269
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6205,
+      "prompt_tokens": 39776,
+      "total_tokens": 45981,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_interiorClosure_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P3 (interior (closure (interior (closure A)))) ↔\n      Topology.P3 (interior (closure A)) := by\n  have hEq :\n      (interior (closure (interior (closure A))) : Set X) =\n        interior (closure A) :=\n    Topology.interiorClosure_idempotent (X := X) (A := A)\n  simpa [hEq] using\n    (Iff.rfl :\n      Topology.P3 (interior (closure (interior (closure A)))) ↔\n        Topology.P3 (interior (closure (interior (closure A)))))"
+  ],
+  "success": true
+}

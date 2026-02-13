@@ -1,0 +1,26 @@
+{
+  "times": [
+    127.8067901134491
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8354,
+      "prompt_tokens": 43753,
+      "total_tokens": 52107,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A ∩ closure (A : Set X)) = interior (A : Set X) := by\n  -- Since `A ⊆ closure A`, the intersection `A ∩ closure A` is just `A`.\n  have h : (A ∩ closure (A : Set X) : Set X) = A := by\n    have hsubset : (A : Set X) ⊆ closure A := subset_closure\n    simpa [Set.inter_eq_left.2 hsubset]\n  simpa [h]"
+  ],
+  "success": true
+}

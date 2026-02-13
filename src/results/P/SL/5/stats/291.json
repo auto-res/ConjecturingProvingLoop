@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.711217403411865
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4419,
+      "prompt_tokens": 57402,
+      "total_tokens": 61821,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_compl_eq_compl_closure_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure ((A : Set X)ᶜ)) = (closure (interior A))ᶜ := by\n  -- First, rewrite the inner `closure` using the complement–interior correspondence.\n  have h₁ : closure ((A : Set X)ᶜ) = (interior (A : Set X))ᶜ :=\n    closure_compl_eq_compl_interior (X := X) (A := A)\n  -- Substitute this equality and apply the analogous rule for `interior`.\n  calc\n    interior (closure ((A : Set X)ᶜ)) =\n        interior ((interior (A : Set X))ᶜ) := by\n          simpa [h₁]\n    _ = (closure (interior (A : Set X)))ᶜ := by\n          simpa using\n            interior_compl_eq_compl_closure\n              (X := X) (A := interior (A : Set X))"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    44.148420095443726
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2390,
+      "prompt_tokens": 52765,
+      "total_tokens": 55155,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closureInterior_subset_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (closure (interior (A : Set X))) ⊆ frontier A := by\n  -- `frontier (closure (interior A)) ⊆ frontier (interior A)`\n  have h₁ :\n      frontier (closure (interior (A : Set X))) ⊆\n        frontier (interior (A : Set X)) :=\n    Topology.frontier_closure_subset_frontier (A := interior A)\n  -- `frontier (interior A) ⊆ frontier A`\n  have h₂ :\n      frontier (interior (A : Set X)) ⊆ frontier A :=\n    Topology.frontier_interior_subset_frontier (A := A)\n  -- Combine the two inclusions.\n  exact subset_trans h₁ h₂"
+  ],
+  "success": true
+}

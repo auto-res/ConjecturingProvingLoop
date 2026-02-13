@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.31918573379517
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4386,
+      "prompt_tokens": 51263,
+      "total_tokens": 55649,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_union_interiors {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    Topology.P3 (interior (A : Set X) ∪ interior B) := by\n  have hA : Topology.P3 (interior (A : Set X)) := P3_interior (A := A)\n  have hB : Topology.P3 (interior (B : Set X)) := P3_interior (A := B)\n  simpa using\n    (P3_union\n      (A := interior (A : Set X))\n      (B := interior (B : Set X))\n      hA hB)"
+  ],
+  "success": true
+}

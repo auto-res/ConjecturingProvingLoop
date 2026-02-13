@@ -1,0 +1,43 @@
+{
+  "times": [
+    124.25191473960876,
+    129.96410822868347
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7483,
+      "prompt_tokens": 30130,
+      "total_tokens": 37613,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    },
+    {
+      "completion_tokens": 9205,
+      "prompt_tokens": 30338,
+      "total_tokens": 39543,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_univ_iff_interior_compl_empty {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    closure A = (Set.univ : Set X) ↔ interior (Aᶜ) = (∅ : Set X) := by\n  constructor\n  · intro h_dense\n    exact\n      Topology.interior_compl_eq_empty_of_dense (X := X) (A := A) h_dense\n  · intro h_int_empty\n    -- We first show that `(closure A)ᶜ` is empty.\n    have h_subset : ((closure A)ᶜ : Set X) ⊆ (∅ : Set X) := by\n      -- `(closure A)ᶜ` is open and contained in `Aᶜ`,\n      -- hence contained in `interior (Aᶜ) = ∅`.\n      have h_open : IsOpen ((closure A)ᶜ) :=\n        isClosed_closure.isOpen_compl\n      have h_sub : ((closure A)ᶜ : Set X) ⊆ (Aᶜ) := by\n        intro x hx\n        by_contra hA\n        have : (x : X) ∈ closure A := subset_closure hA\n        exact (hx this).elim\n      have h_into : ((closure A)ᶜ : Set X) ⊆ interior (Aᶜ) :=\n        interior_maximal h_sub h_open\n      simpa [h_int_empty] using h_into\n    have h_compl_empty : ((closure A)ᶜ : Set X) = (∅ : Set X) := by\n      exact Set.Subset.antisymm h_subset (Set.empty_subset _)\n    -- Taking complements, we obtain the desired equality.\n    have h_closure_univ : closure A = (Set.univ : Set X) := by\n      apply Set.Subset.antisymm\n      · exact Set.Subset_univ _\n      · intro x _\n        by_contra hx\n        have : (x : X) ∈ ((closure A)ᶜ : Set X) := hx\n        simpa [h_compl_empty] using this\n    simpa using h_closure_univ",
+    "theorem Topology.interior_union_interior_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (interior A ∪ interior B) = interior A ∪ interior B := by\n  have h_open : IsOpen (interior A ∪ interior B) :=\n    (isOpen_interior : IsOpen (interior A)).union isOpen_interior\n  simpa using h_open.interior_eq"
+  ],
+  "success": true
+}

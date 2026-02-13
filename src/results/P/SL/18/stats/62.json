@@ -1,0 +1,43 @@
+{
+  "times": [
+    50.13976526260376,
+    148.61014866828918
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3672,
+      "prompt_tokens": 9166,
+      "total_tokens": 12838,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    },
+    {
+      "completion_tokens": 9821,
+      "prompt_tokens": 9261,
+      "total_tokens": 19082,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (A : Set X)) :\n    Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x hxA\n  -- Since `A` is dense, its closure is `univ`.\n  have hClos : closure (A : Set X) = (Set.univ : Set X) := hDense\n  -- Hence the interior of this closure is also `univ`.\n  have hInt : interior (closure (A : Set X)) = (Set.univ : Set X) := by\n    simpa [hClos] using interior_univ\n  -- Any point lies in `univ`, so the desired inclusion holds.\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hInt] using this",
+    "theorem dense_iff_closure_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ closure (A : Set X) = Set.univ := by\n  classical\n  constructor\n  · intro hDense\n    ext x\n    constructor\n    · intro _hx\n      trivial\n    · intro _hx\n      exact hDense x\n  · intro hEq\n    intro x\n    have : (x : X) ∈ (Set.univ : Set X) := by\n      trivial\n    simpa [hEq] using this"
+  ],
+  "success": true
+}

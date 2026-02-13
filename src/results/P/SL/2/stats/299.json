@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.46908688545227
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4099,
+      "prompt_tokens": 51054,
+      "total_tokens": 55153,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_implies_frontier_closure_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A →\n      frontier (closure (A : Set X)) ⊆\n        closure (interior (closure (A : Set X))) := by\n  intro hP1\n  -- `P1` also holds for `closure A`.\n  have hP1_closure : Topology.P1 (closure (A : Set X)) :=\n    Topology.P1_closure_of_P1 (A := A) hP1\n  -- Apply the frontier lemma to `closure A`.\n  have hIncl :\n      frontier (closure (A : Set X)) ⊆\n        closure (interior (closure (closure (A : Set X)))) :=\n    Topology.P1_implies_frontier_subset_closure_interior_closure\n      (A := closure (A : Set X)) hP1_closure\n  -- Simplify the target using idempotence of `closure`.\n  simpa [closure_closure] using hIncl"
+  ],
+  "success": true
+}

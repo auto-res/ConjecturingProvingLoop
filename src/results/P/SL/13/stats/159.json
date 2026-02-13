@@ -1,0 +1,43 @@
+{
+  "times": [
+    110.2238461971283,
+    194.93474507331848
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8404,
+      "prompt_tokens": 27384,
+      "total_tokens": 35788,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 15676,
+      "prompt_tokens": 27487,
+      "total_tokens": 43163,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_complement_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense (A : Set X) ↔ interior ((A : Set X)ᶜ) = (∅ : Set X) := by\n  constructor\n  · intro hDense\n    -- `closure A = univ`, hence its complement is empty.\n    have h_cl : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n    -- `interior (Aᶜ) = (closure A)ᶜ`.\n    have h_eq : interior ((A : Set X)ᶜ) = (closure (A : Set X))ᶜ := by\n      simpa using interior_compl\n    -- Rewrite using `h_cl`.\n    simpa [h_cl] using h_eq\n  · intro hIntEmpty\n    -- Show every point belongs to `closure A`.\n    dsimp [Dense]\n    intro x\n    by_contra hx\n    -- `x` lies in the open set `(closure A)ᶜ`, which is contained in `Aᶜ`.\n    have hx_compl : (x : X) ∈ ((closure (A : Set X))ᶜ : Set X) := hx\n    have h_open : IsOpen ((closure (A : Set X))ᶜ : Set X) :=\n      (isClosed_closure : IsClosed (closure (A : Set X))).isOpen_compl\n    have h_subset :\n        ((closure (A : Set X))ᶜ : Set X) ⊆ (A : Set X)ᶜ := by\n      intro y hy; exact hy\n    -- Hence `x ∈ interior (Aᶜ)`, contradicting `hIntEmpty`.\n    have hx_int : (x : X) ∈ interior ((A : Set X)ᶜ) :=\n      (interior_maximal h_subset h_open) hx_compl\n    simpa [hIntEmpty] using hx_int",
+    "theorem Topology.interior_inter_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) :\n    interior ((A ∩ B) : Set X) = A ∩ B := by\n  have h_open : IsOpen ((A ∩ B) : Set X) := hA.inter hB\n  simpa using h_open.interior_eq"
+  ],
+  "success": true
+}

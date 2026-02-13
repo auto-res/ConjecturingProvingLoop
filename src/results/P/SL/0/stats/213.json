@@ -1,0 +1,43 @@
+{
+  "times": [
+    46.035558223724365,
+    227.6692190170288
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3048,
+      "prompt_tokens": 36171,
+      "total_tokens": 39219,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 13202,
+      "prompt_tokens": 36263,
+      "total_tokens": 49465,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iInter_of_closed {X ι : Type*} [TopologicalSpace X] {F : ι → Set X}\n    (hClosed : ∀ i, IsClosed (F i : Set X))\n    (hP3 : ∀ i, Topology.P3 (F i)) :\n    Topology.P3 (⋂ i, F i) := by\n  -- Each `F i` is open because it is closed and satisfies `P3`.\n  have hOpen : ∀ i, IsOpen (F i : Set X) := by\n    intro i\n    have hEquiv :=\n      Topology.P3_iff_isOpen_of_isClosed (X := X) (A := F i) (hClosed i)\n    exact (hEquiv).1 (hP3 i)\n  -- The intersection of all the `F i` is open as an intersection of open sets.\n  have hOpenInter : IsOpen (⋂ i, F i : Set X) :=\n    isOpen_iInter (fun i ↦ hOpen i)\n  -- Every open set satisfies `P3`.\n  exact\n    (Topology.isOpen_has_all_Ps (X := X) (A := (⋂ i, F i : Set X)) hOpenInter).2.2",
+    ""
+  ],
+  "success": true
+}

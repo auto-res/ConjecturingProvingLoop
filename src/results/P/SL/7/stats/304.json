@@ -1,0 +1,26 @@
+{
+  "times": [
+    130.3887755870819
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7554,
+      "prompt_tokens": 47663,
+      "total_tokens": 55217,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_three_subset\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    closure (interior A) ∪ closure (interior B) ∪ closure (interior C) ⊆\n      closure (interior (A ∪ B ∪ C)) := by\n  intro x hx\n  -- `closure (interior A)` is contained in the target.\n  have hAincl : closure (interior A) ⊆ closure (interior (A ∪ B ∪ C)) := by\n    apply closure_mono\n    apply interior_mono\n    intro y hy\n    exact Or.inl (Or.inl hy)\n  -- `closure (interior B)` is contained in the target.\n  have hBincl : closure (interior B) ⊆ closure (interior (A ∪ B ∪ C)) := by\n    apply closure_mono\n    apply interior_mono\n    intro y hy\n    exact Or.inl (Or.inr hy)\n  -- `closure (interior C)` is contained in the target.\n  have hCincl : closure (interior C) ⊆ closure (interior (A ∪ B ∪ C)) := by\n    apply closure_mono\n    apply interior_mono\n    intro y hy\n    exact Or.inr hy\n  -- Analyse the membership of `x`.\n  cases hx with\n  | inl hAB =>\n      cases hAB with\n      | inl hA => exact hAincl hA\n      | inr hB => exact hBincl hB\n  | inr hC => exact hCincl hC"
+  ],
+  "success": true
+}

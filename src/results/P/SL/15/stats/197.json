@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.95578575134277
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6469,
+      "prompt_tokens": 40261,
+      "total_tokens": 46730,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_prod_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hAne : A.Nonempty) (hBne : B.Nonempty) :\n    Dense (A ×ˢ B) ↔ (Dense A ∧ Dense B) := by\n  constructor\n  · intro hDenseProd\n    -- `closure (A ×ˢ B)` is the whole space.\n    have hClosureProd :\n        (closure (A ×ˢ B) : Set (X × Y)) = (Set.univ : Set (X × Y)) := by\n      simpa using hDenseProd.closure_eq\n    -- Identify `closure (A ×ˢ B)` via the product rule.\n    have hProdClosure :\n        (closure (A ×ˢ B) : Set (X × Y)) = closure A ×ˢ closure B := by\n      simpa using (closure_prod_eq (s := A) (t := B))\n    -- Hence the product of closures is `univ`.\n    have hProdUniv :\n        closure A ×ˢ closure B = (Set.univ : Set (X × Y)) := by\n      calc\n        closure A ×ˢ closure B\n            = (closure (A ×ˢ B) : Set (X × Y)) := by\n                symm; simpa using hProdClosure\n        _ = (Set.univ : Set (X × Y)) := hClosureProd\n    -- Deduce `closure A = univ`.\n    have hClosureA : (closure (A : Set X)) = (Set.univ : Set X) := by\n      apply Set.Subset.antisymm\n      · intro x _; trivial\n      · intro x _\n        rcases hBne with ⟨y0, _hy0⟩\n        have : ((x, y0) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n          trivial\n        have : ((x, y0) : X × Y) ∈ closure A ×ˢ closure B := by\n          simpa [hProdUniv] using this\n        exact (Set.mem_prod.1 this).1\n    -- Deduce `closure B = univ`.\n    have hClosureB : (closure (B : Set Y)) = (Set.univ : Set Y) := by\n      apply Set.Subset.antisymm\n      · intro y _; trivial\n      · intro y _\n        rcases hAne with ⟨x0, _hx0⟩\n        have : ((x0, y) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n          trivial\n        have : ((x0, y) : X × Y) ∈ closure A ×ˢ closure B := by\n          simpa [hProdUniv] using this\n        exact (Set.mem_prod.1 this).2\n    -- Conclude density of the factors.\n    have hDenseA : Dense A := (dense_iff_closure_eq).2 hClosureA\n    have hDenseB : Dense B := (dense_iff_closure_eq).2 hClosureB\n    exact ⟨hDenseA, hDenseB⟩\n  · rintro ⟨hDenseA, hDenseB⟩\n    exact dense_prod_of_dense_left_and_dense_right hDenseA hDenseB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.43998193740845
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3826,
+      "prompt_tokens": 962,
+      "total_tokens": 4788,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Dense A) : Topology.P3 (X:=X) A := by\n  dsimp [Topology.P3]\n  intro x _\n  have h_cl : closure A = (Set.univ : Set X) := hA.closure_eq\n  simpa [h_cl, interior_univ]"
+  ],
+  "success": true
+}

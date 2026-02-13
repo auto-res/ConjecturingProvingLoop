@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.231571197509766
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2086,
+      "prompt_tokens": 35462,
+      "total_tokens": 37548,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_closure_eq_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior A ∪ closure A = closure A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    cases hx with\n    | inl hInt =>\n        -- `x` lies in `interior A`, hence in `A`, hence in `closure A`.\n        exact\n          (subset_closure (interior_subset hInt))\n    | inr hCl =>\n        exact hCl\n  · intro x hx\n    -- Any point of `closure A` is in the right component of the union.\n    exact Or.inr hx"
+  ],
+  "success": true
+}

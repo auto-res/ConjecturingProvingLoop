@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.4187753200531
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3932,
+      "prompt_tokens": 15502,
+      "total_tokens": 19434,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_and_interior_empty_implies_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A : Set X) → interior (A : Set X) = ∅ → A = ∅ := by\n  intro hP1 hIntEmpty\n  apply Set.Subset.antisymm\n  · intro x hxA\n    have : x ∈ closure (interior (A : Set X)) := hP1 hxA\n    simpa [hIntEmpty, closure_empty] using this\n  · simpa using (Set.empty_subset (A := A))"
+  ],
+  "success": true
+}

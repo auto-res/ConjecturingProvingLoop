@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.12580895423889
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4867,
+      "prompt_tokens": 57012,
+      "total_tokens": 61879,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_interior_complement_eq_empty\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (A : Set X)) ∩ interior ((Aᶜ) : Set X) = (∅ : Set X) := by\n  classical\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxClInt, hxIntCompl⟩\n    -- The open set `interior (Aᶜ)` contains `x`, so it must meet `interior A`\n    -- since `x` lies in the closure of `interior A`.\n    have hNonempty :\n        ((interior ((Aᶜ) : Set X)) ∩ interior (A : Set X)).Nonempty :=\n      (mem_closure_iff).1 hxClInt _ isOpen_interior hxIntCompl\n    rcases hNonempty with ⟨y, ⟨hyIntCompl, hyIntA⟩⟩\n    have hyA : (y : X) ∈ (A : Set X) := interior_subset hyIntA\n    have hyAc : (y : X) ∈ ((Aᶜ) : Set X) := interior_subset hyIntCompl\n    have : False := hyAc hyA\n    cases this\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

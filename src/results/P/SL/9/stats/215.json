@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.66376519203186
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7008,
+      "prompt_tokens": 35767,
+      "total_tokens": 42775,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClopen_of_boundary_eq_empty {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (A : Set X) \\ interior A = (∅ : Set X)) :\n    IsClosed A ∧ IsOpen A := by\n  classical\n  -- Step 1: `closure A ⊆ interior A`.\n  have h_subset : (closure (A : Set X)) ⊆ interior A := by\n    intro x hx_cl\n    by_contra hx_int\n    have : x ∈ closure (A : Set X) \\ interior A := ⟨hx_cl, hx_int⟩\n    have : x ∈ (∅ : Set X) := by\n      simpa [h] using this\n    exact this.elim\n  -- Step 2: `closure A = interior A`.\n  have h_eq_cl_int :\n      (closure (A : Set X)) = interior A :=\n    Set.Subset.antisymm h_subset\n      (Topology.interior_subset_closure (A := A))\n  -- Step 3: `closure A = A`.\n  have h_cl_eq : (closure (A : Set X)) = A := by\n    apply Set.Subset.antisymm\n    · intro x hx_cl\n      -- `x ∈ closure A = interior A ⊆ A`.\n      have : x ∈ interior A := by\n        simpa [h_eq_cl_int] using hx_cl\n      exact interior_subset this\n    · exact subset_closure\n  -- Step 4: `interior A = A`.\n  have h_int_eq : interior A = A := by\n    apply Set.Subset.antisymm\n    · exact interior_subset\n    · intro x hxA\n      have hx_cl : x ∈ closure (A : Set X) := subset_closure hxA\n      have : x ∈ interior A := h_subset hx_cl\n      exact this\n  -- Step 5: conclude `A` is clopen.\n  have h_closed : IsClosed A := by\n    have : IsClosed (closure (A : Set X)) := isClosed_closure\n    simpa [h_cl_eq] using this\n  have h_open : IsOpen A := by\n    have : IsOpen (interior A) := isOpen_interior\n    simpa [h_int_eq] using this\n  exact ⟨h_closed, h_open⟩"
+  ],
+  "success": true
+}

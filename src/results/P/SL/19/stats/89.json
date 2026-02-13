@@ -1,0 +1,43 @@
+{
+  "times": [
+    81.45947885513306,
+    80.62113070487976
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6233,
+      "prompt_tokens": 13514,
+      "total_tokens": 19747,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13184
+      }
+    },
+    {
+      "completion_tokens": 5197,
+      "prompt_tokens": 13636,
+      "total_tokens": 18833,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13184
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_eq_closure_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A := A) → closure (interior (closure A)) = closure A := by\n  intro hP1\n  apply Set.Subset.antisymm\n  · -- `closure (interior (closure A)) ⊆ closure A`\n    have hSub : (interior (closure A) : Set X) ⊆ closure A := interior_subset\n    exact closure_mono hSub\n  · -- `closure A ⊆ closure (interior (closure A))`\n    have hEq : closure A = closure (interior A) :=\n      Topology.closure_eq_closure_interior_of_P1 (A := A) hP1\n    have hSub : closure (interior A) ⊆ closure (interior (closure A)) := by\n      have hInt : (interior A : Set X) ⊆ interior (closure A) :=\n        Topology.interior_subset_interior_closure (A := A)\n      exact closure_mono hInt\n    simpa [hEq] using hSub",
+    "theorem Topology.interior_closure_diff_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (closure (A \\ B)) ⊆ interior (closure A) := by\n  intro x hx\n  have hSub : (A \\ B : Set X) ⊆ A := by\n    intro z hz\n    exact hz.1\n  have hClosSub : closure (A \\ B) ⊆ closure A := closure_mono hSub\n  exact (interior_mono hClosSub) hx"
+  ],
+  "success": true
+}

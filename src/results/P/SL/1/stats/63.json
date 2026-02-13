@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.030277967453
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5526,
+      "prompt_tokens": 9359,
+      "total_tokens": 14885,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    -- `closure (interior (closure (interior A))) ⊆ closure (interior A)`\n    have hsubset : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    have hclosure :\n        closure (interior (closure (interior A))) ⊆ closure (closure (interior A)) :=\n      closure_mono hsubset\n    simpa [closure_closure] using hclosure\n  ·\n    -- `closure (interior A) ⊆ closure (interior (closure (interior A)))`\n    have hsubset : interior A ⊆ interior (closure (interior A)) := by\n      -- Apply monotonicity of `interior` to the inclusion `interior A ⊆ closure (interior A)`.\n      have : (interior A : Set X) ⊆ closure (interior A) := subset_closure\n      simpa [interior_interior] using interior_mono this\n    have hclosure :\n        closure (interior A) ⊆ closure (interior (closure (interior A))) :=\n      closure_mono hsubset\n    exact hclosure"
+  ],
+  "success": true
+}

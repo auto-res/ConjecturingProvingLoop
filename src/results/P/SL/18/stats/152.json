@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.97480845451355
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5645,
+      "prompt_tokens": 21988,
+      "total_tokens": 27633,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_of_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (interior (A : Set X)) = Set.univ) :\n    Dense (A : Set X) := by\n  classical\n  -- `closure (interior A)` is contained in `closure A`.\n  have hSub : closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n    Topology.closure_interior_subset_closure (A := A)\n  -- Thus `closure A` coincides with `univ`.\n  have hClos : closure (A : Set X) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro _ _; trivial\n    · have hUniv : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n        simpa [h] using hSub\n      exact hUniv\n  -- Translate the closure equality into density.\n  exact (Topology.dense_iff_closure_eq_univ (A := A)).2 hClos"
+  ],
+  "success": true
+}

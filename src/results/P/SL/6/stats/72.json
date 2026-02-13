@@ -1,0 +1,43 @@
+{
+  "times": [
+    106.65973973274231,
+    208.19908261299133
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6905,
+      "prompt_tokens": 10556,
+      "total_tokens": 17461,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    },
+    {
+      "completion_tokens": 13375,
+      "prompt_tokens": 10644,
+      "total_tokens": 24019,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (A : Set X))))\n      = closure (interior A) := by\n  -- First inclusion: `⊆`.\n  have h₁ :\n      closure (interior (closure (interior A))) ⊆ closure (interior A) := by\n    apply closure_mono\n    exact interior_closure_interior_subset_closure_interior\n  -- Second inclusion: `⊇`.\n  have h₂ :\n      closure (interior A) ⊆ closure (interior (closure (interior A))) := by\n    -- Start with `interior A ⊆ interior (closure (interior A))`.\n    have hInner :\n        interior A ⊆ interior (closure (interior A)) := by\n      have hIncl : interior A ⊆ closure (interior A) :=\n        (subset_closure : (interior A : Set X) ⊆ closure (interior A))\n      have : interior (interior A) ⊆ interior (closure (interior A)) :=\n        interior_mono hIncl\n      simpa [interior_interior] using this\n    exact closure_mono hInner\n  exact subset_antisymm h₁ h₂",
+    "theorem interior_closure_univ_implies_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (closure (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P3 (A : Set X) := by\n  dsimp [Topology.P3]\n  intro x hx\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [h] using this"
+  ],
+  "success": true
+}

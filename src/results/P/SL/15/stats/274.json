@@ -1,0 +1,26 @@
+{
+  "times": [
+    84.02654027938843
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5016,
+      "prompt_tokens": 59002,
+      "total_tokens": 64018,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_of_P1_and_interior_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A)\n    (hInt : interior (closure (interior A)) = (Set.univ : Set X)) :\n    Dense A := by\n  -- First, show that `closure (interior A)` is the whole space.\n  have h_closure_int : closure (interior A : Set X) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro x _; trivial\n    ·\n      have h_subset : interior (closure (interior A)) ⊆ closure (interior A) :=\n        interior_subset\n      simpa [hInt] using h_subset\n  -- From `P1`, deduce `closure A = closure (interior A)`.\n  have h_closure_eq : closure A = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closure_interior (X := X) (A := A)).1 hP1\n  -- Hence `closure A = univ`.\n  have h_closureA_univ : closure A = (Set.univ : Set X) := by\n    simpa [h_closure_int] using h_closure_eq\n  -- Translate this equality into density of `A`.\n  exact (dense_iff_closure_eq (s := A)).2 h_closureA_univ"
+  ],
+  "success": true
+}

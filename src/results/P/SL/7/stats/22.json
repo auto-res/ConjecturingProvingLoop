@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.319660902023315
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3149,
+      "prompt_tokens": 3294,
+      "total_tokens": 6443,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2816
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 A ↔ Topology.P3 A := by\n  have hInt : interior A = A := hA.interior_eq\n  constructor\n  · intro hP2\n    exact Topology.P2_implies_P3 hP2\n  · intro hP3\n    dsimp [Topology.P2]\n    dsimp [Topology.P3] at hP3\n    intro x hx\n    have hx' : x ∈ interior (closure A) := hP3 hx\n    have hEq : interior (closure (interior A)) = interior (closure A) := by\n      simpa [hInt]\n    simpa [hEq] using hx'"
+  ],
+  "success": true
+}

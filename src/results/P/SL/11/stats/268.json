@@ -1,0 +1,26 @@
+{
+  "times": [
+    113.90459251403809
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6468,
+      "prompt_tokens": 43392,
+      "total_tokens": 49860,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_subset_of_closed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsClosed A) :\n    closure (interior A) ⊆ A := by\n  -- The interior of `A` is contained in `A`.\n  have hsubset : (interior A : Set X) ⊆ A := interior_subset\n  -- Since `A` is closed, its closure is itself. Apply `closure_minimal`.\n  exact closure_minimal hsubset hA"
+  ],
+  "success": true
+}

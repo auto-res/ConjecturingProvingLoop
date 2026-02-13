@@ -1,0 +1,77 @@
+{
+  "times": [
+    106.85760402679443,
+    180.57296228408813,
+    200.42061114311218,
+    104.51489639282227
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7743,
+      "prompt_tokens": 33325,
+      "total_tokens": 41068,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    },
+    {
+      "completion_tokens": 9756,
+      "prompt_tokens": 33444,
+      "total_tokens": 43200,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    },
+    {
+      "completion_tokens": 8963,
+      "prompt_tokens": 33525,
+      "total_tokens": 42488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5838,
+      "prompt_tokens": 33594,
+      "total_tokens": 39432,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_interior_iff_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) ↔\n      closure (interior (A : Set X)) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    simpa using hDense.closure_eq\n  · intro hEq\n    simpa [Dense] using hEq",
+    "theorem Topology.P1_of_closure_interior_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hEq : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P1 A := by\n  intro x hxA\n  -- Since `closure (interior A) = univ`, every point (in particular `x`) belongs to it.\n  have hx : x ∈ (Set.univ : Set X) := by\n    simp\n  -- Rewriting with `hEq` gives the desired membership.\n  simpa [hEq] using hx",
+    "theorem (replacing Topology.P1_of_closure_interior_eq_univ)\n    Topology.P1_of_closure_interior_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) = (Set.univ : Set X) → Topology.P1 A := by\n  intro hEq\n  intro x _\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hEq] using this",
+    "theorem Topology.frontier_subset_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (A : Set X) ⊆ closure (A : Set X) := by\n  intro x hx\n  exact hx.1"
+  ],
+  "success": true
+}

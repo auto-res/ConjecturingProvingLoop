@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.0779321193695
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6116,
+      "prompt_tokens": 49758,
+      "total_tokens": 55874,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_implies_emptyInterior_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hDense : Dense (A : Set X)) :\n    interior ((A : Set X)ᶜ) = (∅ : Set X) := by\n  classical\n  -- First, show that `interior (Aᶜ)` is contained in `∅`.\n  have h_subset : interior ((A : Set X)ᶜ) ⊆ (∅ : Set X) := by\n    intro x hx_int\n    -- `x` lies in the closure of `A` because `A` is dense.\n    have hx_closure : (x : X) ∈ closure (A : Set X) := by\n      have h_cl_eq : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n      simpa [h_cl_eq] using (by simp : (x : X) ∈ (Set.univ : Set X))\n    -- Apply the characterization of closure to the open set `interior (Aᶜ)`.\n    have h_nonempty :=\n      (mem_closure_iff).1 hx_closure\n        (interior ((A : Set X)ᶜ)) isOpen_interior hx_int\n    -- Derive a contradiction: the intersection is empty.\n    rcases h_nonempty with ⟨y, ⟨hy_int_comp, hy_inA⟩⟩\n    have hy_notA : (y : X) ∉ A := by\n      -- Points in `interior (Aᶜ)` lie in `Aᶜ`.\n      have : (y : X) ∈ ((A : Set X)ᶜ) :=\n        (interior_subset : interior ((A : Set X)ᶜ) ⊆ (A : Set X)ᶜ) hy_int_comp\n      simpa using this\n    exact False.elim (hy_notA hy_inA)\n  -- Conclude that the two sets are equal.\n  exact Set.Subset.antisymm h_subset (Set.empty_subset _)"
+  ],
+  "success": true
+}

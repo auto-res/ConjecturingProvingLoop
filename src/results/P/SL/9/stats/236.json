@@ -1,0 +1,60 @@
+{
+  "times": [
+    18.486221075057983,
+    75.5103964805603,
+    118.73890399932861
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1273,
+      "prompt_tokens": 39051,
+      "total_tokens": 40324,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 4932,
+      "prompt_tokens": 39157,
+      "total_tokens": 44089,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 7331,
+      "prompt_tokens": 39232,
+      "total_tokens": 46563,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_inter_closureCompl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) = closure A ∩ closure (Aᶜ) := by\n  -- Relate the two descriptions of the boundary via an existing identity.\n  simpa [frontier] using\n    (Topology.closure_inter_closureCompl_eq_closure_diff_interior (A := A)).symm",
+    "theorem Set.compl_compl_safe {α : Type*} (s : Set α) :\n    ((sᶜ)ᶜ : Set α) = s := by\n  simpa using Set.compl_compl s",
+    "theorem Topology.frontier_union_subset_of_open\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    frontier (A ∪ B) ⊆ frontier A ∪ frontier B := by\n  classical\n  intro x hx\n  -- Decompose the hypothesis `hx` into its two components.\n  have hx_cl_union : x ∈ closure (A ∪ B) := hx.1\n  have hx_not_int_union : x ∉ interior (A ∪ B) := hx.2\n  -- Because `A` and `B` are open, their union is open, hence its interior\n  -- is just itself.\n  have h_int_union : interior (A ∪ B) = A ∪ B := by\n    have h_open_union : IsOpen (A ∪ B) := IsOpen.union hA hB\n    simpa using h_open_union.interior_eq\n  -- Translate the non‐interiority condition.\n  have hx_not_union : x ∉ A ∪ B := by\n    simpa [h_int_union] using hx_not_int_union\n  -- Rewrite membership in the closure of the union.\n  have hx_closure_split : x ∈ closure A ∪ closure B := by\n    have h_eq := Topology.closure_union_eq (A := A) (B := B)\n    simpa [h_eq] using hx_cl_union\n  -- Break into cases.\n  cases hx_closure_split with\n  | inl hx_clA =>\n      -- `x` lies in the closure of `A` but not in its interior,\n      -- so `x` is in the frontier of `A`.\n      have hx_not_intA : x ∉ interior A := by\n        intro hx_intA\n        have hxA : x ∈ A := interior_subset hx_intA\n        exact hx_not_union (Or.inl hxA)\n      exact Or.inl ⟨hx_clA, hx_not_intA⟩\n  | inr hx_clB =>\n      -- Symmetric argument for `B`.\n      have hx_not_intB : x ∉ interior B := by\n        intro hx_intB\n        have hxB : x ∈ B := interior_subset hx_intB\n        exact hx_not_union (Or.inr hxB)\n      exact Or.inr ⟨hx_clB, hx_not_intB⟩"
+  ],
+  "success": true
+}

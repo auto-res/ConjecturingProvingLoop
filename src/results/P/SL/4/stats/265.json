@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.92367959022522
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1228,
+      "prompt_tokens": 39785,
+      "total_tokens": 41013,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_interior_eq {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (interior A ∩ interior B) = interior A ∩ interior B := by\n  -- `interior A` and `interior B` are open, hence so is their intersection.\n  have hOpen : IsOpen (interior A ∩ interior B) :=\n    isOpen_interior.inter isOpen_interior\n  -- For an open set, the interior equals the set itself.\n  simpa [hOpen.interior_eq]"
+  ],
+  "success": true
+}

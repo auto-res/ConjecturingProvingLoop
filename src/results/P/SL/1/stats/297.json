@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.49418544769287
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2744,
+      "prompt_tokens": 45764,
+      "total_tokens": 48508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_comp\n    {X : Type*} [TopologicalSpace X] :\n    ((fun A : Set X => closure (interior A)) ∘\n        (fun A : Set X => closure (interior A))) =\n      (fun A : Set X => closure (interior A)) := by\n  funext A\n  simp [Function.comp,\n    Topology.closure_interior_closure_interior_eq_closure_interior (A := A)]"
+  ],
+  "success": true
+}

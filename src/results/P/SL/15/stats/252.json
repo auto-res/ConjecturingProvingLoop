@@ -1,0 +1,43 @@
+{
+  "times": [
+    203.3049943447113,
+    190.9632110595703
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9460,
+      "prompt_tokens": 53924,
+      "total_tokens": 63384,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 10100,
+      "prompt_tokens": 54029,
+      "total_tokens": 64129,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_left_of_dense_prod\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty Y]\n    {A : Set X} {B : Set Y} :\n    Dense (A ×ˢ B) → Dense A := by\n  intro hDenseProd\n  -- The closure of the product is the whole space.\n  have hProdUniv :\n      (closure (A ×ˢ B) : Set (X × Y)) = (Set.univ : Set (X × Y)) := by\n    simpa using hDenseProd.closure_eq\n  -- Express this closure as the product of the individual closures.\n  have hProdEq :\n      (closure (A ×ˢ B) : Set (X × Y)) =\n        closure (A : Set X) ×ˢ closure (B : Set Y) := by\n    simpa using closure_prod_eq (s := A) (t := B)\n  -- Show that the closure of `A` is the whole space.\n  have hClosureA_univ : closure (A : Set X) = (Set.univ : Set X) := by\n    -- `closure A ⊆ univ` holds trivially.\n    apply Set.Subset.antisymm\n    · intro _ _; trivial\n    · -- For the reverse inclusion, fix any `x : X`.\n      intro x _\n      classical\n      -- Choose an arbitrary `y : Y`.\n      let y : Y := Classical.arbitrary Y\n      -- The point `(x, y)` belongs to `univ`, hence to the product of closures.\n      have hxy :\n          ((x, y) : X × Y) ∈ closure (A : Set X) ×ˢ closure (B : Set Y) := by\n        have : ((x, y) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n          trivial\n        simpa [hProdUniv, hProdEq] using this\n      -- Extract the `X`–component.\n      exact (Set.mem_prod.1 hxy).1\n  -- Translate the closure equality into density.\n  exact (dense_iff_closure_eq (s := A)).2 hClosureA_univ",
+    "theorem closure_interior_idempotent {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (interior A)) = closure (interior A) := by\n  -- The interior of an open set is itself.\n  have h : interior (interior A) = interior A := by\n    simpa using (isOpen_interior (A := A)).interior_eq\n  simpa [h]"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.40625619888306
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3166,
+      "prompt_tokens": 10938,
+      "total_tokens": 14104,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_self_of_closed_and_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hP1 : Topology.P1 (X := X) A) :\n    closure (interior A) = A := by\n  apply le_antisymm\n  ·\n    have hsubset : closure (interior A) ⊆ closure A :=\n      Topology.closure_interior_subset_closure (X := X) A\n    simpa [hClosed.closure_eq] using hsubset\n  ·\n    exact hP1"
+  ],
+  "success": true
+}

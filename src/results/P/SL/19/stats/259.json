@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.9217631816864
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3073,
+      "prompt_tokens": 41249,
+      "total_tokens": 44322,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_of_frontier_subset {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : frontier A ⊆ A) : IsClosed A := by\n  -- First, we show `closure A ⊆ A`.\n  have hClosSub : closure A ⊆ A := by\n    intro x hxClos\n    -- Using `interior A ∪ frontier A = closure A`, we know that\n    -- `x ∈ interior A ∪ frontier A`.\n    have hxUnion : x ∈ interior A ∪ frontier A := by\n      simpa [Topology.interior_union_frontier_eq_closure (A := A)] using hxClos\n    -- We distinguish the two cases.\n    cases hxUnion with\n    | inl hInt =>\n        -- `x ∈ interior A ⊆ A`\n        exact (interior_subset : interior A ⊆ A) hInt\n    | inr hFront =>\n        -- `x ∈ frontier A ⊆ A` by the hypothesis `h`\n        exact h hFront\n  -- The inclusion `closure A ⊆ A` implies that `A` is closed.\n  have hClosed : IsClosed A := by\n    have hEquiv := (Topology.isClosed_iff_closure_subset (A := A))\n    exact hEquiv.2 hClosSub\n  simpa using hClosed"
+  ],
+  "success": true
+}

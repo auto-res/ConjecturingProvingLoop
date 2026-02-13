@@ -1,0 +1,43 @@
+{
+  "times": [
+    74.83344340324402,
+    212.29811787605286
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4320,
+      "prompt_tokens": 47888,
+      "total_tokens": 52208,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 11782,
+      "prompt_tokens": 48099,
+      "total_tokens": 59881,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_frontier_subset {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (frontier (A : Set X)) ⊆ frontier A := by\n  intro x hx\n  -- Decompose the membership `hx`.\n  rcases hx with ⟨hx_cl, hx_not_int⟩\n  -- Step 1: `x ∈ closure A`.\n  have h_closure_subset :\n      closure (frontier (A : Set X)) ⊆ closure A :=\n    closure_mono (Topology.frontier_subset_closure (A := A))\n  have hx_closureA : x ∈ closure (A : Set X) := h_closure_subset hx_cl\n  -- Step 2: `x ∉ interior A`.\n  have hx_not_intA : x ∉ interior (A : Set X) := by\n    intro hx_intA\n    -- Any neighbourhood of `x` meets `frontier A`; in particular `interior A`.\n    have h_nonempty :\n        ((interior (A : Set X)) ∩ frontier (A : Set X)).Nonempty := by\n      have h := (mem_closure_iff).1 hx_cl\n      exact h _ isOpen_interior hx_intA\n    -- But `interior A` is disjoint from `frontier A`, contradiction.\n    have h_empty :\n        ((interior (A : Set X)) ∩ frontier (A : Set X)) = (∅ : Set X) :=\n      (Topology.disjoint_interior_boundary (A := A)).eq_bot\n    have : (∅ : Set X).Nonempty := by\n      simpa [h_empty] using h_nonempty\n    exact this.elim\n  -- Assemble the conclusion.\n  exact ⟨hx_closureA, hx_not_intA⟩",
+    "theorem Topology.closure_subset_closure_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A : Set X) ⊆ closure (A ∪ B) := by\n  -- Since `A ⊆ A ∪ B`, monotonicity of `closure` yields the result.\n  have h_subset : (A : Set X) ⊆ A ∪ B := by\n    intro x hx\n    exact Or.inl hx\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

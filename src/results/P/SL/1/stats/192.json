@@ -1,0 +1,43 @@
+{
+  "times": [
+    75.86160969734192,
+    42.842203855514526
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6426,
+      "prompt_tokens": 29672,
+      "total_tokens": 36098,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    },
+    {
+      "completion_tokens": 3439,
+      "prompt_tokens": 29751,
+      "total_tokens": 33190,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closure_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Topology.P2 (closure A) := by\n  intro hDense\n  -- Obtain `P1` for `closure A` from the density of `interior A`.\n  have hP1 : Topology.P1 (closure A) :=\n    Topology.P1_closure_of_dense_interior (A := A) hDense\n  -- Obtain `P3` for `closure A` from the same density assumption.\n  have hP3 : Topology.P3 (closure A) :=\n    Topology.P3_closure_of_dense_interior (A := A) hDense\n  -- Combine the two properties to conclude `P2`.\n  exact Topology.P2_of_P1_and_P3 (A := closure A) hP1 hP3",
+    "theorem Topology.closure_interior_subset_closure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B) :\n    closure (interior A) ⊆ closure B := by\n  -- Since `interior A ⊆ A` and `A ⊆ B`, we get `interior A ⊆ B`.\n  have hsubset : (interior A : Set X) ⊆ B :=\n    Set.Subset.trans (interior_subset : (interior A : Set X) ⊆ A) hAB\n  -- Taking closures preserves set inclusion.\n  exact closure_mono hsubset"
+  ],
+  "success": true
+}

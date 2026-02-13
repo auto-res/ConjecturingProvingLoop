@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.52674579620361
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3905,
+      "prompt_tokens": 10247,
+      "total_tokens": 14152,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_nonempty_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 (X := X) A) (hA : A.Nonempty) :\n    (interior A).Nonempty := by\n  classical\n  by_contra hInt\n  -- `interior A` is empty by assumption.\n  have hInt_empty : interior (A : Set X) = (∅ : Set X) := by\n    simpa using (Set.not_nonempty_iff_eq_empty).1 hInt\n  -- Hence `interior (closure (interior A))` is also empty.\n  have hInt_closure_empty :\n      interior (closure (interior (A : Set X))) = (∅ : Set X) := by\n    simp [hInt_empty]\n  -- Pick a point of `A`.\n  rcases hA with ⟨x, hxA⟩\n  -- `P2` says this point lies in `interior (closure (interior A))`,\n  -- which we have just shown to be empty: contradiction.\n  have hx : x ∈ interior (closure (interior (A : Set X))) := hP2 hxA\n  have : x ∈ (∅ : Set X) := by\n    simpa [hInt_closure_empty] using hx\n  exact this"
+  ],
+  "success": true
+}

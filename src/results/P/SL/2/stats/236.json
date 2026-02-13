@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.30836129188538
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7758,
+      "prompt_tokens": 38542,
+      "total_tokens": 46300,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_implies_closure_interior_closure_eq_closure_interior_simple\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A →\n      closure (interior (closure (A : Set X))) = closure (interior A) := by\n  intro hP1\n  -- First, rewrite `closure (interior (closure A))` using `P1 A`.\n  have h₁ := Topology.P1_implies_closure_interior_closure_eq_closure (A := A) hP1\n  -- Next, rewrite `closure A` in terms of `closure (interior A)`.\n  have h₂ := Topology.P1_implies_closure_interior_eq_closure (A := A) hP1\n  simpa [h₂.symm] using h₁"
+  ],
+  "success": true
+}

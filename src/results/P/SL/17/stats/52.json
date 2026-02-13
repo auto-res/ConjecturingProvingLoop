@@ -1,0 +1,77 @@
+{
+  "times": [
+    58.42623329162598,
+    219.47498083114624,
+    90.73901605606079,
+    21.29698348045349
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3568,
+      "prompt_tokens": 7489,
+      "total_tokens": 11057,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4992
+      }
+    },
+    {
+      "completion_tokens": 13933,
+      "prompt_tokens": 7609,
+      "total_tokens": 21542,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7040
+      }
+    },
+    {
+      "completion_tokens": 5433,
+      "prompt_tokens": 7842,
+      "total_tokens": 13275,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7040
+      }
+    },
+    {
+      "completion_tokens": 1312,
+      "prompt_tokens": 7962,
+      "total_tokens": 9274,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_idempotent {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply subset_antisymm\n  ·\n    have h₁ : closure (interior (closure A)) ⊆ closure A := by\n      have : interior (closure A) ⊆ closure A := interior_subset\n      exact closure_mono this\n    exact\n      (interior_mono h₁ : interior (closure (interior (closure A))) ⊆\n        interior (closure A))\n  ·\n    have h_open : IsOpen (interior (closure A)) := isOpen_interior\n    have h_sub : interior (closure A) ⊆ closure (interior (closure A)) :=\n      subset_closure\n    exact\n      (interior_maximal h_sub h_open :\n        interior (closure A) ⊆ interior (closure (interior (closure A))))",
+    "theorem Topology.interior_closure_idempotent {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply subset_antisymm\n  ·\n    have h₁ : closure (interior (closure A)) ⊆ closure A := by\n      have h_subset : interior (closure A) ⊆ closure A := interior_subset\n      exact closure_mono h_subset\n    exact interior_mono h₁\n  ·\n    have h_subset : interior (closure A) ⊆ closure (interior (closure A)) :=\n      subset_closure\n    exact interior_mono h_subset",
+    "theorem Topology.interior_closure_idempotent {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply subset_antisymm\n  ·\n    -- `interior (closure (interior (closure A))) ⊆ interior (closure A)`\n    have h_sub : closure (interior (closure A)) ⊆ closure A := by\n      have h : interior (closure A) ⊆ closure A := interior_subset\n      exact closure_mono h\n    exact interior_mono h_sub\n  ·\n    -- `interior (closure A) ⊆ interior (closure (interior (closure A)))`\n    have h_sub : interior (closure A) ⊆ closure (interior (closure A)) :=\n      subset_closure\n    have h_interior :\n        interior (closure A) ⊆ interior (closure (interior (closure A))) :=\n      interior_maximal h_sub isOpen_interior\n    exact h_interior",
+    "theorem Topology.P3_interior_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (interior (closure (interior A))) := by\n  simpa using\n    (Topology.P3_of_isOpen (A := interior (closure (interior A))) isOpen_interior)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    255.66937851905823
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 15973,
+      "prompt_tokens": 46777,
+      "total_tokens": 62750,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_inter_closure_compl {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) = closure (A : Set X) ∩ closure (Aᶜ : Set X) := by\n  -- We prove the equality by mutual inclusion.\n  apply Set.Subset.antisymm\n  · -- `⊆` : every frontier point lies in both closures.\n    intro x hx\n    exact\n      And.intro\n        (Topology.frontier_subset_closure (A := A) hx)\n        (Topology.frontier_subset_closure_compl (A := A) hx)\n  · -- `⊇` : a point in the intersection of the closures lies in the frontier.\n    rintro x ⟨hxClA, hxClAc⟩\n    -- We first show that `x ∉ interior A`.\n    have hNotInt : x ∉ interior (A : Set X) := by\n      intro hxInt\n      -- Because `x ∈ interior A`, the open set `interior A`\n      -- is a neighbourhood of `x` contained in `A`.\n      -- This contradicts `x ∈ closure Aᶜ`, which requires every neighbourhood\n      -- of `x` to meet `Aᶜ`.\n      have hNonempty :\n          ((interior (A : Set X)) ∩ (Aᶜ : Set X)).Nonempty :=\n        (mem_closure_iff.1 hxClAc) (interior (A : Set X)) isOpen_interior hxInt\n      rcases hNonempty with ⟨y, hyInt, hyAc⟩\n      have hInA : (y : X) ∈ (A : Set X) := interior_subset hyInt\n      have hNotInA : (y : X) ∉ (A : Set X) := by\n        simpa using hyAc\n      exact hNotInA hInA\n    -- Having `x ∈ closure A` and `x ∉ interior A`, we are in the frontier.\n    exact And.intro hxClA hNotInt"
+  ],
+  "success": true
+}

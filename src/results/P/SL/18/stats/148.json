@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.002320766448975
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3511,
+      "prompt_tokens": 21286,
+      "total_tokens": 24797,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    have h₁ : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    have h₂ :\n        closure (interior (closure (interior A))) ⊆\n          closure (closure (interior A)) :=\n      closure_mono h₁\n    simpa [closure_closure] using h₂\n  ·\n    have h₁ : interior A ⊆ interior (closure (interior A)) :=\n      Topology.interior_subset_interior_closure_interior (A := A)\n    have h₂ :\n        closure (interior A) ⊆ closure (interior (closure (interior A))) :=\n      closure_mono h₁\n    simpa using h₂"
+  ],
+  "success": true
+}

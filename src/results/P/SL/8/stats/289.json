@@ -1,0 +1,43 @@
+{
+  "times": [
+    338.79882764816284,
+    121.2231674194336
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 18623,
+      "prompt_tokens": 44677,
+      "total_tokens": 63300,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 4902,
+      "prompt_tokens": 44756,
+      "total_tokens": 49658,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_subset_closure_left_diff_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A \\ interior B) ⊆ closure A \\ interior B := by\n  intro x hx\n  -- First, `x` lies in `closure A` because `A \\ interior B ⊆ A`.\n  have hxClA : x ∈ closure A :=\n    (closure_mono (Set.diff_subset : A \\ interior B ⊆ A)) hx\n  -- Next, show that `x ∉ interior B`.\n  have hxNotIntB : x ∉ interior B := by\n    intro hxIntB\n    -- Since `interior B` is open and contains `x`, membership of `x` in the\n    -- closure of `A \\ interior B` forces their intersection to be non‐empty.\n    have hNon :\n        ((interior B) ∩ (A \\ interior B)).Nonempty :=\n      (mem_closure_iff).1 hx (interior B) isOpen_interior hxIntB\n    rcases hNon with ⟨y, hyIntB, hyDiff⟩\n    -- But `y ∈ A \\ interior B` implies `y ∉ interior B`, a contradiction.\n    exact hyDiff.2 hyIntB\n  exact And.intro hxClA hxNotIntB",
+    "theorem closure_nonempty_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure A).Nonempty ↔ A.Nonempty := by\n  constructor\n  · intro hCl\n    by_contra hA\n    have hAeq : A = (∅ : Set X) :=\n      Set.not_nonempty_iff_eq_empty.mp hA\n    simpa [hAeq, closure_empty] using hCl\n  · intro hA\n    rcases hA with ⟨x, hxA⟩\n    exact ⟨x, (subset_closure : A ⊆ closure A) hxA⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    37.99235463142395,
+    40.166693449020386
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2502,
+      "prompt_tokens": 766,
+      "total_tokens": 3268,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2936,
+      "prompt_tokens": 879,
+      "total_tokens": 3815,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen A → Topology.P2 A := by\n  intro hA\n  intro x hxA\n  have hx_int_cl : x ∈ interior (closure A) := by\n    have hP3 : Topology.P3 A := Topology.isOpen_implies_P3 hA\n    exact hP3 x hxA\n  simpa [hA.interior_eq] using hx_int_cl",
+    "theorem Topology.isOpen_dense_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen A → Dense A → Topology.P2 A := by\n  intro hOpen hDense\n  intro x hxA\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hOpen.interior_eq, hDense.closure_eq, interior_univ] using this"
+  ],
+  "success": true
+}

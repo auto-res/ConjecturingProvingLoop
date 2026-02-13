@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.25420093536377
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1985,
+      "prompt_tokens": 37151,
+      "total_tokens": 39136,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_compl_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : frontier A ⊆ Aᶜ := by\n  intro x hx\n  -- `hx` gives `x ∉ interior A`.\n  have hNotInt : x ∉ interior A := hx.2\n  -- Since `A` is open, `interior A = A`.\n  have hIntEq : interior A = A := hA.interior_eq\n  -- Therefore, `x ∉ A`.\n  have hNotA : x ∉ A := by\n    simpa [hIntEq] using hNotInt\n  -- Hence, `x ∈ Aᶜ`.\n  simpa using hNotA"
+  ],
+  "success": true
+}

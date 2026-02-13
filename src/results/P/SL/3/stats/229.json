@@ -1,0 +1,26 @@
+{
+  "times": [
+    151.59060287475586
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7810,
+      "prompt_tokens": 36647,
+      "total_tokens": 44457,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_closure_complement {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) ∪ closure ((Aᶜ) : Set X) = (Set.univ : Set X) := by\n  classical\n  -- We prove the equality by showing mutual inclusion.\n  apply Set.Subset.antisymm\n  · -- The union is obviously contained in `univ`.\n    intro x hx\n    cases hx with\n    | inl _ => exact Set.mem_univ _\n    | inr _ => exact Set.mem_univ _\n  · -- Conversely, every point of `univ` belongs to the union.\n    intro x _\n    by_cases hx : (x : X) ∈ interior (A : Set X)\n    · -- If `x ∈ interior A`, we are done.\n      exact Or.inl hx\n    · -- Otherwise, use `closure (Aᶜ) = (interior A)ᶜ`.\n      have hEq := closure_compl_eq_complement_interior (A := A)\n      have : (x : X) ∈ closure ((Aᶜ) : Set X) := by\n        have : (x : X) ∈ (interior (A : Set X))ᶜ := by\n          simp [hx]\n        simpa [hEq] using this\n      exact Or.inr this"
+  ],
+  "success": true
+}

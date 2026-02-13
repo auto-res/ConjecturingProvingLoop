@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.23251533508301
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5344,
+      "prompt_tokens": 17499,
+      "total_tokens": 22843,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.denseInterior_implies_closure_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense (interior (A : Set X)) →\n      closure (A : Set X) = (Set.univ : Set X) := by\n  intro hDense\n  -- First, relate `closure A` to `closure (interior A)` using the existing lemma.\n  have h_eq :\n      closure (A : Set X) = closure (interior A) :=\n    Topology.closure_eq_closureInterior_of_denseInterior (X := X) (A := A) hDense\n  -- Since `interior A` is dense, its closure is the whole space.\n  have h_closure_int : closure (interior A) = (Set.univ : Set X) := hDense.closure_eq\n  -- Combine the two equalities.\n  simpa [h_closure_int] using h_eq"
+  ],
+  "success": true
+}

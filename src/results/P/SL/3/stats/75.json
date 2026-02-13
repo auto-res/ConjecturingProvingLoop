@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.911967754364014
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2577,
+      "prompt_tokens": 12182,
+      "total_tokens": 14759,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_isOpen_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    Topology.P2 A ↔ IsOpen (A : Set X) := by\n  constructor\n  · intro hP2\n    -- From `P2` we get `P3`.\n    have hP3 : Topology.P3 (A : Set X) :=\n      Topology.P2_implies_P3 (A := A) hP2\n    -- A closed set satisfying `P3` is open.\n    exact isOpen_of_isClosed_and_P3 (A := A) hA_closed hP3\n  · intro hOpen\n    -- An open set automatically satisfies `P2`.\n    exact Topology.P2_of_isOpen (A := A) hOpen"
+  ],
+  "success": true
+}

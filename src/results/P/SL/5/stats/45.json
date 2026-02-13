@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.97072696685791
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3891,
+      "prompt_tokens": 6729,
+      "total_tokens": 10620,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6016
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_eq_empty_of_interior_closure_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h : interior (closure (A : Set X)) = (∅ : Set X)) :\n    interior (A : Set X) = (∅ : Set X) := by\n  have hsub : interior (A : Set X) ⊆ (∅ : Set X) := by\n    intro x hx\n    have hx' : x ∈ interior (closure (A : Set X)) :=\n      (interior_subset_interior_closure (X := X) (A := A)) hx\n    simpa [h] using hx'\n  exact le_antisymm hsub (Set.empty_subset _)"
+  ],
+  "success": true
+}

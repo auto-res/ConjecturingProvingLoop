@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.00941562652588
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2795,
+      "prompt_tokens": 12517,
+      "total_tokens": 15312,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12160
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_interior_closure_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A →\n      interior (closure A) = interior (closure (interior A)) := by\n  intro hP1\n  -- From `P1` we know the closures are equal.\n  have hcl : closure A = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 (A := A) hP1\n  -- Taking `interior` of both sides yields the desired equality.\n  simpa using congrArg (fun S : Set X => interior S) hcl"
+  ],
+  "success": true
+}

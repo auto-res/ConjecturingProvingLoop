@@ -1,0 +1,94 @@
+{
+  "times": [
+    100.98998594284058,
+    110.76512718200684,
+    67.69372630119324,
+    81.45039701461792,
+    77.36991786956787
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10017,
+      "prompt_tokens": 54603,
+      "total_tokens": 64620,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 11072,
+      "prompt_tokens": 54718,
+      "total_tokens": 65790,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    },
+    {
+      "completion_tokens": 6321,
+      "prompt_tokens": 54807,
+      "total_tokens": 61128,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 7604,
+      "prompt_tokens": 54923,
+      "total_tokens": 62527,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 7310,
+      "prompt_tokens": 55037,
+      "total_tokens": 62347,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_interior_eq_closure_inter_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A \\ interior A = closure A ∩ closure (Aᶜ) := by\n  classical\n  -- We use the identity `closure (Aᶜ) = (interior A)ᶜ`.\n  have hEq :\n      closure (Aᶜ : Set X) = (interior A)ᶜ :=\n    closure_compl_eq_compl_interior (α := X) (s := A)\n  ext x\n  constructor\n  · -- `⊆` direction\n    intro hx\n    rcases hx with ⟨hxClA, hxNotIntA⟩\n    -- Translate `hxNotIntA : x ∉ interior A` into membership in the complement.\n    have hxClAc : x ∈ closure (Aᶜ) := by\n      have : x ∈ (interior A)ᶜ := by\n        simpa [Set.mem_compl] using hxNotIntA\n      simpa [hEq] using this\n    exact And.intro hxClA hxClAc\n  · -- `⊇` direction\n    intro hx\n    rcases hx with ⟨hxClA, hxClAc⟩\n    -- From `hxClAc`, deduce `x ∉ interior A` via the equality `hEq`.\n    have hxNotIntA : x ∉ interior A := by\n      intro hInt\n      have : x ∈ (interior A) := hInt\n      have : x ∈ (interior A)ᶜ := by\n        simpa [hEq] using hxClAc\n      exact this this\n    exact And.intro hxClA hxNotIntA",
+    "theorem closureInterior_union_eq_union_closureInterior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  -- `interior` distributes over unions.\n  have h_int : interior (A ∪ B) = interior A ∪ interior B := by\n    simpa using interior_union\n  -- `closure` distributes over unions.\n  calc\n    closure (interior (A ∪ B))\n        = closure (interior A ∪ interior B) := by\n            simpa [h_int]\n    _ = closure (interior A) ∪ closure (interior B) := by\n            simpa [closure_union]",
+    "theorem interior_compl_eq_compl_closure_fixed\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ) = (closure A)ᶜ := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    -- We show `x ∉ closure A`\n    have h_not : x ∉ closure A := by\n      intro hxCl\n      -- Choose an open neighbourhood `U` of `x` contained in `Aᶜ`\n      rcases (Set.mem_interior).1 hx with ⟨U, hU_open, hU_sub, hxU⟩\n      -- Since `x ∈ closure A`, `U` meets `A`\n      have h_non : (U ∩ A).Nonempty :=\n        (mem_closure_iff).1 hxCl U hU_open hxU\n      rcases h_non with ⟨y, hyU, hyA⟩\n      -- But `U ⊆ Aᶜ`, contradiction\n      have : y ∈ Aᶜ := hU_sub hyU\n      exact this hyA\n    simpa [Set.mem_compl] using h_not\n  · intro hx\n    -- `x ∈ (closure A)ᶜ`; form an open neighbourhood avoiding `A`\n    have h_open : IsOpen ((closure A)ᶜ) :=\n      (isOpen_compl_iff).2 isClosed_closure\n    have h_subset : (closure A)ᶜ ⊆ Aᶜ := by\n      intro y hy\n      have h_not_cl : y ∉ closure A := by\n        simpa [Set.mem_compl] using hy\n      by_contra hAy\n      have : (y : X) ∈ closure A := subset_closure hAy\n      exact h_not_cl this\n    have hx_mem : x ∈ (closure A)ᶜ := hx\n    have : x ∈ interior (Aᶜ) :=\n      (Set.mem_interior).2 ⟨(closure A)ᶜ, h_open, h_subset, hx_mem⟩\n    simpa using this",
+    "-- A complement version of the classical relation between interior and closure.\ntheorem interior_compl_eq_compl_closure_set {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ) = (closure A)ᶜ := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    -- We show that `x ∉ closure A`.\n    have hnot : x ∉ closure A := by\n      intro hxCl\n      -- Choose an open neighbourhood `U` of `x` contained in `Aᶜ`.\n      rcases (Set.mem_interior).1 hx with ⟨U, hU_open, hU_sub, hxU⟩\n      -- Because `x ∈ closure A`, `U` meets `A`.\n      have hNon : (U ∩ A).Nonempty :=\n        (mem_closure_iff).1 hxCl U hU_open hxU\n      rcases hNon with ⟨y, hyU, hyA⟩\n      -- But `U ⊆ Aᶜ`, contradicting `y ∈ A`.\n      exact (hU_sub hyU) hyA\n    simpa using hnot\n  · intro hxCompl\n    -- Consider the open set `V = (closure A)ᶜ`, which contains `x`.\n    have hV_open : IsOpen ((closure A)ᶜ) :=\n      (isOpen_compl_iff).2 isClosed_closure\n    have hxV : x ∈ (closure A)ᶜ := hxCompl\n    -- `V` is contained in `Aᶜ` since `A ⊆ closure A`.\n    have hV_sub : (closure A)ᶜ ⊆ Aᶜ := by\n      intro y hy\n      by_contra hAy\n      have : (y : X) ∈ closure A := subset_closure hAy\n      exact hy this\n    -- Hence `x` lies in the interior of `Aᶜ`.\n    exact\n      (Set.mem_interior).2 ⟨(closure A)ᶜ, hV_open, hV_sub, hxV⟩",
+    "theorem closure_closure_interior_closure_eq {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (closure (interior (closure A))) = closure (interior (closure A)) := by\n  simpa [closure_closure]"
+  ],
+  "success": true
+}

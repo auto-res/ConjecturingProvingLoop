@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.045849561691284
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2810,
+      "prompt_tokens": 18044,
+      "total_tokens": 20854,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_inter_subset_interiorClosureUnion\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure A) ∩ interior (closure B) ⊆\n      interior (closure (A ∪ B)) := by\n  intro x hx\n  -- It suffices to use the first component `x ∈ interior (closure A)`;\n  -- the argument would be symmetric with `closure B`.\n  have hxA : x ∈ interior (closure A) := hx.1\n  -- `closure A` is contained in `closure (A ∪ B)`.\n  have h_subset : closure A ⊆ closure (A ∪ B) := by\n    have hA_union : (A : Set X) ⊆ A ∪ B := by\n      intro y hy; exact Or.inl hy\n    exact closure_mono hA_union\n  -- By monotonicity of `interior`, `x` lies in the desired interior.\n  exact (interior_mono h_subset) hxA"
+  ],
+  "success": true
+}

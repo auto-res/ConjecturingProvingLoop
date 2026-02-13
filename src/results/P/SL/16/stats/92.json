@@ -1,0 +1,43 @@
+{
+  "times": [
+    54.79104733467102,
+    201.95852732658386
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3946,
+      "prompt_tokens": 16357,
+      "total_tokens": 20303,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    },
+    {
+      "completion_tokens": 13814,
+      "prompt_tokens": 16435,
+      "total_tokens": 30249,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P3_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hP3 : Topology.P3 (X := X) A) :\n    Topology.P2 (X := X) A := by\n  -- From closedness and `P3`, we know `A` is open.\n  have hOpen : IsOpen A :=\n    Topology.closed_P3_isOpen (X := X) (A := A) hClosed hP3\n  -- Any open set satisfies `P2`.\n  exact Topology.isOpen_implies_P2 (X := X) (A := A) hOpen",
+    "theorem Topology.interior_closure_interior_inter_subset_inter_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior (A ∩ B))) ⊆\n      interior (closure (interior A)) ∩ interior (closure (interior B)) := by\n  intro x hx\n  have h_left : x ∈ interior (closure (interior A)) := by\n    -- `interior (A ∩ B) ⊆ interior A`\n    have h₁ : interior (A ∩ B) ⊆ interior A :=\n      interior_mono Set.inter_subset_left\n    -- Taking closures preserves inclusions\n    have h₂ : closure (interior (A ∩ B)) ⊆ closure (interior A) :=\n      closure_mono h₁\n    -- Apply `interior_mono` to obtain the desired inclusion\n    exact (interior_mono h₂) hx\n  have h_right : x ∈ interior (closure (interior B)) := by\n    -- `interior (A ∩ B) ⊆ interior B`\n    have h₁ : interior (A ∩ B) ⊆ interior B :=\n      interior_mono Set.inter_subset_right\n    -- Taking closures preserves inclusions\n    have h₂ : closure (interior (A ∩ B)) ⊆ closure (interior B) :=\n      closure_mono h₁\n    -- Apply `interior_mono` to obtain the desired inclusion\n    exact (interior_mono h₂) hx\n  exact And.intro h_left h_right"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.77418828010559
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6693,
+      "prompt_tokens": 4898,
+      "total_tokens": 11591,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X}\n    (hA : closure A = closure (interior A))\n    (hB : closure B = closure (interior B)) :\n    closure (A ∪ B) = closure (interior (A ∪ B)) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    have hx_union : x ∈ closure A ∪ closure B := by\n      have : x ∈ closure (A ∪ B) := hx\n      simpa [closure_union] using this\n    cases hx_union with\n    | inl hxA =>\n        have hxA' : x ∈ closure (interior A) := by\n          simpa [hA] using hxA\n        have hsubset : interior A ⊆ interior (A ∪ B) := interior_mono (by\n          intro z hz; exact Or.inl hz)\n        exact (closure_mono hsubset) hxA'\n    | inr hxB =>\n        have hxB' : x ∈ closure (interior B) := by\n          simpa [hB] using hxB\n        have hsubset : interior B ⊆ interior (A ∪ B) := interior_mono (by\n          intro z hz; exact Or.inr hz)\n        exact (closure_mono hsubset) hxB'\n  · exact closure_mono (interior_subset : interior (A ∪ B) ⊆ A ∪ B)"
+  ],
+  "success": true
+}

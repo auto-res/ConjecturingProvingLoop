@@ -1,0 +1,94 @@
+{
+  "times": [
+    120.16978549957275,
+    64.2551486492157,
+    61.178746700286865,
+    95.16819906234741,
+    45.61561870574951
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7809,
+      "prompt_tokens": 50351,
+      "total_tokens": 58160,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 3316,
+      "prompt_tokens": 50599,
+      "total_tokens": 53915,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 3877,
+      "prompt_tokens": 50714,
+      "total_tokens": 54591,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 5788,
+      "prompt_tokens": 51103,
+      "total_tokens": 56891,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 2962,
+      "prompt_tokens": 51229,
+      "total_tokens": 54191,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_iterate_succ_eq {X : Type*} [TopologicalSpace X]\n    {A : Set X} (n : ℕ) :\n    Function.iterate (fun s : Set X => interior (closure s)) (n.succ) A =\n      interior (closure (A : Set X)) := by\n  induction n with\n  | zero =>\n      -- One application of the operator gives the desired result\n      simp [Function.iterate]\n  | succ n ih =>\n      -- Peel off one iteration and use the induction hypothesis,\n      -- then collapse with idempotency of `interior ∘ closure`\n      simpa [Function.iterate, ih,\n        Topology.interior_closure_interior_closure_eq_interior_closure\n          (X := X) (A := A)]",
+    "theorem Topology.interior_union_boundary_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A : Set X) ∪ (closure (A : Set X) \\ interior A) =\n      closure (A : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    cases hx with\n    | inl hx_int =>\n        exact interior_subset hx_int\n    | inr hx_bd =>\n        exact hx_bd.1\n  · intro hx_cl\n    by_cases h_int : (x : X) ∈ interior (A : Set X)\n    · exact Or.inl h_int\n    · exact Or.inr ⟨hx_cl, h_int⟩",
+    "theorem Topology.boundary_subset_closure_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure (A : Set X) \\ interior A) ⊆ closure (Aᶜ : Set X) := by\n  classical\n  intro x hx\n  -- Split the facts carried by `hx`.\n  have hx_cl : (x : X) ∈ closure (A : Set X) := hx.1\n  have hx_not_int : (x : X) ∉ interior A := hx.2\n  -- We prove that `x` belongs to the closure of `Aᶜ`\n  -- using the neighbourhood characterization.\n  apply (mem_closure_iff).2\n  intro U hU_open hxU\n  -- Suppose `U` is an open neighbourhood of `x`.\n  -- Since `x ∉ interior A`, `U` cannot be contained in `A`;\n  -- hence it meets `Aᶜ`.\n  by_contra h_empty\n  -- `h_empty` asserts: `(U ∩ Aᶜ)` is empty.\n  -- This means `U ⊆ A`.\n  have h_subset : (U : Set X) ⊆ A := by\n    intro y hyU\n    by_contra hy_notA\n    have : (y : X) ∈ (U ∩ Aᶜ : Set X) := ⟨hyU, hy_notA⟩\n    have : ((U ∩ Aᶜ : Set X)).Nonempty := ⟨y, this⟩\n    have : (U ∩ Aᶜ : Set X) = ∅ := by\n      -- `h_empty` says Nonempty is false, so equality with empty set follows.\n      dsimp [Set.Nonempty] at this\n      exact False.elim (by\n        have : ((U ∩ Aᶜ : Set X)).Nonempty := this\n        have : ((U ∩ Aᶜ : Set X)).Nonempty := this)\n    simpa using this\n  -- But then `U ⊆ A` and `x ∈ U` imply `x ∈ interior A`, contradiction.\n  have hx_int : (x : X) ∈ interior A :=\n    mem_interior_iff_mem_nhds.2 ⟨U, hU_open, h_subset, hxU⟩\n  exact hx_not_int hx_int",
+    "theorem Topology.closure_boundary_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (closure (A : Set X) \\ interior A) ⊆ closure A := by\n  exact closure_mono (Topology.boundary_subset_closure (X := X) (A := A))",
+    ""
+  ],
+  "success": true
+}

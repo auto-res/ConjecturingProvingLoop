@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.92797517776489
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6497,
+      "prompt_tokens": 45170,
+      "total_tokens": 51667,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_subset_closure_union_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (B : Set X) ⊆ closure (A ∪ B) := by\n  -- Apply the “left‐hand” version after swapping `A` and `B`,\n  -- then rewrite using commutativity of `∪`.\n  have h :\n      closure (B : Set X) ⊆ closure (B ∪ A) :=\n    Topology.closure_subset_closure_union_left (X := X) (A := B) (B := A)\n  simpa [Set.union_comm] using h"
+  ],
+  "success": true
+}

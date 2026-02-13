@@ -1,0 +1,6 @@
+
+
+theorem Topology.closureInterior_eq_closure_of_isOpen {X : Type*} [TopologicalSpace X]
+    {A : Set X} (hA : IsOpen (A : Set X)) :
+    closure (interior (A : Set X)) = closure (A : Set X) := by
+  simpa [hA.interior_eq]

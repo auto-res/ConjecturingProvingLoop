@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.983959436416626
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2744,
+      "prompt_tokens": 17941,
+      "total_tokens": 20685,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_and_P3_iff_isOpen_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    (Topology.P1 A ∧ Topology.P3 A) ↔ IsOpen A := by\n  -- `P3 A` is equivalent to `IsOpen A` for closed sets.\n  have hP3 : Topology.P3 A ↔ IsOpen A :=\n    Topology.P3_iff_isOpen_of_isClosed (A := A) hA\n  -- Establish the desired equivalence.\n  constructor\n  · rintro ⟨_, hPA3⟩\n    -- From the second component obtain openness.\n    exact hP3.1 hPA3\n  · intro hOpen\n    -- Openness yields both `P1` and `P3`.\n    exact\n      And.intro\n        (Topology.P1_of_isOpen (A := A) hOpen)\n        (Topology.P3_of_isOpen (A := A) hOpen)"
+  ],
+  "success": true
+}

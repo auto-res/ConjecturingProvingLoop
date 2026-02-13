@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.02691221237183
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5504,
+      "prompt_tokens": 29435,
+      "total_tokens": 34939,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_left_of_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_open : IsOpen (A : Set X)) (hPB : Topology.P3 (X := X) B) :\n    Topology.P3 (X := X) (A ∩ B) := by\n  -- Unfold `P3` for `B`.\n  dsimp [Topology.P3] at hPB ⊢\n  intro x hxAB\n  -- Split the membership in the intersection.\n  have hxA : (x : X) ∈ A := hxAB.1\n  have hxB : (x : X) ∈ B := hxAB.2\n  -- Use `P3` for `B` to obtain an interior point.\n  have hx_int_clB : (x : X) ∈ interior (closure B) := hPB hxB\n  ------------------------------------------------------------------\n  --  Construct an open neighbourhood `U := A ∩ interior (closure B)`\n  --  that is contained in `closure (A ∩ B)`.\n  ------------------------------------------------------------------\n  have hU_open : IsOpen (A ∩ interior (closure B)) :=\n    hA_open.inter isOpen_interior\n  have hxU : (x : X) ∈ (A ∩ interior (closure B)) := ⟨hxA, hx_int_clB⟩\n  -- `U` is contained in `closure (A ∩ B)`.\n  have hU_subset : (A ∩ interior (closure B) : Set X) ⊆ closure (A ∩ B) := by\n    intro y hy\n    -- Separate the conditions on `y`.\n    have hAy : (y : X) ∈ A := hy.1\n    have hy_int : (y : X) ∈ interior (closure B) := hy.2\n    -- Hence `y ∈ closure B`.\n    have hClB : (y : X) ∈ closure B := interior_subset hy_int\n    -- Show `y ∈ closure (A ∩ B)` via the neighbourhood characterization.\n    have : (y : X) ∈ closure (A ∩ B) := by\n      apply (mem_closure_iff).2\n      intro U hUopen hyU\n      -- Consider the open neighbourhood `U ∩ A` of `y`.\n      have hUA_open : IsOpen (U ∩ A) := hUopen.inter hA_open\n      have hyUA : (y : X) ∈ U ∩ A := ⟨hyU, hAy⟩\n      -- Since `y ∈ closure B`, this set meets `B`.\n      have h_nonempty :\n          ((U ∩ A) ∩ B : Set X).Nonempty := by\n        have h_prop := (mem_closure_iff).1 hClB\n        have := h_prop (U ∩ A) hUA_open hyUA\n        simpa [Set.inter_left_comm, Set.inter_assoc] using this\n      -- Extract a witness in `U ∩ (A ∩ B)`.\n      rcases h_nonempty with ⟨z, ⟨⟨hzU, hzA⟩, hzB⟩⟩\n      exact ⟨z, ⟨hzU, ⟨hzA, hzB⟩⟩⟩\n    exact this\n  ------------------------------------------------------------------\n  --  Apply `interior_maximal` to conclude.\n  ------------------------------------------------------------------\n  have h_into_int :\n      (A ∩ interior (closure B) : Set X) ⊆ interior (closure (A ∩ B)) :=\n    interior_maximal hU_subset hU_open\n  exact h_into_int hxU"
+  ],
+  "success": true
+}

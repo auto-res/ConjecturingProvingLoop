@@ -1,0 +1,26 @@
+{
+  "times": [
+    137.2232267856598
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7077,
+      "prompt_tokens": 57539,
+      "total_tokens": 64616,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_eq_univ_of_dense\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hDenseA : Dense (A : Set X)) (hDenseB : Dense (B : Set X)) :\n    closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n  -- Use the existing lemma for the left factor.\n  have _ :=\n    Topology.closure_union_eq_univ_of_dense_right (A := A) (B := B) hDenseB\n  exact\n    Topology.closure_union_eq_univ_of_dense_left (A := A) (B := B) hDenseA"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    123.80848050117493
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6399,
+      "prompt_tokens": 47841,
+      "total_tokens": 54240,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_isClosed_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    IsClosed (B : Set X) → interior (A \\ B : Set X) = interior A \\ B := by\n  intro hClosed\n  -- The complement of a closed set is open.\n  have hOpen : IsOpen ((B : Set X)ᶜ) := hClosed.isOpen_compl\n  -- Apply the lemma for an intersection with an open (right) set to `A ∩ Bᶜ`.\n  have h :=\n    Topology.interior_inter_isOpen_right (A := A) (B := (Bᶜ)) hOpen\n  -- Rewrite intersections with set difference.\n  simpa [Set.diff_eq] using h"
+  ],
+  "success": true
+}

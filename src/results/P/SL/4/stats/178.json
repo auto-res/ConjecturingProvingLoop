@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.12187719345093
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6637,
+      "prompt_tokens": 25019,
+      "total_tokens": 31656,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_iff_interior_closure_eq_of_closed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsClosed A) :\n    IsOpen A ↔ interior (closure A) = A := by\n  have hCl : closure A = A := hA.closure_eq\n  constructor\n  · intro hOpen\n    calc\n      interior (closure A) = interior A := by\n        simpa [hCl]\n      _ = A := by\n        simpa [hOpen.interior_eq]\n  · intro hEq\n    -- From the given equality and `hCl`, deduce `interior A = A`.\n    have hIntA : interior A = A := by\n      simpa [hCl] using hEq\n    -- `interior A` is open; rewrite using `hIntA`.\n    have hOpenInt : IsOpen (interior A) := isOpen_interior\n    simpa [hIntA] using hOpenInt"
+  ],
+  "success": true
+}

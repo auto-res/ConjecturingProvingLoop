@@ -1,0 +1,43 @@
+{
+  "times": [
+    213.13429260253906,
+    101.19395446777344
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10693,
+      "prompt_tokens": 54527,
+      "total_tokens": 65220,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 5132,
+      "prompt_tokens": 54605,
+      "total_tokens": 59737,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_closure_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) ∩ closure (B : Set X) ⊆\n      closure (A ∩ B : Set X) := by\n  intro x hx\n  rcases hx with ⟨hxIntA, hxClB⟩\n  -- We show `x ∈ closure (A ∩ B)` using the neighbourhood criterion.\n  have : x ∈ closure (A ∩ B : Set X) := by\n    -- Employ `mem_closure_iff`.\n    apply (mem_closure_iff).2\n    intro U hU_open hxU\n    -- Consider the open neighbourhood `U ∩ interior A` of `x`.\n    have hV_open : IsOpen (U ∩ interior (A : Set X)) :=\n      hU_open.inter isOpen_interior\n    have hxV : x ∈ U ∩ interior (A : Set X) := ⟨hxU, hxIntA⟩\n    -- Since `x ∈ closure B`, this neighbourhood meets `B`.\n    have hNonempty :\n        ((U ∩ interior (A : Set X)) ∩ B : Set X).Nonempty :=\n      (mem_closure_iff).1 hxClB (U ∩ interior (A : Set X)) hV_open hxV\n    rcases hNonempty with ⟨y, ⟨⟨hyU, hyIntA⟩, hyB⟩⟩\n    -- The point `y` lies in `U ∩ (A ∩ B)`.\n    have hyA : y ∈ A :=\n      (interior_subset : interior (A : Set X) ⊆ A) hyIntA\n    exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩\n  exact this",
+    "theorem interior_inter_subset_interiors_alt\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B : Set X) ⊆ interior A ∩ interior B := by\n  intro x hx\n  exact\n    ⟨(interior_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)) hx,\n     (interior_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hx⟩"
+  ],
+  "success": true
+}

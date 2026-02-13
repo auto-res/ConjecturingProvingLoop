@@ -1,0 +1,43 @@
+{
+  "times": [
+    34.88115334510803,
+    31.649986028671265
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1990,
+      "prompt_tokens": 45531,
+      "total_tokens": 47521,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2003,
+      "prompt_tokens": 45637,
+      "total_tokens": 47640,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.disjoint_interior_frontier {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Disjoint (interior (A : Set X)) (frontier (A : Set X)) := by\n  have h : frontier (A : Set X) = closure (A : Set X) \\ interior (A : Set X) :=\n    Topology.frontier_eq_closure_diff_interior (A := A)\n  simpa [h] using (Topology.disjoint_interior_boundary (A := A))",
+    "theorem Topology.closure_subset_iff_subset_of_isClosed' {X : Type*}\n    [TopologicalSpace X] {A B : Set X} (hB : IsClosed B) :\n    closure (A : Set X) ⊆ B ↔ A ⊆ B := by\n  constructor\n  · intro hSub x hxA\n    exact hSub (subset_closure hxA)\n  · intro hSub\n    have h : closure (A : Set X) ⊆ closure B := closure_mono hSub\n    simpa [hB.closure_eq] using h"
+  ],
+  "success": true
+}

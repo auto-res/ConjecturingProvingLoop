@@ -1,0 +1,26 @@
+{
+  "times": [
+    127.26465821266174
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5879,
+      "prompt_tokens": 47137,
+      "total_tokens": 53016,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense_subset {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Dense A) (hAB : (A : Set X) ⊆ B) : Topology.P3 B := by\n  dsimp [Topology.P3]\n  intro x hxB\n  -- Show that `closure B = univ`.\n  have hsub : (Set.univ : Set X) ⊆ closure B := by\n    intro y _\n    -- Since `closure A = univ`, every point lies in `closure A`.\n    have hyA : y ∈ closure A := by\n      simpa [hA.closure_eq] using (by simp : y ∈ (Set.univ : Set X))\n    -- Monotonicity of `closure` upgrades the membership.\n    have hcl : closure A ⊆ closure B := closure_mono hAB\n    exact hcl hyA\n  have hclosureB : closure B = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro y _; simp\n    · exact hsub\n  -- Conclude the goal using the computed equality.\n  have : x ∈ (Set.univ : Set X) := by simp\n  simpa [hclosureB, interior_univ] using this"
+  ],
+  "success": true
+}

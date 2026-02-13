@@ -1,0 +1,26 @@
+{
+  "times": [
+    9.13862943649292
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1001,
+      "prompt_tokens": 54553,
+      "total_tokens": 55554,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_eq_univ_of_P2_and_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP2 : Topology.P2 (X := X) A) (hDense : Dense (A : Set X)) :\n    closure (interior (A : Set X)) = (Set.univ : Set X) := by\n  -- From `P2` we have equality of the two closures.\n  have h_eq : closure (A : Set X) = closure (interior A) :=\n    Topology.P2_implies_closure_eq_closureInterior (X := X) (A := A) hP2\n  -- Density of `A` tells us its closure is the whole space.\n  have h_closureA : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Combine the two equalities.\n  simpa [h_closureA] using h_eq.symm"
+  ],
+  "success": true
+}

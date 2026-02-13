@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.30453538894653
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4046,
+      "prompt_tokens": 5444,
+      "total_tokens": 9490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closure_iff_P2_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (A : Set X)) ↔ Topology.P2 (closure A) := by\n  -- First, show that `P3` for `closure A` implies `P2` for `closure A`.\n  have h₁ : Topology.P3 (closure (A : Set X)) → Topology.P2 (closure A) := by\n    intro hP3\n    -- `P3` for `closure A` gives that `closure A` is open.\n    have hOpen : IsOpen (closure (A : Set X)) :=\n      (Topology.P3_closure_iff_open_closure (A := A)).1 hP3\n    -- On an open set, `P3` is equivalent to `P2`.\n    exact\n      (Topology.P3_iff_P2_of_isOpen (A := closure (A : Set X)) hOpen).1 hP3\n  -- Conversely, `P2` always implies `P3`.\n  have h₂ : Topology.P2 (closure A) → Topology.P3 (closure (A : Set X)) := by\n    intro hP2\n    exact Topology.P2_implies_P3 (A := closure (A : Set X)) hP2\n  exact ⟨h₁, h₂⟩"
+  ],
+  "success": true
+}

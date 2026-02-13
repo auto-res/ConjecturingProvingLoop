@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.477757692337036
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2257,
+      "prompt_tokens": 37814,
+      "total_tokens": 40071,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_subset_closure_interior_of_subset_and_P1\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP1B : Topology.P1 (X := X) B) (hAB : (A : Set X) ⊆ B) :\n    closure (A : Set X) ⊆ closure (interior B) := by\n  calc\n    closure (A : Set X) ⊆ closure B := closure_mono hAB\n    _ ⊆ closure (interior B) := by\n      have h : (B : Set X) ⊆ closure (interior B) := hP1B\n      have h' : closure (B : Set X) ⊆ closure (closure (interior B)) :=\n        closure_mono h\n      simpa [closure_closure] using h'"
+  ],
+  "success": true
+}

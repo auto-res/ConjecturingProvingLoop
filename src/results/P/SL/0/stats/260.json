@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.339500665664673
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1614,
+      "prompt_tokens": 44597,
+      "total_tokens": 46211,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_union_interior_right {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 A → Topology.P3 (A ∪ interior (B : Set X)) := by\n  intro hP3A\n  have hOpenInt : IsOpen (interior (B : Set X)) := isOpen_interior\n  exact\n    Topology.P3_union_right_of_open\n      (X := X) (A := A) (B := interior (B : Set X)) hP3A hOpenInt"
+  ],
+  "success": true
+}

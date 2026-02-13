@@ -1,0 +1,43 @@
+{
+  "times": [
+    46.354963541030884,
+    30.63835096359253
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4906,
+      "prompt_tokens": 17205,
+      "total_tokens": 22111,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    },
+    {
+      "completion_tokens": 2138,
+      "prompt_tokens": 17279,
+      "total_tokens": 19417,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_idempotent_six {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure A))))))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_idempotent]",
+    "theorem P3_interior_closure_interior_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P3 (X := X) (interior (closure (interior (closure A)))) := by\n  -- The interior of any set is open.\n  have h_open : IsOpen (interior (closure (interior (closure A)))) := isOpen_interior\n  -- Hence it satisfies `P3`.\n  exact\n    Topology.isOpen_implies_P3\n      (X := X)\n      (A := interior (closure (interior (closure A))))\n      h_open"
+  ],
+  "success": true
+}

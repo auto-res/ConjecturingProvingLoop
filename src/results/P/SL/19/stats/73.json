@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.55693364143372
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7178,
+      "prompt_tokens": 11599,
+      "total_tokens": 18777,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure A) ∪ interior (closure B) ⊆\n      interior (closure (A ∪ B)) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      -- `x ∈ interior (closure A)`\n      -- Since `closure A ⊆ closure (A ∪ B)`, the monotonicity of `interior`\n      -- sends `hA` into the desired set.\n      have hSub : closure A ⊆ closure (A ∪ B) := closure_mono (by\n        intro z hz; exact Or.inl hz)\n      exact (interior_mono hSub) hA\n  | inr hB =>\n      -- Symmetric argument for the case `x ∈ interior (closure B)`.\n      have hSub : closure B ⊆ closure (A ∪ B) := closure_mono (by\n        intro z hz; exact Or.inr hz)\n      exact (interior_mono hSub) hB"
+  ],
+  "success": true
+}

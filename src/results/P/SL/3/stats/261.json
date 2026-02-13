@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.89890956878662
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4735,
+      "prompt_tokens": 43986,
+      "total_tokens": 48721,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_complement_eq_empty_of_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (A : Set X) = (Set.univ : Set X) →\n      interior ((Aᶜ) : Set X) = (∅ : Set X) := by\n  intro hDense\n  have hEq := interior_complement_eq_complement_closure (A := A)\n  simpa [hDense, Set.compl_univ] using hEq"
+  ],
+  "success": true
+}

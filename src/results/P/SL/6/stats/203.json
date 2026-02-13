@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.20909023284912
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1848,
+      "prompt_tokens": 31649,
+      "total_tokens": 33497,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union_of_P1_and_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP1A : Topology.P1 (A : Set X)) (hOpenB : IsOpen (B : Set X)) :\n    Topology.P1 (A ∪ B) := by\n  -- `B` is open, hence satisfies `P1`.\n  have hP1B : Topology.P1 (B : Set X) :=\n    Topology.open_satisfies_P1 (A := B) hOpenB\n  -- Apply the union lemma for two sets satisfying `P1`.\n  exact Topology.P1_union_of_P1 (A := A) (B := B) hP1A hP1B"
+  ],
+  "success": true
+}

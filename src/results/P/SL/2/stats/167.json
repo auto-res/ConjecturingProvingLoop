@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.11747860908508
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6123,
+      "prompt_tokens": 27324,
+      "total_tokens": 33447,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_P3_nonempty_implies_interior_nonempty {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    IsClosed A → Topology.P3 A → A.Nonempty → (interior A).Nonempty := by\n  intro hClosed hP3 hA_nonempty\n  rcases hA_nonempty with ⟨x, hxA⟩\n  have hx_int : x ∈ interior A := by\n    have : x ∈ interior (closure (A : Set X)) := hP3 hxA\n    simpa [hClosed.closure_eq] using this\n  exact ⟨x, hx_int⟩"
+  ],
+  "success": true
+}

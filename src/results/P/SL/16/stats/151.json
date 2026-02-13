@@ -1,0 +1,43 @@
+{
+  "times": [
+    126.13926672935486,
+    54.24468779563904
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9521,
+      "prompt_tokens": 26813,
+      "total_tokens": 36334,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26496
+      }
+    },
+    {
+      "completion_tokens": 3153,
+      "prompt_tokens": 26887,
+      "total_tokens": 30040,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))) =\n      closure (interior A) := by\n  -- Collapse the innermost pattern using the 4-level idempotence lemma.\n  have h₁ :\n      closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n        closure (interior A) := by\n    simpa using\n      (Topology.closure_interior_closure_interior_closure_interior_closure_interior_eq_closure_interior\n        (X := X) (A := A))\n  -- Rewrite the larger expression using `h₁`.\n  have h₂ :\n      closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))) =\n        closure (interior (closure (interior A))) := by\n    simp [h₁]\n  -- Collapse once more with the 2-level idempotence lemma.\n  have h₃ :\n      closure (interior (closure (interior A))) = closure (interior A) := by\n    simpa using\n      (Topology.closure_interior_closure_interior_eq_closure_interior\n        (X := X) (A := A))\n  simpa [h₃] using h₂",
+    "theorem Topology.interior_interior_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (interior (closure A)) = interior (closure A) := by\n  simpa [interior_interior]"
+  ],
+  "success": true
+}

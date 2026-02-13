@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.37591218948364
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4583,
+      "prompt_tokens": 2411,
+      "total_tokens": 6994,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 (A : Set X)) (hB : Topology.P2 (B : Set X)) :\n    Topology.P2 (A ∪ B) := by\n  dsimp [Topology.P2] at *\n  intro x hx\n  cases hx with\n  | inl hAx =>\n      have hxA : (x : X) ∈ interior (closure (interior A)) := hA hAx\n      have h_subset : interior (closure (interior A))\n          ⊆ interior (closure (interior (A ∪ B))) := by\n        have h_closure : closure (interior A)\n            ⊆ closure (interior (A ∪ B)) := by\n          apply closure_mono\n          have h_int : interior A ⊆ interior (A ∪ B) := by\n            apply interior_mono\n            intro y hy\n            exact Or.inl hy\n          exact h_int\n        exact interior_mono h_closure\n      exact h_subset hxA\n  | inr hBx =>\n      have hxB : (x : X) ∈ interior (closure (interior B)) := hB hBx\n      have h_subset : interior (closure (interior B))\n          ⊆ interior (closure (interior (A ∪ B))) := by\n        have h_closure : closure (interior B)\n            ⊆ closure (interior (A ∪ B)) := by\n          apply closure_mono\n          have h_int : interior B ⊆ interior (A ∪ B) := by\n            apply interior_mono\n            intro y hy\n            exact Or.inr hy\n          exact h_int\n        exact interior_mono h_closure\n      exact h_subset hxB"
+  ],
+  "success": true
+}

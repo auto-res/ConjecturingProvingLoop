@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.445983409881592
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1910,
+      "prompt_tokens": 52490,
+      "total_tokens": 54400,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_subset_compl_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen A) :\n    closure A \\ interior A ⊆ Aᶜ := by\n  intro x hx\n  -- `hx` provides `x ∈ closure A` and `x ∉ interior A`.\n  -- Since `A` is open, `interior A = A`.\n  have h_notA : x ∉ A := by\n    have h_not_int : x ∉ interior A := hx.2\n    simpa [hOpen.interior_eq] using h_not_int\n  -- Membership in the complement is exactly the negation of membership in `A`.\n  exact h_notA"
+  ],
+  "success": true
+}

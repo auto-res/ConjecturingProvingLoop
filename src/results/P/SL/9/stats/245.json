@@ -1,0 +1,43 @@
+{
+  "times": [
+    18.34872269630432,
+    60.44140028953552
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1183,
+      "prompt_tokens": 40748,
+      "total_tokens": 41931,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    },
+    {
+      "completion_tokens": 4183,
+      "prompt_tokens": 40854,
+      "total_tokens": 45037,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) ⊆ closure (Aᶜ) := by\n  intro x hx_frontier\n  -- Reinterpret `hx_frontier` as membership in `closure A \\ interior A`.\n  have hx_boundary : x ∈ closure (A : Set X) \\ interior A := by\n    simpa [frontier] using hx_frontier\n  -- Apply the previously proven lemma about the boundary.\n  exact (Topology.boundary_subset_closure_compl (A := A)) hx_boundary",
+    "theorem Topology.interior_iUnion_eq_iUnion_of_open\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {𝒜 : ι → Set X}\n    (h𝒜 : ∀ i, IsOpen (𝒜 i)) :\n    interior (⋃ i, 𝒜 i) = ⋃ i, 𝒜 i := by\n  have h_open : IsOpen (⋃ i, 𝒜 i) := isOpen_iUnion (fun i ↦ h𝒜 i)\n  simpa using h_open.interior_eq"
+  ],
+  "success": true
+}

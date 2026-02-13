@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.441638469696045
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3370,
+      "prompt_tokens": 20089,
+      "total_tokens": 23459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_empty_iff_P3_empty {X : Type*} [TopologicalSpace X] :\n    Topology.P1 (∅ : Set X) ↔ Topology.P3 (∅ : Set X) := by\n  have h₁ : Topology.P1 (∅ : Set X) ↔ Topology.P2 (∅ : Set X) :=\n    P1_empty_iff_P2_empty (X := X)\n  have h₂ : Topology.P3 (∅ : Set X) ↔ Topology.P2 (∅ : Set X) :=\n    P3_empty_iff_P2_empty (X := X)\n  simpa using h₁.trans h₂.symm"
+  ],
+  "success": true
+}

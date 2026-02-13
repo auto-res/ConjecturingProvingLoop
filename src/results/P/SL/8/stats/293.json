@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.89415574073792
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5622,
+      "prompt_tokens": 45491,
+      "total_tokens": 51113,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_subset_closure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) :\n    interior (closure A) ⊆ closure B := by\n  -- `interior (closure A)` is always contained in `closure A`.\n  have h₁ : interior (closure A) ⊆ closure A := interior_subset\n  -- Monotonicity of `closure` turns `A ⊆ B` into `closure A ⊆ closure B`.\n  have h₂ : closure A ⊆ closure B := closure_mono hAB\n  -- Combine the two inclusions to obtain the desired result.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    33.859328269958496,
+    72.68020629882812
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2213,
+      "prompt_tokens": 41579,
+      "total_tokens": 43792,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 5729,
+      "prompt_tokens": 41675,
+      "total_tokens": 47404,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_iff_closure_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A ↔ closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    simpa using hDense.closure_eq\n  · intro hEq\n    exact ⟨hEq⟩",
+    "theorem interior_union_interior_eq {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A ∪ interior A) = interior A := by\n  -- Since `interior A ⊆ A`, the union is just `A`.\n  have h_union : (A ∪ interior A : Set X) = A := by\n    ext x\n    constructor\n    · intro hx\n      cases hx with\n      | inl hA    => exact hA\n      | inr hIntA => exact interior_subset hIntA\n    · intro hx\n      exact Or.inl hx\n  simpa [h_union]"
+  ],
+  "success": true
+}

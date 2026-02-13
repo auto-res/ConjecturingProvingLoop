@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.4895989894867
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5157,
+      "prompt_tokens": 46767,
+      "total_tokens": 51924,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_eq_interior_of_closed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hB_closed : IsClosed (B : Set X)) :\n    interior (closure (A ∩ B : Set X)) = interior (A ∩ B : Set X) := by\n  -- The intersection of two closed sets is closed.\n  have hClosed : IsClosed (A ∩ B : Set X) := hA_closed.inter hB_closed\n  -- For a closed set, its closure equals the set itself.\n  simpa [hClosed.closure_eq]"
+  ],
+  "success": true
+}

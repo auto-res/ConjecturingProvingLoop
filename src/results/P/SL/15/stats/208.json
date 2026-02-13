@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.95473408699036
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4441,
+      "prompt_tokens": 43647,
+      "total_tokens": 48088,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_subset_closure_interior_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} : interior A ⊆ closure (interior (closure A)) := by\n  intro x hx\n  -- First, enlarge `interior A` to `interior (closure A)`.\n  have hx_int_closure : x ∈ interior (closure A) :=\n    Topology.interior_subset_interior_closure (X := X) (A := A) hx\n  -- Then, any point of an open set belongs to the closure of that set.\n  exact subset_closure hx_int_closure"
+  ],
+  "success": true
+}

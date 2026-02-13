@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.7239305973053
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2856,
+      "prompt_tokens": 41806,
+      "total_tokens": 44662,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_closure_right_eq_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∪ closure B) = closure (A ∪ B) := by\n  have hClosed : IsClosed (closure B) := isClosed_closure\n  have h₁ := Topology.closure_union_right_closed (A := A) (B := closure B) hClosed\n  calc\n    closure (A ∪ closure B) = closure A ∪ closure B := by\n      simpa using h₁\n    _ = closure (A ∪ B) := by\n      simpa [closure_union]"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    92.5917387008667,
+    319.41945576667786,
+    78.57016134262085
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6390,
+      "prompt_tokens": 17395,
+      "total_tokens": 23785,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 19977,
+      "prompt_tokens": 17517,
+      "total_tokens": 37494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 4737,
+      "prompt_tokens": 17680,
+      "total_tokens": 22417,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP3 : Topology.P3 (X := X) A) :\n    closure (interior (closure A)) = closure A := by\n  apply subset_antisymm\n  · -- `closure (interior (closure A)) ⊆ closure A`\n    exact closure_mono (interior_subset : interior (closure A) ⊆ closure A)\n  · -- From `P3`, we have `A ⊆ interior (closure A)`\n    have h_sub : A ⊆ interior (closure A) := hP3\n    -- Taking closures preserves inclusions.\n    exact closure_mono h_sub",
+    "theorem Topology.closure_interior_union_subset_union_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) ⊆\n      closure (interior A) ∪ closure (interior B) := by\n  -- We apply `closure_minimal`, showing that the right-hand side\n  -- is a closed set containing `interior (A ∪ B)`.\n  apply closure_minimal\n  · -- First, prove the inclusion\n    --   `interior (A ∪ B) ⊆ closure (interior A) ∪ closure (interior B)`.\n    intro x hx\n    -- Rewrite the membership using `interior_union`.\n    have hx' : x ∈ interior A ∪ interior B := by\n      simpa [interior_union] using hx\n    -- Each interior is contained in the corresponding closure.\n    cases hx' with\n    | inl hxA =>\n        exact Or.inl (subset_closure hxA)\n    | inr hxB =>\n        exact Or.inr (subset_closure hxB)\n  · -- Finally, check that the target set is closed.\n    have h₁ : IsClosed (closure (interior A)) := isClosed_closure\n    have h₂ : IsClosed (closure (interior B)) := isClosed_closure\n    exact h₁.union h₂",
+    "theorem Topology.interior_closure_interior_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) ⊆ closure A := by\n  intro x hx\n  -- First, `x` lies in `closure (interior A)`.\n  have hx₁ : x ∈ closure (interior A) :=\n    interior_subset hx\n  -- Monotonicity of `closure` turns `interior A ⊆ A` into\n  -- `closure (interior A) ⊆ closure A`, so `x ∈ closure A`.\n  have hx₂ : x ∈ closure A :=\n    (closure_mono (interior_subset : interior A ⊆ A)) hx₁\n  exact hx₂"
+  ],
+  "success": true
+}

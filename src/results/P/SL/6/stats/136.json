@@ -1,0 +1,26 @@
+{
+  "times": [
+    121.54639744758606
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8763,
+      "prompt_tokens": 20714,
+      "total_tokens": 29477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_interior_closure_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) = closure A → Topology.P3 A := by\n  intro hEq\n  -- From the equality, `closure A` coincides with its interior and hence is open.\n  have hOpen : IsOpen (closure (A : Set X)) := by\n    have hOpenInt : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    simpa [hEq] using hOpenInt\n  -- An open closure implies `P3` for the original set.\n  exact Topology.closure_open_satisfies_P3 (A := A) hOpen"
+  ],
+  "success": true
+}

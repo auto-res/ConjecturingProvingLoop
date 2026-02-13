@@ -1,0 +1,60 @@
+{
+  "times": [
+    125.19726133346558,
+    159.2205080986023,
+    46.13774538040161
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10397,
+      "prompt_tokens": 29299,
+      "total_tokens": 39696,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 12011,
+      "prompt_tokens": 29404,
+      "total_tokens": 41415,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    },
+    {
+      "completion_tokens": 3600,
+      "prompt_tokens": 29481,
+      "total_tokens": 33081,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_left_dense\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Dense A → Topology.P3 (A ∪ B) := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hx\n  -- `closure A` is the whole space because `A` is dense.\n  have hclA : closure A = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  -- Hence `closure (A ∪ B)` is also the whole space.\n  have hcl : closure (A ∪ B) = (Set.univ : Set X) := by\n    -- `closure A ⊆ closure (A ∪ B)`\n    have hmono : closure A ⊆ closure (A ∪ B) :=\n      closure_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n    -- Combine inclusions to obtain the equality.\n    have : (Set.univ : Set X) ⊆ closure (A ∪ B) := by\n      intro y _\n      have : y ∈ closure A := by\n        simpa [hclA] using (by simp : y ∈ (Set.univ : Set X))\n      exact hmono this\n    exact Set.Subset.antisymm (by intro _ _; simp) this\n  -- The interior of `univ` is `univ`, so the goal is immediate.\n  have hInt : interior (closure (A ∪ B)) = (Set.univ : Set X) := by\n    simpa [hcl, interior_univ]\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hInt] using this",
+    "theorem Topology.interior_closure_union_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A : Set X)) ∪ interior (closure B) ⊆\n      interior (closure A ∪ closure B) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- `closure A` is contained in `closure A ∪ closure B`\n      have hsubset : closure A ⊆ closure A ∪ closure B := by\n        intro y hy\n        exact Or.inl hy\n      -- Apply monotonicity of `interior`\n      have hmono : interior (closure A) ⊆ interior (closure A ∪ closure B) :=\n        interior_mono hsubset\n      exact hmono hxA\n  | inr hxB =>\n      -- `closure B` is contained in `closure A ∪ closure B`\n      have hsubset : closure B ⊆ closure A ∪ closure B := by\n        intro y hy\n        exact Or.inr hy\n      -- Apply monotonicity of `interior`\n      have hmono : interior (closure B) ⊆ interior (closure A ∪ closure B) :=\n        interior_mono hsubset\n      exact hmono hxB",
+    "theorem Topology.P1_and_P2_iff_isOpen_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    (Topology.P1 A ∧ Topology.P2 A) ↔ IsOpen A := by\n  -- Existing equivalence between `P2` and openness for closed sets.\n  have hEq : Topology.P2 A ↔ IsOpen A :=\n    Topology.P2_iff_isOpen_of_isClosed (A := A) hA\n  -- Prove each direction.\n  constructor\n  · rintro ⟨_, hP2⟩\n    exact hEq.mp hP2\n  · intro hOpen\n    exact And.intro\n      (Topology.P1_of_isOpen (A := A) hOpen)\n      (hEq.mpr hOpen)"
+  ],
+  "success": true
+}

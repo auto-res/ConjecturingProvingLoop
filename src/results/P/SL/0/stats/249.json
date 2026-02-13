@@ -1,0 +1,26 @@
+{
+  "times": [
+    110.06082439422607
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5791,
+      "prompt_tokens": 42561,
+      "total_tokens": 48352,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union_of_subset_closure_interior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    Topology.P1 A → (B : Set X) ⊆ closure (interior A) → Topology.P1 (A ∪ B) := by\n  intro hP1 hB\n  dsimp [Topology.P1] at hP1 ⊢\n  intro x hx\n  -- `closure (interior A)` is contained in the target set via monotonicity.\n  have hMono :\n      closure (interior (A : Set X)) ⊆\n        closure (interior (A ∪ B : Set X)) := by\n    apply closure_mono\n    exact interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n  -- Dispatch the two union cases.\n  cases hx with\n  | inl hxA =>\n      have : x ∈ closure (interior (A : Set X)) := hP1 hxA\n      exact hMono this\n  | inr hxB =>\n      have : x ∈ closure (interior (A : Set X)) := hB hxB\n      exact hMono this"
+  ],
+  "success": true
+}

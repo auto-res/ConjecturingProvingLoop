@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.10161852836609
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7031,
+      "prompt_tokens": 37511,
+      "total_tokens": 44542,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_forall_open_nbhd_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P2 A ↔\n      ∀ x : X, x ∈ (A : Set X) →\n        ∃ U : Set X, IsOpen U ∧ x ∈ U ∧ U ⊆ closure (interior A) := by\n  constructor\n  · intro hP2 x hxA\n    refine\n      ⟨interior (closure (interior A)), isOpen_interior,\n        ?_, interior_subset⟩\n    exact hP2 hxA\n  · intro h\n    intro x hxA\n    rcases h x hxA with ⟨U, hOpenU, hxU, hU_sub⟩\n    have hU_sub_int :\n        (U : Set X) ⊆ interior (closure (interior A)) :=\n      interior_maximal hU_sub hOpenU\n    exact hU_sub_int hxU"
+  ],
+  "success": true
+}

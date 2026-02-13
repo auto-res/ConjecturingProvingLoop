@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.68369340896606
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4163,
+      "prompt_tokens": 38006,
+      "total_tokens": 42169,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_isClosed_and_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hDense : Dense A) :\n    Topology.P3 A := by\n  -- A closed and dense set coincides with `univ`.\n  have hEq : (A : Set X) = (Set.univ : Set X) :=\n    Topology.closed_dense_eq_univ (A := A) hClosed hDense\n  -- `univ` trivially satisfies `P3`.\n  have hP3_univ : Topology.P3 (Set.univ : Set X) :=\n    P3_univ (X := X)\n  -- Transfer the property via the set equality.\n  simpa [hEq] using hP3_univ"
+  ],
+  "success": true
+}

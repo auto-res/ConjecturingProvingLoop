@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.761064529418945
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2256,
+      "prompt_tokens": 42254,
+      "total_tokens": 44510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem diff_frontier_eq_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    A \\ frontier A = interior A := by\n  ext x\n  constructor\n  · intro hx\n    have hxA : x ∈ A := hx.1\n    have hNotFront : x ∉ frontier A := hx.2\n    -- If `x` were not in `interior A`, it would lie in the frontier,\n    -- because points of `A` outside `interior A` belong to `frontier A`.\n    by_cases hxInt : x ∈ interior A\n    · exact hxInt\n    · have hxFront : x ∈ frontier A := by\n        -- `x ∈ closure A` since `A ⊆ closure A`.\n        have hxCl : x ∈ closure A := subset_closure hxA\n        exact And.intro hxCl hxInt\n      exact (hNotFront hxFront).elim\n  · intro hxInt\n    have hxA : x ∈ A := interior_subset hxInt\n    -- Points of `interior A` are not in the frontier.\n    have hNotFront : x ∉ frontier A := by\n      intro hFront\n      have : x ∈ (interior A)ᶜ :=\n        (frontier_subset_compl_interior (X := X) (A := A)) hFront\n      exact this hxInt\n    exact And.intro hxA hNotFront"
+  ],
+  "success": true
+}

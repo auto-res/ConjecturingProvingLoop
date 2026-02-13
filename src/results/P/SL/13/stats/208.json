@@ -1,0 +1,26 @@
+{
+  "times": [
+    16.871973514556885
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1631,
+      "prompt_tokens": 37128,
+      "total_tokens": 38759,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_left_of_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_open : IsOpen (A : Set X)) (hPB : Topology.P1 (X := X) B) :\n    Topology.P1 (X := X) (A ∪ B) := by\n  -- Swap the roles of `A` and `B` and apply the existing lemma.\n  have h :=\n    Topology.P1_union_right_of_open (X := X) (A := B) (B := A) hPB hA_open\n  simpa [Set.union_comm] using h"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.1625382900238
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5671,
+      "prompt_tokens": 52180,
+      "total_tokens": 57851,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_subset {X : Type*} [TopologicalSpace X]\n    (A B : Set X) :\n    closure (interior A ∩ B) ⊆ closure (A ∩ B) := by\n  -- `interior A` is contained in `A`, hence their intersection with `B`\n  -- sits inside `A ∩ B`.\n  have h_subset : (interior A ∩ B : Set X) ⊆ A ∩ B := by\n    intro x hx\n    exact ⟨interior_subset hx.1, hx.2⟩\n  -- Taking closures preserves this inclusion.\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

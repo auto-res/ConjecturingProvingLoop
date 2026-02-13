@@ -1,0 +1,26 @@
+{
+  "times": [
+    126.80358505249023
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6981,
+      "prompt_tokens": 49236,
+      "total_tokens": 56217,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_open_left {X : Type*} [TopologicalSpace X] {U A : Set X}\n    (hU : IsOpen (U : Set X)) (hA : Topology.P1 (X := X) A) :\n    Topology.P1 (X := X) (U ∪ A) := by\n  -- `P1` holds automatically for an open set.\n  have hU_P1 : Topology.P1 (X := X) U :=\n    Topology.isOpen_P1 (X := X) (A := U) hU\n  -- Combine the two `P1` properties using the union lemma.\n  simpa [Set.union_comm] using\n    Topology.P1_union (X := X) (A := A) (B := U) hA hU_P1"
+  ],
+  "success": true
+}

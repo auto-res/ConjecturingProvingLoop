@@ -1,0 +1,26 @@
+{
+  "times": [
+    205.75025391578674
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8983,
+      "prompt_tokens": 53401,
+      "total_tokens": 62384,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_inter_of_open_and_P2\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hOpenA : IsOpen (A : Set X)) (hP2B : Topology.P2 (B : Set X)) :\n    Topology.P2 (A ∩ B) := by\n  -- Apply the existing lemma with the factors swapped, then rewrite.\n  have h :=\n    Topology.P2_inter_of_P2_and_open (A := B) (B := A) hP2B hOpenA\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

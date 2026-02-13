@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.44214153289795
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3848,
+      "prompt_tokens": 50107,
+      "total_tokens": 53955,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_univ_iff_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = (Set.univ : Set X) ↔\n      interior (Aᶜ : Set X) = (∅ : Set X) := by\n  -- `closure A = univ` is equivalent to `Dense A`.\n  have h₁ :\n      closure (A : Set X) = (Set.univ : Set X) ↔ Dense (A : Set X) :=\n    (dense_iff_closure_eq (s := (A : Set X))).symm\n  -- `Dense A` is equivalent to `interior (Aᶜ) = ∅`.\n  have h₂ :\n      Dense (A : Set X) ↔ interior (Aᶜ : Set X) = (∅ : Set X) :=\n    Topology.dense_iff_interior_compl_eq_empty (X := X) (A := A)\n  -- Combine the two equivalences.\n  simpa using h₁.trans h₂"
+  ],
+  "success": true
+}

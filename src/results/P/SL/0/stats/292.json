@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.0427131652832
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4175,
+      "prompt_tokens": 50218,
+      "total_tokens": 54393,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_iUnion_eq_iUnion_of_open {X ι : Type*} [TopologicalSpace X]\n    {F : ι → Set X} (hF : ∀ i, IsOpen (F i : Set X)) :\n    interior (⋃ i, F i : Set X) = (⋃ i, F i : Set X) := by\n  have hOpen : IsOpen (⋃ i, F i : Set X) := isOpen_iUnion (by\n    intro i; exact hF i)\n  simpa [hOpen.interior_eq]"
+  ],
+  "success": true
+}

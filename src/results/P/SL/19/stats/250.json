@@ -1,0 +1,26 @@
+{
+  "times": [
+    105.25535035133362
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6810,
+      "prompt_tokens": 38867,
+      "total_tokens": 45677,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_subset_frontier_inter_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∩ B) ⊆\n      (frontier A ∩ closure B) ∪ (frontier B ∩ closure A) := by\n  intro x hx\n  -- Decompose the hypothesis `hx`.\n  rcases hx with ⟨hxClosInter, hxNotIntInter⟩\n  -- Membership in the individual closures.\n  have hxClosA : x ∈ closure A := by\n    have hSub : (A ∩ B : Set X) ⊆ A := fun y hy => hy.1\n    exact (closure_mono hSub) hxClosInter\n  have hxClosB : x ∈ closure B := by\n    have hSub : (A ∩ B : Set X) ⊆ B := fun y hy => hy.2\n    exact (closure_mono hSub) hxClosInter\n  -- Case distinction on `x ∈ interior A`.\n  by_cases hIntA : x ∈ interior A\n  · -- If `x ∈ interior A`, then `x ∉ interior B`.\n    have hNotIntB : x ∉ interior B := by\n      intro hIntB\n      -- `x` would then lie in `interior (A ∩ B)`, contradicting `hxNotIntInter`.\n      have hSub : (interior A ∩ interior B : Set X) ⊆ A ∩ B := by\n        intro y hy; exact ⟨interior_subset hy.1, interior_subset hy.2⟩\n      have hOpen : IsOpen (interior A ∩ interior B) :=\n        isOpen_interior.inter isOpen_interior\n      have hInc : (interior A ∩ interior B : Set X) ⊆ interior (A ∩ B) :=\n        interior_maximal hSub hOpen\n      have : x ∈ interior (A ∩ B) := hInc ⟨hIntA, hIntB⟩\n      exact hxNotIntInter this\n    -- Assemble membership in `frontier B ∩ closure A`.\n    have hFrontB : x ∈ frontier B := And.intro hxClosB hNotIntB\n    exact Or.inr ⟨hFrontB, hxClosA⟩\n  · -- Otherwise `x ∉ interior A`, so `x ∈ frontier A`.\n    have hFrontA : x ∈ frontier A := And.intro hxClosA hIntA\n    exact Or.inl ⟨hFrontA, hxClosB⟩"
+  ],
+  "success": true
+}

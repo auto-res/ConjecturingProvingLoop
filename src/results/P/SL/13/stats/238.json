@@ -1,0 +1,26 @@
+{
+  "times": [
+    128.70238327980042
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8010,
+      "prompt_tokens": 41815,
+      "total_tokens": 49825,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.nonempty_closureInterior_iff_nonempty_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    (closure (interior (A : Set X))).Nonempty ↔ (interior (A : Set X)).Nonempty := by\n  classical\n  constructor\n  · intro h_nonempty_cl\n    -- `closure (interior A)` is not empty.\n    have h_cl_ne : closure (interior (A : Set X)) ≠ (∅ : Set X) :=\n      (Set.nonempty_iff_ne_empty).1 h_nonempty_cl\n    -- If `interior A` were empty, the equivalence would force its closure to be empty,\n    -- contradicting `h_cl_ne`.\n    have h_int_ne : interior (A : Set X) ≠ (∅ : Set X) := by\n      intro h_int_eq\n      have h_cl_eq : closure (interior (A : Set X)) = (∅ : Set X) :=\n        ((Topology.closureInterior_eq_empty_iff (X := X) (A := A)).2 h_int_eq)\n      exact h_cl_ne h_cl_eq\n    exact (Set.nonempty_iff_ne_empty).2 h_int_ne\n  · intro h_nonempty_int\n    rcases h_nonempty_int with ⟨x, hx⟩\n    exact ⟨x, subset_closure hx⟩"
+  ],
+  "success": true
+}

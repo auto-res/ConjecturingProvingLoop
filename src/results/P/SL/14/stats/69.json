@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.51123118400574
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6669,
+      "prompt_tokens": 12148,
+      "total_tokens": 18817,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closure_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) → Topology.P2 (closure (A : Set X)) := by\n  intro hDense\n  -- Since `A` is dense, its closure is the whole space, which is open.\n  have hOpen : IsOpen (closure (A : Set X)) := by\n    have h_eq : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n    simpa [h_eq] using (isOpen_univ : IsOpen (Set.univ : Set X))\n  -- Apply the lemma that an open closure guarantees `P2`.\n  exact (Topology.P2_of_isOpen_closure (X := X) (A := A)) hOpen"
+  ],
+  "success": true
+}

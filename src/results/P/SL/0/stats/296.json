@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.86775827407837
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2873,
+      "prompt_tokens": 50965,
+      "total_tokens": 53838,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_left_subset_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure ((A ∩ closure (B : Set X)) : Set X)) ⊆\n      interior (closure (B : Set X)) := by\n  -- `A ∩ closure B` is contained in `closure B`.\n  have hSub : (A ∩ closure (B : Set X) : Set X) ⊆ closure (B : Set X) := by\n    intro x hx\n    exact hx.2\n  -- Apply `closure_mono` followed by `interior_mono`.\n  simpa [closure_closure] using\n    (interior_mono (closure_mono hSub))"
+  ],
+  "success": true
+}

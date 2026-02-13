@@ -1,0 +1,43 @@
+{
+  "times": [
+    85.0444278717041,
+    126.95776319503784
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5657,
+      "prompt_tokens": 47420,
+      "total_tokens": 53077,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    },
+    {
+      "completion_tokens": 8318,
+      "prompt_tokens": 47492,
+      "total_tokens": 55810,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_compl {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier ((Aᶜ) : Set X) = frontier (A : Set X) := by\n  calc\n    frontier ((Aᶜ) : Set X)\n        = closure (Aᶜ : Set X) ∩ closure (A : Set X) := by\n          simpa [Set.compl_compl] using\n            (Topology.frontier_eq_closure_inter_closure_compl\n              (A := (Aᶜ : Set X)))\n    _ = closure (A : Set X) ∩ closure (Aᶜ : Set X) := by\n          simpa [Set.inter_comm]\n    _ = frontier (A : Set X) := by\n          simpa using\n            (Topology.frontier_eq_closure_inter_closure_compl (A := A)).symm",
+    "theorem Set.compl_compl {α : Type*} (s : Set α) : sᶜᶜ = s := by\n  simpa using compl_compl (s := s)"
+  ],
+  "success": true
+}

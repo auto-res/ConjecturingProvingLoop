@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.47366309165955
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6652,
+      "prompt_tokens": 43065,
+      "total_tokens": 49717,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_iterate_from_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) (n : ℕ) :\n    Nat.iterate (fun S : Set X => closure (interior S)) (n.succ) (interior A) =\n      closure (interior A) := by\n  simpa [interior_interior]\n    using closure_interior_iterate (X := X) (A := interior A) (n := n)"
+  ],
+  "success": true
+}

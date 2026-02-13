@@ -1,0 +1,77 @@
+{
+  "times": [
+    93.46649599075317,
+    17.167077779769897,
+    84.60760378837585,
+    45.133755683898926
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5212,
+      "prompt_tokens": 40290,
+      "total_tokens": 45502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    },
+    {
+      "completion_tokens": 1387,
+      "prompt_tokens": 40422,
+      "total_tokens": 41809,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    },
+    {
+      "completion_tokens": 7030,
+      "prompt_tokens": 40503,
+      "total_tokens": 47533,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    },
+    {
+      "completion_tokens": 3136,
+      "prompt_tokens": 40783,
+      "total_tokens": 43919,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem compl_frontier_eq_union_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (frontier A)ᶜ = interior A ∪ interior (Aᶜ) := by\n  -- Start with the existing equality expressed in terms of a complement of `closure A`.\n  have h :=\n    compl_frontier_eq_compl_closure_union_interior (X := X) (A := A)\n  -- Rewrite `(closure A)ᶜ` as `interior (Aᶜ)` and conclude.\n  simpa [interior_compl_eq_compl_closure] using h",
+    "theorem compl_frontier_eq_compl_closure_union_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (frontier A)ᶜ = interior A ∪ (closure A)ᶜ := by\n  -- Rewrite the frontier as an intersection.\n  have h₁ : (frontier A : Set X) = closure A ∩ (interior A)ᶜ := by\n    have h := frontier_eq_closure_diff_interior (X := X) (A := A)\n    simpa [Set.diff_eq] using h\n  -- Take complements of both sides.\n  have h₂ : (frontier A)ᶜ = (closure A ∩ (interior A)ᶜ)ᶜ := by\n    simpa [h₁]\n  -- Use De Morgan's laws and commutativity of union to simplify.\n  simpa [Set.compl_inter, Set.compl_compl, Set.union_comm] using h₂",
+    "theorem frontier_eq_empty_iff_clopen {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) ↔ (IsOpen A ∧ IsClosed A) := by\n  constructor\n  · intro hFrontier\n    -- Rewrite the frontier using `closure A \\ interior A`.\n    have hDiff : closure A \\ interior A = (∅ : Set X) := by\n      simpa [frontier_eq_closure_diff_interior] using hFrontier\n    -- From this, deduce `closure A ⊆ interior A`.\n    have hSub : closure A ⊆ interior A := by\n      intro x hxCl\n      by_cases hxInt : x ∈ interior A\n      · exact hxInt\n      ·\n        have hxInDiff : x ∈ closure A \\ interior A := And.intro hxCl hxInt\n        have : x ∈ (∅ : Set X) := by\n          simpa [hDiff] using hxInDiff\n        have hFalse : False := by\n          simpa using this\n        exact (hFalse.elim)\n    -- Hence `interior A = closure A`.\n    have hIntEqCl : interior A = closure A := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      · exact hSub\n    -- Show `A = interior A`.\n    have hAEqInt : A = interior A := by\n      apply Set.Subset.antisymm\n      · intro x hxA\n        have : x ∈ closure A := subset_closure hxA\n        exact hSub this\n      · exact interior_subset\n    -- Conclude that `A` is open.\n    have hOpen : IsOpen A := by\n      have : IsOpen (interior A) := isOpen_interior\n      simpa [hAEqInt] using this\n    -- And `A` is closed.\n    have hClosed : IsClosed A := by\n      have hClEq : closure A = A := by\n        calc\n          closure A = interior A := (hIntEqCl.symm)\n          _ = A := hAEqInt.symm\n      have hClosedClosure : IsClosed (closure A) := isClosed_closure\n      simpa [hClEq] using hClosedClosure\n    exact And.intro hOpen hClosed\n  · rintro ⟨hOpen, hClosed⟩\n    exact frontier_eq_empty_of_clopen (A := A) hOpen hClosed",
+    "theorem dense_frontier_eq_compl_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → frontier (A : Set X) = (Set.univ : Set X) \\ interior A := by\n  intro hDense\n  -- For a dense set, its closure is the whole space.\n  have h_closure : (closure A : Set X) = Set.univ := hDense.closure_eq\n  -- Rewrite the frontier via the standard characterization.\n  have h_frontier : frontier A = closure A \\ interior A := by\n    simpa using (frontier_eq_closure_diff_interior (X := X) (A := A))\n  -- Substitute `closure A = univ` into the expression.\n  simpa [h_closure] using h_frontier"
+  ],
+  "success": true
+}

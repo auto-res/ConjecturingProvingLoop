@@ -1,0 +1,26 @@
+{
+  "times": [
+    105.63699221611023
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8533,
+      "prompt_tokens": 24447,
+      "total_tokens": 32980,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interiors_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X) ∩ interior B) ⊆\n      closure (interior A) ∩ closure (interior B) := by\n  intro x hx\n  -- `interior A ∩ interior B` is contained in `interior A`\n  have hA_sub : interior (A : Set X) ∩ interior B ⊆ interior A := by\n    intro y hy\n    exact hy.1\n  -- `interior A ∩ interior B` is contained in `interior B`\n  have hB_sub : interior (A : Set X) ∩ interior B ⊆ interior B := by\n    intro y hy\n    exact hy.2\n  -- Hence, their closures satisfy the desired inclusions\n  have hxA : (x : X) ∈ closure (interior A) := (closure_mono hA_sub) hx\n  have hxB : (x : X) ∈ closure (interior B) := (closure_mono hB_sub) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

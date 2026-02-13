@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.0014169216156
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6778,
+      "prompt_tokens": 22853,
+      "total_tokens": 29631,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_isOpen_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) :\n    interior (A ∩ B : Set X) = A ∩ interior B := by\n  apply subset_antisymm\n  · -- `⊆` direction: from left to right\n    intro x hx\n    -- A point in `interior (A ∩ B)` lies in `A ∩ B`\n    have hxAB : x ∈ (A ∩ B : Set X) := interior_subset hx\n    -- Hence it lies in `A`\n    have hxA : x ∈ A := hxAB.1\n    -- And, since `A ∩ B ⊆ B`, it also lies in `interior B`\n    have hSub : (A ∩ B : Set X) ⊆ (B : Set X) := by\n      intro y hy; exact hy.2\n    have hxIntB : x ∈ interior (B : Set X) := (interior_mono hSub) hx\n    exact And.intro hxA hxIntB\n  · -- `⊇` direction: from right to left\n    intro x hx\n    rcases hx with ⟨hxA, hxIntB⟩\n    -- `A ∩ interior B` is an open neighbourhood of `x`\n    have hOpen : IsOpen (A ∩ interior (B : Set X) : Set X) :=\n      hA.inter isOpen_interior\n    -- and is contained in `A ∩ B`\n    have hSub : (A ∩ interior (B : Set X) : Set X) ⊆ (A ∩ B : Set X) := by\n      intro y hy\n      have hyB : y ∈ B := interior_subset hy.2\n      exact And.intro hy.1 hyB\n    -- Therefore, by maximality of the interior, it is contained in `interior (A ∩ B)`\n    have hIncl : (A ∩ interior (B : Set X) : Set X) ⊆\n        interior (A ∩ B : Set X) := interior_maximal hSub hOpen\n    -- Since `x` lies in `A ∩ interior B`, it also lies in the interior of `A ∩ B`\n    have : x ∈ (A ∩ interior (B : Set X) : Set X) := And.intro hxA hxIntB\n    exact hIncl this"
+  ],
+  "success": true
+}

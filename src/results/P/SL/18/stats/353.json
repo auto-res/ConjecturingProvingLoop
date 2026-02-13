@@ -1,0 +1,26 @@
+{
+  "times": [
+    105.38299131393433
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7209,
+      "prompt_tokens": 57822,
+      "total_tokens": 65031,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_compl_of_empty_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hInt : interior (A : Set X) = ∅) :\n    Topology.P3 (Aᶜ) := by\n  -- From the emptiness of `interior A`, deduce that `Aᶜ` is dense.\n  have hDense : Dense ((Aᶜ) : Set X) :=\n    (Topology.dense_compl_iff_interior_eq_empty (A := A)).2 hInt\n  -- Density implies property `P3`.\n  exact Topology.P3_of_dense (A := Aᶜ) hDense"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.84220910072327
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6043,
+      "prompt_tokens": 49697,
+      "total_tokens": 55740,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_frontier_closure_eq_closure_interior_diff_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) ∩ frontier (closure A) =\n      closure (interior A) \\ interior (closure A) := by\n  -- First, rewrite the frontier of a closed set.\n  have hFront :\n      frontier (closure A) =\n        closure A \\ interior (closure A) := by\n    simp [frontier, closure_closure]\n  -- We now identify the desired equality by set‐extensionality.\n  ext x\n  constructor\n  · intro hx\n    -- Decompose the membership in the intersection.\n    rcases hx with ⟨hxClosInt, hxDiff⟩\n    -- `hxDiff` witnesses `x ∈ closure A ∧ x ∉ interior (closure A)`.\n    exact And.intro hxClosInt hxDiff.2\n  · intro hx\n    rcases hx with ⟨hxClosInt, hxNotIntClos⟩\n    -- From `x ∈ closure (interior A)` we infer `x ∈ closure A`.\n    have hxClosA : x ∈ closure A :=\n      (Topology.closure_interior_subset_closure (A := A)) hxClosInt\n    -- Assemble the data to obtain membership in the original intersection.\n    have hxDiff : x ∈ closure A \\ interior (closure A) :=\n      And.intro hxClosA hxNotIntClos\n    -- Conclude the required membership.\n    have : x ∈ closure (interior A) ∩ (closure A \\ interior (closure A)) :=\n      And.intro hxClosInt hxDiff\n    -- Rewrite back using `hFront`.\n    simpa [hFront] using this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    121.28816103935242
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6622,
+      "prompt_tokens": 37522,
+      "total_tokens": 44144,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem isClosed_closure_diff_self_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen (A : Set X)) :\n    IsClosed (closure (A : Set X) \\ A) := by\n  -- Rewrite the set as an intersection of two closed sets.\n  have h_eq : (closure (A : Set X) \\ A) = closure (A : Set X) ∩ (Aᶜ : Set X) := rfl\n  -- Both `closure A` and `Aᶜ` are closed.\n  have h_closed₁ : IsClosed (closure (A : Set X)) := isClosed_closure\n  have h_closed₂ : IsClosed ((Aᶜ) : Set X) := hA.isClosed_compl\n  -- The intersection of closed sets is closed.\n  simpa [h_eq] using h_closed₁.inter h_closed₂"
+  ],
+  "success": true
+}

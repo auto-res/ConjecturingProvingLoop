@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.71067500114441
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4721,
+      "prompt_tokens": 24556,
+      "total_tokens": 29277,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_prod_right_open {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : Topology.P3 A) (hB_open : IsOpen B) :\n    Topology.P3 (A ×ˢ B) := by\n  dsimp [Topology.P3] at hA ⊢\n  intro p hpAB\n  -- Decompose the point `p` into its coordinates.\n  rcases hpAB with ⟨hpA, hpB⟩\n  -- Apply `P3` to the first coordinate.\n  have hIntA : p.1 ∈ interior (closure A) := hA hpA\n  -- Form an open rectangle containing `p`.\n  have hMem : p ∈ interior (closure A) ×ˢ B := ⟨hIntA, hpB⟩\n  have hOpen : IsOpen (interior (closure A) ×ˢ B) :=\n    (isOpen_interior).prod hB_open\n  -- Show that the rectangle is contained in `closure (A ×ˢ B)`.\n  have hSub :\n      (interior (closure A) ×ˢ B : Set (X × Y)) ⊆ closure (A ×ˢ B) := by\n    intro q hq\n    rcases hq with ⟨hqA, hqB⟩\n    have hqA_cl : q.1 ∈ closure A :=\n      (interior_subset : interior (closure A) ⊆ closure A) hqA\n    have hqB_cl : q.2 ∈ closure B := subset_closure hqB\n    have : q ∈ closure A ×ˢ closure B := ⟨hqA_cl, hqB_cl⟩\n    simpa [closure_prod_eq] using this\n  -- Upgrade membership to the desired interior via `interior_maximal`.\n  have hSubInt :\n      (interior (closure A) ×ˢ B : Set _) ⊆ interior (closure (A ×ˢ B)) :=\n    interior_maximal hSub hOpen\n  exact hSubInt hMem"
+  ],
+  "success": true
+}

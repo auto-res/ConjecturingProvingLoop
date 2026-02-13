@@ -1,0 +1,26 @@
+{
+  "times": [
+    129.51328110694885
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7849,
+      "prompt_tokens": 25933,
+      "total_tokens": 33782,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_iUnion_subset {X : Type*} [TopologicalSpace X]\n    {ι : Sort _} {f : ι → Set X} :\n    (⋃ i, interior (closure (f i : Set X))) ⊆\n      interior (closure (⋃ i, f i : Set X)) := by\n  intro x hx\n  rcases Set.mem_iUnion.mp hx with ⟨i, hxi⟩\n  have h_closure :\n      closure (f i : Set X) ⊆ closure (⋃ j, f j : Set X) := by\n    apply closure_mono\n    intro y hy\n    exact Set.mem_iUnion.mpr ⟨i, hy⟩\n  have h_interior :\n      interior (closure (f i : Set X)) ⊆\n        interior (closure (⋃ j, f j : Set X)) :=\n    interior_mono h_closure\n  exact h_interior hxi"
+  ],
+  "success": true
+}

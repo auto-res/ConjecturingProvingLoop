@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.039477109909058
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2076,
+      "prompt_tokens": 10386,
+      "total_tokens": 12462,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iUnion_interior {X : Type*} [TopologicalSpace X] {ι : Sort*}\n    (A : ι → Set X) : Topology.P3 (⋃ i, interior (A i)) := by\n  -- The union of interiors is an open set.\n  have hOpen : IsOpen (⋃ i, interior (A i)) := by\n    apply isOpen_iUnion\n    intro i\n    exact isOpen_interior\n  -- Any open set satisfies `P3`.\n  exact Topology.P3_of_isOpen (A := ⋃ i, interior (A i)) hOpen"
+  ],
+  "success": true
+}

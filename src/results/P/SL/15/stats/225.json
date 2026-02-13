@@ -1,0 +1,26 @@
+{
+  "times": [
+    132.32836604118347
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8328,
+      "prompt_tokens": 47896,
+      "total_tokens": 56224,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_prod_eq_closure_interior_prod_of_P1\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y}\n    (hA : Topology.P1 A) (hB : Topology.P1 B) :\n    closure (A ×ˢ B) = closure (interior A) ×ˢ closure (interior B) := by\n  -- Express `closure A` and `closure B` via the `P1` property.\n  have hA_cl : closure (A : Set X) = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closure_interior (X := X) (A := A)).1 hA\n  have hB_cl : closure (B : Set Y) = closure (interior B) :=\n    (Topology.P1_iff_closure_eq_closure_interior (X := Y) (A := B)).1 hB\n  -- Rewrite the closure of the product using these equalities.\n  calc\n    closure (A ×ˢ B) =\n        closure (A : Set X) ×ˢ closure (B : Set Y) := by\n          simpa using closure_prod_eq (s := A) (t := B)\n    _ = closure (interior A) ×ˢ closure (interior B) := by\n          simpa [hA_cl, hB_cl]"
+  ],
+  "success": true
+}

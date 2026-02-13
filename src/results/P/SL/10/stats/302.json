@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.95709896087646
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3471,
+      "prompt_tokens": 48892,
+      "total_tokens": 52363,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_closure_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A ∩ closure B) ⊆ closure (interior A) ∩ closure B := by\n  intro x hx\n  -- `interior A ∩ closure B` is contained in `interior A`.\n  have hx_left : x ∈ closure (interior A) := by\n    have h_subset_left : interior A ∩ closure B ⊆ interior A :=\n      Set.inter_subset_left\n    exact (closure_mono h_subset_left) hx\n  -- Likewise, `interior A ∩ closure B` is contained in `closure B`.\n  have hx_right : x ∈ closure B := by\n    have h_subset_right : interior A ∩ closure B ⊆ closure B := by\n      intro y hy\n      exact hy.2\n    have : closure (interior A ∩ closure B) ⊆ closure (closure B) :=\n      closure_mono h_subset_right\n    simpa [closure_closure] using this hx\n  exact And.intro hx_left hx_right"
+  ],
+  "success": true
+}

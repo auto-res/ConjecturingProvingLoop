@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.546829223632812
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1610,
+      "prompt_tokens": 9971,
+      "total_tokens": 11581,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closure_subset {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : P3 (X := X) A) :\n    closure (A : Set X) ⊆ closure (interior (closure A)) := by\n  -- From `P3`, we have `A ⊆ interior (closure A)`.\n  have hsubset : (A : Set X) ⊆ interior (closure A) := hA\n  -- Taking closures preserves inclusions.\n  exact closure_mono hsubset"
+  ],
+  "success": true
+}

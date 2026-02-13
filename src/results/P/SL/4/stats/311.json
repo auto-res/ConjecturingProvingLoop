@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.03807806968689
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3389,
+      "prompt_tokens": 48110,
+      "total_tokens": 51499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_diff_closure_interior_subset_frontier\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure A) \\ closure (interior A) ⊆ frontier A := by\n  intro x hx\n  -- `hx` gives membership in the interior of `closure A`\n  -- and non-membership in `closure (interior A)`.\n  have hxIntCl : x ∈ interior (closure A) := hx.1\n  have hxNotClInt : x ∉ closure (interior A) := hx.2\n  -- Any point of `interior (closure A)` lies in `closure A`.\n  have hxClA : x ∈ closure A :=\n    (interior_subset : interior (closure A) ⊆ closure A) hxIntCl\n  -- Show that `x` is not in `interior A`; otherwise we contradict `hxNotClInt`.\n  have hxNotIntA : x ∉ interior A := by\n    intro hxIntA\n    -- `interior A` is contained in its closure, contradicting `hxNotClInt`.\n    have : x ∈ closure (interior A) := subset_closure hxIntA\n    exact hxNotClInt this\n  -- Assemble the two conditions defining `frontier A`.\n  exact And.intro hxClA hxNotIntA"
+  ],
+  "success": true
+}

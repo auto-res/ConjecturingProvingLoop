@@ -1,0 +1,60 @@
+{
+  "times": [
+    106.28183507919312,
+    45.074217081069946,
+    93.9340226650238
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10816,
+      "prompt_tokens": 55907,
+      "total_tokens": 66723,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55168
+      }
+    },
+    {
+      "completion_tokens": 4884,
+      "prompt_tokens": 56018,
+      "total_tokens": 60902,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55168
+      }
+    },
+    {
+      "completion_tokens": 4836,
+      "prompt_tokens": 56092,
+      "total_tokens": 60928,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_closure_eq_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ∪ closure A = closure A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    cases hx with\n    | inl hxInt =>\n        exact (subset_closure : interior A ⊆ closure A) hxInt\n    | inr hxCl =>\n        exact hxCl\n  · intro x hx\n    exact Or.inr hx",
+    "theorem interior_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ closure A := by\n  intro x hx\n  have hxA : (x : X) ∈ A := interior_subset hx\n  exact subset_closure hxA",
+    "theorem interior_inter_subset_left {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B) ⊆ interior A := by\n  -- `A ∩ B` is contained in `A`, hence their interiors satisfy the same relation.\n  exact interior_mono (Set.inter_subset_left : A ∩ B ⊆ A)"
+  ],
+  "success": true
+}

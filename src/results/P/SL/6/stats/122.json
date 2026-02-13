@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.26340293884277
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4788,
+      "prompt_tokens": 18629,
+      "total_tokens": 23417,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_satisfies_P1\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (closure (interior (A : Set X)) ∪ closure (interior B)) := by\n  -- Each of the two sets `closure (interior A)` and `closure (interior B)` satisfies `P1`.\n  have hA : Topology.P1 (closure (interior (A : Set X))) :=\n    Topology.closure_interior_satisfies_P1 (A := A)\n  have hB : Topology.P1 (closure (interior (B : Set X))) :=\n    Topology.closure_interior_satisfies_P1 (A := B)\n  -- `P1` is stable under finite unions, so their union also satisfies `P1`.\n  exact\n    Topology.P1_union_of_P1\n      (A := closure (interior (A : Set X)))\n      (B := closure (interior B))\n      hA hB"
+  ],
+  "success": true
+}

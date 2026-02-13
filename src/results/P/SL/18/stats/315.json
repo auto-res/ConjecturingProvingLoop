@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.35926651954651
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3727,
+      "prompt_tokens": 51918,
+      "total_tokens": 55645,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_union_eq_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (closure (A : Set X))) (hB : IsOpen (closure B)) :\n    interior (closure (A ∪ B : Set X)) = closure (A : Set X) ∪ closure B := by\n  -- Rewrite the closure of the union using `closure_union`.\n  have hClos : closure (A ∪ B : Set X) = closure (A : Set X) ∪ closure B := by\n    simpa [closure_union]\n  -- The right‐hand side is an open set (union of two open sets).\n  have hOpen : IsOpen (closure (A : Set X) ∪ closure B) := hA.union hB\n  -- For an open set, its interior coincides with itself.\n  have hInt :\n      interior (closure (A : Set X) ∪ closure B) =\n        closure (A : Set X) ∪ closure B := hOpen.interior_eq\n  -- Combine the two equalities.\n  simpa [hClos] using hInt"
+  ],
+  "success": true
+}

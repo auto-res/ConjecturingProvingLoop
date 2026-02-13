@@ -1,0 +1,26 @@
+{
+  "times": [
+    13.290956974029541
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1406,
+      "prompt_tokens": 57817,
+      "total_tokens": 59223,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_inter_interiorClosure_nonempty_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 (X := X) A) (hA : (A : Set X).Nonempty) :\n    (closure (interior A) ∩ interior (closure (A : Set X))).Nonempty := by\n  -- Choose a point `x` in `A`.\n  rcases hA with ⟨x, hxA⟩\n  -- From `P2` we obtain both `P1` and `P3`.\n  have hP1 : Topology.P1 (X := X) A :=\n    Topology.P2_implies_P1 (X := X) (A := A) hP2\n  have hP3 : Topology.P3 (X := X) A :=\n    Topology.P2_implies_P3 (X := X) (A := A) hP2\n  -- Hence `x` belongs to both parts of the intersection.\n  have hxClInt : x ∈ closure (interior A) := hP1 hxA\n  have hxIntCl : x ∈ interior (closure (A : Set X)) := hP3 hxA\n  exact ⟨x, ⟨hxClInt, hxIntCl⟩⟩"
+  ],
+  "success": true
+}

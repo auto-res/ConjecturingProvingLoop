@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.96706581115723
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3775,
+      "prompt_tokens": 60403,
+      "total_tokens": 64178,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 59264
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_iff_closure_interior_closure_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (closure (A : Set X)) ↔\n      closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  -- Use the existing equivalence with `S = closure A`.\n  have hEquiv :=\n    (Topology.P1_iff_closure_interior_eq_closure\n        (A := closure (A : Set X)))\n  constructor\n  · intro hP1\n    have h := (hEquiv).1 hP1\n    simpa [closure_closure] using h\n  · intro hEq\n    -- Rewrite the given equality to the form expected by `hEquiv`.\n    have h' :\n        closure (interior (closure (A : Set X))) =\n          closure (closure (A : Set X)) := by\n      simpa [closure_closure] using hEq\n    exact (hEquiv).2 h'"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.9921305179596
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5542,
+      "prompt_tokens": 37107,
+      "total_tokens": 42649,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem closed_P1_compl_iff_P2_compl {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    Topology.P1 (Aᶜ) ↔ Topology.P2 (Aᶜ) := by\n  -- The complement of a closed set is open.\n  have hA_open : IsOpen (Aᶜ) := (isOpen_compl_iff).2 hA_closed\n  -- Apply the existing equivalence for open sets.\n  simpa using Topology.isOpen_P1_iff_P2 (X := X) (A := Aᶜ) hA_open"
+  ],
+  "success": true
+}

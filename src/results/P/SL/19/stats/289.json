@@ -1,0 +1,43 @@
+{
+  "times": [
+    134.63982439041138,
+    297.9139506816864
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7842,
+      "prompt_tokens": 46253,
+      "total_tokens": 54095,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    },
+    {
+      "completion_tokens": 11920,
+      "prompt_tokens": 46467,
+      "total_tokens": 58387,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_compl_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ) = (closure A)ᶜ := by\n  ext x\n  constructor\n  · intro hx\n    -- We prove `x ∉ closure A` by contradiction.\n    by_contra hMem\n    -- Any open neighbourhood of `x` meets `A`; in particular `interior (Aᶜ)`.\n    have hNon :\n        ((interior (Aᶜ) : Set X) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hMem _ isOpen_interior hx\n    rcases hNon with ⟨y, ⟨hyInt, hyA⟩⟩\n    -- But `y ∈ interior (Aᶜ)` implies `y ∉ A`, contradiction.\n    have : (y : X) ∈ Aᶜ :=\n      (interior_subset : interior (Aᶜ) ⊆ Aᶜ) hyInt\n    exact this hyA\n  · intro hx\n    -- Use the open set `(closure A)ᶜ` containing `x` and contained in `Aᶜ`.\n    have hOpen : IsOpen ((closure A)ᶜ) :=\n      (isClosed_closure (s := A)).isOpen_compl\n    have hSub : ((closure A)ᶜ : Set X) ⊆ Aᶜ := by\n      intro y hy\n      by_contra hAy\n      exact hy (subset_closure hAy)\n    have hInt : ((closure A)ᶜ : Set X) ⊆ interior (Aᶜ) :=\n      interior_maximal hSub hOpen\n    exact hInt hx",
+    ""
+  ],
+  "success": true
+}

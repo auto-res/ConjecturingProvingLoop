@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.028525590896606
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3667,
+      "prompt_tokens": 50407,
+      "total_tokens": 54074,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interClosure_eq_interClosure {X : Type*} [TopologicalSpace X]\n    (A B : Set X) :\n    closure (closure (A : Set X) ∩ closure B) = closure A ∩ closure B := by\n  have hA : IsClosed (closure (A : Set X)) := isClosed_closure\n  have hB : IsClosed (closure B) := isClosed_closure\n  simpa using\n    (Topology.closure_inter_eq_inter_of_closed\n        (A := closure A) (B := closure B) hA hB)"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    127.58633136749268,
+    84.64185166358948,
+    46.780991077423096
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7336,
+      "prompt_tokens": 42576,
+      "total_tokens": 49912,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 5667,
+      "prompt_tokens": 42742,
+      "total_tokens": 48409,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 3441,
+      "prompt_tokens": 42821,
+      "total_tokens": 46262,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_left_eq {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) :\n    interior (A ∩ B : Set X) = A ∩ interior B := by\n  have h := interior_inter (A := A) (B := B)\n  simpa [hA.interior_eq] using h",
+    "theorem Topology.interior_inter_eq_self_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) :\n    interior (A ∩ B : Set X) = A ∩ interior B := by\n  simpa using interior_inter (A := A) (B := B) hA",
+    "theorem Topology.interior_iUnion_eq_self_of_isOpen\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} (A : ι → Set X)\n    (hA : ∀ i, IsOpen (A i)) :\n    interior (⋃ i, A i) = ⋃ i, A i := by\n  -- The union of the `A i` is open because each `A i` is open.\n  have hOpen : IsOpen (⋃ i, A i) := by\n    apply isOpen_iUnion\n    intro i\n    exact hA i\n  -- For an open set `S`, `interior S = S`.\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

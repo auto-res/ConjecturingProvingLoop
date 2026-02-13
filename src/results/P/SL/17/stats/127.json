@@ -1,0 +1,43 @@
+{
+  "times": [
+    96.92802667617798,
+    112.96511387825012
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6898,
+      "prompt_tokens": 19877,
+      "total_tokens": 26775,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 8610,
+      "prompt_tokens": 20048,
+      "total_tokens": 28658,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) =\n      closure (interior A) ∪ closure (interior B) := by\n  simpa [interior_union] using\n    (Topology.closure_union_interiors_eq (X := X) (A := A) (B := B))",
+    "theorem Topology.closure_interior_univ {X : Type*} [TopologicalSpace X] :\n    closure (interior (Set.univ : Set X)) = (Set.univ : Set X) := by\n  simpa [interior_univ] using\n    (closure_univ : closure (Set.univ : Set X) = Set.univ)"
+  ],
+  "success": true
+}

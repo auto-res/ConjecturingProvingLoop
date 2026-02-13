@@ -1,0 +1,26 @@
+{
+  "times": [
+    208.70185899734497
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10378,
+      "prompt_tokens": 47465,
+      "total_tokens": 57843,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_right_implies_P3_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    Dense (B : Set X) → Topology.P3 (A ∪ B) := by\n  intro hDense\n  intro x hxUnion\n  -- `closure B = univ` because `B` is dense.\n  have hClB : closure (B : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Hence `closure (A ∪ B)` is also the whole space.\n  have hClUnion : closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro y _; simp\n    · intro y _\n      -- Since `closure B = univ`, any point lies in `closure B`.\n      have hy : (y : X) ∈ closure (B : Set X) := by\n        simpa [hClB]\n      -- `B ⊆ A ∪ B`, and closure is monotone.\n      have : (closure (B : Set X) : Set X) ⊆ closure (A ∪ B : Set X) := by\n        have hSub : (B : Set X) ⊆ A ∪ B := by\n          intro z hz; exact Or.inr hz\n        exact closure_mono hSub\n      exact this hy\n  -- Since `closure (A ∪ B) = univ`, its interior is also `univ`.\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hClUnion, interior_univ] using this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.57389211654663
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2192,
+      "prompt_tokens": 9469,
+      "total_tokens": 11661,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed A) (hB : IsClosed B) :\n    Topology.P2 A → Topology.P2 B → Topology.P2 (A ∩ B) := by\n  intro hP2A hP2B\n  have hOpenA : IsOpen A :=\n    (Topology.P2_closed_iff_isOpen (A := A) hA).1 hP2A\n  have hOpenB : IsOpen B :=\n    (Topology.P2_closed_iff_isOpen (A := B) hB).1 hP2B\n  have hOpenAB : IsOpen (A ∩ B) := hOpenA.inter hOpenB\n  exact IsOpen_P2 (A := A ∩ B) hOpenAB"
+  ],
+  "success": true
+}

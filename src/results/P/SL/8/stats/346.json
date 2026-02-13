@@ -1,0 +1,26 @@
+{
+  "times": [
+    137.06300926208496
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6596,
+      "prompt_tokens": 53977,
+      "total_tokens": 60573,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_eq_self_iff_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A = A ↔ IsOpen A := by\n  constructor\n  · intro h_eq\n    -- The interior of any set is open; rewrite using the hypothesis.\n    simpa [h_eq] using (isOpen_interior : IsOpen (interior A))\n  · intro h_open\n    -- For an open set, the interior is itself.\n    simpa using h_open.interior_eq"
+  ],
+  "success": true
+}

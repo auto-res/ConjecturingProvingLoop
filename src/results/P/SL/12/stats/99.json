@@ -1,0 +1,26 @@
+{
+  "times": [
+    13.650557279586792
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1210,
+      "prompt_tokens": 19655,
+      "total_tokens": 20865,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_P2_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P2 (X := X) (closure A)) :\n    Topology.P3 (X := X) A := by\n  -- First, convert `P2 (closure A)` to `P3 (closure A)`.\n  have hP3Closure : Topology.P3 (X := X) (closure A) :=\n    (Topology.P2_closure_iff_P3_closure (X := X) (A := A)).1 h\n  -- Then, descend from `closure A` to `A`.\n  exact Topology.P3_of_P3_closure (X := X) (A := A) hP3Closure"
+  ],
+  "success": true
+}

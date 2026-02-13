@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.77311110496521
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3544,
+      "prompt_tokens": 14142,
+      "total_tokens": 17686,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_union_right_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P3 A) (hB_open : IsOpen B) :\n    Topology.P3 (A ∪ B) := by\n  -- Obtain `P3` for the open set `B`.\n  have hB : Topology.P3 B := Topology.P3_of_open (A := B) hB_open\n  -- Apply the general union lemma for `P3`.\n  exact Topology.P3_union (A := A) (B := B) hA hB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.37131428718567
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7408,
+      "prompt_tokens": 53588,
+      "total_tokens": 60996,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_nonempty_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure (interior A) : Set X).Nonempty ↔ (interior A).Nonempty := by\n  classical\n  constructor\n  · rintro ⟨x, hx⟩\n    -- If `interior A` were empty, its closure would also be empty,\n    -- contradicting the existence of `x`.\n    have : (interior A).Nonempty := by\n      by_contra hIntEmpty\n      have hIntEq : interior A = (∅ : Set X) :=\n        (Set.not_nonempty_iff_eq_empty).1 hIntEmpty\n      have : x ∈ (∅ : Set X) := by\n        simpa [hIntEq, closure_empty] using hx\n      exact this.elim\n    exact this\n  · rintro ⟨x, hx⟩\n    exact ⟨x, subset_closure hx⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    177.1651575565338
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11726,
+      "prompt_tokens": 50528,
+      "total_tokens": 62254,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_closure_subset_closure_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure A \\ closure B ⊆ closure (A \\ B) := by\n  intro x hx\n  rcases hx with ⟨hxA, hxNotB⟩\n  -- `hxA` : x ∈ closure A\n  -- `hxNotB` : x ∉ closure B\n  have hClosureA := (mem_closure_iff).1 hxA\n  -- The complement of `closure B` is an open neighbourhood of `x`.\n  have hOpenT : IsOpen ((closure B)ᶜ : Set X) :=\n    isClosed_closure.isOpen_compl\n  have hxT : x ∈ (closure B)ᶜ := hxNotB\n  -- Show that every open neighbourhood of `x` meets `A \\ B`.\n  refine (mem_closure_iff).2 ?_\n  intro U hUopen hxU\n  -- Consider `U ∩ (closure B)ᶜ`, an open neighbourhood of `x`.\n  have hVopen : IsOpen (U ∩ (closure B)ᶜ) := hUopen.inter hOpenT\n  have hxV : x ∈ U ∩ (closure B)ᶜ := And.intro hxU hxT\n  -- Since `x ∈ closure A`, this neighbourhood meets `A`.\n  have hNonempty := hClosureA (U ∩ (closure B)ᶜ) hVopen hxV\n  rcases hNonempty with ⟨y, ⟨hyU, hyT⟩, hyA⟩\n  -- `y` is in `A` and not in `closure B`, hence not in `B`.\n  have hyNotB : (y : X) ∉ B := by\n    intro hyB\n    have : (y : X) ∈ closure B := subset_closure hyB\n    exact hyT this\n  have hyInDiff : (y : X) ∈ A \\ B := And.intro hyA hyNotB\n  -- Thus `y` lies in `U ∩ (A \\ B)`.\n  exact ⟨y, And.intro hyU hyInDiff⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.89850306510925
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1955,
+      "prompt_tokens": 58661,
+      "total_tokens": 60616,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_image_eq_closure_image_interior_of_P2\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}\n    (hf : Continuous f) {A : Set X} (hA : Topology.P2 (X := X) A) :\n    closure (f '' (A : Set X)) = closure (f '' interior A) := by\n  -- First, upgrade the assumption `P2 A` to `P1 A`.\n  have hP1 : Topology.P1 (X := X) A :=\n    Topology.P2_implies_P1 (X := X) (A := A) hA\n  -- Invoke the existing equality for sets satisfying `P1`.\n  exact\n    Topology.closure_image_eq_closure_image_interior_of_P1\n      (X := X) (Y := Y) (f := f) hf (A := A) hP1"
+  ],
+  "success": true
+}

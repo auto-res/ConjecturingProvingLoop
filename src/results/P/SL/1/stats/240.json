@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.24151420593262
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3873,
+      "prompt_tokens": 36975,
+      "total_tokens": 40848,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_closure {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 (closure A) → Topology.P2 (closure B) → Topology.P2 (closure A ∩ closure B) := by\n  intro hA hB\n  have hA_closed : IsClosed (closure A) := isClosed_closure\n  have hB_closed : IsClosed (closure B) := isClosed_closure\n  exact\n    Topology.P2_inter\n      (A := closure A) (B := closure B)\n      hA_closed hB_closed\n      hA hB"
+  ],
+  "success": true
+}

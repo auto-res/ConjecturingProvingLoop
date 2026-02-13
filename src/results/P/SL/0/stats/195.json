@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.62171196937561
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4721,
+      "prompt_tokens": 32888,
+      "total_tokens": 37609,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_and_interior_closure_eq_empty_implies_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → interior (closure (A : Set X)) = ∅ → A = (∅ : Set X) := by\n  intro hP2 hIntEmpty\n  -- From `P2` we have the inclusion `A ⊆ interior (closure A)`.\n  have hSub : (A : Set X) ⊆ interior (closure (A : Set X)) :=\n    (Topology.P2_implies_subset_interior_closure (X := X) (A := A)) hP2\n  -- But `interior (closure A)` is empty by hypothesis, hence so is `A`.\n  have hSubEmpty : (A : Set X) ⊆ (∅ : Set X) := by\n    simpa [hIntEmpty] using hSub\n  exact Set.Subset.antisymm hSubEmpty (Set.empty_subset _)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.793060302734375
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1736,
+      "prompt_tokens": 61367,
+      "total_tokens": 63103,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_subset_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    IsClosed A → closure (interior A) ⊆ A := by\n  intro hClosed\n  have hsubset :\n      (closure (interior A) : Set X) ⊆ closure (A : Set X) :=\n    closure_mono (interior_subset : (interior A : Set X) ⊆ A)\n  simpa [hClosed.closure_eq] using hsubset"
+  ],
+  "success": true
+}

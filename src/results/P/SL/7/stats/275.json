@@ -1,0 +1,26 @@
+{
+  "times": [
+    18.530471801757812
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1398,
+      "prompt_tokens": 42792,
+      "total_tokens": 44190,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_P2_P3_closure_iff_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (Topology.P1 (closure (A : Set X)) ∧ Topology.P2 (closure (A : Set X)) ∧\n        Topology.P3 (closure (A : Set X))) ↔\n      IsOpen (closure (A : Set X)) := by\n  -- We already have an equivalence for the pair `P2 ∧ P3`.\n  have hPair :=\n    (Topology.P2_P3_closure_iff_isOpen (A := A))\n  constructor\n  · -- From the triple of properties we deduce openness via the pair equivalence.\n    intro hTriple\n    exact hPair.1 ⟨hTriple.2.1, hTriple.2.2⟩\n  · -- Openness immediately gives all three properties.\n    intro hOpen\n    exact Topology.IsOpen_P1_P2_P3_closure (A := A) hOpen"
+  ],
+  "success": true
+}

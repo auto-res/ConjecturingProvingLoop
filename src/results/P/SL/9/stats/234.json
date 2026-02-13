@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.28247857093811
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2471,
+      "prompt_tokens": 38771,
+      "total_tokens": 41242,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_diff_closureInterior_subset_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) \\ closure (interior A) ⊆ frontier A := by\n  intro x hx\n  rcases hx with ⟨hx_int_cl, hx_not_cl_int⟩\n  -- `x` lies in `closure A` because `interior (closure A) ⊆ closure A`.\n  have hx_clA : x ∈ closure (A : Set X) := interior_subset hx_int_cl\n  -- Show that `x` is not in `interior A`.\n  have hx_not_intA : x ∉ interior A := by\n    intro hx_intA\n    have : x ∈ closure (interior A) := subset_closure hx_intA\n    exact hx_not_cl_int this\n  exact ⟨hx_clA, hx_not_intA⟩"
+  ],
+  "success": true
+}

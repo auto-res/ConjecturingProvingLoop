@@ -1,0 +1,26 @@
+{
+  "times": [
+    154.70327639579773
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11481,
+      "prompt_tokens": 18536,
+      "total_tokens": 30017,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n      closure (interior A) := by\n  -- Step 1: the basic two-step idempotence.\n  have h₁ :\n      closure (interior (closure (interior A))) = closure (interior A) := by\n    simpa using\n      (closure_interior_closure_interior_eq\n        (X := X) (A := A))\n  -- Step 2: apply `closure ∘ interior` to both sides of `h₁`.\n  have h₂ :\n      closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n        closure (interior (closure (interior A))) := by\n    simpa using\n      congrArg (fun S : Set X => closure (interior S)) h₁\n  -- Step 3: simplify the right-hand side with `h₁`.\n  simpa [h₁] using h₂"
+  ],
+  "success": true
+}

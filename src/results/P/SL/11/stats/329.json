@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.46868658065796
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4748,
+      "prompt_tokens": 53491,
+      "total_tokens": 58239,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_of_P1_and_open_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) (hOpenCl : IsOpen (closure (A : Set X))) :\n    Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A := by\n  -- Obtain `P2` and `P3` from the given assumptions.\n  have hP2 : Topology.P2 A := Topology.P2_of_P1_and_open_closure (A := A) hP1 hOpenCl\n  have hP3 : Topology.P3 A := Topology.P3_of_P1_and_open_closure (A := A) hP1 hOpenCl\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    83.47421789169312
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5801,
+      "prompt_tokens": 36227,
+      "total_tokens": 42028,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_subset_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) : closure (interior A) ⊆ (A : Set X) := by\n  -- `interior A` is contained in `A`.\n  have hsubset : (interior A : Set X) ⊆ A := interior_subset\n  -- Taking closures preserves inclusion.\n  have hclosure : closure (interior A) ⊆ closure A := closure_mono hsubset\n  -- Since `A` is closed, its closure is itself.\n  simpa [hA.closure_eq] using hclosure"
+  ],
+  "success": true
+}

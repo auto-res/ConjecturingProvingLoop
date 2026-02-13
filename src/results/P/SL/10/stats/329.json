@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.5938470363617
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5165,
+      "prompt_tokens": 52842,
+      "total_tokens": 58007,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_subset_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A \\ A ⊆ closure (Aᶜ) := by\n  intro x hx\n  rcases hx with ⟨_, hxNotA⟩\n  -- To show `x ∈ closure (Aᶜ)`, use the neighbourhood criterion.\n  apply (mem_closure_iff).2\n  intro U hUopen hxU\n  -- The point `x` itself witnesses the non‐emptiness of `U ∩ Aᶜ`.\n  exact ⟨x, And.intro hxU hxNotA⟩"
+  ],
+  "success": true
+}

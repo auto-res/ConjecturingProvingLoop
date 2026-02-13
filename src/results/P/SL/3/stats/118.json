@@ -1,0 +1,43 @@
+{
+  "times": [
+    86.33544826507568,
+    167.2235231399536
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6548,
+      "prompt_tokens": 17840,
+      "total_tokens": 24388,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    },
+    {
+      "completion_tokens": 12500,
+      "prompt_tokens": 17963,
+      "total_tokens": 30463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_of_isClosed_and_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hP1 : Topology.P1 (A : Set X)) :\n    IsOpen (A : Set X) := by\n  have hEq : closure (interior (A : Set X)) = A :=\n    closure_interior_eq_of_isClosed_and_P1 (A := A) hA_closed hP1\n  exact (isOpen_of_closure_interior_eq (A := A) hEq)",
+    "theorem closure_inter_subset_inter_closures {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure ((A ∩ B) : Set X) ⊆ closure (A : Set X) ∩ closure (B : Set X) := by\n  intro x hx\n  have hxA : (x : X) ∈ closure (A : Set X) := by\n    have hSubset : ((A ∩ B) : Set X) ⊆ A := Set.inter_subset_left\n    exact (closure_mono hSubset) hx\n  have hxB : (x : X) ∈ closure (B : Set X) := by\n    have hSubset : ((A ∩ B) : Set X) ⊆ B := Set.inter_subset_right\n    exact (closure_mono hSubset) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

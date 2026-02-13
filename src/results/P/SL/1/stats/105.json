@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.220062255859375
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3019,
+      "prompt_tokens": 16274,
+      "total_tokens": 19293,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_sUnion {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    (∀ A, A ∈ 𝒜 → Topology.P1 A) → Topology.P1 (⋃₀ 𝒜) := by\n  intro hA\n  dsimp [Topology.P1] at hA ⊢\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨A, hA_mem, hxA⟩\n  have hx_closure : x ∈ closure (interior A) := (hA A hA_mem) hxA\n  have hsubset : closure (interior A) ⊆ closure (interior (⋃₀ 𝒜)) := by\n    apply closure_mono\n    have : interior A ⊆ interior (⋃₀ 𝒜) := by\n      apply interior_mono\n      intro y hy\n      exact Set.mem_sUnion.2 ⟨A, hA_mem, hy⟩\n    exact this\n  exact hsubset hx_closure"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    129.43709897994995
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10093,
+      "prompt_tokens": 29662,
+      "total_tokens": 39755,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_prod_left_of_nonempty\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hBne : B.Nonempty) :\n    Topology.P3 (A ×ˢ B) → Topology.P3 A := by\n  intro hProd\n  dsimp [Topology.P3] at hProd\n  dsimp [Topology.P3]\n  intro x hxA\n  rcases hBne with ⟨y, hyB⟩\n  have h_mem_prod : ((x, y) : X × Y) ∈ A ×ˢ B := by\n    exact And.intro hxA hyB\n  have hIntProd : ((x, y) : X × Y) ∈ interior (closure (A ×ˢ B)) :=\n    hProd h_mem_prod\n  have h_closure_prod :\n      closure (A ×ˢ B) = (closure A) ×ˢ (closure B) := by\n    simpa using closure_prod_eq (s := A) (t := B)\n  have hIntProd' :\n      ((x, y) : X × Y) ∈ interior ((closure A) ×ˢ (closure B)) := by\n    simpa [h_closure_prod] using hIntProd\n  have h_int_prod_eq :\n      interior ((closure A) ×ˢ (closure B)) =\n        interior (closure A) ×ˢ interior (closure B) := by\n    simpa using interior_prod_eq (s := closure A) (t := closure B)\n  have hMem :\n      ((x, y) : X × Y) ∈ interior (closure A) ×ˢ interior (closure B) := by\n    simpa [h_int_prod_eq] using hIntProd'\n  exact (Set.mem_prod.1 hMem).1"
+  ],
+  "success": true
+}

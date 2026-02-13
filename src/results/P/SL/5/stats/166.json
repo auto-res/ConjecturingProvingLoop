@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.311320543289185
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3772,
+      "prompt_tokens": 28332,
+      "total_tokens": 32104,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_subset_of_subset_closed\n    {X : Type*} [TopologicalSpace X] {A C : Set X}\n    (hAC : (A : Set X) ⊆ C) (hC_closed : IsClosed (C : Set X)) :\n    closure (interior (A : Set X)) ⊆ C := by\n  -- First, note `interior A ⊆ A ⊆ C`.\n  have h₁ : (interior (A : Set X) : Set X) ⊆ C :=\n    interior_subset.trans hAC\n  -- Taking closures preserves inclusions; rewrite using `closure C = C`\n  -- because `C` is closed.\n  simpa [hC_closed.closure_eq] using closure_mono h₁"
+  ],
+  "success": true
+}

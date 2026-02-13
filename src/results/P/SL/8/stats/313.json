@@ -1,0 +1,26 @@
+{
+  "times": [
+    149.74376821517944
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9144,
+      "prompt_tokens": 48764,
+      "total_tokens": 57908,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_subset_and_subset_interiorClosure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B)\n    (hBsubset : B ⊆ interior (closure (interior A))) :\n    Topology.P2 B := by\n  dsimp [Topology.P2] at *\n  intro x hxB\n  -- From the hypothesis `hBsubset`, the point `x` already lies in\n  -- `interior (closure (interior A))`.\n  have hx₁ : x ∈ interior (closure (interior A)) := hBsubset hxB\n  -- Since `A ⊆ B`, we have `interior A ⊆ interior B`.\n  have hInt : interior A ⊆ interior B := interior_mono hAB\n  -- Taking closures preserves inclusions.\n  have hCl : closure (interior A) ⊆ closure (interior B) :=\n    closure_mono hInt\n  -- Applying `interior_mono` yields the desired containment between interiors.\n  have hIncl :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior B)) :=\n    interior_mono hCl\n  -- Conclude that `x ∈ interior (closure (interior B))`.\n  exact hIncl hx₁"
+  ],
+  "success": true
+}

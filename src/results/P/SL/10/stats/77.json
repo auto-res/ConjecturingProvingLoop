@@ -1,0 +1,43 @@
+{
+  "times": [
+    83.77533435821533,
+    193.94127583503723
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5594,
+      "prompt_tokens": 11778,
+      "total_tokens": 17372,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    },
+    {
+      "completion_tokens": 13052,
+      "prompt_tokens": 11900,
+      "total_tokens": 24952,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure A)) ⊆ closure A := by\n  exact closure_mono (interior_subset : interior (closure A) ⊆ closure A)",
+    "theorem Topology.interior_closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (closure A))))) =\n      interior (closure A) := by\n  calc\n    interior (closure (interior (closure (interior (closure A))))) =\n        interior (closure (interior (closure A))) := by\n          simpa using\n            (Topology.interior_closure_interior_closure_eq\n              (X := X) (A := interior (closure A)))\n    _ = interior (closure A) := by\n          simpa using\n            (Topology.interior_closure_interior_closure_eq\n              (X := X) (A := A))"
+  ],
+  "success": true
+}

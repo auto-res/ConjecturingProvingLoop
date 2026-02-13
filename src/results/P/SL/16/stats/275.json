@@ -1,0 +1,26 @@
+{
+  "times": [
+    130.1147916316986
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3763,
+      "prompt_tokens": 48253,
+      "total_tokens": 52016,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_subset_interior_closure_union_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure A) ⊆ interior (closure (A ∪ B)) := by\n  -- `A ⊆ A ∪ B`\n  have hA : (A : Set X) ⊆ A ∪ B := by\n    intro x hx\n    exact Or.inl hx\n  -- Hence `closure A ⊆ closure (A ∪ B)`\n  have hCl : closure A ⊆ closure (A ∪ B) := closure_mono hA\n  -- Apply monotonicity of `interior`\n  exact interior_mono hCl"
+  ],
+  "success": true
+}

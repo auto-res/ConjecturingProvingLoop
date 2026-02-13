@@ -1,0 +1,26 @@
+{
+  "times": [
+    119.82266187667847
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9905,
+      "prompt_tokens": 58337,
+      "total_tokens": 68242,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_union_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = closure (interior A) ∪ frontier (A : Set X) := by\n  -- We prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    intro x hxClA\n    -- Case distinction on whether `x` lies in `interior A`.\n    by_cases hxIntA : x ∈ interior (A : Set X)\n    · -- If `x ∈ interior A`, then `x ∈ closure (interior A)`.\n      have hxClInt : (x : X) ∈ closure (interior A) :=\n        subset_closure hxIntA\n      exact Or.inl hxClInt\n    · -- Otherwise `x ∉ interior A`; since `x ∈ closure A`, `x` is in the frontier.\n      have hxFront : (x : X) ∈ frontier (A : Set X) :=\n        And.intro hxClA hxIntA\n      exact Or.inr hxFront\n  · -- `⊇` direction\n    intro x hxUnion\n    cases hxUnion with\n    | inl hxClInt =>\n        -- `closure (interior A) ⊆ closure A`\n        exact\n          (Topology.closure_interior_subset_closure (A := A)) hxClInt\n    | inr hxFront =>\n        -- By definition of the frontier, `x ∈ closure A`.\n        exact hxFront.1"
+  ],
+  "success": true
+}

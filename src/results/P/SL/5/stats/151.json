@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.85133671760559
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2587,
+      "prompt_tokens": 24838,
+      "total_tokens": 27425,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union_five {X : Type*} [TopologicalSpace X] {A B C D E : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : Topology.P1 (X := X) B)\n    (hC : Topology.P1 (X := X) C) (hD : Topology.P1 (X := X) D)\n    (hE : Topology.P1 (X := X) E) :\n    Topology.P1 (X := X) (A ∪ B ∪ C ∪ D ∪ E) := by\n  -- First, combine the properties for `A`, `B`, `C`, and `D`.\n  have hABCD : Topology.P1 (X := X) (A ∪ B ∪ C ∪ D) :=\n    Topology.P1_union_four (X := X) (A := A) (B := B) (C := C) (D := D)\n      hA hB hC hD\n  -- Then, unite the result with `E`.\n  have hABCDE : Topology.P1 (X := X) ((A ∪ B ∪ C ∪ D) ∪ E) :=\n    Topology.P1_union (X := X) (A := A ∪ B ∪ C ∪ D) (B := E) hABCD hE\n  -- Re-associate the unions to match the target expression.\n  simpa [Set.union_assoc] using hABCDE"
+  ],
+  "success": true
+}

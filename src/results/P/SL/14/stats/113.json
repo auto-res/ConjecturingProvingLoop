@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.77026581764221
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4411,
+      "prompt_tokens": 19514,
+      "total_tokens": 23925,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosureInterior_mono\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B) :\n    interior (closure (interior A)) ⊆ interior (closure (interior B)) := by\n  -- First, use the monotonicity of `interior` to upgrade the inclusion.\n  have hInt : interior A ⊆ interior B :=\n    interior_mono hAB\n  -- Taking closures preserves the inclusion.\n  have hClos : closure (interior A) ⊆ closure (interior B) :=\n    closure_mono hInt\n  -- Finally, apply monotonicity of `interior` once more.\n  exact interior_mono hClos"
+  ],
+  "success": true
+}

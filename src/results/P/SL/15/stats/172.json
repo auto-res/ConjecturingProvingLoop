@@ -1,0 +1,60 @@
+{
+  "times": [
+    86.32274436950684,
+    126.00509309768677,
+    78.19980072975159
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5391,
+      "prompt_tokens": 34407,
+      "total_tokens": 39798,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 10327,
+      "prompt_tokens": 34482,
+      "total_tokens": 44809,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5762,
+      "prompt_tokens": 34591,
+      "total_tokens": 40353,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hx\n  have h_closure : (closure A : Set X) = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_closure, interior_univ] using this",
+    "theorem P3_closed_implies_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed A) :\n    Topology.P3 A → IsClopen A := by\n  intro hP3\n  -- From `P3` for a closed set we deduce that `A` is open.\n  have hOpen : IsOpen A :=\n    (Topology.P3_closed_iff_isOpen (X := X) (A := A) hA_closed).1 hP3\n  exact ⟨hOpen, hA_closed⟩",
+    "theorem interior_closure_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    interior (closure (A ×ˢ B)) = interior (closure A) ×ˢ interior (closure B) := by\n  have h₁ : closure (A ×ˢ B) = closure A ×ˢ closure B := by\n    simpa using closure_prod_eq (s := A) (t := B)\n  have h₂ :\n      interior ((closure A) ×ˢ (closure B)) =\n        interior (closure A) ×ˢ interior (closure B) := by\n    simpa using interior_prod_eq (s := closure A) (t := closure B)\n  simpa [h₁, h₂]"
+  ],
+  "success": true
+}

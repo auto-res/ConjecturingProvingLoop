@@ -1,0 +1,26 @@
+{
+  "times": [
+    92.3853166103363
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5400,
+      "prompt_tokens": 37399,
+      "total_tokens": 42799,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_inter_frontier_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ) ∩ frontier A = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxIntCompl, hxFront⟩\n    have hxClosA : x ∈ closure A := hxFront.1\n    -- The open neighbourhood `interior (Aᶜ)` of `x` is disjoint from `A`,\n    -- contradicting `x ∈ closure A`.\n    have hNon :\n        ((interior (Aᶜ) : Set X) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hxClosA (interior (Aᶜ)) isOpen_interior hxIntCompl\n    rcases hNon with ⟨y, ⟨hyIntCompl, hyA⟩⟩\n    have : (y : X) ∈ Aᶜ := interior_subset hyIntCompl\n    exact (this hyA).elim\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

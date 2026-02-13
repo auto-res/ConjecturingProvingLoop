@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.31019043922424
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3385,
+      "prompt_tokens": 50353,
+      "total_tokens": 53738,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_P2_P3_of_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) →\n      Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A := by\n  intro hDense\n  have hP1 := Topology.P1_of_denseInterior (X := X) (A := A) hDense\n  have hP2 := Topology.P2_of_denseInterior (X := X) (A := A) hDense\n  have hP3 := Topology.P3_of_denseInterior (X := X) (A := A) hDense\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

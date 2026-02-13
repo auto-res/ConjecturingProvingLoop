@@ -1,0 +1,43 @@
+{
+  "times": [
+    143.37401175498962,
+    27.845271587371826
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7843,
+      "prompt_tokens": 41332,
+      "total_tokens": 49175,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40832
+      }
+    },
+    {
+      "completion_tokens": 1247,
+      "prompt_tokens": 41417,
+      "total_tokens": 42664,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_closure_eq_empty_of_disjoint {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hDisj : Disjoint (A : Set X) B) :\n    interior (A : Set X) ∩ closure (B : Set X) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxIntA, hxClB⟩\n    -- Obtain an open neighborhood `U` of `x` contained in `A`.\n    rcases (mem_interior_iff_mem_nhds).1 hxIntA with ⟨U, hU_open, hxU, hU_subA⟩\n    -- Since `x ∈ closure B`, the neighborhood `U` meets `B`.\n    have hUB_nonempty : (U ∩ (B : Set X)).Nonempty := by\n      have := (mem_closure_iff).1 hxClB U hU_open hxU\n      simpa using this\n    rcases hUB_nonempty with ⟨y, hyU, hyB⟩\n    -- Then `y ∈ A ∩ B`, contradicting disjointness.\n    have hyA : (y : X) ∈ (A : Set X) := hU_subA hyU\n    have hContr : False := (Set.disjoint_left.1 hDisj) hyA hyB\n    exact hContr.elim\n  · exact Set.empty_subset _\n",
+    "theorem isClosed_closure_interior_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    IsClosed (closure (interior (closure (A : Set X)))) := by\n  simpa using\n    (isClosed_closure :\n      IsClosed (closure (interior (closure (A : Set X)))))"
+  ],
+  "success": true
+}

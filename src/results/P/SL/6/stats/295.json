@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.90290594100952
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3655,
+      "prompt_tokens": 46883,
+      "total_tokens": 50538,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_iInter_closure_subset_iInter_interior_closure\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {S : ι → Set X} :\n    interior (⋂ i, closure (S i) : Set X) ⊆ ⋂ i, interior (closure (S i)) := by\n  intro x hx\n  -- For each index `i`, we will show `x ∈ interior (closure (S i))`.\n  have hx_i : ∀ i, x ∈ interior (closure (S i)) := by\n    intro i\n    -- The intersection is contained in each component `closure (S i)`.\n    have hSub : (⋂ j, closure (S j) : Set X) ⊆ closure (S i) := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Monotonicity of `interior` upgrades the inclusion.\n    exact (interior_mono hSub) hx\n  -- Combine the pointwise facts into membership in the intersection.\n  exact Set.mem_iInter.2 hx_i"
+  ],
+  "success": true
+}

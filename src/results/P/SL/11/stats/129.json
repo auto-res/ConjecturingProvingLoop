@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.41006278991699
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3821,
+      "prompt_tokens": 19178,
+      "total_tokens": 22999,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem eq_empty_of_P1_and_interior_empty {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) (hIntEmpty : interior A = (∅ : Set X)) :\n    A = ∅ := by\n  apply Set.Subset.antisymm\n  · intro x hxA\n    have hxClInt : x ∈ closure (interior A) := hP1 hxA\n    have hxClEmpty : x ∈ closure (∅ : Set X) := by\n      simpa [hIntEmpty] using hxClInt\n    simpa [closure_empty] using hxClEmpty\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

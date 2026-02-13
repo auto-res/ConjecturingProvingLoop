@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.2770414352417
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4132,
+      "prompt_tokens": 17829,
+      "total_tokens": 21961,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_dense_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A ↔ Dense (closure A) := by\n  constructor\n  · intro hDense\n    have h_eq : closure A = (Set.univ : Set X) := hDense.closure_eq\n    -- Deduce density of `closure A`.\n    have hDenseClosure : Dense (closure A) := by\n      intro x\n      have hx : (x : X) ∈ (Set.univ : Set X) := by\n        simp\n      simpa [closure_closure, h_eq] using hx\n    exact hDenseClosure\n  · intro hDenseClosure\n    have h_eq : closure A = (Set.univ : Set X) := by\n      -- `closure (closure A) = Set.univ` implies `closure A = Set.univ`.\n      simpa [closure_closure] using hDenseClosure.closure_eq\n    -- Deduce density of `A`.\n    have hDense : Dense A := by\n      intro x\n      have hx : (x : X) ∈ (Set.univ : Set X) := by\n        simp\n      simpa [h_eq] using hx\n    exact hDense"
+  ],
+  "success": true
+}

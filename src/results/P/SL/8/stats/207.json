@@ -1,0 +1,26 @@
+{
+  "times": [
+    82.78717064857483
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6645,
+      "prompt_tokens": 30699,
+      "total_tokens": 37344,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_closed_eq {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB_closed : IsClosed B) :\n    interior (A \\ B) = interior A \\ B := by\n  classical\n  -- Prove the mutual inclusions.\n  apply Set.Subset.antisymm\n  · -- `interior (A \\ B) ⊆ interior A \\ B`\n    intro x hx\n    -- We already have the more precise inclusion into `interior A \\ closure B`.\n    have hsubset : interior (A \\ B) ⊆ interior A \\ closure B :=\n      interior_diff_subset (X := X) (A := A) (B := B)\n    have hx' := hsubset hx\n    -- Since `B` is closed, `closure B = B`.\n    simpa [hB_closed.closure_eq] using hx'\n  · -- `interior A \\ B ⊆ interior (A \\ B)`\n    rintro x ⟨hxIntA, hxNotB⟩\n    -- Choose an open neighbourhood `U` of `x` contained in `A`.\n    rcases (Set.mem_interior).1 hxIntA with ⟨U, hU_open, hU_subA, hxU⟩\n    -- Consider the open set `V = U \\ B`.\n    have hV_open : IsOpen (U \\ B) := by\n      -- The complement of `B` is open because `B` is closed.\n      have hOpenCompl : IsOpen (Bᶜ) := by\n        simpa using (isOpen_compl_iff).2 hB_closed\n      -- `U \\ B = U ∩ Bᶜ`.\n      simpa [Set.diff_eq] using hU_open.inter hOpenCompl\n    -- `V` is contained in `A \\ B`.\n    have hV_sub : U \\ B ⊆ A \\ B := by\n      intro y hy\n      rcases hy with ⟨hyU, hyNotB⟩\n      exact And.intro (hU_subA hyU) hyNotB\n    -- `x` lies in `V`.\n    have hxV : x ∈ U \\ B := by\n      exact And.intro hxU hxNotB\n    -- Conclude that `x` is in the interior of `A \\ B`.\n    exact\n      (Set.mem_interior).2 ⟨U \\ B, hV_open, hV_sub, hxV⟩"
+  ],
+  "success": true
+}

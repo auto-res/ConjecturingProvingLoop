@@ -1,0 +1,26 @@
+{
+  "times": [
+    98.26036262512207
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7384,
+      "prompt_tokens": 33183,
+      "total_tokens": 40567,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_inter_of_isClosed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hB_closed : IsClosed (B : Set X))\n    (hA_P2 : Topology.P2 (A : Set X)) (hB_P2 : Topology.P2 (B : Set X)) :\n    Topology.P2 (A ∩ B) := by\n  -- A and B are closed and satisfy `P2`, hence they are open.\n  have hA_open : IsOpen (A : Set X) :=\n    isOpen_of_isClosed_and_P2 (A := A) hA_closed hA_P2\n  have hB_open : IsOpen (B : Set X) :=\n    isOpen_of_isClosed_and_P2 (A := B) hB_closed hB_P2\n  -- The intersection of two open sets is open.\n  have hOpen : IsOpen (A ∩ B : Set X) := hA_open.inter hB_open\n  -- An open set automatically satisfies `P2`.\n  simpa using Topology.P2_of_isOpen (A := A ∩ B) hOpen"
+  ],
+  "success": true
+}

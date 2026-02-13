@@ -1,0 +1,26 @@
+{
+  "times": [
+    131.132390499115
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12065,
+      "prompt_tokens": 58067,
+      "total_tokens": 70132,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.compl_frontier_eq_union_interiors {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    (frontier (A : Set X))ᶜ = interior (A : Set X) ∪ interior (Aᶜ : Set X) := by\n  calc\n    (frontier (A : Set X))ᶜ\n        = (closure (A : Set X) ∩ closure (Aᶜ : Set X))ᶜ := by\n          simpa [Topology.frontier_eq_closure_inter_closure_compl (A := A)]\n    _ = (closure (A : Set X))ᶜ ∪ (closure (Aᶜ : Set X))ᶜ := by\n          -- De Morgan’s law for complements\n          simp [Set.compl_inter]\n    _ = interior (Aᶜ : Set X) ∪ interior (A : Set X) := by\n          -- `interior (sᶜ) = (closure s)ᶜ`\n          simp [interior_compl]\n    _ = interior (A : Set X) ∪ interior (Aᶜ : Set X) := by\n          simpa [Set.union_comm]"
+  ],
+  "success": true
+}

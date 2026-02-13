@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.04207158088684
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2418,
+      "prompt_tokens": 35479,
+      "total_tokens": 37897,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_boundary_subset_closureInterior_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed A) :\n    Topology.P1 (A := A) ↔ (A \\ interior A) ⊆ closure (interior A) := by\n  classical\n  -- First, show that `P1` implies the boundary inclusion.\n  constructor\n  · intro hP1\n    -- We can reuse the general lemma and simplify using `hA_closed`.\n    have h :=\n      Topology.boundary_subset_closureInterior_of_P1 (A := A) hP1\n    simpa [hA_closed.closure_eq] using h\n  · intro hBoundary\n    -- To prove `P1`, pick any `x ∈ A`.\n    dsimp [Topology.P1] at *\n    intro x hxA\n    by_cases hxInt : x ∈ interior A\n    · -- Points of `interior A` are certainly in `closure (interior A)`.\n      exact subset_closure hxInt\n    · -- Otherwise `x` lies in the boundary, which is contained in the closure.\n      have hx_boundary : x ∈ A \\ interior A := ⟨hxA, hxInt⟩\n      exact hBoundary hx_boundary"
+  ],
+  "success": true
+}

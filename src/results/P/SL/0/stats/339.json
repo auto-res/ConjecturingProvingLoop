@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.31045269966125
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3433,
+      "prompt_tokens": 60562,
+      "total_tokens": 63995,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 59136
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_and_P3_iff_isOpen_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsClosed (A : Set X)) :\n    (Topology.P2 A ∧ Topology.P3 A) ↔ IsOpen (A : Set X) := by\n  -- Equivalences of `P2` and `P3` with openness for a closed set.\n  have hP2 : Topology.P2 A ↔ IsOpen (A : Set X) :=\n    Topology.P2_iff_isOpen_of_isClosed (X := X) (A := A) hA\n  have hP3 : Topology.P3 A ↔ IsOpen (A : Set X) :=\n    Topology.P3_iff_isOpen_of_isClosed (X := X) (A := A) hA\n  -- Assemble the desired equivalence.\n  constructor\n  · rintro ⟨hP2A, _⟩\n    exact (hP2).1 hP2A\n  · intro hOpen\n    have hAll := Topology.isOpen_has_all_Ps (X := X) (A := A) hOpen\n    exact And.intro hAll.2.1 hAll.2.2"
+  ],
+  "success": true
+}

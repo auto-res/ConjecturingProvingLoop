@@ -1,0 +1,26 @@
+{
+  "times": [
+    18.31250810623169
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1664,
+      "prompt_tokens": 12680,
+      "total_tokens": 14344,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B) ⊆ interior A ∩ interior B := by\n  intro x hx\n  have hA : x ∈ interior A := by\n    have hSub : (A ∩ B : Set X) ⊆ A := by\n      intro z hz; exact hz.1\n    exact (interior_mono hSub) hx\n  have hB : x ∈ interior B := by\n    have hSub : (A ∩ B : Set X) ⊆ B := by\n      intro z hz; exact hz.2\n    exact (interior_mono hSub) hx\n  exact And.intro hA hB"
+  ],
+  "success": true
+}

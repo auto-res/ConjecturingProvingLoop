@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.852680921554565
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2395,
+      "prompt_tokens": 37661,
+      "total_tokens": 40056,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_compl_iff_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (frontier A ⊆ Aᶜ) ↔ IsOpen A := by\n  constructor\n  · intro hSub\n    -- We prove that every point of `A` is interior, hence `A` is open.\n    have hInt : (A : Set X) ⊆ interior A := by\n      intro x hxA\n      by_cases hxInt : x ∈ interior A\n      · exact hxInt\n      ·\n        -- If `x ∉ interior A`, then `x` lies in the frontier of `A`.\n        have hxFront : x ∈ frontier A := by\n          have hxClos : x ∈ closure A := subset_closure hxA\n          exact And.intro hxClos hxInt\n        -- But the frontier is assumed to be contained in `Aᶜ`, contradicting `x ∈ A`.\n        have : x ∈ Aᶜ := hSub hxFront\n        exact (this hxA).elim\n    -- Since `interior A ⊆ A` always holds, we have `interior A = A`.\n    have hEq : interior A = A := Set.Subset.antisymm interior_subset hInt\n    simpa [hEq] using (isOpen_interior : IsOpen (interior A))\n  · intro hOpen\n    exact frontier_subset_compl_of_isOpen (A := A) hOpen"
+  ],
+  "success": true
+}

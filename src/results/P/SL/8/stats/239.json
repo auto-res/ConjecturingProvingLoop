@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.46862721443176
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6369,
+      "prompt_tokens": 36836,
+      "total_tokens": 43205,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_eq_univ_iff_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) = (Set.univ : Set X) ↔\n      closure (interior A) = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    -- Since `interior (closure (interior A)) ⊆ closure (interior A)`,\n    -- we obtain the reverse inclusion from the hypothesis.\n    have h_subset : (Set.univ : Set X) ⊆ closure (interior A) := by\n      simpa [hInt] using\n        (interior_subset :\n          interior (closure (interior A)) ⊆ closure (interior A))\n    exact Set.Subset.antisymm (Set.subset_univ _) h_subset\n  · intro hCl\n    -- Rewrite the left‐hand side using `hCl` and compute the interior of `univ`.\n    have : interior (closure (interior A)) =\n        interior (Set.univ : Set X) := by\n      simpa [hCl]\n    simpa [interior_univ] using this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.84712409973145
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6980,
+      "prompt_tokens": 25849,
+      "total_tokens": 32829,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior A ∩ interior (Aᶜ) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hIntA, hIntAc⟩\n    -- From the two interior memberships, derive membership in `A ∩ Aᶜ`,\n    -- which is empty.\n    have hAAc : x ∈ (A ∩ Aᶜ) := by\n      exact And.intro (interior_subset hIntA) (interior_subset hIntAc)\n    simpa [Set.inter_compl_self] using hAAc\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

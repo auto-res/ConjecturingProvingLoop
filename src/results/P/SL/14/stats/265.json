@@ -1,0 +1,26 @@
+{
+  "times": [
+    181.21631407737732
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9178,
+      "prompt_tokens": 48635,
+      "total_tokens": 57813,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_iff_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (A : Set X)) ↔\n      interior (closure (A : Set X)) = closure A := by\n  have h₁ :=\n    Topology.P3_closure_iff_isOpen_closure (X := X) (A := A)\n  have h₂ :=\n    Topology.isOpen_closure_iff_interior_eq_closure (X := X) (A := A)\n  simpa using h₁.trans h₂"
+  ],
+  "success": true
+}

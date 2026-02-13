@@ -1,0 +1,43 @@
+{
+  "times": [
+    17.331900596618652,
+    88.28346395492554
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1211,
+      "prompt_tokens": 43667,
+      "total_tokens": 44878,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 4836,
+      "prompt_tokens": 43773,
+      "total_tokens": 48609,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_iff_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) = (∅ : Set X) ↔ (IsClosed A ∧ IsOpen A) := by\n  have h := Topology.boundary_eq_empty_iff_isClopen (A := A)\n  simpa [Topology.frontier_eq_closure_diff_interior (A := A)] using h",
+    "theorem Topology.frontier_subset_closureInterior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (A := A)) :\n    frontier (A : Set X) ⊆ closure (interior A) := by\n  intro x hx\n  -- `hx` gives `x ∈ closure A`.\n  have hx_closureA : x ∈ closure (A : Set X) := hx.1\n  -- From `P1`, obtain `closure A ⊆ closure (interior A)`.\n  have h_subset : closure (A : Set X) ⊆ closure (interior A) := by\n    have hA : (A : Set X) ⊆ closure (interior A) := hP1\n    simpa [closure_closure] using closure_mono hA\n  -- Conclude the desired membership.\n  exact h_subset hx_closureA"
+  ],
+  "success": true
+}

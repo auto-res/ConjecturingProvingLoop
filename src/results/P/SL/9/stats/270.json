@@ -1,0 +1,43 @@
+{
+  "times": [
+    36.94101858139038,
+    22.57610058784485
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2813,
+      "prompt_tokens": 45661,
+      "total_tokens": 48474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    },
+    {
+      "completion_tokens": 1661,
+      "prompt_tokens": 45767,
+      "total_tokens": 47428,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_iff_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) = (∅ : Set X) ↔ (IsClosed A ∧ IsOpen A) := by\n  have h₁ :\n      (frontier (A : Set X) = (∅ : Set X)) ↔\n        (closure (A : Set X) \\ interior A = (∅ : Set X)) := by\n    have hEq := Topology.frontier_eq_closure_diff_interior (A := A)\n    simpa [hEq]\n  have h₂ := Topology.boundary_eq_empty_iff_isClopen (A := A)\n  exact h₁.trans h₂",
+    "theorem Topology.frontier_subset_closure_of_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : (A : Set X) ⊆ B) :\n    frontier (A : Set X) ⊆ closure B := by\n  intro x hx\n  -- From `hx` we obtain `x ∈ closure A`.\n  have hx_clA : x ∈ closure (A : Set X) := hx.1\n  -- Monotonicity of `closure` gives `closure A ⊆ closure B`.\n  have h_closure_mono : closure (A : Set X) ⊆ closure B := closure_mono hAB\n  -- Hence `x ∈ closure B`.\n  exact h_closure_mono hx_clA"
+  ],
+  "success": true
+}

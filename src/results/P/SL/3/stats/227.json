@@ -1,0 +1,26 @@
+{
+  "times": [
+    224.7348198890686
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12727,
+      "prompt_tokens": 36187,
+      "total_tokens": 48914,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_union_closure_complement {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (closure (A : Set X)) ∪ closure ((Aᶜ) : Set X) =\n      (Set.univ : Set X) := by\n  classical\n  -- A handy rewriting of `closure (Aᶜ)`.\n  have hEq : closure ((Aᶜ) : Set X) = (interior (A : Set X))ᶜ :=\n    closure_compl_eq_complement_interior (A := A)\n  -- Prove the equality by double inclusion.\n  apply Set.Subset.antisymm\n  · intro x _; exact Set.mem_univ x\n  · intro x _\n    by_cases hInt : (x : X) ∈ interior (A : Set X)\n    · -- `x ∈ interior A` ⇒ `x ∈ interior (closure A)`.\n      have hIncl : interior (A : Set X) ⊆ interior (closure (A : Set X)) :=\n        interior_subset_interior_closure (A := A)\n      exact Or.inl (hIncl hInt)\n    · -- Otherwise, `x ∈ (interior A)ᶜ = closure (Aᶜ)`.\n      have hxCompl : (x : X) ∈ (interior (A : Set X))ᶜ := by\n        simp [hInt]\n      have hxCl : (x : X) ∈ closure ((Aᶜ) : Set X) := by\n        simpa [hEq] using hxCompl\n      exact Or.inr hxCl"
+  ],
+  "success": true
+}

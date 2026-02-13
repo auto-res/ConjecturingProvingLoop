@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.69102668762207
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2597,
+      "prompt_tokens": 50967,
+      "total_tokens": 53564,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_isClosed {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (frontier A) := by\n  -- `closure A` and `closure (Aᶜ)` are both closed, so their intersection is closed.\n  have hClosed : IsClosed (closure A ∩ closure (Aᶜ)) :=\n    (isClosed_closure : IsClosed (closure A)).inter\n      (isClosed_closure : IsClosed (closure (Aᶜ)))\n  -- Rewrite the intersection as the frontier.\n  simpa [Topology.frontier_eq_closure_inter_closure_compl (A := A)] using hClosed"
+  ],
+  "success": true
+}

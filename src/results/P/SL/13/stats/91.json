@@ -1,0 +1,43 @@
+{
+  "times": [
+    159.12479519844055,
+    105.72045946121216
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11795,
+      "prompt_tokens": 15095,
+      "total_tokens": 26890,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    },
+    {
+      "completion_tokens": 7307,
+      "prompt_tokens": 15455,
+      "total_tokens": 22762,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.denseInterior_implies_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Dense (A : Set X) := by\n  intro hDenseInt\n  -- Unfold `Dense` so that we can work with equalities of closures.\n  dsimp [Dense] at hDenseInt ⊢\n  -- From `interior A ⊆ A`, taking closures yields an inclusion on closures.\n  have h_subset : closure (interior (A : Set X)) ⊆ closure A :=\n    closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n  -- Rewrite the left‐hand side using the density hypothesis to obtain\n  -- `univ ⊆ closure A`.\n  have h_univ_subset : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n    simpa [hDenseInt] using h_subset\n  -- Combine the two inclusions to get the desired equality of closures.\n  apply Set.Subset.antisymm\n  · exact Set.Subset_univ\n  · exact h_univ_subset",
+    "theorem Topology.interior_closure_interior_eq_interior_of_isClosed {X : Type*}\n    [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed (A : Set X)) :\n    interior (closure (interior A)) = interior A := by\n  apply Set.Subset.antisymm\n  · -- First inclusion: `interior (closure (interior A)) ⊆ interior A`.\n    have h_subset : closure (interior A) ⊆ (A : Set X) := by\n      -- `interior A ⊆ A`, hence their closures are related.\n      have h_int : interior A ⊆ (A : Set X) := interior_subset\n      have h_cl : closure (interior A) ⊆ closure (A : Set X) := closure_mono h_int\n      simpa [hA_closed.closure_eq] using h_cl\n    -- Monotonicity of `interior`.\n    exact interior_mono h_subset\n  · -- Second inclusion: `interior A ⊆ interior (closure (interior A))`.\n    -- `interior A` is open and contained in `closure (interior A)`.\n    have h_subset : (interior A : Set X) ⊆ closure (interior A) := subset_closure\n    have h_open : IsOpen (interior A) := isOpen_interior\n    exact interior_maximal h_subset h_open"
+  ],
+  "success": true
+}

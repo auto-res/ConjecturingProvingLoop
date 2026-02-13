@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.762545585632324
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1679,
+      "prompt_tokens": 29006,
+      "total_tokens": 30685,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_interior {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 A → Topology.P2 (A ∪ interior B) := by\n  intro hP2A\n  have hP2IntB : Topology.P2 (interior B) :=\n    Topology.P2_interior (X := X) (A := B)\n  have h := Topology.P2_union (A := A) (B := interior B) hP2A hP2IntB\n  simpa using h"
+  ],
+  "success": true
+}

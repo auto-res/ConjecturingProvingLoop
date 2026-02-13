@@ -1,0 +1,43 @@
+{
+  "times": [
+    62.77906084060669,
+    221.12063431739807
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5259,
+      "prompt_tokens": 27817,
+      "total_tokens": 33076,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    },
+    {
+      "completion_tokens": 20626,
+      "prompt_tokens": 28064,
+      "total_tokens": 48690,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 20608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_closure_interior_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A →\n      closure (A : Set X) =\n        closure (interior (closure (interior A))) := by\n  intro hP2\n  -- First inclusion: `closure A ⊆ closure (interior (closure (interior A)))`.\n  have h₁ :\n      closure (A : Set X) ⊆\n        closure (interior (closure (interior A))) :=\n    Topology.P2_implies_closure_subset_closure_interior_closure_interior\n      (X := X) (A := A) hP2\n  -- Second inclusion: `closure (interior (closure (interior A))) ⊆ closure A`.\n  have h₂ :\n      closure (interior (closure (interior A))) ⊆\n        closure (A : Set X) := by\n    -- Step 1: `interior (closure (interior A)) ⊆ closure A`.\n    have hIntSub :\n        (interior (closure (interior A)) : Set X) ⊆\n          closure (A : Set X) := by\n      -- `interior (closure (interior A)) ⊆ closure (interior A)`.\n      have h₃ :\n          (interior (closure (interior A)) : Set X) ⊆\n            closure (interior (A : Set X)) :=\n        interior_subset\n      -- `closure (interior A) ⊆ closure A`.\n      have h₄ :\n          closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n        closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n      exact h₃.trans h₄\n    -- Taking closures preserves the inclusion.\n    exact closure_mono hIntSub\n  exact Set.Subset.antisymm h₂ h₁",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    114.39107942581177,
+    169.44529604911804
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5954,
+      "prompt_tokens": 48518,
+      "total_tokens": 54472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    },
+    {
+      "completion_tokens": 9682,
+      "prompt_tokens": 48629,
+      "total_tokens": 58311,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_implies_P1_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (A : Set X)) → Topology.P1 (closure (A : Set X)) := by\n  intro hP3Cl\n  intro x hxCl\n  have : x ∈ interior (closure (closure (A : Set X))) := hP3Cl hxCl\n  simpa [closure_closure] using this",
+    ""
+  ],
+  "success": true
+}

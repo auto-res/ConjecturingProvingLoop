@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.92868709564209
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6483,
+      "prompt_tokens": 52555,
+      "total_tokens": 59038,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union_eight {X : Type*} [TopologicalSpace X] {A B C D E F G H : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : Topology.P1 (X := X) B)\n    (hC : Topology.P1 (X := X) C) (hD : Topology.P1 (X := X) D)\n    (hE : Topology.P1 (X := X) E) (hF : Topology.P1 (X := X) F)\n    (hG : Topology.P1 (X := X) G) (hH : Topology.P1 (X := X) H) :\n    Topology.P1 (X := X) (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H) := by\n  -- Combine the first six sets.\n  have hABCDEF :\n      Topology.P1 (X := X) (A ∪ B ∪ C ∪ D ∪ E ∪ F) :=\n    Topology.P1_union_six (X := X)\n      (A := A) (B := B) (C := C) (D := D) (E := E) (F := F)\n      hA hB hC hD hE hF\n  -- Unite the result with `G`.\n  have hABCDEFG :\n      Topology.P1 (X := X) ((A ∪ B ∪ C ∪ D ∪ E ∪ F) ∪ G) :=\n    Topology.P1_union (X := X)\n      (A := A ∪ B ∪ C ∪ D ∪ E ∪ F) (B := G)\n      hABCDEF hG\n  -- Finally, unite the result with `H`.\n  have hABCDEFGH :\n      Topology.P1 (X := X) (((A ∪ B ∪ C ∪ D ∪ E ∪ F) ∪ G) ∪ H) :=\n    Topology.P1_union (X := X)\n      (A := (A ∪ B ∪ C ∪ D ∪ E ∪ F) ∪ G) (B := H)\n      hABCDEFG hH\n  -- Re‐associate the unions to obtain the desired expression.\n  simpa [Set.union_assoc] using hABCDEFGH"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    64.24896168708801,
+    184.93536400794983,
+    123.2513473033905
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4352,
+      "prompt_tokens": 17550,
+      "total_tokens": 21902,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 11951,
+      "prompt_tokens": 17674,
+      "total_tokens": 29625,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 8072,
+      "prompt_tokens": 17758,
+      "total_tokens": 25830,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_eq_interior_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hClosed : IsClosed A) :\n    interior (closure (interior A)) = interior A := by\n  apply Set.Subset.antisymm\n  ·\n    have h_subset : closure (interior A) ⊆ A := by\n      have h : closure (interior A) ⊆ closure A :=\n        closure_mono (interior_subset : interior A ⊆ A)\n      simpa [hClosed.closure_eq] using h\n    exact interior_mono h_subset\n  ·\n    have h_subset : interior A ⊆ closure (interior A) := subset_closure\n    exact interior_mono h_subset",
+    "theorem Topology.closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    -- First, show `closure (interior (closure (interior A)))` is contained in\n    -- `closure (interior A)`.\n    have h₁ : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    have h₂ :\n        closure (interior (closure (interior A))) ⊆\n          closure (closure (interior A)) :=\n      closure_mono h₁\n    simpa [closure_closure] using h₂\n  ·\n    -- Conversely, show `closure (interior A)` is contained in\n    -- `closure (interior (closure (interior A)))`.\n    -- Step 1: relate the interiors.\n    have h_subset : interior A ⊆ closure (interior A) := subset_closure\n    have h_int :\n        interior A ⊆ interior (closure (interior A)) := by\n      -- Apply `interior_mono` to `h_subset`, then simplify.\n      have : interior (interior A) ⊆ interior (closure (interior A)) :=\n        interior_mono h_subset\n      simpa [interior_interior] using this\n    -- Step 2: pass to closures to obtain the desired inclusion.\n    exact closure_mono h_int",
+    "theorem Topology.closure_interior_closure_interior_eq_closure_interior'\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    -- First, prove `closure (interior (closure (interior A))) ⊆ closure (interior A)`.\n    have h₁ : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    have h₂ :\n        closure (interior (closure (interior A))) ⊆\n          closure (closure (interior A)) :=\n      closure_mono h₁\n    simpa [closure_closure] using h₂\n  ·\n    -- Now, prove the reverse inclusion.\n    have h₁ : interior A ⊆ interior (closure (interior A)) := by\n      have h : interior A ⊆ closure (interior A) := subset_closure\n      have : interior (interior A) ⊆ interior (closure (interior A)) :=\n        interior_mono h\n      simpa [interior_interior] using this\n    have h₂ :\n        closure (interior A) ⊆ closure (interior (closure (interior A))) :=\n      closure_mono h₁\n    exact h₂"
+  ],
+  "success": true
+}

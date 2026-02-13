@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.97639846801758
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5072,
+      "prompt_tokens": 46534,
+      "total_tokens": 51606,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_boundary_subset_closureInterior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (X := X) A ↔\n      (closure (A : Set X) \\ interior A) ⊆ closure (interior A) := by\n  -- First, recall the existing characterization of `P1`.\n  have h_equiv :\n      Topology.P1 (X := X) A ↔\n        closure (A : Set X) ⊆ closure (interior A) :=\n    Topology.P1_iff_closure_subset_closureInterior (X := X) (A := A)\n  constructor\n  · -- `P1` immediately yields the desired boundary inclusion.\n    intro hP1\n    have h_closure : closure (A : Set X) ⊆ closure (interior A) :=\n      (h_equiv).1 hP1\n    intro x hx\n    exact h_closure hx.1\n  · -- Conversely, assume the boundary is included; prove the closure inclusion.\n    intro h_boundary\n    have h_closure : closure (A : Set X) ⊆ closure (interior A) := by\n      intro x hx_cl\n      by_cases hx_int : (x : X) ∈ interior A\n      · -- Points of the interior are certainly in the closure of the interior.\n        exact subset_closure hx_int\n      · -- Otherwise, the point lies in the boundary, which is assumed to be included.\n        have hx_bd : (x : X) ∈ closure (A : Set X) \\ interior A :=\n          ⟨hx_cl, hx_int⟩\n        exact h_boundary hx_bd\n    exact (h_equiv).2 h_closure"
+  ],
+  "success": true
+}

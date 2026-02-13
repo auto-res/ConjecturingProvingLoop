@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.91679263114929
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3957,
+      "prompt_tokens": 68686,
+      "total_tokens": 72643,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 68352
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_eleven {X : Type*} [TopologicalSpace X]\n    {A B C D E F G H I J K : Set X}\n    (hA : Topology.P2 (X := X) A) (hB : Topology.P2 (X := X) B)\n    (hC : Topology.P2 (X := X) C) (hD : Topology.P2 (X := X) D)\n    (hE : Topology.P2 (X := X) E) (hF : Topology.P2 (X := X) F)\n    (hG : Topology.P2 (X := X) G) (hH : Topology.P2 (X := X) H)\n    (hI : Topology.P2 (X := X) I) (hJ : Topology.P2 (X := X) J)\n    (hK : Topology.P2 (X := X) K) :\n    Topology.P2 (X := X)\n      (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J ∪ K) := by\n  -- Combine the first ten sets using the existing `P2_union_ten`.\n  have hTen :\n      Topology.P2 (X := X)\n        (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J) :=\n    Topology.P2_union_ten (X := X)\n      (A := A) (B := B) (C := C) (D := D) (E := E) (F := F)\n      (G := G) (H := H) (I := I) (J := J)\n      hA hB hC hD hE hF hG hH hI hJ\n  -- Unite the result with `K`.\n  have hEleven :\n      Topology.P2 (X := X)\n        ((A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J) ∪ K) :=\n    Topology.P2_union (X := X)\n      (A := A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J) (B := K)\n      hTen hK\n  -- Re-associate the unions to match the desired expression.\n  simpa [Set.union_assoc] using hEleven"
+  ],
+  "success": true
+}

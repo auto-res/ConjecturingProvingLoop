@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.3799307346344
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5207,
+      "prompt_tokens": 25522,
+      "total_tokens": 30729,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_satisfies_P3_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Topology.P3 (closure (interior A)) := by\n  intro hDense\n  -- The closure of `interior A` is the whole space.\n  have h_eq : closure (interior A) = (Set.univ : Set X) := hDense.closure_eq\n  -- Hence `closure (interior A)` is open.\n  have h_open : IsOpen (closure (interior A)) := by\n    simpa [h_eq] using (isOpen_univ : IsOpen (Set.univ : Set X))\n  -- Any open set satisfies `P3`.\n  exact Topology.isOpen_implies_P3\n    (X := X) (A := closure (interior A)) h_open"
+  ],
+  "success": true
+}

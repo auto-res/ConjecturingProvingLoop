@@ -1,0 +1,26 @@
+{
+  "times": [
+    82.65505838394165
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4429,
+      "prompt_tokens": 55192,
+      "total_tokens": 59621,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_interior_union_interior {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    Topology.P3 (X := X) (interior A ∪ interior B) := by\n  -- `P3` holds for the interior of any set.\n  have hA : Topology.P3 (X := X) (interior A) :=\n    Topology.P3_interior (X := X) (A := A)\n  have hB : Topology.P3 (X := X) (interior B) :=\n    Topology.P3_interior (X := X) (A := B)\n  -- Combine the two `P3` properties using the union lemma.\n  exact\n    Topology.P3_union (X := X)\n      (A := interior A) (B := interior B) hA hB"
+  ],
+  "success": true
+}

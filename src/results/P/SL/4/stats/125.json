@@ -1,0 +1,43 @@
+{
+  "times": [
+    105.1198194026947,
+    120.87013840675354
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8432,
+      "prompt_tokens": 17804,
+      "total_tokens": 26236,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8064,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 8923,
+      "prompt_tokens": 17878,
+      "total_tokens": 26801,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure A)))))))))) =\n      interior (closure A) := by\n  -- Start with the six-step idempotence lemma.\n  have h₆ :\n      interior (closure (interior (closure (interior (closure (interior (closure (interior (closure A)))))))) =\n        interior (closure A) := by\n    simpa using\n      interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_eq\n        (X := X) (A := A)\n  -- Apply one more `interior ∘ closure` to both sides of `h₆`.\n  have h₇ :\n      interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure A)))))))))) =\n        interior (closure (interior (closure A))) := by\n    simpa using congrArg (fun S : Set X => interior (closure S)) h₆\n  -- Collapse the remaining two alternating applications.\n  have h₂ : interior (closure (interior (closure A))) = interior (closure A) :=\n    interior_closure_interior_closure_eq (X := X) (A := A)\n  simpa [h₂] using h₇",
+    "theorem interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ closure (interior (closure A)) := by\n  intro x hxIntA\n  -- Step 1: `x` lies in `interior (closure A)` because interiors are monotone\n  have hxIntClosureA : x ∈ interior (closure A) :=\n    Topology.interior_subset_interior_closure (A := A) hxIntA\n  -- Step 2: every point of `interior (closure A)` lies in\n  --         `closure (interior (closure A))`\n  have hIncl : interior (closure A) ⊆ closure (interior (closure A)) := by\n    intro y hy\n    exact subset_closure hy\n  -- Finish by combining the two facts\n  exact hIncl hxIntClosureA"
+  ],
+  "success": true
+}

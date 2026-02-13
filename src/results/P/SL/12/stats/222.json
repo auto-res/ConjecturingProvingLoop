@@ -1,0 +1,26 @@
+{
+  "times": [
+    173.1623876094818
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9998,
+      "prompt_tokens": 41893,
+      "total_tokens": 51891,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_interior_union_interior {X : Type*} [TopologicalSpace X]\n    (A B : Set X) :\n    Topology.P2 (X := X) (interior A ∪ interior B) := by\n  -- `P2` holds for the interior of any set.\n  have hA : Topology.P2 (X := X) (interior A) :=\n    Topology.P2_interior (X := X) (A := A)\n  have hB : Topology.P2 (X := X) (interior B) :=\n    Topology.P2_interior (X := X) (A := B)\n  -- Combine the two instances using the union lemma for `P2`.\n  exact\n    Topology.P2_union (X := X)\n      (A := interior A) (B := interior B) hA hB"
+  ],
+  "success": true
+}

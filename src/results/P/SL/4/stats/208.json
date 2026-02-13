@@ -1,0 +1,43 @@
+{
+  "times": [
+    32.66083645820618,
+    37.701008558273315
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2794,
+      "prompt_tokens": 30472,
+      "total_tokens": 33266,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    },
+    {
+      "completion_tokens": 3100,
+      "prompt_tokens": 30578,
+      "total_tokens": 33678,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_interior_subset_frontier {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (interior A) ⊆ frontier A := by\n  intro x hx\n  dsimp [frontier] at hx ⊢\n  rcases hx with ⟨hx_cl, hx_not_int⟩\n  have hx_closureA : x ∈ closure A := by\n    have h_subset : closure (interior A) ⊆ closure A :=\n      closure_interior_subset_closure (X := X) (A := A)\n    exact h_subset hx_cl\n  have hx_not_intA : x ∉ interior A := by\n    have h_eq : interior (interior A) = interior A := by\n      simpa [interior_interior]\n    have h : x ∉ interior (interior A) := hx_not_int\n    simpa [h_eq] using h\n  exact And.intro hx_closureA hx_not_intA",
+    "theorem interior_union_of_isOpen {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    interior (A ∪ B) = A ∪ B := by\n  simpa using (hA.union hB).interior_eq"
+  ],
+  "success": true
+}

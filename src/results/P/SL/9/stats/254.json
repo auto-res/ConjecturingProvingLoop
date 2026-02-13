@@ -1,0 +1,43 @@
+{
+  "times": [
+    31.77515435218811,
+    29.303800344467163
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2413,
+      "prompt_tokens": 43399,
+      "total_tokens": 45812,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 1863,
+      "prompt_tokens": 43505,
+      "total_tokens": 45368,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_inter_closureCompl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) = closure A ∩ closure (Aᶜ) := by\n  classical\n  simpa [frontier] using\n    (Topology.closure_inter_closureCompl_eq_closure_diff_interior (A := A)).symm",
+    "theorem Topology.frontier_eq_closure_diff_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (A : Set X) = closure A \\ interior A := by\n  rfl"
+  ],
+  "success": true
+}

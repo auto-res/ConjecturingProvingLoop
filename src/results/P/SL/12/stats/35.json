@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.74209260940552
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3238,
+      "prompt_tokens": 5558,
+      "total_tokens": 8796,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iUnion {X ι : Type*} [TopologicalSpace X] (A : ι → Set X)\n    (hA : ∀ i, Topology.P1 (X := X) (A i)) :\n    Topology.P1 (X := X) (⋃ i, A i) := by\n  dsimp [Topology.P1] at hA ⊢\n  intro x hx\n  -- Obtain an index witnessing `x ∈ A i`.\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxAi⟩\n  -- From `P1` for `A i`.\n  have hx_cl : x ∈ closure (interior (A i)) := hA i hxAi\n  -- Show that this closure is contained in the desired one.\n  have h_sub : closure (interior (A i)) ⊆ closure (interior (⋃ j, A j)) := by\n    -- First, relate the interiors.\n    have h_int : (interior (A i) : Set X) ⊆ interior (⋃ j, A j) := by\n      -- `A i ⊆ ⋃ j, A j`.\n      have h_union : (A i : Set X) ⊆ ⋃ j, A j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact interior_mono h_union\n    -- Then, take closures.\n    exact closure_mono h_int\n  exact h_sub hx_cl"
+  ],
+  "success": true
+}

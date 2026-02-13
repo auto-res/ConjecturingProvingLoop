@@ -1,0 +1,26 @@
+{
+  "times": [
+    98.93566370010376
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8671,
+      "prompt_tokens": 56699,
+      "total_tokens": 65370,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55168
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_subset_closure_interior_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (A : Set X) ⊆ closure (interior (closure A)) := by\n  intro x hxIntA\n  -- Step 1: `x ∈ interior (closure A)` since `A ⊆ closure A`.\n  have hxIntCl : x ∈ interior (closure (A : Set X)) :=\n    (interior_mono (subset_closure : (A : Set X) ⊆ closure A)) hxIntA\n  -- Step 2: `interior (closure A) ⊆ closure (interior (closure A))`.\n  have h_sub : interior (closure (A : Set X)) ⊆\n      closure (interior (closure (A : Set X))) :=\n    subset_closure\n  -- Combine the two steps.\n  exact h_sub hxIntCl"
+  ],
+  "success": true
+}

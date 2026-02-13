@@ -1,0 +1,26 @@
+{
+  "times": [
+    125.02261590957642
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9608,
+      "prompt_tokens": 30343,
+      "total_tokens": 39951,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iInter_subset\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    interior (⋂ i, A i) ⊆ ⋂ i, interior (A i) := by\n  intro x hx\n  -- For each `i`, show `x ∈ interior (A i)`.\n  have h_each : ∀ i, (x : X) ∈ interior (A i) := by\n    intro i\n    -- The intersection is contained in `A i`.\n    have h_subset : (⋂ j, A j : Set X) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Monotonicity of `interior` gives the desired inclusion.\n    have h_int_mono : interior (⋂ j, A j) ⊆ interior (A i) :=\n      interior_mono h_subset\n    exact h_int_mono hx\n  -- Combine the pointwise facts into the intersection.\n  exact Set.mem_iInter.2 h_each"
+  ],
+  "success": true
+}

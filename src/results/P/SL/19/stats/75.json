@@ -1,0 +1,43 @@
+{
+  "times": [
+    55.18681335449219,
+    192.9971821308136
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3769,
+      "prompt_tokens": 12039,
+      "total_tokens": 15808,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    },
+    {
+      "completion_tokens": 12319,
+      "prompt_tokens": 12109,
+      "total_tokens": 24428,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_eq_union_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ B)) = interior (closure A) ∪ interior (closure B) := by\n  simpa [closure_union] using\n    (interior_union :\n      interior (closure A ∪ closure B) =\n        interior (closure A) ∪ interior (closure B))",
+    "theorem Topology.interior_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∪ interior B ⊆ interior (A ∪ B) := by\n  exact\n    Topology.interior_union_subset_interior_union\n      (X := X) (A := A) (B := B)"
+  ],
+  "success": true
+}

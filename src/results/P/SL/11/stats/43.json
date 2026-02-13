@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.13631296157837
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2535,
+      "prompt_tokens": 5934,
+      "total_tokens": 8469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iUnion {X ι : Type*} [TopologicalSpace X] {A : ι → Set X}\n    (hA : ∀ i, Topology.P2 (A i)) :\n    Topology.P2 (⋃ i, A i) := by\n  -- Obtain `P1` and `P3` for each `A i`.\n  have hP1 : ∀ i, Topology.P1 (A i) := fun i => Topology.P2_implies_P1 (hA i)\n  have hP3 : ∀ i, Topology.P3 (A i) := fun i => Topology.P2_implies_P3 (hA i)\n  -- Deduce `P1` and `P3` for the union.\n  have hP1Union : Topology.P1 (⋃ i, A i) := Topology.P1_iUnion hP1\n  have hP3Union : Topology.P3 (⋃ i, A i) := Topology.P3_iUnion hP3\n  -- Conclude `P2` for the union.\n  exact Topology.P2_of_P1_and_P3 (A := ⋃ i, A i) ⟨hP1Union, hP3Union⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.56899690628052
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2239,
+      "prompt_tokens": 39948,
+      "total_tokens": 42187,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_closureInterior_of_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → IsOpen (closure (interior A)) := by\n  intro hDense\n  have h_eq : closure (interior A) = (Set.univ : Set X) := hDense.closure_eq\n  simpa [h_eq] using (isOpen_univ : IsOpen (Set.univ : Set X))"
+  ],
+  "success": true
+}

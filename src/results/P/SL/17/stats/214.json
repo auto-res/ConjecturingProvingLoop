@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.3981990814209
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2941,
+      "prompt_tokens": 37670,
+      "total_tokens": 40611,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_diff_isClosed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP1A : Topology.P1 A) (hClosedB : IsClosed B) :\n    Topology.P1 (A \\ B) := by\n  -- The complement of a closed set is open.\n  have hOpenBc : IsOpen (Bᶜ) := hClosedB.isOpen_compl\n  -- Apply the existing intersection lemma with the open complement.\n  have h := Topology.P1_inter_isOpen_right (A := A) (B := Bᶜ) hP1A hOpenBc\n  -- Rewrite `A ∩ Bᶜ` as `A \\ B`.\n  simpa [Set.diff_eq] using h"
+  ],
+  "success": true
+}

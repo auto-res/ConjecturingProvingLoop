@@ -1,0 +1,43 @@
+{
+  "times": [
+    88.17632484436035,
+    232.96948647499084
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6142,
+      "prompt_tokens": 11954,
+      "total_tokens": 18096,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    },
+    {
+      "completion_tokens": 15763,
+      "prompt_tokens": 12076,
+      "total_tokens": 27839,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  -- Set an abbreviation for readability.\n  set s : Set X := interior A with hs\n  -- We establish the two inclusions separately.\n  have h₁ : closure s ⊆ closure (interior (closure s)) := by\n    -- It suffices to show `s ⊆ interior (closure s)`.\n    have hSub : s ⊆ interior (closure s) := by\n      -- `s` is open and contained in its closure.\n      have hSub' : s ⊆ closure s := by\n        intro x hx; exact subset_closure hx\n      have hOpen : IsOpen s := by\n        simpa [hs] using isOpen_interior\n      exact interior_maximal hSub' hOpen\n    -- Taking closures preserves inclusions.\n    exact closure_mono hSub\n  have h₂ : closure (interior (closure s)) ⊆ closure s := by\n    -- `interior (closure s)` is contained in `closure s`.\n    have hSub : interior (closure s) ⊆ closure s := interior_subset\n    -- Taking closures preserves inclusions.\n    exact closure_mono hSub\n  -- Combine the two inclusions to get equality.\n  have hEq : closure (interior (closure s)) = closure s :=\n    Set.Subset.antisymm h₂ h₁\n  -- Revert the abbreviation and finish.\n  simpa [hs] using hEq",
+    ""
+  ],
+  "success": true
+}

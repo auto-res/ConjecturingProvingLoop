@@ -1,0 +1,26 @@
+{
+  "times": [
+    27.02027726173401
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2237,
+      "prompt_tokens": 36794,
+      "total_tokens": 39031,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_idempotent {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (closure A)) ↔ Topology.P3 (closure A) := by\n  have h_eq : closure (closure A) = closure A := by\n    simpa [closure_closure]\n  constructor\n  · intro h\n    simpa [h_eq] using h\n  · intro h\n    simpa [h_eq] using h"
+  ],
+  "success": true
+}

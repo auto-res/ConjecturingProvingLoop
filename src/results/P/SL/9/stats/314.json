@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.45321488380432
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1942,
+      "prompt_tokens": 55402,
+      "total_tokens": 57344,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_closure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (closure (A : Set X)) ⊆ closure A := by\n  have h₁ :\n      frontier (closure (A : Set X)) ⊆ frontier (A : Set X) :=\n    Topology.frontier_closure_subset_frontier (A := A)\n  have h₂ :\n      frontier (A : Set X) ⊆ closure A :=\n    Topology.frontier_subset_closure (A := A)\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.882378578186035
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3981,
+      "prompt_tokens": 36251,
+      "total_tokens": 40232,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_sUnion_isOpen {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    (∀ A, A ∈ 𝒜 → IsOpen A) → Topology.P1 (⋃₀ 𝒜) := by\n  intro hOpen\n  -- First, turn the openness assumption into `P1` for every set in `𝒜`.\n  have hP1 : ∀ A, A ∈ 𝒜 → Topology.P1 A := by\n    intro A hA\n    exact Topology.P1_of_isOpen (A := A) (hOpen A hA)\n  -- Apply the existing `P1_sUnion` theorem.\n  exact Topology.P1_sUnion (X := X) (𝒜 := 𝒜) hP1"
+  ],
+  "success": true
+}

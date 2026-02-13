@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.03726267814636
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4612,
+      "prompt_tokens": 40225,
+      "total_tokens": 44837,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closure_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P2 (X := X) (closure A) := by\n  -- First, show that `closure (interior (closure A)) = univ`.\n  have h_dense : closure (interior (closure (A : Set X))) = (Set.univ : Set X) := by\n    -- `closure (interior A)` is contained in `closure (interior (closure A))`.\n    have h_subset :\n        closure (interior (A : Set X)) ⊆\n          closure (interior (closure A)) :=\n      Topology.closure_interior_subset_closure_interior_closure\n        (X := X) (A := A)\n    -- Hence `univ ⊆ closure (interior (closure A))`.\n    have h_univ_subset :\n        (Set.univ : Set X) ⊆ closure (interior (closure A)) := by\n      simpa [h] using h_subset\n    -- The reverse inclusion is trivial.\n    have h_subset_univ :\n        closure (interior (closure A)) ⊆ (Set.univ : Set X) := by\n      intro x _; simp\n    -- Combine the two inclusions to obtain the equality.\n    exact Set.Subset.antisymm h_subset_univ h_univ_subset\n  -- Apply the existing lemma turning density of the interior into `P2`.\n  exact\n    Topology.P2_of_dense_interior (X := X) (A := closure A) h_dense"
+  ],
+  "success": true
+}

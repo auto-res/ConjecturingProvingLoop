@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.17552065849304
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2225,
+      "prompt_tokens": 9551,
+      "total_tokens": 11776,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9088
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_imp_P3_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 (closure A) := by\n  intro hDense\n  have hP2 : Topology.P2 (closure A) :=\n    dense_imp_P2_closure (A := A) hDense\n  exact Topology.P2_imp_P3 (A := closure A) hP2"
+  ],
+  "success": true
+}

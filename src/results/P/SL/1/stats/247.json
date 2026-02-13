@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.130128145217896
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1576,
+      "prompt_tokens": 37855,
+      "total_tokens": 39431,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_of_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClopen A) :\n    Topology.P2 A ↔ Topology.P3 A := by\n  have h₁ : Topology.P2 A ↔ Topology.P1 A :=\n    (Topology.P2_iff_P1_of_isClopen (A := A) hA)\n  have h₂ : Topology.P1 A ↔ Topology.P3 A :=\n    (Topology.P3_iff_P1_of_isClopen (A := A) hA).symm\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

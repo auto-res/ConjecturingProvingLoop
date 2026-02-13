@@ -1,0 +1,26 @@
+{
+  "times": [
+    105.83217716217041
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5899,
+      "prompt_tokens": 43549,
+      "total_tokens": 49448,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_nonempty_implies_interior_closure_nonempty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (interior (A : Set X)).Nonempty →\n      (interior (closure (A : Set X))).Nonempty := by\n  intro hIntA\n  rcases hIntA with ⟨x, hxIntA⟩\n  -- `interior A` is contained in `interior (closure A)` by monotonicity.\n  have hMono :\n      (interior (A : Set X) : Set X) ⊆\n        interior (closure (A : Set X)) :=\n    interior_mono (subset_closure : (A : Set X) ⊆ closure (A : Set X))\n  exact ⟨x, hMono hxIntA⟩"
+  ],
+  "success": true
+}

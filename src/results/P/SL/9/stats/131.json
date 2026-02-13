@@ -1,0 +1,26 @@
+{
+  "times": [
+    164.66490840911865
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13020,
+      "prompt_tokens": 20195,
+      "total_tokens": 33215,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_closure_compl {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A ∪ closure (Aᶜ) = (Set.univ : Set X) := by\n  classical\n  ext x\n  constructor\n  · intro _; trivial\n  · intro _\n    by_cases h_cl : x ∈ closure A\n    · exact Or.inl h_cl\n    · -- `x ∉ closure A`; we show `x ∈ closure (Aᶜ)`\n      have hAcomp : x ∈ Aᶜ := by\n        by_cases hA : x ∈ A\n        · have : x ∈ closure A := Set.subset_closure hA\n          exact (h_cl this).elim\n        · simpa [Set.compl_def] using hA\n      exact Or.inr (Set.subset_closure hAcomp)"
+  ],
+  "success": true
+}

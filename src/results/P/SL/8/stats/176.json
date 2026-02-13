@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.49563789367676
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2576,
+      "prompt_tokens": 25512,
+      "total_tokens": 28088,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_P1_P2_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (interior (closure A)) ∧\n      Topology.P2 (interior (closure A)) ∧\n        Topology.P3 (interior (closure A)) := by\n  have h_open : IsOpen (interior (closure A)) := isOpen_interior\n  simpa using\n    Topology.isOpen_P1_P2_P3 (X := X) (A := interior (closure A)) h_open"
+  ],
+  "success": true
+}

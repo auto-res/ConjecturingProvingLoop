@@ -1,0 +1,972 @@
+[
+    {
+        "statement": "theorem P1_closure_sUnion {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} (h : ∀ A ∈ 𝒜, Topology.P1 A) : Topology.P1 (closure (⋃₀ 𝒜)) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                9.383277654647827
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 930,
+                    "prompt_tokens": 21430,
+                    "total_tokens": 22360,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 832,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 19200
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                86.64916825294495,
+                33.45098876953125
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 8413,
+                    "prompt_tokens": 281,
+                    "total_tokens": 8694,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 7680,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 3094,
+                    "prompt_tokens": 1074,
+                    "total_tokens": 4168,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2432,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P2_closed_complement' {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) : Topology.P2 (Aᶜ) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                5.557373523712158
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 389,
+                    "prompt_tokens": 21556,
+                    "total_tokens": 21945,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 320,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 20224
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                71.68479084968567
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 6300,
+                    "prompt_tokens": 260,
+                    "total_tokens": 6560,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 6208,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P3_interior_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {A : Set X} {B : Set Y} : Topology.P3 (Set.prod (interior A) (interior B)) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                15.11604118347168
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 1255,
+                    "prompt_tokens": 21664,
+                    "total_tokens": 22919,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1088,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 21376
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                47.473265409469604
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 3741,
+                    "prompt_tokens": 271,
+                    "total_tokens": 4012,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 3648,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P2_exists_basis {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P2 A → ∃ 𝔅 : Set (Set X), (∀ U ∈ 𝔅, IsOpen U) ∧ A ⊆ ⋃₀ 𝔅 ∧ ⋃₀ 𝔅 ⊆ interior (closure (interior A)) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                26.628732681274414
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 2931,
+                    "prompt_tokens": 21888,
+                    "total_tokens": 24819,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2624,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 21376
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                41.26574373245239
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 2951,
+                    "prompt_tokens": 307,
+                    "total_tokens": 3258,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2816,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P1_subsingleton_space {X : Type*} [TopologicalSpace X] [Subsingleton X] (A : Set X) : Topology.P1 A :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                33.12360095977783
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 2246,
+                    "prompt_tokens": 22079,
+                    "total_tokens": 24325,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1984,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 21248
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                57.612581968307495
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 3880,
+                    "prompt_tokens": 251,
+                    "total_tokens": 4131,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 3776,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P2_iUnion_increasing {ι : Sort _} {X : Type*} [TopologicalSpace X] {s : ι → Set X} (hmono : ∀ i j, s i ⊆ s j) (h : ∀ i, Topology.P2 (s i)) : Topology.P2 (⋃ i, s i) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                8.797565460205078
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 426,
+                    "prompt_tokens": 22383,
+                    "total_tokens": 22809,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 384,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 21376
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                59.10735273361206,
+                25.293896436691284
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 4715,
+                    "prompt_tokens": 295,
+                    "total_tokens": 5010,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 4480,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 2074,
+                    "prompt_tokens": 650,
+                    "total_tokens": 2724,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1792,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P1_iInter_decreasing {ι : Sort _} {X : Type*} [TopologicalSpace X] {s : ι → Set X} (hdec : ∀ i j, s j ⊆ s i) (h : ∀ i, Topology.P1 (s i)) : Topology.P1 (⋂ i, s i) :=",
+        "proved_with_context": true,
+        "proved_without_context": true,
+        "stats_with_context": {
+            "times": [
+                20.618536710739136
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 1782,
+                    "prompt_tokens": 22488,
+                    "total_tokens": 24270,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1408,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 22272
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                154.31917428970337,
+                64.1649558544159
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 9237,
+                    "prompt_tokens": 295,
+                    "total_tokens": 9532,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 8960,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 6391,
+                    "prompt_tokens": 627,
+                    "total_tokens": 7018,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 6016,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P2_iInter_decreasing {ι : Sort _} {X : Type*} [TopologicalSpace X] {s : ι → Set X} (hdec : ∀ i j, s j ⊆ s i) (h : ∀ i, Topology.P2 (s i)) : Topology.P2 (⋂ i, s i) :=",
+        "proved_with_context": true,
+        "proved_without_context": false,
+        "stats_with_context": {
+            "times": [
+                10.95654034614563
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 1119,
+                    "prompt_tokens": 22926,
+                    "total_tokens": 24045,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 832,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 22272
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                36.714162826538086
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 2194,
+                    "prompt_tokens": 295,
+                    "total_tokens": 2489,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2176,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P1_prod_symmetric {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {A : Set X} {B : Set Y} : Topology.P1 (Set.prod A B) ↔ Topology.P1 (Set.prod B A) :=",
+        "proved_with_context": true,
+        "proved_without_context": false,
+        "stats_with_context": {
+            "times": [
+                17.91726779937744
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 2078,
+                    "prompt_tokens": 23187,
+                    "total_tokens": 25265,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 1536,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 21248
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                310.61761021614075,
+                137.3006489276886,
+                98.2804958820343,
+                109.0321855545044,
+                180.66412830352783,
+                121.30767679214478,
+                65.46392035484314,
+                109.48472952842712,
+                121.26059746742249,
+                201.79370999336243,
+                84.67880010604858,
+                118.60700941085815,
+                74.89329242706299
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 20838,
+                    "prompt_tokens": 276,
+                    "total_tokens": 21114,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 19904,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 12878,
+                    "prompt_tokens": 1750,
+                    "total_tokens": 14628,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 11648,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 7983,
+                    "prompt_tokens": 3170,
+                    "total_tokens": 11153,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 7104,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 7907,
+                    "prompt_tokens": 4466,
+                    "total_tokens": 12373,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 6976,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 2944
+                    }
+                },
+                {
+                    "completion_tokens": 11895,
+                    "prompt_tokens": 6121,
+                    "total_tokens": 18016,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 10944,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 3840
+                    }
+                },
+                {
+                    "completion_tokens": 9266,
+                    "prompt_tokens": 8199,
+                    "total_tokens": 17465,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 8256,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 5888
+                    }
+                },
+                {
+                    "completion_tokens": 7116,
+                    "prompt_tokens": 9713,
+                    "total_tokens": 16829,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 6144,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 6439,
+                    "prompt_tokens": 11809,
+                    "total_tokens": 18248,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 5440,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 8064
+                    }
+                },
+                {
+                    "completion_tokens": 8949,
+                    "prompt_tokens": 14473,
+                    "total_tokens": 23422,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 8000,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 16256,
+                    "prompt_tokens": 16549,
+                    "total_tokens": 32805,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 15232,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 14080
+                    }
+                },
+                {
+                    "completion_tokens": 8657,
+                    "prompt_tokens": 19099,
+                    "total_tokens": 27756,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 7744,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 9088
+                    }
+                },
+                {
+                    "completion_tokens": 8854,
+                    "prompt_tokens": 21849,
+                    "total_tokens": 30703,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 7872,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 16256
+                    }
+                },
+                {
+                    "completion_tokens": 5202,
+                    "prompt_tokens": 23786,
+                    "total_tokens": 28988,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 5184,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 21248
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "statement": "theorem P3_prod_symmetric {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {A : Set X} {B : Set Y} : Topology.P3 (Set.prod A B) ↔ Topology.P3 (Set.prod B A) :=",
+        "proved_with_context": true,
+        "proved_without_context": false,
+        "stats_with_context": {
+            "times": [
+                30.546018600463867
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 3003,
+                    "prompt_tokens": 23718,
+                    "total_tokens": 26721,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 2496,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                }
+            ]
+        },
+        "stats_without_context": {
+            "times": [
+                461.1913297176361,
+                251.9980788230896,
+                403.9602496623993,
+                274.36023116111755,
+                338.1976754665375,
+                209.08692407608032,
+                118.6268720626831,
+                100.41964721679688,
+                117.65366697311401,
+                124.88458061218262,
+                99.59022688865662,
+                66.93410158157349,
+                173.81475567817688,
+                98.27635717391968,
+                136.42991662025452,
+                105.62681674957275
+            ],
+            "api_usages": [
+                {
+                    "completion_tokens": 29895,
+                    "prompt_tokens": 276,
+                    "total_tokens": 30171,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 29120,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 11449,
+                    "prompt_tokens": 1782,
+                    "total_tokens": 13231,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 10560,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 19846,
+                    "prompt_tokens": 3399,
+                    "total_tokens": 23245,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 18688,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 14803,
+                    "prompt_tokens": 5059,
+                    "total_tokens": 19862,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 13760,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 2944
+                    }
+                },
+                {
+                    "completion_tokens": 14633,
+                    "prompt_tokens": 6867,
+                    "total_tokens": 21500,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 13568,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 4864
+                    }
+                },
+                {
+                    "completion_tokens": 14629,
+                    "prompt_tokens": 8730,
+                    "total_tokens": 23359,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 13632,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 5888
+                    }
+                },
+                {
+                    "completion_tokens": 14643,
+                    "prompt_tokens": 10292,
+                    "total_tokens": 24935,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 13696,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 0
+                    }
+                },
+                {
+                    "completion_tokens": 10593,
+                    "prompt_tokens": 11791,
+                    "total_tokens": 22384,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 9600,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 10112
+                    }
+                },
+                {
+                    "completion_tokens": 9533,
+                    "prompt_tokens": 13648,
+                    "total_tokens": 23181,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 8576,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 8064
+                    }
+                },
+                {
+                    "completion_tokens": 11083,
+                    "prompt_tokens": 15443,
+                    "total_tokens": 26526,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 10112,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 13056
+                    }
+                },
+                {
+                    "completion_tokens": 8299,
+                    "prompt_tokens": 16581,
+                    "total_tokens": 24880,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 7360,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 15232
+                    }
+                },
+                {
+                    "completion_tokens": 7258,
+                    "prompt_tokens": 18218,
+                    "total_tokens": 25476,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 6336,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 11008
+                    }
+                },
+                {
+                    "completion_tokens": 13389,
+                    "prompt_tokens": 19729,
+                    "total_tokens": 33118,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 12544,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 16256
+                    }
+                },
+                {
+                    "completion_tokens": 6608,
+                    "prompt_tokens": 20740,
+                    "total_tokens": 27348,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 5696,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 19200
+                    }
+                },
+                {
+                    "completion_tokens": 7821,
+                    "prompt_tokens": 22349,
+                    "total_tokens": 30170,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 6848,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 20224
+                    }
+                },
+                {
+                    "completion_tokens": 10852,
+                    "prompt_tokens": 23489,
+                    "total_tokens": 34341,
+                    "completion_tokens_details": {
+                        "accepted_prediction_tokens": 0,
+                        "audio_tokens": 0,
+                        "reasoning_tokens": 9792,
+                        "rejected_prediction_tokens": 0
+                    },
+                    "prompt_tokens_details": {
+                        "audio_tokens": 0,
+                        "cached_tokens": 17280
+                    }
+                }
+            ]
+        }
+    }
+]

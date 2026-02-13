@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.33304738998413
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3173,
+      "prompt_tokens": 50454,
+      "total_tokens": 53627,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_interior_compl_eq {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A \\ interior A = closure (Aᶜ) \\ interior (Aᶜ) := by\n  -- Rewrite each difference using the `frontier` of the corresponding set.\n  have h₁ :\n      closure A \\ interior A = frontier (A : Set X) := by\n    simpa using\n      (frontier_eq_closure_diff_interior (X := X) (A := A)).symm\n  have h₂ :\n      closure (Aᶜ) \\ interior (Aᶜ) = frontier (Aᶜ) := by\n    simpa using\n      (frontier_eq_closure_diff_interior (X := X) (A := Aᶜ)).symm\n  -- The frontier is invariant under taking complements.\n  have h_front : frontier (Aᶜ) = frontier (A : Set X) :=\n    frontier_compl_eq_frontier (X := X) (A := A)\n  -- Chain the equalities to reach the goal.\n  calc\n    closure A \\ interior A\n        = frontier (A : Set X) := h₁\n    _   = frontier (Aᶜ) := by\n          simpa using h_front.symm\n    _   = closure (Aᶜ) \\ interior (Aᶜ) := by\n          simpa using\n            (frontier_eq_closure_diff_interior (X := X) (A := Aᶜ))"
+  ],
+  "success": true
+}

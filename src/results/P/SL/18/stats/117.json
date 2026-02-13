@@ -1,0 +1,43 @@
+{
+  "times": [
+    96.80993294715881,
+    113.04490733146667
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6499,
+      "prompt_tokens": 16558,
+      "total_tokens": 23057,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    },
+    {
+      "completion_tokens": 9185,
+      "prompt_tokens": 16781,
+      "total_tokens": 25966,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_eq_interior_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    interior (closure (interior (A : Set X))) = interior (A : Set X) := by\n  apply Set.Subset.antisymm\n  ·\n    have hSubset : interior (A : Set X) ⊆ closure (interior (A : Set X)) :=\n      subset_closure\n    have hIncl : interior (interior (A : Set X))\n        ⊆ interior (closure (interior (A : Set X))) :=\n      interior_mono hSubset\n    simpa [interior_interior] using hIncl\n  ·\n    have hClosSub : closure (interior (A : Set X)) ⊆ (A : Set X) := by\n      have hSub : closure (interior (A : Set X)) ⊆ closure (A : Set X) := by\n        apply closure_mono\n        exact (interior_subset : interior (A : Set X) ⊆ A)\n      simpa [hA_closed.closure_eq] using hSub\n    exact interior_mono hClosSub",
+    "theorem subset_closure_interior_closure_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) :\n    (A : Set X) ⊆ closure (interior (closure A)) := by\n  -- From `P1`, we already know `A ⊆ closure (interior A)`.\n  have h₁ : (A : Set X) ⊆ closure (interior A) := hP1\n  -- And `closure (interior A) ⊆ closure (interior (closure A))` by monotonicity.\n  have h₂ :\n      closure (interior A) ⊆ closure (interior (closure A)) :=\n    Topology.closure_interior_subset_closure_interior_closure (A := A)\n  -- Combining the two inclusions yields the desired result.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

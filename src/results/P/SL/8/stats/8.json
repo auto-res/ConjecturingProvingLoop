@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.137314081192017
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1595,
+      "prompt_tokens": 1044,
+      "total_tokens": 2639,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_imp_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) :\n    Topology.P2 A := by\n  dsimp [Topology.P2]\n  have hP3 := (Topology.isOpen_imp_P3 (X := X) (A := A) hA)\n  dsimp [Topology.P3] at hP3\n  simpa [hA.interior_eq] using hP3"
+  ],
+  "success": true
+}

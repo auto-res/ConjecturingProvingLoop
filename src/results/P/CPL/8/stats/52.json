@@ -1,0 +1,185 @@
+{
+  "conjecture_stats": [
+    {
+      "time": 7.395810127258301,
+      "api_usage": {
+        "completion_tokens": 757,
+        "prompt_tokens": 25712,
+        "total_tokens": 26469,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 128,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 25344
+        }
+      }
+    }
+  ],
+  "prove_stats": {
+    "theorem P1_compl {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A → P1 (Aᶜ) :=": {
+      "times": [
+        14.488681316375732
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1042,
+          "prompt_tokens": 25699,
+          "total_tokens": 26741,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1024,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 25472
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P2_iff_P1_of_regular {X : Type*} [TopologicalSpace X] [T1Space X] {A : Set X} : (∀ x ∈ A, ∃ U, IsOpen U ∧ x ∈ U ∧ closure U ⊆ interior A) → (P2 A ↔ P1 A) :=": {
+      "times": [
+        39.03413939476013
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 3554,
+          "prompt_tokens": 25738,
+          "total_tokens": 29292,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 3264,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 25344
+          }
+        }
+      ],
+      "proved": true
+    },
+    "theorem P3_subset_closure {X : Type*} [TopologicalSpace X] {A B : Set X} : A ⊆ B → P3 B → P3 A :=": {
+      "times": [
+        11.369067192077637
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 914,
+          "prompt_tokens": 26053,
+          "total_tokens": 26967,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 896,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 25472
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P2_prod_of_empty {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {A : Set X} : P2 A → P2 (Set.prod A (∅ : Set Y)) :=": {
+      "times": [
+        28.339290857315063
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 2207,
+          "prompt_tokens": 26063,
+          "total_tokens": 28270,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 2176,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 25472
+          }
+        }
+      ],
+      "proved": true
+    },
+    "theorem P1_induction_on_closure {X : Type*} [TopologicalSpace X] {A : Set X} : (∀ x, x ∈ closure A → ∃ U, IsOpen U ∧ x ∈ U ∧ U ⊆ closure (interior A)) → P1 A :=": {
+      "times": [
+        11.1474130153656
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1048,
+          "prompt_tokens": 26144,
+          "total_tokens": 27192,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 960,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 25472
+          }
+        }
+      ],
+      "proved": true
+    },
+    "theorem P2_unionᵢ_finset {X : Type*} [TopologicalSpace X] {ι : Type*} [Fintype ι] {A : ι → Set X} : (∀ i, P2 (A i)) → P2 (⋃ i, A i) :=": {
+      "times": [
+        6.540200233459473
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 430,
+          "prompt_tokens": 26282,
+          "total_tokens": 26712,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 384,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 25472
+          }
+        }
+      ],
+      "proved": true
+    },
+    "theorem P2_transfinite_union {X : Type*} [TopologicalSpace X] {ι : Type*} [Preorder ι] {A : ι → Set X} (hmon : ∀ i j, i ≤ j → A i ⊆ A j) : (∀ i, P2 (A i)) → P2 (⋃ i, A i) :=": {
+      "times": [
+        11.090997219085693
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 878,
+          "prompt_tokens": 26395,
+          "total_tokens": 27273,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 832,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 25344
+          }
+        }
+      ],
+      "proved": true
+    }
+  }
+}

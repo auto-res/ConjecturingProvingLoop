@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.24540519714355
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4498,
+      "prompt_tokens": 26839,
+      "total_tokens": 31337,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.image_closure_subset_closure_image\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {f : X → Y} (hf : Continuous f) {A : Set X} :\n    f '' closure A ⊆ closure (f '' A) := by\n  intro y hy\n  rcases hy with ⟨x, hxCl, rfl⟩\n  -- We will verify the neighbourhood criterion for `f x`.\n  refine (mem_closure_iff).2 ?_\n  intro V hVopen hfxV\n  -- The preimage of `V` is an open neighbourhood of `x`.\n  have hPreOpen : IsOpen (f ⁻¹' V) := hVopen.preimage hf\n  have hxPre : x ∈ f ⁻¹' V := hfxV\n  -- Since `x ∈ closure A`, this neighbourhood meets `A`.\n  have hNonempty : ((f ⁻¹' V) ∩ A).Nonempty :=\n    (mem_closure_iff).1 hxCl (f ⁻¹' V) hPreOpen hxPre\n  rcases hNonempty with ⟨z, hzPre, hzA⟩\n  -- Map the witness forward to obtain a point in `V ∩ f '' A`.\n  exact ⟨f z, And.intro hzPre ⟨z, hzA, rfl⟩⟩"
+  ],
+  "success": true
+}

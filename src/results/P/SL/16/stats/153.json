@@ -1,0 +1,26 @@
+{
+  "times": [
+    57.1104462146759
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4575,
+      "prompt_tokens": 27233,
+      "total_tokens": 31808,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26496
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_closure_subset_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (X := X) A ↔ closure A ⊆ closure (interior A) := by\n  constructor\n  · intro hP1\n    -- From `A ⊆ closure (interior A)`, take closures of both sides.\n    have : closure A ⊆ closure (closure (interior A)) :=\n      closure_mono (hP1 : A ⊆ closure (interior A))\n    simpa [closure_closure] using this\n  · intro hClSub\n    -- Use the inclusion on closures to obtain the original `P1`.\n    dsimp [Topology.P1]\n    intro x hxA\n    have hxCl : (x : X) ∈ closure A := subset_closure hxA\n    exact hClSub hxCl"
+  ],
+  "success": true
+}

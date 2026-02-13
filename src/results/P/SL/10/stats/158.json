@@ -1,0 +1,26 @@
+{
+  "times": [
+    84.56034731864929
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6734,
+      "prompt_tokens": 26394,
+      "total_tokens": 33128,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.continuous_closure_preimage_subset {X Y : Type*}\n    [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} (hf : Continuous f)\n    {B : Set Y} :\n    closure (f ⁻¹' B) ⊆ f ⁻¹' closure B := by\n  intro x hx\n  -- `hx` gives a neighbourhood criterion for `x` with respect to `f ⁻¹' B`.\n  have h_closure :\n      ∀ V : Set X, IsOpen V → x ∈ V → (V ∩ (f ⁻¹' B)).Nonempty :=\n    (mem_closure_iff).1 hx\n  -- We will verify the neighbourhood criterion for `f x` and `B`.\n  have h_goal :\n      ∀ W : Set Y, IsOpen W → f x ∈ W → (W ∩ B).Nonempty := by\n    intro W hWopen hfxW\n    -- The preimage of `W` is an open neighbourhood of `x`.\n    have h_preimage_open : IsOpen (f ⁻¹' W) := hWopen.preimage hf\n    have hx_preimage : x ∈ f ⁻¹' W := hfxW\n    -- Apply the closure criterion at `x`.\n    have h_nonempty :\n        ((f ⁻¹' W) ∩ (f ⁻¹' B)).Nonempty :=\n      h_closure (f ⁻¹' W) h_preimage_open hx_preimage\n    -- Map the witness forward via `f`.\n    rcases h_nonempty with ⟨y, hy⟩\n    rcases hy with ⟨hyW, hyB⟩\n    exact ⟨f y, And.intro hyW hyB⟩\n  -- Conclude that `f x` is in the closure of `B`.\n  have h_fx : f x ∈ closure B := (mem_closure_iff).2 h_goal\n  simpa using h_fx"
+  ],
+  "success": true
+}

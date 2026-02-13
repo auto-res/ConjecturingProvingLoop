@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.01689791679382
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4243,
+      "prompt_tokens": 54610,
+      "total_tokens": 58853,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_closure_compl_eq_univ {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) ∪ closure (Aᶜ : Set X) = (Set.univ : Set X) := by\n  -- We prove both inclusions separately.\n  apply Set.Subset.antisymm\n  · intro _; simp\n  · intro x _\n    by_cases h : x ∈ (A : Set X)\n    ·\n      have hx : x ∈ closure (A : Set X) := subset_closure h\n      exact Or.inl hx\n    ·\n      have hxComp : x ∈ (Aᶜ : Set X) := h\n      have hx : x ∈ closure (Aᶜ : Set X) := subset_closure hxComp\n      exact Or.inr hx"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.74487853050232
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3739,
+      "prompt_tokens": 28456,
+      "total_tokens": 32195,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_and_interior_closure_eq_empty_implies_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → interior (closure (A : Set X)) = ∅ → A = (∅ : Set X) := by\n  intro hP3 hIntEmpty\n  dsimp [Topology.P3] at hP3\n  -- `P3` gives `A ⊆ interior (closure A)`, which is empty by hypothesis.\n  have hSub : (A : Set X) ⊆ (∅ : Set X) := by\n    have : (A : Set X) ⊆ interior (closure (A : Set X)) := hP3\n    simpa [hIntEmpty] using this\n  -- Conclude that `A = ∅`.\n  exact Set.Subset.antisymm hSub (Set.empty_subset _)"
+  ],
+  "success": true
+}

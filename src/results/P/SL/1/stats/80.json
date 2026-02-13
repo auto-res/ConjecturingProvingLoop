@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.25073266029358
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4753,
+      "prompt_tokens": 11667,
+      "total_tokens": 16420,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_closure_iff\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (closure (closure A)) ↔ Topology.P1 (closure A) := by\n  -- Useful equalities for rewriting.\n  have hInt :\n      interior (closure (closure A)) = interior (closure A) := by\n    simpa using\n      Topology.interior_closure_closure_eq_interior_closure (A := A)\n  have hCl : closure (closure A) = closure A := by\n    simpa [closure_closure] using rfl\n  -- Prove each direction of the equivalence.\n  constructor\n  · intro hP\n    dsimp [Topology.P1] at hP ⊢\n    intro x hx\n    -- View `x` as an element of `closure (closure A)` to use `hP`.\n    have hx' : x ∈ closure (closure A) := by\n      simpa [hCl] using hx\n    -- Apply `hP` and rewrite with the interior equality.\n    have : x ∈ closure (interior (closure (closure A))) := hP hx'\n    simpa [hInt] using this\n  · intro hP\n    dsimp [Topology.P1] at hP ⊢\n    intro x hx\n    -- Rewrite `x` into an element of `closure A` to use `hP`.\n    have hx' : x ∈ closure A := by\n      simpa [hCl] using hx\n    -- Apply `hP` and rewrite with the interior equality.\n    have : x ∈ closure (interior (closure A)) := hP hx'\n    simpa [hInt] using this"
+  ],
+  "success": true
+}

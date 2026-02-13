@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.4702787399292
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6081,
+      "prompt_tokens": 16770,
+      "total_tokens": 22851,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x _\n  -- The interior of `closure (interior A)` is the whole space.\n  have hIntUniv :\n      interior (closure (interior (A : Set X))) = (Set.univ : Set X) := by\n    simpa [hDense] using interior_univ\n  -- By monotonicity, `interior (closure (interior A)) ⊆ interior (closure A)`.\n  have hMono :\n      interior (closure (interior (A : Set X))) ⊆\n        interior (closure (A : Set X)) := by\n    have hcl :\n        closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n      closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n    exact interior_mono hcl\n  -- Any point belongs to `interior (closure A)` since it equals the whole space.\n  have hxInt : x ∈ interior (closure (A : Set X)) := by\n    have hxUniv : (x : X) ∈ (Set.univ : Set X) := by\n      simp\n    have hxInt' :\n        x ∈ interior (closure (interior (A : Set X))) := by\n      simpa [hIntUniv] using hxUniv\n    exact hMono hxInt'\n  exact hxInt"
+  ],
+  "success": true
+}

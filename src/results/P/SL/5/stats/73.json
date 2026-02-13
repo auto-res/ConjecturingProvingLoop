@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.86567044258118
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3385,
+      "prompt_tokens": 11330,
+      "total_tokens": 14715,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_self_of_closed_and_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hClosed : IsClosed (A : Set X)) (hP3 : Topology.P3 (X := X) A) :\n    closure (interior A) = A := by\n  -- Use the equality given by `P3` and rewrite with closedness of `A`.\n  have h :=\n    Topology.closure_eq_closure_interior_closure_of_P3 (X := X) (A := A) hP3\n  have h' : (A : Set X) = closure (interior A) := by\n    simpa [hClosed.closure_eq] using h\n  simpa using h'.symm"
+  ],
+  "success": true
+}

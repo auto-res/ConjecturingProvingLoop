@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.022359132766724
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3515,
+      "prompt_tokens": 36933,
+      "total_tokens": 40448,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_eq_closure_inter_of_open\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) :\n    closure (interior ((A ∩ B) : Set X)) = closure (A ∩ B) := by\n  -- The intersection of two open sets is open.\n  have hOpen : IsOpen ((A ∩ B) : Set X) := hA.inter hB\n  -- For an open set, its interior equals the set itself.\n  have hInt : interior ((A ∩ B) : Set X) = A ∩ B := hOpen.interior_eq\n  simpa [hInt]"
+  ],
+  "success": true
+}

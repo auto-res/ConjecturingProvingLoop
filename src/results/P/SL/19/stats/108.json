@@ -1,0 +1,43 @@
+{
+  "times": [
+    169.37970232963562,
+    77.49680685997009
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13194,
+      "prompt_tokens": 16083,
+      "total_tokens": 29277,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    },
+    {
+      "completion_tokens": 5208,
+      "prompt_tokens": 16157,
+      "total_tokens": 21365,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_iterate_five_eq_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior\n      (closure\n        (interior\n          (closure\n            (interior\n              (closure\n                (interior\n                  (closure\n                    (interior\n                      (closure (interior A))))))))) =\n      interior (closure (interior A)) := by\n  simp [Topology.interior_closure_interior_closure_eq_interior_closure]",
+    "theorem Topology.closure_eq_closure_interior_of_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsClosed A) :\n    Topology.P3 (A := A) → closure A = closure (interior A) := by\n  intro hP3\n  have hP2 : Topology.P2 (A := A) :=\n    (Topology.P3_implies_P2_of_isClosed (A := A) hA) hP3\n  exact Topology.closure_eq_closure_interior_of_P2 (A := A) hP2"
+  ],
+  "success": true
+}

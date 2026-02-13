@@ -1,0 +1,43 @@
+{
+  "times": [
+    164.4642779827118,
+    83.84567427635193
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13276,
+      "prompt_tokens": 11721,
+      "total_tokens": 24997,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5958,
+      "prompt_tokens": 12304,
+      "total_tokens": 18262,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_subset_interiors\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure ((A ∩ B) : Set X)) ⊆\n      interior (closure (A : Set X)) ∩ interior (closure (B : Set X)) := by\n  -- Step 1: `closure (A ∩ B)` is contained in `closure A ∩ closure B`.\n  have h₁ :\n      closure ((A ∩ B) : Set X) ⊆\n        closure (A : Set X) ∩ closure (B : Set X) := by\n    intro x hx\n    have hxA : x ∈ closure (A : Set X) :=\n      (closure_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)) hx\n    have hxB : x ∈ closure (B : Set X) :=\n      (closure_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hx\n    exact And.intro hxA hxB\n  -- Step 2: Apply monotonicity of `interior`.\n  have h₂ :\n      interior (closure ((A ∩ B) : Set X)) ⊆\n        interior (closure (A : Set X) ∩ closure (B : Set X)) :=\n    interior_mono h₁\n  -- Step 3: Show `interior (S ∩ T)` is contained in `interior S ∩ interior T`.\n  have h₃ :\n      interior (closure (A : Set X) ∩ closure (B : Set X)) ⊆\n        interior (closure (A : Set X)) ∩ interior (closure (B : Set X)) := by\n    intro x hx\n    rcases mem_interior.1 hx with ⟨U, hUopen, hxU, hUsub⟩\n    have hU_A : U ⊆ closure (A : Set X) := fun y hy => (hUsub hy).1\n    have hU_B : U ⊆ closure (B : Set X) := fun y hy => (hUsub hy).2\n    have hxA : x ∈ interior (closure (A : Set X)) :=\n      mem_interior.2 ⟨U, hUopen, hxU, hU_A⟩\n    have hxB : x ∈ interior (closure (B : Set X)) :=\n      mem_interior.2 ⟨U, hUopen, hxU, hU_B⟩\n    exact And.intro hxA hxB\n  exact h₂.trans h₃",
+    "theorem clopen_has_all_Ps {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (A : Set X)) (hClosed : IsClosed (A : Set X)) :\n    Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A := by\n  -- We can obtain all three properties directly from the fact that `A` is open.\n  exact Topology.isOpen_has_all_Ps (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

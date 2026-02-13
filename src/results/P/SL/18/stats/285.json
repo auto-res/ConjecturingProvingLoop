@@ -1,0 +1,26 @@
+{
+  "times": [
+    107.35901951789856
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5692,
+      "prompt_tokens": 46263,
+      "total_tokens": 51955,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_inter_open_left {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hOpenA : IsOpen (A : Set X)) :\n    Topology.P1 B → Topology.P1 (A ∩ B) := by\n  intro hP1B\n  have h := Topology.P1_inter_open (A := B) (B := A) hOpenA hP1B\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

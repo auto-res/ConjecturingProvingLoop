@@ -1,0 +1,26 @@
+{
+  "times": [
+    16.89132022857666
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1105,
+      "prompt_tokens": 17371,
+      "total_tokens": 18476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P3_implies_interior_eq_self {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed (A : Set X)) (hP3 : Topology.P3 (X:=X) A) :\n    interior (A : Set X) = A := by\n  have hA_open : IsOpen (A : Set X) :=\n    Topology.closed_P3_implies_isOpen (X:=X) (A:=A) hA_closed hP3\n  simpa using hA_open.interior_eq"
+  ],
+  "success": true
+}

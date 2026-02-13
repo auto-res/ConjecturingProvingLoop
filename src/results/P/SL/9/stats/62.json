@@ -1,0 +1,43 @@
+{
+  "times": [
+    77.52314472198486,
+    52.86189913749695
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6029,
+      "prompt_tokens": 9555,
+      "total_tokens": 15584,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    },
+    {
+      "completion_tokens": 3989,
+      "prompt_tokens": 9635,
+      "total_tokens": 13624,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_subset {X : Type*} [TopologicalSpace X] {s t : Set X} :\n    (interior s \\ closure t) ⊆ interior (s \\ t) := by\n  intro x hx\n  rcases hx with ⟨hx_int_s, hx_not_closure_t⟩\n  -- Obtain an open set `U` with `x ∈ U ⊆ s`.\n  rcases hx_int_s with ⟨U, hU_open, hxU, hU_subset_s⟩\n  -- `x` also lies in the open complement of `closure t`.\n  have hx_in_compl : x ∈ (closure t)ᶜ := by\n    simpa using hx_not_closure_t\n  have hV_open : IsOpen ((closure t)ᶜ) := (isClosed_closure).isOpen_compl\n  -- Consider `W = U ∩ (closure t)ᶜ`, an open neighbourhood of `x`.\n  have hxW : x ∈ U ∩ (closure t)ᶜ := ⟨hxU, hx_in_compl⟩\n  have hW_open : IsOpen (U ∩ (closure t)ᶜ) := IsOpen.inter hU_open hV_open\n  -- `W` is contained in `s \\ t`.\n  have hW_subset : U ∩ (closure t)ᶜ ⊆ s \\ t := by\n    intro y hy\n    have hy_in_s : y ∈ s := hU_subset_s hy.1\n    have hy_not_t : y ∉ t := by\n      intro hy_t\n      exact hy.2 (subset_closure hy_t)\n    exact ⟨hy_in_s, hy_not_t⟩\n  -- Hence `x` belongs to the interior of `s \\ t`.\n  exact mem_interior.2 ⟨U ∩ (closure t)ᶜ, hW_open, hxW, hW_subset⟩",
+    "theorem Topology.interior_closure_eq_interior_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed A) :\n    interior (closure A) = interior A := by\n  simpa [hA_closed.closure_eq]"
+  ],
+  "success": true
+}

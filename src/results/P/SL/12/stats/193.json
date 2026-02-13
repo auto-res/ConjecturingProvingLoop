@@ -1,0 +1,26 @@
+{
+  "times": [
+    44.857348680496216
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3205,
+      "prompt_tokens": 36545,
+      "total_tokens": 39750,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_of_P2_left {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 (X := X) A) (hB : Topology.P3 (X := X) B) :\n    Topology.P3 (X := X) (A ∪ B) := by\n  -- Upgrade the `P2` hypothesis on `A` to `P3`.\n  have hA3 : Topology.P3 (X := X) A :=\n    Topology.P2_implies_P3 (X := X) (A := A) hA\n  -- Combine the `P3` properties using the union lemma.\n  exact Topology.P3_union (X := X) (A := A) (B := B) hA3 hB"
+  ],
+  "success": true
+}

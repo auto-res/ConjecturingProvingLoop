@@ -1,0 +1,43 @@
+{
+  "times": [
+    27.96558928489685,
+    321.6739089488983
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1966,
+      "prompt_tokens": 9940,
+      "total_tokens": 11906,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9088
+      }
+    },
+    {
+      "completion_tokens": 19667,
+      "prompt_tokens": 10062,
+      "total_tokens": 29729,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9088
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_closure_of_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P3 A → closure A = closure (interior (closure A)) := by\n  intro hP3\n  apply subset_antisymm\n  · -- `closure A` is contained in `closure (interior (closure A))`\n    have h_sub : A ⊆ interior (closure A) := hP3\n    exact (closure_mono h_sub)\n  · -- `closure (interior (closure A))` is contained in `closure A`\n    exact closure_mono (interior_subset : interior (closure A) ⊆ closure A)",
+    ""
+  ],
+  "success": true
+}

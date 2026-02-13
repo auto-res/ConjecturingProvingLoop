@@ -1,0 +1,43 @@
+{
+  "times": [
+    72.47872948646545,
+    88.09298539161682
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3416,
+      "prompt_tokens": 39318,
+      "total_tokens": 42734,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 4174,
+      "prompt_tokens": 39395,
+      "total_tokens": 43569,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) → Topology.P3 (X := X) A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hxA\n  -- The closure of a dense set is the whole space.\n  have h_closure : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Hence its interior is also the whole space.\n  have h_int : interior (closure (A : Set X)) = (Set.univ : Set X) := by\n    simpa [h_closure, interior_univ]\n  -- The required inclusion now holds trivially.\n  simpa [h_int] using (by simp : (x : X) ∈ (Set.univ : Set X))",
+    "theorem Topology.closure_inter_interior_subset_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure ((A ∩ interior B) : Set X) ⊆ closure (A : Set X) := by\n  -- Since `A ∩ interior B ⊆ A`, monotonicity of `closure` gives the claim.\n  have h_subset : ((A ∩ interior B) : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

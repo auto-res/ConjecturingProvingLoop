@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.86447763442993
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3502,
+      "prompt_tokens": 39681,
+      "total_tokens": 43183,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_subset_closure_diff_interior {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (A \\ B) ⊆ closure A \\ interior B := by\n  intro x hx\n  -- First, prove `x ∈ closure A`.\n  have hxClosA : x ∈ closure A := by\n    have hSub : (A \\ B : Set X) ⊆ A := fun y hy => hy.1\n    exact (closure_mono hSub) hx\n  -- Next, show `x ∉ interior B` by contradiction.\n  have hxNotIntB : x ∉ interior B := by\n    intro hxIntB\n    -- Since `x ∈ closure (A \\ B)`, every neighbourhood of `x`\n    -- meets `A \\ B`. Take `interior B`, an open neighbourhood of `x`.\n    have hNon :\n        ((interior B : Set X) ∩ (A \\ B)).Nonempty :=\n      (mem_closure_iff).1 hx (interior B) isOpen_interior hxIntB\n    rcases hNon with ⟨y, ⟨hyIntB, hyDiff⟩⟩\n    -- But `y ∈ interior B ⊆ B`, contradicting `y ∉ B`.\n    have : (y : X) ∈ B := (interior_subset : interior B ⊆ B) hyIntB\n    exact hyDiff.2 this\n  -- Assemble the two facts.\n  exact And.intro hxClosA hxNotIntB"
+  ],
+  "success": true
+}

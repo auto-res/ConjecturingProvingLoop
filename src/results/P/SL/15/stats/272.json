@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.93669319152832
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5499,
+      "prompt_tokens": 58618,
+      "total_tokens": 64117,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58112
+      }
+    }
+  ],
+  "responses": [
+    "theorem denseInterior_prod_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y}\n    (hAne : (interior A).Nonempty) (hBne : (interior B).Nonempty) :\n    Dense (interior (A ×ˢ B)) ↔\n      (Dense (interior A) ∧ Dense (interior B)) := by\n  -- Identify the interior of a product.\n  have hInt : interior (A ×ˢ B) = (interior A) ×ˢ (interior B) := by\n    simpa using interior_prod_eq (s := A) (t := B)\n  -- Rewrite the goal with this identification.\n  have hRew :\n      Dense (interior (A ×ˢ B)) ↔\n        Dense ((interior A) ×ˢ (interior B)) := by\n    simpa [hInt]\n  -- Apply the density criterion for products to the interiors.\n  have hProd :=\n    (dense_prod_iff\n        (X := X) (Y := Y)\n        (A := interior A) (B := interior B)\n        (hAne := hAne) (hBne := hBne))\n  -- Combine the two equivalences.\n  exact hRew.trans hProd"
+  ],
+  "success": true
+}

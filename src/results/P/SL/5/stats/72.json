@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.59992742538452
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2392,
+      "prompt_tokens": 11134,
+      "total_tokens": 13526,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_nonempty_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (X := X) A) (hA : A.Nonempty) :\n    (interior (closure (A : Set X))).Nonempty := by\n  -- First, `P1` together with the non-emptiness of `A` gives\n  -- a non-empty interior of `A`.\n  have hInt : (interior (A : Set X)).Nonempty :=\n    Topology.interior_nonempty_of_P1 (X := X) (A := A) hP1 hA\n  -- A non-empty interior of `A` implies a non-empty interior of its closure.\n  exact\n    Topology.interior_closure_nonempty_of_interior_nonempty\n      (X := X) (A := A) hInt"
+  ],
+  "success": true
+}

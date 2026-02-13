@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.69205737113953
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4717,
+      "prompt_tokens": 44657,
+      "total_tokens": 49374,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_compl_interior_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (A : Set X) = (interior (Aᶜ : Set X))ᶜ := by\n  -- Start with `interior (Aᶜ) = (closure A)ᶜ` and take complements.\n  have h : interior ((Aᶜ : Set X)) = (closure (A : Set X))ᶜ :=\n    Topology.interior_compl_eq_compl_closure (X := X) (A := A)\n  simpa [compl_compl] using (congrArg Set.compl h).symm"
+  ],
+  "success": true
+}

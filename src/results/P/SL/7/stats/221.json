@@ -1,0 +1,26 @@
+{
+  "times": [
+    152.4726254940033
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11291,
+      "prompt_tokens": 33843,
+      "total_tokens": 45134,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iInter_subset\n    {X : Type*} [TopologicalSpace X] {ι : Sort _} {F : ι → Set X} :\n    interior (closure (⋂ i, F i)) ⊆ ⋂ i, interior (closure (F i)) := by\n  intro x hx\n  -- We will show that `x` belongs to each component of the intersection.\n  have h : ∀ i, x ∈ interior (closure (F i)) := by\n    intro i\n    -- Use monotonicity of `closure` and `interior` stemming from\n    -- the inclusion `⋂ i, F i ⊆ F i`.\n    have hSub : interior (closure (⋂ j, F j)) ⊆ interior (closure (F i)) := by\n      apply interior_mono\n      have h₀ : (⋂ j, F j : Set X) ⊆ F i := by\n        intro y hy\n        exact (Set.mem_iInter.1 hy) i\n      exact closure_mono h₀\n    exact hSub hx\n  -- Assemble the pointwise memberships into one for the intersection.\n  exact Set.mem_iInter.2 h"
+  ],
+  "success": true
+}

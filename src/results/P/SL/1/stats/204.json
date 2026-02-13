@@ -1,0 +1,26 @@
+{
+  "times": [
+    112.39188194274902
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7069,
+      "prompt_tokens": 31607,
+      "total_tokens": 38676,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_interior_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (interior A ∪ interior B) = interior A ∪ interior B := by\n  -- `interior A` and `interior B` are open, hence their union is open.\n  have hOpen : IsOpen ((interior A ∪ interior B) : Set X) := by\n    exact (isOpen_interior.union isOpen_interior)\n  -- For an open set `S`, we have `interior S = S`.\n  simpa [hOpen.interior_eq]"
+  ],
+  "success": true
+}

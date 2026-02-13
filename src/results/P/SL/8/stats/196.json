@@ -1,0 +1,43 @@
+{
+  "times": [
+    225.97517323493958,
+    99.30572271347046
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14302,
+      "prompt_tokens": 28643,
+      "total_tokens": 42945,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    },
+    {
+      "completion_tokens": 6823,
+      "prompt_tokens": 28763,
+      "total_tokens": 35586,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_sUnion_eq_closure_of_open {X : Type*} [TopologicalSpace X]\n    {𝒜 : Set (Set X)} (h𝒜 : ∀ A : Set X, A ∈ 𝒜 → IsOpen A) :\n    closure (interior (⋃₀ (𝒜 : Set (Set X)) : Set X)) = closure (⋃₀ 𝒜 : Set X) := by\n  -- We denote `S := ⋃₀ 𝒜` for brevity.\n  set S : Set X := ⋃₀ 𝒜 with hS\n  -- First inclusion: `closure (interior S) ⊆ closure S`.\n  have h₁ : closure (interior S) ⊆ closure S :=\n    closure_mono (interior_subset : interior S ⊆ S)\n  -- Second inclusion: `closure S ⊆ closure (interior S)`.\n  -- We start by proving `S ⊆ interior S`, using the openness of the members of `𝒜`.\n  have h₂ : S ⊆ interior S := by\n    intro x hxS\n    -- Obtain an open set `A ∈ 𝒜` that contains `x`.\n    rcases Set.mem_sUnion.mp (by simpa [hS] using hxS) with ⟨A, hA_mem, hxA⟩\n    have hA_open : IsOpen A := h𝒜 A hA_mem\n    have hA_sub : (A : Set X) ⊆ S :=\n      (Set.subset_sUnion_of_mem hA_mem).trans (by simpa [hS])\n    -- Show `x ∈ interior S` using `A`.\n    have : x ∈ interior S := by\n      apply Set.mem_interior.mpr\n      exact ⟨A, hA_sub, hA_open, hxA⟩\n    simpa using this\n  -- Taking closures yields the desired inclusion.\n  have h₂' : closure S ⊆ closure (interior S) := closure_mono h₂\n  -- Combine the two inclusions to obtain equality.\n  have h_eq : closure (interior S) = closure S :=\n    Set.Subset.antisymm h₁ h₂'\n  -- Revert the abbreviation and finish.\n  simpa [hS] using h_eq",
+    "theorem Set.mem_interior {α : Type*} [TopologicalSpace α] {s : Set α} {x : α} :\n    x ∈ interior s ↔ ∃ U : Set α, IsOpen U ∧ U ⊆ s ∧ x ∈ U := by\n  constructor\n  · intro hx\n    exact ⟨interior s, isOpen_interior, interior_subset, hx⟩\n  · rintro ⟨U, hU_open, hU_subset, hxU⟩\n    have hU_in_int : U ⊆ interior s := interior_maximal hU_subset hU_open\n    exact hU_in_int hxU"
+  ],
+  "success": true
+}

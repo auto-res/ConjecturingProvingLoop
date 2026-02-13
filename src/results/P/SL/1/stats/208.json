@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.38336515426636
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3075,
+      "prompt_tokens": 32213,
+      "total_tokens": 35288,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.subset_closure_interior_closure_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → (A : Set X) ⊆ closure (interior (closure A)) := by\n  intro hP1\n  -- Step 1: from `P1`, we have `A ⊆ closure (interior A)`.\n  have h₁ : (A : Set X) ⊆ closure (interior A) := hP1\n  -- Step 2: `interior A ⊆ interior (closure A)` by monotonicity.\n  have hInt : interior A ⊆ interior (closure A) :=\n    interior_mono (subset_closure : (A : Set X) ⊆ closure A)\n  -- Step 3: taking closures preserves the inclusion.\n  have h₂ : closure (interior A) ⊆ closure (interior (closure A)) :=\n    closure_mono hInt\n  -- Combine the two inclusions.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

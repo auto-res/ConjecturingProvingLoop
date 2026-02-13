@@ -1,0 +1,26 @@
+{
+  "times": [
+    125.21719765663147
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9515,
+      "prompt_tokens": 20553,
+      "total_tokens": 30068,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_nonempty_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → (A : Set X).Nonempty → (interior (A : Set X)).Nonempty := by\n  classical\n  intro hP1 hA\n  rcases hA with ⟨x, hxA⟩\n  have hx_cl : x ∈ closure (interior (A : Set X)) := hP1 hxA\n  by_cases hIntEmpty : interior (A : Set X) = (∅ : Set X)\n  · -- This case contradicts the membership `hx_cl`.\n    have : x ∈ (∅ : Set X) := by\n      simpa [hIntEmpty, closure_empty] using hx_cl\n    exact (this.elim)\n  · -- If `interior A` is not empty, we are done.\n    exact (Set.nonempty_iff_ne_empty).2 hIntEmpty"
+  ],
+  "success": true
+}

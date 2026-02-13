@@ -1,0 +1,26 @@
+{
+  "times": [
+    27.761423349380493
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1997,
+      "prompt_tokens": 3126,
+      "total_tokens": 5123,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P1 A := by\n  dsimp [Topology.P1]\n  intro x hxA\n  -- Rewrite `interior A` using the openness of `A`\n  have hx_int : x ∈ interior A := by\n    simpa [hA.interior_eq] using hxA\n  -- Any point of `interior A` lies in `closure (interior A)`\n  exact subset_closure hx_int"
+  ],
+  "success": true
+}

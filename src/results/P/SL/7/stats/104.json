@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.02915167808533
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4566,
+      "prompt_tokens": 14840,
+      "total_tokens": 19406,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closureInteriorClosure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (closure (interior (closure A))) := by\n  dsimp [Topology.P1]\n  intro x hx\n  -- `interior (closure A)` is contained in `interior (closure (interior (closure A)))`\n  have h_subset :\n      (interior (closure A) : Set X) ⊆\n        interior (closure (interior (closure A))) := by\n    simpa using\n      (Topology.interior_subset_interiorClosureInterior (A := closure A))\n  -- Taking closures preserves the inclusion\n  have h_closure :\n      closure (interior (closure A)) ⊆\n        closure (interior (closure (interior (closure A)))) :=\n    closure_mono h_subset\n  exact h_closure hx"
+  ],
+  "success": true
+}

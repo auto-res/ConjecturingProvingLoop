@@ -1,0 +1,60 @@
+{
+  "times": [
+    19.454447269439697,
+    65.85457730293274,
+    23.46522808074951
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1343,
+      "prompt_tokens": 40077,
+      "total_tokens": 41420,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    },
+    {
+      "completion_tokens": 4240,
+      "prompt_tokens": 40183,
+      "total_tokens": 44423,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    },
+    {
+      "completion_tokens": 1172,
+      "prompt_tokens": 40257,
+      "total_tokens": 41429,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_inter_closureCompl {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    frontier (A : Set X) = closure (A : Set X) ∩ closure (Aᶜ) := by\n  -- Relate the frontier to an identity already established.\n  have h :=\n    (Topology.closure_inter_closureCompl_eq_closure_diff_interior (A := A)).symm\n  simpa [frontier] using h",
+    "nonrec theorem Set.compl_compl {α : Type*} (s : Set α) : (sᶜ)ᶜ = s := by\n  ext x\n  by_cases hx : x ∈ s\n  · simp [hx]\n  · simp [hx]",
+    "theorem Topology.frontier_interior_eq_closureInterior_diff_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (interior A) = closure (interior A) \\ interior A := by\n  simp [frontier, interior_interior]"
+  ],
+  "success": true
+}

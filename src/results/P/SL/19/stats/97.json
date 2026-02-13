@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.276713609695435
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3155,
+      "prompt_tokens": 14486,
+      "total_tokens": 17641,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_union_of_P2\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 (A := A) → Topology.P2 (A := B) →\n      closure (A ∪ B) = closure (interior (A ∪ B)) := by\n  intro hA hB\n  have hA_eq : closure A = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P2 (A := A) hA\n  have hB_eq : closure B = closure (interior B) :=\n    Topology.closure_eq_closure_interior_of_P2 (A := B) hB\n  exact\n    Topology.closure_eq_closure_interior_union\n      (A := A) (B := B) hA_eq hB_eq"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.47768497467041
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2842,
+      "prompt_tokens": 25699,
+      "total_tokens": 28541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_closure_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (X := X) A) :\n    closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  -- One direction is given by a general subset lemma.\n  have h₁ :\n      closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) :=\n    Topology.closure_interior_closure_subset_closure (X := X) (A := A)\n  -- For the reverse inclusion, rewrite `closure A` using `P1`\n  -- and use monotonicity of `closure`.\n  have hEq :\n      closure (A : Set X) = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closure_interior (X := X) (A := A)).1 hP1\n  have h₂ :\n      closure (A : Set X) ⊆ closure (interior (closure (A : Set X))) := by\n    intro x hx\n    -- View `x` as lying in `closure (interior A)` via the equality `hEq`.\n    have hx' : x ∈ closure (interior A) := by\n      simpa [hEq] using hx\n    -- Use the monotonicity lemma to lift membership to the desired set.\n    have hsubset :\n        closure (interior A) ⊆\n          closure (interior (closure (A : Set X))) :=\n      Topology.closure_interior_subset_closure_interior_closure\n        (X := X) (A := A)\n    exact hsubset hx'\n  exact le_antisymm h₁ h₂"
+  ],
+  "success": true
+}

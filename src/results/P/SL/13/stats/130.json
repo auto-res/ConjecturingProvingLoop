@@ -1,0 +1,26 @@
+{
+  "times": [
+    82.78223729133606
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5814,
+      "prompt_tokens": 21117,
+      "total_tokens": 26931,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_dense_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hA_dense : Dense (A : Set X)) :\n    Topology.P1 (X := X) A := by\n  -- A closed and dense set is the whole space.\n  have h_eq : (A : Set X) = (Set.univ : Set X) :=\n    Topology.closed_dense_eq_univ (X := X) (A := A) hA_closed hA_dense\n  -- `P1` holds for the whole space; rewrite via `h_eq`.\n  simpa [h_eq] using Topology.P1_univ (X := X)"
+  ],
+  "success": true
+}

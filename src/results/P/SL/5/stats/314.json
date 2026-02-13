@@ -1,0 +1,60 @@
+{
+  "times": [
+    43.691022872924805,
+    61.1506826877594,
+    48.42309308052063
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4339,
+      "prompt_tokens": 64092,
+      "total_tokens": 68431,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 63232
+      }
+    },
+    {
+      "completion_tokens": 5652,
+      "prompt_tokens": 64196,
+      "total_tokens": 69848,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 63232
+      }
+    },
+    {
+      "completion_tokens": 3441,
+      "prompt_tokens": 64271,
+      "total_tokens": 67712,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 63232
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_closure_subset_closures {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A ∩ closure B : Set X) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- `A ∩ closure B ⊆ A`\n  have hA : (A ∩ closure B : Set X) ⊆ A := by\n    intro y hy; exact hy.1\n  -- Hence `x ∈ closure A`.\n  have hxA : x ∈ closure A := (closure_mono hA) hx\n  -- `A ∩ closure B ⊆ closure B`\n  have hB : (A ∩ closure B : Set X) ⊆ closure B := by\n    intro y hy; exact hy.2\n  -- Hence `x ∈ closure B`.\n  have hxB : x ∈ closure B := (closure_mono hB) hx\n  exact ⟨hxA, hxB⟩",
+    "theorem closure_interior_inter_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∩ B : Set X)) ⊆\n      closure (interior A) ∩ closure (interior B) := by\n  intro x hx\n  -- `interior (A ∩ B)` is contained in both `interior A` and `interior B`.\n  have hA : (interior (A ∩ B : Set X)) ⊆ interior A :=\n    interior_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)\n  have hB : (interior (A ∩ B : Set X)) ⊆ interior B :=\n    interior_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)\n  -- Taking closures preserves these inclusions.\n  have hxA : x ∈ closure (interior A) := (closure_mono hA) hx\n  have hxB : x ∈ closure (interior B) := (closure_mono hB) hx\n  exact ⟨hxA, hxB⟩",
+    "theorem interior_diff_closureInterior_eq_empty\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) \\ closure (interior A) = (∅ : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    -- `x` lies in `interior A`.\n    have hxInt : x ∈ interior (A : Set X) := hx.1\n    -- `interior A ⊆ closure (interior A)`.\n    have hsubset : interior (A : Set X) ⊆ closure (interior A) :=\n      subset_closure\n    -- Hence `x ∈ closure (interior A)`.\n    have hxCl : x ∈ closure (interior A) := hsubset hxInt\n    -- Contradiction with `x ∉ closure (interior A)`.\n    exact (hx.2 hxCl).elim\n  · intro hx\n    -- No element lies in the empty set.\n    cases hx"
+  ],
+  "success": true
+}

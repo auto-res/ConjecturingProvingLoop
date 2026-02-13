@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.87992835044861
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5190,
+      "prompt_tokens": 30250,
+      "total_tokens": 35440,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_closure_subset_closure_inter {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) ∩ closure (B : Set X) ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hx_intA, hx_clB⟩\n  -- We prove that `x` belongs to the closure of `A ∩ B`.\n  have : (x : X) ∈ closure (A ∩ B) := by\n    -- Use the neighbourhood characterization of the closure.\n    apply (mem_closure_iff).2\n    intro U hU_open hxU\n    -- Consider the open neighbourhood `U ∩ interior A` of `x`.\n    have hV_open : IsOpen (U ∩ interior (A : Set X)) :=\n      hU_open.inter isOpen_interior\n    have hxV : (x : X) ∈ U ∩ interior (A : Set X) := ⟨hxU, hx_intA⟩\n    -- Since `x ∈ closure B`, this set meets `B`.\n    have h_nonempty :\n        ((U ∩ interior (A : Set X)) ∩ B : Set X).Nonempty := by\n      have h_prop := (mem_closure_iff).1 hx_clB\n      exact h_prop (U ∩ interior (A : Set X)) hV_open hxV\n    -- Extract a witness and show it lies in `U ∩ (A ∩ B)`.\n    rcases h_nonempty with ⟨y, ⟨⟨hyU, hy_intA⟩, hyB⟩⟩\n    have hyA : (y : X) ∈ A := interior_subset hy_intA\n    exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩\n  exact this"
+  ],
+  "success": true
+}

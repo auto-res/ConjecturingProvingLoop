@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.71591114997864
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6229,
+      "prompt_tokens": 20030,
+      "total_tokens": 26259,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_and_emptyInteriorClosure_implies_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP3 : Topology.P3 (X := X) A)\n    (h_int : interior (closure (A : Set X)) = ∅) :\n    (A : Set X) = ∅ := by\n  -- From `P3`, every point of `A` lies in `interior (closure A)`.\n  have h_subset : (A : Set X) ⊆ (∅ : Set X) := by\n    intro x hxA\n    have : x ∈ interior (closure (A : Set X)) := hP3 hxA\n    simpa [h_int] using this\n  -- Combine the derived inclusion with the trivial one in the other direction.\n  exact Set.Subset.antisymm h_subset (Set.empty_subset _)"
+  ],
+  "success": true
+}

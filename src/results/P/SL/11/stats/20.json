@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.18331480026245
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3192,
+      "prompt_tokens": 2933,
+      "total_tokens": 6125,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_closure_interior_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P1 A) :\n    interior (closure A) = interior (closure (interior A)) := by\n  have hEq : closure A = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 (A := A) h\n  simpa [hEq]"
+  ],
+  "success": true
+}

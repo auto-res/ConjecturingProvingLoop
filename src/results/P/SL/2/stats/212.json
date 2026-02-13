@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.148903846740723
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1648,
+      "prompt_tokens": 34682,
+      "total_tokens": 36330,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_P3_implies_closure_interior_eq_self\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed A → Topology.P3 A → closure (interior A) = A := by\n  intro hClosed hP3\n  -- From the assumptions we obtain `P1 A`.\n  have hP1 : Topology.P1 A :=\n    Topology.isClosed_P3_implies_P1 (A := A) hClosed hP3\n  -- Apply the existing result for closed sets with property `P1`.\n  exact\n    Topology.isClosed_P1_implies_closure_interior_eq_self\n      (A := A) hClosed hP1"
+  ],
+  "success": true
+}

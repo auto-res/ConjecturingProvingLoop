@@ -1,0 +1,60 @@
+{
+  "times": [
+    16.52036714553833,
+    79.35479617118835,
+    86.49731183052063
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1403,
+      "prompt_tokens": 43173,
+      "total_tokens": 44576,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 4494,
+      "prompt_tokens": 43279,
+      "total_tokens": 47773,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 4947,
+      "prompt_tokens": 43385,
+      "total_tokens": 48332,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) ⊆ closure (Aᶜ) := by\n  intro x hx\n  have hx' : x ∈ closure (A : Set X) \\ interior A := by\n    simpa [frontier] using hx\n  exact (Topology.boundary_subset_closure_compl (A := A)) hx'",
+    "theorem Topology.closure_inter_closureCompl_eq_frontier {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (A : Set X) ∩ closure (Aᶜ) = frontier A := by\n  classical\n  -- We already have an equality expressing this intersection as a difference.\n  have h :=\n    Topology.closure_inter_closureCompl_eq_closure_diff_interior (A := A)\n  -- Rewriting the difference in terms of `frontier` gives the desired result.\n  simpa [frontier] using h",
+    ""
+  ],
+  "success": true
+}

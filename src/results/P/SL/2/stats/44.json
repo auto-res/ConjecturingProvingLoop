@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.691163063049316
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2183,
+      "prompt_tokens": 6980,
+      "total_tokens": 9163,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_P1_implies_closure_interior_eq_self {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    IsClosed A → Topology.P1 A → closure (interior A) = A := by\n  intro hClosed hP1\n  have hEq : closure (interior A) = closure A :=\n    Topology.P1_implies_closure_interior_eq_closure (A := A) hP1\n  simpa [hClosed.closure_eq] using hEq"
+  ],
+  "success": true
+}

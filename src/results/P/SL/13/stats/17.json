@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.387134313583374
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2075,
+      "prompt_tokens": 2599,
+      "total_tokens": 4674,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_closure_eq_closureInterior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P2 (X:=X) A → closure (A : Set X) = closure (interior A) := by\n  intro hP2\n  have hP1 : Topology.P1 (X:=X) A :=\n    Topology.P2_implies_P1 (X:=X) (A:=A) hP2\n  exact (Topology.P1_iff_closure_eq_closureInterior (X:=X) (A:=A)).1 hP1"
+  ],
+  "success": true
+}

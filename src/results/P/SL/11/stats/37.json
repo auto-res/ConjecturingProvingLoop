@@ -1,0 +1,43 @@
+{
+  "times": [
+    73.45682096481323,
+    63.741621017456055
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4423,
+      "prompt_tokens": 4960,
+      "total_tokens": 9383,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    },
+    {
+      "completion_tokens": 4254,
+      "prompt_tokens": 5141,
+      "total_tokens": 9395,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closed_iff_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    Topology.P3 A ↔ IsOpen A := by\n  constructor\n  · intro hP3\n    -- Using `hP3` and `hA`, upgrade the containment to lie inside `interior A`.\n    have hSub : (A : Set X) ⊆ interior A := by\n      simpa [hA.closure_eq] using hP3\n    -- Since `interior A ⊆ A`, we actually have equality.\n    have hEq : interior A = A := by\n      apply subset_antisymm\n      · exact interior_subset\n      · exact hSub\n    -- An equality with its interior makes `A` open.\n    simpa [hEq] using isOpen_interior\n  · intro hOpen\n    -- Show `A ⊆ interior (closure A)` using the facts that `A` is both open and closed.\n    dsimp [Topology.P3]\n    intro x hx\n    -- Membership in an open set is the same as membership in its interior.\n    have hxInt : x ∈ interior A := by\n      simpa [hOpen.interior_eq] using hx\n    -- Replace `closure A` by `A` because the latter is closed.\n    simpa [hA.closure_eq] using hxInt",
+    "theorem P2_of_interior_closure_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P2 (interior (closure (interior A))) := by\n  simpa using\n    (Topology.P2_of_open (A := interior (closure (interior A))) isOpen_interior)"
+  ],
+  "success": true
+}

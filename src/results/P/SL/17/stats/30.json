@@ -1,0 +1,43 @@
+{
+  "times": [
+    78.10331678390503,
+    21.85813593864441
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5297,
+      "prompt_tokens": 4419,
+      "total_tokens": 9716,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    },
+    {
+      "completion_tokens": 1540,
+      "prompt_tokens": 4551,
+      "total_tokens": 6091,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iUnion {ι : Sort _} {X : Type _} [TopologicalSpace X] {f : ι → Set X} :\n    (∀ i, Topology.P3 (f i)) → Topology.P3 (⋃ i, f i) := by\n  intro hP3\n  unfold Topology.P3 at *\n  intro x hx\n  rcases mem_iUnion.1 hx with ⟨i, hxi⟩\n  have hInt : x ∈ interior (closure (f i)) := hP3 i hxi\n  have hSubsetClosure : closure (f i) ⊆ closure (⋃ j, f j) := by\n    apply closure_mono\n    intro y hy\n    exact mem_iUnion.2 ⟨i, hy⟩\n  have hSubset : interior (closure (f i)) ⊆ interior (closure (⋃ j, f j)) :=\n    interior_mono hSubsetClosure\n  exact hSubset hInt",
+    "theorem Topology.P2_empty {X : Type*} [TopologicalSpace X] :\n    Topology.P2 (∅ : Set X) := by\n  unfold Topology.P2\n  intro x hx\n  cases hx"
+  ],
+  "success": true
+}

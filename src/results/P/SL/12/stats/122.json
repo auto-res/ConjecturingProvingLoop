@@ -1,0 +1,26 @@
+{
+  "times": [
+    154.8936095237732
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9706,
+      "prompt_tokens": 23585,
+      "total_tokens": 33291,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iInter_closure_subset_iInter_interior_closure\n    {X ι : Type*} [TopologicalSpace X] (A : ι → Set X) :\n    interior (⋂ i, closure (A i) : Set X) ⊆ ⋂ i, interior (closure (A i)) := by\n  intro x hx\n  -- For each index `i`, we show `x ∈ interior (closure (A i))`.\n  have h_i : ∀ i, x ∈ interior (closure (A i)) := by\n    intro i\n    -- `⋂ i, closure (A i) ⊆ closure (A i)`.\n    have h_subset :\n        (⋂ j, closure (A j) : Set X) ⊆ closure (A i) := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Apply monotonicity of `interior`.\n    have h_int :\n        interior (⋂ j, closure (A j) : Set X) ⊆ interior (closure (A i)) :=\n      interior_mono h_subset\n    exact h_int hx\n  -- Combine the pointwise statements into one for the intersection.\n  exact (Set.mem_iInter.2 h_i)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    129.39279794692993
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12140,
+      "prompt_tokens": 27872,
+      "total_tokens": 40012,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_empty_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) → interior (Aᶜ) = (∅ : Set X) := by\n  intro hDense\n  classical\n  -- We prove every point is *not* in `interior (Aᶜ)`.\n  apply (Set.eq_empty_iff_forall_not_mem).2\n  intro x hxInt\n  -- Since `A` is dense, the closure of `A` is the whole space, hence `x ∈ closure A`.\n  have hx_closure : (x : X) ∈ closure (A : Set X) := by\n    have hClosure : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n    simpa [hClosure] using (by\n      have : (x : X) ∈ (Set.univ : Set X) := by\n        simp\n      exact this)\n  -- `interior (Aᶜ)` is an open neighbourhood of `x`.\n  have h_open : IsOpen (interior (Aᶜ)) := isOpen_interior\n  -- By density, this neighbourhood must meet `A`.\n  have h_inter : ((interior (Aᶜ)) ∩ A).Nonempty :=\n    (mem_closure_iff).1 hx_closure (interior (Aᶜ)) h_open hxInt\n  -- But `interior (Aᶜ)` is contained in `Aᶜ`, contradicting the intersection with `A`.\n  rcases h_inter with ⟨y, hyInt, hyA⟩\n  have hyNotA : (y : X) ∈ Aᶜ := interior_subset hyInt\n  exact (hyNotA hyA).elim"
+  ],
+  "success": true
+}

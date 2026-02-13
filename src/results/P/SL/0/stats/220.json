@@ -1,0 +1,26 @@
+{
+  "times": [
+    114.27872681617737
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7672,
+      "prompt_tokens": 36969,
+      "total_tokens": 44641,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_interior_iff_isOpen_closure_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (interior (A : Set X))) ↔\n      IsOpen (closure (interior (A : Set X))) := by\n  -- `closure (interior A)` is always a closed set.\n  have hClosed : IsClosed (closure (interior (A : Set X))) := isClosed_closure\n  -- Apply the closed–open characterization of `P2`.\n  simpa using\n    (Topology.P2_iff_isOpen_of_isClosed\n      (X := X)\n      (A := closure (interior (A : Set X)))\n      hClosed)"
+  ],
+  "success": true
+}

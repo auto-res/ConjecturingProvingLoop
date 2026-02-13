@@ -1,0 +1,26 @@
+{
+  "times": [
+    108.66824984550476
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8363,
+      "prompt_tokens": 22586,
+      "total_tokens": 30949,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_inter_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior (A ∩ B))) ⊆\n      interior (closure (interior A)) ∩ interior (closure (interior B)) := by\n  intro x hx\n  -- Inclusion related to `A`.\n  have hA_sub : (A ∩ B : Set X) ⊆ A := by\n    intro y hy; exact hy.1\n  have hA_int : interior (A ∩ B) ⊆ interior A := interior_mono hA_sub\n  have hA_cl : closure (interior (A ∩ B)) ⊆ closure (interior A) :=\n    closure_mono hA_int\n  have hxA : x ∈ interior (closure (interior A)) :=\n    (interior_mono hA_cl) hx\n  -- Inclusion related to `B`.\n  have hB_sub : (A ∩ B : Set X) ⊆ B := by\n    intro y hy; exact hy.2\n  have hB_int : interior (A ∩ B) ⊆ interior B := interior_mono hB_sub\n  have hB_cl : closure (interior (A ∩ B)) ⊆ closure (interior B) :=\n    closure_mono hB_int\n  have hxB : x ∈ interior (closure (interior B)) :=\n    (interior_mono hB_cl) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

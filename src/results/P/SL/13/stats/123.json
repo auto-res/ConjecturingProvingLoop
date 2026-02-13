@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.9894449710846
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6605,
+      "prompt_tokens": 20226,
+      "total_tokens": 26831,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P2_implies_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hP2 : Topology.P2 (X:=X) A) :\n    IsOpen (A : Set X) := by\n  -- From the closedness of `A` and `P2`, we know `interior A = A`.\n  have h_eq : interior (A : Set X) = A :=\n    Topology.closed_P2_implies_interior_eq_self (X := X) (A := A) hA_closed hP2\n  -- Since `interior A` is open, the equality gives the desired result.\n  have : IsOpen (interior (A : Set X)) := isOpen_interior\n  simpa [h_eq] using this"
+  ],
+  "success": true
+}

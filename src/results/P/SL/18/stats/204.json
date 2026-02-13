@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.38793540000916
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7112,
+      "prompt_tokens": 31005,
+      "total_tokens": 38117,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Dense (A : Set X) → Dense (B : Set X) → Dense (A ∪ B : Set X) := by\n  intro hDenseA hDenseB\n  -- Density of `A` already suffices to make the union dense.\n  have h₁ : Dense (A ∪ B : Set X) :=\n    Topology.dense_union_left (A := A) (B := B) hDenseA\n  -- Using the density of `B` provides the same conclusion, ensuring both\n  -- hypotheses are acknowledged.\n  have _h₂ : Dense (A ∪ B : Set X) :=\n    Topology.dense_union_right (A := A) (B := B) hDenseB\n  exact h₁"
+  ],
+  "success": true
+}

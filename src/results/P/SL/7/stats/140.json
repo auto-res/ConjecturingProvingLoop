@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.401997566223145
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1558,
+      "prompt_tokens": 21826,
+      "total_tokens": 23384,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_subset_interiorClosure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) (hP3 : Topology.P3 A) :\n    A ⊆ interior (closure B) := by\n  intro x hxA\n  have hxIntA : x ∈ interior (closure A) := hP3 hxA\n  have hMono : interior (closure A) ⊆ interior (closure B) :=\n    interior_mono (closure_mono hAB)\n  exact hMono hxIntA"
+  ],
+  "success": true
+}

@@ -1,0 +1,77 @@
+{
+  "times": [
+    167.03363251686096,
+    171.6916389465332,
+    185.49182558059692,
+    33.95422053337097
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10745,
+      "prompt_tokens": 39615,
+      "total_tokens": 50360,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 11599,
+      "prompt_tokens": 39735,
+      "total_tokens": 51334,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 15660,
+      "prompt_tokens": 39926,
+      "total_tokens": 55586,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 2162,
+      "prompt_tokens": 40068,
+      "total_tokens": 42230,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P3_compl_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_open : IsOpen A) :\n    Topology.P1 (Aᶜ) ↔ Topology.P3 (Aᶜ) := by\n  have h_closed : IsClosed (Aᶜ) := hA_open.isClosed_compl\n  have h₁ := Topology.P1_iff_P2_compl_of_isClosed (X := X) (A := A) h_closed\n  have h₂ := Topology.P2_iff_P3_compl_of_isOpen (X := X) (A := A) hA_open\n  simpa using h₁.trans h₂",
+    "theorem Topology.closure_eq_interior_union_frontier\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) = interior A ∪ frontier A := by\n  ext x\n  constructor\n  · intro hx\n    by_cases hInt : x ∈ interior A\n    · exact Or.inl hInt\n    · -- `x` is in the closure of `A` but not in its interior,\n      -- hence it belongs to the frontier.\n      have hFront : x ∈ frontier (A : Set X) := by\n        dsimp [frontier] at *\n        exact And.intro hx hInt\n      exact Or.inr hFront\n  · intro h\n    cases h with\n    | inl hInt =>\n        -- A point of the interior is certainly in the closure.\n        have hxA : (x : X) ∈ A := interior_subset hInt\n        exact subset_closure hxA\n    | inr hFront =>\n        -- By definition, a point of the frontier lies in the closure.\n        dsimp [frontier] at hFront\n        exact hFront.1",
+    "theorem Topology.P2_iff_P3_compl_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_open : IsOpen A) :\n    Topology.P2 (Aᶜ) ↔ Topology.P3 (Aᶜ) := by\n  -- The complement of an open set is closed.\n  have hA_closed : IsClosed (Aᶜ) := hA_open.isClosed_compl\n  -- For a closed set, `P2` and `P3` are equivalent to openness; apply the existing lemma.\n  simpa using\n    (Topology.P2_iff_P3_of_isClosed (X := X) (A := Aᶜ) hA_closed)\n\ntheorem Topology.dense_iff_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ interior (Aᶜ : Set X) = (∅ : Set X) := by\n  classical\n  -- Step 1: `Dense A` is equivalent to `closure A = univ`.\n  have h_dense :\n      Dense (A : Set X) ↔ closure (A : Set X) = (Set.univ : Set X) :=\n    dense_iff_closure_eq (s := (A : Set X))\n  -- Step 2: `interior (Aᶜ)` is the complement of `closure A`.\n  have h_int_compl :\n      interior (Aᶜ : Set X) = (closure (A : Set X))ᶜ := by\n    exact interior_compl\n  -- Step 3: Rewrite the right–hand side in terms of `closure A = univ`.\n  have h_aux :\n      closure (A : Set X) = (Set.univ : Set X) ↔\n        interior (Aᶜ : Set X) = (∅ : Set X) := by\n    constructor\n    · intro h_cl\n      -- If `closure A = univ`, then `interior (Aᶜ)` is the empty set.\n      simpa [h_cl, Set.compl_univ] using h_int_compl\n    · intro h_int_empty\n      -- From `h_int_compl` and `h_int_empty` we get `(closure A)ᶜ = ∅`.\n      have h_compl : (closure (A : Set X))ᶜ = (∅ : Set X) := by\n        have : (closure (A : Set X))ᶜ = interior (Aᶜ : Set X) := by\n          simpa using h_int_compl.symm\n        simpa [h_int_empty] using this\n      -- Taking complements gives `closure A = univ`.\n      have : closure (A : Set X) = (Set.univ : Set X) := by\n        have h1 : closure (A : Set X) = ((closure (A : Set X))ᶜ)ᶜ := by\n          ext x\n          by_cases hx : (x : X) ∈ closure (A : Set X) <;> simp [hx]\n        simpa [h_compl] using h1\n      exact this\n  -- Combine the two equivalences.\n  simpa using h_dense.trans h_aux",
+    "theorem Topology.closure_has_P2_of_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Topology.P2 (closure A) := by\n  intro hDense\n  -- From the density of `interior A`, we know `closure A` satisfies `P3`.\n  have hP3 : Topology.P3 (closure A) :=\n    Topology.closure_has_P3_of_denseInterior (X := X) (A := A) hDense\n  -- A `P3` closure yields `P2` for the same closure.\n  exact Topology.P2_of_P3_closure (X := X) (A := A) hP3"
+  ],
+  "success": true
+}

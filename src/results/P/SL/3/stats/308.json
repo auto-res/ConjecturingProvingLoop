@@ -1,0 +1,26 @@
+{
+  "times": [
+    106.46984696388245
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7746,
+      "prompt_tokens": 52455,
+      "total_tokens": 60201,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem subset_closure_interior_of_P1 {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hP1 : Topology.P1 (A : Set X))\n    (hB : (B : Set X) ⊆ closure (A : Set X)) :\n    (B : Set X) ⊆ closure (interior (A : Set X)) := by\n  intro x hxB\n  have hxClA : (x : X) ∈ closure (A : Set X) := hB hxB\n  have hEq : closure (A : Set X) = closure (interior (A : Set X)) :=\n    closure_eq_closure_interior_of_P1 (A := A) hP1\n  simpa [hEq] using hxClA"
+  ],
+  "success": true
+}

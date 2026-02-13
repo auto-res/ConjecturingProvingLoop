@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.59415316581726
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5628,
+      "prompt_tokens": 33602,
+      "total_tokens": 39230,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_nonempty_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → A.Nonempty → (interior (closure A)).Nonempty := by\n  intro hP1 hAne\n  -- First, show that `interior A` is nonempty.\n  have hInt_nonempty : (interior A).Nonempty := by\n    by_contra hIntEmpty\n    have hIntEq : interior A = (∅ : Set X) :=\n      (Set.not_nonempty_iff_eq_empty).1 hIntEmpty\n    -- From `P1` and the emptiness of `interior A`, deduce `A = ∅`, contradiction.\n    have hAEq : (A : Set X) = (∅ : Set X) :=\n      Topology.P1_imp_eq_empty_of_empty_interior\n        (X := X) (A := A) hP1 hIntEq\n    rcases hAne with ⟨x, hx⟩\n    have : x ∈ (∅ : Set X) := by\n      simpa [hAEq] using hx\n    exact this.elim\n  -- Pick a point of `interior A`.\n  rcases hInt_nonempty with ⟨x, hxInt⟩\n  -- `interior A ⊆ interior (closure A)` by monotonicity.\n  have hSubset : interior A ⊆ interior (closure A) :=\n    Topology.interior_subset_interior_closure (X := X) (A := A)\n  exact ⟨x, hSubset hxInt⟩"
+  ],
+  "success": true
+}

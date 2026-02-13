@@ -1,0 +1,26 @@
+{
+  "times": [
+    135.1305227279663
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8139,
+      "prompt_tokens": 22429,
+      "total_tokens": 30568,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_empty_of_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A = (Set.univ : Set X) → interior (Aᶜ) = (∅ : Set X) := by\n  intro h_dense\n  have h_eq : interior (Aᶜ) = (closure A)ᶜ :=\n    Topology.interior_compl_eq_compl_closure (X := X) (A := A)\n  simpa [h_dense] using h_eq"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.48150396347046
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2104,
+      "prompt_tokens": 270,
+      "total_tokens": 2374,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → Topology.P1 A := by\n  intro h\n  have h₁ : interior (closure (interior A)) ⊆ closure (interior A) := by\n    simpa using interior_subset (s := closure (interior A))\n  exact Set.Subset.trans h h₁"
+  ],
+  "success": true
+}

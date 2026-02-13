@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.33257603645325
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3789,
+      "prompt_tokens": 44590,
+      "total_tokens": 48379,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_closure_satisfies_P1_P2_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior A = closure A) :\n    Topology.P1 (X := X) A ∧ Topology.P2 (X := X) A ∧ Topology.P3 (X := X) A := by\n  -- From the hypothesis we know that `A` is both open and closed.\n  have hOpen : IsOpen A :=\n    (Topology.open_and_closed_of_interior_eq_closure (X := X) (A := A) h).1\n  -- Any open set satisfies `P1`, `P2`, and `P3`.\n  exact\n    Topology.isOpen_satisfies_P1_P2_P3 (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

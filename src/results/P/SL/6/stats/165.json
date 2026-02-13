@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.24333143234253
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5893,
+      "prompt_tokens": 25519,
+      "total_tokens": 31412,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem clopen_of_P2_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hP2 : Topology.P2 (A : Set X)) :\n    IsOpen A ∧ IsClosed (A : Set X) := by\n  have hOpen : IsOpen (A : Set X) :=\n    (Topology.open_of_P2_closed (A := A) hClosed) hP2\n  exact And.intro hOpen hClosed"
+  ],
+  "success": true
+}

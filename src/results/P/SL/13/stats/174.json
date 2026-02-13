@@ -1,0 +1,26 @@
+{
+  "times": [
+    14.436897039413452
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 878,
+      "prompt_tokens": 30826,
+      "total_tokens": 31704,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_right_of_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hPA : Topology.P3 (X := X) A) (hB_open : IsOpen (B : Set X)) :\n    Topology.P3 (X := X) (A ∩ B) := by\n  -- Apply the “left” version with the roles of `A` and `B` swapped,\n  -- then rewrite using commutativity of `∩`.\n  have h :=\n    Topology.P3_inter_left_of_open (X := X) (A := B) (B := A) hB_open hPA\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

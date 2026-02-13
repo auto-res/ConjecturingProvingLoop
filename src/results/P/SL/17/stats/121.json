@@ -1,0 +1,26 @@
+{
+  "times": [
+    14.424244165420532
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1117,
+      "prompt_tokens": 18248,
+      "total_tokens": 19365,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_eq_closure_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hP3 : Topology.P3 A) :\n    closure (interior (closure A)) = closure A := by\n  apply subset_antisymm\n  ·\n    exact Topology.closure_interior_closure_subset_closure (A := A)\n  ·\n    have h_subset : A ⊆ interior (closure A) := hP3\n    have : closure A ⊆ closure (interior (closure A)) := closure_mono h_subset\n    exact this"
+  ],
+  "success": true
+}

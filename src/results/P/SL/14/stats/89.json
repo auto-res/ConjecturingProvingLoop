@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.169588565826416
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3425,
+      "prompt_tokens": 15364,
+      "total_tokens": 18789,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_of_isClosed_and_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hP2 : Topology.P2 A) :\n    interior A = A := by\n  -- From `P2` and closedness we deduce that `A` is open.\n  have hOpen : IsOpen A :=\n    Topology.isOpen_of_isClosed_and_P2 (X := X) (A := A) hA_closed hP2\n  -- For an open set, the interior equals the set itself.\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

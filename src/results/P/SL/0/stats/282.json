@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.53602051734924
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4034,
+      "prompt_tokens": 47981,
+      "total_tokens": 52015,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_univ_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    closure (A : Set X) = (Set.univ : Set X) := by\n  -- First, `closure A ⊆ univ` holds trivially.\n  have h₁ : closure (A : Set X) ⊆ (Set.univ : Set X) := by\n    intro x _\n    trivial\n  -- Second, `univ ⊆ closure A` follows from the density hypothesis.\n  have h₂ : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n    have hMono : closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n      closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n    simpa [hDense] using hMono\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

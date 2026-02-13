@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.501407623291016
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1699,
+      "prompt_tokens": 51806,
+      "total_tokens": 53505,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_inter_mono_left\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} (hAB : (A : Set X) ⊆ B) :\n    interior (closure (A ∩ C)) ⊆ interior (closure (B ∩ C)) := by\n  intro x hx\n  -- First, upgrade the inclusion `(A ∩ C) ⊆ (B ∩ C)` to closures.\n  have hClos : closure (A ∩ C) ⊆ closure (B ∩ C) := by\n    have hSub : (A ∩ C : Set X) ⊆ B ∩ C := by\n      intro y hy\n      exact And.intro (hAB hy.1) hy.2\n    exact closure_mono hSub\n  -- Then apply monotonicity of `interior` to conclude.\n  exact (interior_mono hClos) hx"
+  ],
+  "success": true
+}

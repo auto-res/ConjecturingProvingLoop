@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.6172182559967
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6510,
+      "prompt_tokens": 51096,
+      "total_tokens": 57606,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_closed_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense A) (hClosed : IsClosed A) :\n    A = (Set.univ : Set X) := by\n  -- The density of `A` gives `closure A = univ`.\n  have hClosure : closure A = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  -- Since `A` is closed, `closure A = A`.\n  have hClosedEq : closure A = A := hClosed.closure_eq\n  -- Combine the two equalities to obtain the result.\n  simpa [hClosedEq] using hClosure"
+  ],
+  "success": true
+}

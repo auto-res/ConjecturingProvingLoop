@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.37446045875549
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3067,
+      "prompt_tokens": 14077,
+      "total_tokens": 17144,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.subset_interior_closure_of_P3_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP3 : Topology.P3 (closure A)) :\n    A ⊆ interior (closure A) := by\n  intro x hxA\n  -- First, note that `x ∈ closure A`.\n  have hx_closure : x ∈ closure A := subset_closure hxA\n  -- Apply the `P3` property for `closure A`.\n  have hx_int : x ∈ interior (closure (closure A)) := hP3 hx_closure\n  -- Simplify `interior (closure (closure A))` to `interior (closure A)`.\n  simpa [closure_closure] using hx_int"
+  ],
+  "success": true
+}

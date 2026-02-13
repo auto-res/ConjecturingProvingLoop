@@ -1,0 +1,26 @@
+{
+  "times": [
+    338.53073143959045
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 22325,
+      "prompt_tokens": 32144,
+      "total_tokens": 54469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 21440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_compl_eq_complement_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure ((Aᶜ) : Set X) = (interior (A : Set X))ᶜ := by\n  -- First inclusion: `closure (Aᶜ) ⊆ (interior A)ᶜ`.\n  have h₁ : closure ((Aᶜ) : Set X) ⊆ (interior (A : Set X))ᶜ := by\n    -- Since `Aᶜ ⊆ (interior A)ᶜ` and the right–hand side is closed,\n    -- the claim follows from `closure_minimal`.\n    have h_subset : ((Aᶜ) : Set X) ⊆ (interior (A : Set X))ᶜ := by\n      intro x hxAcomp\n      intro hxInt\n      have hxA : (x : X) ∈ (A : Set X) := interior_subset hxInt\n      exact hxAcomp hxA\n    have h_closed : IsClosed ((interior (A : Set X))ᶜ) :=\n      (isOpen_interior : IsOpen (interior (A : Set X))).isClosed_compl\n    exact closure_minimal h_subset h_closed\n  -- Second inclusion: `(interior A)ᶜ ⊆ closure (Aᶜ)`.\n  have h₂ : (interior (A : Set X))ᶜ ⊆ closure ((Aᶜ) : Set X) := by\n    intro x hxNotInt\n    by_contra hxNotCl\n    -- The open neighbourhood `U := (closure (Aᶜ))ᶜ` contains `x`.\n    have hxU : (x : X) ∈ ((closure ((Aᶜ) : Set X))ᶜ) := hxNotCl\n    have hU_open : IsOpen ((closure ((Aᶜ) : Set X))ᶜ) :=\n      (isClosed_closure : IsClosed (closure ((Aᶜ) : Set X))).isOpen_compl\n    -- Show that `U ⊆ A`.\n    have hU_subset : ((closure ((Aᶜ) : Set X))ᶜ : Set X) ⊆ (A : Set X) := by\n      intro y hy\n      by_cases hYA : (y : X) ∈ (A : Set X)\n      · exact hYA\n      · -- Then `y ∈ Aᶜ`, hence `y ∈ closure (Aᶜ)`, contradicting `hy`.\n        have hyComp : (y : X) ∈ ((Aᶜ) : Set X) := by\n          simpa using hYA\n        have hyCl : (y : X) ∈ closure ((Aᶜ) : Set X) := subset_closure hyComp\n        have : (y : X) ∈ ((closure ((Aᶜ) : Set X))ᶜ) := hy\n        exact (this hyCl).elim\n    -- The point `x` is in the interior of `A`, contradicting `hxNotInt`.\n    have hxIntA : (x : X) ∈ interior (A : Set X) := by\n      have hxIntU :\n          (x : X) ∈ interior ((closure ((Aᶜ) : Set X))ᶜ : Set X) := by\n        simpa [hU_open.interior_eq] using hxU\n      have hIntSubset :\n          interior ((closure ((Aᶜ) : Set X))ᶜ : Set X) ⊆ interior (A : Set X) :=\n        interior_mono hU_subset\n      exact hIntSubset hxIntU\n    exact hxNotInt hxIntA\n  -- Combine the two inclusions for the desired equality.\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

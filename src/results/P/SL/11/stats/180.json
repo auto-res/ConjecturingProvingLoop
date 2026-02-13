@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.73731136322021
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5471,
+      "prompt_tokens": 28813,
+      "total_tokens": 34284,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_P2_prod_right\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : A.Nonempty)\n    (hP2 : Topology.P2 (A ×ˢ B)) :\n    Topology.P2 B := by\n  dsimp [Topology.P2] at hP2 ⊢\n  intro y hyB\n  rcases hA with ⟨x, hxA⟩\n  -- Form the point `(x, y) ∈ A ×ˢ B`.\n  have hxy : (x, y) ∈ A ×ˢ B := ⟨hxA, hyB⟩\n  -- Apply `P2` for the product.\n  have hxy_int : (x, y) ∈ interior (closure (interior (A ×ˢ B))) := hP2 hxy\n  -- Rewrite `interior (A ×ˢ B)` via `interior_prod_eq`.\n  have hxy_int₁ :\n      (x, y) ∈ interior (closure ((interior A) ×ˢ (interior B))) := by\n    simpa [interior_prod_eq] using hxy_int\n  -- Use the lemma `interior_closure_prod_eq` to split the closure of a product.\n  have hxy_int₂ :\n      (x, y) ∈ interior (closure (interior A) ×ˢ closure (interior B)) := by\n    simpa [interior_closure_prod_eq\n            (A := interior A) (B := interior B)] using hxy_int₁\n  -- Apply `interior_prod_eq` once more to separate the coordinates.\n  have hxy_int₃ :\n      (x, y) ∈ interior (closure (interior A)) ×ˢ\n        interior (closure (interior B)) := by\n    simpa [interior_prod_eq] using hxy_int₂\n  -- Extract the second coordinate to conclude `P2` for `B`.\n  exact hxy_int₃.2"
+  ],
+  "success": true
+}

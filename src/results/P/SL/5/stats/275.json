@@ -1,0 +1,26 @@
+{
+  "times": [
+    136.22577452659607
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13294,
+      "prompt_tokens": 52206,
+      "total_tokens": 65500,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_diff_eq_empty {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (A : Set X) \\ A) = (∅ : Set X) := by\n  classical\n  apply le_antisymm\n  · intro x hx\n    rcases mem_interior.1 hx with ⟨U, hUsub, hUopen, hxU⟩\n    -- The point `x` lies in `closure A`, since `U ⊆ closure A \\ A ⊆ closure A`.\n    have hxCl : x ∈ closure (A : Set X) := by\n      have : x ∈ closure (A : Set X) \\ A := hUsub hxU\n      exact this.1\n    -- By the defining property of the closure, every open neighbourhood of `x`\n    -- meets `A`, and in particular the neighbourhood `U` does.\n    have hNon : ((U : Set X) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hxCl U hUopen hxU\n    -- However, `U ⊆ closure A \\ A`, so `U` is disjoint from `A`, a contradiction.\n    rcases hNon with ⟨y, ⟨hyU, hyA⟩⟩\n    have : y ∉ A := by\n      have : y ∈ closure (A : Set X) \\ A := hUsub hyU\n      exact this.2\n    exact (this hyA).elim\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

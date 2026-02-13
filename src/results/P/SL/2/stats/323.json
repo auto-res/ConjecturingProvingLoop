@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.637948274612427
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1634,
+      "prompt_tokens": 55577,
+      "total_tokens": 57211,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_union_implies_P1_P2_P3\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    IsOpen A → IsOpen B →\n      (Topology.P1 (A ∪ B) ∧ Topology.P2 (A ∪ B) ∧ Topology.P3 (A ∪ B)) := by\n  intro hOpenA hOpenB\n  have hOpenUnion : IsOpen (A ∪ B : Set X) := hOpenA.union hOpenB\n  exact Topology.isOpen_implies_P1_P2_P3 (A := A ∪ B) hOpenUnion"
+  ],
+  "success": true
+}

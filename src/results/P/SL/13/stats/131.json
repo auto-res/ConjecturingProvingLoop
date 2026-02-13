@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.690014123916626
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2683,
+      "prompt_tokens": 21281,
+      "total_tokens": 23964,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_subset_closureInteriorClosure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A : Set X) ⊆ closure (interior (closure A)) := by\n  intro x hx\n  have hx' : (x : X) ∈ interior (closure A) :=\n    (Topology.interior_subset_interior_closure (X := X) (A := A)) hx\n  exact subset_closure hx'"
+  ],
+  "success": true
+}

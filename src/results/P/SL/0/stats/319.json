@@ -1,0 +1,26 @@
+{
+  "times": [
+    143.14902925491333
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6419,
+      "prompt_tokens": 55632,
+      "total_tokens": 62051,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_forall_open_neighborhood {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A ↔\n      ∀ x ∈ (A : Set X), ∃ U : Set X, IsOpen U ∧ x ∈ U ∧\n        U ⊆ interior (closure (interior (A : Set X))) := by\n  dsimp [Topology.P2]\n  constructor\n  · intro hP2 x hxA\n    exact\n      ⟨interior (closure (interior (A : Set X))), isOpen_interior,\n        hP2 hxA, subset_rfl⟩\n  · intro h x hxA\n    rcases h x hxA with ⟨U, _hUopen, hxU, hUsub⟩\n    exact hUsub hxU"
+  ],
+  "success": true
+}

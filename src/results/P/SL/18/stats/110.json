@@ -1,0 +1,43 @@
+{
+  "times": [
+    28.16657829284668,
+    19.760586977005005
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1777,
+      "prompt_tokens": 15435,
+      "total_tokens": 17212,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    },
+    {
+      "completion_tokens": 1177,
+      "prompt_tokens": 15505,
+      "total_tokens": 16682,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B : Set X)) =\n      closure (interior A) ∪ closure (interior B) := by\n  have hInt : interior (A ∪ B : Set X) = interior A ∪ interior B := by\n    simpa using interior_union\n  calc\n    closure (interior (A ∪ B : Set X))\n        = closure (interior A ∪ interior B) := by\n          simpa [hInt]\n    _ = closure (interior A) ∪ closure (interior B) := by\n          simpa using closure_union",
+    "theorem interior_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ B : Set X)) =\n      interior (closure (A : Set X) ∪ closure (B : Set X)) := by\n  simpa [closure_union]"
+  ],
+  "success": true
+}

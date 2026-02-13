@@ -1,0 +1,43 @@
+{
+  "times": [
+    110.57413506507874,
+    229.04140520095825
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8411,
+      "prompt_tokens": 41195,
+      "total_tokens": 49606,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8128,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    },
+    {
+      "completion_tokens": 13586,
+      "prompt_tokens": 41339,
+      "total_tokens": 54925,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40832
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_univ_iff_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) ↔\n      closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    -- Show `closure A` contains every point.\n    have h_sub : (Set.univ : Set X) ⊆ closure A := by\n      intro x _\n      have hxInt : (x : X) ∈ interior (closure A) := by\n        -- Rewrite using `hInt`.\n        simpa [hInt] using (by\n          have : (x : X) ∈ (Set.univ : Set X) := by simp\n          exact this)\n      exact interior_subset hxInt\n    -- Combine the two inclusions to obtain the desired equality.\n    exact Set.Subset.antisymm (Set.Subset_univ _) h_sub\n  · intro hCl\n    -- The forward implication is supplied by an existing lemma.\n    exact\n      Topology.interior_closure_eq_univ_of_dense (X := X) (A := A) hCl",
+    ""
+  ],
+  "success": true
+}

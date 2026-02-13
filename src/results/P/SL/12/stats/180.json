@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.46980929374695
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3561,
+      "prompt_tokens": 34242,
+      "total_tokens": 37803,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iInter_interior_subset_iInter_closure_interior\n    {X ι : Type*} [TopologicalSpace X] (A : ι → Set X) :\n    closure (⋂ i, interior (A i) : Set X) ⊆ ⋂ i, closure (interior (A i)) := by\n  intro x hx\n  -- Show that `x` belongs to each `closure (interior (A i))`.\n  have hx_i : ∀ i, x ∈ closure (interior (A i)) := by\n    intro i\n    -- `⋂ i, interior (A i) ⊆ interior (A i)`.\n    have h_subset : (⋂ j, interior (A j) : Set X) ⊆ interior (A i) := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Apply monotonicity of `closure`.\n    have h_closure :\n        closure (⋂ j, interior (A j) : Set X) ⊆ closure (interior (A i)) :=\n      closure_mono h_subset\n    exact h_closure hx\n  -- Combine the pointwise memberships into the intersection.\n  exact (Set.mem_iInter.2 hx_i)"
+  ],
+  "success": true
+}

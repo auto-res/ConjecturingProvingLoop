@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.51754140853882
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3295,
+      "prompt_tokens": 19278,
+      "total_tokens": 22573,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18304
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_closure_of_P1 {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → closure A = closure (interior (closure A)) := by\n  intro hP1\n  -- First, rewrite `closure A` using `P1`.\n  have h₁ :=\n    Topology.closure_eq_closure_interior_of_P1 (X := X) (A := A) hP1\n  -- Next, relate the two closures of interiors via `P1`.\n  have h₂ :=\n    Topology.closure_interior_closure_eq_closure_interior_of_P1\n      (X := X) (A := A) hP1\n  -- Chain the equalities together.\n  calc\n    closure A = closure (interior A) := h₁\n    _ = closure (interior (closure A)) := h₂.symm"
+  ],
+  "success": true
+}

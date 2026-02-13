@@ -1,0 +1,43 @@
+{
+  "times": [
+    47.68252778053284,
+    189.6884627342224
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4249,
+      "prompt_tokens": 20581,
+      "total_tokens": 24830,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    },
+    {
+      "completion_tokens": 14354,
+      "prompt_tokens": 20705,
+      "total_tokens": 35059,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_iff_closure_interior_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ closure (interior (closure (A : Set X))) = Set.univ := by\n  classical\n  constructor\n  · intro hDense\n    exact Topology.closure_interior_closure_eq_univ_of_dense (A := A) hDense\n  · intro hEq\n    -- `closure (interior (closure A))` is contained in `closure A`.\n    have hIncl :\n        closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n      have hIntSub :\n          interior (closure (A : Set X)) ⊆ closure (A : Set X) :=\n        interior_subset\n      exact closure_mono hIntSub\n    -- Hence `univ ⊆ closure A`.\n    have hUnivSubset : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      simpa [hEq] using hIncl\n    -- Equality of closures follows.\n    have hClosureEq : closure (A : Set X) = Set.univ := by\n      apply Set.Subset.antisymm\n      · intro _ _; trivial\n      · exact hUnivSubset\n    -- Translate to density.\n    exact\n      (Topology.dense_iff_closure_eq_univ (A := A)).2 hClosureEq",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    43.64221143722534,
+    46.71366548538208
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2969,
+      "prompt_tokens": 6807,
+      "total_tokens": 9776,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    },
+    {
+      "completion_tokens": 2947,
+      "prompt_tokens": 6913,
+      "total_tokens": 9860,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_closure_interior_closure_of_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P3 (A : Set X) →\n      interior (closure (A : Set X)) =\n        interior (closure (interior (closure (A : Set X)))) := by\n  intro hA\n  have hEq :\n      closure (A : Set X) = closure (interior (closure (A : Set X))) :=\n    closure_eq_closure_interior_closure_of_P3 (A := A) hA\n  simpa [hEq]",
+    "theorem P3_empty {X : Type*} [TopologicalSpace X] :\n    Topology.P3 (∅ : Set X) := by\n  dsimp [Topology.P3]\n  intro x hx\n  cases hx"
+  ],
+  "success": true
+}

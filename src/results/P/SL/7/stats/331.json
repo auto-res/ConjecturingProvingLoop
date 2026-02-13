@@ -1,0 +1,26 @@
+{
+  "times": [
+    138.5730917453766
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7449,
+      "prompt_tokens": 52284,
+      "total_tokens": 59733,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_interiors_eq\n    {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    interior (interior A ∩ interior B) = interior A ∩ interior B := by\n  -- `interior A` and `interior B` are open sets.\n  have hA : IsOpen (interior A) := isOpen_interior\n  have hB : IsOpen (interior B) := isOpen_interior\n  -- Apply the general lemma for the interior of an intersection of open sets.\n  simpa using (interior_inter hA hB)"
+  ],
+  "success": true
+}

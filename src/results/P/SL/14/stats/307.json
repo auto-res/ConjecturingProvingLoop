@@ -1,0 +1,26 @@
+{
+  "times": [
+    113.00967741012573
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6494,
+      "prompt_tokens": 57525,
+      "total_tokens": 64019,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_eq_interior_diff_closed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB_closed : IsClosed (B : Set X)) :\n    interior (A \\ B : Set X) = interior A \\ B := by\n  ext x\n  constructor\n  · intro hx\n    -- From `x ∈ interior (A \\ B)` we get `x ∈ interior A`.\n    have hxIntA : (x : X) ∈ interior A := by\n      have h_subset : (A \\ B : Set X) ⊆ A := by\n        intro y hy; exact hy.1\n      exact (interior_mono h_subset) hx\n    -- And we also have `x ∉ B`.\n    have hxNotB : (x : X) ∉ B := by\n      have : (x : X) ∈ A \\ B :=\n        (interior_subset : interior (A \\ B : Set X) ⊆ A \\ B) hx\n      exact this.2\n    exact And.intro hxIntA hxNotB\n  · rintro ⟨hxIntA, hxNotB⟩\n    -- Consider the open neighbourhood `U = interior A ∩ Bᶜ` of `x`.\n    have hU_open : IsOpen (interior A ∩ Bᶜ) :=\n      IsOpen.inter isOpen_interior hB_closed.isOpen_compl\n    have hxU : (x : X) ∈ (interior A ∩ Bᶜ : Set X) :=\n      And.intro hxIntA hxNotB\n    -- `U` is contained in `A \\ B`.\n    have hU_subset : (interior A ∩ Bᶜ : Set X) ⊆ A \\ B := by\n      intro y hy\n      rcases hy with ⟨hyIntA, hyNotB⟩\n      have hyA : (y : X) ∈ A := interior_subset hyIntA\n      exact And.intro hyA hyNotB\n    -- Hence `x ∈ interior (A \\ B)`.\n    have hU_interior :\n        (interior A ∩ Bᶜ : Set X) ⊆ interior (A \\ B : Set X) :=\n      interior_maximal hU_subset hU_open\n    exact hU_interior hxU"
+  ],
+  "success": true
+}

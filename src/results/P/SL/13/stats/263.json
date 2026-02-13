@@ -1,0 +1,26 @@
+{
+  "times": [
+    57.87078261375427
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3671,
+      "prompt_tokens": 46916,
+      "total_tokens": 50587,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_closure_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior (A : Set X)) ∪ closure A = closure A := by\n  ext x\n  constructor\n  · intro hx\n    cases hx with\n    | inr h_clA => exact h_clA\n    | inl h_clIntA =>\n        exact\n          (Topology.closure_interior_subset_closure (X := X) (A := A)) h_clIntA\n  · intro hx\n    exact Or.inr hx"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    77.44790315628052,
+    101.43237400054932,
+    46.12033033370972
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6484,
+      "prompt_tokens": 12598,
+      "total_tokens": 19082,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 8324,
+      "prompt_tokens": 12713,
+      "total_tokens": 21037,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8128,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 3409,
+      "prompt_tokens": 12790,
+      "total_tokens": 16199,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_of_denseInterior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Dense (A : Set X) := by\n  intro hDenseInt\n  -- The closure of `interior A` is the whole space.\n  have h_closureInt : closure (interior A : Set X) = (Set.univ : Set X) :=\n    hDenseInt.closure_eq\n  -- `closure (interior A)` is contained in `closure A`.\n  have h_subset :\n      closure (interior A : Set X) ⊆ closure (A : Set X) :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  -- Hence `closure A` must also be the whole space.\n  have h_closureA_eq : closure (A : Set X) = (Set.univ : Set X) := by\n    refine\n      (Set.Subset.antisymm ?_ ?_) <;>\n    try intro x hx\n    · simp\n    ·\n      have : (x : X) ∈ closure (A : Set X) := by\n        have : (x : X) ∈ (Set.univ : Set X) := by\n          simp\n        simpa [h_closureInt] using h_subset this\n      simpa using this\n  -- Conclude that `A` is dense.\n  exact (dense_iff_closure_eq).2 h_closureA_eq",
+    "theorem Topology.dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) → Topology.P3 (A : Set X) := by\n  intro hDense\n  dsimp [Topology.P3]\n  -- `closure A` is the whole space since `A` is dense.\n  have h_closure : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  intro x hxA\n  -- After rewriting, the goal becomes membership in `interior (Set.univ)`, which is trivial.\n  have : (x : X) ∈ interior (Set.univ : Set X) := by\n    simp\n  simpa [h_closure, interior_univ] using this",
+    "theorem Topology.P3_closure_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) → Topology.P3 (closure (A : Set X)) := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hx\n  -- Since `A` is dense, its closure is the whole space.\n  have h_closure_eq : closure (A : Set X) = (Set.univ : Set X) :=\n    hDense.closure_eq\n  -- Hence every point lies in the interior of this closure (and of its\n  -- further closure, which is equal to itself).\n  have : (x : X) ∈ (Set.univ : Set X) := by\n    simp\n  simpa [closure_closure, h_closure_eq, interior_univ] using this"
+  ],
+  "success": true
+}

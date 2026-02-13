@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.453463077545166
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3716,
+      "prompt_tokens": 32576,
+      "total_tokens": 36292,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_of_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsClosed (B : Set X)) :\n    interior (A \\ B : Set X) = interior A \\ B := by\n  ext x\n  constructor\n  · intro hx\n    have h := interior_diff_subset_interior_diff_closure\n        (X := X) (A := A) (B := B) hx\n    simpa [hB.closure_eq] using h\n  · rintro ⟨hxIntA, hxNotB⟩\n    -- `interior A` is open and contains `x`.\n    rcases mem_interior.1 hxIntA with ⟨U, hUsubA, hUopen, hxU⟩\n    -- The complement of the closed set `B` is open and contains `x`.\n    have hOpenCompl : IsOpen ((Bᶜ : Set X)) := hB.isOpen_compl\n    have hxComplB : x ∈ (Bᶜ : Set X) := by\n      simpa using hxNotB\n    -- The intersection `U ∩ Bᶜ` is an open neighborhood of `x`\n    -- contained in `A \\ B`.\n    have hOpenInt : IsOpen (U ∩ (Bᶜ : Set X)) := hUopen.inter hOpenCompl\n    have hxInt : x ∈ U ∩ (Bᶜ : Set X) := ⟨hxU, hxComplB⟩\n    have hSub :\n        (U ∩ (Bᶜ : Set X) : Set X) ⊆ A \\ B := by\n      intro y hy\n      exact ⟨hUsubA hy.1, hy.2⟩\n    exact mem_interior.2 ⟨U ∩ (Bᶜ : Set X), hSub, hOpenInt, hxInt⟩"
+  ],
+  "success": true
+}

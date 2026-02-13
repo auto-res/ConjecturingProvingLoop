@@ -1,0 +1,43 @@
+{
+  "times": [
+    322.59539580345154,
+    171.05882835388184
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 17014,
+      "prompt_tokens": 46621,
+      "total_tokens": 63635,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 10792,
+      "prompt_tokens": 46701,
+      "total_tokens": 57493,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_subset_closure_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    (closure (A : Set X) ∩ interior (B : Set X) : Set X) ⊆\n      closure ((A : Set X) ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxIntB⟩\n  -- We prove that every open neighborhood of `x` meets `A ∩ B`.\n  refine (mem_closure_iff).2 ?_\n  intro V hVOpen hxV\n  -- Obtain an open neighborhood `U` of `x` contained in `B`.\n  rcases hxIntB with ⟨U, hUOpen, hxU, hUsubB⟩\n  -- Consider the open set `V ∩ U`.\n  have hWOpen : IsOpen ((V ∩ U : Set X)) := hVOpen.inter hUOpen\n  have hxW : x ∈ (V ∩ U : Set X) := And.intro hxV hxU\n  -- Since `x ∈ closure A`, the set `(V ∩ U) ∩ A` is nonempty.\n  have hNon : ((V ∩ U : Set X) ∩ A).Nonempty := by\n    have := (mem_closure_iff).1 hxClA (V ∩ U) hWOpen hxW\n    simpa using this\n  -- Extract a point `y` in the intersection.\n  rcases hNon with ⟨y, hy⟩\n  rcases hy with ⟨⟨hyV, hyU⟩, hyA⟩\n  have hyB : (y : X) ∈ B := hUsubB hyU\n  -- Thus `y` lies in `V ∩ (A ∩ B)`.\n  have : (V ∩ ((A : Set X) ∩ B)).Nonempty := ⟨y, And.intro hyV ⟨hyA, hyB⟩⟩\n  simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm] using this",
+    "theorem interior_union_has_all_Ps {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (interior ((A ∪ B) : Set X)) ∧\n      Topology.P2 (interior ((A ∪ B) : Set X)) ∧\n        Topology.P3 (interior ((A ∪ B) : Set X)) := by\n  have hOpen : IsOpen (interior ((A ∪ B) : Set X)) := isOpen_interior\n  exact\n    Topology.isOpen_has_all_Ps\n      (X := X) (A := interior ((A ∪ B) : Set X)) hOpen"
+  ],
+  "success": true
+}

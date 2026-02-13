@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.50062966346741
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7471,
+      "prompt_tokens": 47203,
+      "total_tokens": 54674,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_closure_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∩ closure B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxIntA, hxClB⟩\n  -- We will use the neighbourhood characterization of the closure.\n  -- Reformulate the goal using `mem_closure_iff`.\n  have : (∀ U : Set X, IsOpen U → x ∈ U → (U ∩ (A ∩ B)).Nonempty) := by\n    intro U hU_open hxU\n    -- Consider the open set `V = U ∩ interior A`, which also contains `x`.\n    let V : Set X := U ∩ interior A\n    have hV_open : IsOpen V := hU_open.inter isOpen_interior\n    have hxV : x ∈ V := And.intro hxU hxIntA\n    -- Because `x ∈ closure B`, the neighbourhood `V` meets `B`.\n    have hNon : (V ∩ B).Nonempty :=\n      (mem_closure_iff).1 hxClB V hV_open hxV\n    -- Any point in `V ∩ B` lies in `U ∩ (A ∩ B)`.\n    rcases hNon with ⟨y, hyV, hyB⟩\n    have hyU : y ∈ U := hyV.1\n    have hyIntA : y ∈ interior A := hyV.2\n    have hyA : y ∈ A := interior_subset hyIntA\n    exact ⟨y, And.intro hyU (And.intro hyA hyB)⟩\n  -- Conclude that `x ∈ closure (A ∩ B)`.\n  exact (mem_closure_iff).2 this"
+  ],
+  "success": true
+}

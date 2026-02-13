@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.77535080909729
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7643,
+      "prompt_tokens": 43222,
+      "total_tokens": 50865,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iUnion_interior\n    {X : Type*} [TopologicalSpace X] {ι : Sort _} {F : ι → Set X} :\n    interior (⋃ i, interior (F i) : Set X) = ⋃ i, interior (F i) := by\n  -- The union of the interiors is open, hence its interior is itself.\n  have hOpen : IsOpen (⋃ i, interior (F i) : Set X) := by\n    apply isOpen_iUnion\n    intro i\n    exact isOpen_interior\n  simpa [hOpen.interior_eq]"
+  ],
+  "success": true
+}

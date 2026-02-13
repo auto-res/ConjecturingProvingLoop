@@ -1,0 +1,26 @@
+{
+  "times": [
+    129.6539306640625
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8489,
+      "prompt_tokens": 16338,
+      "total_tokens": 24827,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_nonempty_iff_interiorClosure_nonempty {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP3 : Topology.P3 A) :\n    A.Nonempty ↔ (interior (closure A)).Nonempty := by\n  constructor\n  · intro hA\n    exact\n      Topology.P3_nonempty_interiorClosure (X := X) (A := A) hP3 hA\n  · intro hInt\n    rcases hInt with ⟨x, hxInt⟩\n    -- From `hxInt : x ∈ interior (closure A)` we know `x ∈ closure A`.\n    have hxCl : x ∈ closure A := interior_subset hxInt\n    -- Use the characterization of points in the closure of `A`.\n    have hIntersect :\n        ((interior (closure A)) ∩ A).Nonempty := by\n      have hMemClosure := (mem_closure_iff).1 hxCl\n      simpa using hMemClosure (interior (closure A)) isOpen_interior hxInt\n    -- Extract a witness from the non-empty intersection.\n    rcases hIntersect with ⟨y, _, hyA⟩\n    exact ⟨y, hyA⟩"
+  ],
+  "success": true
+}

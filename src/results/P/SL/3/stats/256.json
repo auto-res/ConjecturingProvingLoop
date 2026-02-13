@@ -1,0 +1,43 @@
+{
+  "times": [
+    62.853379011154175,
+    15.644078254699707
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5960,
+      "prompt_tokens": 43230,
+      "total_tokens": 49190,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 1116,
+      "prompt_tokens": 43305,
+      "total_tokens": 44421,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_complement_eq_complement_interior_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior ((Aᶜ) : Set X)) =\n      (interior (closure (A : Set X)))ᶜ := by\n  have h₁ :\n      interior ((Aᶜ) : Set X) = (closure (A : Set X))ᶜ :=\n    interior_complement_eq_complement_closure (A := A)\n  have h₂ :\n      closure ((closure (A : Set X))ᶜ) =\n        (interior (closure (A : Set X)))ᶜ :=\n    closure_complement_eq_complement_interior\n      (A := closure (A : Set X))\n  simpa [h₁] using h₂",
+    "theorem closure_complement_eq_complement_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure ((Aᶜ) : Set X) = (interior (A : Set X))ᶜ := by\n  simpa using closure_compl_eq_complement_interior (A := A)"
+  ],
+  "success": true
+}

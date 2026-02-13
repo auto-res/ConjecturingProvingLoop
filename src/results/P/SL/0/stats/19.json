@@ -1,0 +1,60 @@
+{
+  "times": [
+    11.003485441207886,
+    114.92166423797607,
+    54.022987604141235
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1480,
+      "prompt_tokens": 3249,
+      "total_tokens": 4729,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 8046,
+      "prompt_tokens": 3371,
+      "total_tokens": 11417,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2816
+      }
+    },
+    {
+      "completion_tokens": 3928,
+      "prompt_tokens": 3477,
+      "total_tokens": 7405,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2816
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_closure_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → closure (A : Set X) = closure (interior (closure A)) := by\n  intro hP3\n  dsimp [Topology.P3] at hP3\n  apply subset_antisymm\n  · have h₁ : closure (A : Set X) ⊆ closure (interior (closure A)) := by\n      exact closure_mono hP3\n    simpa using h₁\n  · have h₂ : interior (closure A) ⊆ closure A := interior_subset\n    have h₂' : closure (interior (closure A)) ⊆ closure A := closure_mono h₂\n    simpa using h₂'",
+    "theorem P3_iff_isOpen_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    Topology.P3 A ↔ IsOpen (A : Set X) := by\n  constructor\n  · intro hP3\n    dsimp [Topology.P3] at hP3\n    -- Since `A` is closed, its closure is itself.\n    have h_closure : closure (A : Set X) = A := hA_closed.closure_eq\n    -- Using `P3`, we obtain `A ⊆ interior A`.\n    have hSub : (A : Set X) ⊆ interior A := by\n      simpa [h_closure] using hP3\n    -- Together with `interior_subset`, this yields equality.\n    have hEq : (A : Set X) = interior A :=\n      subset_antisymm hSub interior_subset\n    -- The interior of any set is open; hence `A` is open.\n    simpa [hEq] using isOpen_interior\n  · intro hA_open\n    -- Every open set satisfies `P3`.\n    exact (Topology.isOpen_has_all_Ps (X := X) (A := A) hA_open).2.2",
+    "theorem P3_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 A → Topology.P3 B → Topology.P3 (A ∪ B) := by\n  intro hA hB\n  dsimp [Topology.P3] at hA hB ⊢\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- `x` comes from `A`\n      have hx_in : x ∈ interior (closure A) := hA hxA\n      have hMono : interior (closure A) ⊆ interior (closure (A ∪ B)) := by\n        have : closure A ⊆ closure (A ∪ B) := by\n          simpa using closure_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n        exact interior_mono this\n      exact hMono hx_in\n  | inr hxB =>\n      -- `x` comes from `B`\n      have hx_in : x ∈ interior (closure B) := hB hxB\n      have hMono : interior (closure B) ⊆ interior (closure (A ∪ B)) := by\n        have : closure B ⊆ closure (A ∪ B) := by\n          simpa using closure_mono (Set.subset_union_right : (B : Set X) ⊆ A ∪ B)\n        exact interior_mono this\n      exact hMono hx_in"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    74.9149100780487,
+    62.94578719139099
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6891,
+      "prompt_tokens": 18986,
+      "total_tokens": 25877,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    },
+    {
+      "completion_tokens": 5140,
+      "prompt_tokens": 19060,
+      "total_tokens": 24200,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_idempotent_seven {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure A)))))))))))) =\n      interior (closure A) := by\n  simp [Topology.interior_closure_idempotent]",
+    "theorem closure_interior_inter_subset_closure_interiors\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∩ B : Set X)) ⊆\n      closure (interior (A : Set X) ∩ interior B) := by\n  have h :\n      (interior (A ∩ B : Set X)) ⊆ interior (A : Set X) ∩ interior B :=\n    Topology.interior_inter_subset (X := X) (A := A) (B := B)\n  exact closure_mono h"
+  ],
+  "success": true
+}

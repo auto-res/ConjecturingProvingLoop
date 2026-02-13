@@ -1,0 +1,43 @@
+{
+  "times": [
+    42.606112241744995,
+    23.963340759277344
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2474,
+      "prompt_tokens": 54092,
+      "total_tokens": 56566,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 1635,
+      "prompt_tokens": 54198,
+      "total_tokens": 55833,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_frontier_eq_closure_diff_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (frontier (A : Set X)) = closure A \\ interior A := by\n  simpa [Topology.frontier_eq_closure_diff_interior (A := A)] using\n    (Topology.closure_frontier_eq_self (A := A))",
+    "theorem Topology.interior_union_frontier_subset_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) ∪ frontier A ⊆ closure A := by\n  intro x hx\n  cases hx with\n  | inl hx_int =>\n      -- Points of `interior A` are, in particular, in `A`\n      -- and hence lie in `closure A`.\n      exact subset_closure (interior_subset hx_int)\n  | inr hx_frontier =>\n      -- By definition of the frontier, its points already\n      -- belong to `closure A`.\n      exact hx_frontier.1"
+  ],
+  "success": true
+}

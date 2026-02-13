@@ -1,0 +1,26 @@
+{
+  "times": [
+    154.17103743553162
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10827,
+      "prompt_tokens": 45419,
+      "total_tokens": 56246,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_inter_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = closure A ∩ closure (Aᶜ) := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hx_cl, hx_not_int⟩\n    -- `x ∉ interior A` gives membership in the complement of `interior A`\n    have h_mem_compl : x ∈ (interior A)ᶜ := by\n      simpa using hx_not_int\n    -- Rewrite using `closure_compl` to obtain membership in `closure (Aᶜ)`\n    have hx_cl_compl : x ∈ closure (Aᶜ) := by\n      simpa [closure_compl] using h_mem_compl\n    exact And.intro hx_cl hx_cl_compl\n  · intro hx\n    rcases hx with ⟨hx_clA, hx_clAc⟩\n    -- From `x ∈ closure (Aᶜ)` derive `x ∉ interior A`\n    have hx_not_int : x ∉ interior A := by\n      have h_mem_compl : x ∈ (interior A)ᶜ := by\n        simpa [closure_compl] using hx_clAc\n      simpa using h_mem_compl\n    exact And.intro hx_clA hx_not_int"
+  ],
+  "success": true
+}

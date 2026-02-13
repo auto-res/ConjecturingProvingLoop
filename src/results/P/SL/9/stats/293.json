@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.04174971580505
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5683,
+      "prompt_tokens": 51432,
+      "total_tokens": 57115,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_subset_frontier_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∩ B : Set X) ⊆\n      (frontier A ∩ closure B) ∪ (frontier B ∩ closure A) := by\n  intro x hx\n  rcases hx with ⟨hx_clAB, hx_not_intAB⟩\n  -- From the closure of an intersection to the intersection of the closures.\n  have h_cl_subset :\n      closure (A ∩ B : Set X) ⊆ closure A ∩ closure B :=\n    Topology.closure_inter_subset (A := A) (B := B)\n  have hx_clA : x ∈ closure A := (h_cl_subset hx_clAB).1\n  have hx_clB : x ∈ closure B := (h_cl_subset hx_clAB).2\n  -- Express the interior of an intersection.\n  have h_int_eq :\n      interior (A ∩ B : Set X) = interior A ∩ interior B :=\n    Topology.interior_inter_eq_inter (A := A) (B := B)\n  -- Case analysis on membership in `interior A`.\n  by_cases hIntA : x ∈ interior A\n  · -- Then `x ∉ interior B`, otherwise `x` would be in `interior (A ∩ B)`.\n    have h_not_intB : x ∉ interior B := by\n      intro hIntB\n      have : x ∈ interior (A ∩ B : Set X) := by\n        have : x ∈ interior A ∩ interior B := ⟨hIntA, hIntB⟩\n        simpa [h_int_eq] using this\n      exact hx_not_intAB this\n    -- Assemble membership in `frontier B ∩ closure A`.\n    have hx_frontierB : x ∈ frontier B := ⟨hx_clB, h_not_intB⟩\n    exact Or.inr ⟨hx_frontierB, hx_clA⟩\n  · -- Otherwise, `x ∉ interior A`, so `x` is in `frontier A ∩ closure B`.\n    have h_not_intA : x ∉ interior A := hIntA\n    have hx_frontierA : x ∈ frontier A := ⟨hx_clA, h_not_intA⟩\n    exact Or.inl ⟨hx_frontierA, hx_clB⟩"
+  ],
+  "success": true
+}

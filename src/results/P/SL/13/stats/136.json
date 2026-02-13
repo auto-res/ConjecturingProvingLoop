@@ -1,0 +1,43 @@
+{
+  "times": [
+    94.16431427001953,
+    59.51516366004944
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7100,
+      "prompt_tokens": 22158,
+      "total_tokens": 29258,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 4307,
+      "prompt_tokens": 22297,
+      "total_tokens": 26604,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_open_left {X : Type*} [TopologicalSpace X] {U A : Set X}\n    (hU : IsOpen (U : Set X)) :\n    interior ((U ∩ A) : Set X) = U ∩ interior (A : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨V, hV_open, hxV, hV_subset⟩\n    have hxU : x ∈ U := (hV_subset hxV).1\n    have hV_subsetA : (V : Set X) ⊆ A := by\n      intro y hy\n      exact (hV_subset hy).2\n    have hxIntA : x ∈ interior (A : Set X) :=\n      ⟨V, hV_open, hxV, hV_subsetA⟩\n    exact ⟨hxU, hxIntA⟩\n  · intro x hx\n    rcases hx with ⟨hxU, hxIntA⟩\n    rcases hxIntA with ⟨V, hV_open, hxV, hV_subsetA⟩\n    have hVU_open : IsOpen ((V ∩ U) : Set X) := hV_open.inter hU\n    have hxVU : x ∈ V ∩ U := ⟨hxV, hxU⟩\n    have h_subset : (V ∩ U : Set X) ⊆ U ∩ A := by\n      intro y hy\n      have hyV : y ∈ V := hy.1\n      have hyU : y ∈ U := hy.2\n      have hyA : y ∈ A := hV_subsetA hyV\n      exact ⟨hyU, hyA⟩\n    exact ⟨V ∩ U, hVU_open, hxVU, h_subset⟩",
+    "theorem Topology.closureInterior_eq_self_of_isClopen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_open : IsOpen (A : Set X)) (hA_closed : IsClosed (A : Set X)) :\n    closure (interior (A : Set X)) = A := by\n  have h_int : interior (A : Set X) = A := hA_open.interior_eq\n  have h_cl : closure (A : Set X) = A := hA_closed.closure_eq\n  simpa [h_int, h_cl]"
+  ],
+  "success": true
+}

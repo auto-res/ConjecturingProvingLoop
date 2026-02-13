@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.83054757118225
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4009,
+      "prompt_tokens": 12738,
+      "total_tokens": 16747,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_subset_inter_closure_interior {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (interior ((A ∩ B) : Set X)) ⊆\n      closure (interior A) ∩ closure (interior B) := by\n  intro x hx\n  -- `interior (A ∩ B)` is contained in both `interior A` and `interior B`\n  have hA_subset : interior ((A ∩ B) : Set X) ⊆ interior A :=\n    interior_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)\n  have hB_subset : interior ((A ∩ B) : Set X) ⊆ interior B :=\n    interior_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)\n  -- Monotonicity of `closure` transports the point into the respective closures\n  have hxA : x ∈ closure (interior A) := (closure_mono hA_subset) hx\n  have hxB : x ∈ closure (interior B) := (closure_mono hB_subset) hx\n  exact ⟨hxA, hxB⟩"
+  ],
+  "success": true
+}

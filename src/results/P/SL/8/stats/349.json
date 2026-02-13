@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.86791682243347
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5055,
+      "prompt_tokens": 54664,
+      "total_tokens": 59719,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_subset_interior_union_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior A ⊆ interior (A ∪ B) := by\n  -- The set `A` is contained in `A ∪ B`.\n  have h : A ⊆ A ∪ B := by\n    intro x hx\n    exact Or.inl hx\n  -- Monotonicity of `interior` yields the desired inclusion.\n  exact interior_mono h"
+  ],
+  "success": true
+}

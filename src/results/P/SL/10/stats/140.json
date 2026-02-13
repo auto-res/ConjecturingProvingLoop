@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.077908515930176
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2828,
+      "prompt_tokens": 22945,
+      "total_tokens": 25773,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_preimage_open {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {f : X → Y} (hf : Continuous f) {A : Set Y} (hA : IsOpen A) :\n    Topology.P2 (f ⁻¹' A) := by\n  have h_open : IsOpen (f ⁻¹' A) := hA.preimage hf\n  exact Topology.isOpen_implies_P2 (X := X) (A := f ⁻¹' A) h_open"
+  ],
+  "success": true
+}

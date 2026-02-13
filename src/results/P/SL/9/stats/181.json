@@ -1,0 +1,26 @@
+{
+  "times": [
+    84.99906253814697
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7500,
+      "prompt_tokens": 29403,
+      "total_tokens": 36903,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_closureCompl {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior (A : Set X)) ∪ closure (Aᶜ) = (Set.univ : Set X) := by\n  classical\n  ext x\n  constructor\n  · intro _\n    trivial\n  · intro _\n    by_cases hxc : x ∈ closure (Aᶜ)\n    · exact Or.inr hxc\n    · -- Since `x ∉ closure (Aᶜ)`, the open set `U = (closure (Aᶜ))ᶜ`\n      -- contains `x` and is contained in `A`.\n      have hxU : x ∈ ((closure (Aᶜ) : Set X)ᶜ) := by\n        simpa using hxc\n      have hU_open : IsOpen ((closure (Aᶜ) : Set X)ᶜ) :=\n        (isClosed_closure : IsClosed (closure (Aᶜ))).isOpen_compl\n      have hU_subsetA : ((closure (Aᶜ) : Set X)ᶜ) ⊆ A := by\n        intro y hy\n        by_contra hAy\n        have hyAc : y ∈ (Aᶜ : Set X) := hAy\n        have : y ∈ closure (Aᶜ) := subset_closure hyAc\n        exact hy this\n      -- Hence `x ∈ interior A`.\n      have hx_intA : x ∈ interior A := by\n        have h_subset : ((closure (Aᶜ) : Set X)ᶜ) ⊆ interior A :=\n          interior_maximal hU_subsetA hU_open\n        exact h_subset hxU\n      -- Therefore `x ∈ closure (interior A)`.\n      have hx_closureInt : x ∈ closure (interior A) := subset_closure hx_intA\n      exact Or.inl hx_closureInt"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.83890104293823
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3632,
+      "prompt_tokens": 54326,
+      "total_tokens": 57958,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_self_diff_frontier\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) = A \\ frontier A := by\n  classical\n  apply Set.Subset.antisymm\n  · intro x hx_int\n    have hxA : x ∈ A := interior_subset hx_int\n    have h_not_front : x ∉ frontier (A : Set X) := by\n      intro h_front\n      exact h_front.2 hx_int\n    exact ⟨hxA, h_not_front⟩\n  · intro x hx_diff\n    rcases hx_diff with ⟨hxA, h_not_front⟩\n    by_contra h_not_int\n    have hx_cl : x ∈ closure (A : Set X) := subset_closure hxA\n    have hx_front : x ∈ frontier (A : Set X) := ⟨hx_cl, h_not_int⟩\n    exact h_not_front hx_front"
+  ],
+  "success": true
+}

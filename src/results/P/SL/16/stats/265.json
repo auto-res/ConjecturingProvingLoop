@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.46840834617615
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2417,
+      "prompt_tokens": 46473,
+      "total_tokens": 48890,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_subset_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen A) : (A : Set X) ⊆ interior (closure A) := by\n  -- Since `A` is open, its interior is itself.\n  have hInt : interior A = A := hOpen.interior_eq\n  -- Monotonicity of `interior` yields `interior A ⊆ interior (closure A)`.\n  have hSubset : interior A ⊆ interior (closure A) :=\n    interior_mono subset_closure\n  -- Rewrite with `hInt` to obtain the desired inclusion.\n  simpa [hInt] using hSubset"
+  ],
+  "success": true
+}

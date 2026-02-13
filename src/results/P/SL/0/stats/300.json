@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.50838708877563
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6881,
+      "prompt_tokens": 51934,
+      "total_tokens": 58815,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_interiors_subset_union_closure_interiors\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X) ∪ interior (B : Set X)) ⊆\n      closure (interior (A : Set X)) ∪ closure (interior (B : Set X)) := by\n  -- Step 1: Establish the inclusion before taking closures.\n  have hSub :\n      ((interior (A : Set X)) ∪ interior (B : Set X) : Set X) ⊆\n        closure (interior (A : Set X)) ∪ closure (interior (B : Set X)) := by\n    intro x hx\n    cases hx with\n    | inl hxA => exact Or.inl (subset_closure hxA)\n    | inr hxB => exact Or.inr (subset_closure hxB)\n  -- Step 2: Apply `closure_mono`.\n  have hIncl : closure (interior (A : Set X) ∪ interior (B : Set X)) ⊆\n      closure (closure (interior (A : Set X)) ∪ closure (interior (B : Set X))) :=\n    closure_mono hSub\n  -- Step 3: The right‐hand side is already closed, so its closure is itself.\n  have hClosedA : IsClosed (closure (interior (A : Set X))) := isClosed_closure\n  have hClosedB : IsClosed (closure (interior (B : Set X))) := isClosed_closure\n  have hClosed :\n      IsClosed (closure (interior (A : Set X)) ∪ closure (interior (B : Set X))) :=\n    hClosedA.union hClosedB\n  simpa [hClosed.closure_eq] using hIncl"
+  ],
+  "success": true
+}

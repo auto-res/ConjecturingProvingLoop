@@ -1,0 +1,26 @@
+{
+  "times": [
+    149.09731435775757
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8530,
+      "prompt_tokens": 57394,
+      "total_tokens": 65924,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56192
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_inter_left_of_open {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    IsOpen (A : Set X) → Topology.P1 B → Topology.P1 (A ∩ B) := by\n  intro hOpenA hP1B\n  -- Apply the existing “right‐open” lemma after swapping the factors\n  have h := Topology.P1_inter_right_of_open (X := X) (A := B) (B := A) hP1B hOpenA\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

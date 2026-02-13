@@ -1,0 +1,77 @@
+{
+  "times": [
+    388.1919856071472,
+    256.08468532562256,
+    81.28982830047607,
+    35.47594666481018
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 27781,
+      "prompt_tokens": 21755,
+      "total_tokens": 49536,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 27648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 19813,
+      "prompt_tokens": 21865,
+      "total_tokens": 41678,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 8476,
+      "prompt_tokens": 21933,
+      "total_tokens": 30409,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    },
+    {
+      "completion_tokens": 2260,
+      "prompt_tokens": 22102,
+      "total_tokens": 24362,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_closure_eq_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ∩ closure A = interior A := by\n  apply Set.Subset.antisymm\n  · -- `interior A ∩ closure A ⊆ interior A`\n    intro x hx\n    exact hx.1\n  · -- `interior A ⊆ interior A ∩ closure A`\n    intro x hx\n    exact And.intro hx (subset_closure hx)",
+    "Lean code could not be generated because dependency code has a type error that needs refactoring.",
+    "theorem closureInterior_union_eq_union_closureInterior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  calc\n    closure (interior (A ∪ B))\n        = closure (interior A ∪ interior B) := by\n            simpa [interior_union]\n    _   = closure (interior A) ∪ closure (interior B) := by\n            simpa using (closure_union (s := interior A) (t := interior B))",
+    "theorem interior_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ closure A := by\n  intro x hx\n  have hxA : (x : X) ∈ A := interior_subset hx\n  exact subset_closure hxA"
+  ],
+  "success": true
+}

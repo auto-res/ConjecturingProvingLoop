@@ -1,0 +1,77 @@
+{
+  "times": [
+    185.15709733963013,
+    82.21955418586731,
+    52.05806589126587,
+    38.355278968811035
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13297,
+      "prompt_tokens": 30171,
+      "total_tokens": 43468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    },
+    {
+      "completion_tokens": 6810,
+      "prompt_tokens": 31028,
+      "total_tokens": 37838,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    },
+    {
+      "completion_tokens": 3809,
+      "prompt_tokens": 31106,
+      "total_tokens": 34915,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 3221,
+      "prompt_tokens": 32005,
+      "total_tokens": 35226,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_inter_closure_compl {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    frontier A = closure A ∩ closure (Aᶜ) := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hClosA, hNotIntA⟩\n    -- We show `x ∈ closure (Aᶜ)`\n    have hClosAc : x ∈ closure (Aᶜ) := by\n      by_contra hNot\n      -- `U = (closure (Aᶜ))ᶜ` is an open neighbourhood of `x`\n      let U := (closure (Aᶜ))ᶜ\n      have hUOpen : IsOpen U := (isClosed_closure (s := Aᶜ)).isOpen_compl\n      have hxU : x ∈ U := by\n        show x ∈ (closure (Aᶜ))ᶜ; simpa using hNot\n      -- `U ⊆ A`\n      have hUSubA : (U : Set X) ⊆ A := by\n        intro y hy\n        by_contra hyNotA\n        have : y ∈ Aᶜ := by\n          -- `¬ y ∈ A` is the same as `y ∈ Aᶜ`\n          simpa using hyNotA\n        have : y ∈ closure (Aᶜ) := subset_closure this\n        have : y ∈ (closure (Aᶜ))ᶜ := hy\n        exact (this.2 this.1).elim\n      -- Therefore `x ∈ interior A`, contradicting `hNotIntA`\n      have hxIntA : x ∈ interior A := by\n        have hSub : (U : Set X) ⊆ A := hUSubA\n        have hIncl : (U : Set X) ⊆ interior A :=\n          interior_maximal hSub hUOpen\n        exact hIncl hxU\n      exact hNotIntA hxIntA\n    exact And.intro hClosA hClosAc\n  · rintro ⟨hClosA, hClosAc⟩\n    -- We show that `x ∉ interior A`\n    have hNotIntA : x ∉ interior A := by\n      intro hxIntA\n      -- `interior A` is an open neighbourhood of `x`\n      have hNon :\n          ((interior A) ∩ Aᶜ : Set X).Nonempty :=\n        (mem_closure_iff).1 hClosAc (interior A)\n          isOpen_interior hxIntA\n      rcases hNon with ⟨y, ⟨hyInt, hyComp⟩⟩\n      have : (y : X) ∈ A := interior_subset hyInt\n      have : (y : X) ∈ Aᶜ := hyComp\n      exact this.2 this.1\n    exact And.intro hClosA hNotIntA",
+    "theorem Topology.frontier_subset_closure_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A ⊆ closure (Aᶜ) := by\n  classical\n  intro x hx\n  rcases hx with ⟨hxClos, hxNotInt⟩\n  -- We show `x ∈ closure (Aᶜ)` using the neighbourhood characterization.\n  have : x ∈ closure (Aᶜ) := by\n    refine (mem_closure_iff).2 ?_\n    intro U hU hxU\n    -- Suppose, for a contradiction, that `U ∩ Aᶜ` is empty.\n    by_contra hEmpty\n    -- Then every point of `U` lies in `A`.\n    have hSub : (U : Set X) ⊆ A := by\n      intro y hyU\n      by_cases hAy : (y : X) ∈ A\n      · exact hAy\n      · have hNon : ((U ∩ Aᶜ) : Set X).Nonempty := ⟨y, ⟨hyU, hAy⟩⟩\n        exact (hEmpty hNon).elim\n    -- Hence `x` belongs to the interior of `A`, contradicting `hxNotInt`.\n    have hxInt : x ∈ interior A := (interior_maximal hSub hU) hxU\n    exact (hxNotInt hxInt).elim\n  exact this",
+    "theorem Topology.closure_diff_closure_subset_closure_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure A \\ closure B ⊆ closure (A \\ B) := by\n  classical\n  intro x hx\n  rcases hx with ⟨hClosA, hNotClosB⟩\n  -- `x` lies outside the closure of `B`, hence inside its open complement.\n  let V := (closure B)ᶜ\n  have hV_open : IsOpen V := isClosed_closure.isOpen_compl\n  have hxV     : x ∈ V := by\n    -- membership in the complement is the negation of membership in the set\n    simpa [V, Set.mem_compl] using hNotClosB\n  -- To show that `x ∈ closure (A \\ B)`, we use the neighbourhood\n  -- characterization of the closure.\n  have : x ∈ closure (A \\ B) := by\n    -- Apply `mem_closure_iff`.\n    refine (mem_closure_iff).2 ?_\n    intro U hU_open hxU\n    -- Work inside the open set `U ∩ V`, which still contains `x`\n    -- and is disjoint from `B`.\n    have hUV_open : IsOpen (U ∩ V) := hU_open.inter hV_open\n    have hxUV     : x ∈ U ∩ V   := ⟨hxU, hxV⟩\n    -- Since `x ∈ closure A`, this open set intersects `A`.\n    have hNon : ((U ∩ V) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hClosA _ hUV_open hxUV\n    rcases hNon with ⟨y, ⟨⟨hyU, _hyV⟩, hyA⟩⟩\n    -- `y ∈ V` means `y ∉ closure B`, hence `y ∉ B`.\n    have hyNotB : y ∉ B := fun hB => (_hyV : y ∈ (closure B)ᶜ).2 ?_\n    -- Fill in the contradiction to derive `False`, impossible.\n    have : y ∈ closure B := subset_closure hB\n    exact (_hyV : y ∈ (closure B)ᶜ).2 this\n  exact this",
+    "theorem Topology.frontier_eq_self_diff_interior_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    frontier A = A \\ interior A := by\n  simpa [frontier, hA.closure_eq]"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.245765924453735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1405,
+      "prompt_tokens": 41449,
+      "total_tokens": 42854,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_of_P3_and_closure_subset_closure_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → closure A ⊆ closure (interior A) → Topology.P2 A := by\n  intro hP3 hClSub\n  -- From the assumptions, obtain `P1 A` using the existing lemma.\n  have hP1 : Topology.P1 A :=\n    Topology.P1_of_P3_and_closure_subset (A := A) hP3 hClSub\n  -- Combine `P1 A` and `P3 A` to deduce `P2 A`.\n  exact Topology.P2_of_P1_and_P3 (A := A) hP1 hP3"
+  ],
+  "success": true
+}

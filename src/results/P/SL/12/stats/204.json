@@ -1,0 +1,26 @@
+{
+  "times": [
+    119.7400963306427
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9025,
+      "prompt_tokens": 38830,
+      "total_tokens": 47855,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_subset_closure_of_subset_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (h : (A : Set X) ⊆ interior (closure B)) :\n    closure (A : Set X) ⊆ closure B := by\n  -- First, enlarge `A` to `interior (closure B)` using `h`, then take closures.\n  have h₁ : closure (A : Set X) ⊆ closure (interior (closure B)) :=\n    closure_mono h\n  -- Next, observe that `interior (closure B)` is contained in `closure B`,\n  -- hence so is its closure.\n  have h₂ : closure (interior (closure B)) ⊆ closure B := by\n    have h_sub : (interior (closure B) : Set X) ⊆ closure B := interior_subset\n    simpa [closure_closure] using closure_mono h_sub\n  -- Combine the two inclusions to obtain the desired result.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

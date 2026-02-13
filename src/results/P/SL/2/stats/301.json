@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.26392030715942
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5087,
+      "prompt_tokens": 51403,
+      "total_tokens": 56490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_frontier_subset_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) ⊆ interior (closure (A : Set X)) → Topology.P3 A := by\n  intro hFront\n  intro x hxA\n  by_cases hxInt : x ∈ interior (A : Set X)\n  ·\n    -- Case 1: `x` already lies in `interior A`.\n    have hSub :\n        (interior (A : Set X) : Set X) ⊆ interior (closure (A : Set X)) := by\n      have hIncl : (A : Set X) ⊆ closure (A : Set X) := subset_closure\n      exact interior_mono hIncl\n    exact hSub hxInt\n  ·\n    -- Case 2: `x` is not in `interior A`; hence it belongs to the frontier.\n    have hxCl : x ∈ closure (A : Set X) := subset_closure hxA\n    have hxFront : x ∈ frontier (A : Set X) := And.intro hxCl hxInt\n    exact hFront hxFront"
+  ],
+  "success": true
+}

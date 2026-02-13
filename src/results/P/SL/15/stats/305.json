@@ -1,0 +1,43 @@
+{
+  "times": [
+    50.01867914199829,
+    101.84584164619446
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3816,
+      "prompt_tokens": 64786,
+      "total_tokens": 68602,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 64256
+      }
+    },
+    {
+      "completion_tokens": 7269,
+      "prompt_tokens": 64892,
+      "total_tokens": 72161,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 64256
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_implies_interior_closure_eq_interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A →\n      interior (closure A) = interior (closure (interior (closure A))) := by\n  intro hP3\n  -- From `P3`, obtain the equality of closures.\n  have h_cl :\n      closure A = closure (interior (closure A)) :=\n    Topology.P3_implies_closure_eq_closure_interior_closure\n      (X := X) (A := A) hP3\n  -- Taking interiors preserves equality.\n  simpa [h_cl]",
+    "theorem interior_closure_eq_univ_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) ↔ closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    -- `interior (closure A) = univ` implies `univ ⊆ closure A`\n    have h₁ : (Set.univ : Set X) ⊆ closure A := by\n      intro x _\n      -- From `hInt`, we know `x ∈ interior (closure A)`\n      have hx : x ∈ interior (closure A) := by\n        simpa [hInt] using (Set.mem_univ x)\n      -- `interior (closure A)` is contained in `closure A`\n      exact interior_subset hx\n    -- The reverse inclusion is trivial\n    have h₂ : (closure A : Set X) ⊆ (Set.univ : Set X) := by\n      intro x _; trivial\n    exact Set.Subset.antisymm h₂ h₁\n  · intro hClos\n    -- If `closure A = univ`, so is its interior\n    simpa [hClos, interior_univ]"
+  ],
+  "success": true
+}

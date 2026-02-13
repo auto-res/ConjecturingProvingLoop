@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.08781337738037
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2715,
+      "prompt_tokens": 1072,
+      "total_tokens": 3787,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closed_iff_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    Topology.P3 A ↔ IsOpen A := by\n  -- first, rewrite `closure A` using closedness of `A`\n  have hClosure : closure A = A := hA_closed.closure_eq\n  unfold Topology.P3\n  constructor\n  · intro hP3\n    -- from `P3`, deduce `A ⊆ interior A`\n    have hSub : A ⊆ interior A := by\n      simpa [hClosure] using hP3\n    -- combine with `interior_subset` to get equality\n    have hEq : interior A = A := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      · exact hSub\n    -- use the fact that `interior A` is open\n    have hOpenInt : IsOpen (interior A) := isOpen_interior\n    simpa [hEq] using hOpenInt\n  · intro hOpen\n    -- an open set is contained in the interior of its closure\n    exact interior_maximal subset_closure hOpen"
+  ],
+  "success": true
+}

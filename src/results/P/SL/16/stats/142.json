@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.75455403327942
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4028,
+      "prompt_tokens": 25255,
+      "total_tokens": 29283,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_P2_iff_P1_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen A) :\n    Topology.P2 (X := X) A ↔\n      (Topology.P1 (X := X) A ∧ Topology.P3 (X := X) A) := by\n  -- Equivalences between `P1`, `P2`, and `P3` for open sets.\n  have hP1P2 : Topology.P1 (X := X) A ↔ Topology.P2 (X := X) A :=\n    Topology.isOpen_P1_iff_P2 (X := X) (A := A) hOpen\n  have hP1P3 : Topology.P1 (X := X) A ↔ Topology.P3 (X := X) A :=\n    Topology.isOpen_P1_iff_P3 (X := X) (A := A) hOpen\n  constructor\n  · intro hP2\n    -- Obtain `P1` from `P2`.\n    have hP1 : Topology.P1 (X := X) A := (hP1P2).2 hP2\n    -- Obtain `P3` from `P1`.\n    have hP3 : Topology.P3 (X := X) A := (hP1P3).1 hP1\n    exact And.intro hP1 hP3\n  · rintro ⟨hP1, _⟩\n    -- Obtain `P2` from `P1`.\n    exact (hP1P2).1 hP1"
+  ],
+  "success": true
+}

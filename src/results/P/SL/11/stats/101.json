@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.71505069732666
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3430,
+      "prompt_tokens": 14544,
+      "total_tokens": 17974,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_P3_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) : Topology.P2 A ↔ Topology.P3 A := by\n  -- `P1` yields the key closure equality.\n  have hEq : closure A = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 (A := A) hP1\n  -- Use the previously established equivalence under this equality.\n  simpa using\n    (Topology.P2_iff_P3_of_closure_eq_closure_interior (A := A) hEq)"
+  ],
+  "success": true
+}

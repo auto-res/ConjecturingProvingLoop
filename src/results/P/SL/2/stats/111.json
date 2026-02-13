@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.67315411567688
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6018,
+      "prompt_tokens": 17000,
+      "total_tokens": 23018,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_mono {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : (A : Set X) ⊆ B) :\n    interior (closure (interior A)) ⊆ interior (closure (interior B)) := by\n  -- First, enlarge the innermost interiors using the inclusion `A ⊆ B`.\n  have hInt : (interior A : Set X) ⊆ interior B := interior_mono hAB\n  -- Taking closures preserves inclusions.\n  have hCl : (closure (interior A) : Set X) ⊆ closure (interior B) :=\n    closure_mono hInt\n  -- Finally, taking interiors preserves inclusions once more.\n  exact interior_mono hCl"
+  ],
+  "success": true
+}

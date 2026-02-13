@@ -1,0 +1,26 @@
+{
+  "times": [
+    115.53649592399597
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9023,
+      "prompt_tokens": 28114,
+      "total_tokens": 37137,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27520
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∩ B) ⊆ frontier A ∪ frontier B := by\n  intro x hx\n  rcases hx with ⟨hxClosInter, hxNotIntInter⟩\n  -- `x` belongs to both closures\n  have hxClosA : x ∈ closure A := by\n    have hSub : (A ∩ B : Set X) ⊆ A := fun y hy => hy.1\n    exact (closure_mono hSub) hxClosInter\n  have hxClosB : x ∈ closure B := by\n    have hSub : (A ∩ B : Set X) ⊆ B := fun y hy => hy.2\n    exact (closure_mono hSub) hxClosInter\n  open Classical in\n  by_cases hIntA : x ∈ interior A\n  · -- `x ∈ interior A`\n    by_cases hIntB : x ∈ interior B\n    · -- `x ∈ interior B` as well: contradiction with `hxNotIntInter`\n      have hIntInter : x ∈ interior (A ∩ B) := by\n        -- `interior A ∩ interior B` is an open set contained in `A ∩ B`\n        have hSub : (interior A ∩ interior B : Set X) ⊆ A ∩ B := by\n          intro y hy; exact ⟨interior_subset hy.1, interior_subset hy.2⟩\n        have hOpen : IsOpen (interior A ∩ interior B) :=\n          isOpen_interior.inter isOpen_interior\n        have hInc := interior_maximal hSub hOpen\n        exact hInc ⟨hIntA, hIntB⟩\n      exact False.elim (hxNotIntInter hIntInter)\n    · -- `x ∉ interior B` ⇒ `x ∈ frontier B`\n      exact Or.inr ⟨hxClosB, hIntB⟩\n  · -- `x ∉ interior A` ⇒ `x ∈ frontier A`\n    exact Or.inl ⟨hxClosA, hIntA⟩"
+  ],
+  "success": true
+}

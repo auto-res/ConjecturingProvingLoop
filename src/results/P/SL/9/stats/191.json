@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.1148362159729
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2696,
+      "prompt_tokens": 31140,
+      "total_tokens": 33836,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.disjoint_interior_boundary\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Disjoint (interior (A : Set X)) (closure A \\ interior A) := by\n  -- We use the characterization `Set.disjoint_left`.\n  exact (Set.disjoint_left).2 (by\n    intro x hx_int hx_boundary\n    -- `hx_boundary.2` states that `x ∉ interior A`, contradicting `hx_int`.\n    exact (hx_boundary.2) hx_int)"
+  ],
+  "success": true
+}

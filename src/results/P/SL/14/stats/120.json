@@ -1,0 +1,43 @@
+{
+  "times": [
+    77.89720010757446,
+    34.388028383255005
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5842,
+      "prompt_tokens": 20756,
+      "total_tokens": 26598,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 3162,
+      "prompt_tokens": 20925,
+      "total_tokens": 24087,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) =\n      closure (interior A) ∪ closure (interior B) := by\n  calc\n    closure (interior (A ∪ B))\n        = closure ((interior A) ∪ (interior B)) := by\n          simpa [interior_union]\n    _ = closure (interior A) ∪ closure (interior B) := by\n          simpa [closure_union]",
+    "theorem Topology.union_interior_subset_interior_union'\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∪ interior B ⊆ interior (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      -- `interior A` is contained in `interior (A ∪ B)` by monotonicity.\n      have h_mono : (A : Set X) ⊆ A ∪ B := by\n        intro y hy\n        exact Or.inl hy\n      have h_int_mono : interior A ⊆ interior (A ∪ B) := interior_mono h_mono\n      exact h_int_mono hA\n  | inr hB =>\n      -- `interior B` is contained in `interior (A ∪ B)` by monotonicity.\n      have h_mono : (B : Set X) ⊆ A ∪ B := by\n        intro y hy\n        exact Or.inr hy\n      have h_int_mono : interior B ⊆ interior (A ∪ B) := interior_mono h_mono\n      exact h_int_mono hB"
+  ],
+  "success": true
+}

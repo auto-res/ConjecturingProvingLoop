@@ -1,0 +1,60 @@
+{
+  "times": [
+    192.29684400558472,
+    65.56049823760986,
+    49.15919375419617
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10259,
+      "prompt_tokens": 56361,
+      "total_tokens": 66620,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    },
+    {
+      "completion_tokens": 3643,
+      "prompt_tokens": 56566,
+      "total_tokens": 60209,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    },
+    {
+      "completion_tokens": 2014,
+      "prompt_tokens": 56772,
+      "total_tokens": 58786,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.sUnion_closure_interiors_subset_closure_interior_sUnion\n    {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    (⋃₀ (Set.image (fun A : Set X => closure (interior A)) 𝒜)) ⊆\n      closure (interior (⋃₀ 𝒜)) := by\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨S, hS_mem, hxS⟩\n  rcases Set.mem_image.1 hS_mem with ⟨A, hA_mem, rfl⟩\n  have h_subset : interior A ⊆ interior (⋃₀ 𝒜) := by\n    have hA_subset : A ⊆ ⋃₀ 𝒜 := Set.subset_sUnion_of_mem hA_mem\n    exact interior_mono hA_subset\n  have h_closure : closure (interior A) ⊆ closure (interior (⋃₀ 𝒜)) :=\n    closure_mono h_subset\n  exact h_closure hxS",
+    "theorem Topology.frontier_inter_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A ∩ interior (Aᶜ) = (∅ : Set X) := by\n  -- We show the intersection is empty by proving it is contained in `∅`.\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxFront, hxIntCompl⟩\n    -- `hxFront.1` gives `x ∈ closure A`.\n    -- By definition of `interior`, there exists an open set `U` such that\n    -- `x ∈ U` and `U ⊆ Aᶜ`.\n    rcases mem_nhds_iff.1\n        (isOpen_interior.mem_nhds hxIntCompl) with ⟨U, hU_open, hxU, hU_sub⟩\n    -- Since `x ∈ closure A`, every neighbourhood of `x` meets `A`.\n    -- In particular, `U` meets `A`. But `U ⊆ Aᶜ`, contradiction.\n    have h_nonempty : ((U : Set X) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hxFront.1 U hU_open hxU\n    rcases h_nonempty with ⟨y, ⟨hyU, hyA⟩⟩\n    have : y ∈ Aᶜ := hU_sub hyU\n    exact this hyA\n  · -- The empty set is contained in every set.\n    exact Set.empty_subset _\n",
+    "theorem Topology.interior_subset_closure_of_subset_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ closure B) :\n    interior A ⊆ closure B := by\n  intro x hxIntA\n  exact hAB (interior_subset hxIntA)"
+  ],
+  "success": true
+}

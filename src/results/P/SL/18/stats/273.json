@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.08780479431152
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4606,
+      "prompt_tokens": 42907,
+      "total_tokens": 47513,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_sUnion {X : Type*} [TopologicalSpace X] (A : Set (Set X))\n    (h :\n      ∀ B, B ∈ A →\n        Topology.P1 (B : Set X) ∧ Topology.P2 (B : Set X) ∧ Topology.P3 (B : Set X)) :\n    Topology.P1 (⋃₀ A) ∧ Topology.P2 (⋃₀ A) ∧ Topology.P3 (⋃₀ A) := by\n  classical\n  -- Extract the individual properties from the combined assumption.\n  have hP1 : ∀ B, B ∈ A → Topology.P1 (B : Set X) := fun B hBA => (h B hBA).1\n  have hP2 : ∀ B, B ∈ A → Topology.P2 (B : Set X) := fun B hBA => (h B hBA).2.1\n  have hP3 : ∀ B, B ∈ A → Topology.P3 (B : Set X) := fun B hBA => (h B hBA).2.2\n  -- Apply the existing `sUnion` lemmas component-wise.\n  have h₁ : Topology.P1 (⋃₀ A) :=\n    Topology.P1_sUnion (A := A) (by\n      intro B hBA\n      exact hP1 B hBA)\n  have h₂ : Topology.P2 (⋃₀ A) :=\n    Topology.P2_sUnion (A := A) (by\n      intro B hBA\n      exact hP2 B hBA)\n  have h₃ : Topology.P3 (⋃₀ A) :=\n    Topology.P3_sUnion (A := A) (by\n      intro B hBA\n      exact hP3 B hBA)\n  exact ⟨h₁, h₂, h₃⟩"
+  ],
+  "success": true
+}

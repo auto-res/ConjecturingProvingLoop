@@ -1,0 +1,43 @@
+{
+  "times": [
+    130.37676191329956,
+    180.61777544021606
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8503,
+      "prompt_tokens": 49663,
+      "total_tokens": 58166,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 8456,
+      "prompt_tokens": 49742,
+      "total_tokens": 58198,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsClosed B) :\n    interior (A \\ B) = interior A \\ B := by\n  -- We show mutual inclusion.\n  apply Set.Subset.antisymm\n  · -- `⊆` direction.\n    intro x hx\n    -- `x` lies in `interior (A \\ B)`, hence in `A \\ B`.\n    have h₁ : x ∈ A \\ B := (interior_subset : interior (A \\ B) ⊆ A \\ B) hx\n    -- From this we get `x ∈ A` and `x ∉ B`.\n    have hxA : x ∈ A := h₁.1\n    have hxNB : x ∉ B := h₁.2\n    -- Monotonicity of `interior` yields `x ∈ interior A`.\n    have hxIntA : x ∈ interior A :=\n      (interior_mono (Set.diff_subset : (A \\ B : Set X) ⊆ A)) hx\n    exact ⟨hxIntA, hxNB⟩\n  · -- `⊇` direction.\n    rintro ⟨hxIntA, hxNB⟩\n    -- Let `U = interior A`. It is an open set containing `x` and contained in `A`.\n    set U : Set X := interior A\n    have hU_open : IsOpen U := isOpen_interior\n    have hU_sub  : (U : Set X) ⊆ A := interior_subset\n    have hxU     : x ∈ U := by\n      simpa [U] using hxIntA\n    -- Consider the open set `V = U ∩ Bᶜ`, which still contains `x`.\n    have hV_open : IsOpen (U ∩ Bᶜ) := hU_open.inter hB.isOpen_compl\n    have hxV     : x ∈ U ∩ Bᶜ := by\n      have hx_notB : x ∈ Bᶜ := by\n        -- `hxNB : x ∉ B`, which is exactly `x ∈ Bᶜ`.\n        simpa using hxNB\n      exact ⟨hxU, hx_notB⟩\n    -- `V` is contained in `A \\ B`.\n    have hV_sub : (U ∩ Bᶜ : Set X) ⊆ A \\ B := by\n      intro y hy\n      have hyU  : y ∈ U := hy.1\n      have hyNB : y ∈ Bᶜ := hy.2\n      have hyA  : y ∈ A := hU_sub hyU\n      exact ⟨hyA, by\n        -- `y ∈ Bᶜ` translates to `y ∉ B`.\n        simpa using hyNB⟩\n    -- By the characterization of interior, `x ∈ interior (A \\ B)`.\n    exact (interior_maximal hV_sub hV_open) hxV",
+    "theorem P1_iff_subset_closure_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 A ↔ A ⊆ closure (interior A) := by\n  rfl"
+  ],
+  "success": true
+}

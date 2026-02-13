@@ -1,0 +1,26 @@
+{
+  "times": [
+    98.0094153881073
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5570,
+      "prompt_tokens": 8209,
+      "total_tokens": 13779,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_union_of_P1\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 (A : Set X)) (hB : Topology.P1 (B : Set X)) :\n    Topology.P1 (closure (A ∪ B : Set X)) := by\n  -- First, `P1` holds for the union `A ∪ B`.\n  have hUnion : Topology.P1 (A ∪ B : Set X) :=\n    Topology.P1_union_of_P1 (A := A) (B := B) hA hB\n  -- Then, apply the closure-stability of `P1`.\n  exact Topology.P1_closure_of_P1 (A := A ∪ B) hUnion"
+  ],
+  "success": true
+}

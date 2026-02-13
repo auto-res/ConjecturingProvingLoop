@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.24468731880188
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4289,
+      "prompt_tokens": 40390,
+      "total_tokens": 44679,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_subset_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ B : Set X) ⊆ closure B := by\n  -- `A ∩ B` is contained in `B`.\n  have hsubset : (A ∩ B : Set X) ⊆ B := by\n    intro x hx\n    exact hx.2\n  -- Taking closures preserves this inclusion.\n  exact closure_mono hsubset"
+  ],
+  "success": true
+}

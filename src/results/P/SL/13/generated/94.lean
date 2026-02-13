@@ -1,0 +1,9 @@
+
+
+theorem Topology.P2_closure_iff_P3_closure {X : Type*} [TopologicalSpace X] {A : Set X} :
+    Topology.P2 (X := X) (closure (A : Set X)) ↔
+      Topology.P3 (X := X) (closure (A : Set X)) := by
+  -- Both properties are equivalent to `IsOpen (closure A)`.
+  have hP2 := Topology.P2_closure_iff_isOpen_closure (X := X) (A := A)
+  have hP3 := Topology.P3_closure_iff_isOpen_closure (X := X) (A := A)
+  simpa using hP2.trans hP3.symm

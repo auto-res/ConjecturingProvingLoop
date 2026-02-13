@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.2496817111969
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2809,
+      "prompt_tokens": 14271,
+      "total_tokens": 17080,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_of_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 A → B ⊆ closure (interior A) → Topology.P1 (A ∪ B) := by\n  intros hA hB\n  dsimp [Topology.P1] at hA ⊢\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- The point comes from `A`; use `P1` for `A`.\n      have hx_closure : x ∈ closure (interior A) := hA hxA\n      -- Upgrade the membership via monotonicity of `interior` and `closure`.\n      have hsubset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        have : interior A ⊆ interior (A ∪ B) := by\n          apply interior_mono\n          intro y hy\n          exact Or.inl hy\n        exact this\n      exact hsubset hx_closure\n  | inr hxB =>\n      -- The point comes from `B`; use the subset assumption.\n      have hx_closure : x ∈ closure (interior A) := hB hxB\n      have hsubset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        have : interior A ⊆ interior (A ∪ B) := by\n          apply interior_mono\n          intro y hy\n          exact Or.inl hy\n        exact this\n      exact hsubset hx_closure"
+  ],
+  "success": true
+}

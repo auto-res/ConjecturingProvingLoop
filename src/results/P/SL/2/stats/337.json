@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.8918559551239
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5068,
+      "prompt_tokens": 58796,
+      "total_tokens": 63864,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_eq_univ_of_dense_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Dense (A : Set X) → closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n  intro hDense\n  -- We prove the equality by mutual inclusion.\n  apply Set.Subset.antisymm\n  · -- `closure (A ∪ B) ⊆ univ` is trivial.\n    intro _ _\n    simp\n  · -- For the reverse inclusion, start with an arbitrary point `x : X`.\n    intro x _\n    -- Density gives `x ∈ closure A = univ`.\n    have hxClA : (x : X) ∈ closure (A : Set X) := by\n      simpa [hDense.closure_eq] using (by\n        have : x ∈ (Set.univ : Set X) := by simp\n        simpa using this)\n    -- Since `A ⊆ A ∪ B`, monotonicity of `closure` yields the goal.\n    have hIncl : closure (A : Set X) ⊆ closure (A ∪ B : Set X) := by\n      have hSub : (A : Set X) ⊆ A ∪ B := by\n        intro y hy\n        exact Or.inl hy\n      exact closure_mono hSub\n    exact hIncl hxClA"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.01159930229187
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3337,
+      "prompt_tokens": 42342,
+      "total_tokens": 45679,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_mono {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) :\n    interior (closure (interior A)) ⊆ interior (closure (interior B)) := by\n  have h_int : interior A ⊆ interior B := interior_mono hAB\n  have h_closure : closure (interior A) ⊆ closure (interior B) :=\n    closure_mono h_int\n  exact interior_mono h_closure"
+  ],
+  "success": true
+}

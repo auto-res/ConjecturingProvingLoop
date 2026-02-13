@@ -1,0 +1,26 @@
+{
+  "times": [
+    204.88284540176392
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9102,
+      "prompt_tokens": 43336,
+      "total_tokens": 52438,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8128,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_inter_open_right {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP2A : Topology.P2 A) (hOpenB : IsOpen (B : Set X)) :\n    Topology.P2 (A ∩ B) := by\n  -- Unfold the definition of `P2`.\n  dsimp [Topology.P2] at hP2A ⊢\n  intro x hxAB\n  -- Split the hypothesis `x ∈ A ∩ B`.\n  rcases hxAB with ⟨hxA, hxB⟩\n  -- From `P2 A`, obtain that `x` is in the relevant interior.\n  have hxIntA : x ∈ interior (closure (interior A)) := hP2A hxA\n  -- We shall work with the open neighbourhood `W := interior (closure (interior A)) ∩ B`.\n  let W : Set X := interior (closure (interior A)) ∩ B\n  have hW_open : IsOpen W :=\n    (isOpen_interior.inter hOpenB)\n  have hxW : x ∈ W := ⟨hxIntA, hxB⟩\n  -- We next show that every point of `W` lies in `closure (interior (A ∩ B))`.\n  have hW_subset :\n      (W : Set X) ⊆ closure (interior (A ∩ B)) := by\n    intro y hyW\n    rcases hyW with ⟨hyIntA, hyB⟩\n    -- `y` is in the closure of `interior A`.\n    have hyClA : y ∈ closure (interior A) :=\n      (interior_subset : interior (closure (interior A)) ⊆\n        closure (interior A)) hyIntA\n    -- Characterize membership in a closure via neighbourhoods.\n    have hMem : y ∈ closure (interior (A ∩ B)) := by\n      -- Use the neighbourhood formulation of `closure`.\n      refine (mem_closure_iff).2 ?_\n      intro U hU_open hyU\n      -- Intersect the neighbourhood with `B`, which is open and contains `y`.\n      have hV_open : IsOpen (U ∩ B) := hU_open.inter hOpenB\n      have hyV : y ∈ U ∩ B := ⟨hyU, hyB⟩\n      -- From `hyClA`, the intersection with `interior A` is nonempty.\n      have hNonempty :\n          ((U ∩ B) ∩ interior A).Nonempty :=\n        (mem_closure_iff).1 hyClA (U ∩ B) hV_open hyV\n      -- Relate `interior (A ∩ B)` to `interior A ∩ B`.\n      have hInt_eq :\n          interior (A ∩ B : Set X) = interior A ∩ interior B := by\n        simpa using interior_inter\n      -- Since `B` is open, `interior B = B`.\n      have hIntB : interior B = (B : Set X) := hOpenB.interior_eq\n      -- The non‐empty intersection yields a point in `U ∩ interior (A ∩ B)`.\n      rcases hNonempty with ⟨z, ⟨⟨hzU, hzB⟩, hzIntA⟩⟩\n      have hzIntAB : z ∈ interior (A ∩ B) := by\n        have : z ∈ interior A ∩ interior B := by\n          have hzIntB : z ∈ interior B := by\n            simpa [hIntB] using hzB\n          exact ⟨hzIntA, hzIntB⟩\n        simpa [hInt_eq] using this\n      exact ⟨z, ⟨hzU, hzIntAB⟩⟩\n    exact hMem\n  -- By maximality of the interior, `W` lies inside `interior (closure (interior (A ∩ B)))`.\n  have hW_in :\n      (W : Set X) ⊆ interior (closure (interior (A ∩ B))) :=\n    interior_maximal hW_subset hW_open\n  -- Apply the inclusion to the point `x`.\n  exact hW_in hxW"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.56601572036743
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2194,
+      "prompt_tokens": 8228,
+      "total_tokens": 10422,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iUnion {X : Type*} [TopologicalSpace X] {ι : Type*} {s : ι → Set X} :\n    (∀ i, Topology.P2 (s i)) → Topology.P2 (⋃ i, s i) := by\n  intro hP2\n  intro x hxUnion\n  rcases Set.mem_iUnion.1 hxUnion with ⟨i, hx_i⟩\n  have hx_int : x ∈ interior (closure (interior (s i))) := (hP2 i) hx_i\n  have hsubset :\n      interior (closure (interior (s i))) ⊆\n        interior (closure (interior (⋃ j, s j))) := by\n    -- First, relate the interiors.\n    have hInt : interior (s i) ⊆ interior (⋃ j, s j) := by\n      have hSub : (s i : Set X) ⊆ ⋃ j, s j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact interior_mono hSub\n    -- Take closures of both sides.\n    have hCl : closure (interior (s i)) ⊆ closure (interior (⋃ j, s j)) :=\n      closure_mono hInt\n    -- Finally, take interiors again.\n    exact interior_mono hCl\n  exact hsubset hx_int"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    155.70497155189514
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10892,
+      "prompt_tokens": 34024,
+      "total_tokens": 44916,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_diff_subset_closureInterior_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A \\ B)) ⊆ closure (interior A) := by\n  -- The interior of a set difference is contained in the interior of the left set.\n  have h : interior (A \\ B) ⊆ interior A :=\n    interior_diff_subset_left (X := X) (A := A) (B := B)\n  -- Taking closures preserves inclusions.\n  exact closure_mono h"
+  ],
+  "success": true
+}

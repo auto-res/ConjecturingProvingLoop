@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.47117900848389
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7885,
+      "prompt_tokens": 32454,
+      "total_tokens": 40339,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_subset_subset_closure_interior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) (hBsub : B ⊆ closure (interior A)) :\n    Topology.P1 B := by\n  intro x hxB\n  -- Step 1: from the assumption `B ⊆ closure (interior A)` obtain\n  --         that `x` lies in `closure (interior A)`.\n  have hx_clA : x ∈ closure (interior A) := hBsub hxB\n  -- Step 2: monotonicity of `interior` for the inclusion `A ⊆ B`.\n  have hInt : (interior A : Set X) ⊆ interior B := interior_mono hAB\n  -- Step 3: taking closures preserves inclusions.\n  have hCl : (closure (interior A) : Set X) ⊆ closure (interior B) :=\n    closure_mono hInt\n  -- Step 4: combine the facts to obtain the desired conclusion.\n  exact hCl hx_clA"
+  ],
+  "success": true
+}

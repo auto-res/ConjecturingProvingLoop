@@ -1,0 +1,60 @@
+{
+  "times": [
+    156.05431604385376,
+    128.4829704761505,
+    40.39850854873657
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8573,
+      "prompt_tokens": 31134,
+      "total_tokens": 39707,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 8468,
+      "prompt_tokens": 31376,
+      "total_tokens": 39844,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 3223,
+      "prompt_tokens": 31455,
+      "total_tokens": 34678,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_interiorClosure_mem_nhds {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A ↔ ∀ x ∈ A, interior (closure A) ∈ 𝓝 x := by\n  classical\n  constructor\n  · intro hP3 x hx\n    have hxInt : x ∈ interior (closure A) := hP3 hx\n    exact (mem_interior_iff_mem_nhds).1 hxInt\n  · intro h\n    dsimp [Topology.P3]\n    intro x hx\n    have h_nhds : interior (closure A) ∈ 𝓝 x := h x hx\n    exact (mem_interior_iff_mem_nhds).2 h_nhds",
+    "import Mathlib\nimport Aesop\n\nopen Set\n\nnamespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\n/-- Three basic “regularity–type” properties of subsets of a topological space. -/\ndef P1 (A : Set X) : Prop := A ⊆ closure (interior A)\ndef P2 (A : Set X) : Prop := A ⊆ interior (closure (interior A))\ndef P3 (A : Set X) : Prop := A ⊆ interior (closure A)\n\n/-- The *intersection* of two `P3` sets again satisfies `P3`. -/\ntheorem P3_inter {A B : Set X} (hA : P3 A) (hB : P3 B) : P3 (A ∩ B) := by\n  -- First, rewrite the goal in unfolded form.\n  dsimp [P3] at hA hB ⊢\n  -- Take an arbitrary point of `A ∩ B`.\n  intro x hx\n  rcases hx with ⟨hxA, hxB⟩\n  -- Apply the `P3` property to each coordinate.\n  have hx_intA : x ∈ interior (closure A) := hA hxA\n  have hx_intB : x ∈ interior (closure B) := hB hxB\n  -- The intersection of the two interiors is an open neighbourhood of `x`.\n  have h_open : IsOpen (interior (closure A) ∩ interior (closure B)) :=\n    (isOpen_interior).inter isOpen_interior\n  have hx_mem : x ∈ interior (closure A) ∩ interior (closure B) :=\n    ⟨hx_intA, hx_intB⟩\n  -- This neighbourhood is contained in the closure of `A ∩ B`.\n  have h_subset :\n      interior (closure A) ∩ interior (closure B) ⊆ closure (A ∩ B) := by\n    intro y hy\n    rcases hy with ⟨hyA, hyB⟩\n    have hy_clA : y ∈ closure A := interior_subset hyA\n    have hy_clB : y ∈ closure B := interior_subset hyB\n    -- A point in both closures lies in the closure of the intersection.\n    have : y ∈ closure (A ∩ B) := by\n      have h : closure A ∩ closure B ⊆ closure (A ∩ B) := by\n        -- Standard topological lemma.\n        exact closure_inter_subset_inter A B\n      exact h ⟨hy_clA, hy_clB⟩\n    exact this\n  -- Turn the neighbourhood into an interior membership.\n  have h_nhds : closure (A ∩ B) ∈ 𝓝 x :=\n    Filter.mem_of_superset (h_open.mem_nhds hx_mem) h_subset\n  exact (mem_interior_iff_mem_nhds).2 h_nhds",
+    "theorem interior_dense_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) ↔ closure (interior A) = (Set.univ : Set X) := by\n  simpa using (dense_iff_closure_eq (s := interior A))"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.55885243415833
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4336,
+      "prompt_tokens": 6993,
+      "total_tokens": 11329,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_sUnion_of_P2 {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    (∀ A, A ∈ 𝒜 → Topology.P2 A) → Topology.P3 (⋃₀ 𝒜) := by\n  intro hP2\n  have hP3 : ∀ A, A ∈ 𝒜 → Topology.P3 A := by\n    intro A hA\n    exact Topology.P2_implies_P3 (A := A) (hP2 A hA)\n  exact Topology.P3_sUnion (X := X) (𝒜 := 𝒜) hP3"
+  ],
+  "success": true
+}

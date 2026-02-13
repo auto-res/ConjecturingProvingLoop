@@ -1,0 +1,26 @@
+{
+  "times": [
+    112.54431295394897
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9536,
+      "prompt_tokens": 4329,
+      "total_tokens": 13865,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_nonempty_implies_interior_nonempty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 A → A.Nonempty → (interior A).Nonempty := by\n  intro hP1 hA_nonempty\n  rcases hA_nonempty with ⟨x, hxA⟩\n  have hx_cl : x ∈ closure (interior A) := hP1 hxA\n  by_cases hIntEq : interior A = ∅\n  ·\n    have hFalse : False := by\n      simpa [hIntEq, closure_empty] using hx_cl\n    exact hFalse.elim\n  ·\n    classical\n    exact Set.nonempty_iff_ne_empty.mpr hIntEq"
+  ],
+  "success": true
+}

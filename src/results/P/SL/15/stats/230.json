@@ -1,0 +1,26 @@
+{
+  "times": [
+    118.57541728019714
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7797,
+      "prompt_tokens": 49019,
+      "total_tokens": 56816,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_subset_interior_closure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) :\n    interior A ⊆ interior (closure B) := by\n  intro x hxA\n  -- First enlarge from `A` to `B` using monotonicity of `interior`.\n  have hxB : x ∈ interior B := (interior_mono hAB) hxA\n  -- Since `B ⊆ closure B`, enlarge once more.\n  have hBC : interior B ⊆ interior (closure B) :=\n    interior_mono (subset_closure : (B : Set X) ⊆ closure B)\n  exact hBC hxB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    152.13082098960876
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10086,
+      "prompt_tokens": 36961,
+      "total_tokens": 47047,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_interior_subset_frontier {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (interior (A : Set X)) ⊆ frontier A := by\n  intro x hx\n  -- Unpack the definition of the frontier of `interior A`.\n  rcases hx with ⟨hx_closureInt, hx_not_intInt⟩\n  -- `closure (interior A)` is contained in `closure A`.\n  have hsubset : (closure (interior (A : Set X)) : Set X) ⊆ closure A :=\n    Topology.closure_interior_subset_closure (A := A)\n  -- Assemble the two conditions defining `x ∈ frontier A`.\n  refine And.intro (hsubset hx_closureInt) ?_\n  -- Rewrite `x ∉ interior (interior A)` as `x ∉ interior A`.\n  simpa [interior_interior] using hx_not_intInt"
+  ],
+  "success": true
+}

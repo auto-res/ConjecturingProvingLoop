@@ -1,0 +1,43 @@
+{
+  "times": [
+    171.68936491012573,
+    185.17912554740906
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11776,
+      "prompt_tokens": 36321,
+      "total_tokens": 48097,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    },
+    {
+      "completion_tokens": 9937,
+      "prompt_tokens": 36441,
+      "total_tokens": 46378,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_and_P1_implies_denseInterior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense (A : Set X) → Topology.P1 (X:=X) A → Dense (interior (A : Set X)) := by\n  intro hDense hP1\n  -- `P1` gives equality of the two closures.\n  have h_eq : closure (A : Set X) = closure (interior (A : Set X)) :=\n    (Topology.P1_iff_closure_eq_closureInterior (X := X) (A := A)).1 hP1\n  -- Since `A` is dense, its closure is the whole space.\n  have h_clA : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Hence the closure of `interior A` is also the whole space.\n  have h_clInt : closure (interior (A : Set X)) = (Set.univ : Set X) := by\n    calc\n      closure (interior (A : Set X)) = closure (A : Set X) := by\n        simpa using h_eq.symm\n      _ = (Set.univ : Set X) := h_clA\n  -- Conclude that `interior A` is dense.\n  simpa [Dense] using h_clInt",
+    "theorem Topology.interior_interior_interior_eq_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (interior (interior (A : Set X))) = interior A := by\n  simp [interior_interior]"
+  ],
+  "success": true
+}

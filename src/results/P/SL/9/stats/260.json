@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.859106063842773
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2056,
+      "prompt_tokens": 44547,
+      "total_tokens": 46603,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_compl_of_open_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_open : IsOpen (A : Set X)) (hA_dense : Dense (A : Set X)) :\n    frontier (A : Set X) = (Aᶜ : Set X) := by\n  have h_frontier :\n      frontier (A : Set X) = closure (A : Set X) \\ A :=\n    Topology.frontier_eq_closure_diff_self_of_isOpen (A := A) hA_open\n  have h_closure : closure (A : Set X) = (Set.univ : Set X) :=\n    hA_dense.closure_eq\n  simpa [h_closure, Set.diff_eq, Set.inter_univ, Set.univ_inter] using h_frontier"
+  ],
+  "success": true
+}

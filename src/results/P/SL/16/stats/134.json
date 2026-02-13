@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.44703483581543
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4679,
+      "prompt_tokens": 23986,
+      "total_tokens": 28665,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iInter_subset_iInter_interior\n    {ι X : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    interior (⋂ i, A i : Set X) ⊆ ⋂ i, interior (A i) := by\n  intro x hx\n  -- For each index `i`, `(⋂ i, A i) ⊆ A i`.\n  have hxi : ∀ i, x ∈ interior (A i) := by\n    intro i\n    have h_subset : (⋂ j, A j : Set X) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    exact (interior_mono h_subset) hx\n  exact Set.mem_iInter.2 hxi"
+  ],
+  "success": true
+}

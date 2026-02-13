@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.20993661880493
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4212,
+      "prompt_tokens": 52509,
+      "total_tokens": 56721,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.IsOpen_P1_P2_P3_inter_three {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} (hA : IsOpen A) (hB : IsOpen B) (hC : IsOpen C) :\n    Topology.P1 (A ∩ B ∩ C) ∧ Topology.P2 (A ∩ B ∩ C) ∧ Topology.P3 (A ∩ B ∩ C) := by\n  have hOpen : IsOpen (A ∩ B ∩ C) := ((hA.inter hB).inter hC)\n  simpa using Topology.IsOpen_P1_P2_P3 (A := A ∩ B ∩ C) hOpen"
+  ],
+  "success": true
+}

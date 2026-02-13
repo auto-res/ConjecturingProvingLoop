@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.76107144355774
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3056,
+      "prompt_tokens": 54871,
+      "total_tokens": 57927,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_empty_of_closed_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h_closed : IsClosed (A : Set X)) (h_dense : Dense (A : Set X)) :\n    closure (A : Set X) \\ interior A = (∅ : Set X) := by\n  -- A closed and dense set is the whole space.\n  have h_eq_univ : (A : Set X) = (Set.univ : Set X) :=\n    Topology.closed_dense_eq_univ (X := X) (A := A) h_closed h_dense\n  -- Rewrite both the closure and the interior using `h_eq_univ`.\n  have h_closure_eq : closure (A : Set X) = (Set.univ : Set X) := by\n    simpa [h_eq_univ, closure_univ] using (h_closed.closure_eq)\n  have h_interior_eq : interior (A : Set X) = (Set.univ : Set X) := by\n    simpa [h_eq_univ, interior_univ] using\n      (isOpen_univ.interior_eq.symm.trans (by simp [h_eq_univ]))\n  -- Compute the boundary using these equalities.\n  simpa [h_closure_eq, h_interior_eq, Set.diff_self]"
+  ],
+  "success": true
+}

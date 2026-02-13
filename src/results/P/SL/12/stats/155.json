@@ -1,0 +1,26 @@
+{
+  "times": [
+    217.79220938682556
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13001,
+      "prompt_tokens": 29619,
+      "total_tokens": 42620,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_eq_closure_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P1 (X := X) A) :\n    closure (interior (closure (A : Set X))) = closure (interior A) := by\n  -- From `P1` we know that the closures of `A` and `interior A` coincide.\n  have h_cl : closure (A : Set X) = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 (X := X) (A := A) hA\n  -- Rewrite the left‐hand side using `h_cl` and invoke the idempotence lemma.\n  calc\n    closure (interior (closure (A : Set X))) =\n        closure (interior (closure (interior A))) := by\n          simpa [h_cl]\n    _ = closure (interior A) := by\n          simpa using\n            Topology.closure_interior_closure_interior_eq (X := X) (A := A)"
+  ],
+  "success": true
+}

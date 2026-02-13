@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.01100969314575
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2686,
+      "prompt_tokens": 27213,
+      "total_tokens": 29899,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26496
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_superset_of_subset_interiorClosureInterior\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hBsubset : B ⊆ interior (closure (interior A))) :\n    Topology.P2 B := by\n  dsimp [Topology.P2] at *\n  intro x hxB\n  have hxIntA : x ∈ interior (closure (interior A)) := hBsubset hxB\n  have hIncl : interior (closure (interior A)) ⊆\n      interior (closure (interior B)) := by\n    apply interior_mono\n    apply closure_mono\n    apply interior_mono\n    exact hAB\n  exact hIncl hxIntA"
+  ],
+  "success": true
+}

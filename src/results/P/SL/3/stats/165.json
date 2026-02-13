@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.9733579158783
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6558,
+      "prompt_tokens": 25407,
+      "total_tokens": 31965,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_union_right_dense {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 (A : Set X) →\n      closure (B : Set X) = (Set.univ : Set X) →\n      Topology.P3 (A ∪ B) := by\n  intro hP3A hDenseB\n  have hP3B : Topology.P3 (B : Set X) :=\n    Topology.P3_of_dense (A := B) hDenseB\n  exact Topology.P3_union (A := A) (B := B) hP3A hP3B"
+  ],
+  "success": true
+}

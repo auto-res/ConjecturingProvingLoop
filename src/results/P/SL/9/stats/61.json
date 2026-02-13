@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.02345657348633
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3533,
+      "prompt_tokens": 9432,
+      "total_tokens": 12965,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_eq_self_of_discrete\n    {X : Type*} [TopologicalSpace X] [DiscreteTopology X] (A : Set X) :\n    closure (interior A) = A := by\n  have h_open : IsOpen A := isOpen_discrete _\n  have h_closed : IsClosed A := isClosed_discrete _\n  have h_int : interior A = A := h_open.interior_eq\n  have h_closure : closure A = A := h_closed.closure_eq\n  simpa [h_int, h_closure]"
+  ],
+  "success": true
+}

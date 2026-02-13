@@ -1,0 +1,43 @@
+{
+  "times": [
+    48.55857181549072,
+    121.666499376297
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3225,
+      "prompt_tokens": 11108,
+      "total_tokens": 14333,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    },
+    {
+      "completion_tokens": 8594,
+      "prompt_tokens": 11330,
+      "total_tokens": 19924,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_closure_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP3 : Topology.P3 (X := X) A) :\n    closure A = closure (interior (closure A)) := by\n  apply subset_antisymm\n  ·\n    have h_subset : interior (closure A) ⊆ closure A := interior_subset\n    exact closure_mono h_subset\n  ·\n    have h_subset : A ⊆ interior (closure A) := hP3\n    exact closure_mono h_subset",
+    "theorem Topology.interior_closure_eq_interior_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hClosed : IsClosed A) :\n    interior (closure A) = interior A := by\n  simpa [hClosed.closure_eq]"
+  ],
+  "success": true
+}

@@ -1,0 +1,77 @@
+{
+  "times": [
+    162.2027428150177,
+    59.88103985786438,
+    132.92648315429688,
+    128.20146107673645
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12598,
+      "prompt_tokens": 27693,
+      "total_tokens": 40291,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    },
+    {
+      "completion_tokens": 6854,
+      "prompt_tokens": 27767,
+      "total_tokens": 34621,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 9959,
+      "prompt_tokens": 27908,
+      "total_tokens": 37867,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    },
+    {
+      "completion_tokens": 9145,
+      "prompt_tokens": 27985,
+      "total_tokens": 37130,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iter_five_eq {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (A : Set X))))))))) =\n      closure (interior A) := by\n  calc\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (A : Set X))))))))) =\n        closure (interior (closure (interior A))) := by\n      -- Simplify the inner 4-fold iteration using the existing lemma.\n      have h := Topology.closure_interior_iter_four_eq (X := X) (A := A)\n      simpa [h]\n    _ = closure (interior A) := by\n      -- Apply the idempotence lemma for one more simplification.\n      simpa using\n        Topology.closure_interior_closure_interior_eq (X := X) (A := A)",
+    "theorem Topology.interior_closure_interior_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior (A ∪ B : Set X))) =\n      interior (closure (interior A) ∪ closure (interior B)) := by\n  simpa [interior_union] using\n    (Topology.interior_closure_union_eq_interior_union_closures\n      (X := X) (A := interior A) (B := interior B))",
+    "theorem Topology.interior_iUnion_eq_iUnion_of_isOpen {X ι : Type*} [TopologicalSpace X]\n    (A : ι → Set X) (hA : ∀ i, IsOpen (A i)) :\n    interior (⋃ i, A i : Set X) = ⋃ i, A i := by\n  -- The union of open sets is open.\n  have h_open : IsOpen (⋃ i, A i : Set X) := by\n    simpa using isOpen_iUnion (A := fun i => A i) hA\n  -- For an open set, its interior is itself.\n  simpa [h_open.interior_eq]",
+    "theorem Topology.interior_inter_eq {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B : Set X) = interior A ∩ interior B := by\n  -- First, establish the inclusion `⊆`.\n  have h₁ :\n      interior (A ∩ B : Set X) ⊆ interior A ∩ interior B := by\n    intro x hx\n    have hxA : x ∈ interior A :=\n      (interior_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)) hx\n    have hxB : x ∈ interior B :=\n      (interior_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hx\n    exact And.intro hxA hxB\n  -- Next, establish the inclusion `⊇`.\n  have h₂ :\n      interior A ∩ interior B ⊆ interior (A ∩ B : Set X) := by\n    -- The set `interior A ∩ interior B` is open …\n    have h_open : IsOpen (interior A ∩ interior B : Set X) :=\n      (isOpen_interior : IsOpen (interior A)).inter\n        (isOpen_interior : IsOpen (interior B))\n    -- … and contained in `A ∩ B`.\n    have h_sub :\n        (interior A ∩ interior B : Set X) ⊆ A ∩ B := by\n      intro x hx\n      exact And.intro\n        ((interior_subset : interior A ⊆ A) hx.1)\n        ((interior_subset : interior B ⊆ B) hx.2)\n    -- Hence it is contained in the interior of `A ∩ B`.\n    exact interior_maximal h_sub h_open\n  -- Combine the two inclusions into an equality.\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

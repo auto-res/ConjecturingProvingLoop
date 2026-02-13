@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.57435083389282
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4945,
+      "prompt_tokens": 40153,
+      "total_tokens": 45098,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_subset_closureInteriorClosureInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ closure (interior (closure (interior A))) := by\n  intro x hx\n  -- `interior A ⊆ closure (interior A)`\n  have hxCl : (x : X) ∈ closure (interior A) := subset_closure hx\n  -- `closure (interior A) ⊆ closure (interior (closure (interior A)))`\n  have hIncl :\n      closure (interior A) ⊆ closure (interior (closure (interior A))) := by\n    have h :=\n      closure_interior_subset_closure_interior_closure\n        (X := X) (A := interior A)\n    simpa [interior_interior] using h\n  exact hIncl hxCl"
+  ],
+  "success": true
+}

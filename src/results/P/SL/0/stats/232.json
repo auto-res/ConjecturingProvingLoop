@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.725043296813965
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4198,
+      "prompt_tokens": 39567,
+      "total_tokens": 43765,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_right_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsOpen (B : Set X)) :\n    interior ((A ∩ B) : Set X) = interior (A : Set X) ∩ B := by\n  -- Left-to-right inclusion.\n  have h₁ :\n      (interior ((A ∩ B) : Set X) : Set X) ⊆ interior (A : Set X) ∩ B := by\n    intro x hx\n    -- Membership in `interior (A ∩ B)` implies membership in `A ∩ B`.\n    have hxAB : x ∈ (A : Set X) ∩ B := interior_subset hx\n    -- Monotonicity of `interior` for the inclusion `A ∩ B ⊆ A`.\n    have hxIntA : x ∈ interior (A : Set X) := by\n      have hSub : (A ∩ B : Set X) ⊆ (A : Set X) := by\n        intro y hy; exact hy.1\n      exact (interior_mono hSub) hx\n    exact And.intro hxIntA hxAB.2\n  -- Right-to-left inclusion.\n  have h₂ :\n      (interior (A : Set X) ∩ B : Set X) ⊆ interior ((A ∩ B) : Set X) := by\n    -- The set on the left is open as the intersection of two open sets.\n    have hOpen : IsOpen ((interior (A : Set X)) ∩ B : Set X) :=\n      (isOpen_interior).inter hB\n    -- It is contained in `A ∩ B`.\n    have hSub :\n        ((interior (A : Set X)) ∩ B : Set X) ⊆ (A : Set X) ∩ B := by\n      intro y hy; exact And.intro (interior_subset hy.1) hy.2\n    -- Use the maximality property of `interior`.\n    exact interior_maximal hSub hOpen\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

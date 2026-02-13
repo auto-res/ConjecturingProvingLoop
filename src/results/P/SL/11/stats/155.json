@@ -1,0 +1,94 @@
+{
+  "times": [
+    123.02979326248169,
+    46.20909571647644,
+    139.683189868927,
+    101.85259866714478,
+    130.14574432373047
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9428,
+      "prompt_tokens": 22780,
+      "total_tokens": 32208,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    },
+    {
+      "completion_tokens": 4385,
+      "prompt_tokens": 22960,
+      "total_tokens": 27345,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    },
+    {
+      "completion_tokens": 9072,
+      "prompt_tokens": 23255,
+      "total_tokens": 32327,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    },
+    {
+      "completion_tokens": 7196,
+      "prompt_tokens": 23388,
+      "total_tokens": 30584,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    },
+    {
+      "completion_tokens": 6937,
+      "prompt_tokens": 23542,
+      "total_tokens": 30479,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : Topology.P1 A) (hB : Topology.P1 B) :\n    Topology.P1 (Set.prod A B) := by\n  dsimp [Topology.P1] at hA hB ⊢\n  rintro ⟨x, y⟩ hxy\n  rcases hxy with ⟨hxA, hyB⟩\n  -- Each coordinate is sent into the closure of the corresponding interior.\n  have hxCl : x ∈ closure (interior A) := hA hxA\n  have hyCl : y ∈ closure (interior B) := hB hyB\n  -- Combine the two facts via the description of the closure of a product.\n  have hPair : (x, y) ∈ closure (Set.prod (interior A) (interior B)) := by\n    have hEq := closure_prod_eq (interior A) (interior B)\n    have hMem : (x, y) ∈ Set.prod (closure (interior A)) (closure (interior B)) :=\n      ⟨hxCl, hyCl⟩\n    simpa [hEq] using hMem\n  -- `interior A × interior B` is an open subset of `A × B`, hence lies in its interior.\n  have hSub :\n      Set.prod (interior A) (interior B) ⊆ interior (Set.prod A B) := by\n    intro p hp\n    rcases hp with ⟨hpA, hpB⟩\n    have hOpen : IsOpen (Set.prod (interior A) (interior B)) :=\n      (isOpen_interior.prod isOpen_interior)\n    have hContain :\n        (Set.prod (interior A) (interior B) : Set (X × Y)) ⊆ Set.prod A B := by\n      intro q hq\n      exact ⟨(interior_subset hq.1), (interior_subset hq.2)⟩\n    have hInt :\n        Set.prod (interior A) (interior B) ⊆ interior (Set.prod A B) :=\n      interior_maximal hContain hOpen\n    exact hInt hp\n  -- Take closures to reach the desired target.\n  have hSubCl :\n      closure (Set.prod (interior A) (interior B)) ⊆\n        closure (interior (Set.prod A B)) :=\n    closure_mono hSub\n  exact hSubCl hPair",
+    "theorem P1_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : Topology.P1 A) (hB : Topology.P1 B) :\n    Topology.P1 (Set.prod A B) := by\n  dsimp [Topology.P1] at hA hB ⊢\n  intro p hp\n  -- Separate the membership information for each coordinate.\n  have hAx : p.1 ∈ A := hp.1\n  have hBy : p.2 ∈ B := hp.2\n  -- Send each coordinate into the corresponding closure.\n  have hxCl : p.1 ∈ closure (interior A) := hA hAx\n  have hyCl : p.2 ∈ closure (interior B) := hB hBy\n  -- Combine the two pieces of information into the product set.\n  have hProdCl :\n      p ∈ Set.prod (closure (interior A)) (closure (interior B)) :=\n    ⟨hxCl, hyCl⟩\n  -- Identify this product with the closure of `interior A × interior B`.\n  have h1 :\n      p ∈ closure (Set.prod (interior A) (interior B)) := by\n    simpa [(closure_prod_eq (interior A) (interior B)).symm] using hProdCl\n  -- Rewrite `interior (A × B)` as `interior A × interior B`.\n  have hInt :\n      interior (Set.prod A B) = Set.prod (interior A) (interior B) := by\n    simpa using interior_prod_eq (A := A) (B := B)\n  -- Conclude the desired membership in the required closure.\n  simpa [hInt] using h1",
+    "theorem P1_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : Topology.P1 A) (hB : Topology.P1 B) :\n    Topology.P1 (Set.prod A B) := by\n  dsimp [Topology.P1] at *\n  intro p hp\n  -- Decompose the point `p` and its membership in `A ×ˢ B`.\n  rcases p with ⟨x, y⟩\n  rcases hp with ⟨hxA, hyB⟩\n  -- Apply `P1` to each coordinate.\n  have hxCl : x ∈ closure (interior A) := hA hxA\n  have hyCl : y ∈ closure (interior B) := hB hyB\n  -- Assemble the pair inside the product of the two closures.\n  have hProd : (x, y) ∈\n      Set.prod (closure (interior A)) (closure (interior B)) := by\n    exact And.intro hxCl hyCl\n  -- Relate the target set to the established product via known equalities.\n  have hEq :\n      closure (interior (Set.prod A B)) =\n        Set.prod (closure (interior A)) (closure (interior B)) := by\n    -- Express `interior (A ×ˢ B)` and then take its closure.\n    have hInt :\n        interior (Set.prod A B) =\n          Set.prod (interior A) (interior B) := by\n      simpa using interior_prod_eq A B\n    have hCl :\n        closure (Set.prod (interior A) (interior B)) =\n          Set.prod (closure (interior A)) (closure (interior B)) := by\n      simpa using closure_prod_eq (interior A) (interior B)\n    simpa [hInt] using hCl\n  -- Conclude by rewriting with the equality obtained above.\n  have : (x, y) ∈ closure (interior (Set.prod A B)) := by\n    simpa [hEq] using hProd\n  simpa using this",
+    "theorem interior_inter_of_open_left {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) :\n    interior (A ∩ B) = A ∩ interior B := by\n  ext x\n  constructor\n  · intro hx\n    rcases mem_interior_iff_mem_nhds.1 hx with ⟨U, hUopen, hxU, hUsub⟩\n    have hxA : x ∈ A := (hUsub hxU).1\n    have hUsubB : U ⊆ B := fun y hy => (hUsub hy).2\n    have hxIntB : x ∈ interior B :=\n      mem_interior_iff_mem_nhds.2 ⟨U, hUopen, hxU, hUsubB⟩\n    exact ⟨hxA, hxIntB⟩\n  · intro hx\n    rcases hx with ⟨hxA, hxIntB⟩\n    rcases mem_interior_iff_mem_nhds.1 hxIntB with ⟨U, hUopen, hxU, hUsubB⟩\n    have hVopen : IsOpen (U ∩ A) := hUopen.inter hA\n    have hxV : x ∈ U ∩ A := ⟨hxU, hxA⟩\n    have hVsub : U ∩ A ⊆ A ∩ B := by\n      intro y hy\n      exact ⟨hy.2, hUsubB hy.1⟩\n    exact\n      mem_interior_iff_mem_nhds.2\n        ⟨U ∩ A, hVopen, hxV, hVsub⟩",
+    "theorem P3_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : Topology.P3 A) (hB : Topology.P3 B) :\n    Topology.P3 (A ×ˢ B) := by\n  dsimp [Topology.P3] at *\n  intro p hp\n  -- Decompose `p` and obtain coordinate membership.\n  rcases hp with ⟨hpA, hpB⟩\n  -- Apply `P3` to each coordinate.\n  have hIntA : p.1 ∈ interior (closure A) := hA hpA\n  have hIntB : p.2 ∈ interior (closure B) := hB hpB\n  -- The point `p` lies in the product of the two interiors.\n  have hMemProd :\n      p ∈ interior (closure A) ×ˢ interior (closure B) := by\n    exact ⟨hIntA, hIntB⟩\n  -- This rectangle is open.\n  have hOpenProd :\n      IsOpen (interior (closure A) ×ˢ interior (closure B)) :=\n    (isOpen_interior).prod isOpen_interior\n  -- Show the rectangle is contained in `closure (A ×ˢ B)`.\n  have hSubProd :\n      (interior (closure A) ×ˢ interior (closure B)) ⊆\n        closure (A ×ˢ B) := by\n    intro q hq\n    rcases hq with ⟨hqA, hqB⟩\n    have hqA_cl : q.1 ∈ closure A := (interior_subset) hqA\n    have hqB_cl : q.2 ∈ closure B := (interior_subset) hqB\n    have hqIn : q ∈ closure A ×ˢ closure B := ⟨hqA_cl, hqB_cl⟩\n    simpa [closure_prod_eq] using hqIn\n  -- Use `interior_maximal` to upgrade membership.\n  have hSubInterior :\n      (interior (closure A) ×ˢ interior (closure B)) ⊆\n        interior (closure (A ×ˢ B)) :=\n    interior_maximal hSubProd hOpenProd\n  exact hSubInterior hMemProd"
+  ],
+  "success": true
+}

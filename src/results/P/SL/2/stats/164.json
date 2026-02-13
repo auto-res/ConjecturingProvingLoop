@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.2318320274353
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2576,
+      "prompt_tokens": 26669,
+      "total_tokens": 29245,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_iUnion_implies_P1 {X : Type*} [TopologicalSpace X] {ι : Type*}\n    {s : ι → Set X} :\n    (∀ i, IsOpen (s i)) → Topology.P1 (⋃ i, s i) := by\n  intro hOpen\n  have hOpenUnion : IsOpen (⋃ i, s i) := isOpen_iUnion (fun i => hOpen i)\n  exact Topology.isOpen_implies_P1 (A := ⋃ i, s i) hOpenUnion"
+  ],
+  "success": true
+}

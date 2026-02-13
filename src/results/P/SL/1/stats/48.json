@@ -1,0 +1,94 @@
+{
+  "times": [
+    56.47685384750366,
+    21.103050470352173,
+    62.25316071510315,
+    63.431610107421875,
+    28.19302535057068
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3865,
+      "prompt_tokens": 6803,
+      "total_tokens": 10668,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1831,
+      "prompt_tokens": 6926,
+      "total_tokens": 8757,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6016
+      }
+    },
+    {
+      "completion_tokens": 4088,
+      "prompt_tokens": 7001,
+      "total_tokens": 11089,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6016
+      }
+    },
+    {
+      "completion_tokens": 4345,
+      "prompt_tokens": 7232,
+      "total_tokens": 11577,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    },
+    {
+      "completion_tokens": 2158,
+      "prompt_tokens": 7342,
+      "total_tokens": 9500,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iUnion {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    (∀ i, Topology.P2 (A i)) → Topology.P2 (⋃ i, A i) := by\n  intro hA\n  dsimp [Topology.P2] at hA ⊢\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxi⟩\n  have hxInt : x ∈ interior (closure (interior (A i))) := hA i hxi\n  have hsubset :\n      interior (closure (interior (A i))) ⊆\n        interior (closure (interior (⋃ i, A i))) := by\n    -- Step 1: `interior (A i) ⊆ interior (⋃ j, A j)`\n    have h1 : interior (A i) ⊆ interior (⋃ j, A j) := by\n      intro y hy\n      exact Set.mem_iUnion.2 ⟨i, hy⟩\n    -- Step 2: Take closures to obtain the corresponding inclusion\n    have h2 : closure (interior (A i)) ⊆ closure (interior (⋃ j, A j)) :=\n      closure_mono h1\n    -- Step 3: Apply monotonicity of `interior`\n    exact interior_mono h2\n  exact hsubset hxInt",
+    "theorem Topology.P1_iUnion {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    (∀ i, Topology.P1 (A i)) → Topology.P1 (⋃ i, A i) := by\n  intro hA\n  dsimp [Topology.P1] at hA ⊢\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxAi⟩\n  have hx_closure : x ∈ closure (interior (A i)) := (hA i) hxAi\n  have hsubset : closure (interior (A i)) ⊆ closure (interior (⋃ j, A j)) := by\n    apply closure_mono\n    have hsub_int : interior (A i) ⊆ interior (⋃ j, A j) := by\n      apply interior_mono\n      intro y hy\n      have : (y : X) ∈ (A i) := (interior_subset : interior (A i) ⊆ (A i)) hy\n      exact Set.mem_iUnion.2 ⟨i, this⟩\n    exact hsub_int\n  exact hsubset hx_closure",
+    "theorem interior_closure_interior_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply Set.Subset.antisymm\n  ·\n    have hsubset : closure (interior (closure A)) ⊆ closure A := by\n      have : interior (closure A) ⊆ closure A := interior_subset\n      exact closure_mono this\n    exact interior_mono hsubset\n  ·\n    have hsubset : interior (closure A) ⊆ closure (interior (closure A)) := by\n      intro x hx\n      exact subset_closure hx\n    exact interior_mono hsubset",
+    "theorem Topology.closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    -- `interior (closure (interior A))` is contained in `closure (interior A)`\n    have h₁ : interior (closure (interior A)) ⊆ closure (interior A) := by\n      intro x hx\n      exact interior_subset hx\n    -- Taking closures preserves inclusions\n    have hclosure :\n        closure (interior (closure (interior A))) ⊆\n          closure (closure (interior A)) := closure_mono h₁\n    simpa [closure_closure] using hclosure\n  ·\n    -- `interior A` is contained in `interior (closure (interior A))`\n    have h₂ : interior A ⊆ interior (closure (interior A)) := by\n      apply interior_mono\n      intro x hx\n      exact subset_closure hx\n    -- Taking closures preserves inclusions\n    have hclosure :\n        closure (interior A) ⊆ closure (interior (closure (interior A))) :=\n      closure_mono h₂\n    exact hclosure",
+    "theorem Topology.P2_iUnion {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    (∀ i, Topology.P2 (A i)) → Topology.P2 (⋃ i, A i) := by\n  intro hA\n  dsimp [Topology.P2] at hA ⊢\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxAi⟩\n  have hxInt : x ∈ interior (closure (interior (A i))) := (hA i) hxAi\n  have hsubset :\n      interior (closure (interior (A i))) ⊆\n        interior (closure (interior (⋃ j, A j))) := by\n    apply interior_mono\n    have : closure (interior (A i)) ⊆ closure (interior (⋃ j, A j)) := by\n      apply closure_mono\n      have : interior (A i) ⊆ interior (⋃ j, A j) := by\n        apply interior_mono\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact this\n    exact this\n  exact hsubset hxInt"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.46516871452332
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9005,
+      "prompt_tokens": 28785,
+      "total_tokens": 37790,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_intersection_subset_inter_interior {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    interior ((A ∩ B) : Set X) ⊆ interior A ∩ interior B := by\n  intro x hx\n  -- `A ∩ B ⊆ A`, hence `interior (A ∩ B) ⊆ interior A`.\n  have hxA : (x : X) ∈ interior A :=\n    (interior_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)) hx\n  -- Similarly, `A ∩ B ⊆ B`, so `interior (A ∩ B) ⊆ interior B`.\n  have hxB : (x : X) ∈ interior B :=\n    (interior_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hx\n  exact ⟨hxA, hxB⟩"
+  ],
+  "success": true
+}

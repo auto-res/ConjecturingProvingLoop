@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.63358783721924
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4737,
+      "prompt_tokens": 18991,
+      "total_tokens": 23728,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18304
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 (closure A) := by\n  intro hDense\n  have hEq : closure (closure A) = (Set.univ : Set X) := by\n    simpa [closure_closure] using hDense.closure_eq\n  simpa using\n    (Topology.P3_of_closure_eq_univ (A := closure A) hEq)"
+  ],
+  "success": true
+}

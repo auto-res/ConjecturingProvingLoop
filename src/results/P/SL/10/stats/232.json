@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.68083953857422
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3995,
+      "prompt_tokens": 37428,
+      "total_tokens": 41423,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_closure_subset_closure_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure A \\ closure B ⊆ closure (A \\ B) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxNotClB⟩\n  -- We show that `x ∈ closure (A \\ B)` using the neighbourhood criterion.\n  have : x ∈ closure (A \\ B) := by\n    apply (mem_closure_iff).2\n    intro U hUopen hxU\n    -- Intersect the neighbourhood with the open complement of `closure B`.\n    have hOpenCompl : IsOpen ((closure (B : Set X))ᶜ) :=\n      (isClosed_closure : IsClosed (closure B)).isOpen_compl\n    have hVopen : IsOpen (U ∩ (closure (B : Set X))ᶜ) :=\n      hUopen.inter hOpenCompl\n    have hxV : x ∈ U ∩ (closure (B : Set X))ᶜ :=\n      ⟨hxU, hxNotClB⟩\n    -- Since `x ∈ closure A`, this open set meets `A`.\n    have hNonempty :\n        (U ∩ (closure (B : Set X))ᶜ ∩ A).Nonempty :=\n      (mem_closure_iff).1 hxClA _ hVopen hxV\n    rcases hNonempty with ⟨y, ⟨hyU, hyNotClB⟩, hyA⟩\n    -- The point `y` avoids `B`, hence lies in `A \\ B`.\n    have hyNotB : y ∉ B := by\n      intro hyB\n      have : y ∈ (closure (B : Set X)) := subset_closure hyB\n      exact hyNotClB this\n    exact ⟨y, ⟨hyU, ⟨hyA, hyNotB⟩⟩⟩\n  exact this"
+  ],
+  "success": true
+}

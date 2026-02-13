@@ -1,0 +1,43 @@
+{
+  "times": [
+    71.41362380981445,
+    88.152339220047
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6413,
+      "prompt_tokens": 22190,
+      "total_tokens": 28603,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 7553,
+      "prompt_tokens": 22310,
+      "total_tokens": 29863,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_subset_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n  -- `interior (closure A)` is contained in `closure A`\n  have h : interior (closure (A : Set X)) ⊆ closure (A : Set X) :=\n    interior_subset (s := closure (A : Set X))\n  -- Taking closures preserves inclusions\n  exact closure_mono h",
+    "theorem isClosed_closure_diff_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    IsClosed (closure (A : Set X) \\ interior (A : Set X)) := by\n  -- Express the set as an intersection of two closed sets\n  have h_eq :\n      (closure (A : Set X) \\ interior (A : Set X)) =\n        closure (A : Set X) ∩ (interior (A : Set X))ᶜ := by\n    rfl\n  -- `closure A` is closed\n  have h_closure : IsClosed (closure (A : Set X)) := isClosed_closure\n  -- The complement of `interior A` is closed because `interior A` is open\n  have h_compl : IsClosed ((interior (A : Set X))ᶜ) :=\n    (isOpen_interior : IsOpen (interior (A : Set X))).isClosed_compl\n  -- The intersection of two closed sets is closed\n  simpa [h_eq] using h_closure.inter h_compl"
+  ],
+  "success": true
+}

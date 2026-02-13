@@ -1,0 +1,26 @@
+{
+  "times": [
+    123.12620878219604
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7284,
+      "prompt_tokens": 51723,
+      "total_tokens": 59007,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_comp\n    {X : Type*} [TopologicalSpace X] :\n    ((fun A : Set X => closure (interior (closure A))) ∘\n        (fun A : Set X => closure (interior (closure A)))) =\n      (fun A : Set X => closure (interior (closure A))) := by\n  funext A\n  -- Abbreviate `F S = closure (interior (closure S))`.\n  have h₁ :\n      closure (interior (closure (closure (interior (closure A))))) =\n        closure (interior (closure (interior (closure A)))) := by\n    -- First contraction: remove the outermost redundant `closure`.\n    simpa using\n      (Topology.closure_interior_closure_closure_eq_closure_interior_closure\n        (A := interior (closure A)))\n  have h₂ :\n      closure (interior (closure (interior (closure A)))) =\n        closure (interior (closure A)) := by\n    -- Second contraction: collapse the nested `interior`.\n    simpa using\n      (Topology.closure_interior_closure_interior_eq_closure_interior\n        (A := closure A))\n  -- Combine the two equalities to obtain idempotence.\n  simpa [Function.comp] using (h₁.trans h₂)"
+  ],
+  "success": true
+}

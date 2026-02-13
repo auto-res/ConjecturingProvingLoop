@@ -1,0 +1,26 @@
+{
+  "times": [
+    123.60059595108032
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8967,
+      "prompt_tokens": 33242,
+      "total_tokens": 42209,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_three_subset\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    closure (interior (A : Set X)) ∪ closure (interior B) ∪ closure (interior C) ⊆\n      closure (interior (A ∪ B ∪ C : Set X)) := by\n  -- Each individual term of the left‐hand side is contained in the right‐hand side.\n  have hA :\n      closure (interior (A : Set X)) ⊆\n        closure (interior (A ∪ B ∪ C : Set X)) := by\n    apply Topology.closure_interior_mono\n    intro x hx\n    -- `x ∈ A ⊆ A ∪ B ∪ C`\n    exact Or.inl (Or.inl hx)\n  have hB :\n      closure (interior (B : Set X)) ⊆\n        closure (interior (A ∪ B ∪ C : Set X)) := by\n    apply Topology.closure_interior_mono\n    intro x hx\n    -- `x ∈ B ⊆ A ∪ B ⊆ (A ∪ B) ∪ C`\n    exact Or.inl (Or.inr hx)\n  have hC :\n      closure (interior (C : Set X)) ⊆\n        closure (interior (A ∪ B ∪ C : Set X)) := by\n    apply Topology.closure_interior_mono\n    intro x hx\n    -- `x ∈ C ⊆ (A ∪ B) ∪ C`\n    exact Or.inr hx\n  -- Analyse membership in the triple union.\n  intro x hx\n  cases hx with\n  | inl hxAB =>\n      cases hxAB with\n      | inl hxA => exact hA hxA\n      | inr hxB => exact hB hxB\n  | inr hxC => exact hC hxC"
+  ],
+  "success": true
+}

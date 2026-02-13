@@ -1,0 +1,26 @@
+{
+  "times": [
+    106.07526636123657
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6248,
+      "prompt_tokens": 53001,
+      "total_tokens": 59249,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_diff_frontier {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A = A \\ frontier A := by\n  ext x\n  constructor\n  · intro hxInt\n    have hxA : x ∈ A := interior_subset hxInt\n    have hxNotFrontier : x ∉ frontier A := by\n      intro hxFront\n      -- `hxFront.2` asserts `x ∉ interior A`, contradicting `hxInt`.\n      exact hxFront.2 hxInt\n    exact And.intro hxA hxNotFrontier\n  · intro hx\n    rcases hx with ⟨hxA, hxNotFrontier⟩\n    by_cases hxInt : x ∈ interior A\n    · exact hxInt\n    ·\n      -- From `x ∈ A` we get `x ∈ closure A`.\n      have hxClos : x ∈ closure A := subset_closure hxA\n      -- Together with `hxInt : x ∉ interior A`, this places `x` in the frontier,\n      -- contradicting `hxNotFrontier`.\n      have hxFrontier : x ∈ frontier A := And.intro hxClos hxInt\n      exact False.elim (hxNotFrontier hxFrontier)"
+  ],
+  "success": true
+}

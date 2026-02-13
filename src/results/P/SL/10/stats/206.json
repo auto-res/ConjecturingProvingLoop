@@ -1,0 +1,43 @@
+{
+  "times": [
+    106.1968183517456,
+    167.44625735282898
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9400,
+      "prompt_tokens": 33549,
+      "total_tokens": 42949,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 11800,
+      "prompt_tokens": 33659,
+      "total_tokens": 45459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_closure_compl_eq_univ {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure A ∪ closure (Aᶜ) = (Set.univ : Set X) := by\n  -- `interior A` is contained in `closure A`.\n  have h_int_subset : interior A ⊆ closure A := interior_subset\n  -- We already know `interior A ∪ closure (Aᶜ) = univ`.\n  have h_union :=\n    Topology.interior_union_closure_compl_eq_univ (X := X) (A := A)\n  -- Prove the desired equality by showing mutual inclusion.\n  ext x\n  constructor\n  · intro _; simp\n  · intro _\n    -- Place `x` in `interior A ∪ closure (Aᶜ)` via `h_union`.\n    have hx_union : x ∈ interior A ∪ closure (Aᶜ) := by\n      have : x ∈ (Set.univ : Set X) := by simp\n      simpa [h_union] using this\n    -- Transfer membership to the required union.\n    cases hx_union with\n    | inl hxInt =>\n        exact Or.inl (h_int_subset hxInt)\n    | inr hxClCompl =>\n        exact Or.inr hxClCompl",
+    "theorem Topology.interior_subset_of_subset_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ closure B) :\n    interior A ⊆ closure B := by\n  intro x hx\n  exact hAB (interior_subset hx)"
+  ],
+  "success": true
+}

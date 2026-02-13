@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.94591522216797
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4780,
+      "prompt_tokens": 53710,
+      "total_tokens": 58490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_interior_eq {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (interior A ∩ interior B) = interior A ∩ interior B := by\n  -- `interior A` is open, so we may apply `interior_inter_open_left`.\n  have h_open : IsOpen (interior A) := isOpen_interior\n  have h :=\n    Topology.interior_inter_open_left\n      (X := X) (U := interior A) (A := interior B) h_open\n  -- Simplify `interior (interior B)` to `interior B`.\n  simpa [interior_interior] using h"
+  ],
+  "success": true
+}

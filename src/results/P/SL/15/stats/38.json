@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.48377823829651
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2756,
+      "prompt_tokens": 5634,
+      "total_tokens": 8390,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4992
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closure_interior_iff_isOpen_closure_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (interior A)) ↔ IsOpen (closure (interior A)) := by\n  have h_closed : IsClosed (closure (interior A)) := isClosed_closure\n  simpa using\n    (Topology.P3_closed_iff_isOpen (X := X) (A := closure (interior A)) h_closed)"
+  ],
+  "success": true
+}

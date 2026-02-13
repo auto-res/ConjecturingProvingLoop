@@ -1,0 +1,43 @@
+{
+  "times": [
+    91.84472274780273,
+    69.18255805969238
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5842,
+      "prompt_tokens": 15170,
+      "total_tokens": 21012,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    },
+    {
+      "completion_tokens": 4846,
+      "prompt_tokens": 15242,
+      "total_tokens": 20088,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_compl_iff_isClosed_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_open : IsOpen A) :\n    Topology.P3 (A := Aᶜ) ↔ IsClosed A := by\n  -- First, note that `Aᶜ` is closed because `A` is open.\n  have hA_compl_closed : IsClosed (Aᶜ) := hA_open.isClosed_compl\n  -- Use the characterisation of `P3` for closed sets applied to `Aᶜ`.\n  have h₁ :\n      Topology.P3 (A := Aᶜ) ↔ IsOpen (Aᶜ) :=\n    Topology.P3_iff_isOpen_of_isClosed (A := Aᶜ) hA_compl_closed\n  -- Relate `IsOpen (Aᶜ)` to `IsClosed A`.\n  have h₂ : IsOpen (Aᶜ) ↔ IsClosed A := by\n    constructor\n    · intro h_open_compl\n      -- The complement of an open set is closed.\n      simpa [Set.compl_compl] using h_open_compl.isClosed_compl\n    · intro h_closed_A\n      -- The complement of a closed set is open.\n      simpa using h_closed_A.isOpen_compl\n  -- Combine the two equivalences.\n  simpa using h₁.trans h₂",
+    "theorem Topology.closure_compl_subset_compl_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (Aᶜ) ⊆ (interior A)ᶜ := by\n  intro x hx_closure\n  -- We must show `x ∉ interior A`.\n  intro hx_intA\n  -- Use the characterization of closure: every neighbourhood of `x` meets `Aᶜ`.\n  have h_nonempty : ((interior A) ∩ Aᶜ).Nonempty := by\n    have h_closure := (mem_closure_iff).1 hx_closure\n    exact h_closure _ isOpen_interior hx_intA\n  -- Derive a contradiction from the non-empty intersection.\n  rcases h_nonempty with ⟨y, ⟨hy_int, hy_compl⟩⟩\n  have hyA : y ∈ A := interior_subset hy_int\n  exact hy_compl hyA"
+  ],
+  "success": true
+}

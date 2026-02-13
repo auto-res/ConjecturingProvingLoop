@@ -1,0 +1,26 @@
+{
+  "times": [
+    133.6831865310669
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8332,
+      "prompt_tokens": 41019,
+      "total_tokens": 49351,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8128,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iInter_closure_eq_iInter_closure\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    closure (⋂ i, closure (A i)) = ⋂ i, closure (A i) := by\n  apply Set.Subset.antisymm\n  ·\n    have h :\n        closure (⋂ i, closure (A i)) ⊆ ⋂ i, closure (closure (A i)) :=\n      Topology.closure_iInter_subset (A := fun i => closure (A i))\n    simpa [closure_closure] using h\n  ·\n    intro x hx\n    exact\n      (subset_closure :\n        (⋂ i, closure (A i)) ⊆ closure (⋂ i, closure (A i))) hx"
+  ],
+  "success": true
+}

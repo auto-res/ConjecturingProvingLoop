@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.77931213378906
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4200,
+      "prompt_tokens": 20625,
+      "total_tokens": 24825,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_subset_interior_closureInterior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) ⊆ interior (closure (interior A)) := by\n  -- Apply monotonicity of `interior` to the inclusion\n  -- `interior A ⊆ closure (interior A)`.\n  have h :\n      interior (interior (A : Set X)) ⊆ interior (closure (interior A)) :=\n    interior_mono (subset_closure : (interior (A : Set X)) ⊆ closure (interior A))\n  simpa [interior_interior] using h"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    84.64951705932617
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6899,
+      "prompt_tokens": 21934,
+      "total_tokens": 28833,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_interior_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Topology.P3 (closure (interior A)) := by\n  intro hDense\n  -- Since `interior A` is dense, its (double) closure is the whole space.\n  have hEq : closure (closure (interior A)) = (Set.univ : Set X) := by\n    simpa [closure_closure] using hDense.closure_eq\n  -- Apply the existing lemma to conclude the `P3` property.\n  exact Topology.P3_of_closure_eq_univ (A := closure (interior A)) hEq"
+  ],
+  "success": true
+}

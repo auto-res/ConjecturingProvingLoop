@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.74338459968567
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6003,
+      "prompt_tokens": 27795,
+      "total_tokens": 33798,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_of_subset_closure_interior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    Topology.P1 A → (B ⊆ closure (interior A)) → Topology.P1 (A ∪ B) := by\n  intro hP1A hBsub\n  intro x hxUnion\n  -- We will show that `x` belongs to `closure (interior (A ∪ B))`\n  -- by distinguishing the cases `x ∈ A` or `x ∈ B`.\n  have hIncl :\n      closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n    -- First, note that `interior A ⊆ interior (A ∪ B)`.\n    have hIntSub : (interior A : Set X) ⊆ interior (A ∪ B) := by\n      have hASub : (A : Set X) ⊆ A ∪ B := by\n        intro y hy; exact Or.inl hy\n      exact interior_mono hASub\n    -- Taking closures preserves inclusions.\n    exact closure_mono hIntSub\n  cases hxUnion with\n  | inl hxA =>\n      -- Case `x ∈ A`\n      have hx_cl : x ∈ closure (interior A) := hP1A hxA\n      exact hIncl hx_cl\n  | inr hxB =>\n      -- Case `x ∈ B`\n      have hx_cl : x ∈ closure (interior A) := hBsub hxB\n      exact hIncl hx_cl"
+  ],
+  "success": true
+}

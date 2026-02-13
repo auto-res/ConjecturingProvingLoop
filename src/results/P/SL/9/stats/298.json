@@ -1,0 +1,60 @@
+{
+  "times": [
+    73.13961553573608,
+    116.12217211723328,
+    80.69986629486084
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4372,
+      "prompt_tokens": 52519,
+      "total_tokens": 56891,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    },
+    {
+      "completion_tokens": 5010,
+      "prompt_tokens": 52625,
+      "total_tokens": 57635,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    },
+    {
+      "completion_tokens": 5256,
+      "prompt_tokens": 52699,
+      "total_tokens": 57955,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_frontier_eq_empty\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) ∩ frontier A = (∅ : Set X) := by\n  classical\n  -- We show that the intersection contains no points.\n  apply (Set.eq_empty_iff_forall_not_mem).2\n  intro x hx\n  rcases hx with ⟨hxInt, hxFront⟩\n  -- Rewrite membership in the frontier.\n  have hxFrontDiff : x ∈ closure (A : Set X) \\ interior A := by\n    simpa [Topology.frontier_eq_closure_diff_interior (A := A)] using hxFront\n  -- The second component of `hxFrontDiff` says `x ∉ interior A`,\n  -- contradicting `hxInt`.\n  exact hxFrontDiff.2 hxInt",
+    "theorem Set.compl_compl {α : Type*} (s : Set α) : ((sᶜ)ᶜ : Set α) = s := by\n  ext x\n  by_cases hx : x ∈ s\n  · simp [hx]\n  · simp [hx]",
+    "theorem Topology.frontier_diff_subset_union_frontier {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    frontier (A \\ B : Set X) ⊆ frontier A ∪ frontier B := by\n  classical\n  intro x hx\n  -- Rewrite the difference as an intersection with the complement.\n  have hx' : x ∈ frontier (A ∩ Bᶜ : Set X) := by\n    simpa [Set.diff_eq] using hx\n  -- Apply the lemma for intersections.\n  have hStep :=\n    (Topology.frontier_inter_subset_union_frontier\n        (A := A) (B := Bᶜ)) hx'\n  -- Convert the frontier of `Bᶜ` back to `B` using `frontier_compl`.\n  cases hStep with\n  | inl hA =>\n      exact Or.inl hA\n  | inr hBcompl =>\n      have hB : x ∈ frontier (B : Set X) := by\n        simpa [frontier_compl (A := B)] using hBcompl\n      exact Or.inr hB"
+  ],
+  "success": true
+}

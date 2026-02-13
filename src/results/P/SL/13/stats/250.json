@@ -1,0 +1,43 @@
+{
+  "times": [
+    63.64336347579956,
+    51.02054214477539
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4065,
+      "prompt_tokens": 44343,
+      "total_tokens": 48408,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 4352,
+      "prompt_tokens": 44417,
+      "total_tokens": 48769,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_iterate_thirteen_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure\n      (interior (closure\n        (interior (closure\n          (interior (closure\n            (interior (closure\n              (interior (closure\n                (interior (closure\n                  (interior (closure\n                    (interior (closure\n                      (interior (closure (A : Set X)))))))))))))))))) =\n      interior (closure A) := by\n  -- Collapse the innermost twelve-layer expression using the existing lemma.\n  have h₁ :=\n    Topology.interior_closure_iterate_twelve_eq_interior_closure (X := X) (A := A)\n  -- Rewrite and finish with the two-layer idempotency lemma.\n  calc\n    interior (closure\n      (interior (closure\n        (interior (closure\n          (interior (closure\n            (interior (closure\n              (interior (closure\n                (interior (closure\n                  (interior (closure\n                    (interior (closure\n                      (interior (closure (A : Set X)))))))))))))))))) =\n        interior (closure (interior (closure A))) := by\n          simpa [h₁]\n    _ = interior (closure A) := by\n          simpa using\n            (Topology.interior_closure_interior_closure_eq_interior_closure\n              (X := X) (A := A))",
+    "theorem Topology.interior_inter_closure_subset_interior_and_closure {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    interior ((A ∩ closure (B : Set X)) : Set X) ⊆ interior A ∩ closure B := by\n  intro x hx\n  -- First, record that `x` lies in `A ∩ closure B`.\n  have h_mem : (x : X) ∈ A ∩ closure (B : Set X) := interior_subset hx\n  -- Deduce `x ∈ interior A` using monotonicity of `interior`.\n  have hxA : (x : X) ∈ interior A := by\n    have h_subset : (A ∩ closure (B : Set X) : Set X) ⊆ A :=\n      Set.inter_subset_left\n    exact (interior_mono h_subset) hx\n  -- Extract the `closure B` membership from `h_mem`.\n  have hxB : (x : X) ∈ closure B := h_mem.2\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.71792840957642
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5883,
+      "prompt_tokens": 31097,
+      "total_tokens": 36980,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_interior_of_P1 {X : Type*}\n    [TopologicalSpace X] {A : Set X} (hP1 : Topology.P1 A) :\n    frontier A ⊆ closure (interior A) := by\n  intro x hx\n  -- From `x ∈ frontier A`, we know `x ∈ closure A`.\n  have hx_closure : x ∈ closure A := hx.1\n  -- Under `P1`, the two closures coincide.\n  have h_eq : closure (interior A) = closure A :=\n    Topology.closure_interior_eq_closure_of_P1 (A := A) hP1\n  -- Rewrite the membership using this equality.\n  simpa [h_eq] using hx_closure"
+  ],
+  "success": true
+}

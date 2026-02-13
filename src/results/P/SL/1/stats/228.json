@@ -1,0 +1,43 @@
+{
+  "times": [
+    151.5641644001007,
+    63.12488055229187
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12351,
+      "prompt_tokens": 35270,
+      "total_tokens": 47621,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 5416,
+      "prompt_tokens": 35344,
+      "total_tokens": 40760,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure\n        (interior\n          (closure\n            (interior\n              (closure\n                (interior\n                  (closure\n                    (interior\n                      (closure\n                        (interior\n                          (closure\n                            (interior A)))))))))) =\n      closure (interior A) := by\n  calc\n    closure\n        (interior\n          (closure\n            (interior\n              (closure\n                (interior\n                  (closure\n                    (interior\n                      (closure\n                        (interior\n                          (closure\n                            (interior A)))))))))) =\n        closure\n          (interior\n            (closure\n              (interior\n                (closure\n                  (interior\n                    (closure\n                      (interior\n                        A)))))) := by\n      simpa using\n        (Topology.closure_interior_closure_interior_closure_interior_closure_interior_closure_eq_closure_interior\n          (A := closure (interior A)))\n    _ = closure (interior A) := by\n      simpa using\n        (Topology.closure_interior_closure_interior_eq_closure_interior (A := A))",
+    "theorem Topology.P1_compl_iff_isOpen_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    Topology.P1 (Aᶜ) ↔ IsOpen (Aᶜ) := by\n  -- The complement of a closed set is open.\n  have hOpen : IsOpen (Aᶜ) := by\n    simpa using (isOpen_compl_iff).2 hA\n  constructor\n  · intro _; exact hOpen\n  · intro hOpenCompl\n    exact Topology.P1_of_isOpen (A := Aᶜ) hOpenCompl"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    130.69479155540466,
+    171.45501971244812,
+    58.08877754211426
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6349,
+      "prompt_tokens": 45151,
+      "total_tokens": 51500,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 9771,
+      "prompt_tokens": 45221,
+      "total_tokens": 54992,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    },
+    {
+      "completion_tokens": 3241,
+      "prompt_tokens": 45293,
+      "total_tokens": 48534,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_diff_closure_interior_subset_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) \\ closure (interior A) ⊆ Set.frontier A := by\n  intro x hx\n  -- `hx` gives the two facts we need about `x`.\n  have hxIntCl : x ∈ interior (closure A) := hx.1\n  have hxNotClInt : x ∉ closure (interior A) := hx.2\n  -- Any point of `interior (closure A)` lies in `closure A`.\n  have hxCl : x ∈ closure A := interior_subset hxIntCl\n  -- Show that `x` is not in `interior A`.\n  have hxNotInt : x ∉ interior A := by\n    intro hxIntA\n    have : x ∈ closure (interior A) := subset_closure hxIntA\n    exact hxNotClInt this\n  -- Combine the two conditions to place `x` in `frontier A = closure A \\ interior A`.\n  exact And.intro hxCl hxNotInt",
+    "theorem Topology.isClosed_closure_diff_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (closure A \\ interior A : Set X) := by\n  -- `closure A` is closed.\n  have hClosedCl : IsClosed (closure A) := isClosed_closure\n  -- The complement of `interior A` is closed because `interior A` is open.\n  have hClosedComplInt : IsClosed ((interior A)ᶜ) := by\n    dsimp [IsClosed]\n    simpa [Set.compl_compl] using isOpen_interior\n  -- The difference `closure A \\ interior A` is `closure A ∩ (interior A)ᶜ`,\n  -- an intersection of two closed sets, hence closed.\n  have hClosedInter : IsClosed (closure A ∩ (interior A)ᶜ : Set X) :=\n    hClosedCl.inter hClosedComplInt\n  simpa [Set.diff_eq] using hClosedInter",
+    "theorem Topology.closure_diff_subset_closure_diffInterior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A \\ B : Set X) ⊆ closure A \\ interior B := by\n  intro x hx\n  -- First, `x` lies in `closure A` because `A \\ B ⊆ A`.\n  have hxClA : x ∈ closure A := by\n    have hSub : (A \\ B : Set X) ⊆ A := by\n      intro y hy; exact hy.1\n    exact (closure_mono hSub) hx\n  -- Next, show that `x` is **not** in `interior B`.\n  have hxNotIntB : x ∉ interior B := by\n    intro hxIntB\n    -- Use the characterization of points in the closure.\n    have hNonEmpty :\n        ((interior B) ∩ (A \\ B) : Set X).Nonempty :=\n      (mem_closure_iff).1 hx (interior B) isOpen_interior hxIntB\n    rcases hNonEmpty with ⟨y, hyIntB, hyAminusB⟩\n    -- From `y ∈ interior B`, we get `y ∈ B`.\n    have : (y : X) ∈ B := interior_subset hyIntB\n    -- But `y ∉ B` because `y ∈ A \\ B`, contradiction.\n    exact (hyAminusB.2 this).elim\n  exact And.intro hxClA hxNotIntB"
+  ],
+  "success": true
+}

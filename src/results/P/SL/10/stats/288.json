@@ -1,0 +1,26 @@
+{
+  "times": [
+    121.69041991233826
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7705,
+      "prompt_tokens": 46563,
+      "total_tokens": 54268,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_eq_empty_iff_open_and_closed {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A \\ interior A = (∅ : Set X) ↔ (IsOpen A ∧ IsClosed A) := by\n  classical\n  constructor\n  · intro h\n    -- First show `closure A ⊆ interior A`.\n    have h_subset : closure A ⊆ interior A := by\n      intro x hx_cl\n      by_cases hx_int : x ∈ interior A\n      · exact hx_int\n      ·\n        -- Otherwise `x` would lie in the (empty) boundary.\n        have h_mem : x ∈ closure A \\ interior A := ⟨hx_cl, hx_int⟩\n        have h_false : False := by\n          have : x ∈ (∅ : Set X) := by\n            simpa [h] using h_mem\n          simpa using this\n        exact (h_false.elim)\n    -- Hence `interior A = A`.\n    have h_int_eq : interior A = A := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      · intro x hxA\n        exact h_subset (subset_closure hxA)\n    -- And `closure A = A`.\n    have h_cl_eq : closure A = A := by\n      apply Set.Subset.antisymm\n      · intro x hx_cl\n        have : x ∈ interior A := h_subset hx_cl\n        exact interior_subset this\n      · exact subset_closure\n    -- Conclude that `A` is both open and closed.\n    have hOpen : IsOpen A := by\n      have : IsOpen (interior A) := isOpen_interior\n      simpa [h_int_eq] using this\n    have hClosed : IsClosed A := by\n      have : IsClosed (closure A) := isClosed_closure\n      simpa [h_cl_eq] using this\n    exact And.intro hOpen hClosed\n  · rintro ⟨hOpen, hClosed⟩\n    -- For an open and closed set the boundary is empty.\n    have h_int_eq : interior A = A := hOpen.interior_eq\n    have h_cl_eq  : closure A = A  := hClosed.closure_eq\n    simpa [h_int_eq, h_cl_eq, Set.diff_self]"
+  ],
+  "success": true
+}

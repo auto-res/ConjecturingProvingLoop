@@ -1,0 +1,77 @@
+{
+  "times": [
+    22.426419973373413,
+    21.210949420928955,
+    28.58353281021118,
+    25.028452396392822
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1631,
+      "prompt_tokens": 49357,
+      "total_tokens": 50988,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 1542,
+      "prompt_tokens": 49463,
+      "total_tokens": 51005,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    },
+    {
+      "completion_tokens": 1507,
+      "prompt_tokens": 49623,
+      "total_tokens": 51130,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 2256,
+      "prompt_tokens": 49691,
+      "total_tokens": 51947,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_frontier_eq_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (A : Set X) ∪ frontier A = closure A := by\n  simpa [frontier] using\n    (Topology.interior_union_closureDiffInterior_eq_closure (A := A))",
+    "theorem Topology.frontier_union_three_subset {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} :\n    frontier (A ∪ B ∪ C : Set X) ⊆ frontier A ∪ frontier B ∪ frontier C := by\n  -- Reassociate the union to fit the binary lemma.\n  have h₁ :\n      frontier ((A ∪ B) ∪ C : Set X) ⊆\n        frontier (A ∪ B) ∪ frontier C :=\n    Topology.frontier_union_subset (A := A ∪ B) (B := C)\n  -- Apply the two–set lemma once more to `frontier (A ∪ B)`.\n  have h₂ :\n      frontier (A ∪ B) ⊆ frontier A ∪ frontier B :=\n    Topology.frontier_union_subset (A := A) (B := B)\n  -- Combine the two inclusions.\n  have h₃ :\n      frontier (A ∪ B ∪ C : Set X) ⊆\n        (frontier A ∪ frontier B) ∪ frontier C := by\n    simpa [Set.union_assoc] using\n      (Set.union_subset_union h₂ subset_rfl).trans (by\n        simpa [Set.union_assoc] using h₁)\n  -- Reassociate unions on the right‐hand side to match the goal.\n  simpa [Set.union_assoc] using h₃",
+    "Lean code cannot be generated because previous code still contains errors that must be corrected first.",
+    "theorem Topology.frontier_eq_empty_iff_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) = (∅ : Set X) ↔ (IsClosed A ∧ IsOpen A) := by\n  classical\n  constructor\n  · intro h_frontier\n    -- From `frontier A = ∅` we deduce `closure A ⊆ interior A`.\n    have h_subset : closure A ⊆ interior A := by\n      intro x hx_cl\n      by_contra hx_int\n      have : x ∈ frontier (A : Set X) := ⟨hx_cl, hx_int⟩\n      simpa [h_frontier] using this\n    -- Hence `interior A ⊆ A ⊆ closure A ⊆ interior A`,\n    -- so all three sets coincide.\n    have h_int_eq : interior A = (A : Set X) := by\n      apply subset_antisymm\n      · exact interior_subset\n      · intro x hxA\n        have hx_cl : x ∈ closure A := subset_closure hxA\n        exact h_subset hx_cl\n    have h_cl_eq : closure A = (A : Set X) := by\n      apply subset_antisymm\n      · intro x hx_cl\n        exact (interior_subset : interior A ⊆ A) (h_subset hx_cl)\n      · exact subset_closure\n    -- Use these equalities to obtain openness and closedness.\n    have h_open : IsOpen A := by\n      simpa [h_int_eq] using (isOpen_interior : IsOpen (interior A))\n    have h_closed : IsClosed A := by\n      simpa [h_cl_eq] using (isClosed_closure : IsClosed (closure A))\n    exact ⟨h_closed, h_open⟩\n  · rintro ⟨h_closed, h_open⟩\n    exact Topology.frontier_eq_empty_of_isClopen (A := A) h_closed h_open"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.98939752578735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8796,
+      "prompt_tokens": 29819,
+      "total_tokens": 38615,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_isOpen_left {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hOpenA : IsOpen A) (hP2B : Topology.P2 B) :\n    Topology.P2 (A ∩ B) := by\n  -- Expand the definition of `P2`.\n  unfold Topology.P2 at *\n  -- Take an arbitrary point `x` in `A ∩ B`.\n  intro x hxAB\n  rcases hxAB with ⟨hxA, hxB⟩\n  -- From `P2` for `B`, obtain the required membership.\n  have hxIntB : x ∈ interior (closure (interior B)) := hP2B hxB\n  -- Consider the open set `A ∩ interior (closure (interior B))` that contains `x`.\n  have hxS : x ∈ A ∩ interior (closure (interior B)) := ⟨hxA, hxIntB⟩\n  -- We will show this open set is contained in `closure (interior (A ∩ B))`.\n  have h_subset :\n      (A ∩ interior (closure (interior B))) ⊆ closure (interior (A ∩ B)) := by\n    intro y hy\n    rcases hy with ⟨hyA, hyIntB⟩\n    -- `y` belongs to the closure of `interior B`.\n    have hyClB : y ∈ closure (interior B) := interior_subset hyIntB\n    -- Show that `y` lies in the closure of `interior (A ∩ B)`.\n    have : y ∈ closure (interior (A ∩ B)) := by\n      -- Use the neighbourhood characterization of the closure.\n      apply (mem_closure_iff).2\n      intro U hU_open hyU\n      -- Refine the neighbourhood to stay inside `A`, which is open.\n      have hV_open : IsOpen (U ∩ A) := hU_open.inter hOpenA\n      have hyV : y ∈ U ∩ A := ⟨hyU, hyA⟩\n      -- Since `y ∈ closure (interior B)`, this refined neighbourhood meets `interior B`.\n      have h_nonempty :\n          ((U ∩ A) ∩ interior B).Nonempty := by\n        have h :=\n          (mem_closure_iff).1 hyClB (U ∩ A) hV_open hyV\n        simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm] using h\n      rcases h_nonempty with ⟨z, ⟨⟨hzU, hzA⟩, hzIntB⟩⟩\n      -- Show that `z ∈ interior (A ∩ B)`.\n      have hzIntAB : z ∈ interior (A ∩ B) := by\n        -- The set `A ∩ interior B` is an open subset of `A ∩ B` containing `z`.\n        have h_open : IsOpen (A ∩ interior B) := hOpenA.inter isOpen_interior\n        have h_sub : (A ∩ interior B) ⊆ A ∩ B := by\n          intro t ht; exact ⟨ht.1, interior_subset ht.2⟩\n        have hz_mem : z ∈ A ∩ interior B := ⟨hzA, hzIntB⟩\n        have h_incl : (A ∩ interior B) ⊆ interior (A ∩ B) :=\n          interior_maximal h_sub h_open\n        exact h_incl hz_mem\n      -- Conclude that `U` meets `interior (A ∩ B)`.\n      exact ⟨z, ⟨hzU, hzIntAB⟩⟩\n    exact this\n  -- The set we constructed is open.\n  have h_openS : IsOpen (A ∩ interior (closure (interior B))) :=\n    hOpenA.inter isOpen_interior\n  -- Apply `interior_maximal` to obtain the desired inclusion.\n  have h_interior :\n      (A ∩ interior (closure (interior B))) ⊆\n        interior (closure (interior (A ∩ B))) :=\n    interior_maximal h_subset h_openS\n  -- Finish the proof by applying the inclusion to `x`.\n  exact h_interior hxS"
+  ],
+  "success": true
+}

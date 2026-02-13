@@ -1,0 +1,26 @@
+{
+  "times": [
+    137.7067792415619
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6966,
+      "prompt_tokens": 51669,
+      "total_tokens": 58635,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_interior_compl_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) \\ interior (A : Set X) =\n      closure (Aᶜ : Set X) \\ interior (Aᶜ : Set X) := by\n  calc\n    closure (A : Set X) \\ interior (A : Set X)\n        = frontier (A : Set X) := rfl\n    _ = frontier ((Aᶜ) : Set X) :=\n      (Topology.frontier_compl (A := A)).symm\n    _ = closure (Aᶜ : Set X) \\ interior (Aᶜ : Set X) := rfl"
+  ],
+  "success": true
+}

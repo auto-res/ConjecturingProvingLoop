@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.4794602394104
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5720,
+      "prompt_tokens": 46022,
+      "total_tokens": 51742,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_eq_closure_iff_clopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A = closure A ↔ (IsOpen A ∧ IsClosed A) := by\n  constructor\n  · intro h_eq\n    -- First, show `interior A = A`.\n    have hA_int : A ⊆ interior A := by\n      intro x hx\n      have hx_cl : x ∈ closure A := subset_closure hx\n      simpa [h_eq] using hx_cl\n    have h_int_eq : interior A = A :=\n      subset_antisymm interior_subset hA_int\n    -- Next, deduce `closure A = A`.\n    have h_cl_eq : closure A = A := by\n      calc\n        closure A = interior A := by\n          simpa [h_eq]\n        _ = A := h_int_eq\n    -- Conclude that `A` is both open and closed.\n    have h_open : IsOpen A := by\n      have : IsOpen (interior A) := isOpen_interior\n      simpa [h_int_eq] using this\n    have h_closed : IsClosed A := by\n      have : IsClosed (closure A) := isClosed_closure\n      simpa [h_cl_eq] using this\n    exact And.intro h_open h_closed\n  · rintro ⟨h_open, h_closed⟩\n    simpa [h_open.interior_eq, h_closed.closure_eq]"
+  ],
+  "success": true
+}

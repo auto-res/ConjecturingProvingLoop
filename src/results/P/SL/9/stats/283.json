@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.96918845176697
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4932,
+      "prompt_tokens": 49242,
+      "total_tokens": 54174,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closure_eq_empty_of_open_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (A : Set X))) :\n    frontier (closure (A : Set X)) = (∅ : Set X) := by\n  have h :=\n    (Topology.frontier_closure_eq_closure_diff_interiorClosure (A := A))\n  simpa [closure_closure, hOpen.interior_eq, Set.diff_self] using h"
+  ],
+  "success": true
+}

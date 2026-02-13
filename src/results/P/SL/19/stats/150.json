@@ -1,0 +1,26 @@
+{
+  "times": [
+    133.7636525630951
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11369,
+      "prompt_tokens": 22242,
+      "total_tokens": 33611,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.nonempty_interior_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A := A) → A.Nonempty → (interior A).Nonempty := by\n  intro hP2 hA_non\n  by_cases hInt : (interior A).Nonempty\n  · exact hInt\n  ·\n    -- In this branch we have `interior A = ∅`.\n    have hIntEq : interior A = (∅ : Set X) :=\n      (Set.not_nonempty_iff_eq_empty).1 hInt\n    -- Choose a point `x ∈ A` using the non‐emptiness of `A`.\n    rcases hA_non with ⟨x, hxA⟩\n    -- `P2` tells us that `x` lies in `interior (closure (interior A))`.\n    have hxInt : x ∈ interior (closure (interior A)) := hP2 hxA\n    -- But this set is empty, contradicting the membership of `x`.\n    have : x ∈ (∅ : Set X) := by\n      simpa [hIntEq, closure_empty, interior_empty] using hxInt\n    cases this"
+  ],
+  "success": true
+}

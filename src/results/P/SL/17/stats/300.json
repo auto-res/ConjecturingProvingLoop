@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.6995964050293
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3196,
+      "prompt_tokens": 51347,
+      "total_tokens": 54543,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closure_eq_empty_of_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hDense : Dense A) :\n    frontier (closure A) = (∅ : Set X) := by\n  -- `A` is dense, so its closure is the whole space.\n  have hCl : closure A = (Set.univ : Set X) := hDense.closure_eq\n  -- Consequently, the interior of this closure is also the whole space.\n  have hInt : interior (closure A) = (Set.univ : Set X) := by\n    simpa [hCl] using (interior_univ : interior (Set.univ : Set X) = Set.univ)\n  -- Rewrite the frontier of `closure A` using an existing lemma.\n  have hFront :\n      frontier (closure A) =\n        closure A \\ interior (closure A) :=\n    Topology.frontier_closure_eq_closure_diff_interior_closure (A := A)\n  -- Combine the above equalities and simplify.\n  calc\n    frontier (closure A) =\n        closure A \\ interior (closure A) := hFront\n    _ = (Set.univ : Set X) \\ (Set.univ : Set X) := by\n      simpa [hCl, hInt]\n    _ = (∅ : Set X) := by\n      simp"
+  ],
+  "success": true
+}

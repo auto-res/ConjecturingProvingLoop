@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.14381504058838
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3699,
+      "prompt_tokens": 3505,
+      "total_tokens": 7204,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_closureInterior_eq_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed A) :\n    Topology.P1 A ↔ closure (interior A) = A := by\n  dsimp [Topology.P1]\n  constructor\n  · intro hP1\n    have h_subset : closure (interior A) ⊆ A :=\n      closure_minimal (interior_subset : interior A ⊆ A) hA_closed\n    exact Set.Subset.antisymm h_subset hP1\n  · intro h_eq\n    simpa [h_eq] using (subset_rfl : (A : Set X) ⊆ A)"
+  ],
+  "success": true
+}

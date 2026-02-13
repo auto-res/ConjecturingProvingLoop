@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.15543818473816
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2957,
+      "prompt_tokens": 55264,
+      "total_tokens": 58221,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_frontier_inter_closure_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (A : Set X) = frontier A ∩ closure (Aᶜ) := by\n  ext x\n  constructor\n  · intro hx\n    have h₁ : x ∈ closure (Aᶜ) :=\n      (Topology.frontier_subset_closure_compl (A := A)) hx\n    exact And.intro hx h₁\n  · intro hx\n    exact hx.1"
+  ],
+  "success": true
+}

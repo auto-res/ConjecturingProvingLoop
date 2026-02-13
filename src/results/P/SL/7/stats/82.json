@@ -1,0 +1,43 @@
+{
+  "times": [
+    109.51327729225159,
+    239.30437994003296
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7459,
+      "prompt_tokens": 11800,
+      "total_tokens": 19259,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    },
+    {
+      "completion_tokens": 15123,
+      "prompt_tokens": 11922,
+      "total_tokens": 27045,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosureInteriorClosure_eq_interiorClosure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply Set.Subset.antisymm\n  ·\n    exact interior_mono (closure_mono (interior_subset (s := closure A)))\n  ·\n    have h : (interior (closure A) : Set X) ⊆ interior (closure (interior (closure A))) := by\n      apply interior_maximal\n      · exact subset_closure\n      · exact isOpen_interior\n    simpa using h",
+    ""
+  ],
+  "success": true
+}

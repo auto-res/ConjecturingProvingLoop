@@ -1,0 +1,26 @@
+{
+  "times": [
+    47.739468812942505
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3033,
+      "prompt_tokens": 53962,
+      "total_tokens": 56995,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iInter_subset_iInter_closure\n    {ι X : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    closure (⋂ i, A i : Set X) ⊆ ⋂ i, closure (A i) := by\n  intro x hx\n  -- Show that `x` belongs to `closure (A i)` for each `i`.\n  have hx_i : ∀ i, x ∈ closure (A i) := by\n    intro i\n    -- The inclusion `(⋂ j, A j) ⊆ A i` follows from the definition of `⋂`.\n    have h_subset : (⋂ j, A j : Set X) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Monotonicity of `closure` transports the inclusion.\n    have h_closure_subset :\n        closure (⋂ j, A j : Set X) ⊆ closure (A i) :=\n      closure_mono h_subset\n    exact h_closure_subset hx\n  -- Combine the coordinate-wise membership into an intersection.\n  exact Set.mem_iInter.2 hx_i"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    108.22285461425781,
+    51.54372954368591,
+    30.65648627281189
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9391,
+      "prompt_tokens": 27461,
+      "total_tokens": 36852,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26496
+      }
+    },
+    {
+      "completion_tokens": 4081,
+      "prompt_tokens": 27541,
+      "total_tokens": 31622,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    },
+    {
+      "completion_tokens": 2069,
+      "prompt_tokens": 27647,
+      "total_tokens": 29716,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_isOpen_left {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hOpenA : IsOpen A) (hP2B : Topology.P2 B) :\n    Topology.P2 (A ∩ B) := by\n  -- Unfold the definition of `P2`.\n  unfold Topology.P2 at *\n  -- Take an arbitrary point `x ∈ A ∩ B`.\n  intro x hxAB\n  -- From `hxAB` we have `x ∈ B`.\n  have hxB : x ∈ B := hxAB.2\n  -- Apply `P2` for `B` to obtain\n  -- `x ∈ interior (closure (interior B))`.\n  have hxIntB : x ∈ interior (closure (interior B)) := hP2B hxB\n  -- Unpack the membership in the interior: pick an open neighbourhood\n  -- `U` of `x` contained in `closure (interior B)`.\n  rcases hxIntB with ⟨U, hU_open, hxU, hU_sub⟩\n  -- Intersect the neighbourhood with the open set `A`.\n  let V : Set X := U ∩ A\n  have hV_open : IsOpen V := hU_open.inter hOpenA\n  have hxV : x ∈ V := ⟨hxU, hxAB.1⟩\n  -- Show that every point of `V` lies in `closure (interior (A ∩ B))`.\n  have hV_sub : V ⊆ closure (interior (A ∩ B)) := by\n    intro y hyV\n    -- Decompose the membership `y ∈ V`.\n    have hyU : y ∈ U := (show y ∈ U ∩ A from by\n        simpa [V] using hyV).1\n    have hyA : y ∈ A := (show y ∈ U ∩ A from by\n        simpa [V] using hyV).2\n    -- From `U ⊆ closure (interior B)` we get `y ∈ closure (interior B)`.\n    have hy_clB : y ∈ closure (interior B) := hU_sub hyU\n    -- We show `y ∈ closure (interior (A ∩ B))`\n    -- using the neighbourhood characterization of the closure.\n    have : y ∈ closure (interior (A ∩ B)) := by\n      -- Employ `mem_closure_iff`.\n      apply (mem_closure_iff).2\n      intro W hW_open hyW\n      -- Refine the neighbourhood to stay inside `A`.\n      have hWA_open : IsOpen (W ∩ A) := hW_open.inter hOpenA\n      have hyWA : y ∈ W ∩ A := ⟨hyW, hyA⟩\n      -- Since `y ∈ closure (interior B)`, the refined neighbourhood\n      -- meets `interior B`.\n      have h_nonempty :\n          ((W ∩ A) ∩ interior B).Nonempty :=\n        (mem_closure_iff).1 hy_clB (W ∩ A) hWA_open hyWA\n      -- Extract a witness `z`.\n      rcases h_nonempty with ⟨z, ⟨hzW, hzA⟩, hzIntB⟩\n      -- `A ∩ interior B` is open and contained in `A ∩ B`;\n      -- hence its points lie in `interior (A ∩ B)`.\n      have hzIntAB : z ∈ interior (A ∩ B) := by\n        -- `A ∩ interior B` is an open subset of `A ∩ B`.\n        have h_open : IsOpen (A ∩ interior B) :=\n          hOpenA.inter isOpen_interior\n        have h_subset : A ∩ interior B ⊆ A ∩ B := by\n          intro t ht; exact ⟨ht.1, interior_subset ht.2⟩\n        have hz_mem : z ∈ A ∩ interior B := ⟨hzA, hzIntB⟩\n        exact interior_maximal h_subset h_open hz_mem\n      -- Therefore, `W` meets `interior (A ∩ B)` at `z`.\n      exact ⟨z, ⟨hzW, hzIntAB⟩⟩\n    exact this\n  -- `V` is an open neighbourhood of `x` contained in the required closure,\n  -- so `x` lies in the interior of that closure.\n  exact\n    (show x ∈ interior (closure (interior (A ∩ B))) from\n      ⟨V, hV_open, hxV, hV_sub⟩)",
+    "theorem Topology.frontier_interior_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (interior A) ⊆ closure A := by\n  intro x hx\n  -- First, upgrade membership from `frontier (interior A)` to `frontier A`\n  have hx_frontierA : x ∈ frontier A :=\n    (Topology.frontier_interior_subset_frontier (A := A)) hx\n  -- By unfolding `frontier A = closure A \\ interior A`, we extract the desired fact\n  have : x ∈ closure A ∧ x ∉ interior A := by\n    simpa [frontier] using hx_frontierA\n  exact this.1",
+    "theorem Topology.interior_inter_eq_interiors_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    interior (A ∩ B) = interior A ∩ interior B := by\n  -- Since `A` and `B` are open, so is `A ∩ B`, and its interior is itself.\n  have hInt : interior (A ∩ B) = A ∩ B :=\n    (hA.inter hB).interior_eq\n  -- The interior of an open set is the set itself.\n  have hA_int : interior A = A := hA.interior_eq\n  have hB_int : interior B = B := hB.interior_eq\n  -- Substitute and simplify.\n  simpa [hInt, hA_int, hB_int]"
+  ],
+  "success": true
+}

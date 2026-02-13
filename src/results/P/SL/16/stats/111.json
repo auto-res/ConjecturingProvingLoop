@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.33949041366577
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2592,
+      "prompt_tokens": 20183,
+      "total_tokens": 22775,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_closure_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP3 : Topology.P3 (X := X) A) :\n    closure A = closure (interior (closure A)) := by\n  apply subset_antisymm\n  · -- `closure A ⊆ closure (interior (closure A))` via monotonicity of `closure`\n    have h : A ⊆ interior (closure A) := hP3\n    exact closure_mono h\n  · -- `closure (interior (closure A)) ⊆ closure A`\n    have h₁ : interior (closure A) ⊆ closure A := interior_subset\n    have h₂ : closure (interior (closure A)) ⊆ closure (closure A) :=\n      closure_mono h₁\n    simpa [closure_closure] using h₂"
+  ],
+  "success": true
+}

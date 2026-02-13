@@ -1,0 +1,26 @@
+{
+  "times": [
+    142.4795582294464
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9485,
+      "prompt_tokens": 51197,
+      "total_tokens": 60682,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_compl_eq_compl_interior {α : Type*} [TopologicalSpace α]\n    {s : Set α} :\n    closure (sᶜ) = (interior s)ᶜ := by\n  classical\n  -- First, apply the known relation to the complement `sᶜ`.\n  have h : interior s = (closure (sᶜ))ᶜ := by\n    simpa [Set.compl_compl s] using\n      (interior_compl_eq_compl_closure (A := sᶜ))\n  -- Taking complements of both sides yields the desired equality.\n  have : closure (sᶜ) = (interior s)ᶜ := by\n    have h' := congrArg Set.compl h\n    simpa [Set.compl_compl] using h'\n  simpa using this"
+  ],
+  "success": true
+}

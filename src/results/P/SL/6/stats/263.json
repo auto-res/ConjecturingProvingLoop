@@ -1,0 +1,26 @@
+{
+  "times": [
+    131.51374340057373
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7494,
+      "prompt_tokens": 41598,
+      "total_tokens": 49092,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_univ_of_dense_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (A : Set X))\n    (hDense : closure (A : Set X) = (Set.univ : Set X)) :\n    closure (interior (A : Set X)) = (Set.univ : Set X) := by\n  -- From `P1`, we know `closure (interior A) = closure A`.\n  have hEq : closure (interior (A : Set X)) = closure A :=\n    (Topology.P1_iff_closure_interior_eq_closure (A := A)).1 hP1\n  -- Combine this with the density hypothesis to obtain the result.\n  simpa [hDense] using hEq"
+  ],
+  "success": true
+}

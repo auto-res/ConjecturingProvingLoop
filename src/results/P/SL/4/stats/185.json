@@ -1,0 +1,43 @@
+{
+  "times": [
+    82.42464017868042,
+    66.21957182884216
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6670,
+      "prompt_tokens": 26165,
+      "total_tokens": 32835,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    },
+    {
+      "completion_tokens": 4725,
+      "prompt_tokens": 26955,
+      "total_tokens": 31680,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_closure_eq_inter_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure A ∩ closure B) =\n      interior (closure A) ∩ interior (closure B) := by\n  ext x\n  constructor\n  · intro hx\n    have hxA : x ∈ interior (closure A) :=\n      (interior_mono (Set.inter_subset_left :\n        (closure A ∩ closure B : Set X) ⊆ closure A)) hx\n    have hxB : x ∈ interior (closure B) :=\n      (interior_mono (Set.inter_subset_right :\n        (closure A ∩ closure B : Set X) ⊆ closure B)) hx\n    exact And.intro hxA hxB\n  · rintro ⟨hxA, hxB⟩\n    rcases mem_interior.1 hxA with ⟨U, hUopen, hUx, hUsub⟩\n    rcases mem_interior.1 hxB with ⟨V, hVopen, hVx, hVsub⟩\n    have hWopen : IsOpen (U ∩ V) := hUopen.inter hVopen\n    have hWsub : (U ∩ V : Set X) ⊆ closure A ∩ closure B := by\n      intro y hy\n      exact And.intro (hUsub hy.1) (hVsub hy.2)\n    have hxW : x ∈ U ∩ V := And.intro hUx hVx\n    exact mem_interior.2 ⟨U ∩ V, hWopen, hxW, hWsub⟩",
+    "theorem inter_subset_closure_left_right {X : Type*} [TopologicalSpace X]\n    {U V A B : Set X} (hU : U ⊆ closure A) (hV : V ⊆ closure B) :\n    (U ∩ V : Set X) ⊆ closure A ∩ closure B := by\n  intro x hx\n  exact And.intro (hU hx.1) (hV hx.2)"
+  ],
+  "success": true
+}

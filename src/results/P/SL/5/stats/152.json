@@ -1,0 +1,26 @@
+{
+  "times": [
+    44.99771761894226
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3876,
+      "prompt_tokens": 25168,
+      "total_tokens": 29044,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_closure_subset_closure_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A : Set X) ∩ closure B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxIntA, hxClB⟩\n  -- We will show `x ∈ closure (A ∩ B)` using the neighbourhood\n  -- characterization of the closure.\n  have : x ∈ closure (A ∩ B : Set X) := by\n    -- Apply `mem_closure_iff`.\n    refine (mem_closure_iff).2 ?_\n    intro U hUopen hxU\n    -- Since `x ∈ interior A`, pick an open `V ⊆ A` with `x ∈ V`.\n    rcases mem_interior.1 hxIntA with ⟨V, hVsubA, hVopen, hxV⟩\n    -- Consider the open neighbourhood `W = U ∩ V` of `x`.\n    have hWopen : IsOpen (U ∩ V) := hUopen.inter hVopen\n    have hxW : x ∈ U ∩ V := ⟨hxU, hxV⟩\n    -- Because `x ∈ closure B`, this neighbourhood meets `B`.\n    have hNon : ((U ∩ V) ∩ (B : Set X)).Nonempty := by\n      have hClosure := (mem_closure_iff).1 hxClB\n      have : ((U ∩ V) ∩ B).Nonempty := hClosure (U ∩ V) hWopen hxW\n      -- Rearrange intersections to match Lean's expectations.\n      simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm] using this\n    -- Extract a point `y` witnessing the non-emptiness.\n    rcases hNon with ⟨y, ⟨⟨hyU, hyV⟩, hyB⟩⟩\n    -- `y ∈ V ⊆ A`, hence `y ∈ A ∩ B` and `y ∈ U`.\n    have hyA : y ∈ A := hVsubA hyV\n    exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩\n  exact this"
+  ],
+  "success": true
+}

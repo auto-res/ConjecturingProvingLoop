@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.84881854057312
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6100,
+      "prompt_tokens": 29210,
+      "total_tokens": 35310,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (closure (interior (closure (A : Set X)))) := by\n  -- `interior (closure A)` is open.\n  have hOpen : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n  -- Apply the existing lemma for the closure of an open set.\n  exact\n    Topology.P1_closure_of_open\n      (A := interior (closure (A : Set X))) hOpen"
+  ],
+  "success": true
+}

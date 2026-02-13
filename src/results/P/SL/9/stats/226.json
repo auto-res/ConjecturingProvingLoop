@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.10654926300049
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1419,
+      "prompt_tokens": 37463,
+      "total_tokens": 38882,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_eq_empty_of_discrete {X : Type*} [TopologicalSpace X]\n    [DiscreteTopology X] (A : Set X) :\n    closure (A : Set X) \\ interior A = (∅ : Set X) := by\n  have hClosed : IsClosed (A : Set X) := isClosed_discrete _\n  have hOpen   : IsOpen   (A : Set X) := isOpen_discrete _\n  simpa using Topology.boundary_eq_empty_of_isClopen (A := A) hClosed hOpen"
+  ],
+  "success": true
+}

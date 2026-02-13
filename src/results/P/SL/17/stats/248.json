@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.02724742889404
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4729,
+      "prompt_tokens": 44535,
+      "total_tokens": 49264,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_closed_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hDense : Dense A) : Topology.P3 A := by\n  -- We already have all three properties for a closed, dense set.\n  have h := Topology.P_properties_of_closed_dense (A := A) hClosed hDense\n  -- Extract the `P3` component.\n  exact h.right.right"
+  ],
+  "success": true
+}

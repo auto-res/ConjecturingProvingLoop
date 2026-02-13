@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.39344668388367
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3870,
+      "prompt_tokens": 34687,
+      "total_tokens": 38557,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_three_eq {X : Type*} [TopologicalSpace X]\n    (A B C : Set X) :\n    interior (closure (A ∪ B ∪ C : Set X)) =\n      interior (closure A ∪ closure B ∪ closure C) := by\n  -- Reassociate the union to fit the binary lemmas.\n  have h₁ : (A ∪ B ∪ C : Set X) = (A ∪ B) ∪ C := by\n    simpa [Set.union_assoc]\n  -- Use the two–set lemma for closures.\n  have h₂ : (closure (A ∪ B) : Set X) = closure A ∪ closure B :=\n    Topology.closure_union_eq (A := A) (B := B)\n  -- Apply the binary lemma twice, rewriting along the way.\n  calc\n    interior (closure (A ∪ B ∪ C : Set X))\n        = interior (closure ((A ∪ B) ∪ C)) := by\n          simpa [h₁]\n    _ = interior (closure (A ∪ B) ∪ closure C) := by\n          simpa using\n            (Topology.interior_closure_union_eq (A := A ∪ B) (B := C))\n    _ = interior ((closure A ∪ closure B) ∪ closure C) := by\n          simpa [h₂]\n    _ = interior (closure A ∪ closure B ∪ closure C) := by\n          simpa [Set.union_assoc]"
+  ],
+  "success": true
+}

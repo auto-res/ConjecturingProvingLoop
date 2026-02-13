@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.02108716964722
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2346,
+      "prompt_tokens": 18871,
+      "total_tokens": 21217,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_imp_closure_subset_closureInterior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP2 : Topology.P2 A) :\n    closure A ⊆ closure (interior A) := by\n  -- First, upgrade `P2 A` to `P1 A`.\n  have hP1 : Topology.P1 A :=\n    Topology.P2_imp_P1 (X := X) (A := A) hP2\n  -- Translate `P1 A` into the desired inclusion of closures.\n  exact\n    (Topology.P1_iff_closure_subset_closureInterior (X := X) (A := A)).1 hP1"
+  ],
+  "success": true
+}

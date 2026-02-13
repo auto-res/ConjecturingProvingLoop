@@ -1,0 +1,26 @@
+{
+  "times": [
+    17.07708716392517
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 804,
+      "prompt_tokens": 59342,
+      "total_tokens": 60146,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P2_of_dense_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h_dense : closure (interior A : Set X) = Set.univ) :\n    Topology.P1 (X := X) A ↔ Topology.P2 (X := X) A := by\n  -- Both `P1` and `P2` hold unconditionally under the density assumption.\n  have hP1 : Topology.P1 (X := X) A :=\n    Topology.P1_of_dense_interior (X := X) (A := A) h_dense\n  have hP2 : Topology.P2 (X := X) A :=\n    Topology.P2_of_dense_interior (X := X) (A := A) h_dense\n  -- Assemble the equivalence from the two unconditional facts.\n  constructor\n  · intro _; exact hP2\n  · intro _; exact hP1"
+  ],
+  "success": true
+}

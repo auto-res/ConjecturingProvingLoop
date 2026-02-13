@@ -1,0 +1,26 @@
+{
+  "times": [
+    152.87763357162476
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12800,
+      "prompt_tokens": 31942,
+      "total_tokens": 44742,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (closure (interior (closure (interior A)))) := by\n  -- Two useful equalities coming from idempotence of `closure ∘ interior`.\n  have h_eq :\n      closure (interior (closure (interior A))) =\n        closure (interior A) := by\n    simpa using Topology.closure_interior_idempotent (A := A)\n  have h_int_eq :\n      interior (closure (interior (closure (interior A)))) =\n        interior (closure (interior A)) := by\n    simpa using Topology.interior_closure_idempotent (A := interior A)\n  -- `P1` is already known for `closure (interior A)`.\n  have hP1_base : Topology.P1 (closure (interior A)) :=\n    Topology.P1_closure_interior (A := A)\n  -- Unfold the definition of `P1` and start the proof.\n  unfold Topology.P1 at *\n  intro x hx\n  -- Transport `x` to the simpler set using `h_eq`.\n  have hx_base : x ∈ closure (interior A) := by\n    simpa [h_eq] using hx\n  -- Apply `P1` for `closure (interior A)`.\n  have hx_goal_base : x ∈ closure (interior (closure (interior A))) :=\n    hP1_base hx_base\n  -- Rewrite using `h_int_eq` to match the required target set.\n  simpa [h_int_eq] using hx_goal_base"
+  ],
+  "success": true
+}

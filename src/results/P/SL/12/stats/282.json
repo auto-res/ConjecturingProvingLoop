@@ -1,0 +1,43 @@
+{
+  "times": [
+    42.336127519607544,
+    93.42520451545715
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2584,
+      "prompt_tokens": 54186,
+      "total_tokens": 56770,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    },
+    {
+      "completion_tokens": 7247,
+      "prompt_tokens": 54499,
+      "total_tokens": 61746,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_compl_of_isClosed_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_closed : IsClosed (A : Set X)) (h_open : IsOpen (A : Set X)) :\n    Topology.P1 (X := X) (Aᶜ : Set X) := by\n  -- The complement of a clopen set is itself clopen.\n  have h_closed_compl : IsClosed (Aᶜ : Set X) := h_open.compl\n  have h_open_compl  : IsOpen (Aᶜ : Set X) := h_closed.compl\n  -- Apply the existing lemma for clopen sets to the complement.\n  simpa using\n    Topology.P1_of_isClosed_isOpen\n      (X := X) (A := (Aᶜ : Set X)) h_closed_compl h_open_compl",
+    "theorem IsOpen.compl {X : Type*} [TopologicalSpace X] {s : Set X}\n    (h : IsOpen (s : Set X)) :\n    IsClosed ((s : Set X)ᶜ) := by\n  simpa using h.isClosed_compl\n\ntheorem IsClosed.compl {X : Type*} [TopologicalSpace X] {s : Set X}\n    (h : IsClosed (s : Set X)) :\n    IsOpen ((s : Set X)ᶜ) := by\n  simpa using h.isOpen_compl"
+  ],
+  "success": true
+}

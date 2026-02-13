@@ -1,0 +1,26 @@
+{
+  "times": [
+    108.52590537071228
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9799,
+      "prompt_tokens": 59203,
+      "total_tokens": 69002,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_interior_closure_diff_frontier {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) =\n      interior (closure (A : Set X)) \\ frontier (A : Set X) := by\n  ext x\n  constructor\n  · intro hxIntA\n    -- `x` lies in the interior of `closure A` because `A ⊆ closure A`.\n    have hxIntCl : x ∈ interior (closure (A : Set X)) := by\n      have hSub : (A : Set X) ⊆ closure (A : Set X) := subset_closure\n      exact (interior_mono hSub) hxIntA\n    -- Points of `interior A` are never in the frontier of `A`.\n    have hxNotFront : x ∉ frontier (A : Set X) := by\n      intro hxFront\n      exact hxFront.2 hxIntA\n    exact And.intro hxIntCl hxNotFront\n  · rintro ⟨hxIntCl, hxNotFront⟩\n    -- We show that `x ∈ interior A`; otherwise we obtain a contradiction.\n    by_contra hNotIntA\n    -- `x` lies in `closure A` because it is in `interior (closure A)`.\n    have hxClA : x ∈ closure (A : Set X) := interior_subset hxIntCl\n    -- Hence `x` would be in the frontier of `A`, contradicting `hxNotFront`.\n    have hxFront : x ∈ frontier (A : Set X) := And.intro hxClA hNotIntA\n    exact hxNotFront hxFront"
+  ],
+  "success": true
+}

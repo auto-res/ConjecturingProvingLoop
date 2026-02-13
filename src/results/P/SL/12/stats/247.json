@@ -1,0 +1,77 @@
+{
+  "times": [
+    142.23911547660828,
+    130.41131806373596,
+    91.43877577781677,
+    82.3349187374115
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6952,
+      "prompt_tokens": 47401,
+      "total_tokens": 54353,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    },
+    {
+      "completion_tokens": 6261,
+      "prompt_tokens": 47521,
+      "total_tokens": 53782,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    },
+    {
+      "completion_tokens": 6252,
+      "prompt_tokens": 47619,
+      "total_tokens": 53871,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    },
+    {
+      "completion_tokens": 4527,
+      "prompt_tokens": 47697,
+      "total_tokens": 52224,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_image_interior_subset_closure_image\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}\n    (hf : Continuous f) {A : Set X} :\n    interior (f '' interior A) ⊆ closure (f '' A) := by\n  -- First, `interior S ⊆ closure S` for any set `S`.\n  have h₁ : interior (f '' interior A) ⊆ closure (f '' interior A) :=\n    interior_subset\n  -- Next, apply the previously proven lemma about closures of images.\n  have h₂ :\n      closure (f '' interior A) ⊆ closure (f '' A) :=\n    Topology.closure_image_interior_subset (X := X) (Y := Y)\n      (f := f) hf (A := A)\n  -- Combine the two inclusions to obtain the result.\n  exact Set.Subset.trans h₁ h₂",
+    "theorem Topology.image_interior_subset_closure_image\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {f : X → Y} {A : Set X} :\n    interior (f '' interior A) ⊆ closure (f '' interior A) := by\n  exact\n    (interior_subset : interior (f '' interior A) ⊆ (f '' interior A))\n      ▸ subset_closure",
+    "theorem Topology.image_closure_subset_closure_image\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {f : X → Y} (hf : Continuous f) {A : Set X} :\n    f '' closure (A : Set X) ⊆ closure (f '' A) := by\n  intro y hy\n  rcases hy with ⟨x, hx_cl, rfl⟩\n  -- We will show that `f x` belongs to the closure of `f '' A`.\n  have : f x ∈ closure (f '' A) := by\n    -- Use the neighbourhood characterisation of the closure.\n    apply (mem_closure_iff).2\n    intro V hV_open hxV\n    -- The preimage of `V` under `f` is an open neighbourhood of `x`.\n    have hU_open : IsOpen (f ⁻¹' V) := hV_open.preimage hf\n    have hxU : x ∈ f ⁻¹' V := by\n      simpa using hxV\n    -- Because `x` is in the closure of `A`, this neighbourhood meets `A`.\n    have h_nonempty : ((f ⁻¹' V) ∩ A).Nonempty := by\n      have h_closure := (mem_closure_iff).1 hx_cl\n      have h := h_closure (f ⁻¹' V) hU_open hxU\n      simpa [Set.inter_comm] using h\n    -- Map a witness through `f` to get a point of `(V ∩ f '' A)`.\n    rcases h_nonempty with ⟨z, hz_mem⟩\n    have hzU : z ∈ f ⁻¹' V := hz_mem.1\n    have hzA : z ∈ A := hz_mem.2\n    have hzV : f z ∈ V := by\n      simpa using hzU\n    have hz_image : f z ∈ f '' A := ⟨z, hzA, rfl⟩\n    exact ⟨f z, And.intro hzV hz_image⟩\n  simpa using this",
+    "theorem Topology.image_interior_subset_closure_image\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} {A : Set X} :\n    f '' interior (A : Set X) ⊆ closure (f '' A) := by\n  intro y hy\n  rcases hy with ⟨x, hx_int, rfl⟩\n  have hxA : (x : X) ∈ (A : Set X) := interior_subset hx_int\n  have h_im : (f x) ∈ f '' (A : Set X) := ⟨x, hxA, rfl⟩\n  exact subset_closure h_im"
+  ],
+  "success": true
+}

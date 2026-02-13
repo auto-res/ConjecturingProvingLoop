@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.24014163017273
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6699,
+      "prompt_tokens": 24272,
+      "total_tokens": 30971,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_subset_intersection {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior ((A ∩ B) : Set X)) ⊆\n      closure (interior (A : Set X)) ∩ closure (interior (B : Set X)) := by\n  intro x hx\n  -- `A ∩ B` is contained in `A`, hence so is its interior.\n  have hSubA : interior ((A ∩ B) : Set X) ⊆ interior (A : Set X) := by\n    have hAB_A : (A ∩ B : Set X) ⊆ (A : Set X) := by\n      intro y hy\n      exact hy.1\n    exact interior_mono hAB_A\n  -- Symmetrically for `B`.\n  have hSubB : interior ((A ∩ B) : Set X) ⊆ interior (B : Set X) := by\n    have hAB_B : (A ∩ B : Set X) ⊆ (B : Set X) := by\n      intro y hy\n      exact hy.2\n    exact interior_mono hAB_B\n  -- Transfer the inclusions to closures and assemble the result.\n  have hxA : x ∈ closure (interior (A : Set X)) :=\n    (closure_mono hSubA) hx\n  have hxB : x ∈ closure (interior (B : Set X)) :=\n    (closure_mono hSubB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

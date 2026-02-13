@@ -1,0 +1,60 @@
+{
+  "times": [
+    64.20074605941772,
+    116.64472389221191,
+    76.9571042060852
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6256,
+      "prompt_tokens": 25991,
+      "total_tokens": 32247,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 8013,
+      "prompt_tokens": 26068,
+      "total_tokens": 34081,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    },
+    {
+      "completion_tokens": 4672,
+      "prompt_tokens": 26184,
+      "total_tokens": 30856,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_left_denseInterior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (h_dense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P3 (X := X) (A ∪ B) := by\n  -- First, show that `A ∪ B` is dense in `X`, i.e. its closure is `univ`.\n  have h_closure_univ : closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n    apply subset_antisymm\n    · intro x hx; simp at hx\n    · intro x _\n      -- Since `closure (interior A) = univ`, we have `x ∈ closure (interior A)`.\n      have hx : x ∈ closure (interior A) := by\n        simpa [h_dense] using (by\n          have : (x : X) ∈ (Set.univ : Set X) := by\n            simp\n          exact this)\n      -- And `closure (interior A) ⊆ closure (A ∪ B)`.\n      have h_subset : closure (interior A) ⊆ closure (A ∪ B) := by\n        apply closure_mono\n        intro y hy\n        have : y ∈ A := interior_subset hy\n        exact Or.inl this\n      exact h_subset hx\n  -- Apply the density lemma to obtain `P3`.\n  exact Topology.P3_of_dense (X := X) (A := A ∪ B) h_closure_univ",
+    "Lean code could not be generated because the underlying file contains two declarations with the same name\n`Topology.P3_union_left_denseInterior`.  \nPlease remove one of the two copies (or rename one of them) and re-compile; afterwards the requested\nnew theorem can be added without further problems.",
+    "theorem Topology.closure_interior_eq_empty_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) = (∅ : Set X) ↔ interior A = (∅ : Set X) := by\n  constructor\n  · intro h\n    -- Since `interior A ⊆ closure (interior A)`, the right-hand side being empty\n    -- forces `interior A` itself to be empty.\n    have hsubset : interior A ⊆ (∅ : Set X) := by\n      intro x hx\n      have : (x : X) ∈ closure (interior A) := subset_closure hx\n      simpa [h] using this\n    have hIntEmpty : interior A = (∅ : Set X) := by\n      apply Set.eq_of_subset_of_subset hsubset\n      intro x hx\n      cases hx\n    exact hIntEmpty\n  · intro h\n    -- If `interior A` is empty, its closure is also empty.\n    simpa [h, closure_empty]"
+  ],
+  "success": true
+}

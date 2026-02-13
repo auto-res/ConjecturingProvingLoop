@@ -1,0 +1,26 @@
+{
+  "times": [
+    110.55436182022095
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7209,
+      "prompt_tokens": 47257,
+      "total_tokens": 54466,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_subset_closure_diff_interior_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hB_closed : IsClosed (B : Set X)) :\n    closure ((A \\ B) : Set X) ⊆ closure (A : Set X) \\ interior (B : Set X) := by\n  intro x hx\n  -- First, `x` lies in the closure of `A`,\n  -- because `A \\ B` is a subset of `A`.\n  have hx_clA : (x : X) ∈ closure (A : Set X) := by\n    have h_subset : ((A \\ B) : Set X) ⊆ A := by\n      intro y hy; exact hy.1\n    exact (closure_mono h_subset) hx\n  -- Next, we show that `x` is *not* in `interior B`.\n  have hx_notIntB : (x : X) ∉ interior (B : Set X) := by\n    intro hxIntB\n    -- Since `x` is in the closure of `A \\ B`,\n    -- every open neighbourhood of `x` meets `A \\ B`.\n    have h_nonempty :=\n      (mem_closure_iff.1 hx) (interior (B : Set X)) isOpen_interior hxIntB\n    rcases h_nonempty with ⟨y, ⟨hyIntB, hyDiff⟩⟩\n    -- But `interior B ⊆ B`, so `y ∈ B`.\n    have hy_inB : (y : X) ∈ B := interior_subset hyIntB\n    -- Yet `y ∈ A \\ B` gives `y ∉ B`, contradiction.\n    exact (hyDiff.2) hy_inB\n  exact And.intro hx_clA hx_notIntB"
+  ],
+  "success": true
+}

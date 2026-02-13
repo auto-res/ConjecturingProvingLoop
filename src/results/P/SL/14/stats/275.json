@@ -1,0 +1,26 @@
+{
+  "times": [
+    170.462562084198
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9715,
+      "prompt_tokens": 50697,
+      "total_tokens": 60412,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_union_three\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : Dense (A : Set X)) (hB : Dense (B : Set X)) (hC : Dense (C : Set X)) :\n    Dense (A ∪ B ∪ C : Set X) := by\n  -- First, the union `A ∪ B` is dense.\n  have hAB : Dense (A ∪ B : Set X) :=\n    Topology.dense_union (X := X) (A := A) (B := B) hA hB\n  -- Next, union the result with `C`.\n  have hABC : Dense ((A ∪ B) ∪ C : Set X) :=\n    Topology.dense_union (X := X) (A := A ∪ B) (B := C) hAB hC\n  -- Rewrite to the desired (left‐associative) form.\n  simpa [Set.union_assoc] using hABC"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    137.80779314041138
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11354,
+      "prompt_tokens": 32581,
+      "total_tokens": 43935,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_three_subset {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} :\n    interior (closure (A : Set X)) ∪ interior (closure B) ∪ interior (closure C) ⊆\n      interior (closure (A ∪ B ∪ C : Set X)) := by\n  -- First, deal with the union of `A` and `B`.\n  have hAB :\n      interior (closure (A : Set X)) ∪ interior (closure B) ⊆\n        interior (closure (A ∪ B : Set X)) :=\n    Topology.interior_closure_union_subset (X := X) (A := A) (B := B)\n  -- Next, add `C` to the picture.\n  have hABC :\n      interior (closure (A ∪ B : Set X)) ∪ interior (closure C) ⊆\n        interior (closure ((A ∪ B) ∪ C : Set X)) :=\n    Topology.interior_closure_union_subset (X := X) (A := A ∪ B) (B := C)\n  -- Rewrite `((A ∪ B) ∪ C)` using associativity.\n  have hABC' :\n      interior (closure (A ∪ B : Set X)) ∪ interior (closure C) ⊆\n        interior (closure (A ∪ B ∪ C : Set X)) := by\n    simpa [Set.union_assoc] using hABC\n  -- Now prove the desired inclusion.\n  intro x hx\n  -- Analyse the membership of `x` in the triple union.\n  cases hx with\n  | inl hx_left =>\n      -- `x` lies in the first two terms of the triple union.\n      have hxAB : x ∈ interior (closure (A ∪ B : Set X)) := hAB hx_left\n      have hxABC : x ∈\n          interior (closure (A ∪ B : Set X)) ∪ interior (closure C) :=\n        Or.inl hxAB\n      exact hABC' hxABC\n  | inr hxC =>\n      -- `x` lies in the third term `interior (closure C)`.\n      have hxABC : x ∈\n          interior (closure (A ∪ B : Set X)) ∪ interior (closure C) :=\n        Or.inr hxC\n      exact hABC' hxABC"
+  ],
+  "success": true
+}

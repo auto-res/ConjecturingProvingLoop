@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.41132378578186
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6188,
+      "prompt_tokens": 8179,
+      "total_tokens": 14367,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_closure_subset_closureInterior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (X := X) A ↔ closure (A : Set X) ⊆ closure (interior A) := by\n  constructor\n  · intro hP1\n    -- From `P1`, we have equality of the two closures, hence the desired subset.\n    have h_eq : closure (A : Set X) = closure (interior A) :=\n      (Topology.P1_iff_closure_eq_closureInterior (X := X) (A := A)).1 hP1\n    simpa [h_eq]\n  · intro h_subset\n    -- The reverse inclusion always holds, giving equality of the closures.\n    have h_subset' : closure (interior A) ⊆ closure (A : Set X) :=\n      closure_mono (interior_subset : interior A ⊆ A)\n    have h_eq : closure (A : Set X) = closure (interior A) :=\n      Set.Subset.antisymm h_subset h_subset'\n    -- Convert the equality back to `P1`.\n    exact\n      (Topology.P1_iff_closure_eq_closureInterior (X := X) (A := A)).2 h_eq"
+  ],
+  "success": true
+}

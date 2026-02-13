@@ -1,0 +1,60 @@
+{
+  "times": [
+    52.95179629325867,
+    73.65850377082825,
+    49.84563112258911
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3999,
+      "prompt_tokens": 12012,
+      "total_tokens": 16011,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    },
+    {
+      "completion_tokens": 4631,
+      "prompt_tokens": 12118,
+      "total_tokens": 16749,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    },
+    {
+      "completion_tokens": 3555,
+      "prompt_tokens": 12196,
+      "total_tokens": 15751,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_interior_closure_eq_interior_closureInteriorClosure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (X:=X) A →\n      interior (closure (A : Set X)) = interior (closure (interior (closure A))) := by\n  intro hP3\n  have h_cl_eq :\n      closure (A : Set X) = closure (interior (closure A)) :=\n    (Topology.P3_implies_closure_eq_closureInteriorClosure (X:=X) (A:=A)) hP3\n  simpa [h_cl_eq]",
+    "theorem Topology.denseInterior_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Topology.P2 (X := X) A := by\n  intro hDense\n  dsimp [Topology.P2]\n  intro x _\n  -- The closure of a dense set is the whole space.\n  have h_closure : closure (interior (A : Set X)) = (Set.univ : Set X) :=\n    hDense.closure_eq\n  -- Hence, the interior of this closure is also the whole space.\n  have h_interior :\n      interior (closure (interior (A : Set X))) = (Set.univ : Set X) := by\n    simpa [h_closure, interior_univ]\n  -- Rewriting with `h_interior` finishes the proof.\n  simpa [h_interior]",
+    "theorem Topology.interior_closure_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (closure (A : Set X)) ⊆ closure A := by\n  intro x hx\n  exact (interior_subset : interior (closure (A : Set X)) ⊆ closure (A : Set X)) hx"
+  ],
+  "success": true
+}

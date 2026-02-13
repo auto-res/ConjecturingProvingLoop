@@ -1,0 +1,26 @@
+{
+  "times": [
+    246.65570259094238
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 16894,
+      "prompt_tokens": 37417,
+      "total_tokens": 54311,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_nonempty_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure (A : Set X)).Nonempty ↔ (A : Set X).Nonempty := by\n  classical\n  constructor\n  · intro hCl\n    by_cases hA : (A : Set X).Nonempty\n    · exact hA\n    · -- If `A` is empty, then its closure is also empty, contradicting `hCl`.\n      have hA_eq : (A : Set X) = ∅ := Set.not_nonempty_iff_eq_empty.mp hA\n      have hCl_eq : closure (A : Set X) = (∅ : Set X) := by\n        simpa [hA_eq] using closure_empty\n      have hFalse : False := by\n        -- `hCl` yields a point in `closure A`, hence (by `hCl_eq`) in `∅`.\n        have h' : (∅ : Set X).Nonempty := by\n          simpa [hCl_eq] using hCl\n        rcases h' with ⟨x, hx⟩\n        cases hx\n      exact hFalse.elim\n  · intro hA\n    rcases hA with ⟨x, hxA⟩\n    exact ⟨x, subset_closure hxA⟩"
+  ],
+  "success": true
+}

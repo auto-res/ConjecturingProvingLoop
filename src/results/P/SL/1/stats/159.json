@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.87122344970703
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6068,
+      "prompt_tokens": 24460,
+      "total_tokens": 30528,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_interior_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (closure A))))) =\n      interior (closure A) := by\n  -- First contraction using idempotence of `interior ∘ closure`.\n  have h₁ :\n      interior (closure (interior (closure (interior (closure A))))) =\n        interior (closure (interior (closure A))) := by\n    simpa using\n      (Topology.interior_closure_interior_closure_eq_interior_closure\n        (A := interior (closure A)))\n  -- Second contraction to reach the final form.\n  have h₂ :\n      interior (closure (interior (closure A))) = interior (closure A) := by\n    simpa using\n      (Topology.interior_closure_interior_closure_eq_interior_closure (A := A))\n  simpa [h₁, h₂]"
+  ],
+  "success": true
+}

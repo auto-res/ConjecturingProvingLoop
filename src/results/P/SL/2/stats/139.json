@@ -1,0 +1,26 @@
+{
+  "times": [
+    83.2367615699768
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6423,
+      "prompt_tokens": 21745,
+      "total_tokens": 28168,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_closed {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    IsClosed (A : Set X) → IsClosed (B : Set X) →\n    Topology.P2 A → Topology.P2 B → Topology.P2 (A ∩ B) := by\n  intro hClosedA hClosedB hP2A hP2B\n  -- From closedness and `P2`, we infer that both `A` and `B` are open.\n  have hOpenA : IsOpen (A : Set X) :=\n    Topology.isClosed_P2_implies_isOpen (A := A) hClosedA hP2A\n  have hOpenB : IsOpen (B : Set X) :=\n    Topology.isClosed_P2_implies_isOpen (A := B) hClosedB hP2B\n  -- The intersection of two open sets is open.\n  have hOpenInter : IsOpen ((A ∩ B) : Set X) := hOpenA.inter hOpenB\n  -- Any open set satisfies `P2`.\n  exact Topology.isOpen_implies_P2 (A := A ∩ B) hOpenInter"
+  ],
+  "success": true
+}

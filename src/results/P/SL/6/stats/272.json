@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.816325664520264
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3568,
+      "prompt_tokens": 43208,
+      "total_tokens": 46776,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem nonempty_iff_nonempty_interior_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 (A : Set X)) :\n    (A : Set X).Nonempty ↔ (interior (A : Set X)).Nonempty := by\n  constructor\n  · intro hA\n    exact nonempty_interior_of_nonempty_P2 (A := A) hP2 hA\n  · intro hInt\n    rcases hInt with ⟨x, hxInt⟩\n    exact ⟨x, (interior_subset : interior (A : Set X) ⊆ A) hxInt⟩"
+  ],
+  "success": true
+}

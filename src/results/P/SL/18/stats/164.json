@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.00150489807129
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2963,
+      "prompt_tokens": 24191,
+      "total_tokens": 27154,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_iff_closure_interior_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ closure (interior (closure (A : Set X))) = Set.univ := by\n  constructor\n  · intro hDense\n    exact\n      Topology.closure_interior_closure_eq_univ_of_dense (A := A) hDense\n  · intro hEq\n    exact\n      Topology.dense_of_closure_interior_closure_eq_univ (A := A) hEq"
+  ],
+  "success": true
+}

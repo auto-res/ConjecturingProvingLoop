@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.69691801071167
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2377,
+      "prompt_tokens": 16845,
+      "total_tokens": 19222,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_of_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hB_closed : IsClosed (B : Set X))\n    (hPA : Topology.P2 (X:=X) A) (hPB : Topology.P2 (X:=X) B) :\n    Topology.P2 (X:=X) (A ∩ B) := by\n  -- `A` is open because it is closed and satisfies `P2`\n  have hA_open : IsOpen (A : Set X) := by\n    have h_eq : interior (A : Set X) = A :=\n      Topology.closed_P2_implies_interior_eq_self (X:=X) (A:=A) hA_closed hPA\n    simpa [h_eq] using (isOpen_interior : IsOpen (interior (A : Set X)))\n  -- `B` is open for the same reason\n  have hB_open : IsOpen (B : Set X) := by\n    have h_eq : interior (B : Set X) = B :=\n      Topology.closed_P2_implies_interior_eq_self (X:=X) (A:=B) hB_closed hPB\n    simpa [h_eq] using (isOpen_interior : IsOpen (interior (B : Set X)))\n  -- The intersection of two open sets is open\n  have h_open : IsOpen ((A ∩ B) : Set X) := hA_open.inter hB_open\n  -- Any open set satisfies `P2`\n  exact isOpen_implies_P2 (X:=X) (A:=A ∩ B) h_open"
+  ],
+  "success": true
+}

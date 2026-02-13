@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.651253700256348
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1846,
+      "prompt_tokens": 43904,
+      "total_tokens": 45750,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_of_isClosed_and_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) (hP3 : Topology.P3 (A := A)) :\n    frontier A = (∅ : Set X) := by\n  -- `P3` together with `A` closed implies `A` is open\n  have hOpen : IsOpen A :=\n    (Topology.P3_iff_isOpen_of_isClosed (A := A) hA).1 hP3\n  -- A set that is both open and closed has empty frontier\n  exact Topology.frontier_eq_empty_of_isOpen_and_isClosed\n      (A := A) hOpen hA"
+  ],
+  "success": true
+}

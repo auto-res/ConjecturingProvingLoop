@@ -1,0 +1,43 @@
+{
+  "times": [
+    167.34130024909973,
+    104.13165664672852
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8984,
+      "prompt_tokens": 38898,
+      "total_tokens": 47882,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 6226,
+      "prompt_tokens": 38988,
+      "total_tokens": 45214,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_right_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsOpen B) :\n    interior (A ∪ B) = interior A ∪ B := by\n  apply Set.Subset.antisymm\n  · -- `interior (A ∪ B) ⊆ interior A ∪ B`\n    intro x hx\n    by_cases hxB : x ∈ B\n    · exact Or.inr hxB\n    · -- If `x ∉ B`, we will show `x ∈ interior A`.\n      -- Obtain an open neighbourhood `U` of `x` contained in `A ∪ B`.\n      rcases mem_interior_iff_mem_nhds.1 hx with ⟨U, hUopen, hxU, hUsub⟩\n      -- Consider the open set `V = U \\ B` that contains `x` and is contained in `A`.\n      have hVopen : IsOpen (U \\ B) := hUopen.diff hB\n      have hxV : x ∈ U \\ B := ⟨hxU, hxB⟩\n      have hVsubA : (U \\ B : Set X) ⊆ A := by\n        intro y hy\n        have hYinUnion : y ∈ A ∪ B := hUsub hy.1\n        cases hYinUnion with\n        | inl hAy => exact hAy\n        | inr hBy => exact (hy.2 hBy).elim\n      -- Hence `x ∈ interior A`.\n      have hxIntA : x ∈ interior A :=\n        (interior_maximal hVsubA hVopen) hxV\n      exact Or.inl hxIntA\n  · -- `interior A ∪ B ⊆ interior (A ∪ B)`\n    intro x hx\n    cases hx with\n    | inl hxIntA =>\n        -- `interior A` is contained in `interior (A ∪ B)` by monotonicity.\n        have hsubset : interior A ⊆ interior (A ∪ B) :=\n          interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n        exact hsubset hxIntA\n    | inr hxB =>\n        -- `B` is open and contained in `A ∪ B`, hence in the interior.\n        have hBsubset : (B : Set X) ⊆ interior (A ∪ B) :=\n          interior_maximal\n            (by\n              intro y hy\n              exact Or.inr hy)\n            hB\n        exact hBsubset hxB",
+    "theorem P3_iUnion_open {X ι : Type*} [TopologicalSpace X] {A : ι → Set X}\n    (hA : ∀ i, IsOpen (A i)) :\n    Topology.P3 (⋃ i, A i) := by\n  -- Each `A i` is open and hence satisfies `P3`.\n  have hP3 : ∀ i, Topology.P3 (A i) := fun i => Topology.P3_of_open (A := A i) (hA i)\n  exact Topology.P3_iUnion hP3"
+  ],
+  "success": true
+}

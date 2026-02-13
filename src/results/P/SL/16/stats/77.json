@@ -1,0 +1,26 @@
+{
+  "times": [
+    12.286235332489014
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 890,
+      "prompt_tokens": 13654,
+      "total_tokens": 14544,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13184
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P2_interior_eq_self {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hP2 : Topology.P2 (X := X) A) : interior A = A := by\n  have hOpen : IsOpen A :=\n    Topology.closed_P2_isOpen (X := X) (A := A) hClosed hP2\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

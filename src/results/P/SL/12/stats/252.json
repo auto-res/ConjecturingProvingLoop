@@ -1,0 +1,60 @@
+{
+  "times": [
+    85.05548644065857,
+    41.59402132034302,
+    62.22323679924011
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4791,
+      "prompt_tokens": 48272,
+      "total_tokens": 53063,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 2616,
+      "prompt_tokens": 48395,
+      "total_tokens": 51011,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 2968,
+      "prompt_tokens": 48475,
+      "total_tokens": 51443,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_compl_interior_compl {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) = (interior ((A : Set X)ᶜ))ᶜ := by\n  -- First, rewrite `interior (Aᶜ)` using the existing complement lemma.\n  have h :\n      interior ((A : Set X)ᶜ) = (closure (A : Set X))ᶜ := by\n    simpa [Set.compl_compl] using\n      (Topology.interior_eq_compl_closure_compl\n        (X := X) (A := ((A : Set X)ᶜ)))\n  -- Taking complements of both sides yields the desired statement.\n  have h_compl :\n      (interior ((A : Set X)ᶜ))ᶜ = closure (A : Set X) := by\n    simpa using congrArg Set.compl h\n  simpa [Set.compl_compl] using h_compl.symm",
+    "theorem Topology.interior_eq_compl_closure_compl {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (A : Set X) = (closure ((A : Set X)ᶜ))ᶜ := by\n  -- Apply the lemma about the interior of a complement and simplify.\n  simpa [compl_compl] using\n    (interior_compl (s := (Aᶜ : Set X)))",
+    "theorem Topology.interior_compl_eq_compl_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ : Set X) = (closure (A : Set X))ᶜ := by\n  simpa using interior_compl (A := A)"
+  ],
+  "success": true
+}

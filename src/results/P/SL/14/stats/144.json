@@ -1,0 +1,26 @@
+{
+  "times": [
+    141.156494140625
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10409,
+      "prompt_tokens": 26354,
+      "total_tokens": 36763,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_of_isClosed_and_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hDense : Dense (interior A)) :\n    IsOpen A := by\n  -- From density of `interior A`, we obtain `P2 A`.\n  have hP2 : Topology.P2 A :=\n    Topology.P2_of_denseInterior (X := X) (A := A) hDense\n  -- A closed set satisfying `P2` is open.\n  exact Topology.isOpen_of_isClosed_and_P2 (X := X) (A := A) hA_closed hP2"
+  ],
+  "success": true
+}

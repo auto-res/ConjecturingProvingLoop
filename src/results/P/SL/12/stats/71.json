@@ -1,0 +1,60 @@
+{
+  "times": [
+    65.57306361198425,
+    103.44649815559387,
+    84.032146692276
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5381,
+      "prompt_tokens": 14570,
+      "total_tokens": 19951,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13184
+      }
+    },
+    {
+      "completion_tokens": 6493,
+      "prompt_tokens": 14650,
+      "total_tokens": 21143,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    },
+    {
+      "completion_tokens": 5575,
+      "prompt_tokens": 14729,
+      "total_tokens": 20304,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (A : Set X)))) =\n      interior (closure A) := by\n  -- We prove the two inclusions separately and conclude by antisymmetry.\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    have h_cl :\n        closure (interior (closure (A : Set X))) ⊆ closure A := by\n      -- `interior (closure A) ⊆ closure A`\n      have h₁ :\n          (interior (closure (A : Set X)) : Set X) ⊆ closure A :=\n        interior_subset\n      -- Taking closures preserves the inclusion.\n      have h₂ :\n          closure (interior (closure (A : Set X))) ⊆\n            closure (closure (A : Set X)) :=\n        closure_mono h₁\n      -- Simplify the right‐hand side.\n      simpa [closure_closure] using h₂\n    -- Monotonicity of `interior` yields the desired inclusion.\n    exact interior_mono h_cl\n  · -- `⊇` direction\n    -- `interior (closure A)` is open.\n    have h_open : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    -- It is contained in `closure (interior (closure A))`.\n    have h_subset :\n        (interior (closure (A : Set X)) : Set X) ⊆\n          closure (interior (closure (A : Set X))) := subset_closure\n    -- Maximality of the interior for an open set provides the inclusion.\n    have h_incl :\n        interior (closure (A : Set X)) ⊆\n          interior (closure (interior (closure A))) :=\n      interior_maximal h_subset h_open\n    -- Conclude.\n    simpa using h_incl",
+    "import Mathlib\nimport Aesop\n\ntheorem Topology.interior_closure_interior_closure_idempotent_twice\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (closure (interior A)))))) =\n      interior (closure (interior A)) := by\n  -- First simplification with `A := closure (interior A)`\n  have h₁ :\n      interior (closure (interior (closure (interior (closure (interior A)))))) =\n        interior (closure (interior (closure (interior A)))) := by\n    simpa using\n      Topology.interior_closure_interior_closure_idempotent\n        (X := X) (A := closure (interior A))\n  -- Second simplification with the original `A`\n  have h₂ :\n      interior (closure (interior (closure (interior A)))) =\n        interior (closure (interior A)) := by\n    simpa using\n      Topology.interior_closure_interior_closure_idempotent\n        (X := X) (A := A)\n  -- Combine the two equalities\n  simpa [h₁, h₂]",
+    "theorem Topology.interior_closure_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) ⊆ closure A := by\n  exact interior_subset"
+  ],
+  "success": true
+}

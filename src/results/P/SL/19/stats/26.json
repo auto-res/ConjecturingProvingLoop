@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.2719087600708
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3852,
+      "prompt_tokens": 3263,
+      "total_tokens": 7115,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A := A) → (Topology.P2 (A := A) ↔ Topology.P3 (A := A)) := by\n  intro hP1\n  have hEq :=\n    (Topology.interior_closure_eq_interior_closure_interior_of_P1 (A := A) hP1).symm\n  simpa [Topology.P2, Topology.P3, hEq]"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    106.2263617515564,
+    91.38245820999146
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6466,
+      "prompt_tokens": 51884,
+      "total_tokens": 58350,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    },
+    {
+      "completion_tokens": 5868,
+      "prompt_tokens": 51958,
+      "total_tokens": 57826,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iter_six_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (A : Set X))))))))))) =\n      closure (interior A) := by\n  calc\n    closure (interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (A : Set X))))))))))) =\n        closure (interior (closure (interior (closure (interior (closure\n          (interior (closure (interior (closure (interior A)))))))))) := by\n          simpa using\n            Topology.closure_interior_iter_five_eq\n              (X := X) (A := closure (interior A))\n    _ = closure (interior A) := by\n          simpa using\n            Topology.closure_interior_closure_interior_eq\n              (X := X) (A := A)",
+    "theorem Topology.interior_closure_interior_idempotent\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (A : Set X)))) =\n      interior (closure A) := by\n  -- We prove the two inclusions separately and conclude by extensionality.\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    -- First, note `interior (closure A) ⊆ closure A`.\n    have h₁ :\n        (interior (closure (A : Set X)) : Set X) ⊆ closure A :=\n      interior_subset\n    -- Taking closures preserves inclusions.\n    have h₂ :\n        closure (interior (closure (A : Set X))) ⊆\n          closure (closure (A : Set X)) :=\n      closure_mono h₁\n    -- Simplify `closure (closure A)` and apply monotonicity of `interior`.\n    have h₃ :\n        closure (interior (closure (A : Set X))) ⊆ closure A := by\n      simpa [closure_closure] using h₂\n    -- Finally, `interior` is monotone.\n    exact interior_mono h₃\n  · -- `⊇` direction\n    -- The set `interior (closure A)` is open …\n    have h_open : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    -- … and contained in `closure (interior (closure A))`.\n    have h_subset :\n        (interior (closure (A : Set X)) : Set X) ⊆\n          closure (interior (closure (A : Set X))) :=\n      subset_closure\n    -- By maximality of the interior of an open set, it is contained in the\n    -- interior of any superset—here `closure (interior (closure A))`.\n    have h_interior :\n        interior (closure (A : Set X)) ⊆\n          interior (closure (interior (closure A))) :=\n      interior_maximal h_subset h_open\n    -- This is exactly the desired inclusion.\n    simpa using h_interior"
+  ],
+  "success": true
+}

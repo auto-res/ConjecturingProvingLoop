@@ -1,0 +1,26 @@
+{
+  "times": [
+    21.01187825202942
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1855,
+      "prompt_tokens": 51233,
+      "total_tokens": 53088,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_eight {X : Type*} [TopologicalSpace X]\n    {A B C D E F G H : Set X}\n    (hA : Topology.P2 (X := X) A) (hB : Topology.P2 (X := X) B)\n    (hC : Topology.P2 (X := X) C) (hD : Topology.P2 (X := X) D)\n    (hE : Topology.P2 (X := X) E) (hF : Topology.P2 (X := X) F)\n    (hG : Topology.P2 (X := X) G) (hH : Topology.P2 (X := X) H) :\n    Topology.P2 (X := X) (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H) := by\n  -- Combine the properties for the first seven sets.\n  have hABCDEFG :\n      Topology.P2 (X := X) (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G) :=\n    Topology.P2_union_seven (X := X)\n      (A := A) (B := B) (C := C) (D := D) (E := E) (F := F) (G := G)\n      hA hB hC hD hE hF hG\n  -- Unite the result with `H`.\n  have hABCDEFGH :\n      Topology.P2 (X := X) ((A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G) ∪ H) :=\n    Topology.P2_union (X := X)\n      (A := A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G) (B := H)\n      hABCDEFG hH\n  -- Re‐associate unions to match the desired expression.\n  simpa [Set.union_assoc] using hABCDEFGH"
+  ],
+  "success": true
+}

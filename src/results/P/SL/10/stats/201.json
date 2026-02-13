@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.12117886543274
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4909,
+      "prompt_tokens": 32628,
+      "total_tokens": 37537,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iInter_subset {X : Type*} [TopologicalSpace X]\n    {ι : Sort*} {A : ι → Set X} :\n    interior (⋂ i, A i) ⊆ ⋂ i, interior (A i) := by\n  intro x hx\n  -- Show `x` belongs to each `interior (A i)`.\n  have hxi : ∀ i, x ∈ interior (A i) := by\n    intro i\n    -- The intersection is contained in each component `A i`.\n    have h_subset : (⋂ j, A j) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Pass to interiors using monotonicity.\n    have h_int_subset : interior (⋂ j, A j) ⊆ interior (A i) :=\n      interior_mono h_subset\n    exact h_int_subset hx\n  exact Set.mem_iInter.2 hxi"
+  ],
+  "success": true
+}

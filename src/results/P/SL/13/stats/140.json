@@ -1,0 +1,43 @@
+{
+  "times": [
+    19.991999864578247,
+    276.9356486797333
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1493,
+      "prompt_tokens": 22863,
+      "total_tokens": 24356,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    },
+    {
+      "completion_tokens": 19493,
+      "prompt_tokens": 22974,
+      "total_tokens": 42467,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P3_implies_isClopen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hP3 : Topology.P3 (X:=X) A) :\n    IsClopen (A : Set X) := by\n  have hA_open : IsOpen (A : Set X) :=\n    Topology.closed_P3_implies_isOpen (X:=X) (A:=A) hA_closed hP3\n  exact ⟨hA_open, hA_closed⟩",
+    "theorem Topology.closure_interior_subset_closure_interior_union {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X)) ⊆ closure (interior (A ∪ B)) := by\n  -- `A` is contained in `A ∪ B`, so the same holds for their interiors.\n  have h_subset : interior (A : Set X) ⊆ interior (A ∪ B) :=\n    interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n  -- Taking closures preserves inclusions.\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

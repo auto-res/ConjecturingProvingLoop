@@ -1,0 +1,26 @@
+{
+  "times": [
+    98.88991594314575
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6416,
+      "prompt_tokens": 11848,
+      "total_tokens": 18264,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_eq_closure_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A := A) → closure (interior (closure A)) = closure A := by\n  intro hP2\n  have h₁ :\n      closure (interior (closure A)) = closure (interior A) :=\n    Topology.closure_interior_closure_eq_closure_interior_of_P2 (A := A) hP2\n  have h₂ : closure (interior A) = closure A :=\n    (Topology.closure_eq_closure_interior_of_P2 (A := A) hP2).symm\n  calc\n    closure (interior (closure A))\n        = closure (interior A) := h₁\n    _ = closure A := h₂"
+  ],
+  "success": true
+}

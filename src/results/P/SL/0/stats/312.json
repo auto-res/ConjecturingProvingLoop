@@ -1,0 +1,26 @@
+{
+  "times": [
+    113.66968059539795
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4805,
+      "prompt_tokens": 54503,
+      "total_tokens": 59308,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closure_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 (closure (A : Set X)) →\n    Topology.P3 (closure (B : Set X)) →\n    Topology.P3 (closure (A ∪ B : Set X)) := by\n  intro hA hB\n  -- Each hypothesis gives the openness of the corresponding closure.\n  have hOpenA : IsOpen (closure (A : Set X)) :=\n    (Topology.isOpen_closure_of_P3_closure (X := X) (A := A)) hA\n  have hOpenB : IsOpen (closure (B : Set X)) :=\n    (Topology.isOpen_closure_of_P3_closure (X := X) (A := B)) hB\n  -- Hence their union, which equals `closure (A ∪ B)`, is open.\n  have hOpenUnion : IsOpen (closure (A ∪ B : Set X)) := by\n    have h : IsOpen ((closure (A : Set X)) ∪ closure (B : Set X) : Set X) :=\n      hOpenA.union hOpenB\n    simpa [closure_union] using h\n  -- An open set satisfies `P3`.\n  exact\n    (Topology.P3_closure_of_isOpen_closure (X := X) (A := A ∪ B)) hOpenUnion"
+  ],
+  "success": true
+}

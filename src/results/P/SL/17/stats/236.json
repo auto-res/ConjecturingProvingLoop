@@ -1,0 +1,26 @@
+{
+  "times": [
+    47.417396545410156
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2986,
+      "prompt_tokens": 42529,
+      "total_tokens": 45515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P_properties_of_closed_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hClosed : IsClosed A) (hDense : Dense A) :\n    Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A := by\n  -- A closed and dense set must coincide with the whole space.\n  have hEq : A = (Set.univ : Set X) :=\n    Topology.closed_dense_eq_univ (A := A) hClosed hDense\n  -- All three properties hold for `Set.univ`; transport them along the equality.\n  simpa [hEq] using (Topology.P_properties_univ (X := X))"
+  ],
+  "success": true
+}

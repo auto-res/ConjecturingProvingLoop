@@ -1,0 +1,43 @@
+{
+  "times": [
+    91.72395181655884,
+    48.87862205505371
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7334,
+      "prompt_tokens": 18482,
+      "total_tokens": 25816,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 5029,
+      "prompt_tokens": 18594,
+      "total_tokens": 23623,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interiorClosure_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  constructor\n  · intro h_dense\n    simpa using interior_closure_eq_univ_of_dense (A := A) h_dense\n  · intro h_int_eq\n    dsimp [Dense] at *\n    -- Show `closure A = univ` using the assumed equality of interiors.\n    -- First, `univ ⊆ closure A` because `interior (closure A) ⊆ closure A`.\n    have h_subset : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      have h_int_subset : interior (closure (A : Set X)) ⊆ closure (A : Set X) :=\n        interior_subset\n      simpa [h_int_eq] using h_int_subset\n    -- The other inclusion is trivial.\n    have h_trivial : closure (A : Set X) ⊆ (Set.univ : Set X) := by\n      intro x _; trivial\n    exact subset_antisymm h_trivial h_subset",
+    "theorem Topology.closure_union_subset\n    {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    closure A ∪ closure B ⊆ closure (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have h_mono : closure A ⊆ closure (A ∪ B) := by\n        have h_sub : (A : Set X) ⊆ A ∪ B := by\n          intro y hy; exact Or.inl hy\n        exact closure_mono h_sub\n      exact h_mono hA\n  | inr hB =>\n      have h_mono : closure B ⊆ closure (A ∪ B) := by\n        have h_sub : (B : Set X) ⊆ A ∪ B := by\n          intro y hy; exact Or.inr hy\n        exact closure_mono h_sub\n      exact h_mono hB"
+  ],
+  "success": true
+}

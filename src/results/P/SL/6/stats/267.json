@@ -1,0 +1,26 @@
+{
+  "times": [
+    70.57919073104858
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4615,
+      "prompt_tokens": 42360,
+      "total_tokens": 46975,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_univ_of_dense_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) →\n      closure (A : Set X) = (Set.univ : Set X) →\n      closure (interior (A : Set X)) = (Set.univ : Set X) := by\n  intro hP2 hDense\n  -- From `P2`, we know the closures of `A` and `interior A` coincide.\n  have hEq : closure (interior (A : Set X)) = closure A :=\n    Topology.P2_implies_closure_interior_eq_closure (A := A) hP2\n  -- Combine this with the density hypothesis.\n  simpa [hDense] using hEq.trans hDense"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.2466516494751
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4061,
+      "prompt_tokens": 62390,
+      "total_tokens": 66451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_inter_four_of_closed {X : Type*} [TopologicalSpace X] {A B C D : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hB_closed : IsClosed (B : Set X))\n    (hC_closed : IsClosed (C : Set X)) (hD_closed : IsClosed (D : Set X)) :\n    Topology.P2 A → Topology.P2 B → Topology.P2 C → Topology.P2 D →\n      Topology.P2 (A ∩ B ∩ C ∩ D) := by\n  intro hPA hPB hPC hPD\n  -- Convert each `P2` on a closed set into openness.\n  have hOpenA : IsOpen (A : Set X) :=\n    (Topology.isOpen_of_isClosed_and_P2 (X := X) (A := A) hA_closed) hPA\n  have hOpenB : IsOpen (B : Set X) :=\n    (Topology.isOpen_of_isClosed_and_P2 (X := X) (A := B) hB_closed) hPB\n  have hOpenC : IsOpen (C : Set X) :=\n    (Topology.isOpen_of_isClosed_and_P2 (X := X) (A := C) hC_closed) hPC\n  have hOpenD : IsOpen (D : Set X) :=\n    (Topology.isOpen_of_isClosed_and_P2 (X := X) (A := D) hD_closed) hPD\n  -- The intersection of four open sets is open, hence satisfies `P2`.\n  exact\n    (Topology.P2_inter_four_of_open (X := X) (A := A) (B := B) (C := C) (D := D)\n        hOpenA hOpenB hOpenC hOpenD)"
+  ],
+  "success": true
+}

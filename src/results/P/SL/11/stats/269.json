@@ -1,0 +1,26 @@
+{
+  "times": [
+    104.08082127571106
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4897,
+      "prompt_tokens": 43506,
+      "total_tokens": 48403,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem exists_open_subset_same_closure_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) :\n    ∃ U : Set X, IsOpen U ∧ U ⊆ A ∧ closure U = closure A := by\n  refine ⟨interior A, isOpen_interior, interior_subset, ?_⟩\n  have hEq :\n      closure (interior A) = closure A :=\n    (Topology.closure_eq_closure_interior_of_P1 (A := A) hP1).symm\n  simpa [hEq]"
+  ],
+  "success": true
+}

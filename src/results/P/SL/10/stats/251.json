@@ -1,0 +1,26 @@
+{
+  "times": [
+    168.18359184265137
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8908,
+      "prompt_tokens": 40520,
+      "total_tokens": 49428,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_univ_iff_interior_compl_empty {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    closure A = (Set.univ : Set X) ↔ interior (Aᶜ) = (∅ : Set X) := by\n  -- Useful relations between `closure` and `interior` for complements.\n  have h₁ := Topology.interior_compl_eq_compl_closure (X := X) (A := A)\n  have h₂ := Topology.closure_eq_compl_interior_compl (X := X) (A := A)\n  constructor\n  · intro hCl\n    -- Rewrite `h₁` using `hCl` to eliminate `closure A`.\n    have : interior (Aᶜ) = (Set.univ : Set X)ᶜ := by\n      simpa [hCl] using h₁\n    -- The complement of `univ` is `∅`.\n    simpa [Set.compl_univ] using this\n  · intro hInt\n    -- Rewrite `h₂` using `hInt` to eliminate `interior (Aᶜ)`.\n    have : closure A = (∅ : Set X)ᶜ := by\n      simpa [hInt] using h₂\n    -- The complement of `∅` is `univ`.\n    simpa [Set.compl_empty] using this"
+  ],
+  "success": true
+}

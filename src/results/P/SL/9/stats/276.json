@@ -1,0 +1,60 @@
+{
+  "times": [
+    27.707486629486084,
+    100.43951082229614,
+    61.08282279968262
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1399,
+      "prompt_tokens": 47596,
+      "total_tokens": 48995,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 5518,
+      "prompt_tokens": 47702,
+      "total_tokens": 53220,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 3484,
+      "prompt_tokens": 47776,
+      "total_tokens": 51260,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_iff_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) = (∅ : Set X) ↔ (IsClosed A ∧ IsOpen A) := by\n  simpa [Topology.frontier_eq_closure_diff_interior (A := A)]\n    using (Topology.boundary_eq_empty_iff_isClopen (A := A))",
+    "theorem Set.compl_compl {α : Type*} (s : Set α) : (sᶜ)ᶜ = s := by\n  ext x\n  by_cases hx : x ∈ s\n  · simp [hx]\n  · simp [hx]",
+    "theorem Topology.disjoint_closureCompl_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen (A : Set X)) : Disjoint (closure (Aᶜ)) A := by\n  -- From a general lemma we know `closure (Aᶜ) ⊆ (interior A)ᶜ`.\n  have hsubset : closure (Aᶜ : Set X) ⊆ (A : Set X)ᶜ := by\n    simpa [hA.interior_eq] using\n      (Topology.closure_compl_subset_compl_interior (A := A))\n  -- Translate this containment into the required disjointness.\n  exact (Set.disjoint_left).2 (by\n    intro x hx_cl hx_A\n    have : x ∈ (Aᶜ : Set X) := hsubset hx_cl\n    exact this hx_A)"
+  ],
+  "success": true
+}

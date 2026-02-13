@@ -1,0 +1,60 @@
+{
+  "times": [
+    44.194610834121704,
+    169.66829919815063,
+    171.23057770729065
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2301,
+      "prompt_tokens": 4142,
+      "total_tokens": 6443,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 14481,
+      "prompt_tokens": 4282,
+      "total_tokens": 18763,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 10732,
+      "prompt_tokens": 4413,
+      "total_tokens": 15145,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closureInterior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (A := closure (interior A)) := by\n  dsimp [Topology.P1]\n  intro x hx\n  have hsubset :\n      closure (interior A) ⊆ closure (interior (closure (interior A))) :=\n    Topology.closureInterior_subset_closureInteriorClosure (A := interior A)\n  exact hsubset hx",
+    "theorem Topology.closureInteriorClosure_idempotent {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply subset_antisymm\n  ·\n    have h : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    exact closure_mono h\n  ·\n    have h : interior A ⊆ interior (closure (interior A)) := by\n      have h₁ : interior A ⊆ closure (interior A) := subset_closure\n      have h₂ : interior (interior A) ⊆ interior (closure (interior A)) :=\n        interior_mono h₁\n      simpa [interior_interior] using h₂\n    exact closure_mono h",
+    "theorem closure_diff_subset {X : Type*} [TopologicalSpace X] (s t : Set X) :\n    closure (s \\ t) ⊆ closure s \\ interior t := by\n  intro x hx\n  -- `x` lies in the closure of `s`\n  have hx_cl_s : x ∈ closure s := by\n    have h_sub : s \\ t ⊆ s := by\n      intro y hy\n      exact hy.1\n    exact closure_mono h_sub hx\n  -- `x` is not in the interior of `t`\n  have hx_not_int : x ∉ interior t := by\n    by_contra hx_int\n    -- Any neighbourhood of `x` meets `s \\\\ t`; pick `interior t`\n    have h_nonempty : ((interior t) ∩ (s \\ t)).Nonempty := by\n      have h_closure := (mem_closure_iff).1 hx\n      exact h_closure _ isOpen_interior hx_int\n    rcases h_nonempty with ⟨y, ⟨hy_int_t, hy_diff⟩⟩\n    have : y ∈ t := interior_subset hy_int_t\n    exact hy_diff.2 this\n  exact ⟨hx_cl_s, hx_not_int⟩"
+  ],
+  "success": true
+}

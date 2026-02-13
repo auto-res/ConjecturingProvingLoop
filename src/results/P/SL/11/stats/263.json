@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.36639904975891
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3769,
+      "prompt_tokens": 42633,
+      "total_tokens": 46402,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_nonempty_iff_interior_nonempty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure (interior A)).Nonempty ↔ (interior A).Nonempty := by\n  classical\n  constructor\n  · intro hCl\n    by_contra hInt\n    have hIntEq : interior A = (∅ : Set X) :=\n      (Set.not_nonempty_iff_eq_empty).1 hInt\n    have hClEq : closure (interior A) = (∅ : Set X) := by\n      simpa [hIntEq, closure_empty]\n    rcases hCl with ⟨x, hx⟩\n    have : x ∈ (∅ : Set X) := by\n      simpa [hClEq] using hx\n    exact (Set.not_mem_empty x) this\n  · intro hInt\n    rcases hInt with ⟨x, hx⟩\n    exact ⟨x, subset_closure hx⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    76.1010491847992,
+    84.2512481212616
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5475,
+      "prompt_tokens": 52082,
+      "total_tokens": 57557,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    },
+    {
+      "completion_tokens": 6317,
+      "prompt_tokens": 52159,
+      "total_tokens": 58476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_closure_inter_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) =\n      closure (interior A) ∩ interior (closure (A : Set X)) := by\n  -- We first show the inclusion from left to right.\n  have h₁ :\n      interior (closure (A : Set X)) ⊆\n        closure (interior A) ∩ interior (closure (A : Set X)) := by\n    intro x hx\n    have hx₁ :\n        x ∈ closure (interior A) :=\n      (Topology.interior_closure_subset_closure_interior (A := A)) hx\n    -- Assemble the two required facts.\n    exact And.intro hx₁ hx\n  -- The reverse inclusion is immediate from the definition of `∩`.\n  have h₂ :\n      closure (interior A) ∩ interior (closure (A : Set X)) ⊆\n        interior (closure (A : Set X)) := by\n    intro x hx\n    exact hx.2\n  -- Combine the two inclusions to obtain the desired equality.\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem Topology.interior_closure_subset_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 A → interior (closure (A : Set X)) ⊆ closure (interior A) := by\n  intro hP1\n  exact Topology.interior_closure_subset_closure_interior_of_P1 (A := A) hP1"
+  ],
+  "success": true
+}

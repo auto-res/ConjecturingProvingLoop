@@ -1,0 +1,26 @@
+{
+  "times": [
+    83.77419018745422
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5648,
+      "prompt_tokens": 10656,
+      "total_tokens": 16304,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_union_of_P1\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 A → Topology.P1 B →\n      closure (A ∪ B) = closure (interior (A ∪ B)) := by\n  intro hA hB\n  -- Obtain `P1` for the union from the hypotheses on `A` and `B`.\n  have hUnion : Topology.P1 (A ∪ B) :=\n    Topology.P1_union (X := X) (A := A) (B := B) hA hB\n  -- Translate `P1` for the union into the desired equality of closures.\n  exact Topology.closure_eq_closure_interior_of_P1\n      (X := X) (A := A ∪ B) hUnion"
+  ],
+  "success": true
+}

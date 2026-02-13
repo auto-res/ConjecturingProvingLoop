@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.81328964233398
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4483,
+      "prompt_tokens": 50666,
+      "total_tokens": 55149,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_subset_inter_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∩ B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- `hx.1` witnesses that `x` lies in the closure of `A ∩ B`.\n  have h := (Topology.closure_inter_subset_inter_closure\n      (A := A) (B := B)) hx.1\n  exact h"
+  ],
+  "success": true
+}

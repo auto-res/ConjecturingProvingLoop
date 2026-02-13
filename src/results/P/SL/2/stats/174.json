@@ -1,0 +1,26 @@
+{
+  "times": [
+    157.45772099494934
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13709,
+      "prompt_tokens": 28599,
+      "total_tokens": 42308,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iInter_subset_iInter_closure_interior\n    {X : Type*} [TopologicalSpace X] {ι : Type*} {s : ι → Set X} :\n    closure (interior (⋂ i, s i : Set X)) ⊆ ⋂ i, closure (interior (s i)) := by\n  intro x hx\n  -- For each index `i`, we will show `x ∈ closure (interior (s i))`.\n  have hx₀ : x ∈ closure (interior (⋂ i, s i : Set X)) := hx\n  have hxi : ∀ i, x ∈ closure (interior (s i)) := by\n    intro i\n    -- `interior (⋂ i, s i)` is contained in `interior (s i)`\n    have hsub :\n        (interior (⋂ j, s j : Set X) : Set X) ⊆ interior (s i) := by\n      -- Since `⋂ j, s j ⊆ s i`, monotonicity of `interior` gives the claim.\n      have hSup : (⋂ j, s j : Set X) ⊆ s i := by\n        intro y hy\n        exact (Set.mem_iInter.1 hy) i\n      exact interior_mono hSup\n    -- Taking closures preserves inclusions.\n    have hcl :\n        closure (interior (⋂ j, s j : Set X)) ⊆ closure (interior (s i)) :=\n      closure_mono hsub\n    exact hcl hx₀\n  -- Combine the pointwise facts into membership in the intersection.\n  exact Set.mem_iInter.2 hxi"
+  ],
+  "success": true
+}

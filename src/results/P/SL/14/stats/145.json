@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.46956968307495
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3636,
+      "prompt_tokens": 26505,
+      "total_tokens": 30141,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.denseInteriorClosure_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) → Dense (interior (closure (A : Set X))) := by\n  intro hDense\n  -- From the density of `A`, we know `closure (interior (closure A)) = univ`.\n  have h_closure :\n      closure (interior (closure (A : Set X))) = (Set.univ : Set X) :=\n    Topology.closureInteriorClosure_eq_univ_of_dense (X := X) (A := A) hDense\n  -- Conclude density via the closure characterization.\n  exact (dense_iff_closure_eq).2 h_closure"
+  ],
+  "success": true
+}

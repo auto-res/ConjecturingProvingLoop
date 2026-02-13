@@ -1,0 +1,26 @@
+{
+  "times": [
+    81.01236033439636
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5330,
+      "prompt_tokens": 25931,
+      "total_tokens": 31261,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_univ_iff_closure_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ) = (Set.univ : Set X) ↔ closure A = (∅ : Set X) := by\n  -- Relate the two sets using the existing complement–closure lemma.\n  have h_rel := Topology.interior_compl_eq_compl_closure (X := X) (A := A)\n  constructor\n  · intro hInt\n    -- Translate `hInt` via `h_rel` to obtain `(closure A)ᶜ = univ`.\n    have h_eq : (closure A)ᶜ = (Set.univ : Set X) := by\n      simpa [h_rel] using hInt\n    -- Complement both sides to deduce `closure A = ∅`.\n    have h_closure : closure A = (Set.univ : Set X)ᶜ := by\n      simpa using congrArg (fun s : Set X => sᶜ) h_eq\n    simpa [Set.compl_univ] using h_closure\n  · intro hCl\n    -- Rewrite `interior (Aᶜ)` using `h_rel` and `hCl`.\n    have h_eq : interior (Aᶜ) = (closure A)ᶜ := h_rel\n    simpa [hCl, Set.compl_empty] using h_eq"
+  ],
+  "success": true
+}

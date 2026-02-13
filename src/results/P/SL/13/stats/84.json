@@ -1,0 +1,26 @@
+{
+  "times": [
+    119.74172902107239
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9527,
+      "prompt_tokens": 13475,
+      "total_tokens": 23002,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.denseInterior_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Topology.P3 (X := X) A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hxA\n  -- First, show that `closure A = univ`.\n  have h_univ_subset : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n    -- Since `interior A ⊆ A`, taking closures yields the inclusion we need.\n    have h_subset : closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n      closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n    -- Rewrite using the density of `interior A`.\n    simpa [hDense.closure_eq] using h_subset\n  have h_closureA_univ : closure (A : Set X) = (Set.univ : Set X) :=\n    Set.Subset.antisymm Set.Subset_univ h_univ_subset\n  -- Hence the interior of `closure A` is the whole space.\n  have h_int_univ : interior (closure (A : Set X)) = (Set.univ : Set X) := by\n    simpa [h_closureA_univ, interior_univ]\n  -- The desired membership now follows.\n  simpa [h_int_univ] using (by\n    have : (x : X) ∈ (Set.univ : Set X) := by\n      simp\n    exact this)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.86912560462952
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6879,
+      "prompt_tokens": 27961,
+      "total_tokens": 34840,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.eq_empty_of_P2_of_interior_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hInt : interior A = ∅) (hP2 : Topology.P2 A) :\n    (A : Set X) = ∅ := by\n  -- First, show `A ⊆ ∅`.\n  have hsubset : (A : Set X) ⊆ (∅ : Set X) := by\n    intro x hx\n    -- From `P2`, we know `x` lies in the specified interior.\n    have hx' : x ∈ interior (closure (interior A)) := hP2 hx\n    -- But that interior is empty, thanks to `hInt`.\n    have hEmpty : interior (closure (interior A)) = (∅ : Set X) := by\n      simp [hInt]\n    -- Hence `x` belongs to the empty set, an impossibility.\n    have : x ∈ (∅ : Set X) := by\n      simpa [hEmpty] using hx'\n    exact this.elim\n  -- Conclude the desired equality of sets.\n  exact Set.Subset.antisymm hsubset (Set.empty_subset _)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    129.55281019210815
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7459,
+      "prompt_tokens": 18392,
+      "total_tokens": 25851,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_of_isClosed_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hA_open : IsOpen A) :\n    closure (interior A) = A := by\n  -- The interior of an open set is itself.\n  have hInt : interior A = A := hA_open.interior_eq\n  -- The closure of a closed set is itself.\n  have hCl : closure A = A := hA_closed.closure_eq\n  -- Combine the two equalities to obtain the result.\n  simpa [hInt, hCl]"
+  ],
+  "success": true
+}

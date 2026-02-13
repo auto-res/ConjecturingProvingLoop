@@ -1,0 +1,43 @@
+{
+  "times": [
+    177.417325258255,
+    132.23433995246887
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9968,
+      "prompt_tokens": 38549,
+      "total_tokens": 48517,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    },
+    {
+      "completion_tokens": 7420,
+      "prompt_tokens": 38720,
+      "total_tokens": 46140,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_of_isOpen_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : IsOpen (A : Set X)) :\n    interior ((A ∩ B) : Set X) = A ∩ interior B := by\n  simpa [inter_comm] using\n    (interior_inter_of_isOpen_right (A := B) (B := A) hA)",
+    "theorem closure_interior_eq_self_of_P1_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    Topology.P1 (A : Set X) → closure (interior A) = A := by\n  intro hP1\n  exact\n    (Topology.P1_iff_closure_interior_eq_self_of_closed\n        (A := A) hA).1 hP1"
+  ],
+  "success": true
+}

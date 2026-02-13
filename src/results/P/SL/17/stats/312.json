@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.6729199886322
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2590,
+      "prompt_tokens": 53786,
+      "total_tokens": 56376,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closure_interior_idempotent\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (closure (interior (closure (interior A)))) =\n      frontier (closure (interior A)) := by\n  -- Obtain the core set equality from idempotence of `closure ∘ interior`.\n  have hEq :\n      closure (interior (closure (interior A))) = closure (interior A) :=\n    Topology.closure_interior_idempotent (A := A)\n  -- Rewrite both frontiers using the established equality.\n  simpa [frontier, hEq]"
+  ],
+  "success": true
+}

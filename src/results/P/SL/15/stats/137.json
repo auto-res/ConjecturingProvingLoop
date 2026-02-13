@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.32534456253052
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4252,
+      "prompt_tokens": 27532,
+      "total_tokens": 31784,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_prod_univ {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} :\n    Topology.P3 A → Topology.P3 (A ×ˢ (Set.univ : Set Y)) := by\n  intro hA\n  have hUniv : Topology.P3 (Set.univ : Set Y) := Topology.P3_univ (X := Y)\n  exact\n    Topology.P3_prod\n      (X := X) (Y := Y) (A := A) (B := (Set.univ : Set Y)) hA hUniv"
+  ],
+  "success": true
+}

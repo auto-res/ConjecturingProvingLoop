@@ -1,0 +1,43 @@
+{
+  "times": [
+    75.43586421012878,
+    205.79663729667664
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4925,
+      "prompt_tokens": 51065,
+      "total_tokens": 55990,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 10706,
+      "prompt_tokens": 51191,
+      "total_tokens": 61897,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_closure_subset_interior_closure_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ closure B)) ⊆ interior (closure B) := by\n  have h_closure : closure (A ∩ closure B) ⊆ closure B :=\n    closure_mono (Set.inter_subset_right : A ∩ closure B ⊆ closure B)\n  exact interior_mono h_closure",
+    ""
+  ],
+  "success": true
+}

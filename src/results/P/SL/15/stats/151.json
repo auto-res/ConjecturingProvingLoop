@@ -1,0 +1,26 @@
+{
+  "times": [
+    84.13583636283875
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5670,
+      "prompt_tokens": 30290,
+      "total_tokens": 35960,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_univ_of_P1_and_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) (hDenseInt : Dense (interior A)) :\n    closure A = (Set.univ : Set X) := by\n  -- From `P1`, we know `closure A = closure (interior A)`.\n  have h_cl_eq : closure A = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closure_interior (X := X) (A := A)).1 hP1\n  -- Since `interior A` is dense, its closure is the whole space.\n  have h_univ : closure (interior A) = (Set.univ : Set X) := by\n    simpa using hDenseInt.closure_eq\n  -- Combining the two equalities yields the result.\n  simpa [h_univ] using h_cl_eq"
+  ],
+  "success": true
+}

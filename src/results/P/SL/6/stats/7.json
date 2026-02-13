@@ -1,0 +1,43 @@
+{
+  "times": [
+    55.70909857749939,
+    75.0948748588562
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3715,
+      "prompt_tokens": 787,
+      "total_tokens": 4502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4661,
+      "prompt_tokens": 911,
+      "total_tokens": 5572,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem open_satisfies_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 A := by\n  dsimp [Topology.P2]\n  have h : interior A ⊆ interior (closure (interior A)) := by\n    have hSub : interior A ⊆ closure (interior A) := subset_closure\n    exact interior_mono hSub\n  simpa [hA.interior_eq] using h",
+    "theorem open_satisfies_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 A := by\n  dsimp [Topology.P2]\n  have h : interior (interior A) ⊆ interior (closure (interior A)) :=\n    interior_mono subset_closure\n  simpa [interior_interior, hA.interior_eq] using h"
+  ],
+  "success": true
+}

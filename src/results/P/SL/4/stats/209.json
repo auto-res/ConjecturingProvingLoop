@@ -1,0 +1,60 @@
+{
+  "times": [
+    45.09937357902527,
+    74.60426354408264,
+    27.197649240493774
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3321,
+      "prompt_tokens": 30547,
+      "total_tokens": 33868,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    },
+    {
+      "completion_tokens": 4885,
+      "prompt_tokens": 30653,
+      "total_tokens": 35538,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 1646,
+      "prompt_tokens": 30866,
+      "total_tokens": 32512,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_frontier_eq_empty {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior A ∩ frontier A = (∅ : Set X) := by\n  have h : interior A ∩ (closure A \\ interior A) = (∅ : Set X) := by\n    simpa using Set.inter_diff_self (interior A) (closure A)\n  simpa [frontier_eq_closure_diff_interior] using h",
+    "theorem interior_union_of_isOpen_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : IsOpen A) :\n    interior (A ∪ B) = A ∪ interior B := by\n  -- We show mutual inclusion of the two sets.\n  ext x\n  constructor\n  · intro hx\n    -- There exists an open set `U` with `x ∈ U ⊆ A ∪ B`.\n    rcases hx with ⟨U, hU_open, hxU, hU_subset⟩\n    by_cases hAx : x ∈ A\n    · -- If `x ∈ A`, we are done.\n      exact Or.inl hAx\n    · -- Otherwise, construct an open neighbourhood of `x` contained in `B`.\n      -- Consider `U \\ A`, which is open and contains `x`.\n      have h_open : IsOpen (U \\ A) := hU_open.diff hA\n      have hxUdiff : x ∈ U \\ A := And.intro hxU hAx\n      -- Show that `U \\ A ⊆ B`.\n      have h_subset : U \\ A ⊆ B := by\n        intro y hy\n        have hyU : y ∈ U := hy.1\n        have hyNotA : y ∉ A := hy.2\n        have : y ∈ A ∪ B := hU_subset hyU\n        cases this with\n        | inl hYA  => exact (False.elim <| hyNotA hYA)\n        | inr hYB  => exact hYB\n      -- Hence `x ∈ interior B`.\n      exact Or.inr ⟨U \\ A, h_open, hxUdiff, h_subset⟩\n  · intro hx\n    cases hx with\n    | inl hAx =>\n        -- `A` is open and contained in `A ∪ B`.\n        exact\n          interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n            (show x ∈ A from hAx)\n    | inr hIntB =>\n        -- From `x ∈ interior B`, obtain an open set inside `B`.\n        rcases hIntB with ⟨U, hU_open, hxU, hU_subset⟩\n        -- This open set is also contained in `A ∪ B`.\n        have hU_subset_union : U ⊆ A ∪ B :=\n          Set.Subset.trans hU_subset (Set.subset_union_right)\n        exact ⟨U, hU_open, hxU, hU_subset_union⟩",
+    "theorem interior_inter_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior A ∩ interior (closure A) = interior A := by\n  ext x\n  constructor\n  · intro hx\n    exact hx.1\n  · intro hx\n    -- `interior A` is contained in `interior (closure A)` by monotonicity.\n    have h_subset : interior A ⊆ interior (closure A) :=\n      interior_mono (subset_closure : (A : Set X) ⊆ closure A)\n    have hx_int_cl : x ∈ interior (closure A) := h_subset hx\n    exact And.intro hx hx_int_cl"
+  ],
+  "success": true
+}

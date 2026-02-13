@@ -1,0 +1,26 @@
+{
+  "times": [
+    123.61121582984924
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8876,
+      "prompt_tokens": 20701,
+      "total_tokens": 29577,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_univ_of_dense_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hDense : Dense (interior A)) :\n    closure A = (Set.univ : Set X) := by\n  -- First, density gives `closure (interior A) = Set.univ`.\n  have h_closure_int : closure (interior A) = (Set.univ : Set X) :=\n    hDense.closure_eq\n  -- Since `interior A ⊆ A`, their closures satisfy\n  -- `closure (interior A) ⊆ closure A`.\n  have h_subset : closure (interior A) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  -- Hence `Set.univ ⊆ closure A`.\n  have h_superset : (Set.univ : Set X) ⊆ closure A := by\n    simpa [h_closure_int] using h_subset\n  -- The opposite inclusion is trivial.\n  have h_subset_univ : closure A ⊆ (Set.univ : Set X) := by\n    intro _x _hx; simp\n  -- Conclude by antisymmetry.\n  exact Set.Subset.antisymm h_subset_univ h_superset"
+  ],
+  "success": true
+}

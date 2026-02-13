@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.16853308677673
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6966,
+      "prompt_tokens": 65114,
+      "total_tokens": 72080,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 64256
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_union_closure_diff\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) =\n      closure (interior A) ∪ closure (A \\ interior A) := by\n  classical\n  ext x\n  constructor\n  · intro hxClA\n    by_cases hClInt : x ∈ closure (interior A)\n    · exact Or.inl hClInt\n    · -- Put `x` in the complement of `closure (interior A)`.\n      have hxW : x ∈ (closure (interior (A : Set X)))ᶜ := by\n        simpa [Set.mem_compl] using hClInt\n      -- Show `x ∈ closure (A \\ interior A)`.\n      have hxClDiff : x ∈ closure (A \\ interior A : Set X) := by\n        -- Use the neighbourhood characterisation of the closure.\n        refine (mem_closure_iff).2 ?_\n        intro U hUopen hxU\n        -- Intersect with the open set `W` that avoids `interior A`.\n        let W : Set X := (closure (interior (A : Set X)))ᶜ\n        have hWopen : IsOpen W := isClosed_closure.isOpen_compl\n        have hxW' : x ∈ W := hxW\n        let V : Set X := U ∩ W\n        have hVopen : IsOpen V := hUopen.inter hWopen\n        have hxV : x ∈ V := by\n          exact And.intro hxU hxW'\n        -- Since `x ∈ closure A`, `V` meets `A`.\n        have hNon : ((V : Set X) ∩ (A : Set X)).Nonempty := by\n          have := (mem_closure_iff).1 hxClA V hVopen hxV\n          simpa [V, Set.inter_assoc, Set.inter_left_comm, Set.inter_comm] using this\n        -- Extract a point `y` in `V ∩ A`; it cannot lie in `interior A`.\n        rcases hNon with ⟨y, ⟨⟨hyU, hyW⟩, hyA⟩⟩\n        have hyNotInt : y ∈ (interior (A : Set X))ᶜ := by\n          intro hyInt\n          have : y ∈ closure (interior (A : Set X)) := subset_closure hyInt\n          exact hyW this\n        have hyDiff : y ∈ A \\ interior A := ⟨hyA, hyNotInt⟩\n        exact ⟨y, ⟨hyU, hyDiff⟩⟩\n      exact Or.inr hxClDiff\n  · intro hx\n    cases hx with\n    | inl hxInt =>\n        have hsubset : closure (interior A) ⊆ closure (A : Set X) :=\n          Topology.closure_interior_subset_closure (X := X) A\n        exact hsubset hxInt\n    | inr hxDiff =>\n        have hsubset :\n            closure (A \\ interior A : Set X) ⊆ closure (A : Set X) :=\n          closure_mono (Set.diff_subset : (A \\ interior A : Set X) ⊆ A)\n        exact hsubset hxDiff"
+  ],
+  "success": true
+}

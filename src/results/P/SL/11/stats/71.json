@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.17059135437012
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3818,
+      "prompt_tokens": 10304,
+      "total_tokens": 14122,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_sUnion {X : Type*} [TopologicalSpace X] {𝔄 : Set (Set X)}\n    (hA : ∀ A, A ∈ 𝔄 → Topology.P2 A) :\n    Topology.P2 (⋃₀ 𝔄) := by\n  -- First, extract `P1` and `P3` for every member of `𝔄` from the given `P2`.\n  have hP1 : ∀ A, A ∈ 𝔄 → Topology.P1 A := by\n    intro A hA_mem\n    exact Topology.P2_implies_P1 (hA A hA_mem)\n  have hP3 : ∀ A, A ∈ 𝔄 → Topology.P3 A := by\n    intro A hA_mem\n    exact Topology.P2_implies_P3 (hA A hA_mem)\n  -- Use the existing `sUnion` lemmas for `P1` and `P3`.\n  have hP1_sUnion : Topology.P1 (⋃₀ 𝔄) := Topology.P1_sUnion hP1\n  have hP3_sUnion : Topology.P3 (⋃₀ 𝔄) := Topology.P3_sUnion hP3\n  -- Combine them to obtain `P2` for the union.\n  exact Topology.P2_of_P1_and_P3 (A := ⋃₀ 𝔄) ⟨hP1_sUnion, hP3_sUnion⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.07503604888916
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2408,
+      "prompt_tokens": 51144,
+      "total_tokens": 53552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_P1_and_open_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 A)\n    (hOpen : IsOpen (closure (interior A))) :\n    Topology.P3 A := by\n  dsimp [Topology.P3] at *\n  intro x hxA\n  -- Step 1: `P1` sends `x` into `closure (interior A)`.\n  have hxCl : x ∈ closure (interior A) := hP1 hxA\n  -- Step 2: since `closure (interior A)` is open, its interior is itself.\n  have hIntEq : interior (closure (interior A)) = closure (interior A) :=\n    hOpen.interior_eq\n  -- Reinterpret membership using the interior.\n  have hxInt : x ∈ interior (closure (interior A)) := by\n    simpa [hIntEq] using hxCl\n  -- Step 3: monotonicity of `interior` gives the desired containment.\n  have hsubset :\n      interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_closure_interior_subset (A := A)\n  exact hsubset hxInt"
+  ],
+  "success": true
+}

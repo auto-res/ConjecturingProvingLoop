@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.50399541854858
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9558,
+      "prompt_tokens": 35198,
+      "total_tokens": 44756,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_nonempty_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → (A : Set X).Nonempty →\n      (interior (closure (interior (A : Set X)))).Nonempty := by\n  intro hP2 hA\n  rcases hA with ⟨x, hxA⟩\n  have hx : x ∈ interior (closure (interior (A : Set X))) := hP2 hxA\n  exact ⟨x, hx⟩"
+  ],
+  "success": true
+}

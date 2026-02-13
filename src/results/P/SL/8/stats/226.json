@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.28242516517639
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6142,
+      "prompt_tokens": 34147,
+      "total_tokens": 40289,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_diff_closed_imp_P1_P2_P3 {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) (hB : IsClosed B) :\n    Topology.P1 (A \\ B) ∧ Topology.P2 (A \\ B) ∧ Topology.P3 (A \\ B) := by\n  have hP1 : Topology.P1 (A \\ B) :=\n    isOpen_diff_closed_imp_P1 (X := X) (A := A) (B := B) hA hB\n  have hP2 : Topology.P2 (A \\ B) :=\n    isOpen_diff_closed_imp_P2 (X := X) (A := A) (B := B) hA hB\n  have hP3 : Topology.P3 (A \\ B) :=\n    isOpen_diff_closed_imp_P3 (X := X) (A := A) (B := B) hA hB\n  exact And.intro hP1 (And.intro hP2 hP3)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.5534303188324
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6632,
+      "prompt_tokens": 37286,
+      "total_tokens": 43918,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.nonempty_closure_interior_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure (interior A)).Nonempty ↔ (interior A).Nonempty := by\n  constructor\n  · intro hClNon\n    by_cases hInt : (interior A).Nonempty\n    · exact hInt\n    ·\n      exfalso\n      rcases hClNon with ⟨x, hx_cl⟩\n      -- If `interior A` is empty, its closure is also empty, contradicting `hx_cl`.\n      have hIntEmpty : interior A = (∅ : Set X) := by\n        apply Set.eq_empty_iff_forall_not_mem.2\n        intro y hy\n        have : (interior A).Nonempty := ⟨y, hy⟩\n        exact (hInt this).elim\n      have hFalse : x ∈ (∅ : Set X) := by\n        simpa [hIntEmpty, closure_empty] using hx_cl\n      cases hFalse\n  · intro hIntNon\n    rcases hIntNon with ⟨x, hx_int⟩\n    exact ⟨x, subset_closure hx_int⟩"
+  ],
+  "success": true
+}

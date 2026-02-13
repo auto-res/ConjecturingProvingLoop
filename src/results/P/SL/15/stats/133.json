@@ -1,0 +1,43 @@
+{
+  "times": [
+    34.134032249450684,
+    55.825629234313965
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2587,
+      "prompt_tokens": 26856,
+      "total_tokens": 29443,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    },
+    {
+      "completion_tokens": 4633,
+      "prompt_tokens": 26978,
+      "total_tokens": 31611,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior (closure A)) ⊆ closure A := by\n  have h_subset : interior (closure A) ⊆ closure A := interior_subset\n  exact closure_mono h_subset",
+    "theorem closure_interior_mono {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) :\n    closure (interior A) ⊆ closure (interior B) := by\n  exact closure_mono (interior_mono hAB)"
+  ],
+  "success": true
+}

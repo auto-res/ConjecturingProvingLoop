@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.282753705978394
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3504,
+      "prompt_tokens": 30781,
+      "total_tokens": 34285,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_interior_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) = (Set.univ : Set X) → Topology.P3 A := by\n  intro hIntEq\n  intro x hxA\n  -- `x` lies in `interior A` because `interior A = univ`.\n  have hxIntA : x ∈ interior (A : Set X) := by\n    have : x ∈ (Set.univ : Set X) := by\n      simp\n    simpa [hIntEq] using this\n  -- Monotonicity of `interior` for the inclusion `A ⊆ closure A`.\n  have hSubset :\n      (interior (A : Set X) : Set X) ⊆ interior (closure (A : Set X)) :=\n    interior_mono (subset_closure : (A : Set X) ⊆ closure A)\n  exact hSubset hxIntA"
+  ],
+  "success": true
+}

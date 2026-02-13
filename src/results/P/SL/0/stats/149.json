@@ -1,0 +1,60 @@
+{
+  "times": [
+    52.14759922027588,
+    66.35254263877869,
+    146.62046360969543
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4505,
+      "prompt_tokens": 24779,
+      "total_tokens": 29284,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    },
+    {
+      "completion_tokens": 4784,
+      "prompt_tokens": 24911,
+      "total_tokens": 29695,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    },
+    {
+      "completion_tokens": 8766,
+      "prompt_tokens": 24992,
+      "total_tokens": 33758,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_closure_of_P2 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P2 A →\n      closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  intro hP2\n  -- First inclusion: `closure A ⊆ closure (interior (closure A))`.\n  have h₁ : closure (A : Set X) ⊆\n      closure (interior (closure (A : Set X))) := by\n    have hSub : (A : Set X) ⊆ interior (closure (A : Set X)) :=\n      Topology.P2_implies_subset_interior_closure (X := X) (A := A) hP2\n    exact closure_mono hSub\n  -- Second inclusion: `closure (interior (closure A)) ⊆ closure A`.\n  have h₂ :\n      closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) :=\n    Topology.closure_interior_closure_subset_closure (X := X) (A := A)\n  exact subset_antisymm h₁ h₂",
+    "theorem closure_interior_closure_eq_closure_of_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P3 A →\n      closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  intro hP3\n  -- First inclusion: `closure A ⊆ closure (interior (closure A))`.\n  have h₁ : closure (A : Set X) ⊆\n      closure (interior (closure (A : Set X))) := by\n    have hSub : (A : Set X) ⊆ interior (closure (A : Set X)) := hP3\n    exact closure_mono hSub\n  -- Second inclusion: `closure (interior (closure A)) ⊆ closure A`.\n  have h₂ : closure (interior (closure (A : Set X))) ⊆\n      closure (A : Set X) := by\n    -- Since `interior (closure A) ⊆ closure A`, taking closures yields the claim.\n    have : (interior (closure (A : Set X)) : Set X) ⊆ closure (A : Set X) :=\n      interior_subset\n    exact closure_mono this\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem closure_inter_subset_inter_closures {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure ((A ∩ B) : Set X) ⊆ closure (A : Set X) ∩ closure (B : Set X) := by\n  intro x hx\n  -- `A ∩ B` is contained in `A`, so the closure relation is preserved.\n  have hSubA : (A ∩ B : Set X) ⊆ (A : Set X) := by\n    intro y hy\n    exact hy.1\n  have hxA : x ∈ closure (A : Set X) := (closure_mono hSubA) hx\n  -- Symmetrically for `B`.\n  have hSubB : (A ∩ B : Set X) ⊆ (B : Set X) := by\n    intro y hy\n    exact hy.2\n  have hxB : x ∈ closure (B : Set X) := (closure_mono hSubB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

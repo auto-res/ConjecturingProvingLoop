@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.51139998435974
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5742,
+      "prompt_tokens": 21374,
+      "total_tokens": 27116,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_mono {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) :\n    closure (interior (closure A)) ⊆ closure (interior (closure B)) := by\n  -- First, use monotonicity of `closure`.\n  have h₁ : closure A ⊆ closure B := closure_mono hAB\n  -- Next, apply monotonicity of `interior`.\n  have h₂ : interior (closure A) ⊆ interior (closure B) :=\n    interior_mono h₁\n  -- Finally, apply `closure` once more.\n  exact closure_mono h₂"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    130.9724521636963
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7538,
+      "prompt_tokens": 29926,
+      "total_tokens": 37464,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_sInter_subset\n    {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    closure (interior (⋂₀ 𝒜 : Set X)) ⊆\n      ⋂₀ ((fun S : Set X => closure (interior S)) '' 𝒜) := by\n  intro x hx\n  -- To show `x` lies in the big intersection, we prove it belongs to each\n  -- member of the image of `𝒜` under `closure ∘ interior`.\n  apply Set.mem_sInter.2\n  intro S hS\n  -- Destructure `hS` to obtain the originating set `T ∈ 𝒜` with `S = closure (interior T)`.\n  rcases hS with ⟨T, hT𝒜, rfl⟩\n  -- We have to prove `x ∈ closure (interior T)`.\n  -- First, note `⋂₀ 𝒜 ⊆ T`.\n  have h_incl : (⋂₀ 𝒜 : Set X) ⊆ T := by\n    intro y hy\n    exact (Set.mem_sInter.1 hy) T hT𝒜\n  -- Hence `interior (⋂₀ 𝒜) ⊆ interior T` by monotonicity of `interior`.\n  have h_int : interior (⋂₀ 𝒜 : Set X) ⊆ interior T :=\n    interior_mono h_incl\n  -- Taking closures preserves inclusions, yielding the desired containment.\n  have h_closure : closure (interior (⋂₀ 𝒜 : Set X)) ⊆ closure (interior T) :=\n    closure_mono h_int\n  -- Apply this inclusion to `x`.\n  exact h_closure hx"
+  ],
+  "success": true
+}

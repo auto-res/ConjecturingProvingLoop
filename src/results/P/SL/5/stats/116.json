@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.31604337692261
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5938,
+      "prompt_tokens": 18697,
+      "total_tokens": 24635,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_four {X : Type*} [TopologicalSpace X] {A B C D : Set X}\n    (hA : Topology.P2 (X := X) A) (hB : Topology.P2 (X := X) B)\n    (hC : Topology.P2 (X := X) C) (hD : Topology.P2 (X := X) D) :\n    Topology.P2 (X := X) (A ∪ B ∪ C ∪ D) := by\n  -- First, combine the properties for `A`, `B`, and `C`.\n  have hABC : Topology.P2 (X := X) (A ∪ B ∪ C) :=\n    Topology.P2_union_three (X := X) (A := A) (B := B) (C := C) hA hB hC\n  -- Then, combine the result with `D`.\n  have hABCD : Topology.P2 (X := X) ((A ∪ B ∪ C) ∪ D) :=\n    Topology.P2_union (X := X) (A := A ∪ B ∪ C) (B := D) hABC hD\n  -- Re-associate the unions to match the desired shape.\n  simpa [Set.union_assoc] using hABCD"
+  ],
+  "success": true
+}

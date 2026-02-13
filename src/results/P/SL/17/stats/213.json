@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.96514678001404
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3642,
+      "prompt_tokens": 37565,
+      "total_tokens": 41207,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_of_clopen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hClosed : IsClosed A) (hOpen : IsOpen A) :\n    frontier A = (∅ : Set X) := by\n  -- `frontier A = closure A \\ interior A`; rewrite using the clopen hypotheses.\n  simpa [frontier, hClosed.closure_eq, hOpen.interior_eq, Set.diff_self]"
+  ],
+  "success": true
+}

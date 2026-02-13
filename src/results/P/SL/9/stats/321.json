@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.990060567855835
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3319,
+      "prompt_tokens": 56921,
+      "total_tokens": 60240,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_dense_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_closed : IsClosed A) (h_dense : Dense (A : Set X)) :\n    A = (Set.univ : Set X) := by\n  -- For closed sets, the closure is the set itself.\n  have h_closure_self : closure (A : Set X) = A := h_closed.closure_eq\n  -- For dense sets, the closure is the whole space.\n  have h_closure_univ : closure (A : Set X) = (Set.univ : Set X) := h_dense.closure_eq\n  -- Combine the two equalities.\n  simpa [h_closure_self] using h_closure_univ"
+  ],
+  "success": true
+}

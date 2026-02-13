@@ -1,0 +1,26 @@
+{
+  "times": [
+    125.30921936035156
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7872,
+      "prompt_tokens": 35611,
+      "total_tokens": 43483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closureInterior_union_frontier {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure A = closure (interior A) ∪ frontier A := by\n  ext x\n  constructor\n  · intro hx\n    by_cases hInt : x ∈ interior A\n    · -- `x` is an interior point of `A`\n      have hx' : x ∈ closure (interior A) := subset_closure hInt\n      exact Or.inl hx'\n    · -- `x` is not an interior point of `A`, hence it lies in the frontier\n      have hFront : x ∈ frontier A := by\n        -- `frontier A = closure A \\ interior A`\n        have : x ∈ closure A ∧ x ∉ interior A := And.intro hx hInt\n        simpa [frontier, Set.diff_eq] using this\n      exact Or.inr hFront\n  · intro h\n    cases h with\n    | inl hClInt =>\n        -- `closure (interior A)` is contained in `closure A`\n        have hSub : closure (interior A) ⊆ closure A :=\n          closure_interior_subset_closure (A := A)\n        exact hSub hClInt\n    | inr hFront =>\n        -- Points of the frontier belong to `closure A`\n        exact hFront.1"
+  ],
+  "success": true
+}

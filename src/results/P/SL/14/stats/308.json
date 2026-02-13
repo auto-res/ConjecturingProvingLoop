@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.49237108230591
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3555,
+      "prompt_tokens": 58050,
+      "total_tokens": 61605,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56192
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) → Topology.P3 A := by\n  intro hDense\n  -- The closure of a dense set is the whole space, hence open.\n  have hOpenClosure : IsOpen (closure (A : Set X)) :=\n    Topology.isOpen_closure_of_dense (X := X) (A := A) hDense\n  -- An open closure implies `P3` for the original set.\n  exact\n    Topology.P3_of_isOpen_closure (X := X) (A := A) hOpenClosure"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.08847832679749
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5227,
+      "prompt_tokens": 27476,
+      "total_tokens": 32703,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_implies_eq_empty_of_empty_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → interior A = ∅ → A = (∅ : Set X) := by\n  intro hP1 hIntEq\n  -- First, deduce `A ⊆ ∅` from `P1 A` and the hypothesis on the interior.\n  have hSub : (A : Set X) ⊆ (∅ : Set X) := by\n    intro x hxA\n    have : (x : X) ∈ closure (interior A) := hP1 hxA\n    simpa [hIntEq, closure_empty] using this\n  -- The reverse inclusion is trivial.\n  have hSub' : (∅ : Set X) ⊆ (A : Set X) := by\n    intro x hx\n    cases hx\n  exact Set.Subset.antisymm hSub hSub'"
+  ],
+  "success": true
+}

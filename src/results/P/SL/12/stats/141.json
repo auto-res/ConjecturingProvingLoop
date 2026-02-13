@@ -1,0 +1,26 @@
+{
+  "times": [
+    87.93010902404785
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7043,
+      "prompt_tokens": 26606,
+      "total_tokens": 33649,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_P2_P3_of_isClosed_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_closed : IsClosed (A : Set X)) (h_open : IsOpen (A : Set X)) :\n    Topology.P1 (X := X) A ∧ Topology.P2 (X := X) A ∧ Topology.P3 (X := X) A := by\n  -- `P1` follows from the combination of closedness and openness of `A`.\n  have hP1 : Topology.P1 (X := X) A :=\n    Topology.P1_of_isClosed_isOpen (X := X) (A := A) h_closed h_open\n  -- `P2` holds for any open set.\n  have hP2 : Topology.P2 (X := X) A :=\n    Topology.isOpen_P2 (X := X) (A := A) h_open\n  -- `P3` is equivalent to openness for closed sets, hence holds as well.\n  have hP3 : Topology.P3 (X := X) A := by\n    have h_equiv := Topology.P3_iff_isOpen_of_isClosed (X := X) (A := A) h_closed\n    exact (h_equiv.mpr h_open)\n  exact And.intro hP1 (And.intro hP2 hP3)"
+  ],
+  "success": true
+}

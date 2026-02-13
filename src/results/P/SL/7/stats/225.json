@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.307292461395264
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5497,
+      "prompt_tokens": 34729,
+      "total_tokens": 40226,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosureInterior_eq_univ_iff_closureInterior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) = (Set.univ : Set X) ↔\n      closure (interior A) = (Set.univ : Set X) := by\n  constructor\n  · intro h\n    -- `interior (closure (interior A))` is contained in `closure (interior A)`.\n    have hSub : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    -- Hence `univ ⊆ closure (interior A)`.\n    have hIncl : (Set.univ : Set X) ⊆ closure (interior A) := by\n      simpa [h] using hSub\n    -- The reverse inclusion is immediate.\n    exact Set.Subset.antisymm (Set.Subset_univ _) hIncl\n  · intro h\n    simpa [h, interior_univ]"
+  ],
+  "success": true
+}

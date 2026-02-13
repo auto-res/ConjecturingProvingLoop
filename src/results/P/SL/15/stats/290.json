@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.077311038970947
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2737,
+      "prompt_tokens": 62011,
+      "total_tokens": 64748,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_prod_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hAne : A.Nonempty) (hBne : B.Nonempty) :\n    Topology.P1 (closure A ×ˢ closure B) ↔\n      (Topology.P1 (closure A) ∧ Topology.P1 (closure B)) := by\n  -- The closures of non-empty sets are themselves non-empty.\n  have hAneCl : (closure (A : Set X)).Nonempty := by\n    rcases hAne with ⟨a, ha⟩\n    exact ⟨a, subset_closure ha⟩\n  have hBneCl : (closure (B : Set Y)).Nonempty := by\n    rcases hBne with ⟨b, hb⟩\n    exact ⟨b, subset_closure hb⟩\n  -- Use the existing equivalence for products and transport it to closures.\n  constructor\n  · intro hProd\n    exact\n      (Topology.P1_prod_implies_P1_left_and_right\n          (X := X) (Y := Y)\n          (A := closure A) (B := closure B)\n          hProd hAneCl hBneCl)\n  · rintro ⟨hPA, hPB⟩\n    exact\n      Topology.P1_prod\n        (X := X) (Y := Y)\n        (A := closure A) (B := closure B) hPA hPB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.8462438583374
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4558,
+      "prompt_tokens": 29341,
+      "total_tokens": 33899,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_subset_closures\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ interior B : Set X) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- `A ∩ interior B` is contained in `A`, hence its closure is contained in `closure A`.\n  have hA : closure (A ∩ interior B : Set X) ⊆ closure A :=\n    closure_mono (Set.inter_subset_left : (A ∩ interior B : Set X) ⊆ A)\n  -- Likewise, `A ∩ interior B` is contained in `B`, so its closure is contained in `closure B`.\n  have hB : closure (A ∩ interior B : Set X) ⊆ closure B := by\n    have hSub : (A ∩ interior B : Set X) ⊆ B := by\n      intro y hy\n      exact (interior_subset : interior B ⊆ B) hy.2\n    exact closure_mono hSub\n  exact ⟨hA hx, hB hx⟩"
+  ],
+  "success": true
+}

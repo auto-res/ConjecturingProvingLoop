@@ -1,0 +1,60 @@
+{
+  "times": [
+    183.2239592075348,
+    70.4548602104187,
+    85.22900652885437
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10813,
+      "prompt_tokens": 48613,
+      "total_tokens": 59426,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 3697,
+      "prompt_tokens": 48688,
+      "total_tokens": 52385,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 5860,
+      "prompt_tokens": 48815,
+      "total_tokens": 54675,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Dense A) : Topology.P3 A := by\n  -- From density we obtain `closure A = univ`.\n  have hEq : closure A = (Set.univ : Set X) := h.closure_eq\n  -- Invoke the existing lemma tailored to this equality.\n  exact Topology.P3_of_closure_eq_univ (A := A) hEq",
+    "```lean\nimport Mathlib\nimport Aesop\n\nnamespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\ndef P1 (A : Set X) : Prop :=\n  A ⊆ closure (interior A)\n\ndef P2 (A : Set X) : Prop :=\n  A ⊆ interior (closure (interior A))\n\ndef P3 (A : Set X) : Prop :=\n  A ⊆ interior (closure A)\n\n/--  A dense set satisfies `P3`.  -/\ntheorem P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Dense A) : Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro _x hx\n  -- Since `A` is dense, its closure is the whole space.\n  have : _x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hA.closure_eq, interior_univ] using this\n```",
+    "theorem Topology.dense_interior_closure_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Dense (interior (closure A)) := by\n  intro hDense\n  -- Since `A` is dense, its closure is the whole space.\n  have hClA : closure A = (Set.univ : Set X) := hDense.closure_eq\n  -- Hence the interior of that closure is also the whole space.\n  have hInt : interior (closure A) = (Set.univ : Set X) := by\n    simpa [hClA, interior_univ]\n  -- Taking closures preserves this equality.\n  have hClInt : closure (interior (closure A)) = (Set.univ : Set X) := by\n    simpa [hInt, closure_univ]\n  -- Conclude density from the closure equality.\n  exact (dense_iff_closure_eq).2 hClInt"
+  ],
+  "success": true
+}

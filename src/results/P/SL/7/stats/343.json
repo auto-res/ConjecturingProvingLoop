@@ -1,0 +1,26 @@
+{
+  "times": [
+    163.0794005393982
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8227,
+      "prompt_tokens": 54297,
+      "total_tokens": 62524,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_superset_of_subset_interiorClosureInterior\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hBsubset : B ⊆ interior (closure (interior A))) :\n    Topology.P3 B := by\n  dsimp [Topology.P3] at *\n  intro x hxB\n  have hxIntA : x ∈ interior (closure (interior A)) := hBsubset hxB\n  have hMono₁ :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior B)) :=\n    Topology.interiorClosureInterior_mono hAB\n  have hMono₂ :\n      interior (closure (interior B)) ⊆ interior (closure B) :=\n    Topology.interiorClosureInterior_subset_interiorClosure (A := B)\n  exact hMono₂ (hMono₁ hxIntA)"
+  ],
+  "success": true
+}

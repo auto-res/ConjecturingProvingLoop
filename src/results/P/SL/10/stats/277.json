@@ -1,0 +1,43 @@
+{
+  "times": [
+    158.43397045135498,
+    105.74602794647217
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8693,
+      "prompt_tokens": 45160,
+      "total_tokens": 53853,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    },
+    {
+      "completion_tokens": 5654,
+      "prompt_tokens": 45583,
+      "total_tokens": 51237,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_boundary_eq_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A \\ (closure A \\ interior A) = interior A := by\n  classical\n  have h_compl :\n      (closure A \\ interior A)ᶜ =\n        interior A ∪ (closure A)ᶜ := by\n    simpa using\n      Topology.compl_boundary_eq_union_interior_compl_closure\n        (X := X) (A := A)\n  calc\n    closure A \\ (closure A \\ interior A)\n        = closure A ∩ ((closure A \\ interior A)ᶜ) := by\n          simp [Set.diff_eq]\n    _ = closure A ∩ (interior A ∪ (closure A)ᶜ) := by\n          simp [h_compl]\n    _ = (closure A ∩ interior A) ∪ (closure A ∩ (closure A)ᶜ) := by\n          simp [Set.inter_distrib_left]\n    _ = interior A ∪ (closure A ∩ (closure A)ᶜ) := by\n          simp [Set.inter_comm]\n    _ = interior A ∪ (∅ : Set X) := by\n          simp [Set.inter_compl_self]\n    _ = interior A := by\n          simp",
+    "theorem Set.inter_distrib_left {α : Type*} {s t u : Set α} :\n    s ∩ (t ∪ u) = (s ∩ t) ∪ (s ∩ u) := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hx_s, hxtu⟩\n    cases hxtu with\n    | inl hx_t => exact Or.inl ⟨hx_s, hx_t⟩\n    | inr hx_u => exact Or.inr ⟨hx_s, hx_u⟩\n  · intro hx\n    cases hx with\n    | inl hst => exact ⟨hst.1, Or.inl hst.2⟩\n    | inr hsu => exact ⟨hsu.1, Or.inr hsu.2⟩"
+  ],
+  "success": true
+}

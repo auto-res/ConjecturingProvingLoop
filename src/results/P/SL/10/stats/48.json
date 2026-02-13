@@ -1,0 +1,77 @@
+{
+  "times": [
+    36.667325258255005,
+    197.25292921066284,
+    130.8020510673523,
+    27.379937171936035
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2292,
+      "prompt_tokens": 6984,
+      "total_tokens": 9276,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    },
+    {
+      "completion_tokens": 10824,
+      "prompt_tokens": 7106,
+      "total_tokens": 17930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    },
+    {
+      "completion_tokens": 6878,
+      "prompt_tokens": 7228,
+      "total_tokens": 14106,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    },
+    {
+      "completion_tokens": 2306,
+      "prompt_tokens": 7305,
+      "total_tokens": 9611,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply Set.Subset.antisymm\n  ·\n    -- `interior (closure (interior (closure A))) ⊆ interior (closure A)`\n    have h_closure : closure (interior (closure A)) ⊆ closure A := by\n      exact closure_mono (interior_subset : interior (closure A) ⊆ closure A)\n    exact interior_mono h_closure\n  ·\n    -- `interior (closure A) ⊆ interior (closure (interior (closure A)))`\n    have h_open : IsOpen (interior (closure A)) := isOpen_interior\n    have h_subset : interior (closure A) ⊆ closure (interior (closure A)) :=\n      subset_closure\n    exact interior_maximal h_subset h_open",
+    "theorem Topology.P3_implies_closure_interior_closure_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → closure (interior (closure A)) = closure A := by\n  intro hP3\n  apply Set.Subset.antisymm\n  ·\n    have h_subset : interior (closure A) ⊆ closure A := interior_subset\n    exact (closure_mono h_subset)\n  ·\n    exact (closure_mono hP3)",
+    "theorem Topology.closure_interior_inter_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (A ∩ B)) ⊆ closure (interior A) ∩ closure (interior B) := by\n  intro x hx\n  have h₁ : interior (A ∩ B) ⊆ interior A :=\n    interior_mono (Set.inter_subset_left : (A ∩ B) ⊆ A)\n  have h₂ : interior (A ∩ B) ⊆ interior B :=\n    interior_mono (Set.inter_subset_right : (A ∩ B) ⊆ B)\n  have hxA : x ∈ closure (interior A) := (closure_mono h₁) hx\n  have hxB : x ∈ closure (interior B) := (closure_mono h₂) hx\n  exact And.intro hxA hxB",
+    "theorem Topology.P3_nonempty_interior_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P3 A → A.Nonempty → (interior (closure A)).Nonempty := by\n  intro hP3 hA\n  rcases hA with ⟨x, hxA⟩\n  have hx_int : x ∈ interior (closure A) := hP3 hxA\n  exact ⟨x, hx_int⟩"
+  ],
+  "success": true
+}

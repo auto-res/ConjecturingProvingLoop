@@ -1,0 +1,26 @@
+{
+  "times": [
+    92.42791295051575
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6872,
+      "prompt_tokens": 9883,
+      "total_tokens": 16755,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9088
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P3 A := by\n  -- First, deduce that `closure A = Set.univ`.\n  have h_closureA : closure (A : Set X) = (Set.univ : Set X) := by\n    -- `closure (interior A)` is contained in `closure A`\n    have h_subset : closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n      closure_mono (interior_subset (s := A))\n    -- Hence, `Set.univ ⊆ closure A`\n    have : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      simpa [hA] using h_subset\n    -- Combine the two inclusions to obtain equality\n    exact Set.Subset.antisymm (Set.subset_univ _) this\n  -- Apply the existing result for dense sets\n  simpa using Topology.P3_of_dense (A := A) h_closureA"
+  ],
+  "success": true
+}

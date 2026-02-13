@@ -1,0 +1,43 @@
+{
+  "times": [
+    77.03086805343628,
+    68.15803742408752
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5345,
+      "prompt_tokens": 43353,
+      "total_tokens": 48698,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 4395,
+      "prompt_tokens": 43459,
+      "total_tokens": 47854,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_frontier_eq_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A \\ frontier A = interior A := by\n  apply subset_antisymm\n  · -- `closure A \\ frontier A ⊆ interior A`\n    intro x hx\n    rcases hx with ⟨hx_cl, hx_notFront⟩\n    by_cases hx_int : x ∈ interior A\n    · exact hx_int\n    · -- If `x ∉ interior A` but `x ∈ closure A`, then `x` lies in the frontier,\n      -- contradicting `hx_notFront`.\n      have hFront : x ∈ frontier A := by\n        have : x ∈ closure A \\ interior A := And.intro hx_cl hx_int\n        simpa [frontier_eq_closure_diff_interior] using this\n      exact (hx_notFront hFront).elim\n  · -- `interior A ⊆ closure A \\ frontier A`\n    intro x hx_int\n    have hx_cl : x ∈ closure A := subset_closure (interior_subset hx_int)\n    -- Points of `interior A` do not belong to the frontier.\n    have hx_notFront : x ∉ frontier A := by\n      have hSub : frontier (A : Set X) ⊆ (interior A)ᶜ :=\n        frontier_subset_compl_interior (A := A)\n      intro hFront\n      exact (hSub hFront) hx_int\n    exact And.intro hx_cl hx_notFront",
+    "theorem frontier_diff_subset_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A \\ B) ⊆ frontier A ∪ frontier B := by\n  -- First rewrite the difference as an intersection and apply the existing lemma\n  have h :\n      frontier (A \\ B) ⊆ frontier A ∪ frontier (Bᶜ) := by\n    simpa [Set.diff_eq] using\n      (frontier_inter_subset (A := A) (B := Bᶜ))\n  -- Replace `frontier (Bᶜ)` with `frontier B`\n  simpa [frontier_compl_eq_frontier (A := B)] using h"
+  ],
+  "success": true
+}

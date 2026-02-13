@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.80157828330994
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4262,
+      "prompt_tokens": 28835,
+      "total_tokens": 33097,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_eq_closure_inter_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∩ B : Set X)) =\n      closure (interior (A : Set X) ∩ interior B) := by\n  apply le_antisymm\n  ·\n    exact\n      Topology.closure_interior_inter_subset_closure_interiors\n        (X := X) (A := A) (B := B)\n  ·\n    exact\n      Topology.closure_inter_interior_subset_closure_interior_inter\n        (X := X) (A := A) (B := B)"
+  ],
+  "success": true
+}

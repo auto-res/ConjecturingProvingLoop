@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.7776415348053
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2126,
+      "prompt_tokens": 39563,
+      "total_tokens": 41689,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_subset_right {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure ((A ∩ B) : Set X) ⊆ closure (B : Set X) := by\n  -- Since `A ∩ B ⊆ B`, monotonicity of `closure` yields the desired inclusion.\n  have h_subset : ((A ∩ B) : Set X) ⊆ (B : Set X) := by\n    intro x hx\n    exact hx.2\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

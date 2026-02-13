@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.1811363697052
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4094,
+      "prompt_tokens": 9178,
+      "total_tokens": 13272,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iUnion {ι X : Type*} [TopologicalSpace X] {A : ι → Set X}\n    (hP : ∀ i, Topology.P2 (X := X) (A i)) :\n    Topology.P2 (X := X) (⋃ i, A i) := by\n  classical\n  dsimp [Topology.P2] at hP ⊢\n  intro x hxUnion\n  rcases Set.mem_iUnion.1 hxUnion with ⟨i, hxAi⟩\n  have hxInt : x ∈ interior (closure (interior (A i))) := hP i hxAi\n  -- Step 1:  interior (A i) ⊆ interior (⋃ j, A j)\n  have h_int_subset : interior (A i) ⊆ interior (⋃ j, A j) := by\n    have h_sub : interior (A i) ⊆ ⋃ j, A j := by\n      intro y hy\n      have hyAi : y ∈ A i := interior_subset hy\n      exact Set.mem_iUnion.2 ⟨i, hyAi⟩\n    exact interior_maximal h_sub isOpen_interior\n  -- Step 2:  closure (interior (A i)) ⊆ closure (interior (⋃ j, A j))\n  have h_closure_subset :\n      closure (interior (A i)) ⊆ closure (interior (⋃ j, A j)) :=\n    closure_mono h_int_subset\n  -- Step 3:  interior (closure (interior (A i))) ⊆ interior (closure (interior (⋃ j, A j)))\n  have h_int_subset' :\n      interior (closure (interior (A i))) ⊆\n        interior (closure (interior (⋃ j, A j))) :=\n    interior_mono h_closure_subset\n  exact h_int_subset' hxInt"
+  ],
+  "success": true
+}

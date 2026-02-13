@@ -1,0 +1,6 @@
+
+
+theorem Topology.P2_closure_interior_iff_isOpen_closure_interior {X : Type*}
+    [TopologicalSpace X] {A : Set X} :
+    Topology.P2 (closure (interior A)) ↔ IsOpen (closure (interior A)) := by
+  simpa using (Topology.P2_closure_iff_isOpen_closure (A := interior A))

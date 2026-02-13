@@ -1,0 +1,43 @@
+{
+  "times": [
+    33.261462926864624,
+    37.936551570892334
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2910,
+      "prompt_tokens": 50781,
+      "total_tokens": 53691,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 2444,
+      "prompt_tokens": 50976,
+      "total_tokens": 53420,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_interior_of_frontier_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) → closure A = interior A := by\n  classical\n  intro hFrontier\n  -- `frontier A = closure A \\ interior A`, rewrite using the hypothesis.\n  have hDiff : closure A \\ interior A = (∅ : Set X) := by\n    simpa [frontier] using hFrontier\n  -- Prove each inclusion separately.\n  apply Set.Subset.antisymm\n  · intro x hxCl\n    by_cases hxInt : x ∈ interior A\n    · exact hxInt\n    ·\n      -- If `x ∉ interior A`, then `x ∈ closure A \\ interior A = ∅`, contradiction.\n      have hxDiff : x ∈ closure A \\ interior A := ⟨hxCl, hxInt⟩\n      have : x ∈ (∅ : Set X) := by\n        simpa [hDiff] using hxDiff\n      exact False.elim (by\n        have : False := by\n          simpa using this\n        exact this)\n  ·\n    exact interior_subset",
+    "theorem Topology.interior_closure_subset_closure_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) :\n    interior (closure A) ⊆ closure (interior A) := by\n  intro x hx\n  -- First, note that `x ∈ closure A` because `interior (closure A) ⊆ closure A`.\n  have hx_closureA : x ∈ closure A := interior_subset hx\n  -- Under `P1`, the two closures coincide.\n  have h_eq : closure (interior A) = closure A :=\n    Topology.closure_interior_eq_closure_of_P1 (A := A) hP1\n  -- Rewrite to obtain the desired membership.\n  simpa [h_eq] using hx_closureA"
+  ],
+  "success": true
+}

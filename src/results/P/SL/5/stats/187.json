@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.7695107460022
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7113,
+      "prompt_tokens": 32121,
+      "total_tokens": 39234,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A \\ B : Set X) ⊆ closure A \\ interior B := by\n  intro x hx\n  -- `x` lies in `closure A` because `A \\ B ⊆ A`.\n  have hx_clA : x ∈ closure (A : Set X) := by\n    have hsubset : (A \\ B : Set X) ⊆ A := by\n      intro y hy\n      exact hy.1\n    exact (closure_mono hsubset) hx\n  -- Show `x ∉ interior B`; otherwise reach a contradiction.\n  have hx_not_intB : x ∉ interior B := by\n    intro hx_intB\n    -- Use the neighbourhood characterization of the closure.\n    have hmem := (mem_closure_iff).1 hx\n    have hNon : ((interior B : Set X) ∩ (A \\ B : Set X)).Nonempty :=\n      hmem (interior B) isOpen_interior hx_intB\n    rcases hNon with ⟨y, ⟨hy_intB, hy_A_diff_B⟩⟩\n    have hy_in_B : y ∈ B := interior_subset hy_intB\n    exact hy_A_diff_B.2 hy_in_B\n  exact ⟨hx_clA, hx_not_intB⟩"
+  ],
+  "success": true
+}

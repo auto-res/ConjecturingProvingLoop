@@ -1,0 +1,26 @@
+{
+  "times": [
+    183.60499954223633
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10285,
+      "prompt_tokens": 51431,
+      "total_tokens": 61716,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosureInterior_union_three_subset\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    interior (closure (interior A)) ∪\n        interior (closure (interior B)) ∪\n        interior (closure (interior C)) ⊆\n      interior (closure (interior (A ∪ B ∪ C))) := by\n  intro x hx\n  -- Split the membership in the three‐fold union\n  cases hx with\n  | inl hAB =>\n      cases hAB with\n      | inl hA =>\n          -- Handle the case `x ∈ interior (closure (interior A))`\n          have hSub :\n              interior (closure (interior A)) ⊆\n                interior (closure (interior (A ∪ B ∪ C))) := by\n            apply interior_mono\n            apply closure_mono\n            apply interior_mono\n            intro y hy\n            -- `y ∈ A` is certainly in `A ∪ B ∪ C`\n            exact Or.inl (Or.inl hy)\n          exact hSub hA\n      | inr hB =>\n          -- Handle the case `x ∈ interior (closure (interior B))`\n          have hSub :\n              interior (closure (interior B)) ⊆\n                interior (closure (interior (A ∪ B ∪ C))) := by\n            apply interior_mono\n            apply closure_mono\n            apply interior_mono\n            intro y hy\n            -- `y ∈ B` embeds into the union\n            exact Or.inl (Or.inr hy)\n          exact hSub hB\n  | inr hC =>\n      -- Handle the case `x ∈ interior (closure (interior C))`\n      have hSub :\n          interior (closure (interior C)) ⊆\n            interior (closure (interior (A ∪ B ∪ C))) := by\n        apply interior_mono\n        apply closure_mono\n        apply interior_mono\n        intro y hy\n        -- `y ∈ C` embeds into the union\n        exact Or.inr hy\n      exact hSub hC"
+  ],
+  "success": true
+}

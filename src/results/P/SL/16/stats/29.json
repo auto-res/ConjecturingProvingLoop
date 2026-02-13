@@ -1,0 +1,43 @@
+{
+  "times": [
+    72.78342080116272,
+    62.70942234992981
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6190,
+      "prompt_tokens": 5034,
+      "total_tokens": 11224,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    },
+    {
+      "completion_tokens": 4365,
+      "prompt_tokens": 5104,
+      "total_tokens": 9469,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B : Set X)) = closure (interior A) ∪ closure (interior B) := by\n  have h : interior (A ∪ B : Set X) = interior A ∪ interior B := by\n    simpa using interior_union\n  calc\n    closure (interior (A ∪ B : Set X))\n        = closure (interior A ∪ interior B) := by\n          simpa [h]\n    _ = closure (interior A) ∪ closure (interior B) := by\n          simpa using closure_union",
+    "theorem Topology.closed_P3_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hP3 : Topology.P3 (X := X) A) :\n    Topology.P1 (X := X) A := by\n  have hOpen : IsOpen A :=\n    Topology.closed_P3_isOpen (X := X) (A := A) hClosed hP3\n  exact Topology.isOpen_implies_P1 (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

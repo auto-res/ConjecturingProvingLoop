@@ -1,0 +1,26 @@
+{
+  "times": [
+    21.595715761184692
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1588,
+      "prompt_tokens": 18507,
+      "total_tokens": 20095,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_P2_P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : closure (interior A : Set X) = Set.univ) :\n    Topology.P1 (X := X) A ∧ Topology.P2 (X := X) A ∧ Topology.P3 (X := X) A := by\n  have hP1 : Topology.P1 (X := X) A :=\n    Topology.P1_of_dense_interior (X := X) (A := A) hA\n  have hP2 : Topology.P2 (X := X) A :=\n    Topology.P2_of_dense_interior (X := X) (A := A) hA\n  have hP3 : Topology.P3 (X := X) A :=\n    Topology.P3_of_dense_interior (X := X) (A := A) hA\n  exact And.intro hP1 (And.intro hP2 hP3)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.36839580535889
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4169,
+      "prompt_tokens": 16516,
+      "total_tokens": 20685,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_open_left {X : Type*} [TopologicalSpace X]\n    {U A : Set X} (hU : IsOpen U) :\n    Topology.P3 A → Topology.P3 (U ∩ A) := by\n  intro hP3\n  dsimp [Topology.P3] at hP3 ⊢\n  intro x hxUA\n  rcases hxUA with ⟨hxU, hxA⟩\n  have hxInt : x ∈ interior (closure A) := hP3 hxA\n  -- Define an open neighbourhood of `x` that we will eventually place inside\n  -- `closure (U ∩ A)`.\n  have hV_open : IsOpen (interior (closure A) ∩ U) :=\n    isOpen_interior.inter hU\n  have hxV : x ∈ interior (closure A) ∩ U := ⟨hxInt, hxU⟩\n  -- Show that this neighbourhood is actually contained in `closure (U ∩ A)`.\n  have hV_subset : (interior (closure A) ∩ U) ⊆ closure (U ∩ A) := by\n    intro y hy\n    have hyInt : y ∈ interior (closure A) := hy.1\n    have hyU  : y ∈ U := hy.2\n    have hyClA : y ∈ closure A := interior_subset hyInt\n    -- Use the neighbourhood characterization of the closure.\n    have : y ∈ closure (U ∩ A) := by\n      apply (mem_closure_iff).2\n      intro V hVopen hyV\n      have hVU_open : IsOpen (V ∩ U) := hVopen.inter hU\n      have hyVU : y ∈ V ∩ U := ⟨hyV, hyU⟩\n      have h_nonempty : (V ∩ U ∩ A).Nonempty :=\n        (mem_closure_iff).1 hyClA (V ∩ U) hVU_open hyVU\n      simpa [Set.inter_assoc, Set.inter_left_comm] using h_nonempty\n    exact this\n  -- Conclude that `x` lies in the desired interior.\n  exact\n    (interior_maximal hV_subset hV_open) hxV"
+  ],
+  "success": true
+}

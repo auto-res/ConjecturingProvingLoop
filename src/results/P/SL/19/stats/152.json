@@ -1,0 +1,43 @@
+{
+  "times": [
+    120.39328074455261,
+    43.68315839767456
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8916,
+      "prompt_tokens": 22619,
+      "total_tokens": 31535,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    },
+    {
+      "completion_tokens": 3296,
+      "prompt_tokens": 22766,
+      "total_tokens": 26062,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_iterate_succ {X : Type*} [TopologicalSpace X]\n    {A : Set X} (n : ℕ) :\n    (Nat.iterate (fun s : Set X => interior (closure s)) (n.succ)) A =\n      interior (closure A) := by\n  induction n with\n  | zero =>\n      simp [Nat.iterate]\n  | succ n ih =>\n      simp [Nat.iterate, ih,\n        Topology.interior_closure_interior_closure_eq_interior_closure\n          (X := X) (A := A)]",
+    "theorem Topology.interior_inter_eq_of_isOpen {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    interior (A ∩ B) = A ∩ B := by\n  simpa using (hA.inter hB).interior_eq"
+  ],
+  "success": true
+}

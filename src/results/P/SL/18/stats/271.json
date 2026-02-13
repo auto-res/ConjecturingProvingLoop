@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.518749952316284
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3491,
+      "prompt_tokens": 42623,
+      "total_tokens": 46114,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_complement_of_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    Topology.P1 (Aᶜ) ∧ Topology.P2 (Aᶜ) ∧ Topology.P3 (Aᶜ) := by\n  -- The complement of a closed set is open.\n  have hOpen : IsOpen (Aᶜ : Set X) := hA_closed.isOpen_compl\n  -- Apply the combined property for open sets.\n  simpa using Topology.P123_of_open (A := Aᶜ) hOpen"
+  ],
+  "success": true
+}

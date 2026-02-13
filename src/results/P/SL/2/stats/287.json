@@ -1,0 +1,43 @@
+{
+  "times": [
+    125.86478090286255,
+    132.12162494659424
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5627,
+      "prompt_tokens": 48840,
+      "total_tokens": 54467,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    },
+    {
+      "completion_tokens": 7959,
+      "prompt_tokens": 48946,
+      "total_tokens": 56905,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closure_eq_empty_iff_isOpen_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    frontier (closure (A : Set X)) = (∅ : Set X) ↔ IsOpen (closure (A : Set X)) := by\n  constructor\n  · intro hFrontier\n    -- We will show `interior (closure A) = closure A`, which is equivalent to openness.\n    have hIntEq : interior (closure (A : Set X)) = closure (A : Set X) := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      · intro x hxCl\n        by_cases hInt : x ∈ interior (closure (A : Set X))\n        · exact hInt\n        ·\n          -- `x` would belong to the frontier, contradicting `frontier = ∅`.\n          have hFront : x ∈ frontier (closure (A : Set X)) := by\n            dsimp [frontier] at *\n            exact And.intro hxCl hInt\n          have : x ∈ (∅ : Set X) := by\n            simpa [hFrontier] using hFront\n          exact False.elim this\n    -- Openness follows from `interior` coinciding with the set itself.\n    simpa [hIntEq] using (isOpen_iff_interior_eq (A := closure (A : Set X))).mpr hIntEq\n  · intro hOpen\n    -- An open set has empty frontier.\n    exact\n      Topology.isOpen_closure_implies_frontier_closure_eq_empty\n        (A := A) hOpen",
+    "theorem Topology.isClosed_P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed A → Topology.P2 A → Topology.P1 A := by\n  intro hClosed hP2\n  -- From the assumptions we first obtain that `A` is open.\n  have hOpen : IsOpen A :=\n    Topology.isClosed_P2_implies_isOpen (A := A) hClosed hP2\n  -- Every open set satisfies `P1`.\n  exact Topology.isOpen_implies_P1 (A := A) hOpen"
+  ],
+  "success": true
+}

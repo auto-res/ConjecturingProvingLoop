@@ -1,0 +1,60 @@
+{
+  "times": [
+    116.24304366111755,
+    88.92283463478088,
+    82.65621042251587
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7827,
+      "prompt_tokens": 17555,
+      "total_tokens": 25382,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 6832,
+      "prompt_tokens": 17667,
+      "total_tokens": 24499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 6982,
+      "prompt_tokens": 17746,
+      "total_tokens": 24728,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_of_open_closureInterior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (interior A))) : Topology.P2 A := by\n  dsimp [Topology.P2]\n  intro x hxA\n  have hx_closure : x ∈ closure (interior A) := subset_closure hxA\n  have hIntEq : interior (closure (interior A)) = closure (interior A) :=\n    hOpen.interior_eq\n  simpa [hIntEq] using hx_closure",
+    "import Mathlib\nimport Aesop\n\ntheorem Topology.interior_closure_univ {X : Type*} [TopologicalSpace X] :\n    interior (closure (Set.univ : Set X)) = (Set.univ : Set X) := by\n  -- The closure of `univ` is `univ`, and the interior of `univ` is `univ`.\n  simp [closure_univ, interior_univ]",
+    "theorem Topology.P1_empty {X : Type*} [TopologicalSpace X] :\n    Topology.P1 (∅ : Set X) := by\n  exact (Topology.P1_P2_P3_empty (X := X)).1"
+  ],
+  "success": true
+}

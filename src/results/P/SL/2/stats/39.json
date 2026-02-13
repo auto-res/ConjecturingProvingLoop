@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.508541107177734
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3146,
+      "prompt_tokens": 5698,
+      "total_tokens": 8844,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iUnion {X : Type*} [TopologicalSpace X] {ι : Type*} {s : ι → Set X} :\n    (∀ i, Topology.P3 (s i)) → Topology.P3 (⋃ i, s i) := by\n  intro hP3\n  intro x hxUnion\n  rcases Set.mem_iUnion.1 hxUnion with ⟨i, hx_i⟩\n  have hx_int : x ∈ interior (closure (s i)) := (hP3 i) hx_i\n  have hsubset : interior (closure (s i)) ⊆ interior (closure (⋃ j, s j)) := by\n    have hcl : closure (s i) ⊆ closure (⋃ j, s j) := by\n      have hSub : (s i : Set X) ⊆ ⋃ j, s j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact closure_mono hSub\n    exact interior_mono hcl\n  exact hsubset hx_int"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    139.07943725585938,
+    38.303298234939575
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8564,
+      "prompt_tokens": 40086,
+      "total_tokens": 48650,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    },
+    {
+      "completion_tokens": 2254,
+      "prompt_tokens": 40197,
+      "total_tokens": 42451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_iff_interior_closure_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A ↔ interior (closure A) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    exact interior_closure_eq_univ_of_dense (A := A) hDense\n  · intro hInt\n    -- From the given equality derive `closure A = univ`.\n    have hClosure : (closure A : Set X) = Set.univ :=\n      ((interior_closure_eq_univ_iff (A := A)).1) hInt\n    -- Unfolding the definition of `Dense` concludes the proof.\n    simpa [Dense] using hClosure",
+    "theorem frontier_closure_eq_frontier_of_closed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsClosed A) :\n    frontier (closure A) = frontier A := by\n  simpa [hA.closure_eq]"
+  ],
+  "success": true
+}

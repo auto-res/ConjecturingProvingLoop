@@ -1,0 +1,26 @@
+{
+  "times": [
+    83.85977411270142
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5824,
+      "prompt_tokens": 16658,
+      "total_tokens": 22482,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_implies_interior_closure_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense (A : Set X) →\n      interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  intro hDense\n  have h_cl : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  simpa [h_cl, interior_univ]"
+  ],
+  "success": true
+}

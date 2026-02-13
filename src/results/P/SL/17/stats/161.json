@@ -1,0 +1,26 @@
+{
+  "times": [
+    105.5338716506958
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8832,
+      "prompt_tokens": 25774,
+      "total_tokens": 34606,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_inter_isOpen_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hOpenA : IsOpen A) (hP1B : Topology.P1 B) :\n    Topology.P1 (A ∩ B) := by\n  unfold Topology.P1 at *\n  intro x hx\n  rcases hx with ⟨hxA, hxB⟩\n  -- `x` is in the closure of `interior B` by `P1` for `B`\n  have h_clB : x ∈ closure (interior B) := hP1B hxB\n  -- We prove `x ∈ closure (interior (A ∩ B))` using `mem_closure_iff`\n  have : x ∈ closure (interior (A ∩ B)) := by\n    apply (mem_closure_iff).2\n    intro U hU_open hxU\n    -- Consider the open set `U ∩ A` that still contains `x`\n    have hV_open : IsOpen (U ∩ A) := hU_open.inter hOpenA\n    have hxV : x ∈ U ∩ A := ⟨hxU, hxA⟩\n    -- Since `x ∈ closure (interior B)`, `U ∩ A` meets `interior B`\n    have h_nonempty :=\n      (mem_closure_iff).1 h_clB (U ∩ A) hV_open hxV\n    rcases h_nonempty with ⟨y, ⟨hyU, hyA⟩, hyIntB⟩\n    -- Show `y ∈ interior (A ∩ B)`\n    have hyIntAB : y ∈ interior (A ∩ B) := by\n      -- The open set `A ∩ interior B` contains `y` and is included in `A ∩ B`\n      have h_open : IsOpen (A ∩ interior B) := hOpenA.inter isOpen_interior\n      have h_subset : (A ∩ interior B) ⊆ A ∩ B := by\n        intro z hz; exact ⟨hz.1, interior_subset hz.2⟩\n      have hy_in : y ∈ A ∩ interior B := ⟨hyA, hyIntB⟩\n      exact (interior_maximal h_subset h_open) hy_in\n    exact ⟨y, ⟨hyU, hyIntAB⟩⟩\n  exact this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    87.86988687515259
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5821,
+      "prompt_tokens": 47750,
+      "total_tokens": 53571,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.image_subset_closure_image_interior_of_P1\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}\n    (hf : Continuous f) {A : Set X} (hA : Topology.P1 (X := X) A) :\n    f '' (A : Set X) ⊆ closure (f '' interior A) := by\n  intro y hy\n  rcases hy with ⟨x, hxA, rfl⟩\n  -- From `P1`, `x` lies in the closure of `interior A`.\n  have hx_cl : (x : X) ∈ closure (interior A) := hA hxA\n  -- Hence `f x` lies in `f '' closure (interior A)`.\n  have hy_image : f x ∈ f '' closure (interior A) := ⟨x, hx_cl, rfl⟩\n  -- Use continuity of `f` to pass from the image of a closure\n  -- to the closure of an image.\n  have h_subset : f '' closure (interior A) ⊆ closure (f '' interior A) :=\n    image_closure_subset_closure_image (X := X) (Y := Y)\n      (f := f) hf (A := interior A)\n  exact h_subset hy_image"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.545175075531006
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2818,
+      "prompt_tokens": 57161,
+      "total_tokens": 59979,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56192
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_interior_compl_eq_univ\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) ∪ interior ((A : Set X)ᶜ) = (Set.univ : Set X) := by\n  classical\n  -- Rewrite `interior (Aᶜ)` as the complement of `closure A`.\n  have h : interior ((A : Set X)ᶜ) = (closure (A : Set X))ᶜ :=\n    interior_compl_eq_compl_closure (X := X) (A := A)\n  -- Use this equality and the fact that a set union its complement is `univ`.\n  calc\n    closure (A : Set X) ∪ interior ((A : Set X)ᶜ)\n        = closure (A : Set X) ∪ (closure (A : Set X))ᶜ := by\n          simpa [h]\n    _ = (Set.univ : Set X) := by\n          simpa using Set.union_compl_self (closure (A : Set X))"
+  ],
+  "success": true
+}

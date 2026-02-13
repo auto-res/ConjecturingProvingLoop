@@ -1,0 +1,26 @@
+{
+  "times": [
+    124.23934745788574
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8418,
+      "prompt_tokens": 36752,
+      "total_tokens": 45170,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_P2_implies_frontier_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    IsClosed A → Topology.P2 A → frontier (A : Set X) = (∅ : Set X) := by\n  intro hClosed hP2\n  -- From the premises, `A` is both closed and open.\n  have hOpen : IsOpen (A : Set X) :=\n    Topology.isClosed_P2_implies_isOpen (A := A) hClosed hP2\n  -- Hence `closure A = A` and `interior A = A`.\n  have hCl : closure (A : Set X) = A := hClosed.closure_eq\n  have hInt : interior (A : Set X) = A := hOpen.interior_eq\n  -- Unfold `frontier` and simplify.\n  ext x\n  simp [frontier, hCl, hInt]"
+  ],
+  "success": true
+}

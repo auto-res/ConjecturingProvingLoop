@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.70700812339783
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5085,
+      "prompt_tokens": 28110,
+      "total_tokens": 33195,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27520
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_isOpen_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hOpenA : IsOpen A) (hP3B : Topology.P3 B) :\n    Topology.P3 (A ∩ B) := by\n  -- Expand the definition of `P3`.\n  unfold Topology.P3 at *\n  intro x hxAB\n  rcases hxAB with ⟨hxA, hxB⟩\n  -- From `P3` for `B`, we get that `x` lies in the interior of `closure B`.\n  have hxIntB : x ∈ interior (closure B) := hP3B hxB\n  -- The point `x` lies in the open set `A ∩ interior (closure B)`.\n  have hxS : x ∈ A ∩ interior (closure B) := And.intro hxA hxIntB\n  -- We will show that this open set is contained in `closure (A ∩ B)`.\n  have h_subset : (A ∩ interior (closure B)) ⊆ closure (A ∩ B) := by\n    intro y hy\n    rcases hy with ⟨hyA, hyIntB⟩\n    -- `y` belongs to `closure B`.\n    have hyClB : y ∈ closure B := interior_subset hyIntB\n    -- Prove that `y` is in `closure (A ∩ B)` using the neighbourhood\n    -- characterization of the closure.\n    have : y ∈ closure (A ∩ B) := by\n      apply (mem_closure_iff).2\n      intro U hU_open hyU\n      -- Refine the neighbourhood to stay inside `A`, which is open.\n      have hUA_open : IsOpen (U ∩ A) := hU_open.inter hOpenA\n      have hyUA : y ∈ U ∩ A := ⟨hyU, hyA⟩\n      -- Because `y ∈ closure B`, the set `(U ∩ A)` meets `B`.\n      have h_nonempty : ((U ∩ A) ∩ B).Nonempty := by\n        have h := (mem_closure_iff).1 hyClB (U ∩ A) hUA_open hyUA\n        simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm] using h\n      -- Extract a witness in the required intersection.\n      rcases h_nonempty with ⟨z, ⟨⟨hzU, hzA⟩, hzB⟩⟩\n      exact ⟨z, And.intro hzU (And.intro hzA hzB)⟩\n    exact this\n  -- The set `A ∩ interior (closure B)` is open.\n  have h_open : IsOpen (A ∩ interior (closure B)) :=\n    hOpenA.inter isOpen_interior\n  -- Use `interior_maximal` to deduce an inclusion into the interior.\n  have h_interior :\n      (A ∩ interior (closure B)) ⊆ interior (closure (A ∩ B)) :=\n    interior_maximal h_subset h_open\n  -- Conclude for the original point `x`.\n  exact h_interior hxS"
+  ],
+  "success": true
+}

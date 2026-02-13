@@ -1,0 +1,26 @@
+{
+  "times": [
+    196.52455067634583
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12980,
+      "prompt_tokens": 14614,
+      "total_tokens": 27594,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_interiors_eq_union_closure_interiors\n    {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    closure ((interior (A : Set X)) ∪ interior B) =\n      closure (interior A) ∪ closure (interior B) := by\n  -- We prove the equality by showing mutual inclusion.\n  apply Set.Subset.antisymm\n  · -- First, `closure (U ∪ V)` is contained in `closure U ∪ closure V`.\n    have h_subset :\n        (interior (A : Set X) ∪ interior B) ⊆\n          closure (interior A) ∪ closure (interior B) := by\n      intro x hx\n      cases hx with\n      | inl hA =>\n          exact Or.inl (subset_closure hA)\n      | inr hB =>\n          exact Or.inr (subset_closure hB)\n    have h_closed :\n        IsClosed (closure (interior A) ∪ closure (interior B)) := by\n      exact (isClosed_closure).union isClosed_closure\n    exact closure_minimal h_subset h_closed\n  · -- Conversely, each of the two closures lies inside `closure (U ∪ V)`.\n    intro x hx\n    cases hx with\n    | inl hA =>\n        have h_sub :\n            closure (interior A) ⊆\n              closure ((interior (A : Set X)) ∪ interior B) := by\n          apply closure_mono\n          intro y hy\n          exact Or.inl hy\n        exact h_sub hA\n    | inr hB =>\n        have h_sub :\n            closure (interior B) ⊆\n              closure ((interior (A : Set X)) ∪ interior B) := by\n          apply closure_mono\n          intro y hy\n          exact Or.inr hy\n        exact h_sub hB"
+  ],
+  "success": true
+}

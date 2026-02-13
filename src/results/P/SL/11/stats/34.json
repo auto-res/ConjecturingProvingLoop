@@ -1,0 +1,43 @@
+{
+  "times": [
+    39.97504639625549,
+    117.86231136322021
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3071,
+      "prompt_tokens": 4436,
+      "total_tokens": 7507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    },
+    {
+      "completion_tokens": 6985,
+      "prompt_tokens": 4542,
+      "total_tokens": 11527,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_open_of_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) : Topology.P3 A ↔ IsOpen A := by\n  dsimp [Topology.P3]\n  have hclosure : closure A = A := hA.closure_eq\n  constructor\n  · intro hP3\n    have hsubs : (A : Set X) ⊆ interior A := by\n      simpa [hclosure] using hP3\n    have hEq : (A : Set X) = interior A := subset_antisymm hsubs interior_subset\n    simpa [hEq] using isOpen_interior\n  · intro hOpen\n    exact Topology.P3_of_open (A := A) hOpen",
+    "theorem P2_interior_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P2 (interior A) := by\n  intro hP2\n  dsimp [Topology.P2] at hP2 ⊢\n  intro x hx\n  -- `hx` gives `x ∈ interior A`, hence `x ∈ A`\n  have hxA : x ∈ A := (interior_subset : interior A ⊆ A) hx\n  -- Use `hP2` to send `x` into the larger interior\n  have hxTarget : x ∈ interior (closure (interior A)) := hP2 hxA\n  -- Rewrite the goal using `interior_interior`\n  simpa [interior_interior] using hxTarget"
+  ],
+  "success": true
+}

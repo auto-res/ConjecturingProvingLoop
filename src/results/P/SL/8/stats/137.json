@@ -1,0 +1,43 @@
+{
+  "times": [
+    119.21063613891602,
+    58.62445306777954
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8784,
+      "prompt_tokens": 19324,
+      "total_tokens": 28108,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 4714,
+      "prompt_tokens": 19493,
+      "total_tokens": 24207,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_union_eq_closureInteriorUnion\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) =\n      closure (interior A) ∪ closure (interior B) := by\n  calc\n    closure (interior (A ∪ B))\n        = closure (interior A ∪ interior B) := by\n          simpa [interior_union]\n    _ = closure (interior A) ∪ closure (interior B) := by\n          simpa [closure_union]",
+    "theorem closureInterior_union_eq_union_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    closure (interior (A ∪ B)) = closure A ∪ closure B := by\n  -- `interior` of an open set is itself.\n  have h_int : interior (A ∪ B) = A ∪ B := by\n    have h_open : IsOpen (A ∪ B) := hA.union hB\n    simpa using h_open.interior_eq\n  -- Rewrite and use the distributivity of `closure` over unions.\n  calc\n    closure (interior (A ∪ B)) = closure (A ∪ B) := by\n      simpa [h_int]\n    _ = closure A ∪ closure B := by\n      simpa using\n        (closure_union : closure (A ∪ B) = closure A ∪ closure B)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    132.03079319000244
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7307,
+      "prompt_tokens": 36440,
+      "total_tokens": 43747,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iff_forall_open_nbhd_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A ↔\n      ∀ x : X, x ∈ (A : Set X) →\n        ∃ U : Set X, IsOpen U ∧ x ∈ U ∧ U ⊆ closure (A : Set X) := by\n  constructor\n  · intro hP3 x hxA\n    -- Choose the canonical open neighbourhood `interior (closure A)`.\n    have hx_int : x ∈ interior (closure (A : Set X)) := hP3 hxA\n    exact\n      ⟨interior (closure (A : Set X)), isOpen_interior, hx_int, interior_subset⟩\n  · intro h\n    intro x hxA\n    -- Extract an open neighbourhood of `x` contained in `closure A`.\n    rcases h x hxA with ⟨U, hOpenU, hxU, hU_sub⟩\n    -- This witnesses that `x` is in the interior of `closure A`.\n    have : (∃ V : Set X, V ⊆ closure (A : Set X) ∧ IsOpen V ∧ x ∈ V) :=\n      ⟨U, hU_sub, hOpenU, hxU⟩\n    simpa [mem_interior] using this"
+  ],
+  "success": true
+}

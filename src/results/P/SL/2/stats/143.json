@@ -1,0 +1,60 @@
+{
+  "times": [
+    57.40266013145447,
+    70.09360527992249,
+    63.328863859176636
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4828,
+      "prompt_tokens": 22397,
+      "total_tokens": 27225,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 5100,
+      "prompt_tokens": 22558,
+      "total_tokens": 27658,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    },
+    {
+      "completion_tokens": 6869,
+      "prompt_tokens": 22678,
+      "total_tokens": 29547,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_closure_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense (A : Set X) ↔ interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    exact Topology.dense_implies_interior_closure_eq_univ (A := A) hDense\n  · intro hIntEq\n    -- First, show that `univ ⊆ closure A`.\n    have hSub : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      have hIntSub : interior (closure (A : Set X)) ⊆ closure (A : Set X) :=\n        interior_subset\n      simpa [hIntEq] using hIntSub\n    -- Now deduce `closure A = univ`.\n    have hClosureEq : closure (A : Set X) = (Set.univ : Set X) := by\n      apply subset_antisymm\n      · exact subset_univ _\n      · exact hSub\n    -- Conclude `Dense A`.\n    simpa [Dense] using hClosureEq",
+    "theorem Topology.closure_interior_union_eq_union_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior ((A ∪ B) : Set X)) =\n      closure (interior (A : Set X)) ∪ closure (interior (B : Set X)) := by\n  simpa [interior_union, closure_union]",
+    "theorem Topology.dense_iff_interior_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    exact\n      (Topology.dense_implies_interior_closure_eq_univ (A := A)) hDense\n  · intro hIntEq\n    -- First, show `closure A = univ`.\n    have hSub : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      intro x hx\n      have hxInt : x ∈ interior (closure (A : Set X)) := by\n        simpa [hIntEq] using hx\n      exact interior_subset hxInt\n    have hClosureEq : closure (A : Set X) = (Set.univ : Set X) := by\n      apply subset_antisymm\n      · intro x hx; simp\n      · exact hSub\n    -- Conclude density from the closure equality.\n    simpa [Dense, hClosureEq] using hClosureEq"
+  ],
+  "success": true
+}

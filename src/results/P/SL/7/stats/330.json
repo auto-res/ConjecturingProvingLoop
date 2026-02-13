@@ -1,0 +1,43 @@
+{
+  "times": [
+    88.56319785118103,
+    164.75954127311707
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5436,
+      "prompt_tokens": 52283,
+      "total_tokens": 57719,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 10386,
+      "prompt_tokens": 52395,
+      "total_tokens": 62781,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_open_closureInterior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (interior A))) : Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x hxA\n  -- Any point of `A` is in `closure (interior A)`.\n  have hx_cl : x ∈ closure (interior A) := subset_closure hxA\n  -- Since this closure is open, its interior is itself.\n  have hx_int : x ∈ interior (closure (interior A)) := by\n    have hEq : interior (closure (interior A)) = closure (interior A) :=\n      hOpen.interior_eq\n    simpa [hEq] using hx_cl\n  -- Use the established inclusion to land in `interior (closure A)`.\n  have hIncl : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interiorClosureInterior_subset_interiorClosure (A := A)\n  exact hIncl hx_int",
+    ""
+  ],
+  "success": true
+}

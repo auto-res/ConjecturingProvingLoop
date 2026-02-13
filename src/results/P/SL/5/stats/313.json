@@ -1,0 +1,26 @@
+{
+  "times": [
+    126.25414752960205
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11587,
+      "prompt_tokens": 63914,
+      "total_tokens": 75501,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 63232
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_interior_closure_diff_closure_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    IsOpen (interior (closure (A : Set X)) \\ closure (interior A)) := by\n  -- `interior (closure A)` is open, while `closure (interior A)` is closed,\n  -- so their set‐difference is open.\n  have h :\n      IsOpen (interior (closure (A : Set X)) \\ closure (interior A)) :=\n    IsOpen.diff\n      (X := X)\n      (A := interior (closure (A : Set X)))\n      (B := closure (interior A))\n      isOpen_interior\n      (isClosed_closure : IsClosed (closure (interior A)))\n  simpa using h"
+  ],
+  "success": true
+}

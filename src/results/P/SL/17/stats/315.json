@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.632148027420044
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3209,
+      "prompt_tokens": 54221,
+      "total_tokens": 57430,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_frontier_eq_closure_inter_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (frontier A) = closure A ∩ closure (Aᶜ) := by\n  -- First, `frontier A` is closed, hence its closure is itself.\n  have h₁ : closure (frontier A) = frontier A :=\n    Topology.closure_frontier_eq_frontier (A := A)\n  -- Next, express `frontier A` as the intersection of the two closures.\n  have h₂ : frontier A = closure A ∩ closure (Aᶜ) :=\n    Topology.frontier_eq_closure_inter_closure_compl (A := A)\n  -- Combine the two equalities.\n  simpa [h₂] using h₁"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    108.05705666542053,
+    191.6067087650299,
+    247.9955472946167
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5155,
+      "prompt_tokens": 52741,
+      "total_tokens": 57896,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    },
+    {
+      "completion_tokens": 11877,
+      "prompt_tokens": 52860,
+      "total_tokens": 64737,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    },
+    {
+      "completion_tokens": 12152,
+      "prompt_tokens": 52932,
+      "total_tokens": 65084,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_compl_iff_P3_compl_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    Topology.P2 (Aᶜ) ↔ Topology.P3 (Aᶜ) := by\n  -- The complement of an open set is closed.\n  have hClosed : IsClosed (Aᶜ) := (isOpen_compl_iff).1 hA\n  -- Apply the equivalence for closed sets.\n  simpa using (Topology.P2_iff_P3_of_isClosed (A := Aᶜ) hClosed)",
+    "theorem Topology.isClosed_compl_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    IsClosed (Aᶜ) := by\n  -- View `A` as the double complement of itself so that we can\n  -- directly apply `isOpen_compl_iff`.\n  have hOpenDoubleCompl : IsOpen ((Aᶜ)ᶜ) := by\n    simpa [Set.compl_compl] using hA\n  -- Now obtain the desired closedness from the equivalence.\n  simpa using (isOpen_compl_iff.mp hOpenDoubleCompl)",
+    "theorem Set.compl_compl {α : Type*} (s : Set α) : sᶜᶜ = s := by\n  ext x\n  simp"
+  ],
+  "success": true
+}

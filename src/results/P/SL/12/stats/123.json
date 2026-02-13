@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.36745047569275
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5643,
+      "prompt_tokens": 23866,
+      "total_tokens": 29509,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iInter_subset_iInter_interior\n    {X ι : Type*} [TopologicalSpace X] (A : ι → Set X) :\n    interior (⋂ i, A i : Set X) ⊆ ⋂ i, interior (A i) := by\n  intro x hx\n  -- Show that `x` belongs to each `interior (A i)`.\n  have hx_each : ∀ i, x ∈ interior (A i) := by\n    intro i\n    -- Since `⋂ i, A i ⊆ A i`, monotonicity of `interior` yields the result.\n    have h_subset : (⋂ j, A j : Set X) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    have h_int : interior (⋂ j, A j : Set X) ⊆ interior (A i) :=\n      interior_mono h_subset\n    exact h_int hx\n  -- Combine the pointwise facts into a membership of the intersection.\n  exact (Set.mem_iInter.2 hx_each)"
+  ],
+  "success": true
+}

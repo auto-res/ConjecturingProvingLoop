@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.285940408706665
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2047,
+      "prompt_tokens": 37972,
+      "total_tokens": 40019,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_subset_closureInteriorClosure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ closure (interior (closure A)) := by\n  intro x hx\n  -- First, move from `interior A` to `interior (closure A)`.\n  have hx₁ : x ∈ interior (closure A) :=\n    (interior_subset_interiorClosure (X := X) (A := A)) hx\n  -- Then, use the fact that any set is contained in the closure of itself.\n  have hx₂ : x ∈ closure (interior (closure A)) :=\n    (subset_closure : interior (closure A) ⊆\n      closure (interior (closure A))) hx₁\n  exact hx₂"
+  ],
+  "success": true
+}

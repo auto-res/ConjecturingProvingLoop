@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.43718934059143
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6102,
+      "prompt_tokens": 2921,
+      "total_tokens": 9023,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : Topology.P1 (X := X) B) :\n    Topology.P1 (X := X) (A ∪ B) := by\n  -- Unfold the definition of `P1`\n  dsimp [Topology.P1] at hA hB ⊢\n  intro x hx\n  -- Deal with the two cases coming from the union\n  cases hx with\n  | inl hxA =>\n      -- From `P1` for `A`\n      have hx_cl : x ∈ closure (interior A) := hA hxA\n      -- `closure (interior A)` is contained in `closure (interior (A ∪ B))`\n      have h_sub : closure (interior A : Set X) ⊆ closure (interior (A ∪ B)) := by\n        have h_int : (interior A : Set X) ⊆ interior (A ∪ B) := by\n          have : (A : Set X) ⊆ A ∪ B := Set.subset_union_left\n          exact interior_mono this\n        exact closure_mono h_int\n      exact h_sub hx_cl\n  | inr hxB =>\n      -- From `P1` for `B`\n      have hx_cl : x ∈ closure (interior B) := hB hxB\n      -- `closure (interior B)` is contained in `closure (interior (A ∪ B))`\n      have h_sub : closure (interior B : Set X) ⊆ closure (interior (A ∪ B)) := by\n        have h_int : (interior B : Set X) ⊆ interior (A ∪ B) := by\n          have : (B : Set X) ⊆ A ∪ B := Set.subset_union_right\n          exact interior_mono this\n        exact closure_mono h_int\n      exact h_sub hx_cl"
+  ],
+  "success": true
+}

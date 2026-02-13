@@ -1,0 +1,26 @@
+{
+  "times": [
+    154.65497422218323
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8465,
+      "prompt_tokens": 57141,
+      "total_tokens": 65606,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8064,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56192
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interior_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) ∩ interior B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hx_clA, hx_intB⟩\n  -- We prove `x ∈ closure (A ∩ B)` using the neighborhood characterization.\n  have : (x : X) ∈ closure (A ∩ B) := by\n    refine (mem_closure_iff).2 ?_\n    intro U hU hxU\n    -- The open set `U ∩ interior B` is an open neighbourhood of `x`.\n    have hU' : IsOpen (U ∩ interior B) := IsOpen.inter hU isOpen_interior\n    have hxU' : (x : X) ∈ U ∩ interior B := ⟨hxU, hx_intB⟩\n    -- Since `x ∈ closure A`, this neighbourhood meets `A`.\n    have hNonempty : ((U ∩ interior B) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hx_clA (U ∩ interior B) hU' hxU'\n    rcases hNonempty with ⟨y, ⟨hyU, hy_intB⟩, hyA⟩\n    -- The point `y` lies in `B` because it lies in `interior B`.\n    have hyB : (y : X) ∈ B := interior_subset hy_intB\n    exact ⟨y, hyU, ⟨hyA, hyB⟩⟩\n  exact this"
+  ],
+  "success": true
+}

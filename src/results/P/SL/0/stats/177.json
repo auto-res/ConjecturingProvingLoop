@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.41127395629883
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5129,
+      "prompt_tokens": 29773,
+      "total_tokens": 34902,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_mono {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 A → (A : Set X) ⊆ B →\n      (A : Set X) ⊆ interior (closure (B : Set X)) := by\n  intro hP3 hAB\n  dsimp [Topology.P3] at hP3\n  intro x hxA\n  -- Via `P3`, `x` lies in `interior (closure A)`.\n  have hx_intA : x ∈ interior (closure (A : Set X)) := hP3 hxA\n  -- Since `A ⊆ B`, we have `closure A ⊆ closure B`.\n  have h_cl : closure (A : Set X) ⊆ closure (B : Set X) := closure_mono hAB\n  -- Applying monotonicity of `interior` to the previous inclusion.\n  have h_mono : interior (closure (A : Set X)) ⊆ interior (closure (B : Set X)) :=\n    interior_mono h_cl\n  exact h_mono hx_intA"
+  ],
+  "success": true
+}

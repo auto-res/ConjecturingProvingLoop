@@ -1,0 +1,43 @@
+{
+  "times": [
+    200.5124852657318,
+    119.9069356918335
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13932,
+      "prompt_tokens": 20615,
+      "total_tokens": 34547,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 9265,
+      "prompt_tokens": 20689,
+      "total_tokens": 29954,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure_iterate_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure A)))))))))) =\n      interior (closure A) := by\n  simpa [interior_closure_interior_closure_eq]",
+    "theorem isOpen_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P1 (closure A) := by\n  have hP1A : Topology.P1 A :=\n    Topology.isOpen_P1 (A := A) hA\n  exact Topology.P1_imp_P1_closure (A := A) hP1A"
+  ],
+  "success": true
+}

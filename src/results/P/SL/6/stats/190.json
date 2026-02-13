@@ -1,0 +1,43 @@
+{
+  "times": [
+    51.89766573905945,
+    79.70539116859436
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3703,
+      "prompt_tokens": 29362,
+      "total_tokens": 33065,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    },
+    {
+      "completion_tokens": 6288,
+      "prompt_tokens": 29474,
+      "total_tokens": 35762,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem open_closure_interior_implies_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (interior (A : Set X)))) :\n    Topology.P3 (A : Set X) := by\n  dsimp [Topology.P3]\n  intro x hxA\n  -- `x` lies in `closure (interior A)` by density of the closure.\n  have hx_cl : x ∈ closure (interior (A : Set X)) := subset_closure hxA\n  -- Since this closure is open, its interior equals itself.\n  have hIntEq :\n      interior (closure (interior (A : Set X))) =\n        closure (interior (A : Set X)) := hOpen.interior_eq\n  -- Reinterpret the membership using the equality.\n  have hx_int :\n      x ∈ interior (closure (interior (A : Set X))) := by\n    simpa [hIntEq] using hx_cl\n  -- Monotonicity of `interior` and `closure` yields the desired inclusion.\n  have hIncl :\n      interior (closure (interior (A : Set X))) ⊆\n        interior (closure (A : Set X)) :=\n    interior_closure_interior_subset_closure (A := A)\n  exact hIncl hx_int",
+    "theorem closure_interior_univ_eq_univ {X : Type*} [TopologicalSpace X] :\n    closure (interior (Set.univ : Set X)) = (Set.univ : Set X) := by\n  simpa [interior_univ, closure_univ]"
+  ],
+  "success": true
+}

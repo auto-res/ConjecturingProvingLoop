@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.3158540725708
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4985,
+      "prompt_tokens": 12439,
+      "total_tokens": 17424,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_open_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (A : Set X))) : Topology.P3 A := by\n  -- First, translate the openness of `closure A` into `P3 (closure A)`.\n  have hP3_closure : Topology.P3 (closure (A : Set X)) := by\n    have hEquiv := (Topology.P3_closure_iff_isOpen (A := A))\n    exact (hEquiv).2 hOpen\n  -- Then use `P3 (closure A)` to obtain `P3 A`.\n  exact Topology.P3_of_P3_closure (A := A) hP3_closure"
+  ],
+  "success": true
+}

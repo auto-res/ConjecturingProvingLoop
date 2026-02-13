@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.02821779251099
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6370,
+      "prompt_tokens": 48746,
+      "total_tokens": 55116,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_prod_closure_of_isOpen\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y}\n    (hA : IsOpen (closure A)) (hB : IsOpen (closure B)) :\n    Topology.P3 (closure A ×ˢ closure B) := by\n  -- Obtain `P3` for each factor from the openness of its closure\n  have hP3A : Topology.P3 (closure A) := by\n    have hEquiv := (Topology.P3_closure_iff_isOpen_closure (X := X) (A := A))\n    exact hEquiv.mpr hA\n  have hP3B : Topology.P3 (closure B) := by\n    have hEquiv := (Topology.P3_closure_iff_isOpen_closure (X := Y) (A := B))\n    exact hEquiv.mpr hB\n  -- Combine the two `P3` properties using the product rule\n  simpa using\n    (Topology.P3_prod\n      (X := X) (Y := Y)\n      (A := closure A) (B := closure B) hP3A hP3B)"
+  ],
+  "success": true
+}

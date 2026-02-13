@@ -1,0 +1,43 @@
+{
+  "times": [
+    61.03607702255249,
+    47.94072389602661
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4245,
+      "prompt_tokens": 3633,
+      "total_tokens": 7878,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    },
+    {
+      "completion_tokens": 3783,
+      "prompt_tokens": 3802,
+      "total_tokens": 7585,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  simpa [interior_union, closure_union]",
+    "theorem isOpen_union_P2 {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    Topology.P2 (A ∪ B) := by\n  -- The union of two open sets is open\n  have hOpen : IsOpen (A ∪ B) := hA.union hB\n  -- Apply the existing result for open sets\n  exact Topology.isOpen_P2 (A := A ∪ B) hOpen"
+  ],
+  "success": true
+}

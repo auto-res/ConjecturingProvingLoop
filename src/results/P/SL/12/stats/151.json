@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.74138379096985
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5458,
+      "prompt_tokens": 28650,
+      "total_tokens": 34108,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_univ_of_dense_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    closure (A : Set X) = (Set.univ : Set X) := by\n  -- `closure (interior A)` is always contained in `closure A`.\n  have h_subset : (closure (interior (A : Set X))) ⊆ closure A :=\n    closure_mono (interior_subset : (interior (A : Set X)) ⊆ A)\n  -- Hence, from the hypothesis, `univ ⊆ closure A`.\n  have h_univ_subset : (Set.univ : Set X) ⊆ closure A := by\n    simpa [hA] using h_subset\n  -- The reverse inclusion is immediate.\n  have h_closure_subset : closure (A : Set X) ⊆ (Set.univ : Set X) := by\n    intro x _; simp\n  -- Conclude the desired equality.\n  exact Set.Subset.antisymm h_closure_subset h_univ_subset"
+  ],
+  "success": true
+}

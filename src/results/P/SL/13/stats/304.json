@@ -1,0 +1,60 @@
+{
+  "times": [
+    149.5696883201599,
+    82.86448192596436,
+    22.364450216293335
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12907,
+      "prompt_tokens": 54303,
+      "total_tokens": 67210,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 6938,
+      "prompt_tokens": 54377,
+      "total_tokens": 61315,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 1121,
+      "prompt_tokens": 54492,
+      "total_tokens": 55613,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iterate_ten_eq_closure_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    closure (interior\n      (closure (interior\n        (closure (interior\n          (closure (interior\n            (closure (interior\n              (closure (interior\n                (closure (interior\n                  (closure (interior\n                    (closure (interior (A : Set X))))))))))))))) =\n      closure (interior A) := by\n  -- Collapse the innermost nine-layer expression to `closure (interior A)`.\n  have h :=\n    Topology.closure_interior_iterate_nine_eq_closure_interior (X := X) (A := A)\n  -- Rewrite and finish with the two-layer idempotency lemma.\n  simpa [h,\n        Topology.closure_interior_closure_interior_eq_closure_interior\n          (X := X) (A := A)]",
+    "theorem Topology.interior_union_boundary_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A : Set X) ∪ (closure (A : Set X) \\ interior A) =\n      closure (A : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    cases hx with\n    | inl h_int =>\n        -- Points from the interior are certainly in the closure.\n        exact interior_subset h_int\n    | inr h_bd =>\n        -- Boundary points come with the required membership in the closure.\n        exact h_bd.1\n  · intro hx_cl\n    -- Every point of the closure is either interior or boundary.\n    by_cases hx_int : (x : X) ∈ interior (A : Set X)\n    · exact Or.inl hx_int\n    · exact Or.inr ⟨hx_cl, hx_int⟩",
+    "theorem Topology.interior_inter_interior_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior ((A ∩ interior (B : Set X)) : Set X) = interior A ∩ interior B := by\n  -- `interior B` is an open set.\n  have h_open : IsOpen (interior (B : Set X)) := isOpen_interior\n  -- Apply the general lemma for the intersection with an open set.\n  simpa using\n    Topology.interior_inter_open_right\n      (X := X) (A := A) (B := interior (B : Set X)) h_open"
+  ],
+  "success": true
+}

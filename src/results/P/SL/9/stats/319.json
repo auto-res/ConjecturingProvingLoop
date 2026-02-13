@@ -1,0 +1,60 @@
+{
+  "times": [
+    35.327605962753296,
+    151.428542137146,
+    90.73708653450012
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2547,
+      "prompt_tokens": 56495,
+      "total_tokens": 59042,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    },
+    {
+      "completion_tokens": 6375,
+      "prompt_tokens": 56686,
+      "total_tokens": 63061,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    },
+    {
+      "completion_tokens": 3373,
+      "prompt_tokens": 56803,
+      "total_tokens": 60176,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_inter_frontier_eq_interiorClosure_diff_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (A : Set X)) ∩ frontier A =\n      interior (closure A) \\ interior A := by\n  classical\n  -- Express the frontier via closure and interior.\n  have h_front : frontier (A : Set X) = closure A \\ interior A :=\n    Topology.frontier_eq_closure_diff_interior (A := A)\n  -- Establish the desired set equality.\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hx_int_cl, hx_front⟩\n    -- Translate the frontier membership using `h_front`.\n    have : x ∈ closure A \\ interior A := by\n      simpa [h_front] using hx_front\n    exact ⟨hx_int_cl, this.2⟩\n  · intro hx\n    rcases hx with ⟨hx_int_cl, hx_not_intA⟩\n    -- From `x ∈ interior (closure A)` we obtain `x ∈ closure A`.\n    have hx_clA : x ∈ closure (A : Set X) := interior_subset hx_int_cl\n    -- Construct membership in the frontier using `h_front`.\n    have hx_front : x ∈ frontier (A : Set X) := by\n      have : x ∈ closure A \\ interior A := ⟨hx_clA, hx_not_intA⟩\n      simpa [h_front] using this\n    exact ⟨hx_int_cl, hx_front⟩",
+    "```lean\ntheorem interior_eq_empty_iff_subset_closure_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A : Set X) = (∅ : Set X) ↔ A ⊆ closure (Aᶜ) := by\n  classical\n  constructor\n  · intro hInt x hxA\n    -- We prove `x ∈ closure (Aᶜ)` by contradiction.\n    by_contra hNot\n    -- `hNot : x ∉ closure (Aᶜ)` implies `x ∈ interior A`,\n    -- thanks to `closure (Aᶜ) = (interior A)ᶜ`.\n    have hxInt : x ∈ interior A := by\n      have hEq : closure (Aᶜ : Set X) = (interior A)ᶜ :=\n        Topology.closure_compl_eq_compl_interior (A := A)\n      have : x ∈ (closure (Aᶜ : Set X))ᶜ := hNot\n      simpa [hEq] using this\n    -- But `interior A` is empty by hypothesis.\n    have : x ∈ (∅ : Set X) := by\n      simpa [hInt] using hxInt\n    exact this\n  · intro hSub\n    -- We show that no point belongs to `interior A`.\n    apply Set.eq_empty_iff_forall_not_mem.2\n    intro x hxInt\n    -- From `hxInt : x ∈ interior A`, obtain an open neighbourhood\n    -- `U` of `x` contained in `A`.\n    rcases (mem_interior).1 hxInt with ⟨U, hU_sub, hU_open, hxU⟩\n    have hxA : x ∈ (A : Set X) := interior_subset hxInt\n    -- By the assumed inclusion, `x ∈ closure (Aᶜ)`.\n    have hxCl : x ∈ closure (Aᶜ : Set X) := hSub hxA\n    -- However, `U` is an open neighbourhood of `x` disjoint from `Aᶜ`,\n    -- contradicting the definition of closure.\n    have : ((U : Set X) ∩ Aᶜ).Nonempty :=\n      (mem_closure_iff).1 hxCl U hU_open hxU\n    have hEmpty : U ∩ (Aᶜ : Set X) = ∅ := by\n      apply Set.eq_empty_iff_forall_not_mem.2\n      intro y hy\n      have : y ∈ A := hU_sub hy.1\n      exact hy.2 this\n    simpa [hEmpty] using this\n```",
+    "theorem interior_inter_left_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsOpen (B : Set X)) :\n    interior (A ∩ B) = interior A ∩ B := by\n  have h := Topology.interior_inter_eq_inter (A := A) (B := B)\n  simpa [hB.interior_eq] using h"
+  ],
+  "success": true
+}

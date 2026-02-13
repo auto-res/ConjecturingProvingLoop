@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.80646014213562
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1687,
+      "prompt_tokens": 17930,
+      "total_tokens": 19617,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_closure_of_open_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpenCl : IsOpen (closure (A : Set X))) :\n    Topology.P1 (closure A) ∧ Topology.P2 (closure A) ∧ Topology.P3 (closure A) := by\n  have hP1 : Topology.P1 (closure A) :=\n    Topology.P1_of_open_closure (A := A) hOpenCl\n  have hP2 : Topology.P2 (closure A) :=\n    Topology.P2_of_open_closure (A := A) hOpenCl\n  have hP3 : Topology.P3 (closure A) :=\n    (Topology.P3_closure_iff_open (A := A)).mpr hOpenCl\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.63266587257385
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2482,
+      "prompt_tokens": 14297,
+      "total_tokens": 16779,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_of_P2_and_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP2 : Topology.P2 A) (hClosed : IsClosed A) :\n    interior A = A := by\n  -- First, deduce `P3 A` from the given `P2 A`.\n  have hP3 : Topology.P3 A :=\n    Topology.P2_implies_P3 (X := X) (A := A) hP2\n  -- Apply the existing result for `P3` sets that are closed.\n  exact\n    Topology.interior_eq_of_P3_and_isClosed (X := X) (A := A) hP3 hClosed"
+  ],
+  "success": true
+}

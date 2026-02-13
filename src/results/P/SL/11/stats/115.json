@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.5833683013916
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2180,
+      "prompt_tokens": 17328,
+      "total_tokens": 19508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_inter_right_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 A) (hB_open : IsOpen B) :\n    Topology.P2 (A ∩ B) := by\n  -- Extract `P1` and `P3` for `A` from the given `P2` assumption.\n  have hP1A : Topology.P1 A := Topology.P2_implies_P1 (A := A) hA\n  have hP3A : Topology.P3 A := Topology.P2_implies_P3 (A := A) hA\n  -- Obtain `P1` and `P3` for the intersection using the existing lemmas.\n  have hP1 : Topology.P1 (A ∩ B) :=\n    Topology.P1_inter_right_open (A := A) (B := B) hP1A hB_open\n  have hP3 : Topology.P3 (A ∩ B) :=\n    Topology.P3_inter_right_open (A := A) (B := B) hP3A hB_open\n  -- Combine `P1` and `P3` to conclude `P2` for the intersection.\n  exact Topology.P2_of_P1_and_P3 (A := A ∩ B) ⟨hP1, hP3⟩"
+  ],
+  "success": true
+}

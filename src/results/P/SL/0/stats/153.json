@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.6999146938324
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5413,
+      "prompt_tokens": 25568,
+      "total_tokens": 30981,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_implies_closure_interior_eq_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A →\n      closure (interior (A : Set X)) =\n        closure (interior (closure (A : Set X))) := by\n  intro hP1\n  -- From `P1 A` we get `closure A = closure (interior A)`.\n  have hEq1 : closure (A : Set X) = closure (interior (A : Set X)) :=\n    (Topology.P1_iff_closure_eq_closure_interior (X := X) (A := A)).1 hP1\n  -- `P1` is preserved under taking closures.\n  have hP1_cl : Topology.P1 (closure (A : Set X)) :=\n    (Topology.P1_implies_P1_closure (X := X) (A := A)) hP1\n  -- Applying the same equivalence to `closure A`.\n  have hEq2 : closure (A : Set X) =\n      closure (interior (closure (A : Set X))) := by\n    have h :=\n      (Topology.P1_iff_closure_eq_closure_interior\n          (X := X) (A := closure (A : Set X))).1 hP1_cl\n    simpa [closure_closure] using h\n  -- Combine the two equalities.\n  have : closure (interior (A : Set X)) =\n      closure (interior (closure (A : Set X))) := by\n    calc\n      closure (interior (A : Set X)) = closure (A : Set X) := by\n        simpa using hEq1.symm\n      _ = closure (interior (closure (A : Set X))) := hEq2\n  simpa using this"
+  ],
+  "success": true
+}

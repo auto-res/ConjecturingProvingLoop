@@ -1,0 +1,26 @@
+{
+  "times": [
+    122.20297050476074
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6506,
+      "prompt_tokens": 45644,
+      "total_tokens": 52150,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_three_eq_self_of_open\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X))\n    (hC : IsOpen (C : Set X)) :\n    interior (A ∪ B ∪ C : Set X) = (A ∪ B ∪ C : Set X) := by\n  -- The triple union of open sets is open.\n  have hOpen : IsOpen ((A ∪ B ∪ C) : Set X) := (hA.union hB).union hC\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    295.2907817363739
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 22041,
+      "prompt_tokens": 34388,
+      "total_tokens": 56429,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 21824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_union_dense {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : closure (A : Set X) = (Set.univ : Set X))\n    (hB : closure (B : Set X) = (Set.univ : Set X)) :\n    Topology.P3 (A ∪ B) := by\n  -- First, observe that `A ∪ B` is dense.\n  have hDenseUnion : closure ((A ∪ B) : Set X) = (Set.univ : Set X) := by\n    have h := closure_union_eq_union_closure (A := A) (B := B)\n    simpa [hA, hB, Set.union_univ, Set.univ_union] using h\n  -- A dense set satisfies `P3`.\n  exact Topology.P3_of_dense (A := A ∪ B) hDenseUnion"
+  ],
+  "success": true
+}

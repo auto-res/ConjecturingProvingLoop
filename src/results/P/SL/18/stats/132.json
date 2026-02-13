@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.22242307662964
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3329,
+      "prompt_tokens": 18689,
+      "total_tokens": 22018,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (A : Set X))))) =\n      closure (interior (closure (A : Set X))) := by\n  -- From `interior_closure_interior_closure`, the two interiors coincide.\n  have h := Topology.interior_closure_interior_closure (A := A)\n  simpa [h]"
+  ],
+  "success": true
+}

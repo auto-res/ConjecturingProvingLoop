@@ -1,0 +1,60 @@
+{
+  "times": [
+    45.53220081329346,
+    59.16930103302002,
+    13.335461139678955
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2843,
+      "prompt_tokens": 50276,
+      "total_tokens": 53119,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 4040,
+      "prompt_tokens": 50382,
+      "total_tokens": 54422,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 789,
+      "prompt_tokens": 50456,
+      "total_tokens": 51245,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.disjoint_frontier_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Disjoint (frontier (A : Set X)) (interior A) := by\n  simpa [frontier] using\n    (Topology.disjoint_interior_boundary (A := A)).symm",
+    "theorem Set.compl_compl {α : Type*} (s : Set α) : (sᶜ)ᶜ = s := by\n  ext x\n  by_cases hx : x ∈ s <;> simp [hx]",
+    "theorem Topology.P3_of_interiorClosure_eq_self\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (closure A) = A) : Topology.P3 (A := A) := by\n  -- From the hypothesis we deduce that `A` is open.\n  have h_open : IsOpen A := by\n    simpa [h] using (isOpen_interior : IsOpen (interior (closure A)))\n  -- Any open set satisfies `P3`.\n  exact Topology.P3_of_isOpen (A := A) h_open"
+  ],
+  "success": true
+}

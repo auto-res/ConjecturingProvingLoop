@@ -1,0 +1,26 @@
+{
+  "times": [
+    20.62662672996521
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1908,
+      "prompt_tokens": 25471,
+      "total_tokens": 27379,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_empty_iff {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior A) = (∅ : Set X) ↔ interior A = (∅ : Set X) := by\n  constructor\n  · intro h\n    have hSub : interior A ⊆ (∅ : Set X) := by\n      have : interior A ⊆ closure (interior A) := subset_closure\n      simpa [h] using this\n    -- A set contained in `∅` is `∅`.\n    ext x\n    constructor\n    · intro hx\n      have : x ∈ (∅ : Set X) := hSub hx\n      simpa using this\n    · intro hx\n      cases hx\n  · intro h\n    calc\n      closure (interior A) = closure (∅ : Set X) := by\n        simpa [h]\n      _ = (∅ : Set X) := by\n        simp"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.55850553512573
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2868,
+      "prompt_tokens": 19343,
+      "total_tokens": 22211,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_subset_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    closure (interior A) ⊆ A := by\n  have h : closure (interior A) ⊆ closure A :=\n    Topology.closure_interior_subset_closure (A := A)\n  simpa [hA.closure_eq] using h"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.081204414367676
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1828,
+      "prompt_tokens": 52527,
+      "total_tokens": 54355,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_interior_subset_closure_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (interior A) ⊆ closure (frontier A) := by\n  intro x hx\n  -- First, move from the frontier of `interior A` to the frontier of `A`.\n  have hFrontA : x ∈ frontier A :=\n    (Topology.frontier_interior_subset_frontier (A := A)) hx\n  -- Then use the fact that every set is contained in the closure of itself.\n  exact (subset_closure : frontier A ⊆ closure (frontier A)) hFrontA"
+  ],
+  "success": true
+}

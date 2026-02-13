@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.07616949081421
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2648,
+      "prompt_tokens": 45990,
+      "total_tokens": 48638,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_three {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    Topology.P1 A → Topology.P1 B → Topology.P1 C → Topology.P1 (A ∪ B ∪ C) := by\n  intro hA hB hC\n  -- First, combine `A` and `B`.\n  have hAB : Topology.P1 (A ∪ B) := Topology.P1_union (A := A) (B := B) hA hB\n  -- Then, unite the result with `C`.\n  have hABC : Topology.P1 ((A ∪ B) ∪ C) :=\n    Topology.P1_union (A := A ∪ B) (B := C) hAB hC\n  -- Reassociate unions to match the desired form.\n  simpa [Set.union_assoc] using hABC"
+  ],
+  "success": true
+}

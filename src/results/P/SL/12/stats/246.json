@@ -1,0 +1,26 @@
+{
+  "times": [
+    119.38217258453369
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7686,
+      "prompt_tokens": 47220,
+      "total_tokens": 54906,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_univ_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  -- From the density of `interior A` we already know `closure A = univ`.\n  have h_closure_univ :\n      closure (A : Set X) = (Set.univ : Set X) :=\n    Topology.closure_eq_univ_of_dense_interior (X := X) (A := A) hA\n  -- Rewrite and simplify using `interior_univ`.\n  simpa [h_closure_univ, interior_univ]"
+  ],
+  "success": true
+}

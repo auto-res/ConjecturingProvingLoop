@@ -1,0 +1,43 @@
+{
+  "times": [
+    59.839348793029785,
+    110.16992378234863
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4032,
+      "prompt_tokens": 18469,
+      "total_tokens": 22501,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18304
+      }
+    },
+    {
+      "completion_tokens": 7944,
+      "prompt_tokens": 18539,
+      "total_tokens": 26483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18304
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_dense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P3 (X := X) A := by\n  dsimp [Topology.P3]\n  intro x hxA\n  -- First, show that `closure A = univ`.\n  have h_closureA : closure A = (Set.univ : Set X) := by\n    have h_univ_subset : (Set.univ : Set X) ⊆ closure A := by\n      have h : closure (interior A) ⊆ closure A :=\n        closure_mono (interior_subset : interior A ⊆ A)\n      simpa [h_dense] using h\n    exact Set.Subset.antisymm subset_univ h_univ_subset\n  -- Using this equality, conclude the desired membership.\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [h_closureA, interior_univ] using this",
+    "theorem Topology.P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_dense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P3 (X := X) A := by\n  -- First, show that `A` itself is dense, i.e. `closure A = univ`.\n  have h_closure_univ : closure A = (Set.univ : Set X) := by\n    -- `interior A ⊆ A`, so `closure (interior A) ⊆ closure A`.\n    have h_subset : closure (interior A) ⊆ closure A :=\n      closure_mono (interior_subset : interior A ⊆ A)\n    -- Hence every point of `univ` lies in `closure A`.\n    have h_univ_subset : (Set.univ : Set X) ⊆ closure A := by\n      intro x _\n      -- From `h_dense`, `x ∈ closure (interior A)`.\n      have hx : x ∈ closure (interior A) := by\n        simpa [h_dense] using (by\n          have : (x : X) ∈ (Set.univ : Set X) := by\n            simp\n          exact this)\n      exact h_subset hx\n    -- The reverse inclusion is trivial.\n    have h_closure_subset : closure A ⊆ (Set.univ : Set X) := by\n      intro x _\n      simp\n    exact subset_antisymm h_closure_subset h_univ_subset\n  -- Apply the existing lemma for dense sets.\n  exact Topology.P3_of_dense (X := X) (A := A) h_closure_univ"
+  ],
+  "success": true
+}

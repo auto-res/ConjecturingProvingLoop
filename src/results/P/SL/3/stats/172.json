@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.59150218963623
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8236,
+      "prompt_tokens": 26452,
+      "total_tokens": 34688,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_interior_union_closure_diff_interior {X : Type*}\n    [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) =\n      interior (A : Set X) ∪ (closure (A : Set X) \\ interior (A : Set X)) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    by_cases h_int : (x : X) ∈ interior (A : Set X)\n    · exact Or.inl h_int\n    · exact Or.inr ⟨hx, h_int⟩\n  · intro x hx\n    cases hx with\n    | inl h_int =>\n        -- `x` lies in `interior A`, hence in `A` and thus in `closure A`.\n        have hA : (x : X) ∈ (A : Set X) := interior_subset h_int\n        exact subset_closure hA\n    | inr h_cl =>\n        exact h_cl.1"
+  ],
+  "success": true
+}

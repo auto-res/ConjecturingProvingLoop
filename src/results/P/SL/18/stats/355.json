@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.09767484664917
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2985,
+      "prompt_tokens": 58077,
+      "total_tokens": 61062,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closed_iff_clopen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    Topology.P2 A ↔ IsClopen (A : Set X) := by\n  -- For a closed set, `P2` is equivalent to openness.\n  have hP2_open : Topology.P2 A ↔ IsOpen (A : Set X) :=\n    Topology.P2_closed_iff_open (A := A) hA_closed\n  -- Openness is equivalent to being clopen when closedness is already given.\n  have hOpen_clopen : IsOpen (A : Set X) ↔ IsClopen (A : Set X) := by\n    constructor\n    · intro hOpen\n      exact ⟨hA_closed, hOpen⟩\n    · intro hClopen\n      exact hClopen.2\n  exact hP2_open.trans hOpen_clopen"
+  ],
+  "success": true
+}

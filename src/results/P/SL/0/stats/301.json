@@ -1,0 +1,26 @@
+{
+  "times": [
+    251.538578748703
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14343,
+      "prompt_tokens": 52334,
+      "total_tokens": 66677,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 (closure (A : Set X)) → Topology.P2 (closure (B : Set X)) →\n      Topology.P2 (closure (A ∪ B : Set X)) := by\n  intro hA hB\n  -- Apply the union lemma to the two closures.\n  have hUnion :\n      Topology.P2 (closure (A : Set X) ∪ closure (B : Set X)) :=\n    Topology.P2_union (X := X)\n      (A := closure (A : Set X)) (B := closure (B : Set X)) hA hB\n  -- Re‐express the union of closures as the closure of the union.\n  simpa [closure_union] using hUnion"
+  ],
+  "success": true
+}

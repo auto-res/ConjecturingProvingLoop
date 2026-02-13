@@ -1,0 +1,26 @@
+{
+  "times": [
+    434.40214490890503
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 21865,
+      "prompt_tokens": 54611,
+      "total_tokens": 76476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 21632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.disjoint_interior_diff_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Disjoint (interior (A \\ B : Set X)) (interior B) := by\n  refine Set.disjoint_left.2 ?_\n  intro x hx_diff hx_intB\n  -- `x` lies in `A \\ B`, hence it is not in `B`.\n  have h_notB : (x : X) ∉ B := by\n    have : (x : X) ∈ A \\ B :=\n      (interior_subset : interior (A \\ B) ⊆ A \\ B) hx_diff\n    exact this.2\n  -- But `x` also lies in `interior B`, which is contained in `B`.\n  have h_inB : (x : X) ∈ B :=\n    (interior_subset : interior B ⊆ B) hx_intB\n  exact h_notB h_inB"
+  ],
+  "success": true
+}

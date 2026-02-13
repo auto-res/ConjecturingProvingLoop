@@ -1,0 +1,26 @@
+{
+  "times": [
+    104.0554690361023
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6784,
+      "prompt_tokens": 14205,
+      "total_tokens": 20989,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior A))))) =\n      closure (interior A) := by\n  have h1 :=\n    interior_closure_interior_closure_interior_eq (X := X) (A := A)\n  have h2 :=\n    closure_interior_closure_eq (X := X) (A := A)\n  calc\n    closure (interior (closure (interior (closure (interior A))))) =\n        closure (interior (closure (interior A))) := by\n      simpa [h1]\n    _ = closure (interior A) := by\n      simpa using h2"
+  ],
+  "success": true
+}

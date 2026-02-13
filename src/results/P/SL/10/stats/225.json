@@ -1,0 +1,43 @@
+{
+  "times": [
+    136.26050639152527,
+    207.6709864139557
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7675,
+      "prompt_tokens": 36136,
+      "total_tokens": 43811,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    },
+    {
+      "completion_tokens": 9426,
+      "prompt_tokens": 36248,
+      "total_tokens": 45674,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_subset_diff_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B) ⊆ A \\ closure B := by\n  intro x hx\n  -- `x` lies in `A \\ B`.\n  have hxAB : x ∈ A \\ B := interior_subset hx\n  have hxA : x ∈ A := hxAB.1\n  -- We will show that `x ∉ closure B`.\n  have hx_not_clB : x ∉ closure B := by\n    by_contra hCl\n    -- Since `x ∈ closure B`, every open neighbourhood of `x` meets `B`.\n    -- Consider the open neighbourhood `interior (A \\ B)` of `x`.\n    have h_nonempty : (interior (A \\ B) ∩ B).Nonempty :=\n      (mem_closure_iff).1 hCl (interior (A \\ B)) isOpen_interior hx\n    -- But `interior (A \\ B)` is disjoint from `B`.\n    have h_empty : (interior (A \\ B) ∩ B) = (∅ : Set X) := by\n      ext y\n      constructor\n      · intro hy\n        have : y ∈ A \\ B := interior_subset hy.1\n        exact (this.2) hy.2\n      · intro hy\n        cases hy\n    -- Contradiction.\n    have : (∅ : Set X).Nonempty := by\n      simpa [h_empty] using h_nonempty\n    exact this.elim\n  exact And.intro hxA hx_not_clB",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    87.37342119216919
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5271,
+      "prompt_tokens": 24675,
+      "total_tokens": 29946,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_closure_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior A ∩ closure (Aᶜ) = (∅ : Set X) := by\n  -- `closure (Aᶜ)` is the complement of `interior A`.\n  have h : closure (Aᶜ) = (interior A)ᶜ :=\n    closure_compl_eq_compl_interior (X := X) (A := A)\n  -- Rewrite and simplify the intersection.\n  simpa [h, Set.inter_compl_self]"
+  ],
+  "success": true
+}

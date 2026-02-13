@@ -1,0 +1,43 @@
+{
+  "times": [
+    68.35288643836975,
+    247.00504112243652
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4921,
+      "prompt_tokens": 21464,
+      "total_tokens": 26385,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 17298,
+      "prompt_tokens": 21576,
+      "total_tokens": 38874,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_interior_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A ∪ interior A = closure A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    cases hx with\n    | inl hClos => exact hClos\n    | inr hInt  => exact subset_closure hInt\n  · intro x hx\n    exact Or.inl hx",
+    ""
+  ],
+  "success": true
+}

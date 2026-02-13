@@ -1,0 +1,43 @@
+{
+  "times": [
+    48.53382587432861,
+    39.60888361930847
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3866,
+      "prompt_tokens": 5381,
+      "total_tokens": 9247,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    },
+    {
+      "completion_tokens": 2563,
+      "prompt_tokens": 5525,
+      "total_tokens": 8088,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (A : Set X)) = interior (closure (interior (closure A))) := by\n  -- First inclusion: `interior (closure (interior (closure A))) ⊆ interior (closure A)`\n  have h₁ :\n      interior (closure (interior (closure (A : Set X)))) ⊆\n        interior (closure (A : Set X)) := by\n    simpa using\n      (Topology.interior_closure_interior_subset_interior_closure\n        (X := X) (A := closure (A : Set X)))\n  -- Second inclusion via `P3` for the open set `interior (closure A)`\n  have h_open : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n  have hP3 : Topology.P3 (X := X) (interior (closure (A : Set X))) :=\n    Topology.isOpen_P3 (X := X) (A := interior (closure (A : Set X))) h_open\n  have h₂ :\n      interior (closure (A : Set X)) ⊆\n        interior (closure (interior (closure (A : Set X)))) := by\n    dsimp [Topology.P3] at hP3\n    exact hP3\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem Topology.interior_closure_interior_mono {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) :\n    interior (closure (interior A)) ⊆ interior (closure (interior B)) := by\n  -- First enlarge `interior A` to `interior B` using monotonicity of `interior`.\n  have h₁ : (interior A : Set X) ⊆ interior B := interior_mono hAB\n  -- Then enlarge the closures accordingly.\n  have h₂ : closure (interior A : Set X) ⊆ closure (interior B) :=\n    closure_mono h₁\n  -- Finally, take interiors once more to get the desired inclusion.\n  exact interior_mono h₂"
+  ],
+  "success": true
+}

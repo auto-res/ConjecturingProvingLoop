@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.916738748550415
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3046,
+      "prompt_tokens": 46346,
+      "total_tokens": 49392,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureUnion_has_P1_of_P1\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 A) (hB : Topology.P1 B) :\n    Topology.P1 (closure (A ∪ B : Set X)) := by\n  have h_union : Topology.P1 (A ∪ B) :=\n    Topology.P1_union (X := X) (A := A) (B := B) hA hB\n  simpa using\n    Topology.closure_has_P1_of_P1 (X := X) (A := A ∪ B) h_union"
+  ],
+  "success": true
+}

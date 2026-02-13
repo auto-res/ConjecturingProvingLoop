@@ -1,0 +1,43 @@
+{
+  "times": [
+    41.2121148109436,
+    38.11458349227905
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4051,
+      "prompt_tokens": 8340,
+      "total_tokens": 12391,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    },
+    {
+      "completion_tokens": 2931,
+      "prompt_tokens": 8472,
+      "total_tokens": 11403,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iUnion {ι : Sort*} {X : Type*} [TopologicalSpace X]\n    (A : ι → Set X) (hP1 : ∀ i, Topology.P1 (A := A i)) :\n    Topology.P1 (A := Set.iUnion A) := by\n  dsimp [Topology.P1] at hP1 ⊢\n  intro x hx\n  rcases mem_iUnion.1 hx with ⟨i, hxAi⟩\n  have hx_closure_i : x ∈ closure (interior (A i)) := (hP1 i) hxAi\n  have h_subset : closure (interior (A i)) ⊆\n                  closure (interior (⋃ j, A j)) := by\n    have h_int_subset : interior (A i) ⊆ interior (⋃ j, A j) := by\n      have hA_subset : (A i : Set X) ⊆ ⋃ j, A j :=\n        subset_iUnion _ i\n      exact interior_mono hA_subset\n    exact closure_mono h_int_subset\n  exact h_subset hx_closure_i",
+    "theorem Topology.closure_subset_closureInterior_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P2 (A := A)) :\n    closure A ⊆ closure (interior A) := by\n  -- `P2` implies `P1`, giving `A ⊆ closure (interior A)`.\n  have hP1 : Topology.P1 (A := A) := Topology.P2_implies_P1 hA\n  have h_subset : (A : Set X) ⊆ closure (interior A) := hP1\n  -- Taking closures preserves inclusions.\n  simpa [closure_closure] using closure_mono h_subset"
+  ],
+  "success": true
+}

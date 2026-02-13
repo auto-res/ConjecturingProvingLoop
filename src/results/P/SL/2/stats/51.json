@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.05752444267273
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2684,
+      "prompt_tokens": 7860,
+      "total_tokens": 10544,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_of_closure_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hEq : closure (interior A) = closure A) :\n    Topology.P2 A ↔ Topology.P3 A := by\n  -- Obtain `P1 A` from the given closure equality.\n  have hP1 : Topology.P1 A :=\n    (Topology.P1_iff_closure_interior_eq_closure (A := A)).2 hEq\n  -- Use the existing equivalence `P2 A ↔ P1 A ∧ P3 A`.\n  have hEquiv := (Topology.P2_iff_P1_and_P3 (A := A))\n  constructor\n  · intro hP2\n    exact Topology.P2_implies_P3 (A := A) hP2\n  · intro hP3\n    have : Topology.P1 A ∧ Topology.P3 A := And.intro hP1 hP3\n    exact (hEquiv).2 this"
+  ],
+  "success": true
+}

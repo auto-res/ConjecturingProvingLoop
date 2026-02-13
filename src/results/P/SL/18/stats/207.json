@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.799779653549194
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3227,
+      "prompt_tokens": 31421,
+      "total_tokens": 34648,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_closure_interior_of_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (A : Set X) = closure (interior A)) :\n    closure (interior (closure (A : Set X))) = closure (interior A) := by\n  -- From the given equality we obtain `P1 A`.\n  have hP1 : Topology.P1 (A : Set X) :=\n    Topology.P1_of_closure_eq_closure_interior (A := A) h\n  -- `P1` yields an identity relating the two closures we are interested in.\n  have hEq :\n      closure (A : Set X) = closure (interior (closure (A : Set X))) :=\n    Topology.closure_eq_closure_interior_closure_of_P1 (A := A) hP1\n  -- Rearrange the equality for convenient rewriting.\n  have hEq' :\n      closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n    simpa using hEq.symm\n  -- Substitute and finish.\n  simpa [hEq', h]"
+  ],
+  "success": true
+}

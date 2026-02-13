@@ -1,0 +1,26 @@
+{
+  "times": [
+    15.064743041992188
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1320,
+      "prompt_tokens": 31278,
+      "total_tokens": 32598,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1_of_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → Topology.P1 (interior A) := by\n  intro hP2\n  -- Derive `P1` for `A` from `P2`.\n  have hP1 : Topology.P1 (A : Set X) :=\n    Topology.P2_implies_P1 (A := A) hP2\n  -- Transfer `P1` from `A` to its interior.\n  exact Topology.P1_implies_P1_of_interior (A := A) hP1"
+  ],
+  "success": true
+}

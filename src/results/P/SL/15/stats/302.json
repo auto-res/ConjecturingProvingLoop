@@ -1,0 +1,26 @@
+{
+  "times": [
+    100.66957688331604
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6956,
+      "prompt_tokens": 64315,
+      "total_tokens": 71271,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 62208
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_prod_right_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hAne : A.Nonempty) (hBne : B.Nonempty) (hDenseA : Dense A) :\n    Dense (A ×ˢ B) ↔ Dense B := by\n  -- Start with the general equivalence for products.\n  have h₁ :=\n    (dense_prod_iff\n      (X := X) (Y := Y) (A := A) (B := B) hAne hBne)\n  -- Under the extra hypothesis `Dense A`, the right‐hand side simplifies.\n  have h₂ : (Dense A ∧ Dense B) ↔ Dense B := by\n    constructor\n    · intro h; exact h.2\n    · intro hB; exact And.intro hDenseA hB\n  -- Combine the two equivalences.\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

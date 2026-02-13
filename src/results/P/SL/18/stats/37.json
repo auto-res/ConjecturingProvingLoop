@@ -1,0 +1,43 @@
+{
+  "times": [
+    46.50330972671509,
+    183.4509425163269
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3370,
+      "prompt_tokens": 5847,
+      "total_tokens": 9217,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    },
+    {
+      "completion_tokens": 12460,
+      "prompt_tokens": 5967,
+      "total_tokens": 18427,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_closure_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP3 : Topology.P3 A) :\n    closure A = closure (interior (closure A)) := by\n  apply Set.Subset.antisymm\n  ·\n    have : closure A ⊆ closure (interior (closure A)) :=\n      closure_mono hP3\n    simpa using this\n  ·\n    have : interior (closure A) ⊆ closure A := interior_subset\n    have : closure (interior (closure A)) ⊆ closure A :=\n      closure_mono this\n    simpa using this",
+    "theorem P123_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (interior A) ∧ Topology.P2 (interior A) ∧ Topology.P3 (interior A) := by\n  have hOpen : IsOpen (interior A) := isOpen_interior\n  simpa using Topology.P123_of_open hOpen"
+  ],
+  "success": true
+}

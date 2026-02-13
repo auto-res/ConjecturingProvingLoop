@@ -1,0 +1,26 @@
+{
+  "times": [
+    213.38121366500854
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7577,
+      "prompt_tokens": 47925,
+      "total_tokens": 55502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_implies_P1_and_P2_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (X := X) (closure A) →\n      (Topology.P1 (X := X) (closure A) ∧\n        Topology.P2 (X := X) (closure A)) := by\n  intro hP3\n  have hP1 : Topology.P1 (X := X) (closure A) :=\n    Topology.P3_closure_implies_P1_closure (X := X) (A := A) hP3\n  have hP2 : Topology.P2 (X := X) (closure A) :=\n    Topology.P3_closure_implies_P2_closure (X := X) (A := A) hP3\n  exact And.intro hP1 hP2"
+  ],
+  "success": true
+}

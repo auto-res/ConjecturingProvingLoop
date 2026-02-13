@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.646631956100464
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3870,
+      "prompt_tokens": 46160,
+      "total_tokens": 50030,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_dense_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (h_dense : closure A = (Set.univ : Set X)) :\n    Topology.P3 (A ∪ B) := by\n  -- First, show that `closure (A ∪ B) = univ`.\n  have h_closure_union : closure (A ∪ B) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · exact Set.Subset_univ\n    · intro x _\n      -- Since `closure A = univ`, every point lies in `closure A`.\n      have hx_clA : (x : X) ∈ closure A := by\n        simpa [h_dense]\n      -- Monotonicity of `closure` gives the desired membership.\n      have h_mono : closure A ⊆ closure (A ∪ B) :=\n        closure_mono (Set.subset_union_left : A ⊆ A ∪ B)\n      exact h_mono hx_clA\n  -- Conclude using the criterion for dense sets.\n  exact Topology.P3_of_dense (X := X) (A := A ∪ B) h_closure_union"
+  ],
+  "success": true
+}

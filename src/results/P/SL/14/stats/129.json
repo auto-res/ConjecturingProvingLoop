@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.109407663345337
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1772,
+      "prompt_tokens": 22462,
+      "total_tokens": 24234,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_isOpen_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 A) (hB : IsOpen B) : Topology.P1 (A ∪ B) := by\n  -- Since `B` is open, it satisfies `P1`.\n  have hB_P1 : Topology.P1 B :=\n    Topology.isOpen_implies_P1 (X := X) (A := B) hB\n  -- Apply the existing `P1_union` lemma.\n  exact Topology.P1_union (X := X) (A := A) (B := B) hA hB_P1"
+  ],
+  "success": true
+}

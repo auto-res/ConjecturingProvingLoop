@@ -1,0 +1,77 @@
+{
+  "times": [
+    69.60391044616699,
+    199.3069350719452,
+    84.2166383266449,
+    45.933401346206665
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5135,
+      "prompt_tokens": 35116,
+      "total_tokens": 40251,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 13268,
+      "prompt_tokens": 35227,
+      "total_tokens": 48495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 6918,
+      "prompt_tokens": 35640,
+      "total_tokens": 42558,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 3161,
+      "prompt_tokens": 35722,
+      "total_tokens": 38883,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_closure_interior_closure_interior_eq_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A →\n      closure (interior (closure (interior A))) =\n        closure (interior (closure A)) := by\n  intro hP2\n  have h :=\n    Topology.P2_implies_interior_closure_interior_closure_eq_interior_closure\n      (A := A) hP2\n  simpa using congrArg closure h",
+    "```lean\ntheorem Topology.closure_interior_closure_interior_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (A : Set X))))) ⊆\n      closure (interior A) := by\n  -- We start from the fact that `interior (closure (interior (closure A)))`\n  -- is contained in `closure A` (a lemma already in the library).\n  have h₁ :\n      (interior (closure (interior (closure (A : Set X)))) : Set X) ⊆ closure A :=\n    Topology.interior_closure_interior_subset_closure (A := A)\n  -- Since `interior A ⊆ A`, we obtain `closure A ⊆ closure (interior A)`.\n  have h₂ : (closure (A : Set X)) ⊆ closure (interior A) :=\n    Topology.closure_interior_subset_closure (A := A)\n  -- Combining the two inclusions yields the desired result.\n  exact closure_mono (Set.Subset.trans h₁ h₂)\n```",
+    "theorem Topology.interior_closure_interior_closure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (A : Set X)))) ⊆ closure A := by\n  intro x hx\n  -- First, upgrade the hypothesis: from the interior we move to the closure.\n  have hx' : x ∈ closure (interior (closure (A : Set X))) :=\n    interior_subset hx\n  -- `interior (closure A)` is evidently contained in `closure A`.\n  have hInner : (interior (closure (A : Set X)) : Set X) ⊆ closure A := by\n    intro y hy\n    exact interior_subset hy\n  -- Taking closures preserves inclusions; simplify the right‐hand side with\n  -- `closure_closure`.\n  have hClosure :\n      (closure (interior (closure (A : Set X))) : Set X) ⊆ closure A := by\n    have h := closure_mono hInner\n    simpa [closure_closure] using h\n  exact hClosure hx'",
+    "theorem Topology.frontier_interior_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (interior (A : Set X)) ⊆ closure (A : Set X) := by\n  intro x hx\n  -- First, use the general fact `frontier S ⊆ closure S` with `S := interior A`.\n  have hx₁ : x ∈ closure (interior (A : Set X)) :=\n    (Topology.frontier_subset_closure (A := interior A)) hx\n  -- Next, `closure (interior A)` is contained in `closure A`.\n  have hsubset : (closure (interior (A : Set X)) : Set X) ⊆ closure A :=\n    Topology.closure_interior_subset_closure (A := A)\n  -- Combining the two inclusions yields the desired result.\n  exact hsubset hx₁"
+  ],
+  "success": true
+}

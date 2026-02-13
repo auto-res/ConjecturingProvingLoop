@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.797659158706665
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3676,
+      "prompt_tokens": 53290,
+      "total_tokens": 56966,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_iInter_subset_iInter_interior\n    {X ι : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    interior (⋂ i, A i) ⊆ ⋂ i, interior (A i) := by\n  intro x hx\n  -- For each index `i`, show `x ∈ interior (A i)`.\n  have hx_all : ∀ i, x ∈ interior (A i) := by\n    intro i\n    -- The intersection is contained in each `A i`.\n    have hsubset : (⋂ j, A j) ⊆ A i :=\n      Set.iInter_subset (fun j => A j) i\n    -- Monotonicity of `interior` transfers membership.\n    exact (interior_mono hsubset) hx\n  -- Aggregate the memberships into the intersection of interiors.\n  exact Set.mem_iInter.2 hx_all"
+  ],
+  "success": true
+}

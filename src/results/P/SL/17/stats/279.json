@@ -1,0 +1,43 @@
+{
+  "times": [
+    15.002274751663208,
+    155.24947428703308
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1251,
+      "prompt_tokens": 48557,
+      "total_tokens": 49808,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 9362,
+      "prompt_tokens": 48663,
+      "total_tokens": 58025,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_univ_of_dense_and_interior_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hDense : Dense A)\n    (hInt : interior A = (∅ : Set X)) :\n    frontier A = (Set.univ : Set X) := by\n  calc\n    frontier A = closure A \\ interior A := by\n      simp [frontier]\n    _ = (Set.univ : Set X) \\ (∅ : Set X) := by\n      simpa [hDense.closure_eq, hInt]\n    _ = (Set.univ : Set X) := by\n      simp",
+    ""
+  ],
+  "success": true
+}

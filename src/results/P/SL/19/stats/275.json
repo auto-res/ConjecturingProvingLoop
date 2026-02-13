@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.7028431892395
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3558,
+      "prompt_tokens": 44069,
+      "total_tokens": 47627,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_univ_iff_interior_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A = (Set.univ : Set X) ↔ interior (closure A) = (Set.univ : Set X) := by\n  constructor\n  · intro h\n    exact\n      Topology.interior_closure_eq_univ_of_closure_eq_univ\n        (X := X) (A := A) h\n  · intro h\n    exact\n      Topology.closure_eq_univ_of_interior_closure_eq_univ\n        (X := X) (A := A) h"
+  ],
+  "success": true
+}

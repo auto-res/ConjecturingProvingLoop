@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.45044708251953
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4550,
+      "prompt_tokens": 7576,
+      "total_tokens": 12126,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_interior_satisfies_P1_and_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : closure (interior (A : Set X)) = Set.univ) :\n    Topology.P1 A ∧ Topology.P2 A := by\n  -- First, note that the interior of the universal set is itself.\n  have hInt : interior (closure (interior (A : Set X))) = (Set.univ : Set X) := by\n    simpa [hDense] using (interior_univ : interior (Set.univ : Set X) = _)\n  constructor\n  · -- Establish `P1`.\n    dsimp [Topology.P1]\n    intro x hx\n    have : x ∈ (Set.univ : Set X) := by\n      simp\n    simpa [hDense] using this\n  · -- Establish `P2`.\n    dsimp [Topology.P2]\n    intro x hx\n    have : x ∈ (Set.univ : Set X) := by\n      simp\n    simpa [hInt] using this"
+  ],
+  "success": true
+}

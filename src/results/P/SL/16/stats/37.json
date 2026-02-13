@@ -1,0 +1,43 @@
+{
+  "times": [
+    31.201122522354126,
+    174.23403549194336
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2475,
+      "prompt_tokens": 6372,
+      "total_tokens": 8847,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6016
+      }
+    },
+    {
+      "completion_tokens": 11276,
+      "prompt_tokens": 6489,
+      "total_tokens": 17765,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_closure_of_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (X := X) A → closure (interior A) = closure A := by\n  intro hP1\n  apply subset_antisymm\n  · -- `closure (interior A)` is contained in `closure A` by monotonicity\n    exact closure_mono interior_subset\n  · -- From `P1`, `A ⊆ closure (interior A)`, hence so is `closure A`\n    have : A ⊆ closure (interior A) := hP1\n    exact closure_mono this",
+    "theorem Topology.closure_interior_eq_closure_of_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 (X := X) A) :\n    closure (interior A) = closure A := by\n  apply subset_antisymm\n  · -- `closure (interior A) ⊆ closure A` by monotonicity of `closure`\n    exact closure_mono (interior_subset : interior A ⊆ A)\n  · -- For the reverse inclusion use `A ⊆ closure (interior A)` from `P1`\n    have h : A ⊆ closure (interior A) := hP1\n    have : closure A ⊆ closure (closure (interior A)) := closure_mono h\n    simpa [closure_closure] using this"
+  ],
+  "success": true
+}

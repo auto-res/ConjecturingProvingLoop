@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.919989585876465
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1490,
+      "prompt_tokens": 27579,
+      "total_tokens": 29069,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closure_subset_frontier {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (closure A) ⊆ frontier A := by\n  intro x hx\n  -- Expand the membership condition in the frontier of `closure A`.\n  rcases hx with ⟨hxClosClosA, hxNotIntClosA⟩\n  -- Since `closure (closure A) = closure A`, we already have `x ∈ closure A`.\n  have hxClosA : x ∈ closure A := by\n    simpa [closure_closure] using hxClosClosA\n  -- Show that `x ∉ interior A` using the fact that\n  -- `interior A ⊆ interior (closure A)`.\n  have hxNotIntA : x ∉ interior A := by\n    intro hxIntA\n    have : (x : X) ∈ interior (closure A) :=\n      (Topology.interior_subset_interior_closure (A := A)) hxIntA\n    exact hxNotIntClosA this\n  -- Conclude that `x ∈ frontier A`.\n  exact And.intro hxClosA hxNotIntA"
+  ],
+  "success": true
+}

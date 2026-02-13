@@ -1,0 +1,26 @@
+{
+  "times": [
+    27.524993896484375
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2228,
+      "prompt_tokens": 13364,
+      "total_tokens": 15592,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12160
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → Topology.P1 (closure (A : Set X)) := by\n  intro hP3\n  -- Unfold definitions of `P3` and `P1`.\n  dsimp [Topology.P3] at hP3\n  dsimp [Topology.P1]\n  intro x hxCl\n  -- Use monotonicity of `closure` with the inclusion given by `hP3`.\n  have hIncl : closure (A : Set X) ⊆ closure (interior (closure A)) := by\n    apply closure_mono\n    exact hP3\n  exact hIncl hxCl"
+  ],
+  "success": true
+}

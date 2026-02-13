@@ -1,0 +1,26 @@
+{
+  "times": [
+    21.900839805603027
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2355,
+      "prompt_tokens": 61362,
+      "total_tokens": 63717,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_implies_P3_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 (interior (closure A)) := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hx\n  -- `closure A` is the whole space because `A` is dense\n  have h_closure : (closure A : Set X) = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  -- hence its interior is also the whole space\n  have h_int_closure : interior (closure A) = (Set.univ : Set X) := by\n    simpa [h_closure, interior_univ]\n      using (congrArg id h_closure)\n  -- rewrite the goal using these equalities\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_int_closure, closure_univ, interior_univ] using this"
+  ],
+  "success": true
+}

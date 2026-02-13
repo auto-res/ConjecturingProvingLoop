@@ -1,0 +1,43 @@
+{
+  "times": [
+    319.1755895614624,
+    131.30419445037842
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 16675,
+      "prompt_tokens": 52068,
+      "total_tokens": 68743,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    },
+    {
+      "completion_tokens": 7649,
+      "prompt_tokens": 52233,
+      "total_tokens": 59882,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A ↔ interior (Aᶜ) = (∅ : Set X) := by\n  classical\n  constructor\n  · intro hDense\n    -- A dense set has empty interior complement.\n    exact Topology.interior_compl_eq_empty_of_dense (A := A) hDense\n  · intro hIntEmpty\n    -- We prove that `closure A = univ`, hence `A` is dense.\n    have hClosureEq : closure A = (Set.univ : Set X) := by\n      -- It suffices to show the complement of `closure A` is empty.\n      have hComplEmpty : (closure A)ᶜ = (∅ : Set X) := by\n        apply Set.eq_empty_iff_forall_not_mem.2\n        intro x hxComp\n        -- `((closure A)ᶜ)` is an open subset of `Aᶜ`, hence contained\n        -- in `interior (Aᶜ)`, contradicting the hypothesis.\n        have hOpen : IsOpen ((closure A)ᶜ) :=\n          isClosed_closure.isOpen_compl\n        have hSubset : ((closure A)ᶜ : Set X) ⊆ Aᶜ := by\n          intro y hy\n          by_contra hAy\n          -- If `y ∈ A`, then `y ∈ closure A`, contradicting `hy`.\n          have : y ∈ closure A := subset_closure hAy\n          exact hy this\n        have hxInt : x ∈ interior (Aᶜ) :=\n          (interior_maximal hSubset hOpen) hxComp\n        simpa [hIntEmpty] using hxInt\n      -- With an empty complement, the closure is the whole space.\n      simpa [hComplEmpty] using Set.compl_compl (closure A)\n    -- Translate the equality into the `Dense` predicate.\n    exact (Topology.dense_iff_closure_eq_univ (A := A)).2 hClosureEq",
+    "theorem Topology.closure_interior_union_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) ∪ frontier A = closure A := by\n  ext x\n  constructor\n  · intro hx\n    cases hx with\n    | inl h_cl_int =>\n        -- `closure (interior A)` is contained in `closure A`\n        have h_sub : closure (interior A) ⊆ closure A :=\n          closure_mono (interior_subset : interior A ⊆ A)\n        exact h_sub h_cl_int\n    | inr h_front =>\n        -- Points in the frontier of `A` lie in `closure A`\n        exact h_front.1\n  · intro hx_clA\n    by_cases h_intA : x ∈ interior A\n    · -- If `x ∈ interior A`, then it is in `closure (interior A)`\n      have : x ∈ closure (interior A) := subset_closure h_intA\n      exact Or.inl this\n    · -- Otherwise, `x` belongs to the frontier of `A`\n      have : x ∈ frontier A := And.intro hx_clA h_intA\n      exact Or.inr this"
+  ],
+  "success": true
+}

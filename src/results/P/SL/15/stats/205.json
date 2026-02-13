@@ -1,0 +1,43 @@
+{
+  "times": [
+    21.61628222465515,
+    226.2956976890564
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1479,
+      "prompt_tokens": 42847,
+      "total_tokens": 44326,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    },
+    {
+      "completion_tokens": 10068,
+      "prompt_tokens": 43100,
+      "total_tokens": 53168,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_interiorClosureInterior_mem_nhds\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A ↔ ∀ x ∈ A, interior (closure (interior A)) ∈ 𝓝 x := by\n  classical\n  constructor\n  · intro hP2 x hx\n    have hxInt : x ∈ interior (closure (interior A)) := hP2 hx\n    exact (mem_interior_iff_mem_nhds).1 hxInt\n  · intro h\n    dsimp [Topology.P2]\n    intro x hx\n    have hNhds : interior (closure (interior A)) ∈ 𝓝 x := h x hx\n    exact (mem_interior_iff_mem_nhds).2 hNhds",
+    ""
+  ],
+  "success": true
+}

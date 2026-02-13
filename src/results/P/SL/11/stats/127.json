@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.94998145103455
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5911,
+      "prompt_tokens": 18805,
+      "total_tokens": 24716,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_univ_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : closure (interior A) = (Set.univ : Set X)) :\n    closure A = (Set.univ : Set X) := by\n  apply subset_antisymm\n  ·\n    exact Set.subset_univ _\n  ·\n    have : (Set.univ : Set X) ⊆ closure A := by\n      simpa [hDense] using\n        (closure_mono (interior_subset : interior A ⊆ A))\n    exact this"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    125.29828715324402,
+    102.13477921485901
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8605,
+      "prompt_tokens": 46371,
+      "total_tokens": 54976,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8128,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 5954,
+      "prompt_tokens": 46633,
+      "total_tokens": 52587,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_self_of_open\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen (A : Set X)) :\n    interior (closure (A : Set X)) = A := by\n  classical\n  -- We prove the two inclusions separately, then use `Subset.antisymm`.\n  apply Set.Subset.antisymm\n  · -- `interior (closure A) ⊆ A`\n    intro x hxInt\n    by_contra hxNotA\n    -- From `hxInt` we know `x ∈ closure A`.\n    have hxCl : x ∈ closure (A : Set X) :=\n      (interior_subset : interior (closure (A : Set X)) ⊆ closure A) hxInt\n    -- Consider the open set `V = interior (closure A) \\ A` that contains `x`.\n    have hOpenInt : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    have hVOpen  : IsOpen (interior (closure (A : Set X)) \\ A) :=\n      hOpenInt.diff hA\n    have hxV : x ∈ (interior (closure (A : Set X)) \\ A) :=\n      ⟨hxInt, hxNotA⟩\n    -- Since `x ∈ closure A`, every neighbourhood of `x` meets `A`.\n    -- In particular, `V` meets `A`, yielding a contradiction.\n    have hNonempty :\n        ((interior (closure (A : Set X)) \\ A) ∩ A : Set X).Nonempty :=\n      (mem_closure_iff).1 hxCl _ hVOpen hxV\n    rcases hNonempty with ⟨y, ⟨⟨_, hyNotA⟩, hyA⟩⟩\n    exact hyNotA hyA\n  · -- `A ⊆ interior (closure A)`\n    exact\n      interior_maximal\n        (subset_closure : (A : Set X) ⊆ closure A) hA",
+    "theorem IsOpen.diff {α : Type*} [TopologicalSpace α] {U V : Set α}\n    (hU : IsOpen (U : Set α)) (hV : IsClosed (V : Set α)) :\n    IsOpen (U \\ V : Set α) := by\n  have hOpenComplV : IsOpen (Vᶜ : Set α) := by\n    simpa using hV.isOpen_compl\n  simpa [Set.diff_eq] using hU.inter hOpenComplV"
+  ],
+  "success": true
+}

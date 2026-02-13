@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.16176772117615
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4633,
+      "prompt_tokens": 17369,
+      "total_tokens": 22002,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_subset_interiors {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (closure ((A ∩ B) : Set X)) ⊆\n      interior (closure (A : Set X)) ∩ interior (closure (B : Set X)) := by\n  -- First, relate `closure (A ∩ B)` to `closure A` and `closure B`.\n  have hSubA :\n      closure ((A ∩ B) : Set X) ⊆ closure (A : Set X) := by\n    have hAB_SubA : (A ∩ B : Set X) ⊆ (A : Set X) := by\n      intro x hx\n      exact hx.1\n    exact closure_mono hAB_SubA\n  have hSubB :\n      closure ((A ∩ B) : Set X) ⊆ closure (B : Set X) := by\n    have hAB_SubB : (A ∩ B : Set X) ⊆ (B : Set X) := by\n      intro x hx\n      exact hx.2\n    exact closure_mono hAB_SubB\n  -- Use monotonicity of `interior` to obtain the desired inclusions.\n  have hIntSubA :\n      interior (closure ((A ∩ B) : Set X)) ⊆\n        interior (closure (A : Set X)) := interior_mono hSubA\n  have hIntSubB :\n      interior (closure ((A ∩ B) : Set X)) ⊆\n        interior (closure (B : Set X)) := interior_mono hSubB\n  -- Combine the two inclusions.\n  intro x hx\n  exact And.intro (hIntSubA hx) (hIntSubB hx)"
+  ],
+  "success": true
+}

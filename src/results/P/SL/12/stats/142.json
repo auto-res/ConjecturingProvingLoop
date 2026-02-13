@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.043893814086914
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3920,
+      "prompt_tokens": 26911,
+      "total_tokens": 30831,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_three_of_P2 {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} (hA : Topology.P2 (X := X) A)\n    (hB : Topology.P2 (X := X) B) (hC : Topology.P2 (X := X) C) :\n    Topology.P3 (X := X) (A ∪ B ∪ C) := by\n  -- Upgrade each `P2` hypothesis to `P3`.\n  have hA3 : Topology.P3 (X := X) A :=\n    Topology.P2_implies_P3 (X := X) (A := A) hA\n  have hB3 : Topology.P3 (X := X) B :=\n    Topology.P2_implies_P3 (X := X) (A := B) hB\n  have hC3 : Topology.P3 (X := X) C :=\n    Topology.P2_implies_P3 (X := X) (A := C) hC\n  -- First union `A` and `B`.\n  have hAB3 : Topology.P3 (X := X) (A ∪ B) :=\n    Topology.P3_union (X := X) (A := A) (B := B) hA3 hB3\n  -- Then union the result with `C`.\n  have hABC3 : Topology.P3 (X := X) ((A ∪ B) ∪ C) :=\n    Topology.P3_union (X := X) (A := (A ∪ B)) (B := C) hAB3 hC3\n  -- Rewrite with associativity of union.\n  simpa [Set.union_assoc] using hABC3"
+  ],
+  "success": true
+}

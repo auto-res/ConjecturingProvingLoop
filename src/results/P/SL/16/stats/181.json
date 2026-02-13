@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.39685845375061
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5830,
+      "prompt_tokens": 31778,
+      "total_tokens": 37608,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.open_closure_satisfies_P1_P2_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure A)) :\n    Topology.P1 (X := X) (closure A) ∧\n      Topology.P2 (X := X) (closure A) ∧\n      Topology.P3 (X := X) A := by\n  -- `P1` holds for `closure A` because it is open.\n  have hP1 : Topology.P1 (X := X) (closure A) := by\n    simpa [closure_closure] using\n      (Topology.isOpen_closure_implies_P1 (X := X) (A := closure A) hOpen)\n  -- `P2` holds for `closure A` by openness of `closure A`.\n  have hP2 : Topology.P2 (X := X) (closure A) :=\n    Topology.P2_of_open_closure (X := X) (A := A) hOpen\n  -- `P3` holds for `A` when `closure A` is open.\n  have hP3 : Topology.P3 (X := X) A :=\n    Topology.P3_of_open_closure (X := X) (A := A) hOpen\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

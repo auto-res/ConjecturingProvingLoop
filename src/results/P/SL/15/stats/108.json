@@ -1,0 +1,60 @@
+{
+  "times": [
+    57.23688340187073,
+    13.304579257965088,
+    17.742322206497192
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3667,
+      "prompt_tokens": 16564,
+      "total_tokens": 20231,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    },
+    {
+      "completion_tokens": 917,
+      "prompt_tokens": 16733,
+      "total_tokens": 17650,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    },
+    {
+      "completion_tokens": 1485,
+      "prompt_tokens": 16902,
+      "total_tokens": 18387,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq_closure_interiors {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A ∪ interior B) := by\n  simpa [interior_union]",
+    "theorem closure_interior_union_eq {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  simpa [interior_union, closure_union]",
+    "theorem closure_interior_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) ⊆ closure A := by\n  exact closure_mono (interior_subset : interior A ⊆ A)"
+  ],
+  "success": true
+}

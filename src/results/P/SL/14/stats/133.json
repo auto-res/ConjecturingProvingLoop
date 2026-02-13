@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.01560187339783
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9274,
+      "prompt_tokens": 23545,
+      "total_tokens": 32819,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_isOpen_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 A) (hB_open : IsOpen B) :\n    Topology.P2 (A ∩ B) := by\n  dsimp [Topology.P2] at hA ⊢\n  intro x hx\n  rcases hx with ⟨hxA, hxB⟩\n  -- `x` lies in `interior (closure (interior A))` by `P2 A`.\n  have hxA_int : (x : X) ∈ interior (closure (interior A)) := hA hxA\n  -- Auxiliary open set around `x`.\n  have h_open_aux :\n      IsOpen (B ∩ interior (closure (interior A))) :=\n    IsOpen.inter hB_open isOpen_interior\n  -- This auxiliary set is contained in `closure (interior (A ∩ B))`.\n  have h_subset_aux :\n      (B ∩ interior (closure (interior A)) : Set X) ⊆\n        closure (interior (A ∩ B)) := by\n    intro y hy\n    rcases hy with ⟨hyB, hyIntA⟩\n    -- `y` lies in the closure of `interior A`.\n    have hy_closureA : (y : X) ∈ closure (interior A) :=\n      (interior_subset :\n        interior (closure (interior A)) ⊆ closure (interior A)) hyIntA\n    -- Show that every neighbourhood of `y` meets `interior (A ∩ B)`.\n    have : (y : X) ∈ closure (interior (A ∩ B)) := by\n      refine (mem_closure_iff).2 ?_\n      intro U hU hyU\n      -- `U ∩ B` is an open neighbourhood of `y`.\n      have hUB_open : IsOpen (U ∩ B) := IsOpen.inter hU hB_open\n      have hyUB : (y : X) ∈ U ∩ B := ⟨hyU, hyB⟩\n      -- Since `y ∈ closure (interior A)`, `U ∩ B` meets `interior A`.\n      have h_nonempty : ((U ∩ B) ∩ interior A).Nonempty :=\n        ((mem_closure_iff).1 hy_closureA) (U ∩ B) hUB_open hyUB\n      -- A point in this intersection lies in `interior (A ∩ B)`.\n      rcases h_nonempty with ⟨z, ⟨hzU, hzB⟩, hzIntA⟩\n      -- `interior A ∩ B` is an open subset of `A ∩ B`, hence contained in its interior.\n      have hz_interior : (z : X) ∈ interior (A ∩ B) := by\n        have h_open : IsOpen (interior A ∩ B) :=\n          IsOpen.inter isOpen_interior hB_open\n        have h_subset :\n            (interior A ∩ B : Set X) ⊆ A ∩ B := by\n          intro w hw; exact ⟨interior_subset hw.1, hw.2⟩\n        have h_interior_max :=\n          interior_maximal h_subset h_open\n        exact h_interior_max ⟨hzIntA, hzB⟩\n      -- Finally, `z` witnesses that `U` meets `interior (A ∩ B)`.\n      refine ⟨z, hzU, hz_interior⟩\n    exact this\n  -- The auxiliary open set lies inside the desired interior.\n  have h_aux_incl :\n      (B ∩ interior (closure (interior A)) : Set X) ⊆\n        interior (closure (interior (A ∩ B))) :=\n    interior_maximal h_subset_aux h_open_aux\n  -- Since `x` belongs to the auxiliary open set, it belongs to the target interior.\n  have hx_aux : (x : X) ∈ B ∩ interior (closure (interior A)) :=\n    ⟨hxB, hxA_int⟩\n  exact h_aux_incl hx_aux"
+  ],
+  "success": true
+}

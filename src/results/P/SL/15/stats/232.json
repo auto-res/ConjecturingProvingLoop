@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.34796166419983
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2740,
+      "prompt_tokens": 49633,
+      "total_tokens": 52373,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_prod_closure_of_isOpen\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y}\n    (hA : IsOpen (closure A)) (hB : IsOpen (closure B)) :\n    Topology.P1 (closure A ×ˢ closure B) := by\n  -- The product of two open sets is open.\n  have hOpen : IsOpen (closure A ×ˢ closure B) := hA.prod hB\n  -- Open sets satisfy `P1`.\n  exact\n    Topology.isOpen_implies_P1\n      (X := X × Y)\n      (A := closure A ×ˢ closure B)\n      hOpen"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    170.08883571624756
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8104,
+      "prompt_tokens": 53430,
+      "total_tokens": 61534,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_three {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) (hC : IsOpen (C : Set X)) :\n    interior (A ∩ B ∩ C : Set X) = A ∩ B ∩ C := by\n  have hOpen : IsOpen (A ∩ B ∩ C : Set X) := by\n    have hAB : IsOpen (A ∩ B : Set X) := hA.inter hB\n    exact hAB.inter hC\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

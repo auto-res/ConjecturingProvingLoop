@@ -1,0 +1,26 @@
+{
+  "times": [
+    113.88007712364197
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8538,
+      "prompt_tokens": 24921,
+      "total_tokens": 33459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closureInteriorClosure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (X := X) (closure (interior (closure (A : Set X)))) := by\n  dsimp [Topology.P1]\n  intro x hx\n  -- `interior (closure (interior (closure A)))` simplifies to `interior (closure A)`\n  -- via an existing lemma; hence their closures coincide.\n  have h_int_eq :\n      interior (closure (interior (closure (A : Set X)))) =\n        interior (closure (A : Set X)) := by\n    simpa using\n      (Topology.interior_closure_interior_closure_eq_interior_closure\n        (X := X) (A := A))\n  -- Rewrite the target set using `h_int_eq` and conclude with `hx`.\n  simpa [h_int_eq] using hx"
+  ],
+  "success": true
+}

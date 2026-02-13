@@ -1,0 +1,60 @@
+{
+  "times": [
+    136.85743737220764,
+    147.78512334823608,
+    15.805841445922852
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9491,
+      "prompt_tokens": 57189,
+      "total_tokens": 66680,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    },
+    {
+      "completion_tokens": 9772,
+      "prompt_tokens": 57306,
+      "total_tokens": 67078,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    },
+    {
+      "completion_tokens": 1048,
+      "prompt_tokens": 57505,
+      "total_tokens": 58553,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "```Lean\ntheorem P3_inter_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P3 A) (hB_open : IsOpen B) :\n    Topology.P3 (A ∩ B) := by\n  dsimp [Topology.P3] at hA ⊢\n  intro x hx\n  -- Split the hypotheses `hx : x ∈ A ∩ B`.\n  rcases hx with ⟨hxA, hxB⟩\n  -- Use `P3 A` to put `x` in the interior of `closure A`.\n  have hx_intA : x ∈ interior (closure A) := hA hxA\n  -- The open set we shall use.\n  let U : Set X := interior (closure A) ∩ B\n  have hU_open : IsOpen U := isOpen_interior.inter hB_open\n  have hxU : x ∈ U := And.intro hx_intA hxB\n  -- We show that `U ⊆ closure (A ∩ B)`.\n  have hU_subset : (U : Set X) ⊆ closure (A ∩ B) := by\n    intro y hyU\n    rcases hyU with ⟨hy_intA, hyB⟩\n    -- `y ∈ closure A` because `interior (closure A) ⊆ closure A`.\n    have hy_clA : y ∈ closure A := interior_subset hy_intA\n    -- Prove `y ∈ closure (A ∩ B)` using the characterization via neighbourhoods.\n    have : y ∈ closure (A ∩ B) := by\n      -- Use `mem_closure_iff`.\n      apply (mem_closure_iff).2\n      intro V hV_open hyV\n      -- Refine the neighbourhood so that it stays inside `B`.\n      have hVB_open : IsOpen (V ∩ B) := hV_open.inter hB_open\n      have hyV_in : y ∈ V ∩ B := And.intro hyV hyB\n      -- Since `y ∈ closure A`, `A` meets every neighbourhood of `y`.\n      have hNonempty : ((V ∩ B) ∩ A).Nonempty := by\n        have := (mem_closure_iff).1 hy_clA (V ∩ B) hVB_open hyV_in\n        simpa [Set.inter_comm, Set.inter_left_comm, Set.inter_assoc] using this\n      -- Extract a witness in `V ∩ (A ∩ B)`.\n      rcases hNonempty with ⟨z, ⟨⟨hzV, hzB⟩, hzA⟩⟩\n      exact ⟨z, And.intro hzV (And.intro hzA hzB)⟩\n    exact this\n  -- Conclude that `x` lies in the interior of `closure (A ∩ B)`.\n  have : x ∈ interior (closure (A ∩ B)) :=\n    (mem_interior_iff_mem_nhds).2\n      (Filter.mem_of_superset (hU_open.mem_nhds hxU) hU_subset)\n  exact this\n```",
+    "theorem interior_prod_eq_empty_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    interior (A ×ˢ B) = (∅ : Set (X × Y)) ↔\n      interior A = ∅ ∨ interior B = ∅ := by\n  classical\n  -- Express the interior of a product via the interiors of the factors.\n  have h_eq : interior (A ×ˢ B) = interior A ×ˢ interior B := by\n    simpa using interior_prod_eq (s := A) (t := B)\n  -- Prove the two implications.\n  constructor\n  · intro hEmpty\n    -- Translate the emptiness through `h_eq`.\n    have hProdEmpty : interior A ×ˢ interior B = (∅ : Set (X × Y)) := by\n      simpa [h_eq] using hEmpty\n    -- Analyse the possible non-emptiness of the factors.\n    by_cases hA : (interior A).Nonempty\n    · rcases hA with ⟨x, hx⟩\n      by_cases hB : (interior B).Nonempty\n      · rcases hB with ⟨y, hy⟩\n        -- Build a point of the product, contradicting its emptiness.\n        have : ((x, y) : X × Y) ∈ (∅ : Set (X × Y)) := by\n          have : ((x, y) : X × Y) ∈ interior A ×ˢ interior B := by\n            exact And.intro hx hy\n          simpa [hProdEmpty] using this\n        exact this.elim\n      · -- `interior B` is empty.\n        simpa [Set.not_nonempty_iff_eq_empty] using hB\n    · -- `interior A` is empty.\n      simpa [Set.not_nonempty_iff_eq_empty] using hA\n  · intro h\n    cases h with\n    | inl hA_empty =>\n        have : interior A ×ˢ interior B = (∅ : Set (X × Y)) := by\n          simp [hA_empty]\n        simpa [h_eq] using this\n    | inr hB_empty =>\n        have : interior A ×ˢ interior B = (∅ : Set (X × Y)) := by\n          simp [hB_empty]\n        simpa [h_eq] using this",
+    "theorem interior_nonempty_iff_nonempty_of_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 A → ((interior A).Nonempty ↔ A.Nonempty) := by\n  intro hP1\n  constructor\n  · intro hInt\n    rcases hInt with ⟨x, hx⟩\n    exact ⟨x, interior_subset hx⟩\n  · intro hA\n    exact\n      Topology.interior_nonempty_of_P1 (X := X) (A := A) hP1 hA"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    17.71759271621704,
+    23.836572647094727
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1054,
+      "prompt_tokens": 44913,
+      "total_tokens": 45967,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    },
+    {
+      "completion_tokens": 1130,
+      "prompt_tokens": 45019,
+      "total_tokens": 46149,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureFrontier_eq_closure_diff_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (frontier (A : Set X)) = closure A \\ interior A := by\n  have h₁ : closure (frontier (A : Set X)) = frontier (A : Set X) :=\n    Topology.closureFrontier_eq_self (A := A)\n  have h₂ : frontier (A : Set X) = closure A \\ interior A :=\n    Topology.frontier_eq_closure_diff_interior (A := A)\n  simpa [h₂] using h₁",
+    "theorem Topology.frontier_interior_subset_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (interior A) ⊆ closure A := by\n  intro x hx\n  -- `hx.1` gives `x ∈ closure (interior A)`.\n  have hx_closureInt : x ∈ closure (interior A) := hx.1\n  -- Since `interior A ⊆ A`, taking closures yields the desired inclusion.\n  have h_subset : closure (interior A) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  exact h_subset hx_closureInt"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    121.81833744049072
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6965,
+      "prompt_tokens": 49377,
+      "total_tokens": 56342,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_closure_eq_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (closure A ∪ closure B : Set X) = closure (A ∪ B) := by\n  have h₁ :\n      closure (closure A ∪ closure B : Set X) = closure (A ∪ closure B) := by\n    simpa using\n      (closure_union_closure_left (A := A) (B := closure B))\n  have h₂ : closure (A ∪ closure B : Set X) = closure (A ∪ B) :=\n    closure_union_closure_right (A := A) (B := B)\n  simpa using (h₁.trans h₂)"
+  ],
+  "success": true
+}

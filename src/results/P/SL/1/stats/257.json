@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.42282795906067
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7756,
+      "prompt_tokens": 39234,
+      "total_tokens": 46990,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_diff_of_isOpen_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsClosed B) :\n    Topology.P1 (A \\ B) := by\n  -- The complement of a closed set is open.\n  have hOpenCompl : IsOpen (Bᶜ) := by\n    simpa using (isOpen_compl_iff).2 hB\n  -- `A \\ B` is the intersection of two open sets, hence open.\n  have hOpen : IsOpen (A \\ B) := by\n    simpa [Set.diff_eq] using hA.inter hOpenCompl\n  -- Any open set satisfies `P1`.\n  exact Topology.P1_of_isOpen (A := A \\ B) hOpen"
+  ],
+  "success": true
+}

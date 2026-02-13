@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.05940794944763
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8860,
+      "prompt_tokens": 11867,
+      "total_tokens": 20727,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (A : Set X)))) = interior (closure A) := by\n  -- We prove the equality by showing mutual inclusion.\n  apply Set.Subset.antisymm\n  · -- First, `⊆`.\n    have h :\n        interior (closure (interior (closure (A : Set X))))\n          ⊆ interior (closure (closure (A : Set X))) :=\n      interior_closure_interior_subset_closure (A := closure (A : Set X))\n    simpa [closure_closure] using h\n  · -- Second, `⊇`.\n    -- `interior (closure A)` is open and contained in `closure (interior (closure A))`.\n    have hSub :\n        interior (closure (A : Set X))\n          ⊆ closure (interior (closure (A : Set X))) :=\n      subset_closure\n    have hIncl :\n        interior (closure (A : Set X))\n          ⊆ interior (closure (interior (closure A))) :=\n      interior_maximal hSub isOpen_interior\n    simpa using hIncl"
+  ],
+  "success": true
+}

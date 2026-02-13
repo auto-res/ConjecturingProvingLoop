@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.3217031955719
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5899,
+      "prompt_tokens": 34784,
+      "total_tokens": 40683,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34688
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_self_of_discrete\n    {X : Type*} [TopologicalSpace X] [DiscreteTopology X] {A : Set X} :\n    interior (closure A) = A := by\n  classical\n  -- First, prove `closure A = A`.\n  have h_closure_eq : closure A = A := by\n    apply Set.Subset.antisymm\n    · intro x hx_cl\n      by_cases hxA : x ∈ A\n      · exact hxA\n      ·\n        -- The singleton `{x}` is open in a discrete space.\n        have h_open : IsOpen ({x} : Set X) := isOpen_discrete _\n        -- Since `{x}` contains `x` and is open, density in the closure forces\n        -- a contradiction if `x ∉ A`.\n        have h_nonempty :\n            (({x} : Set X) ∩ A).Nonempty :=\n          (mem_closure_iff).1 hx_cl ({x}) h_open (by\n            simp)\n        rcases h_nonempty with ⟨y, ⟨hy_single, hyA⟩⟩\n        have h_eq : y = x := by\n          simpa [Set.mem_singleton_iff] using hy_single\n        have : x ∈ A := by\n          simpa [h_eq] using hyA\n        exact this\n    · exact subset_closure\n  -- In a discrete space every set is open, so `interior A = A`.\n  have h_interior_eq : interior A = A :=\n    (isOpen_discrete _).interior_eq\n  -- Rewrite using the two equalities obtained above.\n  simpa [h_closure_eq, h_interior_eq]"
+  ],
+  "success": true
+}

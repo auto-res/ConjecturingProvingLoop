@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.89143443107605
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6096,
+      "prompt_tokens": 13389,
+      "total_tokens": 19485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13184
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_closure_eq_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure A)))) =\n      closure (interior (closure A)) := by\n  have h :\n      interior (closure (interior (closure A))) = interior (closure A) :=\n    Topology.interior_closure_interior_closure_eq_interior_closure\n      (X := X) (A := A)\n  simpa [h]"
+  ],
+  "success": true
+}

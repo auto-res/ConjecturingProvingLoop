@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.58261179924011
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3689,
+      "prompt_tokens": 56239,
+      "total_tokens": 59928,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iUnion_interior_subset_closure_iUnion\n    {X ι : Type*} [TopologicalSpace X] (A : ι → Set X) :\n    closure (⋃ i, interior (A i) : Set X) ⊆\n      closure (⋃ i, A i) := by\n  -- The union of the interiors is contained in the union of the sets themselves.\n  have h_subset :\n      (⋃ i, interior (A i) : Set X) ⊆ ⋃ i, A i := by\n    intro x hx\n    rcases Set.mem_iUnion.1 hx with ⟨i, hx_int⟩\n    have hxAi : x ∈ A i :=\n      (interior_subset : interior (A i) ⊆ A i) hx_int\n    exact Set.mem_iUnion.2 ⟨i, hxAi⟩\n  -- Taking closures preserves inclusions.\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    57.34911561012268
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2773,
+      "prompt_tokens": 43230,
+      "total_tokens": 46003,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_empty_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = (∅ : Set X) ↔ (A : Set X) = ∅ := by\n  constructor\n  · intro h\n    -- Since `A ⊆ closure A`, the hypothesis forces `A` to be empty.\n    have hSub : (A : Set X) ⊆ (∅ : Set X) := by\n      have : (A : Set X) ⊆ closure (A : Set X) := subset_closure\n      simpa [h] using this\n    exact Set.Subset.antisymm hSub (Set.empty_subset _)\n  · intro h\n    -- Replace `A` with `∅` in the left‐hand side and use `closure_empty`.\n    simpa [h, closure_empty]"
+  ],
+  "success": true
+}

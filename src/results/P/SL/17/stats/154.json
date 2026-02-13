@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.74383330345154
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5153,
+      "prompt_tokens": 24647,
+      "total_tokens": 29800,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_closure_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hDense : Dense (interior A)) :\n    closure (interior A) = closure A := by\n  -- Obtain `P2` for `A` from the density of its interior.\n  have hP2 : Topology.P2 A := Topology.P2_of_dense_interior (A := A) hDense\n  -- Use the existing lemma that equates the two closures under `P2`.\n  exact Topology.closure_interior_eq_closure_of_P2 (A := A) hP2"
+  ],
+  "success": true
+}

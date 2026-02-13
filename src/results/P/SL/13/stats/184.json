@@ -1,0 +1,26 @@
+{
+  "times": [
+    10.592814445495605
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1029,
+      "prompt_tokens": 33142,
+      "total_tokens": 34171,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_of_P2_and_denseInterior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 (X := X) A) (hDenseInt : Dense (interior (A : Set X))) :\n    Dense (A : Set X) := by\n  -- From `P2` we get `P1`.\n  have hP1 : Topology.P1 (X := X) A :=\n    Topology.P2_implies_P1 (X := X) (A := A) hP2\n  -- Use the existing lemma that combines `P1` with density of `interior A`.\n  exact\n    Topology.dense_of_P1_and_denseInterior\n      (X := X) (A := A) hP1 hDenseInt"
+  ],
+  "success": true
+}

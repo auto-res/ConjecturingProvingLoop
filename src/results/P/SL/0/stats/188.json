@@ -1,0 +1,43 @@
+{
+  "times": [
+    149.25446200370789,
+    103.0044937133789
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10403,
+      "prompt_tokens": 31665,
+      "total_tokens": 42068,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 7442,
+      "prompt_tokens": 31786,
+      "total_tokens": 39228,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_subset_closure_interior_closure_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A →\n      closure (A : Set X) ⊆ closure (interior (closure (A : Set X))) := by\n  intro hP1\n  dsimp [Topology.P1] at hP1\n  -- Step 1 : `closure A ⊆ closure (interior A)` by monotonicity of `closure`.\n  have h₁ :\n      closure (A : Set X) ⊆ closure (interior (A : Set X)) :=\n    closure_mono hP1\n  -- Step 2 : `closure (interior A) ⊆ closure (interior (closure A))`\n  -- because `interior A ⊆ interior (closure A)`.\n  have h₂ :\n      closure (interior (A : Set X)) ⊆\n        closure (interior (closure (A : Set X))) := by\n    apply closure_mono\n    exact interior_mono (subset_closure : (A : Set X) ⊆ closure (A : Set X))\n  -- Combine the two inclusions.\n  exact h₁.trans h₂",
+    ""
+  ],
+  "success": true
+}

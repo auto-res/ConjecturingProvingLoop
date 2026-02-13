@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.482616901397705
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4262,
+      "prompt_tokens": 13018,
+      "total_tokens": 17280,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_of_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hB_closed : IsClosed (B : Set X))\n    (hPA : Topology.P3 (X:=X) A) (hPB : Topology.P3 (X:=X) B) :\n    Topology.P3 (X:=X) (A ∩ B) := by\n  -- Both sets are open because they are closed and satisfy P3\n  have hA_open : IsOpen (A : Set X) :=\n    Topology.closed_P3_implies_isOpen (X:=X) (A:=A) hA_closed hPA\n  have hB_open : IsOpen (B : Set X) :=\n    Topology.closed_P3_implies_isOpen (X:=X) (A:=B) hB_closed hPB\n  -- The intersection of two open sets is open\n  have h_inter_open : IsOpen ((A ∩ B) : Set X) := hA_open.inter hB_open\n  -- Open sets always satisfy P3\n  exact Topology.isOpen_subset_interiorClosure (X:=X) (A:=A ∩ B) h_inter_open"
+  ],
+  "success": true
+}

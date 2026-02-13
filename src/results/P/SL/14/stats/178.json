@@ -1,0 +1,26 @@
+{
+  "times": [
+    124.81567668914795
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8764,
+      "prompt_tokens": 33898,
+      "total_tokens": 42662,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closureInteriorClosure_iff_isOpen_closureInteriorClosure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (interior (closure (A : Set X)))) ↔\n      IsOpen (closure (interior (closure A))) := by\n  -- `closure (interior (closure A))` is a closed set.\n  have h_closed : IsClosed (closure (interior (closure A))) := isClosed_closure\n  -- Apply the general equivalence between `P2` and openness for closed sets.\n  simpa using\n    (Topology.P2_iff_isOpen_of_isClosed\n      (X := X) (A := closure (interior (closure A))) h_closed)"
+  ],
+  "success": true
+}

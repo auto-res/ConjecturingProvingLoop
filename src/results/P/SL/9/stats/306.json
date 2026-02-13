@@ -1,0 +1,43 @@
+{
+  "times": [
+    100.61412954330444,
+    233.2071795463562
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6934,
+      "prompt_tokens": 54238,
+      "total_tokens": 61172,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 9874,
+      "prompt_tokens": 54567,
+      "total_tokens": 64441,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_frontier_union_interiorCompl_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) ∪ frontier A ∪ interior (Aᶜ) =\n      (Set.univ : Set X) := by\n  classical\n  -- Prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- Everything on the left is certainly in `univ`.\n    intro x _; trivial\n  · -- Let `x : X` be arbitrary; we show it belongs to the left-hand side.\n    intro x _\n    -- Use the decomposition `closure A ∪ interior Aᶜ = univ`.\n    have h_decomp :\n        closure (A : Set X) ∪ interior (Aᶜ) = (Set.univ : Set X) :=\n      Topology.closure_union_interiorCompl (A := A)\n    have hx_union : x ∈ closure (A : Set X) ∪ interior (Aᶜ) := by\n      -- Rewrite `x ∈ univ` using `h_decomp`.\n      have : x ∈ (Set.univ : Set X) := by trivial\n      simpa [h_decomp] using this\n    -- Distinguish the two cases provided by the union.\n    cases hx_union with\n    | inr hx_intCompl =>\n        -- Case `x ∈ interior Aᶜ`.\n        have : x ∈\n            interior (A : Set X) ∪ frontier A ∪ interior (Aᶜ) :=\n          Or.inr (Set.mem_union.2 <| Or.inr hx_intCompl)\n        simpa using this\n    | inl hx_clA =>\n        -- Case `x ∈ closure A`; decide whether `x ∈ interior A`.\n        by_cases hx_intA : x ∈ interior (A : Set X)\n        · -- Subcase `x ∈ interior A`.\n          have : x ∈\n              interior (A : Set X) ∪ frontier A ∪ interior (Aᶜ) :=\n            Or.inl hx_intA\n          simpa using this\n        · -- Subcase `x ∉ interior A`; then `x` is in the frontier of `A`.\n          have hx_frontier : x ∈ frontier (A : Set X) :=\n            ⟨hx_clA, hx_intA⟩\n          have : x ∈\n              interior (A : Set X) ∪ frontier A ∪ interior (Aᶜ) :=\n            Or.inr (Set.mem_union.2 <| Or.inl hx_frontier)\n          simpa using this",
+    ""
+  ],
+  "success": true
+}

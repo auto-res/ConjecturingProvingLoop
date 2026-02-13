@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.27473425865173
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3548,
+      "prompt_tokens": 34022,
+      "total_tokens": 37570,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_diff_subset_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) \\ A ⊆ frontier A := by\n  intro x hx\n  rcases hx with ⟨hxIntClos, hxNotA⟩\n  -- `x ∈ closure A` because `interior (closure A) ⊆ closure A`\n  have hxClos : x ∈ closure A :=\n    (interior_subset : interior (closure A) ⊆ closure A) hxIntClos\n  -- `x ∉ interior A` since `interior A ⊆ A`\n  have hxNotInt : x ∉ interior A := by\n    intro hxIntA\n    have : (x : X) ∈ A := interior_subset hxIntA\n    exact hxNotA this\n  exact And.intro hxClos hxNotInt"
+  ],
+  "success": true
+}

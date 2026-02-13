@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.87382674217224
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3301,
+      "prompt_tokens": 28766,
+      "total_tokens": 32067,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_compl_eq_compl_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (Aᶜ)) = (interior (closure A))ᶜ := by\n  -- First rewrite `interior (Aᶜ)` using an existing complement–closure lemma.\n  have h₁ : interior (Aᶜ) = (closure A)ᶜ :=\n    Topology.interior_compl_eq_compl_closure (X := X) (A := A)\n  -- Apply the closure–interior complement lemma to `closure A`.\n  have h₂ : closure ((closure A)ᶜ) = (interior (closure A))ᶜ :=\n    Topology.closure_compl_eq_compl_interior (X := X) (A := closure A)\n  -- Combine the two equalities.\n  simpa [h₁] using h₂"
+  ],
+  "success": true
+}

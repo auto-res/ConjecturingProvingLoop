@@ -1,0 +1,43 @@
+{
+  "times": [
+    162.43469190597534,
+    104.65843343734741
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11560,
+      "prompt_tokens": 46725,
+      "total_tokens": 58285,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    },
+    {
+      "completion_tokens": 6226,
+      "prompt_tokens": 46821,
+      "total_tokens": 53047,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_of_interior_compl_empty {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hInt : interior (Aᶜ) = (∅ : Set X)) : Dense A := by\n  -- Step 1:  `(closure A)ᶜ ⊆ interior (Aᶜ)`\n  have hSubset : ((closure A)ᶜ : Set X) ⊆ interior (Aᶜ) := by\n    -- `(closure A)ᶜ` is open…\n    have hOpen : IsOpen ((closure A)ᶜ : Set X) :=\n      isClosed_closure.isOpen_compl\n    -- …and contained in `Aᶜ`.\n    have hSub : ((closure A)ᶜ : Set X) ⊆ (Aᶜ) := by\n      intro x hxCompl\n      by_cases hxA : x ∈ A\n      · have : (x : X) ∈ closure A := subset_closure hxA\n        exact False.elim (hxCompl this)\n      · simpa [Set.mem_compl] using hxA\n    -- Apply `interior_maximal`.\n    exact interior_maximal hSub hOpen\n  -- Step 2:  `(closure A)ᶜ = ∅`\n  have hComplEmpty : ((closure A)ᶜ : Set X) = (∅ : Set X) := by\n    apply Set.Subset.antisymm\n    ·\n      have : ((closure A)ᶜ : Set X) ⊆ interior (Aᶜ) := hSubset\n      simpa [hInt] using this\n    · exact Set.empty_subset _\n  -- Step 3:  `closure A = univ`\n  have hClosure : closure A = (Set.univ : Set X) := by\n    have : closure A = (((closure A)ᶜ : Set X)ᶜ) := by\n      simp\n    simpa [hComplEmpty, Set.compl_empty] using this\n  -- Step 4:  conclude density.\n  exact ⟨hClosure⟩",
+    ""
+  ],
+  "success": true
+}

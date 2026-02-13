@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.773428440093994
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1911,
+      "prompt_tokens": 30694,
+      "total_tokens": 32605,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closure_iff_interior_eq_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure A) ↔ interior (closure A) = closure A := by\n  have h_closed : IsClosed (closure A) := isClosed_closure\n  simpa using\n    (Topology.P3_closed_iff_interior_eq (X := X) (A := closure A) h_closed)"
+  ],
+  "success": true
+}

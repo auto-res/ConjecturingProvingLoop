@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.07191514968872
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3895,
+      "prompt_tokens": 44924,
+      "total_tokens": 48819,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_boundary {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (closure (A : Set X) \\ interior A) := by\n  -- The closure of a set is closed.\n  have h₁ : IsClosed (closure (A : Set X)) := isClosed_closure\n  -- The complement of the interior is closed.\n  have h₂ : IsClosed ((interior (A : Set X))ᶜ) := by\n    have : IsOpen (interior (A : Set X)) := isOpen_interior\n    exact this.isClosed_compl\n  -- Express the set as an intersection of two closed sets.\n  simpa [Set.diff_eq] using h₁.inter h₂"
+  ],
+  "success": true
+}

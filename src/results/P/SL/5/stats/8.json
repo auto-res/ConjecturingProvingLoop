@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.46602153778076
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2497,
+      "prompt_tokens": 1493,
+      "total_tokens": 3990,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    P3 (X := X) A := by\n  dsimp [P3]\n  intro x hxA\n  have hsubset : (A : Set X) ⊆ interior (closure A) :=\n    interior_maximal (subset_closure : (A : Set X) ⊆ closure A) hA\n  exact hsubset hxA"
+  ],
+  "success": true
+}

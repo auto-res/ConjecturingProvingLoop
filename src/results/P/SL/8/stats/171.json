@@ -1,0 +1,26 @@
+{
+  "times": [
+    136.9821379184723
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10927,
+      "prompt_tokens": 24681,
+      "total_tokens": 35608,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_inter_subset_inter_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∩ B)) ⊆ closure A ∩ closure B := by\n  -- First, use the existing inclusion into the intersection of\n  -- the closures of the interiors.\n  have h₁ :\n      closure (interior (A ∩ B)) ⊆\n        closure (interior A) ∩ closure (interior B) :=\n    closureInterior_inter_subset_inter_closureInterior\n      (X := X) (A := A) (B := B)\n  -- Next, observe that each `closure (interior _)` is contained in the corresponding `closure _`.\n  have h₂ :\n      (closure (interior A) ∩ closure (interior B)) ⊆\n        closure A ∩ closure B := by\n    intro x hx\n    rcases hx with ⟨hxA, hxB⟩\n    exact And.intro\n      (closure_interior_subset_closure (X := X) (A := A) hxA)\n      (closure_interior_subset_closure (X := X) (A := B) hxB)\n  -- Combine the two inclusions.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

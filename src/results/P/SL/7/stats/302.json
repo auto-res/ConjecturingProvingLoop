@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.6492486000061
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2188,
+      "prompt_tokens": 47298,
+      "total_tokens": 49486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_union_eq_union_interiorClosures\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (closure (A : Set X))) (hB : IsOpen (closure (B : Set X))) :\n    interior (closure (A ∪ B : Set X)) =\n      interior (closure (A : Set X)) ∪ interior (closure (B : Set X)) := by\n  -- Start from the existing equality expressed with closures.\n  have h :=\n    Topology.interiorClosure_union_eq_union_of_open_closures\n      (A := A) (B := B) hA hB\n  -- Rewrite the right‐hand side using `interior_eq` for the open closures.\n  simpa [hA.interior_eq, hB.interior_eq] using h"
+  ],
+  "success": true
+}

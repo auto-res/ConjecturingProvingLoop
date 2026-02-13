@@ -1,0 +1,43 @@
+{
+  "times": [
+    131.20856595039368,
+    248.74258184432983
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8932,
+      "prompt_tokens": 38274,
+      "total_tokens": 47206,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    },
+    {
+      "completion_tokens": 17107,
+      "prompt_tokens": 38391,
+      "total_tokens": 55498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_implies_frontier_eq_frontier_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 A → frontier (A : Set X) = frontier (interior A) := by\n  intro hP1\n  -- From `P1`, we know the closures coincide.\n  have hCl : closure (A : Set X) = closure (interior A) :=\n    Topology.P1_implies_closure_interior_eq_closure (A := A) hP1\n  -- Rewrite both frontiers using their definitions and simplify.\n  simp [frontier, hCl, interior_interior]",
+    ""
+  ],
+  "success": true
+}

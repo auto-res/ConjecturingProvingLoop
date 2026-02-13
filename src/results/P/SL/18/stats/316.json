@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.53184485435486
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3461,
+      "prompt_tokens": 52171,
+      "total_tokens": 55632,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_iInter_eq_iInter_of_closed {ι : Sort _} {X : Type _}\n    [TopologicalSpace X] (A : ι → Set X) (hClosed : ∀ i, IsClosed (A i)) :\n    closure (⋂ i, A i : Set X) = ⋂ i, A i := by\n  have h : IsClosed (⋂ i, A i : Set X) := isClosed_iInter (fun i ↦ hClosed i)\n  simpa using h.closure_eq"
+  ],
+  "success": true
+}

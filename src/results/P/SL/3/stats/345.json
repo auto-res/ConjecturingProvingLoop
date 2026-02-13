@@ -1,0 +1,77 @@
+{
+  "times": [
+    70.60371470451355,
+    210.8623423576355,
+    70.41912364959717,
+    61.909387826919556
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4220,
+      "prompt_tokens": 58534,
+      "total_tokens": 62754,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    },
+    {
+      "completion_tokens": 12068,
+      "prompt_tokens": 58638,
+      "total_tokens": 70706,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    },
+    {
+      "completion_tokens": 3878,
+      "prompt_tokens": 58717,
+      "total_tokens": 62595,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    },
+    {
+      "completion_tokens": 3486,
+      "prompt_tokens": 58921,
+      "total_tokens": 62407,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_closure_subset_inter_closures\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure ((A ∩ closure (B : Set X)) : Set X) ⊆\n      closure (A : Set X) ∩ closure (B : Set X) := by\n  intro x hx\n  have hxA : (x : X) ∈ closure (A : Set X) := by\n    have h_subset : ((A ∩ closure (B : Set X)) : Set X) ⊆ A := by\n      intro y hy; exact hy.1\n    exact (closure_mono h_subset) hx\n  have hxB : (x : X) ∈ closure (B : Set X) := by\n    have h_subset : ((A ∩ closure (B : Set X)) : Set X) ⊆ closure (B : Set X) := by\n      intro y hy; exact hy.2\n    exact (closure_mono h_subset) hx\n  exact And.intro hxA hxB",
+    "theorem closure_inter_interior_subset_closure_interiors {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure ((A ∩ interior (B : Set X)) : Set X) ⊆\n      closure (A : Set X) ∩ closure (interior (B : Set X)) := by\n  intro x hx\n  -- `A ∩ interior B` is contained in `A`\n  have hA : ((A ∩ interior (B : Set X)) : Set X) ⊆ A := by\n    intro y hy\n    exact hy.1\n  -- `A ∩ interior B` is contained in `interior B`\n  have hB : ((A ∩ interior (B : Set X)) : Set X) ⊆ interior (B : Set X) := by\n    intro y hy\n    exact hy.2\n  -- Close the inclusions\n  have hxA : (x : X) ∈ closure (A : Set X) :=\n    (closure_mono hA) hx\n  have hxB : (x : X) ∈ closure (interior (B : Set X)) :=\n    (closure_mono hB) hx\n  exact And.intro hxA hxB",
+    "theorem P1_P2_P3_of_full_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (A : Set X) = Set.univ) :\n    Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A := by\n  -- First, show that `A = univ`, since `interior A ⊆ A`.\n  have hA_univ : (A : Set X) = Set.univ := by\n    apply Set.Subset.antisymm\n    · intro x hxA\n      have : (x : X) ∈ interior (A : Set X) := interior_subset hxA\n      simpa [h] using this\n    · intro x _; exact Set.mem_univ _\n  -- Reduce the goal to the already proved fact for `univ`.\n  simpa [hA_univ] using (Topology.P1_P2_P3_univ (X := X))",
+    "theorem closure_interior_subset_closure_interior_union_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X)) ⊆ closure (interior (A ∪ B)) := by\n  -- First, note that `interior A ⊆ interior (A ∪ B)`.\n  have hInt : interior (A : Set X) ⊆ interior (A ∪ B) := by\n    apply interior_mono\n    intro x hx\n    exact Or.inl hx\n  -- Taking closures preserves inclusions.\n  exact closure_mono hInt"
+  ],
+  "success": true
+}

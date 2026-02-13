@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.21547293663025
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2407,
+      "prompt_tokens": 7846,
+      "total_tokens": 10253,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_subset_interior_closure_interior_closure {X : Type*}\n    [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior A)) ⊆\n      interior (closure (interior (closure A))) := by\n  -- The set `A` is always contained in its closure.\n  have hA : (A : Set X) ⊆ closure A := subset_closure\n  -- Apply monotonicity of `interior ∘ closure ∘ interior`.\n  exact\n    Topology.interior_closure_interior_mono\n      (X := X) (A := A) (B := closure A) hA"
+  ],
+  "success": true
+}

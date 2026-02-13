@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.46757745742798
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3518,
+      "prompt_tokens": 12862,
+      "total_tokens": 16380,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_and_closure_interior_eq_closure_implies_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (A : Set X) →\n      closure (interior A) = closure A → Topology.P2 A := by\n  intro hP3 hEq\n  -- Derive `P1` from the equality of closures.\n  have hP1 : Topology.P1 (A : Set X) :=\n    (Topology.P1_iff_closure_interior_eq_closure (A := A)).2 hEq\n  -- Combine `P1` and `P3` to obtain `P2`.\n  exact Topology.P1_and_P3_implies_P2 (A := A) hP1 hP3"
+  ],
+  "success": true
+}

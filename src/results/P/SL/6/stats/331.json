@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.8411374092102
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6891,
+      "prompt_tokens": 53119,
+      "total_tokens": 60010,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem nonempty_iff_nonempty_interior_closure_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP3 : Topology.P3 (A : Set X)) :\n    (A : Set X).Nonempty ↔ (interior (closure (A : Set X))).Nonempty := by\n  classical\n  constructor\n  · intro hA\n    exact\n      nonempty_interior_closure_of_nonempty_P3 (A := A) hP3 hA\n  · intro hInt\n    by_cases hA : (A : Set X).Nonempty\n    · exact hA\n    · exfalso\n      -- From `¬ A.Nonempty`, deduce `interior (closure A)` is empty,\n      -- contradicting `hInt`.\n      have hIntEq :\n          interior (closure (A : Set X)) = (∅ : Set X) := by\n        have hAeq : (A : Set X) = ∅ := by\n          simpa [Set.not_nonempty_iff_eq_empty] using hA\n        simpa [hAeq, closure_empty, interior_empty]\n      rcases hInt with ⟨x, hx⟩\n      simpa [hIntEq] using hx"
+  ],
+  "success": true
+}

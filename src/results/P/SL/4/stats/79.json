@@ -1,0 +1,26 @@
+{
+  "times": [
+    12.50058889389038
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1025,
+      "prompt_tokens": 11215,
+      "total_tokens": 12240,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closure_imp_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure A) → Topology.P3 A := by\n  intro hP3Closure\n  dsimp [Topology.P3] at hP3Closure\n  dsimp [Topology.P3]\n  intro x hxA\n  -- A point of `A` is in `closure A`.\n  have hx_closure : x ∈ closure A := subset_closure hxA\n  -- Apply `P3` for `closure A`.\n  have hx_int : x ∈ interior (closure (closure A)) := hP3Closure hx_closure\n  -- Simplify `closure (closure A)` to `closure A`.\n  simpa [closure_closure] using hx_int"
+  ],
+  "success": true
+}

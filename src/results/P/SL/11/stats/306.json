@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.9967405796051
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3626,
+      "prompt_tokens": 50185,
+      "total_tokens": 53811,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_interior_subset_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A ∪ interior B) ⊆ closure (A ∪ B) := by\n  -- The subset relation on the underlying sets\n  have hSub : (A ∪ interior B : Set X) ⊆ A ∪ B := by\n    intro x hx\n    cases hx with\n    | inl hA   => exact Or.inl hA\n    | inr hInt => exact Or.inr ((interior_subset : interior B ⊆ B) hInt)\n  -- Taking closures preserves inclusions\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.63755059242249
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4330,
+      "prompt_tokens": 5502,
+      "total_tokens": 9832,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → Topology.P1 (closure A) := by\n  intro hP3\n  have hEq : closure A = closure (interior (closure A)) :=\n    Topology.closure_eq_closure_interior_closure_of_P3 (A := A) hP3\n  have hP1 : Topology.P1 (closure A) :=\n    Topology.P1_of_closure_eq_closure_interior\n      (A := closure A)\n      (by\n        simpa [closure_closure] using hEq)\n  exact hP1"
+  ],
+  "success": true
+}

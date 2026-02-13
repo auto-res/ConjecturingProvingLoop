@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.54249835014343
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4327,
+      "prompt_tokens": 33477,
+      "total_tokens": 37804,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_frontier_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A →\n      frontier (A : Set X) ⊆ closure (interior (closure (A : Set X))) := by\n  intro hP3 x hxFrontier\n  -- A point in the frontier of `A` lies in `closure A`.\n  have hx_closureA : (x : X) ∈ closure (A : Set X) := hxFrontier.1\n  -- `closure A` is contained in `closure (interior (closure A))` by `P3`.\n  have hsubset :\n      (closure (A : Set X)) ⊆ closure (interior (closure (A : Set X))) :=\n    Topology.P3_implies_closure_subset_closure_interior_closure (A := A) hP3\n  exact hsubset hx_closureA"
+  ],
+  "success": true
+}

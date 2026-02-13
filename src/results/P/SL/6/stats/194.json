@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.02767634391785
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6207,
+      "prompt_tokens": 30210,
+      "total_tokens": 36417,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior ((A \\ B) : Set X) ⊆ interior A := by\n  -- Since `A \\ B ⊆ A`, monotonicity of `interior` yields the desired inclusion.\n  have hSub : (A \\ B : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  exact interior_mono hSub"
+  ],
+  "success": true
+}

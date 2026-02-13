@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.27659773826599
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5459,
+      "prompt_tokens": 35283,
+      "total_tokens": 40742,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_dense_interior_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_closed : IsClosed (A : Set X)) (h_dense : Dense (A : Set X)) :\n    interior (A : Set X) = (Set.univ : Set X) := by\n  have h_eq : (A : Set X) = (Set.univ : Set X) :=\n    Topology.closed_dense_eq_univ (X := X) (A := A) h_closed h_dense\n  simpa [h_eq, interior_univ]"
+  ],
+  "success": true
+}

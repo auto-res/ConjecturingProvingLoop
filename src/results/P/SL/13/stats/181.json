@@ -1,0 +1,60 @@
+{
+  "times": [
+    97.78591299057007,
+    106.7970621585846,
+    15.46957278251648
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7886,
+      "prompt_tokens": 32304,
+      "total_tokens": 40190,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    },
+    {
+      "completion_tokens": 7212,
+      "prompt_tokens": 32394,
+      "total_tokens": 39606,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    },
+    {
+      "completion_tokens": 1446,
+      "prompt_tokens": 32473,
+      "total_tokens": 33919,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_closure_interior_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (A : Set X)))))) =\n      closure (interior A) := by\n  simpa [interior_interior] using\n    (Topology.closure_interior_closure_interior_closure_eq_closure_interior\n      (X := X) (A := interior (A : Set X)))",
+    "import Mathlib\n\ntheorem Topology.closure_interior_subset_closure_self {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior (A : Set X)) ⊆ closure A := by\n  intro x hx\n  have h_subset : interior (A : Set X) ⊆ A := interior_subset\n  exact (closure_mono h_subset) hx",
+    "theorem Topology.dense_implies_all_P_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (A : Set X)) :\n    (Topology.P1 (X := X) (closure (A : Set X))) ∧\n      (Topology.P2 (X := X) (closure (A : Set X))) ∧\n        (Topology.P3 (X := X) (closure (A : Set X))) := by\n  have hP1 := Topology.dense_implies_P1_closure (X := X) (A := A) hDense\n  have hP2 := Topology.dense_implies_P2_closure (X := X) (A := A) hDense\n  have hP3 := Topology.dense_implies_P3_closure (X := X) (A := A) hDense\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.062904596328735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3288,
+      "prompt_tokens": 13778,
+      "total_tokens": 17066,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_right_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 A) (hB_open : IsOpen B) :\n    Topology.P2 (A ∪ B) := by\n  -- Obtain `P2` for the open set `B`.\n  have hB : Topology.P2 B := Topology.P2_of_open (A := B) hB_open\n  -- Apply the general union lemma for `P2`.\n  exact Topology.P2_union (A := A) (B := B) hA hB"
+  ],
+  "success": true
+}

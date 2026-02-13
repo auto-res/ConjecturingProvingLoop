@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.80688762664795
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2029,
+      "prompt_tokens": 53566,
+      "total_tokens": 55595,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.nonempty_interior_closure_interior_iff\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (interior (closure (interior A))).Nonempty ↔ (interior A).Nonempty := by\n  -- First, translate the desired statement into a comparison of (in)equality\n  -- with the empty set, using `Set.nonempty_iff_ne_empty`.\n  have hNe :\n      (interior (closure (interior A)) ≠ (∅ : Set X)) ↔\n        interior A ≠ (∅ : Set X) := by\n    -- Take the negation of the equivalence of emptiness already proved.\n    have hEmpty :=\n      Topology.interior_closure_interior_eq_empty_iff (A := A)\n    exact (not_congr hEmpty)\n  -- Rewrite `Nonempty` in terms of `≠ ∅` and conclude.\n  simpa [Set.nonempty_iff_ne_empty] using hNe"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.13768410682678
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2669,
+      "prompt_tokens": 5636,
+      "total_tokens": 8305,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_subset {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P2 (X := X) A) :\n    closure A ⊆ closure (interior A) := by\n  -- From `P2`, we have `A ⊆ interior (closure (interior A))`.\n  have h_subset : (A : Set X) ⊆ interior (closure (interior A)) := hA\n  -- Taking closures yields the desired inclusion, modulo re-writing with idempotency.\n  simpa [Topology.closure_interior_idempotent (X := X) (A := A)]\n    using (closure_mono h_subset)"
+  ],
+  "success": true
+}

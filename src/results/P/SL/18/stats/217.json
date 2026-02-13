@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.20886158943176
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3916,
+      "prompt_tokens": 33565,
+      "total_tokens": 37481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_univ_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDenseInt : Dense (interior (A : Set X))) :\n    interior (closure (A : Set X)) = Set.univ := by\n  -- From the density of `interior A`, obtain that\n  -- `interior (closure (interior A)) = univ`.\n  have hInt :\n      interior (closure (interior (A : Set X))) = (Set.univ : Set X) :=\n    (Topology.dense_interior_iff_interior_closure_interior_eq_univ (A := A)).1\n      hDenseInt\n  -- This interior is contained in `interior (closure A)`.\n  have hSub :\n      interior (closure (interior (A : Set X))) ⊆\n        interior (closure (A : Set X)) :=\n    Topology.interior_closure_interior_subset_interior_closure (A := A)\n  -- Hence `univ ⊆ interior (closure A)`.\n  have hSubUniv :\n      (Set.univ : Set X) ⊆ interior (closure (A : Set X)) := by\n    simpa [hInt] using hSub\n  -- Conclude the desired equality by antisymmetry.\n  apply Set.Subset.antisymm\n  · intro _ _; trivial\n  · exact hSubUniv"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.44535303115845
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4145,
+      "prompt_tokens": 7569,
+      "total_tokens": 11714,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_inter_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior (A ∩ B))) ⊆\n      interior (closure (interior A)) ∩ interior (closure (interior B)) := by\n  intro x hx\n  have hA : x ∈ interior (closure (interior A)) := by\n    have hSubA :\n        interior (closure (interior (A ∩ B))) ⊆\n          interior (closure (interior A)) := by\n      have hInterA : (A ∩ B : Set X) ⊆ A := by\n        intro z hz\n        exact hz.1\n      exact\n        Topology.interior_closure_interior_mono\n          (X := X) (A := A ∩ B) (B := A) hInterA\n    exact hSubA hx\n  have hB : x ∈ interior (closure (interior B)) := by\n    have hSubB :\n        interior (closure (interior (A ∩ B))) ⊆\n          interior (closure (interior B)) := by\n      have hInterB : (A ∩ B : Set X) ⊆ B := by\n        intro z hz\n        exact hz.2\n      exact\n        Topology.interior_closure_interior_mono\n          (X := X) (A := A ∩ B) (B := B) hInterB\n    exact hSubB hx\n  exact And.intro hA hB"
+  ],
+  "success": true
+}

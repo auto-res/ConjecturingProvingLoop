@@ -1,0 +1,26 @@
+{
+  "times": [
+    14.284898042678833
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1354,
+      "prompt_tokens": 37016,
+      "total_tokens": 38370,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_self_of_clopen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed A) (hA_open : IsOpen A) :\n    interior (closure A) = A := by\n  calc\n    interior (closure A) = interior A := by\n      simpa using\n        (Topology.interior_closure_eq_interior_of_closed (A := A) hA_closed)\n    _ = A := by\n      simpa using hA_open.interior_eq"
+  ],
+  "success": true
+}

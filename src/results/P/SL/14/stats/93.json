@@ -1,0 +1,43 @@
+{
+  "times": [
+    104.36025857925415,
+    75.6931791305542
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5941,
+      "prompt_tokens": 15979,
+      "total_tokens": 21920,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    },
+    {
+      "completion_tokens": 5093,
+      "prompt_tokens": 16180,
+      "total_tokens": 21273,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X)) ∪ closure (interior B) ⊆\n      closure (interior (A ∪ B)) := by\n  intro x hx\n  rcases hx with hA | hB\n  ·\n    -- Case `x ∈ closure (interior A)`\n    have h_int_mono : (interior A : Set X) ⊆ interior (A ∪ B) := by\n      intro y hy\n      exact Or.inl hy\n    have h_closure_mono :\n        closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n      closure_mono h_int_mono\n    exact h_closure_mono hA\n  ·\n    -- Case `x ∈ closure (interior B)`\n    have h_int_mono : (interior B : Set X) ⊆ interior (A ∪ B) := by\n      intro y hy\n      exact Or.inr hy\n    have h_closure_mono :\n        closure (interior B) ⊆ closure (interior (A ∪ B)) :=\n      closure_mono h_int_mono\n    exact h_closure_mono hB",
+    "theorem Topology.P3_iff_P1_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (interior A)) :\n    Topology.P3 A ↔ Topology.P1 A := by\n  have hP1 : Topology.P1 A :=\n    Topology.P1_of_denseInterior (X := X) (A := A) hDense\n  have hP3 : Topology.P3 A :=\n    Topology.P3_of_denseInterior (X := X) (A := A) hDense\n  exact ⟨fun _ => hP1, fun _ => hP3⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.78457403182983
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5958,
+      "prompt_tokens": 55781,
+      "total_tokens": 61739,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_subset_closures_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X) ∩ B) ⊆ closure A ∩ closure B := by\n  have h :\n      closure (B ∩ interior (A : Set X)) ⊆ closure B ∩ closure A :=\n    closure_inter_interior_subset_closures (A := B) (B := A)\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.77374577522278
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2480,
+      "prompt_tokens": 50490,
+      "total_tokens": 52970,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_diff_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure ((A \\ B) : Set X)) ⊆ interior (closure (A : Set X)) := by\n  -- Since `A \\ B ⊆ A`, monotonicity gives all required inclusions.\n  have hSub : ((A \\ B) : Set X) ⊆ (A : Set X) := by\n    intro x hx\n    exact hx.1\n  have hCl : closure ((A \\ B) : Set X) ⊆ closure (A : Set X) :=\n    closure_mono hSub\n  exact interior_mono hCl"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.17784905433655
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3519,
+      "prompt_tokens": 39086,
+      "total_tokens": 42605,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_frontier_subset_frontier {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (frontier A) ⊆ frontier A := by\n  intro x hx\n  -- `hx` provides `x ∈ closure (frontier A)`.\n  have h_cl : x ∈ closure (frontier A) := hx.1\n  -- Since `frontier A` is closed, its closure is itself.\n  have h_closed : closure (frontier A) = frontier A := by\n    have hIsClosed : IsClosed (frontier A) := frontier_isClosed (X := X) (A := A)\n    simpa using hIsClosed.closure_eq\n  -- Rewrite using the equality and finish.\n  simpa [h_closed] using h_cl"
+  ],
+  "success": true
+}

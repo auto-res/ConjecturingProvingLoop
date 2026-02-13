@@ -1,0 +1,26 @@
+{
+  "times": [
+    129.9961712360382
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6923,
+      "prompt_tokens": 23753,
+      "total_tokens": 30676,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter3_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior\n      (closure (interior (closure A))))))) = interior (closure A) := by\n  have h₁ :=\n    Topology.interiorClosure_iter2_idempotent\n      (A := interior (closure A))\n  have h₂ := Topology.interiorClosure_idempotent (A := A)\n  simpa using h₁.trans h₂"
+  ],
+  "success": true
+}

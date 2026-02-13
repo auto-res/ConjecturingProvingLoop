@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.749369144439697
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2148,
+      "prompt_tokens": 17035,
+      "total_tokens": 19183,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_subset_interior_closure_of_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) (hP2 : Topology.P2 A) :\n    A ⊆ interior (closure B) := by\n  intro x hxA\n  -- From `P2`, the point `x` lies in `interior (closure (interior A))`.\n  have hx_int : x ∈ interior (closure (interior A)) := hP2 hxA\n  -- Since `A ⊆ B`, the interior of `A` is included in `B`.\n  have h_int_subset : interior A ⊆ B := by\n    intro y hyInt\n    have : y ∈ A := interior_subset hyInt\n    exact hAB this\n  -- Taking closures preserves inclusion.\n  have h_closure_subset : closure (interior A) ⊆ closure B :=\n    closure_mono h_int_subset\n  -- Taking interiors preserves inclusion as well.\n  have h_int_mono : interior (closure (interior A)) ⊆ interior (closure B) :=\n    interior_mono h_closure_subset\n  -- Conclude the desired membership.\n  exact h_int_mono hx_int"
+  ],
+  "success": true
+}

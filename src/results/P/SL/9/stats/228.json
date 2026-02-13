@@ -1,0 +1,26 @@
+{
+  "times": [
+    148.27380967140198
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9045,
+      "prompt_tokens": 37644,
+      "total_tokens": 46689,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_union_three_subset_union_boundary\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    closure (A ∪ B ∪ C) \\ interior (A ∪ B ∪ C) ⊆\n      (closure A \\ interior A) ∪ (closure B \\ interior B) ∪\n        (closure C \\ interior C) := by\n  intro x hx\n  -- First, treat the union as `((A ∪ B) ∪ C)` and apply the two‐set lemma.\n  have h₁ :\n      x ∈ (closure (A ∪ B) \\ interior (A ∪ B)) ∪\n          (closure C \\ interior C) :=\n    (Topology.boundary_union_subset_union_boundary\n        (A := A ∪ B) (B := C)) hx\n  cases h₁ with\n  | inl hAB =>\n      -- Now decompose the boundary of `A ∪ B`.\n      have h₂ :\n          x ∈ (closure A \\ interior A) ∪ (closure B \\ interior B) :=\n        (Topology.boundary_union_subset_union_boundary\n            (A := A) (B := B)) hAB\n      cases h₂ with\n      | inl hA =>\n          exact Or.inl (Or.inl hA)\n      | inr hB =>\n          exact Or.inl (Or.inr hB)\n  | inr hC =>\n      exact Or.inr hC"
+  ],
+  "success": true
+}

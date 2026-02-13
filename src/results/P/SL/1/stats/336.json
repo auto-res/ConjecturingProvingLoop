@@ -1,0 +1,26 @@
+{
+  "times": [
+    57.636372804641724
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4077,
+      "prompt_tokens": 51312,
+      "total_tokens": 55389,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_iInter_subset\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    interior (closure (interior (⋂ i, A i))) ⊆\n      ⋂ i, interior (closure (interior (A i))) := by\n  intro x hx\n  -- Show that `x` belongs to each component of the intersection.\n  have h : ∀ i, x ∈ interior (closure (interior (A i))) := by\n    intro i\n    -- Step 1: `(⋂ j, A j) ⊆ A i`\n    have h₁ : (⋂ j, A j : Set X) ⊆ A i := Set.iInter_subset _ i\n    -- Step 2: `interior (⋂ j, A j) ⊆ interior (A i)`\n    have h₂ : interior (⋂ j, A j) ⊆ interior (A i) := interior_mono h₁\n    -- Step 3: `closure (interior (⋂ j, A j)) ⊆ closure (interior (A i))`\n    have h₃ : closure (interior (⋂ j, A j)) ⊆ closure (interior (A i)) :=\n      closure_mono h₂\n    -- Step 4: `interior (closure (interior (⋂ j, A j))) ⊆\n    --          interior (closure (interior (A i)))`\n    have h₄ :\n        interior (closure (interior (⋂ j, A j))) ⊆\n          interior (closure (interior (A i))) :=\n      interior_mono h₃\n    -- Apply the inclusion to `hx`.\n    exact h₄ hx\n  exact Set.mem_iInter.2 h"
+  ],
+  "success": true
+}

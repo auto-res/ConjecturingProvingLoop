@@ -1,0 +1,43 @@
+{
+  "times": [
+    143.7042202949524,
+    352.05423164367676
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8602,
+      "prompt_tokens": 16949,
+      "total_tokens": 25551,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    },
+    {
+      "completion_tokens": 21216,
+      "prompt_tokens": 17071,
+      "total_tokens": 38287,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 21056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (A : Set X))))\n      = closure (interior A) := by\n  apply Set.Subset.antisymm\n  · -- First, show `⊆`.\n    have h :\n        interior (closure (interior (A : Set X)))\n          ⊆ closure (interior A) :=\n      interior_subset\n    simpa [closure_closure] using closure_mono h\n  · -- Second, show `⊇`.\n    have h :\n        interior (A : Set X)\n          ⊆ interior (closure (interior A)) := by\n      have : interior (A : Set X) ⊆ closure (interior A) :=\n        subset_closure\n      exact interior_mono this\n    simpa using closure_mono h",
+    "theorem interior_eq_self_of_P3_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    Topology.P3 (A : Set X) → interior (A : Set X) = A := by\n  intro hP3\n  -- A closed set satisfying `P3` is also open.\n  have hOpen : IsOpen (A : Set X) :=\n    (Topology.open_of_P3_closed (A := A) hA) hP3\n  -- For an open set, its interior is the set itself.\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

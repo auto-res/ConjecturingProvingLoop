@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.369606494903564
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4320,
+      "prompt_tokens": 33264,
+      "total_tokens": 37584,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closed_iff_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    Topology.P3 A ↔ interior A = A := by\n  -- For closed sets, `P3` is equivalent to being open.\n  have h₁ : Topology.P3 A ↔ IsOpen A :=\n    Topology.P3_closed_iff_isOpen (A := A) hA\n  -- A set is open iff its interior equals itself.\n  have h₂ : IsOpen A ↔ interior A = A := by\n    constructor\n    · intro hOpen\n      simpa [hOpen.interior_eq]\n    · intro hEq\n      have hOpenInt : IsOpen (interior A) := isOpen_interior\n      simpa [hEq] using hOpenInt\n  -- Combine the two equivalences.\n  simpa using h₁.trans h₂"
+  ],
+  "success": true
+}

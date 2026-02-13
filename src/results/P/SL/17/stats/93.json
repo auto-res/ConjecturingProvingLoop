@@ -1,0 +1,26 @@
+{
+  "times": [
+    15.520298957824707
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1447,
+      "prompt_tokens": 13479,
+      "total_tokens": 14926,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closure_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense A) : Topology.P2 (closure A) := by\n  -- Obtain `P3` for `closure A` from the density of `A`.\n  have hP3 : Topology.P3 (closure A) :=\n    Topology.P3_closure_of_dense (A := A) hDense\n  -- Use the equivalence `P2 (closure A) ↔ P3 (closure A)` to get `P2`.\n  exact (Topology.P2_closure_iff_P3_closure (A := A)).2 hP3"
+  ],
+  "success": true
+}

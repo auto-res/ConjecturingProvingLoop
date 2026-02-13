@@ -1,0 +1,43 @@
+{
+  "times": [
+    114.60731816291809,
+    164.47296929359436
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7472,
+      "prompt_tokens": 17093,
+      "total_tokens": 24565,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    },
+    {
+      "completion_tokens": 10160,
+      "prompt_tokens": 17224,
+      "total_tokens": 27384,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (A : Set X)))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    have h : interior (closure (interior (A : Set X))) ⊆ closure (interior A) :=\n      interior_subset\n    exact closure_mono h\n  · -- `⊇` direction\n    -- First, establish `interior A ⊆ interior (closure (interior A))`.\n    have h₁ : interior A ⊆ interior (closure (interior (A : Set X))) := by\n      have hSub : interior A ⊆ closure (interior (A : Set X)) :=\n        subset_closure\n      simpa [interior_interior] using interior_mono hSub\n    exact closure_mono h₁",
+    "theorem closure_interior_union_subset_closure_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X)) ∪ closure (interior B) ⊆\n      closure (interior (A ∪ B)) := by\n  intro x hx\n  cases hx with\n  | inl hAx =>\n      have hIncl :\n          closure (interior (A : Set X))\n            ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        apply interior_mono\n        intro y hy\n        exact Or.inl hy\n      exact hIncl hAx\n  | inr hBx =>\n      have hIncl :\n          closure (interior (B : Set X))\n            ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        apply interior_mono\n        intro y hy\n        exact Or.inr hy\n      exact hIncl hBx"
+  ],
+  "success": true
+}

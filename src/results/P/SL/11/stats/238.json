@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.88393425941467
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3719,
+      "prompt_tokens": 38054,
+      "total_tokens": 41773,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_right_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsOpen B) :\n    interior (A ∩ B) = interior A ∩ B := by\n  -- First, show `interior (A ∩ B) ⊆ interior A ∩ B`.\n  have h₁ : interior (A ∩ B) ⊆ interior A ∩ interior B :=\n    interior_inter_subset (A := A) (B := B)\n  have h₁' : interior (A ∩ B) ⊆ interior A ∩ B := by\n    simpa [hB.interior_eq] using h₁\n  -- Second, show `interior A ∩ B ⊆ interior (A ∩ B)`.\n  have h₂ : interior A ∩ B ⊆ interior (A ∩ B) := by\n    intro x hx\n    rcases hx with ⟨hxIntA, hxB⟩\n    -- `x` lies in the open set `interior A ∩ B`, which is contained in `A ∩ B`.\n    have hOpen : IsOpen (interior A ∩ B) := isOpen_interior.inter hB\n    have hSub : (interior A ∩ B : Set X) ⊆ A ∩ B := by\n      intro y hy\n      exact ⟨(interior_subset : interior A ⊆ A) hy.1, hy.2⟩\n    exact\n      (interior_maximal hSub hOpen) ⟨hxIntA, hxB⟩\n  exact Set.Subset.antisymm h₁' h₂"
+  ],
+  "success": true
+}

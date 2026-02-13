@@ -1,0 +1,60 @@
+{
+  "times": [
+    42.10557460784912,
+    171.18856000900269,
+    35.993407249450684
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4536,
+      "prompt_tokens": 23916,
+      "total_tokens": 28452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 9654,
+      "prompt_tokens": 24031,
+      "total_tokens": 33685,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    },
+    {
+      "completion_tokens": 2136,
+      "prompt_tokens": 24110,
+      "total_tokens": 26246,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) A → Topology.P1 (X := X) (closure A) := by\n  intro hP2\n  dsimp [Topology.P1]\n  intro x hxCl\n  -- Rewrite `closure A` using `P2`.\n  have h_eq : closure A = closure (interior A) :=\n    Topology.closure_interior_eq_closure_of_P2 (X := X) (A := A) hP2\n  have hxClInt : x ∈ closure (interior A) := by\n    simpa [h_eq] using hxCl\n  -- Use monotonicity of `closure ∘ interior`.\n  have h_subset :\n      closure (interior A) ⊆ closure (interior (closure A)) :=\n    Topology.closure_interior_subset_closure_interior_closure (X := X) (A := A)\n  exact h_subset hxClInt",
+    "theorem Topology.P2_closure_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) (closure A) → Topology.P3 (X := X) A := by\n  intro hP2 x hxA\n  -- First, upgrade `x ∈ A` to `x ∈ closure A`.\n  have hxCl : x ∈ closure A := subset_closure hxA\n  -- Apply `P2` for `closure A`.\n  have hxInt₁ : x ∈ interior (closure (interior (closure A))) := hP2 hxCl\n  -- Identify the interior just obtained with `interior (closure A)`.\n  have h_eq :\n      interior (closure (interior (closure A))) = interior (closure A) :=\n    Topology.interior_closure_interior_closure_eq_interior_closure\n      (X := X) (A := A)\n  -- Rewrite and finish.\n  simpa [h_eq] using hxInt₁",
+    "theorem Topology.closure_interior_closure_closure_eq_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (closure A))) = closure (interior (closure A)) := by\n  simp [closure_closure]"
+  ],
+  "success": true
+}

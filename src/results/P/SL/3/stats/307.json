@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.16254115104675
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2658,
+      "prompt_tokens": 52184,
+      "total_tokens": 54842,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_inter_open_nonempty {X : Type*} [TopologicalSpace X]\n    {A U : Set X} (hA : closure (A : Set X) = (Set.univ : Set X))\n    (hU : IsOpen (U : Set X)) (hU_nonempty : (U : Set X).Nonempty) :\n    ((A ∩ U) : Set X).Nonempty := by\n  -- Choose a point `x` in the non-empty open set `U`.\n  rcases hU_nonempty with ⟨x, hxU⟩\n  -- Since `A` is dense, `x` lies in the closure of `A`.\n  have hx_closureA : (x : X) ∈ closure (A : Set X) := by\n    simpa [hA] using (Set.mem_univ (x : X))\n  -- The neighbourhood characterisation of closure yields\n  -- that `U` meets `A`.\n  have h_inter : ((U : Set X) ∩ A).Nonempty :=\n    (mem_closure_iff.1 hx_closureA) U hU hxU\n  -- Reorder the intersection to obtain the required statement.\n  simpa [Set.inter_comm] using h_inter"
+  ],
+  "success": true
+}

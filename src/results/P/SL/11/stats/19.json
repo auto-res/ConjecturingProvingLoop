@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.803887844085693
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2705,
+      "prompt_tokens": 2677,
+      "total_tokens": 5382,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 A) (hB : Topology.P2 B) :\n    Topology.P2 (A ∪ B) := by\n  have hP1A : Topology.P1 A := Topology.P2_implies_P1 hA\n  have hP1B : Topology.P1 B := Topology.P2_implies_P1 hB\n  have hP3A : Topology.P3 A := Topology.P2_implies_P3 hA\n  have hP3B : Topology.P3 B := Topology.P2_implies_P3 hB\n  have hP1Union : Topology.P1 (A ∪ B) := Topology.P1_union hP1A hP1B\n  have hP3Union : Topology.P3 (A ∪ B) := Topology.P3_union hP3A hP3B\n  exact Topology.P2_of_P1_and_P3 (A := A ∪ B) ⟨hP1Union, hP3Union⟩"
+  ],
+  "success": true
+}

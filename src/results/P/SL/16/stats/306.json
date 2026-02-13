@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.70993113517761
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5283,
+      "prompt_tokens": 53294,
+      "total_tokens": 58577,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_diff_subset_closure_interior_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A \\ B)) ⊆ closure (interior A) \\ interior B := by\n  classical\n  intro x hx\n  -- `interior (A \\ B) ⊆ interior A`\n  have hInt : interior (A \\ B) ⊆ interior A := by\n    have : (A \\ B : Set X) ⊆ A := by\n      intro y hy; exact hy.1\n    exact interior_mono this\n  -- Hence `x ∈ closure (interior A)`\n  have hx₁ : x ∈ closure (interior A) :=\n    (closure_mono hInt) hx\n  -- Show that `x ∉ interior B`\n  have hx₂ : x ∉ interior B := by\n    intro hxIntB\n    -- Use the characterization of points in the closure\n    have hOpen : IsOpen (interior B) := isOpen_interior\n    have hNonempty :\n        ((interior B) ∩ interior (A \\ B) : Set X).Nonempty :=\n      (mem_closure_iff.1 hx) (interior B) hOpen hxIntB\n    rcases hNonempty with ⟨y, ⟨hyIntB, hyIntDiff⟩⟩\n    -- Contradiction: `y ∈ B` and `y ∉ B`\n    have hInB : (y : X) ∈ B := interior_subset hyIntB\n    have hInDiff : (y : X) ∈ A \\ B := interior_subset hyIntDiff\n    exact (hInDiff.2 hInB)\n  exact And.intro hx₁ hx₂"
+  ],
+  "success": true
+}

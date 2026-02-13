@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.39716458320618
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5074,
+      "prompt_tokens": 40736,
+      "total_tokens": 45810,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_diff_subset_closure_interior_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A \\ B)) ⊆ closure (interior A) \\ interior B := by\n  classical\n  intro x hx\n  -- First, `x` lies in `closure (interior A)` because\n  -- `interior (A \\ B) ⊆ interior A`.\n  have hx_closureA : x ∈ closure (interior A) := by\n    have h_subset : interior (A \\ B) ⊆ interior A :=\n      Topology.interior_diff_subset_interior_left (A := A) (B := B)\n    exact (closure_mono h_subset) hx\n  -- Next, we show `x ∉ interior B`; otherwise we obtain a contradiction.\n  have hx_not_intB : x ∉ interior B := by\n    intro hxIntB\n    -- The open set `interior B` contains `x`.\n    have h_nonempty :=\n      (mem_closure_iff).1 hx (interior B) isOpen_interior hxIntB\n    rcases h_nonempty with ⟨y, hyIntB, hyIntDiff⟩\n    -- From `y ∈ interior (A \\ B)` we know `y ∈ A \\ B`, so `y ∉ B`.\n    have hy_notB : y ∉ B := (interior_subset hyIntDiff).2\n    -- But `y ∈ interior B` implies `y ∈ B`, contradiction.\n    exact hy_notB (interior_subset hyIntB)\n  -- Assemble the required membership in the set difference.\n  exact And.intro hx_closureA hx_not_intB"
+  ],
+  "success": true
+}

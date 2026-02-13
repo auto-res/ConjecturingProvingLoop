@@ -1,0 +1,26 @@
+{
+  "times": [
+    84.45665192604065
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5873,
+      "prompt_tokens": 24998,
+      "total_tokens": 30871,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_iInter_subset\n    {ι : Sort _} {X : Type _} [TopologicalSpace X] (A : ι → Set X) :\n    closure (interior (⋂ i, A i : Set X)) ⊆ ⋂ i, closure (interior (A i)) := by\n  intro x hx\n  -- Show that `x ∈ closure (interior (A i))` for every index `i`.\n  have hx_i : ∀ i, x ∈ closure (interior (A i)) := by\n    intro i\n    -- `interior` is monotone with respect to set inclusion.\n    have hSub_int : interior (⋂ j, A j : Set X) ⊆ interior (A i) := by\n      apply interior_mono\n      -- The intersection is contained in each component.\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Taking closures preserves inclusions.\n    have hSub_clos :\n        closure (interior (⋂ j, A j : Set X)) ⊆\n          closure (interior (A i)) :=\n      closure_mono hSub_int\n    exact hSub_clos hx\n  -- Assemble the pointwise membership into the intersection.\n  exact Set.mem_iInter.2 hx_i"
+  ],
+  "success": true
+}

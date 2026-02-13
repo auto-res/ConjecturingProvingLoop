@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.78289365768433
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7412,
+      "prompt_tokens": 23080,
+      "total_tokens": 30492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_of_isOpen_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen (closure (A : Set X)) → Topology.P1 (closure A) := by\n  intro hOpen\n  simpa [closure_closure] using\n    (Topology.isOpen_implies_P1_closure\n        (X := X) (A := closure (A : Set X))) hOpen"
+  ],
+  "success": true
+}

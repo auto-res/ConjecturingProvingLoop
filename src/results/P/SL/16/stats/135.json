@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.747389793395996
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2274,
+      "prompt_tokens": 24167,
+      "total_tokens": 26441,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_right_denseInterior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (h_dense : closure (interior B) = (Set.univ : Set X)) :\n    Topology.P2 (X := X) (A ∪ B) := by\n  -- Apply the existing left-dense lemma after swapping `A` and `B`.\n  have h : Topology.P2 (X := X) (B ∪ A) :=\n    Topology.P2_union_left_denseInterior (X := X) (A := B) (B := A) h_dense\n  simpa [Set.union_comm] using h"
+  ],
+  "success": true
+}

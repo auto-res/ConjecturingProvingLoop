@@ -1,0 +1,43 @@
+{
+  "times": [
+    91.4833390712738,
+    312.0151672363281
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6491,
+      "prompt_tokens": 15775,
+      "total_tokens": 22266,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    },
+    {
+      "completion_tokens": 19337,
+      "prompt_tokens": 15899,
+      "total_tokens": 35236,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen A) :\n    closure (interior (closure A)) = closure A := by\n  apply Set.Subset.antisymm\n  · -- `closure (interior (closure A)) ⊆ closure A`\n    have h₁ : interior (closure A) ⊆ closure A := interior_subset\n    exact closure_mono h₁\n  · -- `closure A ⊆ closure (interior (closure A))`\n    have hA_sub : A ⊆ interior (closure A) :=\n      interior_maximal (subset_closure : A ⊆ closure A) hA\n    have h₂ : closure A ⊆ closure (interior (closure A)) :=\n      closure_mono hA_sub\n    simpa [closure_closure] using h₂",
+    "theorem interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (closure (interior (closure A))))))) =\n      interior (closure A) := by\n  have h :=\n    interior_closure_interior_closure_interior_closure_interior_closure_eq\n      (X := X) (A := closure A)\n  simpa [closure_closure] using h"
+  ],
+  "success": true
+}

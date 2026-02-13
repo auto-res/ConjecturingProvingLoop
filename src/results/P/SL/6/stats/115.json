@@ -1,0 +1,43 @@
+{
+  "times": [
+    57.52513575553894,
+    233.11026406288147
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6090,
+      "prompt_tokens": 17440,
+      "total_tokens": 23530,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 14793,
+      "prompt_tokens": 17666,
+      "total_tokens": 32459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (A : Set X)))) =\n      closure (interior A) := by\n  -- First, show `⊆`.\n  have h₁ :\n      interior (closure (interior (A : Set X))) ⊆ closure (interior A) :=\n    interior_subset\n  have h₁' :\n      closure (interior (closure (interior (A : Set X))))\n        ⊆ closure (interior A) :=\n    closure_mono h₁\n  -- Second, show `⊇`.\n  have h₂ :\n      interior (A : Set X) ⊆\n        interior (closure (interior (A : Set X))) := by\n    apply interior_mono\n    exact subset_closure\n  have h₂' :\n      closure (interior A) ⊆\n        closure (interior (closure (interior A))) :=\n    closure_mono h₂\n  exact Set.Subset.antisymm h₁' h₂'",
+    "theorem interior_inter_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior ((A ∩ B) : Set X) ⊆ interior A ∩ interior B := by\n  intro x hx\n  -- First, show `x ∈ interior A`.\n  have hA : x ∈ interior A := by\n    -- Since `A ∩ B ⊆ A`, monotonicity of `interior` gives the inclusion.\n    have hSub : (A ∩ B : Set X) ⊆ A := by\n      intro y hy\n      exact hy.1\n    exact (interior_mono hSub) hx\n  -- Next, show `x ∈ interior B`.\n  have hB : x ∈ interior B := by\n    -- Similarly, `A ∩ B ⊆ B`.\n    have hSub : (A ∩ B : Set X) ⊆ B := by\n      intro y hy\n      exact hy.2\n    exact (interior_mono hSub) hx\n  -- Combine the two inclusions.\n  exact And.intro hA hB"
+  ],
+  "success": true
+}

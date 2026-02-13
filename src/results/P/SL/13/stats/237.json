@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.18692946434021
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4067,
+      "prompt_tokens": 41670,
+      "total_tokens": 45737,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_empty_of_emptyInterior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_int : interior (A : Set X) = (∅ : Set X)) :\n    Topology.P1 (X := X) A ↔ (A : Set X) = (∅ : Set X) := by\n  constructor\n  · intro hP1\n    exact\n      Topology.P1_and_emptyInterior_implies_empty (X := X) (A := A) hP1 h_int\n  · intro hA\n    simpa [hA] using Topology.P1_empty (X := X)"
+  ],
+  "success": true
+}

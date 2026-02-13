@@ -1,0 +1,43 @@
+{
+  "times": [
+    50.84899377822876,
+    107.12590312957764
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3546,
+      "prompt_tokens": 52132,
+      "total_tokens": 55678,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    },
+    {
+      "completion_tokens": 6446,
+      "prompt_tokens": 52242,
+      "total_tokens": 58688,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_of_dense_interior_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Dense (interior A)) : Topology.P3 (A ∪ B) := by\n  dsimp [Topology.P3]\n  intro x hx\n  -- Step 1: `closure (interior A) = univ`.\n  have hClIntA : closure (interior A) = (Set.univ : Set X) := hA.closure_eq\n  -- Step 2: `closure (interior A) ⊆ closure (A ∪ B)`.\n  have hSub : closure (interior A) ⊆ closure (A ∪ B) := by\n    have hInner : interior A ⊆ (A ∪ B : Set X) := by\n      intro y hy; exact Or.inl hy\n    exact closure_mono hInner\n  -- Step 3: deduce `closure (A ∪ B) = univ`.\n  have hClUnion : closure (A ∪ B) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro y _; simp\n    · intro y _\n      have : y ∈ closure (interior A) := by\n        have : y ∈ (Set.univ : Set X) := by simp\n        simpa [hClIntA] using this\n      exact hSub this\n  -- Step 4: use the equality of closures to finish.\n  have : x ∈ interior (closure (A ∪ B)) := by\n    have : x ∈ (Set.univ : Set X) := by simp\n    simpa [hClUnion, interior_univ] using this\n  exact this",
+    "theorem Topology.interior_subset_closure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B) :\n    interior A ⊆ closure B := by\n  intro x hxInt\n  -- From `x ∈ interior A`, we obtain `x ∈ A`.\n  have hxA : x ∈ A := interior_subset hxInt\n  -- Use the given inclusion `A ⊆ B` to get `x ∈ B`.\n  have hxB : x ∈ B := hAB hxA\n  -- Every point of `B` lies in `closure B`.\n  exact subset_closure hxB"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    51.94598627090454,
+    68.94864702224731,
+    133.52099442481995
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3855,
+      "prompt_tokens": 21598,
+      "total_tokens": 25453,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    },
+    {
+      "completion_tokens": 3977,
+      "prompt_tokens": 21767,
+      "total_tokens": 25744,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    },
+    {
+      "completion_tokens": 8978,
+      "prompt_tokens": 21882,
+      "total_tokens": 30860,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_eq {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (A ∪ B)) =\n      closure (interior A) ∪ closure (interior B) := by\n  calc\n    closure (interior (A ∪ B))\n        = closure (interior A ∪ interior B) := by\n          simpa [interior_union]\n    _   = closure (interior A) ∪ closure (interior B) := by\n          simpa [closure_union]",
+    "theorem Topology.interiorClosureInterior_eq_self_of_P2_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) (hP2 : Topology.P2 A) :\n    interior (closure (interior A)) = A := by\n  -- We prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- `⊆` : `interior (closure (interior A)) ⊆ A`\n    -- Since `A` is closed, `closure (interior A) ⊆ A`.\n    have hSub : closure (interior A) ⊆ A := by\n      have : closure (interior A) ⊆ closure A :=\n        closure_mono (interior_subset : interior A ⊆ A)\n      simpa [hA.closure_eq] using this\n    -- Monotonicity of `interior` gives the desired inclusion.\n    exact interior_mono hSub\n  · -- `⊇` : `A ⊆ interior (closure (interior A))`\n    exact hP2",
+    ""
+  ],
+  "success": true
+}

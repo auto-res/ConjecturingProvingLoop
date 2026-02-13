@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.70556831359863
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2192,
+      "prompt_tokens": 49045,
+      "total_tokens": 51237,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem subset_of_closure_subset_interior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (h : closure (A : Set X) ⊆ interior (B : Set X)) :\n    (A : Set X) ⊆ B := by\n  intro x hxA\n  have hxCl : (x : X) ∈ closure (A : Set X) := subset_closure hxA\n  have hxInt : (x : X) ∈ interior (B : Set X) := h hxCl\n  exact interior_subset hxInt"
+  ],
+  "success": true
+}

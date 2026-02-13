@@ -1,0 +1,43 @@
+{
+  "times": [
+    259.95101404190063,
+    92.20107650756836
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 21131,
+      "prompt_tokens": 20711,
+      "total_tokens": 41842,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 20928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 8306,
+      "prompt_tokens": 20785,
+      "total_tokens": 29091,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure A))))))))) =\n      closure (interior A) := by\n  -- First, recall the fundamental two-step idempotence lemma.\n  have h :\n      closure (interior (closure (interior (closure (interior A))))) =\n        closure (interior A) := by\n    simpa using\n      (closure_interior_closure_interior_closure_eq\n        (X := X) (A := A))\n  -- Repeatedly applying `h` collapses the longer alternating chain.\n  simpa [h]",
+    "theorem interior_closure_inter_interior_subset_inter_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ interior B)) ⊆\n      interior (closure A) ∩ interior (closure B) := by\n  intro x hx\n  -- `closure (A ∩ interior B)` is contained in `closure A`\n  have hA : closure (A ∩ interior B) ⊆ closure A :=\n    closure_mono Set.inter_subset_left\n  -- `closure (A ∩ interior B)` is contained in `closure B`\n  have hB : closure (A ∩ interior B) ⊆ closure B := by\n    -- First, note that `A ∩ interior B ⊆ B`\n    have h : A ∩ interior B ⊆ B := by\n      intro y hy\n      exact interior_subset hy.2\n    -- Taking closures preserves the inclusion\n    exact closure_mono h\n  -- Taking interiors preserves these inclusions\n  have hA_int : interior (closure (A ∩ interior B)) ⊆ interior (closure A) :=\n    interior_mono hA\n  have hB_int : interior (closure (A ∩ interior B)) ⊆ interior (closure B) :=\n    interior_mono hB\n  -- Apply the inclusions to the given point `x`\n  have hxA : x ∈ interior (closure A) := hA_int hx\n  have hxB : x ∈ interior (closure B) := hB_int hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

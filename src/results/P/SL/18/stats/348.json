@@ -1,0 +1,26 @@
+{
+  "times": [
+    145.32838439941406
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6480,
+      "prompt_tokens": 56815,
+      "total_tokens": 63295,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_closure_subset_closure_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) \\ closure B ⊆ closure (A \\ B : Set X) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxNotClB⟩\n  -- We will verify the neighbourhood criterion for `closure (A \\ B)`.\n  have h :\n      ∀ U : Set X, IsOpen U → x ∈ U →\n        ((U ∩ (A \\ B)) : Set X).Nonempty := by\n    intro U hU hxU\n    -- Shrink the neighbourhood so that it is disjoint from `B`.\n    have hOpenCompl : IsOpen ((closure B)ᶜ : Set X) :=\n      isClosed_closure.isOpen_compl\n    have hVopen : IsOpen (U ∩ (closure B)ᶜ) := hU.inter hOpenCompl\n    have hxV : x ∈ U ∩ (closure B)ᶜ := by\n      exact And.intro hxU hxNotClB\n    -- Since `x ∈ closure A`, this neighbourhood meets `A`.\n    have hNonempty :\n        ((U ∩ (closure B)ᶜ) ∩ A : Set X).Nonempty :=\n      (mem_closure_iff).1 hxClA (U ∩ (closure B)ᶜ) hVopen hxV\n    rcases hNonempty with ⟨y, ⟨⟨hyU, hyNotClB⟩, hyA⟩⟩\n    -- Points outside `closure B` are certainly outside `B`.\n    have hyNotB : (y : X) ∉ B := by\n      intro hyB\n      have : (y : X) ∈ closure B := subset_closure hyB\n      exact hyNotClB this\n    -- Hence `y ∈ U ∩ (A \\ B)`.\n    exact ⟨y, ⟨hyU, ⟨hyA, hyNotB⟩⟩⟩\n  -- Conclude that `x ∈ closure (A \\ B)` by the neighbourhood criterion.\n  exact (mem_closure_iff).2 h"
+  ],
+  "success": true
+}

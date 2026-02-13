@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.757689237594604
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2634,
+      "prompt_tokens": 34629,
+      "total_tokens": 37263,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_of_closureInterior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) = (Set.univ : Set X) → Topology.P2 A := by\n  intro hEq\n  have hDense : Dense (interior A) :=\n    (dense_iff_closure_eq (s := (interior A : Set X))).2 hEq\n  exact Topology.P2_of_denseInterior (X := X) (A := A) hDense"
+  ],
+  "success": true
+}

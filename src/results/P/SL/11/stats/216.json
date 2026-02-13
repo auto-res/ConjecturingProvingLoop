@@ -1,0 +1,26 @@
+{
+  "times": [
+    129.0784158706665
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7994,
+      "prompt_tokens": 35583,
+      "total_tokens": 43577,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_nonempty_iff_nonempty_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A) :\n    (interior (closure A)).Nonempty ↔ A.Nonempty := by\n  classical\n  constructor\n  · intro hInt\n    by_cases hA : (A : Set X).Nonempty\n    · exact hA\n    · -- If `A` is empty, its closure and hence the given interior are empty,\n      -- contradicting `hInt`.\n      have hAeq : (A : Set X) = ∅ :=\n        (Set.not_nonempty_iff_eq_empty).1 hA\n      have : (interior (∅ : Set X)).Nonempty := by\n        simpa [hAeq, closure_empty] using hInt\n      simpa [interior_empty] using this\n  · intro hA\n    exact\n      Topology.interior_closure_nonempty_of_P2 (A := A) hP2 hA"
+  ],
+  "success": true
+}

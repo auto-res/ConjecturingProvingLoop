@@ -1,0 +1,43 @@
+{
+  "times": [
+    122.09177494049072,
+    145.2616102695465
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7946,
+      "prompt_tokens": 10368,
+      "total_tokens": 18314,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 9731,
+      "prompt_tokens": 10492,
+      "total_tokens": 20223,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_closure_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen (A : Set X)) :\n    closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  apply Set.Subset.antisymm\n  ·\n    have h₁ : interior (closure (A : Set X)) ⊆ closure (A : Set X) :=\n      interior_subset (s := closure (A : Set X))\n    exact closure_mono h₁\n  ·\n    have h₂ : (A : Set X) ⊆ interior (closure (A : Set X)) := by\n      apply interior_maximal\n      · exact subset_closure\n      · exact hA\n    exact closure_mono h₂",
+    "theorem closure_interior_eq_of_isClosed_and_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed (A : Set X)) (hP1 : Topology.P1 (A : Set X)) :\n    closure (interior (A : Set X)) = A := by\n  apply Set.Subset.antisymm\n  · -- `closure (interior A) ⊆ A`\n    have h : closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n      closure_mono (interior_subset (s := A))\n    simpa [hA_closed.closure_eq] using h\n  · -- `A ⊆ closure (interior A)` follows from `P1`\n    exact hP1"
+  ],
+  "success": true
+}

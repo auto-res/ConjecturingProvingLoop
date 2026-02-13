@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.77603459358215
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5042,
+      "prompt_tokens": 19816,
+      "total_tokens": 24858,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_union_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior (A : Set X))) ∪\n        interior (closure (interior (B : Set X))) ⊆\n      interior (closure (interior (A ∪ B : Set X))) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have hIncl :\n          interior (closure (interior (A : Set X)))\n            ⊆ interior (closure (interior (A ∪ B : Set X))) := by\n        apply interior_mono\n        have hSub :\n            closure (interior (A : Set X)) ⊆\n              closure (interior (A ∪ B : Set X)) := by\n          apply closure_mono\n          have hIntSub :\n              interior (A : Set X) ⊆ interior (A ∪ B : Set X) := by\n            apply interior_mono\n            intro y hy\n            exact Or.inl hy\n          exact hIntSub\n        exact hSub\n      exact hIncl hA\n  | inr hB =>\n      have hIncl :\n          interior (closure (interior (B : Set X)))\n            ⊆ interior (closure (interior (A ∪ B : Set X))) := by\n        apply interior_mono\n        have hSub :\n            closure (interior (B : Set X)) ⊆\n              closure (interior (A ∪ B : Set X)) := by\n          apply closure_mono\n          have hIntSub :\n              interior (B : Set X) ⊆ interior (A ∪ B : Set X) := by\n            apply interior_mono\n            intro y hy\n            exact Or.inr hy\n          exact hIntSub\n        exact hSub\n      exact hIncl hB"
+  ],
+  "success": true
+}

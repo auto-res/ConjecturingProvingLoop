@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.001065254211426
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2091,
+      "prompt_tokens": 32700,
+      "total_tokens": 34791,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_subset_interiorClosure_of_closure_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hP2 : Topology.P2 A) (hcl : closure A ⊆ B) :\n    A ⊆ interior (closure B) := by\n  -- First, derive `A ⊆ B` from the hypothesis `closure A ⊆ B`.\n  have hAB : A ⊆ B := fun x hxA => hcl (subset_closure hxA)\n  -- Upgrade `P2 A` to `P3 A`.\n  have hP3 : Topology.P3 A :=\n    Topology.P2_imp_P3 (X := X) (A := A) hP2\n  -- Apply the existing lemma for `P3` with the inclusion `A ⊆ B`.\n  exact\n    P3_subset_interiorClosure_of_subset (X := X) (A := A) (B := B) hP3 hAB"
+  ],
+  "success": true
+}

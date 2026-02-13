@@ -1,0 +1,60 @@
+{
+  "times": [
+    103.36405992507935,
+    119.64253449440002,
+    81.09214115142822
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5268,
+      "prompt_tokens": 43796,
+      "total_tokens": 49064,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    },
+    {
+      "completion_tokens": 7059,
+      "prompt_tokens": 43902,
+      "total_tokens": 50961,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 4962,
+      "prompt_tokens": 43976,
+      "total_tokens": 48938,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_frontier_eq_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A \\ frontier A = interior A := by\n  -- Characterize the frontier as a difference of `closure` and `interior`.\n  have hFront : (frontier A : Set X) = closure A \\ interior A := by\n    simpa using frontier_eq_closure_diff_interior (X := X) (A := A)\n  -- Prove the two inclusions.\n  apply Set.Subset.antisymm\n  · -- `closure A \\ frontier A ⊆ interior A`\n    intro x hx\n    rcases hx with ⟨hx_cl, hx_notFront⟩\n    -- If `x` were not in `interior A`, it would lie in the frontier,\n    -- contradicting `hx_notFront`.\n    by_cases hx_int : x ∈ interior A\n    · exact hx_int\n    ·\n      have : x ∈ closure A \\ interior A := ⟨hx_cl, hx_int⟩\n      have : x ∈ frontier A := by\n        simpa [hFront] using this\n      exact False.elim (hx_notFront this)\n  · -- `interior A ⊆ closure A \\ frontier A`\n    intro x hx_int\n    have hx_cl : x ∈ closure A :=\n      subset_closure (interior_subset hx_int)\n    have hx_notFront : x ∉ frontier A := by\n      intro hFrontMem\n      have : x ∈ (interior A)ᶜ :=\n        (frontier_subset_compl_interior (X := X) (A := A)) hFrontMem\n      exact this hx_int\n    exact ⟨hx_cl, hx_notFront⟩",
+    "theorem Set.compl_compl {α : Type*} {s : Set α} :\n    ((sᶜ)ᶜ : Set α) = s := by\n  ext x\n  by_cases hx : x ∈ s\n  · simp [hx]\n  · simp [hx]",
+    "theorem frontier_eq_univ_of_dense_and_empty_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → interior A = (∅ : Set X) → frontier (A : Set X) = (Set.univ : Set X) := by\n  intro hDense hInt\n  -- Use the previously established description of the frontier of a dense set.\n  have h :=\n    dense_frontier_eq_compl_interior (X := X) (A := A) hDense\n  -- Substitute the hypothesis `interior A = ∅` and simplify.\n  simpa [hInt, Set.diff_empty] using h"
+  ],
+  "success": true
+}

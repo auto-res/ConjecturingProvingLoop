@@ -1,0 +1,43 @@
+{
+  "times": [
+    110.35791182518005,
+    85.75942826271057
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8134,
+      "prompt_tokens": 23182,
+      "total_tokens": 31316,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    },
+    {
+      "completion_tokens": 6689,
+      "prompt_tokens": 23336,
+      "total_tokens": 30025,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_closure_compl_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) ∪ closure (Aᶜ) = (Set.univ : Set X) := by\n  apply Set.Subset.antisymm\n  ·\n    -- The union is obviously contained in `univ`.\n    intro x _\n    trivial\n  ·\n    -- To show `univ ⊆` the union, fix an arbitrary point `x`.\n    intro x _\n    classical\n    by_cases hxInt : x ∈ interior (closure A)\n    ·\n      exact Or.inl hxInt\n    ·\n      -- We will prove `x ∈ closure (Aᶜ)`.\n      by_cases hxCl : x ∈ closure (Aᶜ)\n      ·\n        exact Or.inr hxCl\n      ·\n        -- Having excluded both possibilities leads to a contradiction.\n        -- From `hxCl : x ∉ closure (Aᶜ)` we deduce `x ∈ interior A`.\n        have hIntEq :\n            interior A = (closure (Aᶜ : Set X))ᶜ :=\n          Topology.interior_eq_compl_closure_compl (X := X) (A := A)\n        have hxIntA : x ∈ interior A := by\n          have : x ∉ closure (Aᶜ : Set X) := hxCl\n          have : x ∈ (closure (Aᶜ : Set X))ᶜ := by\n            simpa [not_mem] using this\n          simpa [hIntEq] using this\n        -- But `interior A ⊆ interior (closure A)`, contradicting `hxInt`.\n        have h_subset :\n            interior A ⊆ interior (closure A) :=\n          Topology.interior_subset_interior_closure (X := X) (A := A)\n        exact (hxInt (h_subset hxIntA)).elim",
+    "theorem Topology.interior_inter_closure_eq_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A ∩ closure A) = interior A := by\n  apply Set.Subset.antisymm\n  ·\n    -- The interior of the intersection is contained in `A`, hence in `interior A`.\n    have h : (A ∩ closure A) ⊆ A := Set.inter_subset_left\n    exact interior_mono h\n  ·\n    -- `interior A` is an open subset of the intersection, so it lies in its interior.\n    have h_subset : interior A ⊆ A ∩ closure A := by\n      intro x hx\n      have hxA : x ∈ A := interior_subset hx\n      have hxCl : x ∈ closure A := subset_closure hxA\n      exact And.intro hxA hxCl\n    exact interior_maximal h_subset isOpen_interior"
+  ],
+  "success": true
+}

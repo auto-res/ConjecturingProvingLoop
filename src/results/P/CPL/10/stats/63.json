@@ -1,0 +1,247 @@
+{
+  "conjecture_stats": [
+    {
+      "time": 9.781345844268799,
+      "api_usage": {
+        "completion_tokens": 1185,
+        "prompt_tokens": 23863,
+        "total_tokens": 25048,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 512,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 23296
+        }
+      }
+    }
+  ],
+  "prove_stats": {
+    "theorem P1_image_continuous {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {A : Set X} (hA : Topology.P1 A) : Topology.P1 (f '' A) :=": {
+      "times": [
+        6.629739999771118
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 338,
+          "prompt_tokens": 23879,
+          "total_tokens": 24217,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 320,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 23424
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P3_compl {X : Type*} [TopologicalSpace X] {A : Set X} (hA : Topology.P3 A) : Topology.P2 (Aᶜ) :=": {
+      "times": [
+        15.132693529129028
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1106,
+          "prompt_tokens": 23858,
+          "total_tokens": 24964,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1088,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 23424
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P2_union_closure {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : Topology.P2 A) (hB : Topology.P2 B) : Topology.P2 (closure A ∪ closure B) :=": {
+      "times": [
+        16.051482439041138,
+        63.78421664237976
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 2324,
+          "prompt_tokens": 23872,
+          "total_tokens": 26196,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1792,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 23296
+          }
+        },
+        {
+          "completion_tokens": 4434,
+          "prompt_tokens": 24607,
+          "total_tokens": 29041,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 4416,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 23424
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P3_iff_closure_eq_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P3 A ↔ closure A = closure (interior A) :=": {
+      "times": [
+        24.640636920928955
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1298,
+          "prompt_tokens": 23861,
+          "total_tokens": 25159,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1280,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 23424
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P1_subset {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) (hB : Topology.P1 B) : Topology.P1 A :=": {
+      "times": [
+        13.26648235321045
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1170,
+          "prompt_tokens": 23863,
+          "total_tokens": 25033,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1152,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 23424
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P2_sigma {α : Type*} {β : α → Type*} [∀ a, TopologicalSpace (β a)] {A : Set α} {F : ∀ a, Set (β a)} (hF : ∀ a, Topology.P2 (F a)) : Topology.P2 {p : Σ a, β a | p.1 ∈ A ∧ p.2 ∈ F p.1} :=": {
+      "times": [
+        169.09543681144714
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 9938,
+          "prompt_tokens": 23909,
+          "total_tokens": 33847,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 9920,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 23424
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P3_iInter {X : Type*} [TopologicalSpace X] {ι : Sort*} {F : ι → Set X} (hF : ∀ i, Topology.P3 (F i)) : Topology.P3 (⋂ i, F i) :=": {
+      "times": [
+        21.292202949523926
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1554,
+          "prompt_tokens": 23875,
+          "total_tokens": 25429,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1536,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 22400
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem exists_P2_not_P3 {X : Type*} [TopologicalSpace X] [Nonempty X] : ∃ A : Set X, Topology.P2 A ∧ ¬ Topology.P3 A :=": {
+      "times": [
+        4.4017438888549805
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 338,
+          "prompt_tokens": 23860,
+          "total_tokens": 24198,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 320,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 23424
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P1_preimage_dense {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) (hD : DenseRange f) {B : Set Y} (hB : Topology.P1 B) : Topology.P1 (f ⁻¹' B) :=": {
+      "times": [
+        295.1995234489441
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 24146,
+          "prompt_tokens": 23889,
+          "total_tokens": 48035,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 24128,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 23296
+          }
+        }
+      ],
+      "proved": false
+    }
+  }
+}

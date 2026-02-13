@@ -1,0 +1,26 @@
+{
+  "times": [
+    44.15449666976929
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3931,
+      "prompt_tokens": 37554,
+      "total_tokens": 41485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_subset_and_subset_closureInterior\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP1A : Topology.P1 A) (hAB : A ⊆ B) (hBsubset : B ⊆ closure (interior A)) :\n    Topology.P1 B := by\n  dsimp [Topology.P1] at hP1A ⊢\n  intro x hxB\n  -- Step 1: Use the hypothesis `hBsubset` to place `x` in `closure (interior A)`.\n  have hxClA : x ∈ closure (interior A) := hBsubset hxB\n  -- Step 2: Relate `closure (interior A)` to `closure (interior B)`\n  -- via the monotonicity of `interior` and `closure`.\n  have hClSub : closure (interior A) ⊆ closure (interior B) := by\n    have hIntSub : interior A ⊆ interior B := interior_mono hAB\n    exact closure_mono hIntSub\n  -- Step 3: Conclude the desired membership.\n  exact hClSub hxClA"
+  ],
+  "success": true
+}

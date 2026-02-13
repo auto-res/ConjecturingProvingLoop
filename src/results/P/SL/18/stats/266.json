@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.2604627609253
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4420,
+      "prompt_tokens": 41960,
+      "total_tokens": 46380,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40832
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_closure_of_open_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (A : Set X))) :\n    closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  -- Since `closure A` is open, its interior coincides with itself.\n  have hInt : interior (closure (A : Set X)) = closure (A : Set X) :=\n    hOpen.interior_eq\n  -- Rewrite and simplify using `closure_closure`.\n  have : closure (interior (closure (A : Set X))) =\n      closure (closure (A : Set X)) := by\n    simpa [hInt]\n  simpa [closure_closure] using this"
+  ],
+  "success": true
+}

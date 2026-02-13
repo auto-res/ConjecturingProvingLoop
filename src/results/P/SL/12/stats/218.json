@@ -1,0 +1,77 @@
+{
+  "times": [
+    398.08453845977783,
+    80.28827571868896,
+    128.68333053588867,
+    59.226479291915894
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 21676,
+      "prompt_tokens": 41419,
+      "total_tokens": 63095,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 21056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 5721,
+      "prompt_tokens": 41521,
+      "total_tokens": 47242,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 8921,
+      "prompt_tokens": 41601,
+      "total_tokens": 50522,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 4724,
+      "prompt_tokens": 41720,
+      "total_tokens": 46444,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_compl_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior ((Aᶜ) : Set X) = (closure (A : Set X))ᶜ := by\n  classical\n  -- First inclusion: `interior (Aᶜ) ⊆ (closure A)ᶜ`.\n  have h₁ : interior ((Aᶜ) : Set X) ⊆ (closure (A : Set X))ᶜ := by\n    intro x hx\n    -- Choose an open neighbourhood `U` of `x` contained in `Aᶜ`.\n    rcases mem_interior.1 hx with ⟨U, hU_sub, hU_open, hxU⟩\n    -- Show that `x ∉ closure A`; otherwise `U` would meet `A`, contradicting `U ⊆ Aᶜ`.\n    by_contra h_cl\n    have h_nonempty : (U ∩ (A : Set X)).Nonempty :=\n      (mem_closure_iff.1 (show x ∈ closure (A : Set X) from h_cl) U hU_open hxU)\n    rcases h_nonempty with ⟨y, ⟨hyU, hyA⟩⟩\n    have : y ∈ (Aᶜ : Set X) := hU_sub hyU\n    exact this hyA\n  -- Second inclusion: `(closure A)ᶜ ⊆ interior (Aᶜ)`.\n  have h₂ : (closure (A : Set X))ᶜ ⊆ interior ((Aᶜ) : Set X) := by\n    intro x hx\n    -- The open set `(closure A)ᶜ` contains `x` and is contained in `Aᶜ`.\n    have h_open : IsOpen ((closure (A : Set X))ᶜ : Set X) :=\n      isClosed_closure.isOpen_compl\n    have h_sub : ((closure (A : Set X))ᶜ : Set X) ⊆ (Aᶜ : Set X) := by\n      intro y hy\n      by_cases hAy : y ∈ A\n      · have : y ∈ closure (A : Set X) := subset_closure hAy\n        exact (hy this).elim\n      · exact hAy\n    -- Hence `x` lies in the interior of `Aᶜ`.\n    exact\n      mem_interior.2 ⟨(closure (A : Set X))ᶜ, h_sub, h_open, hx⟩\n  -- Conclude the desired equality.\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem Topology.closure_inter_interior_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) ∩ interior (B : Set X) ⊆ closure (A ∩ B : Set X) := by\n  intro x hx\n  rcases hx with ⟨hx_clA, hx_intB⟩\n  -- We prove the desired membership using the neighbourhood characterization\n  -- of the closure.\n  refine (mem_closure_iff.2 ?_)\n  intro V hV hxV\n  -- Consider the open set `V ∩ interior B`, which still contains `x`.\n  have hV' : IsOpen (V ∩ interior (B : Set X)) := hV.inter isOpen_interior\n  have hxV' : x ∈ V ∩ interior (B : Set X) := And.intro hxV hx_intB\n  -- Since `x ∈ closure A`, this open set meets `A`.\n  have h_non : ((V ∩ interior (B : Set X)) ∩ A).Nonempty := by\n    have h_closure := (mem_closure_iff.1 hx_clA)\n    exact h_closure _ hV' hxV'\n  -- Extract a witness from the non‐emptiness statement.\n  rcases h_non with ⟨y, ⟨⟨hyV, hy_intB⟩, hyA⟩⟩\n  have hyB : y ∈ (B : Set X) := interior_subset hy_intB\n  -- Show that this witness lies in `V ∩ (A ∩ B)`.\n  exact ⟨y, And.intro hyV (And.intro hyA hyB)⟩",
+    "theorem Topology.not_mem_closure_iff_exists_open {X : Type*} [TopologicalSpace X]\n    {A : Set X} {x : X} :\n    x ∉ closure (A : Set X) ↔\n      ∃ U : Set X, IsOpen U ∧ x ∈ U ∧ Set.Disjoint U A := by\n  classical\n  constructor\n  · intro hx\n    -- Negate the `mem_closure_iff` characterization.\n    have hneg :\n        ¬∀ V : Set X, IsOpen V → x ∈ V → ((V ∩ A : Set X).Nonempty) := by\n      intro hV\n      have : x ∈ closure (A : Set X) := (mem_closure_iff).2 hV\n      exact hx this\n    -- Pull the negation outwards to obtain the required witnesses.\n    push_neg at hneg\n    rcases hneg with ⟨U, hUopen, hxU, hEmpty⟩\n    -- Turn emptiness of the intersection into `Disjoint U A`.\n    have hdis : Set.Disjoint U A := by\n      refine Set.disjoint_left.2 ?_\n      intro y hyU hyA\n      have : (U ∩ A : Set X).Nonempty := ⟨y, And.intro hyU hyA⟩\n      exact (hEmpty this).elim\n    exact ⟨U, hUopen, hxU, hdis⟩\n  · rintro ⟨U, hUopen, hxU, hdis⟩ hxcl\n    -- Use `mem_closure_iff` to derive a contradiction with disjointness.\n    have hforall := (mem_closure_iff).1 hxcl\n    have hnon : ((U ∩ A : Set X).Nonempty) := hforall U hUopen hxU\n    rcases hnon with ⟨y, ⟨hyU, hyA⟩⟩\n    exact (Set.disjoint_left.1 hdis) hyU hyA",
+    "theorem Topology.closure_image_interior_subset {X Y : Type*}\n    [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} {A : Set X} :\n    closure (f '' interior A) ⊆ closure (f '' A) := by\n  -- The image of `interior A` is contained in the image of `A`.\n  have h_image : (f '' interior A : Set Y) ⊆ f '' A := by\n    intro y hy\n    rcases hy with ⟨x, hx, rfl⟩\n    exact ⟨x, interior_subset hx, rfl⟩\n  -- Taking closures preserves inclusions.\n  exact closure_mono h_image"
+  ],
+  "success": true
+}

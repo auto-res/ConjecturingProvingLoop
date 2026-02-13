@@ -1,0 +1,60 @@
+{
+  "times": [
+    220.8706510066986,
+    81.34586429595947,
+    54.41224908828735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 19999,
+      "prompt_tokens": 35153,
+      "total_tokens": 55152,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 7119,
+      "prompt_tokens": 35289,
+      "total_tokens": 42408,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 4295,
+      "prompt_tokens": 35498,
+      "total_tokens": 39793,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_left_open {X : Type*} [TopologicalSpace X] {A U : Set X} :\n    Topology.P3 A → IsOpen U → Topology.P3 (A ∩ U) := by\n  intro hA hU\n  dsimp [Topology.P3] at hA ⊢\n  intro x hxAU\n  rcases hxAU with ⟨hxA, hxU⟩\n  have hxIntA : x ∈ interior (closure A) := hA hxA\n  -- The open neighbourhood `W := interior (closure A) ∩ U`.\n  have hW_open : IsOpen (interior (closure A) ∩ U) :=\n    (isOpen_interior).inter hU\n  have hxW : x ∈ (interior (closure A) ∩ U : Set X) :=\n    And.intro hxIntA hxU\n  -- Show that `W ⊆ closure (A ∩ U)`.\n  have hW_subset : (interior (closure A) ∩ U : Set X) ⊆ closure (A ∩ U) := by\n    -- First inclusion: `interior (closure A) ⊆ closure A`.\n    have h₁ : (interior (closure A) ∩ U : Set X) ⊆ closure A ∩ U := by\n      intro y hy\n      rcases hy with ⟨hyInt, hyU⟩\n      have hyCl : y ∈ closure A :=\n        (interior_subset : interior (closure A) ⊆ closure A) hyInt\n      exact And.intro hyCl hyU\n    -- Second inclusion: `closure A ∩ U ⊆ closure (A ∩ U)`.\n    have h₂ : (closure A ∩ U : Set X) ⊆ closure (A ∩ U) := by\n      intro y hy\n      rcases hy with ⟨hyCl, hyU⟩\n      -- Use the neighbourhood characterization of closure.\n      have : y ∈ closure (A ∩ U) := by\n        refine (mem_closure_iff).2 ?_\n        intro V hV hyV\n        -- `V ∩ U` is an open neighbourhood of `y`.\n        have hVU_open : IsOpen (V ∩ U) := hV.inter hU\n        have hyVU : y ∈ V ∩ U := And.intro hyV hyU\n        -- Since `y ∈ closure A`, `V ∩ U` meets `A`.\n        have hNon : ((V ∩ U) ∩ A).Nonempty :=\n          (mem_closure_iff.1 hyCl) (V ∩ U) hVU_open hyVU\n        -- Rearrange intersections to fit the required form.\n        simpa [Set.inter_comm, Set.inter_left_comm, Set.inter_assoc] using hNon\n      exact this\n    exact Set.Subset.trans h₁ h₂\n  -- `W` witnesses that `x` is in the desired interior.\n  have hW_to_int :\n      (interior (closure A) ∩ U : Set X) ⊆ interior (closure (A ∩ U)) :=\n    interior_maximal hW_open hW_subset\n  exact hW_to_int hxW",
+    "theorem Topology.interior_compl_eq_compl_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ) = (closure A)ᶜ := by\n  ext x\n  constructor\n  · intro hx\n    -- Obtain an open set `U` containing `x` and disjoint from `A`.\n    rcases (isOpen_iff_mem_nhds.1 isOpen_interior) x hx with ⟨U, hU_open, hxU, hU_sub⟩\n    -- If `x ∈ closure A`, every open neighbourhood of `x` meets `A`, contradicting `U`.\n    have h : (A ∩ U).Nonempty := by\n      by_contra hAU\n      have : U ∩ A = (∅ : Set X) := by\n        ext y; by_cases hy : y ∈ U ∧ y ∈ A <;> simp [hy, hAU] at *\n      have : (A ∩ U : Set X) = ∅ := by\n        ext y; by_cases hy : y ∈ A ∧ y ∈ U <;> simp [Set.inter_comm, hy] at *\n      exact False.elim (by\n        have hx_closure : x ∈ closure A := ?_)\n    -- Conclude that `x` is not in the closure of `A`.\n    intro hx_closure\n    have : ((U : Set X) ∩ A).Nonempty := by\n      have hU_nhds : U ∈ 𝓝 x := hU_open.mem_nhds hxU\n      simpa [Set.nonempty_def] using mem_closure_iff.1 hx_closure U hU_nhds\n    exact (hU_sub this).elim\n  · intro hx\n    -- Suppose `x ∈ (closure A)ᶜ`; we will show `x ∈ interior (Aᶜ)`.\n    have hx_not_cl : x ∉ closure A := hx\n    -- By the definition of closure, there exists an open neighbourhood `U` of `x` disjoint from `A`.\n    rcases mem_nhds_iff_exists_inter.1 (isClosed_closure.ct.nhdsWithin hx_not_cl) with\n      ⟨U, hU_open, hxU, hA⟩\n    -- Such a `U` witnesses that `x ∈ interior (Aᶜ)`.\n    have hU_sub : (U : Set X) ⊆ Aᶜ := by\n      intro y hy\n      have : y ∉ A := by\n        intro hyA\n        have : y ∈ A ∩ U := And.intro hyA hy\n        exact hA this\n      simpa using this\n    exact mem_interior.2 ⟨U, hU_open, hxU, hU_sub⟩",
+    "theorem Topology.closure_inter_subset_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A ∩ B : Set X) ⊆ closure A := by\n  -- The set `A ∩ B` is contained in `A`.\n  have h : (A ∩ B : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  -- Monotonicity of `closure` yields the desired inclusion.\n  exact closure_mono h"
+  ],
+  "success": true
+}

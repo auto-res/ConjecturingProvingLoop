@@ -1,0 +1,43 @@
+{
+  "times": [
+    27.511116981506348,
+    105.38229846954346
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2869,
+      "prompt_tokens": 21531,
+      "total_tokens": 24400,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 7328,
+      "prompt_tokens": 21652,
+      "total_tokens": 28980,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (X := X) A → Topology.P1 (X := X) (closure A) := by\n  intro hP1\n  dsimp [Topology.P1] at hP1 ⊢\n  intro x hxClA\n  -- Step 1: from `closure A` to `closure (interior A)`\n  have h₁ : closure A ⊆ closure (interior A) :=\n    closure_mono hP1\n  have hx₁ : x ∈ closure (interior A) := h₁ hxClA\n  -- Step 2: from `closure (interior A)` to `closure (interior (closure A))`\n  have h₂ : closure (interior A) ⊆ closure (interior (closure A)) := by\n    apply closure_mono\n    exact interior_mono subset_closure\n  exact h₂ hx₁",
+    "theorem Topology.closure_subset_closure_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (X := X) A) :\n    closure A ⊆ closure (interior A) := by\n  -- From `P1` we know `A ⊆ closure (interior A)`.\n  have h : (A : Set X) ⊆ closure (interior A) := hP1\n  -- Taking closures preserves inclusions; simplify with `closure_closure`.\n  simpa [closure_closure] using (closure_mono h)"
+  ],
+  "success": true
+}

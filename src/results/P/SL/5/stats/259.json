@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.62279558181763
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3139,
+      "prompt_tokens": 47687,
+      "total_tokens": 50826,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_six {X : Type*} [TopologicalSpace X]\n    {A B C D E F : Set X} :\n    closure (A ∪ B ∪ C ∪ D ∪ E ∪ F : Set X) =\n      closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E ∪ closure F := by\n  -- Reassociate the unions so that `closure_union` can be applied.\n  have h₁ :\n      closure (A ∪ B ∪ C ∪ D ∪ E ∪ F : Set X) =\n        closure ((A ∪ B ∪ C ∪ D ∪ E) ∪ F : Set X) := by\n    simpa [Set.union_assoc]\n  -- Distribute `closure` over the last union.\n  have h₂ :\n      closure ((A ∪ B ∪ C ∪ D ∪ E) ∪ F : Set X) =\n        closure (A ∪ B ∪ C ∪ D ∪ E : Set X) ∪ closure F := by\n    simpa using\n      closure_union\n        (A := (A ∪ B ∪ C ∪ D ∪ E : Set X))\n        (B := F)\n  -- Use the existing five-set lemma.\n  have h₃ :\n      closure (A ∪ B ∪ C ∪ D ∪ E : Set X) =\n        closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E := by\n    simpa using\n      closure_union_five (X := X)\n        (A := A) (B := B) (C := C) (D := D) (E := E)\n  -- Assemble the pieces and tidy up with associativity of `∪`.\n  calc\n    closure (A ∪ B ∪ C ∪ D ∪ E ∪ F : Set X)\n        = closure ((A ∪ B ∪ C ∪ D ∪ E) ∪ F : Set X) := by\n            simpa [Set.union_assoc] using h₁\n    _ = closure (A ∪ B ∪ C ∪ D ∪ E : Set X) ∪ closure F := by\n            simpa using h₂\n    _ = (closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E) ∪ closure F := by\n            simpa [h₃]\n    _ = closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E ∪ closure F := by\n            simpa [Set.union_assoc]"
+  ],
+  "success": true
+}

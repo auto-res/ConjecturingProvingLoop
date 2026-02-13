@@ -1,0 +1,43 @@
+{
+  "times": [
+    56.868664026260376,
+    89.64208722114563
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4367,
+      "prompt_tokens": 3607,
+      "total_tokens": 7974,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    },
+    {
+      "completion_tokens": 7093,
+      "prompt_tokens": 3719,
+      "total_tokens": 10812,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure_eq {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply Set.Subset.antisymm\n  ·\n    have hsubset : closure (interior (closure A)) ⊆ closure A := by\n      have : interior (closure A) ⊆ (closure A : Set X) := subset_closure\n      exact closure_mono this\n    exact interior_mono hsubset\n  ·\n    have h_open : IsOpen (interior (closure A)) := isOpen_interior\n    have hsubset : interior (closure A) ⊆ closure (interior (closure A)) := by\n      intro x hx\n      exact subset_closure hx\n    exact interior_maximal hsubset h_open",
+    "theorem Topology.P1_of_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure A = closure (interior A)) :\n    Topology.P1 A := by\n  dsimp [Topology.P1] at *\n  intro x hx\n  have hx_closure : x ∈ closure A := subset_closure hx\n  simpa [h] using hx_closure"
+  ],
+  "success": true
+}

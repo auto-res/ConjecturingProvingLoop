@@ -1,0 +1,26 @@
+{
+  "times": [
+    83.83635807037354
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5732,
+      "prompt_tokens": 51649,
+      "total_tokens": 57381,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_closure_subset_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A ∩ closure B) ⊆ interior A ∩ closure B := by\n  intro x hx\n  -- `hx` places `x` inside the interior of `A ∩ closure B`.\n  have h_mem : x ∈ A ∩ closure B := interior_subset hx\n  have hxClB : x ∈ closure B := h_mem.2\n  -- Monotonicity of `interior` shows that `x` also lies in `interior A`.\n  have hxIntA : x ∈ interior A := by\n    have h_subset : interior (A ∩ closure B) ⊆ interior A :=\n      interior_mono (Set.inter_subset_left : (A ∩ closure B) ⊆ A)\n    exact h_subset hx\n  exact And.intro hxIntA hxClB"
+  ],
+  "success": true
+}

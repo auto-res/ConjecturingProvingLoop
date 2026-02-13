@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.23227453231812
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5427,
+      "prompt_tokens": 44015,
+      "total_tokens": 49442,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_interior_of_subset_P1\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hP1B : Topology.P1 B) :\n    frontier A ⊆ closure (interior B) := by\n  intro x hx\n  -- From `x ∈ frontier A`, obtain `x ∈ closure A`.\n  have hx_clA : x ∈ closure A := hx.1\n  -- Since `A ⊆ B`, we have `closure A ⊆ closure B`.\n  have h_cl_subset : closure A ⊆ closure B := closure_mono hAB\n  have hx_clB : x ∈ closure B := h_cl_subset hx_clA\n  -- `P1 B` gives `B ⊆ closure (interior B)`.\n  have hB_subset : B ⊆ closure (interior B) := hP1B\n  -- Taking closures preserves inclusions; simplify `closure (closure _)`.\n  have h_clB_subset : closure B ⊆ closure (interior B) := by\n    simpa [closure_closure] using closure_mono hB_subset\n  -- Combine the inclusions to conclude the desired membership.\n  exact h_clB_subset hx_clB"
+  ],
+  "success": true
+}

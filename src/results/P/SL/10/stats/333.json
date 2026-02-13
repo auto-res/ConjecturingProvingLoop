@@ -1,0 +1,26 @@
+{
+  "times": [
+    183.19024538993835
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9308,
+      "prompt_tokens": 53273,
+      "total_tokens": 62581,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_subset_diff_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B) ⊆ A \\ closure B := by\n  intro x hxInt\n  -- From `hxInt` we know that `x ∈ A \\ B`.\n  have hxAB : x ∈ A ∧ x ∉ B := by\n    have : x ∈ (A \\ B) := interior_subset hxInt\n    exact this\n  have hxA : x ∈ A := hxAB.1\n  -- We now show `x ∉ closure B`; otherwise we obtain a contradiction.\n  have hxNotClB : x ∉ closure B := by\n    intro hxClB\n    -- Because `x ∈ interior (A \\ B)`, the set `interior (A \\ B)` is an open\n    -- neighbourhood of `x` disjoint from `B`.\n    have h_nonempty :=\n      (mem_closure_iff).1 hxClB (interior (A \\ B)) isOpen_interior hxInt\n    rcases h_nonempty with ⟨y, ⟨hyInt, hyB⟩⟩\n    -- But `hyInt : y ∈ interior (A \\ B)` implies `y ∉ B`, contradicting `hyB`.\n    have : y ∉ B := (interior_subset hyInt).2\n    exact this hyB\n  exact And.intro hxA hxNotClB"
+  ],
+  "success": true
+}

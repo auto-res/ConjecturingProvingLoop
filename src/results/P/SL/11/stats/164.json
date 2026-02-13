@@ -1,0 +1,43 @@
+{
+  "times": [
+    42.85351347923279,
+    194.3936369419098
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3485,
+      "prompt_tokens": 25317,
+      "total_tokens": 28802,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    },
+    {
+      "completion_tokens": 10758,
+      "prompt_tokens": 25450,
+      "total_tokens": 36208,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_inter {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P3 A) (hB : Topology.P3 B) :\n    Topology.P3 (A ∩ B) := by\n  dsimp [Topology.P3] at hA hB ⊢\n  intro x hxAB\n  rcases hxAB with ⟨hxA, hxB⟩\n  have hxIntA : x ∈ interior (closure A) := hA hxA\n  have hxIntB : x ∈ interior (closure B) := hB hxB\n  have hIn : x ∈ interior (closure A) ∩ interior (closure B) :=\n    ⟨hxIntA, hxIntB⟩\n  have hsubset := interior_closure_inter_subset (A := A) (B := B)\n  exact hsubset hIn",
+    "theorem interior_closure_empty {X : Type*} [TopologicalSpace X] :\n    interior (closure (∅ : Set X)) = (∅ : Set X) := by\n  simpa [closure_empty] using interior_empty"
+  ],
+  "success": true
+}

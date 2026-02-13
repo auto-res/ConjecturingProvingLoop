@@ -1,0 +1,26 @@
+{
+  "times": [
+    104.35496997833252
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8007,
+      "prompt_tokens": 26756,
+      "total_tokens": 34763,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_iInter_subset_interiors\n    {ι : Sort _} {X : Type _} [TopologicalSpace X] (A : ι → Set X) :\n    interior (⋂ i, A i : Set X) ⊆ ⋂ i, interior (A i) := by\n  intro x hx\n  -- For each `i`, `x` lies in `interior (A i)`.\n  have hx_i : ∀ i, x ∈ interior (A i) := by\n    intro i\n    -- The intersection is contained in each component.\n    have hSub : (⋂ j, A j : Set X) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Monotonicity of `interior` gives the desired inclusion.\n    have hInt : interior (⋂ j, A j : Set X) ⊆ interior (A i) :=\n      interior_mono hSub\n    exact hInt hx\n  -- Assemble the pointwise condition into membership in the intersection.\n  exact Set.mem_iInter.2 hx_i"
+  ],
+  "success": true
+}

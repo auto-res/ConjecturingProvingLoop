@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.262160301208496
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2172,
+      "prompt_tokens": 42345,
+      "total_tokens": 44517,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_subset_interiorClosureInteriorClosure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A) :\n    A ⊆ interior (closure (interior (closure A))) := by\n  intro x hxA\n  -- From `P2` we have membership in `interior (closure (interior A))`.\n  have hxInt : x ∈ interior (closure (interior A)) := hP2 hxA\n  -- Monotonicity upgrades this to the desired larger set.\n  have hMono :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior (closure A))) := by\n    apply interior_mono\n    -- Show the corresponding inclusion for the closures.\n    have hSub :\n        closure (interior A) ⊆ closure (interior (closure A)) := by\n      apply closure_mono\n      exact Topology.interior_subset_interiorClosure (A := A)\n    exact hSub\n  exact hMono hxInt"
+  ],
+  "success": true
+}

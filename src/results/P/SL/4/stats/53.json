@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.92084455490112
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3870,
+      "prompt_tokens": 7591,
+      "total_tokens": 11461,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) :\n    Topology.P2 A ↔ Topology.P3 A := by\n  -- For an open set, `interior A = A`.\n  have h_int : interior A = A := hA.interior_eq\n  -- Rewrite `P2` using the above equality.\n  have hP2 : Topology.P2 A ↔ A ⊆ interior (closure A) := by\n    dsimp [Topology.P2]\n    simpa [h_int]\n  -- `P3` is already exactly the same inclusion.\n  have h : (A ⊆ interior (closure A)) ↔ Topology.P3 A := by\n    dsimp [Topology.P3]\n    exact Iff.rfl\n  -- Combine the two equivalences.\n  exact hP2.trans h"
+  ],
+  "success": true
+}

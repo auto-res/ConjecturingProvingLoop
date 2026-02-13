@@ -1,0 +1,43 @@
+{
+  "times": [
+    142.61670184135437,
+    39.01717185974121
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13309,
+      "prompt_tokens": 25145,
+      "total_tokens": 38454,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 2943,
+      "prompt_tokens": 25219,
+      "total_tokens": 28162,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior\n      (closure (interior\n        (closure (interior\n          (closure (interior\n            (closure (interior\n              (closure (interior\n                (closure (interior\n                  (closure (interior\n                    (closure (interior A)))))))))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_closure_interior_eq_closure_interior (X := X)]",
+    "theorem Topology.isOpen_closure_iff_interior_eq_self {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    IsOpen (closure A) ↔ interior (closure A) = closure A := by\n  constructor\n  · intro hOpen\n    exact hOpen.interior_eq\n  · intro h_eq\n    have hOpenInt : IsOpen (interior (closure A)) := isOpen_interior\n    simpa [h_eq] using hOpenInt"
+  ],
+  "success": true
+}

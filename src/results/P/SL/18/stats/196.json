@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.272597551345825
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2659,
+      "prompt_tokens": 29594,
+      "total_tokens": 32253,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem nonempty_of_interior_closure_nonempty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (interior (closure (A : Set X))).Nonempty → (A : Set X).Nonempty := by\n  intro hInt\n  rcases hInt with ⟨x, hxInt⟩\n  have hxCl : x ∈ closure (A : Set X) :=\n    (interior_subset : interior (closure (A : Set X)) ⊆ closure A) hxInt\n  -- Apply the neighborhood characterization of `closure` with the open set `univ`.\n  have hNonempty : ((Set.univ : Set X) ∩ A).Nonempty :=\n    (mem_closure_iff).1 hxCl Set.univ isOpen_univ (by\n      -- `x` trivially belongs to `univ`.\n      trivial)\n  simpa [Set.inter_univ] using hNonempty"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.56839656829834
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5098,
+      "prompt_tokens": 13959,
+      "total_tokens": 19057,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13184
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_emptyInterior_implies_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 (X := X) A)\n    (hIntEmpty : interior A = (∅ : Set X)) :\n    A = (∅ : Set X) := by\n  apply (Set.eq_empty_iff_forall_not_mem).2\n  intro x hxA\n  have hx_cl : x ∈ closure (interior A) := hP1 hxA\n  have : x ∈ (∅ : Set X) := by\n    simpa [hIntEmpty, closure_empty] using hx_cl\n  exact this"
+  ],
+  "success": true
+}

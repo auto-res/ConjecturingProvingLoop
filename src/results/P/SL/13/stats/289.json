@@ -1,0 +1,26 @@
+{
+  "times": [
+    129.69997906684875
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7406,
+      "prompt_tokens": 51181,
+      "total_tokens": 58587,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_closure_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) ∪ closure (Aᶜ : Set X) = (Set.univ : Set X) := by\n  ext x\n  constructor\n  · intro _\n    simp\n  · intro _\n    by_cases hx : x ∈ closure (A : Set X)\n    · exact Or.inl hx\n    · -- Otherwise, `x` is outside `closure A`; in particular, it is outside `A`.\n      have hxAcomp : (x : X) ∈ (Aᶜ : Set X) := by\n        have : x ∉ (A : Set X) := by\n          intro hxA\n          have : (x : X) ∈ closure (A : Set X) := subset_closure hxA\n          exact hx this\n        simpa using this\n      exact Or.inr (subset_closure hxAcomp)"
+  ],
+  "success": true
+}

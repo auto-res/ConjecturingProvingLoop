@@ -1,0 +1,26 @@
+{
+  "times": [
+    16.062270879745483
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1540,
+      "prompt_tokens": 8577,
+      "total_tokens": 10117,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_sUnion {X : Type*} [TopologicalSpace X] {S : Set (Set X)} :\n    (∀ A, A ∈ S → Topology.P2 A) → Topology.P2 (⋃₀ S) := by\n  intro h_all\n  dsimp [Topology.P2] at *\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨A, hAS, hxA⟩\n  have hP2A : Topology.P2 A := h_all A hAS\n  have hx_int : x ∈ interior (closure (interior A)) := hP2A hxA\n  have hA_subset : A ⊆ ⋃₀ S := by\n    intro y hy\n    exact Set.mem_sUnion.2 ⟨A, hAS, hy⟩\n  have h_int_subset :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior (⋃₀ S))) := by\n    have h_int : interior A ⊆ interior (⋃₀ S) :=\n      interior_mono hA_subset\n    have h_closure :\n        closure (interior A) ⊆ closure (interior (⋃₀ S)) :=\n      closure_mono h_int\n    exact interior_mono h_closure\n  exact h_int_subset hx_int"
+  ],
+  "success": true
+}

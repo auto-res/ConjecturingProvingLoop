@@ -1,0 +1,26 @@
+{
+  "times": [
+    211.67000460624695
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10021,
+      "prompt_tokens": 54653,
+      "total_tokens": 64674,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_closure_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Dense (closure A) := by\n  intro hDense\n  -- The closure of a dense set is the whole space,\n  -- hence its closure (taken once more) is also the whole space.\n  have h_closure :\n      closure (closure A : Set X) = (Set.univ : Set X) := by\n    simpa [hDense.closure_eq, closure_univ, closure_closure]\n  -- Translate this equality into the desired density statement.\n  exact (dense_iff_closure_eq (s := closure A)).2 h_closure"
+  ],
+  "success": true
+}

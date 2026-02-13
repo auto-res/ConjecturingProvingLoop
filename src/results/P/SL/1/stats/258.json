@@ -1,0 +1,26 @@
+{
+  "times": [
+    44.94022035598755
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3566,
+      "prompt_tokens": 39420,
+      "total_tokens": 42986,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_of_dense_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Dense (interior A) → Topology.P2 (A ∪ B) := by\n  intro hDense\n  -- First, obtain density of `interior (A ∪ B)` from the given hypothesis.\n  have hDenseUnion : Dense (interior (A ∪ B)) :=\n    Topology.dense_interior_union_of_dense_left (A := A) (B := B) hDense\n  -- Apply the existing lemma to conclude the `P2` property.\n  exact Topology.P2_of_dense_interior (A := A ∪ B) hDenseUnion"
+  ],
+  "success": true
+}

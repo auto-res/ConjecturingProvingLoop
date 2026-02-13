@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.9348258972168
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3036,
+      "prompt_tokens": 15257,
+      "total_tokens": 18293,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_closure_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P3 A) :\n    closure A = closure (interior (closure A)) := by\n  apply subset_antisymm\n  ·\n    -- From `P3`, we have `A ⊆ interior (closure A)`.\n    have h₁ : (A : Set X) ⊆ interior (closure A) := h\n    -- Taking closures yields the desired inclusion.\n    simpa using (closure_mono h₁)\n  ·\n    -- The interior of a set is always contained in the set itself.\n    have h₂ : interior (closure A) ⊆ closure A := interior_subset\n    -- Taking closures on both sides (and simplifying) gives the reverse inclusion.\n    simpa [closure_closure] using (closure_mono h₂)"
+  ],
+  "success": true
+}

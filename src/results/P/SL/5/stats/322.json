@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.354809284210205
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5633,
+      "prompt_tokens": 67771,
+      "total_tokens": 73404,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 67456
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_inter_interior_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X)) ∩ interior B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxClIntA, hxIntB⟩\n  -- We will show `x ∈ closure (A ∩ B)` using the neighbourhood criterion.\n  have : x ∈ closure (A ∩ B : Set X) := by\n    refine (mem_closure_iff).2 ?_\n    intro U hUopen hxU\n    -- Consider the open neighbourhood `V = U ∩ interior B` of `x`.\n    have hVopen : IsOpen (U ∩ interior B) := hUopen.inter isOpen_interior\n    have hxV : x ∈ U ∩ interior B := ⟨hxU, hxIntB⟩\n    -- Since `x ∈ closure (interior A)`, this neighbourhood meets `interior A`.\n    have hNon : ((U ∩ interior B : Set X) ∩ interior A).Nonempty := by\n      have h := (mem_closure_iff).1 hxClIntA\n      simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm]\n        using h (U ∩ interior B) hVopen hxV\n    -- Extract a point `y` in the intersection.\n    rcases hNon with ⟨y, ⟨⟨hyU, hyIntB⟩, hyIntA⟩⟩\n    have hyA : y ∈ A := interior_subset hyIntA\n    have hyB : y ∈ B := interior_subset hyIntB\n    exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩\n  exact this"
+  ],
+  "success": true
+}

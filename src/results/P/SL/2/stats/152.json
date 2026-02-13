@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.24317240715027
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4827,
+      "prompt_tokens": 24161,
+      "total_tokens": 28988,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_implies_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → (A : Set X) ⊆ closure (interior (closure A)) := by\n  intro hP1 x hxA\n  -- From `P1 A`, the point `x` lies in `closure (interior A)`.\n  have hx_closure_int : (x : X) ∈ closure (interior A) := hP1 hxA\n  -- `interior A` is contained in `interior (closure A)` because `A ⊆ closure A`.\n  have hInt_sub :\n      (interior A : Set X) ⊆ interior (closure A) := by\n    have hSub : (A : Set X) ⊆ closure A := subset_closure\n    exact interior_mono hSub\n  -- Taking closures preserves inclusions.\n  have hCl_sub :\n      closure (interior A) ⊆ closure (interior (closure A)) :=\n    closure_mono hInt_sub\n  -- Combining the two, obtain the desired membership.\n  exact hCl_sub hx_closure_int"
+  ],
+  "success": true
+}

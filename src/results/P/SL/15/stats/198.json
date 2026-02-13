@@ -1,0 +1,26 @@
+{
+  "times": [
+    211.81554198265076
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 16712,
+      "prompt_tokens": 41017,
+      "total_tokens": 57729,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_has_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (closure (interior (closure (interior (closure A))))) := by\n  -- The set `interior (closure (interior (closure A)))` already has `P1`.\n  have hInner :\n      Topology.P1 (interior (closure (interior (closure A)))) :=\n    Topology.interior_has_P1\n      (X := X) (A := closure (interior (closure A)))\n  -- Transfer `P1` through the closure operator.\n  exact\n    Topology.P1_implies_P1_closure\n      (X := X)\n      (A := interior (closure (interior (closure A))))\n      hInner"
+  ],
+  "success": true
+}

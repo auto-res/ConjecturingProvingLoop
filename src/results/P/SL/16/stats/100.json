@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.72530961036682
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5655,
+      "prompt_tokens": 17819,
+      "total_tokens": 23474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_left_denseInterior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (h_dense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P2 (X := X) (A ∪ B) := by\n  -- First, show that `interior (A ∪ B)` is dense in `X`.\n  have h_dense_union : closure (interior (A ∪ B)) = (Set.univ : Set X) := by\n    -- `closure (interior (A ∪ B)) ⊆ univ` is immediate.\n    have h₁ : closure (interior (A ∪ B)) ⊆ (Set.univ : Set X) := by\n      intro x _\n      simp\n    -- For the reverse inclusion, use the density of `interior A`.\n    have h₂ : (Set.univ : Set X) ⊆ closure (interior (A ∪ B)) := by\n      have h_cl_subset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        have h_int_subset : interior A ⊆ interior (A ∪ B) := by\n          have hA_subset : A ⊆ A ∪ B := by\n            intro x hx\n            exact Or.inl hx\n          exact interior_mono hA_subset\n        exact h_int_subset\n      simpa [h_dense] using h_cl_subset\n    exact subset_antisymm h₁ h₂\n  -- Apply the lemma that `P2` holds for sets with dense interior.\n  exact Topology.P2_of_dense_interior (X := X) (A := A ∪ B) h_dense_union"
+  ],
+  "success": true
+}

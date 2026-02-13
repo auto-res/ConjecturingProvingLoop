@@ -1,0 +1,43 @@
+{
+  "times": [
+    41.084514141082764,
+    182.2051498889923
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2604,
+      "prompt_tokens": 7283,
+      "total_tokens": 9887,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7040
+      }
+    },
+    {
+      "completion_tokens": 10993,
+      "prompt_tokens": 7405,
+      "total_tokens": 18398,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7040
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_closure_of_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : P3 (X := X) A) :\n    closure (A : Set X) = closure (interior (closure A)) := by\n  have h₁ : closure (A : Set X) ⊆ closure (interior (closure A)) :=\n    closure_mono hA\n  have h₂ : closure (interior (closure A)) ⊆ closure A :=\n    closure_mono (interior_subset : (interior (closure A) : Set X) ⊆ closure A)\n  exact le_antisymm h₁ h₂",
+    "theorem closure_interior_closure_subset_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed (A : Set X)) :\n    closure (interior (closure (A : Set X))) ⊆ A := by\n  -- Since `A` is closed, its closure is itself.\n  have h_closure_eq : closure (A : Set X) = A := hA.closure_eq\n  -- First, `interior (closure A)` is contained in `closure A`, hence in `A`.\n  have h_subset : (interior (closure (A : Set X)) : Set X) ⊆ A := by\n    have h' : (interior (closure (A : Set X)) : Set X) ⊆ closure A :=\n      interior_subset\n    simpa [h_closure_eq] using h'\n  -- Taking closures preserves inclusions; rewrite via `closure A = A`.\n  simpa [h_closure_eq] using closure_mono h_subset"
+  ],
+  "success": true
+}

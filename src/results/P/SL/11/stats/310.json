@@ -1,0 +1,43 @@
+{
+  "times": [
+    36.55386924743652,
+    150.5177686214447
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2023,
+      "prompt_tokens": 50830,
+      "total_tokens": 52853,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    },
+    {
+      "completion_tokens": 10027,
+      "prompt_tokens": 50959,
+      "total_tokens": 60986,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (closure (A : Set X)) → Topology.P1 A := by\n  intro hP1Cl\n  dsimp [Topology.P1] at hP1Cl ⊢\n  intro x hxA\n  -- Step 1: view `x` as a point of `closure A`.\n  have hxCl : x ∈ closure A := subset_closure hxA\n  -- Step 2: apply `P1` for `closure A`.\n  have hxTarget : x ∈ closure (interior (closure A)) := hP1Cl hxCl\n  -- Step 3: transfer membership via monotonicity.\n  have hsubset : closure (interior (closure A)) ⊆ closure (interior A) :=\n    closure_interior_subset_closure_interior_closure (A := A)\n  exact hsubset hxTarget",
+    "theorem closure_interior_closure_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior (closure A)) ⊆ closure A := by\n  -- The interior of `closure A` is contained in `closure A`.\n  have h₁ : (interior (closure A) : Set X) ⊆ closure A := interior_subset\n  -- Taking closures preserves inclusions.\n  have h₂ : closure (interior (closure A)) ⊆ closure (closure A) :=\n    closure_mono h₁\n  -- Simplify `closure (closure A)` to `closure A`.\n  simpa [closure_closure] using h₂"
+  ],
+  "success": true
+}

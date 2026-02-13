@@ -1,0 +1,26 @@
+{
+  "times": [
+    174.86939096450806
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10038,
+      "prompt_tokens": 35516,
+      "total_tokens": 45554,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_closure_subset_closure_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure A \\ closure B ⊆ closure (A \\ B) := by\n  intro x hx\n  rcases hx with ⟨hxA, hxNotB⟩\n  -- We prove `x ∈ closure (A \\ B)` via the characterization\n  -- of the closure in terms of open neighbourhoods.\n  have hMem : ∀ U, IsOpen U → x ∈ U → ((U ∩ (A \\ B) : Set X)).Nonempty := by\n    intro U hU hxU\n    -- Choose an open neighbourhood of `x` disjoint from `B`.\n    have hV : IsOpen ((closure B)ᶜ) :=\n      (isClosed_closure (s := B)).isOpen_compl\n    have hxV : x ∈ (closure B)ᶜ := by\n      simpa using hxNotB\n    -- Intersect the two open neighbourhoods.\n    let W := U ∩ (closure B)ᶜ\n    have hW_open : IsOpen W := hU.inter hV\n    have hxW : x ∈ W := And.intro hxU hxV\n    -- Since `x ∈ closure A`, `W ∩ A` is nonempty.\n    have hNon : ((W ∩ A : Set X)).Nonempty :=\n      (mem_closure_iff).1 hxA W hW_open hxW\n    rcases hNon with ⟨y, ⟨⟨hyU, hyV⟩, hyA⟩⟩\n    -- `y ∉ B` because `y ∈ (closure B)ᶜ`, hence `y ∈ A \\ B`.\n    have hyNotB : y ∉ B := by\n      intro hyB\n      have : (y : X) ∈ closure B := subset_closure hyB\n      exact hyV this\n    exact ⟨y, And.intro hyU (And.intro hyA hyNotB)⟩\n  exact (mem_closure_iff).2 hMem"
+  ],
+  "success": true
+}

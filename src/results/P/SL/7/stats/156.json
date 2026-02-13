@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.52879071235657
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3387,
+      "prompt_tokens": 24301,
+      "total_tokens": 27688,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_superset_of_subset_closureInterior\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hBsubset : B ⊆ closure (interior A)) :\n    Topology.P1 B := by\n  dsimp [Topology.P1] at *\n  intro x hxB\n  -- `x` belongs to `closure (interior A)` by the hypothesis `hBsubset`.\n  have hx_clA : x ∈ closure (interior A) := hBsubset hxB\n  -- Since `A ⊆ B`, we have `interior A ⊆ interior B`.\n  have hIntSubset : interior A ⊆ interior B := interior_mono hAB\n  -- Taking closures preserves inclusion.\n  have hClSubset : closure (interior A) ⊆ closure (interior B) :=\n    closure_mono hIntSubset\n  -- Conclude that `x ∈ closure (interior B)`.\n  exact hClSubset hx_clA"
+  ],
+  "success": true
+}

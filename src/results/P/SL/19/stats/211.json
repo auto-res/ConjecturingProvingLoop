@@ -1,0 +1,77 @@
+{
+  "times": [
+    64.60018563270569,
+    72.98054695129395,
+    26.794708728790283,
+    42.68092584609985
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4570,
+      "prompt_tokens": 33103,
+      "total_tokens": 37673,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 5156,
+      "prompt_tokens": 33396,
+      "total_tokens": 38552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 1617,
+      "prompt_tokens": 33485,
+      "total_tokens": 35102,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 3136,
+      "prompt_tokens": 33591,
+      "total_tokens": 36727,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_and_isOpen_of_frontier_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) → IsClosed A ∧ IsOpen A := by\n  intro hFrontier\n  -- From `frontier A = ∅` we get `closure A ⊆ interior A`.\n  have hSub : closure A ⊆ interior A := by\n    intro x hxClos\n    by_cases hxInt : x ∈ interior A\n    · exact hxInt\n    ·\n      have : x ∈ closure A \\ interior A := ⟨hxClos, hxInt⟩\n      have : x ∈ (∅ : Set X) := by\n        simpa [frontier, hFrontier] using this\n      exact this.elim\n  -- `interior A ⊆ A` and `A ⊆ closure A` are always true.\n  have hIntSubA : interior A ⊆ A := interior_subset\n  have hASubClos : A ⊆ closure A := subset_closure\n  -- Hence all three sets coincide.\n  have hClosEqInt : closure A = interior A := by\n    apply Set.Subset.antisymm\n    · exact hSub\n    · exact Topology.interior_subset_closure (A := A)\n  have hClosEqA : closure A = A := by\n    apply Set.Subset.antisymm\n    · exact\n        (hClosEqInt.trans hIntSubA)   -- `closure A ⊆ interior A ⊆ A`\n    · exact hASubClos\n  have hIntEqA : interior A = A := by\n    apply Set.Subset.antisymm\n    · exact hIntSubA\n    ·\n      have : interior A ⊆ closure A :=\n        Topology.interior_subset_closure (A := A)\n      simpa [hClosEqA] using this\n  -- Conclude that `A` is both closed and open.\n  have hClosed : IsClosed A := by\n    simpa [hClosEqA] using (isClosed_closure (s := A))\n  have hOpen : IsOpen A := by\n    simpa [hIntEqA] using (isOpen_interior : IsOpen (interior A))\n  exact And.intro hClosed hOpen",
+    "theorem Topology.image_closure_subset_closure_image\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {f : X → Y} (hf : Continuous f) {A : Set X} :\n    f '' closure A ⊆ closure (f '' A) := by\n  intro y hy\n  rcases hy with ⟨x, hx_closure, rfl⟩\n  -- We show that `f x` satisfies the closure property with respect to `f '' A`.\n  refine (mem_closure_iff).2 ?_\n  intro U hU_open hfxU\n  -- The preimage of `U` under `f` is an open neighbourhood of `x`.\n  have hPreimageOpen : IsOpen (f ⁻¹' U) := hU_open.preimage hf\n  have hxPreimage : x ∈ f ⁻¹' U := hfxU\n  -- Since `x ∈ closure A`, this neighbourhood intersects `A`.\n  have hInter : ((f ⁻¹' U) ∩ A).Nonempty :=\n    (mem_closure_iff.1 hx_closure) (f ⁻¹' U) hPreimageOpen hxPreimage\n  -- Project the intersection point through `f` to obtain the desired intersection.\n  rcases hInter with ⟨z, ⟨hzPre, hzA⟩⟩\n  exact ⟨f z, ⟨z, hzA, rfl⟩, hzPre⟩",
+    "theorem Topology.isClosed_frontier {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (frontier A) := by\n  simpa [frontier] using\n    (Topology.isClosed_boundary (X := X) (A := A))",
+    "theorem Topology.closure_eq_self_union_frontier {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A = A ∪ frontier A := by\n  ext x\n  constructor\n  · intro hxClos\n    by_cases hA : x ∈ A\n    · exact Or.inl hA\n    ·\n      have hxNotInt : x ∉ interior A := by\n        intro hxInt\n        exact hA (interior_subset hxInt)\n      have hxFront : x ∈ frontier A := And.intro hxClos hxNotInt\n      exact Or.inr hxFront\n  · intro hx\n    cases hx with\n    | inl hA      => exact subset_closure hA\n    | inr hFront  => exact hFront.1"
+  ],
+  "success": true
+}

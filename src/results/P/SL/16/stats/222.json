@@ -1,0 +1,26 @@
+{
+  "times": [
+    122.02826070785522
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8954,
+      "prompt_tokens": 38683,
+      "total_tokens": 47637,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iterate_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    ∀ n : ℕ,\n      Topology.P1 (X := X)\n        (((fun S : Set X => closure (interior S))^[n.succ]) A) := by\n  intro n\n  induction n with\n  | zero =>\n      simpa using\n        (Topology.P1_closure_interior (X := X) (A := A))\n  | succ n ih =>\n      simpa [Function.iterate_succ_apply'] using\n        (Topology.P1_closure_interior (X := X)\n          (A := ((fun S : Set X => closure (interior S))^[n.succ] A)))"
+  ],
+  "success": true
+}

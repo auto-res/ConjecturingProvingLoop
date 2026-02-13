@@ -1,0 +1,128 @@
+{
+  "times": [
+    108.49376487731934,
+    55.35957670211792,
+    30.634045600891113,
+    27.26944589614868,
+    28.673877954483032,
+    39.98383855819702,
+    206.78803133964539
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6577,
+      "prompt_tokens": 52772,
+      "total_tokens": 59349,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 3156,
+      "prompt_tokens": 52889,
+      "total_tokens": 56045,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 1794,
+      "prompt_tokens": 53024,
+      "total_tokens": 54818,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 1912,
+      "prompt_tokens": 53305,
+      "total_tokens": 55217,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 2239,
+      "prompt_tokens": 53326,
+      "total_tokens": 55565,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3082,
+      "prompt_tokens": 53347,
+      "total_tokens": 56429,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 12504,
+      "prompt_tokens": 53368,
+      "total_tokens": 65872,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_union_closure_inter_compl_eq_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ B) ∪ closure (A ∩ Bᶜ) = closure A := by\n  -- Rewrite the left‐hand side using `closure_union`.\n  calc\n    closure (A ∩ B) ∪ closure (A ∩ Bᶜ)\n        = closure ((A ∩ B) ∪ (A ∩ Bᶜ)) := by\n          simpa [closure_union]\n    _ = closure A := by\n      -- Show that the union inside the closure is just `A`.\n      have h : ((A ∩ B) ∪ (A ∩ Bᶜ) : Set X) = A := by\n        ext x\n        constructor\n        · intro hxb\n          cases hxb with\n          | inl h1 => exact h1.1\n          | inr h2 => exact h2.1\n        · intro hxA\n          by_cases hB : x ∈ B\n          · exact Or.inl ⟨hxA, hB⟩\n          · exact Or.inr ⟨hxA, hB⟩\n      simpa [h]",
+    "theorem Topology.closure_inter_union_closure_compl_eq_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ B) ∪ closure (A ∩ Bᶜ) = closure A := by\n  -- First, turn the left-hand side into a single closure using `closure_union`.\n  have h₁ :\n      closure (A ∩ B) ∪ closure (A ∩ Bᶜ) =\n        closure ((A ∩ B) ∪ (A ∩ Bᶜ)) := by\n    simpa using (closure_union (A ∩ B) (A ∩ Bᶜ)).symm\n  -- Next, observe that `(A ∩ B) ∪ (A ∩ Bᶜ)` is just `A`.\n  have h₂ : ((A ∩ B : Set X) ∪ (A ∩ Bᶜ)) = A := by\n    ext x\n    constructor\n    · intro hx\n      cases hx with\n      | inl h => exact h.1\n      | inr h => exact h.1\n    · intro hxA\n      by_cases hB : x ∈ B\n      · exact Or.inl ⟨hxA, hB⟩\n      · exact Or.inr ⟨hxA, hB⟩\n  -- Put everything together.\n  simpa [h₁, h₂]",
+    "theorem closure_eq_union_of_inter_and_diff {X : Type*} [TopologicalSpace X]\n    (A B : Set X) :\n    closure (A : Set X) = closure (A ∩ B) ∪ closure (A ∩ Bᶜ) := by\n  classical\n  -- Step 1: decompose `A` as a union of the two intersections.\n  have h_decomp : (A : Set X) = (A ∩ B) ∪ (A ∩ Bᶜ) := by\n    ext x\n    constructor\n    · intro hx\n      by_cases hB : x ∈ B\n      · exact Or.inl ⟨hx, hB⟩\n      · exact Or.inr ⟨hx, hB⟩\n    · intro h\n      cases h with\n      | inl hAB   => exact hAB.1\n      | inr hA¬B  => exact hA¬B.1\n  -- Step 2: rewrite the desired closure using this decomposition\n  calc\n    closure (A : Set X)\n        = closure ((A ∩ B) ∪ (A ∩ Bᶜ)) := by\n            simpa [h_decomp]\n    _   = closure (A ∩ B) ∪ closure (A ∩ Bᶜ) := by\n            simpa [closure_union]",
+    "theorem Topology.closure_inter_union_diff_eq_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A ∩ B) ∪ closure (A \\ B) = closure A := by\n  -- Decompose `A` into the disjoint union of `A ∩ B` and `A \\ B`.\n  have h_decomp : (A : Set X) = (A ∩ B) ∪ (A \\ B) := by\n    ext x\n    constructor\n    · intro hxA\n      by_cases hB : x ∈ B\n      · exact Or.inl ⟨hxA, hB⟩\n      · exact Or.inr ⟨hxA, hB⟩\n    · intro hx\n      cases hx with\n      | inl h₁ => exact h₁.1\n      | inr h₂ => exact h₂.1\n  -- Use `closure_union` and the decomposition above.\n  calc\n    closure (A ∩ B) ∪ closure (A \\ B)\n        = closure ((A ∩ B) ∪ (A \\ B)) := by\n          simpa using (closure_union (A ∩ B) (A \\ B)).symm\n    _ = closure A := by\n          simpa [h_decomp]",
+    "theorem Topology.closure_eq_closure_inter_union_closure_inter_compl\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure A = closure (A ∩ B) ∪ closure (A ∩ Bᶜ) := by\n  -- Step 1: decompose `A` as a union of two disjoint pieces.\n  have h_decomp : (A : Set X) = (A ∩ B) ∪ (A ∩ Bᶜ) := by\n    ext x\n    constructor\n    · intro hxA\n      by_cases hB : x ∈ B\n      · exact Or.inl ⟨hxA, hB⟩\n      · exact Or.inr ⟨hxA, hB⟩\n    · intro hx\n      cases hx with\n      | inl h1 => exact h1.1\n      | inr h2 => exact h2.1\n  -- Step 2: rewrite the closure using this decomposition\n  simpa [h_decomp, closure_union]",
+    "theorem Topology.closure_eq_closure_inter_union_closure_inter_compl\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) = closure (A ∩ B) ∪ closure (A ∩ Bᶜ) := by\n  -- First, express `A` as the union of its parts inside and outside `B`.\n  have h_decomp : (A : Set X) = (A ∩ B) ∪ (A ∩ Bᶜ) := by\n    ext x\n    constructor\n    · intro hxA\n      by_cases hxB : x ∈ B\n      · exact Or.inl ⟨hxA, hxB⟩\n      · exact Or.inr ⟨hxA, hxB⟩\n    · intro hx\n      cases hx with\n      | inl hAB   => exact hAB.1\n      | inr hABc  => exact hABc.1\n  -- Rewrite `closure A` using the decomposition and `closure_union`.\n  simpa [h_decomp, closure_union]",
+    "theorem Topology.interior_closure_subset_closure_interior_union_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) ⊆ closure (interior A) ∪ frontier A := by\n  intro x hxInt\n  by_cases h : x ∈ closure (interior A)\n  · exact Or.inl h\n  ·\n    -- If `x ∉ closure (interior A)`, then it lies in the set difference\n    have hxDiff : x ∈ interior (closure A) \\ closure (interior A) :=\n      And.intro hxInt h\n    -- The previously proved lemma sends this difference into the frontier\n    have hxFront :\n        x ∈ frontier A :=\n      (Topology.interior_closure_diff_closure_interior_subset_frontier\n        (A := A)) hxDiff\n    exact Or.inr hxFront"
+  ],
+  "success": true
+}

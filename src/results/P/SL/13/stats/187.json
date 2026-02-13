@@ -1,0 +1,43 @@
+{
+  "times": [
+    134.13192486763,
+    82.58093571662903
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10653,
+      "prompt_tokens": 33599,
+      "total_tokens": 44252,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 6348,
+      "prompt_tokens": 33673,
+      "total_tokens": 40021,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iterate_seven_eq_closure_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    closure (interior\n      (closure (interior\n        (closure (interior\n          (closure (interior\n            (closure (A : Set X)))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_closure_interior_closure_eq_closure_interior,\n        Topology.closure_interior_closure_interior_closure_interior_closure_eq_closure_interior_closure,\n        closure_closure, interior_interior]",
+    "theorem Topology.interior_closure_interior_closure_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (A : Set X)))) ⊆\n      closure (interior (closure (A : Set X))) := by\n  intro x hx\n  exact\n    (interior_subset :\n      interior (closure (interior (closure (A : Set X)))) ⊆\n        closure (interior (closure (A : Set X)))) hx"
+  ],
+  "success": true
+}

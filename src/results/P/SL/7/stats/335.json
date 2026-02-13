@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.66185736656189
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1586,
+      "prompt_tokens": 53007,
+      "total_tokens": 54593,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P2 A ↔ Topology.P3 A := by\n  -- The density assumption forces both properties to hold unconditionally.\n  have hP2 : Topology.P2 A := Topology.P2_of_dense_interior (A := A) hDense\n  have hP3 : Topology.P3 A := Topology.P3_of_dense_interior (A := A) hDense\n  constructor\n  · intro _; exact hP3\n  · intro _; exact hP2"
+  ],
+  "success": true
+}

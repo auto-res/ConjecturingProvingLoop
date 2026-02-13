@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.17420434951782
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4423,
+      "prompt_tokens": 30148,
+      "total_tokens": 34571,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior A ∪ closure (interior A) = closure (interior A) := by\n  -- We first note that `interior A` is contained in `closure (interior A)`.\n  have h_sub : (interior A : Set X) ⊆ closure (interior A) := by\n    intro x hx\n    exact subset_closure hx\n  -- Now we establish the desired set equality.\n  apply Set.Subset.antisymm\n  · intro x hx\n    cases hx with\n    | inl hx_int => exact h_sub hx_int\n    | inr hx_cl  => exact hx_cl\n  · intro x hx\n    exact Or.inr hx"
+  ],
+  "success": true
+}

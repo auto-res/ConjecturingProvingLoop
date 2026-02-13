@@ -1,0 +1,43 @@
+{
+  "times": [
+    171.99271750450134,
+    136.47362685203552
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9972,
+      "prompt_tokens": 9765,
+      "total_tokens": 19737,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9088
+      }
+    },
+    {
+      "completion_tokens": 8351,
+      "prompt_tokens": 9839,
+      "total_tokens": 18190,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8128,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_idempotent_six {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (closure\n      (interior (closure\n        (interior (closure\n          (interior (closure\n            (interior (closure\n              (interior (closure A)))))))))) =\n      interior (closure A) := by\n  simp [Topology.interior_closure_idempotent]",
+    "theorem P2_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (A : Set X) = Set.univ) :\n    Topology.P2 (X := X) A := by\n  dsimp [Topology.P2]\n  intro x _hxA\n  -- First, compute `interior (closure (interior A))`.\n  have hint :\n      interior (closure (interior (A : Set X))) = (Set.univ : Set X) := by\n    have h_closure : closure (interior (A : Set X)) = (Set.univ : Set X) := by\n      simpa [h] using closure_univ\n    simpa [h_closure, interior_univ]\n  -- The desired membership is now immediate.\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [hint] using this"
+  ],
+  "success": true
+}

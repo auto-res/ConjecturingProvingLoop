@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.460405111312866
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1654,
+      "prompt_tokens": 36489,
+      "total_tokens": 38143,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_subset_self_union_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) ⊆ A ∪ frontier A := by\n  intro x hx\n  -- First, use the existing inclusion into `interior A ∪ frontier A`.\n  have h : x ∈ interior A ∪ frontier A :=\n    (Topology.interior_closure_subset_interior_union_frontier (A := A)) hx\n  -- Upgrade the membership from `interior A` to `A` when necessary.\n  cases h with\n  | inl hInt =>\n      exact Or.inl (interior_subset hInt)\n  | inr hFront =>\n      exact Or.inr hFront"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.7621054649353
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3500,
+      "prompt_tokens": 7759,
+      "total_tokens": 11259,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (A : Set X)) ⊆ closure (interior (closure (A : Set X))) := by\n  -- Since `A ⊆ closure A`, monotonicity of `interior` gives the key inclusion.\n  have h : interior (A : Set X) ⊆ interior (closure (A : Set X)) :=\n    interior_mono (subset_closure : (A : Set X) ⊆ closure (A : Set X))\n  -- Taking `closure` on both sides preserves the inclusion.\n  exact closure_mono h"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    70.77657461166382
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6019,
+      "prompt_tokens": 11759,
+      "total_tokens": 17778,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_closure_mem_nhds {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A ↔ ∀ x ∈ A, closure A ∈ 𝓝 x := by\n  constructor\n  · intro hP3\n    dsimp [Topology.P3] at hP3\n    intro x hx\n    have hx_int : x ∈ interior (closure A) := hP3 hx\n    exact (mem_interior_iff_mem_nhds).1 hx_int\n  · intro h\n    dsimp [Topology.P3]\n    intro x hx\n    have h_nhds : closure A ∈ 𝓝 x := h x hx\n    exact (mem_interior_iff_mem_nhds).2 h_nhds"
+  ],
+  "success": true
+}

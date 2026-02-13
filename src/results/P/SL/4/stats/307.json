@@ -1,0 +1,26 @@
+{
+  "times": [
+    228.63849401474
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11961,
+      "prompt_tokens": 47357,
+      "total_tokens": 59318,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_frontier_eq_empty_of_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    interior (frontier A) = (∅ : Set X) := by\n  -- Rewrite the frontier using the fact that `A` is closed.\n  have hFrontier : (frontier A : Set X) = A \\ interior A :=\n    frontier_eq_diff_interior_of_closed (A := A) hA\n  -- Show that `interior (A \\ interior A)` is empty.\n  have hEmpty : interior (A \\ interior A : Set X) = (∅ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro x hx\n      -- `x ∈ A \\ interior A`\n      have hxDiff : x ∈ A \\ interior A := interior_subset hx\n      -- `x ∈ interior A`, since interiors are monotone and\n      -- `(A \\ interior A) ⊆ A`.\n      have hSub : (A \\ interior A : Set X) ⊆ A := by\n        intro y hy; exact hy.1\n      have hxIntA : x ∈ interior A := (interior_mono hSub) hx\n      -- Contradiction with `x ∉ interior A`.\n      exact (hxDiff.2 hxIntA).elim\n    · exact Set.empty_subset _\n  -- Use the two identities obtained above.\n  calc\n    interior (frontier A)\n        = interior (A \\ interior A) := by\n          simpa [hFrontier]\n    _   = (∅ : Set X) := hEmpty"
+  ],
+  "success": true
+}

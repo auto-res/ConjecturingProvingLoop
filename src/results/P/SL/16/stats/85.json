@@ -1,0 +1,26 @@
+{
+  "times": [
+    136.1086483001709
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9335,
+      "prompt_tokens": 14995,
+      "total_tokens": 24330,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_left_dense {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (h_dense : closure A = (Set.univ : Set X)) :\n    Topology.P3 (X := X) (A ∪ B) := by\n  -- First show that `A ∪ B` is dense in `X`.\n  have h_dense_union : closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n    apply subset_antisymm\n    · intro x _\n      simp\n    · intro x _\n      -- Since `closure A = univ`, we have `x ∈ closure A`.\n      have hxA : x ∈ closure A := by\n        simpa [h_dense] using (by simp : (x : X) ∈ (Set.univ : Set X))\n      -- And `closure A ⊆ closure (A ∪ B)` because `A ⊆ A ∪ B`.\n      have h_sub : closure A ⊆ closure (A ∪ B) := closure_mono (by\n        intro y hy\n        exact Or.inl hy)\n      exact h_sub hxA\n  -- Conclude using `P3_of_dense`.\n  exact Topology.P3_of_dense (X := X) (A := A ∪ B) h_dense_union"
+  ],
+  "success": true
+}

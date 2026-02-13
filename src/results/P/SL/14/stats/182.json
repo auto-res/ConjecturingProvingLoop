@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.088449239730835
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2356,
+      "prompt_tokens": 34319,
+      "total_tokens": 36675,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_closure_of_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → IsOpen (closure A) := by\n  intro hDense\n  -- From the density of `interior A`, we know `closure A` satisfies `P3`.\n  have hP3 : Topology.P3 (closure A) :=\n    Topology.closure_has_P3_of_denseInterior (X := X) (A := A) hDense\n  -- For closed sets, `P3` is equivalent to being open.\n  exact\n    ((Topology.P3_closure_iff_isOpen_closure (X := X) (A := A)).1) hP3"
+  ],
+  "success": true
+}

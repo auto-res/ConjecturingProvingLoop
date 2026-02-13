@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.55544424057007
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2824,
+      "prompt_tokens": 1870,
+      "total_tokens": 4694,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_of_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : Topology.P1 (X := X) A) :\n    closure (A : Set X) = closure (interior A) := by\n  -- `closure (interior A)` is always a subset of `closure A`\n  have h₁ : closure (interior A) ⊆ closure (A : Set X) :=\n    closure_mono interior_subset\n  -- From `P1` we have `A ⊆ closure (interior A)`\n  have hA' : (A : Set X) ⊆ closure (interior A) := hA\n  -- Taking closures gives the reverse inclusion\n  have h₂ : closure (A : Set X) ⊆ closure (interior A) := by\n    have : closure (A : Set X) ⊆ closure (closure (interior A)) :=\n      closure_mono hA'\n    simpa [closure_closure] using this\n  exact Set.Subset.antisymm h₂ h₁"
+  ],
+  "success": true
+}

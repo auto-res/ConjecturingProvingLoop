@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.09779405593872
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6335,
+      "prompt_tokens": 12366,
+      "total_tokens": 18701,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure A)))) =\n      closure (interior (closure A)) := by\n  -- First, identify the key equality for interiors using the closedness of `closure A`.\n  have hInt :\n      interior (closure (interior (closure A))) = interior (closure A) := by\n    have hClosed : IsClosed (closure A) := isClosed_closure\n    simpa using\n      (interior_closure_interior_eq_interior_of_closed\n        (X := X) (A := closure A) hClosed)\n  -- Taking closures of both sides preserves equality.\n  simpa [hInt]"
+  ],
+  "success": true
+}

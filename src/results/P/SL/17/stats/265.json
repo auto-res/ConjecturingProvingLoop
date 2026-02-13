@@ -1,0 +1,60 @@
+{
+  "times": [
+    259.26211380958557,
+    63.92591452598572,
+    16.85055160522461
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13710,
+      "prompt_tokens": 47070,
+      "total_tokens": 60780,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    },
+    {
+      "completion_tokens": 3977,
+      "prompt_tokens": 47171,
+      "total_tokens": 51148,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 980,
+      "prompt_tokens": 47249,
+      "total_tokens": 48229,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_diff_subset_union_frontier {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    frontier (A \\ B) ⊆ frontier A ∪ frontier B := by\n  intro x hx\n  rcases hx with ⟨hClDiff, hNotIntDiff⟩\n  -- `A \\ B ⊆ A`, hence `x ∈ closure A`.\n  have hClA : x ∈ closure A := by\n    have hSub : (A \\ B : Set X) ⊆ A := fun y hy => hy.1\n    exact (closure_mono hSub) hClDiff\n  -- Case distinction on whether `x ∈ interior A`.\n  by_cases hIntA : x ∈ interior A\n  · ------------------------------------------------------------------\n    -- Case `x ∈ interior A`. We show `x ∈ frontier B`.\n    -- First, prove that `x ∉ interior B`; otherwise we contradict\n    -- `x ∉ interior (A \\ B)`.\n    have hNotIntB : x ∉ interior B := by\n      intro hIntB\n      -- The open set `interior A ∩ interior B` contains `x`\n      -- and is disjoint from `A \\ B`, contradicting `hClDiff`.\n      have hOpen : IsOpen (interior A ∩ interior B) :=\n        isOpen_interior.inter isOpen_interior\n      have hxMem : x ∈ interior A ∩ interior B := And.intro hIntA hIntB\n      have hDisjoint :\n          (interior A ∩ interior B) ∩ (A \\ B) = (∅ : Set X) := by\n        apply Set.eq_empty_of_subset_empty\n        intro y hy\n        rcases hy with ⟨⟨_, hyIntB⟩, hyDiff⟩\n        -- `y ∈ interior B` implies `y ∈ B`, contradicting `y ∉ B`.\n        exact (hyDiff.2 (interior_subset hyIntB)).elim\n      -- Using `hClDiff`, every neighbourhood of `x` meets `A \\ B`,\n      -- contradiction with `hDisjoint`.\n      have hNonempty :=\n        (mem_closure_iff).1 hClDiff _ hOpen hxMem\n      simpa [hDisjoint] using hNonempty\n    -- Next, show `x ∈ closure B`; otherwise we again contradict\n    -- `hNotIntDiff`.\n    have hClB : x ∈ closure B := by\n      by_contra hNot\n      -- If `x ∉ closure B`, then `x ∈ interior (Bᶜ)` (an open neighbourhood).\n      have hIntBc : x ∈ interior (Bᶜ) := by\n        -- `Bᶜ` is open, and `x ∉ closure B ⊆ B`, hence `x ∈ Bᶜ`.\n        have : x ∈ Bᶜ := by\n          by_cases hInB : x ∈ B\n          · exact False.elim (hNot (subset_closure hInB))\n          · simpa [Set.mem_compl] using hInB\n        simpa [isOpen_compl_iff] using this\n      -- The open set `interior A ∩ interior (Bᶜ)` contains `x`\n      -- and is contained in `A \\ B`, contradicting `hNotIntDiff`.\n      have hOpen : IsOpen (interior A ∩ interior (Bᶜ)) :=\n        isOpen_interior.inter isOpen_interior\n      have hxMem : x ∈ interior A ∩ interior (Bᶜ) :=\n        And.intro hIntA hIntBc\n      have hSubset : (interior A ∩ interior (Bᶜ)) ⊆ (A \\ B) := by\n        intro y hy; exact\n          ⟨interior_subset hy.1, by\n            have : y ∈ Bᶜ := interior_subset hy.2\n            exact this⟩\n      have hxInt : x ∈ interior (A \\ B) :=\n        interior_maximal hSubset hOpen hxMem\n      exact hNotIntDiff hxInt\n    -- Assemble membership in `frontier B`.\n    have hFrontB : x ∈ frontier B := And.intro hClB hNotIntB\n    exact Or.inr hFrontB\n  · ------------------------------------------------------------------\n    -- Case `x ∉ interior A`. Then `x ∈ frontier A`.\n    have hFrontA : x ∈ frontier A := And.intro hClA hIntA\n    exact Or.inl hFrontA",
+    "theorem Topology.closure_diff_subset_closure_diff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A \\ B) ⊆ closure A \\ interior B := by\n  intro x hx\n  -- First, `x` belongs to `closure A`.\n  have h_clA : x ∈ closure A := by\n    have h_sub : (A \\ B : Set X) ⊆ A := fun y hy => hy.1\n    exact (closure_mono h_sub) hx\n  -- Next, we show `x ∉ interior B`.\n  have h_notIntB : x ∉ interior B := by\n    intro hxInt\n    -- Since `x ∈ closure (A \\ B)`, every open neighborhood of `x`\n    -- meets `A \\ B`; in particular `interior B`, which contains `x`.\n    have h_nonempty :\n        ((interior B) ∩ (A \\ B)).Nonempty := by\n      have h_open : IsOpen (interior B) := isOpen_interior\n      exact (mem_closure_iff).1 hx (interior B) h_open hxInt\n    rcases h_nonempty with ⟨y, ⟨hyIntB, hyDiff⟩⟩\n    -- From `y ∈ interior B`, we get `y ∈ B`.\n    have hy_in_B : y ∈ B := interior_subset hyIntB\n    -- From `y ∈ A \\ B`, we know `y ∉ B`.\n    have hy_not_B : y ∉ B := hyDiff.2\n    exact hy_not_B hy_in_B\n  exact And.intro h_clA h_notIntB",
+    "theorem Topology.frontier_closure_eq_closure_diff_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (closure A) = closure A \\ interior (closure A) := by\n  simpa [frontier, closure_closure]"
+  ],
+  "success": true
+}

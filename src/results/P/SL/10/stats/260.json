@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.91319632530212
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5427,
+      "prompt_tokens": 41993,
+      "total_tokens": 47420,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_union_interior_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    ((closure A \\ interior A) ∪ interior A) = closure A := by\n  ext x\n  constructor\n  · intro hx\n    cases hx with\n    | inl hxbound => exact hxbound.1\n    | inr hxInt   => exact subset_closure (interior_subset hxInt)\n  · intro hxCl\n    classical\n    by_cases hxInt : x ∈ interior A\n    · exact Or.inr hxInt\n    · exact Or.inl ⟨hxCl, hxInt⟩"
+  ],
+  "success": true
+}

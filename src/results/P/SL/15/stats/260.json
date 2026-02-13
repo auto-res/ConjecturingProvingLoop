@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.85714244842529
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2892,
+      "prompt_tokens": 55740,
+      "total_tokens": 58632,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_prod_left_iff_of_nonempty\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hBne : B.Nonempty) (hP3B : Topology.P3 B) :\n    Topology.P3 (A ×ˢ B) ↔ Topology.P3 A := by\n  constructor\n  · intro hProd\n    exact\n      (Topology.P3_prod_left_of_nonempty\n        (X := X) (Y := Y) (A := A) (B := B) hBne) hProd\n  · intro hP3A\n    exact\n      Topology.P3_prod (X := X) (Y := Y) (A := A) (B := B) hP3A hP3B"
+  ],
+  "success": true
+}

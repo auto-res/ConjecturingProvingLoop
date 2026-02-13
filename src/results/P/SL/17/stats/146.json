@@ -1,0 +1,43 @@
+{
+  "times": [
+    262.94649505615234,
+    118.00957560539246
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 19209,
+      "prompt_tokens": 23432,
+      "total_tokens": 42641,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    },
+    {
+      "completion_tokens": 9539,
+      "prompt_tokens": 23506,
+      "total_tokens": 33045,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_idempotent_iter6\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure (interior A)))))))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_idempotent (A := A),\n        Topology.closure_interior_idempotent_iter5 (A := A)]",
+    "theorem Topology.P2_closure_interior_idempotent {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (interior (closure (interior A)))) ↔\n      Topology.P2 (closure (interior A)) := by\n  have hEq : closure (interior (closure (interior A))) = closure (interior A) :=\n    Topology.closure_interior_idempotent (A := A)\n  simpa [hEq]"
+  ],
+  "success": true
+}

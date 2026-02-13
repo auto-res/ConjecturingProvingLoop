@@ -1,0 +1,43 @@
+{
+  "times": [
+    13.36921763420105,
+    102.03624415397644
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1056,
+      "prompt_tokens": 2049,
+      "total_tokens": 3105,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 8397,
+      "prompt_tokens": 2166,
+      "total_tokens": 10563,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → closure A = closure (interior A) := by\n  intro hP1\n  -- First, `closure (interior A)` is always contained in `closure A`\n  have h₁ : closure (interior A) ⊆ closure A := by\n    have : interior A ⊆ A := interior_subset\n    exact closure_mono this\n  -- Second, `closure A` is contained in `closure (interior A)` thanks to `P1`\n  have h₂ : closure A ⊆ closure (interior A) := by\n    have : A ⊆ closure (interior A) := by\n      simpa [Topology.P1] using hP1\n    exact closure_mono this\n  exact Set.Subset.antisymm h₂ h₁",
+    "theorem closure_interior_eq_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : closure (interior A) = closure A := by\n  simpa [hA.interior_eq]"
+  ],
+  "success": true
+}

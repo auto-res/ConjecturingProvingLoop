@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.85370635986328
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4650,
+      "prompt_tokens": 42324,
+      "total_tokens": 46974,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem isClosed_imp_P1_P2_P3_compl {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    Topology.P1 (Aᶜ) ∧ Topology.P2 (Aᶜ) ∧ Topology.P3 (Aᶜ) := by\n  have hP1 : Topology.P1 (Aᶜ) :=\n    isClosed_imp_P1_compl (X := X) (A := A) hA_closed\n  have hP2 : Topology.P2 (Aᶜ) :=\n    isClosed_imp_P2_compl (X := X) (A := A) hA_closed\n  have hP3 : Topology.P3 (Aᶜ) :=\n    isClosed_imp_P3_compl (X := X) (A := A) hA_closed\n  exact And.intro hP1 (And.intro hP2 hP3)"
+  ],
+  "success": true
+}

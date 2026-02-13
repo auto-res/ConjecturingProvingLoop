@@ -1,0 +1,43 @@
+{
+  "times": [
+    138.06952786445618,
+    151.11375856399536
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9859,
+      "prompt_tokens": 43135,
+      "total_tokens": 52994,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    },
+    {
+      "completion_tokens": 6921,
+      "prompt_tokens": 43209,
+      "total_tokens": 50130,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iter_six_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior\n      (closure (interior\n        (closure (interior\n          (closure (interior\n            (closure (interior (A : Set X))))))))) =\n      closure (interior A) := by\n  -- First collapse the innermost five alternations of `closure` and `interior`.\n  have h₁ :\n      closure (interior\n        (closure (interior\n          (closure (interior\n            (closure (interior (A : Set X)))))))) =\n        closure (interior A) :=\n    Topology.closure_interior_iter_five_eq (X := X) (A := A)\n  -- Rewriting the goal with `h₁` reduces it to a single extra alternation,\n  -- which can be removed by the basic idempotence lemma.\n  simpa [h₁,\n        Topology.closure_interior_closure_interior_eq\n          (X := X) (A := A)]",
+    "theorem Topology.isOpen_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen (interior (closure (interior A))) := by\n  exact isOpen_interior"
+  ],
+  "success": true
+}

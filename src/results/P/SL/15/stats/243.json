@@ -1,0 +1,26 @@
+{
+  "times": [
+    68.0609998703003
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4810,
+      "prompt_tokens": 52075,
+      "total_tokens": 56885,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_prod_of_dense_left\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hDense : Dense A) :\n    interior (closure (A ×ˢ B)) =\n      (Set.univ : Set X) ×ˢ interior (closure B) := by\n  -- Express the interior of the closure of the product.\n  have hProd :\n      interior (closure (A ×ˢ B)) =\n        interior (closure (A : Set X)) ×ˢ interior (closure B) :=\n    interior_closure_prod (X := X) (Y := Y) (A := A) (B := B)\n  -- Since `A` is dense, its closure is the whole space.\n  have hClosureA : closure (A : Set X) = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  -- Hence the interior of this closure is also the whole space.\n  have hIntClosureA : interior (closure (A : Set X)) = (Set.univ : Set X) := by\n    have : interior (closure (A : Set X)) = interior ((Set.univ : Set X)) := by\n      simpa [hClosureA]\n    simpa [interior_univ] using this\n  -- Substitute and simplify.\n  simpa [hIntClosureA] using hProd"
+  ],
+  "success": true
+}

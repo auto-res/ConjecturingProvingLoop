@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.68218517303467
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5386,
+      "prompt_tokens": 15218,
+      "total_tokens": 20604,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosureInterior_subset_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (closure (interior A)) ⊆ closure (A : Set X) := by\n  -- First, we use the established inclusion\n  -- `interior (closure (interior A)) ⊆ interior (closure A)`.\n  have h₁ : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interiorClosureInterior_subset_interiorClosure (A := A)\n  -- Next, we recall that `interior (closure A)` is contained in `closure A`.\n  have h₂ : interior (closure A) ⊆ closure A := interior_subset\n  -- Chaining the two inclusions yields the desired result.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

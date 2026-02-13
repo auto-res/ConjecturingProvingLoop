@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.88071084022522
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1704,
+      "prompt_tokens": 28980,
+      "total_tokens": 30684,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_frontier_eq_frontier {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (frontier A) = frontier A := by\n  have hClosed : IsClosed (frontier A) := by\n    simpa using (Topology.isClosed_boundary (X := X) (A := A))\n  simpa using hClosed.closure_eq"
+  ],
+  "success": true
+}

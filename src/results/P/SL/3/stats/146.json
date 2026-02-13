@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.94802165031433
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5208,
+      "prompt_tokens": 21992,
+      "total_tokens": 27200,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_subset_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (closure (interior (A : Set X))) ⊆ closure (A : Set X) := by\n  intro x hx\n  -- From `hx`, we know `x` lies in the closure of `interior A`.\n  have hx_closure_int : (x : X) ∈ closure (interior (A : Set X)) :=\n    interior_subset (s := closure (interior (A : Set X))) hx\n  -- `closure (interior A)` is contained in `closure A`.\n  have h_subset : closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n    closure_mono (interior_subset (s := A))\n  -- Combining the facts yields the desired inclusion.\n  exact h_subset hx_closure_int"
+  ],
+  "success": true
+}

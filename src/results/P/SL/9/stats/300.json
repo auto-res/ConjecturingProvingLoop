@@ -1,0 +1,60 @@
+{
+  "times": [
+    41.89383625984192,
+    107.332834482193,
+    64.7756884098053
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2695,
+      "prompt_tokens": 52962,
+      "total_tokens": 55657,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    },
+    {
+      "completion_tokens": 6383,
+      "prompt_tokens": 53068,
+      "total_tokens": 59451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 4383,
+      "prompt_tokens": 53188,
+      "total_tokens": 57571,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.union_interiors_union_frontier_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) ∪ interior (Aᶜ) ∪ frontier A =\n      (Set.univ : Set X) := by\n  classical\n  -- Rewrite the union of the two interiors using the existing lemma.\n  have h₁ :\n      interior (A : Set X) ∪ interior (Aᶜ) =\n        (closure (A : Set X) \\ interior A)ᶜ :=\n    Topology.union_interiors_eq_compl_boundary (A := A)\n  -- Rewrite the frontier of `A`.\n  have h₂ :\n      frontier (A : Set X) =\n        closure (A : Set X) \\ interior A :=\n    Topology.frontier_eq_closure_diff_interior (A := A)\n  -- Assemble the pieces and use the complement–self union law.\n  calc\n    interior (A : Set X) ∪ interior (Aᶜ) ∪ frontier A\n        = (closure (A : Set X) \\ interior A)ᶜ ∪\n          (closure (A : Set X) \\ interior A) := by\n          simpa [h₁, h₂, Set.union_left_comm, Set.union_comm, Set.union_assoc]\n    _ = (Set.univ : Set X) := Set.compl_union_self _",
+    "theorem Topology.closure_frontier_subset_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (frontier (A : Set X)) ⊆ closure A := by\n  -- The frontier of `A` is contained in `closure A`; taking closures\n  -- preserves this inclusion.\n  exact closure_mono (Topology.frontier_subset_closure (A := A))",
+    "theorem Topology.closure_frontier_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (frontier (A : Set X)) ⊆ closure A := by\n  -- `frontier A` is contained in `closure A`.\n  have h : frontier (A : Set X) ⊆ closure A := by\n    intro x hx\n    exact hx.1\n  -- Taking closures preserves inclusions.\n  have h' : closure (frontier (A : Set X)) ⊆ closure (closure A) := closure_mono h\n  simpa [closure_closure] using h'"
+  ],
+  "success": true
+}

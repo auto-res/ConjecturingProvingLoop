@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.3116672039032
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1810,
+      "prompt_tokens": 46252,
+      "total_tokens": 48062,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_iff_subset_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (A : Set X)) ↔\n      closure (A : Set X) ⊆ interior (closure A) := by\n  have h₁ :=\n    (Topology.P3_closure_iff_P2_closure (A := A)).symm\n  have h₂ :=\n    (Topology.P3_closure_iff_subset_interior_closure (A := A))\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

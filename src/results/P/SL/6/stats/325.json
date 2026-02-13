@@ -1,0 +1,43 @@
+{
+  "times": [
+    89.3251383304596,
+    158.64582109451294
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5891,
+      "prompt_tokens": 51440,
+      "total_tokens": 57331,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    },
+    {
+      "completion_tokens": 9393,
+      "prompt_tokens": 51532,
+      "total_tokens": 60925,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iInter_of_P3_closed\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {S : ι → Set X}\n    (hClosed : ∀ i, IsClosed (S i)) (hP3 : ∀ i, Topology.P3 (S i)) :\n    Topology.P3 (⋂ i, S i) := by\n  classical\n  -- Each set `S i` is open because it is closed and satisfies `P3`.\n  have hOpen : ∀ i, IsOpen (S i) :=\n    fun i => (Topology.open_of_P3_closed (A := S i) (hClosed i)) (hP3 i)\n  -- The intersection of (possibly infinitely many) open sets is open.\n  have hOpenInter : IsOpen (⋂ i, S i : Set X) := by\n    simpa using isOpen_iInter (fun i => hOpen i)\n  -- Any open set satisfies `P3`.\n  exact Topology.open_satisfies_P3 (A := ⋂ i, S i) hOpenInter",
+    "theorem Topology.subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (A : Set X) ⊆ closure A := by\n  intro x hxA\n  -- Use the neighborhood characterization of `closure`.\n  apply (mem_closure_iff).2\n  intro U hU hxU\n  exact ⟨x, And.intro hxU hxA⟩"
+  ],
+  "success": true
+}

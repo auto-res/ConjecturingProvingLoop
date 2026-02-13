@@ -1,0 +1,43 @@
+{
+  "times": [
+    186.08015537261963,
+    76.92761182785034
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12633,
+      "prompt_tokens": 52934,
+      "total_tokens": 65567,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    },
+    {
+      "completion_tokens": 3989,
+      "prompt_tokens": 53053,
+      "total_tokens": 57042,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_compl_eq_compl_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (Aᶜ)) = (closure (interior A))ᶜ := by\n  -- It suffices to prove equality of complements.\n  apply Set.compl_injective\n  -- Step 1: rewrite the complement of `interior (closure (Aᶜ))`\n  --         using `closure_compl`.\n  have h₁ : (interior (closure (Aᶜ)))ᶜ = closure ((closure (Aᶜ))ᶜ) := by\n    simpa using (closure_compl (s := closure (Aᶜ))).symm\n  -- Step 2: identify `((closure (Aᶜ))ᶜ)` with `interior A`.\n  have h₂ : (closure (Aᶜ))ᶜ = interior A := by\n    -- From `closure_compl (s := A)` we have `closure (Aᶜ) = (interior A)ᶜ`.\n    -- Taking complements of both sides yields the desired identity.\n    have h := closure_compl (s := A)\n    simpa [h, Set.compl_compl] using congrArg Set.compl h\n  -- Step 3: combine the two equalities.\n  have h_compl : (interior (closure (Aᶜ)))ᶜ = closure (interior A) := by\n    simpa [h₂] using h₁\n  -- Step 4: translate back to the original (non-complemented) statement.\n  simpa [h_compl, Set.compl_compl] using congrArg Set.compl h_compl",
+    "theorem Topology.frontier_compl_eq {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (Aᶜ) = frontier A := by\n  simpa [frontier_eq_closure_inter_closure_compl, Set.inter_comm, Set.compl_compl]"
+  ],
+  "success": true
+}

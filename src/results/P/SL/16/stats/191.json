@@ -1,0 +1,26 @@
+{
+  "times": [
+    106.54659295082092
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8030,
+      "prompt_tokens": 33556,
+      "total_tokens": 41586,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7872,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iterate_closure_interior_fixed {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    ∀ n : ℕ,\n      ((fun S : Set X => closure (interior S))^[n]) (closure (interior A)) =\n        closure (interior A) := by\n  intro n\n  induction n with\n  | zero =>\n      simp\n  | succ n ih =>\n      simp [Function.iterate_succ_apply', ih,\n        Topology.closure_interior_closure_interior_eq_closure_interior\n          (X := X) (A := closure (interior A))]"
+  ],
+  "success": true
+}

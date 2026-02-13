@@ -1,0 +1,77 @@
+{
+  "times": [
+    63.692102909088135,
+    49.94567346572876,
+    30.402063608169556,
+    47.94523525238037
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4793,
+      "prompt_tokens": 20622,
+      "total_tokens": 25415,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 5893,
+      "prompt_tokens": 20727,
+      "total_tokens": 26620,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 844,
+      "prompt_tokens": 20809,
+      "total_tokens": 21653,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 3283,
+      "prompt_tokens": 20884,
+      "total_tokens": 24167,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_of_dense_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 A → Dense B → Topology.P3 (A ∪ B) := by\n  intro hP3A hDenseB\n  dsimp [Topology.P3] at hP3A ⊢\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- Use `P3` for `A` and monotonicity of `interior ∘ closure`.\n      have hxIntA : x ∈ interior (closure A) := hP3A hxA\n      have hsubset : interior (closure A) ⊆ interior (closure (A ∪ B)) := by\n        apply interior_mono\n        have : closure A ⊆ closure (A ∪ B) := by\n          apply closure_mono\n          intro y hy\n          exact Or.inl hy\n        exact this\n      exact hsubset hxIntA\n  | inr _hxB =>\n      -- Density of `B` forces `closure (A ∪ B)` to be the whole space.\n      have hclosureB : closure B = (Set.univ : Set X) := by\n        simpa using hDenseB.closure_eq\n      have hclosureUnion : closure (A ∪ B) = (Set.univ : Set X) := by\n        apply Set.Subset.antisymm\n        · intro y hy; simp\n        · intro y _\n          have hyB : y ∈ closure B := by\n            have : y ∈ (Set.univ : Set X) := by simp\n            simpa [hclosureB] using this\n          have hsubset : closure B ⊆ closure (A ∪ B) := by\n            apply closure_mono\n            intro z hz\n            exact Or.inr hz\n          exact hsubset hyB\n      have hIntUniv : interior (closure (A ∪ B)) = (Set.univ : Set X) := by\n        simpa [hclosureUnion, interior_univ]\n      have : x ∈ (Set.univ : Set X) := by simp\n      simpa [hIntUniv] using this",
+    "theorem Topology.interior_closure_eq_univ_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} (h : Dense (interior A)) :\n    interior (closure A) = (Set.univ : Set X) := by\n  -- First, record that the closure of `interior A` is the whole space.\n  have h_closure : closure (interior A) = (Set.univ : Set X) := by\n    simpa using h.closure_eq\n  -- Prove the desired equality by showing each inclusion.\n  apply Set.Subset.antisymm\n  ·\n    -- The forward inclusion is immediate.\n    intro _ _\n    simp\n  ·\n    -- For the reverse inclusion, start with an arbitrary point `x : X`.\n    intro x _\n    -- Because `closure (interior A) = univ`, its interior is also `univ`,\n    -- so `x` certainly lies in that interior.\n    have hx₁ : x ∈ interior (closure (interior A)) := by\n      simpa [h_closure, interior_univ] using (by\n        have : x ∈ (Set.univ : Set X) := by\n          simp\n        exact this)\n    -- Monotonicity of `interior` composed with `closure` upgrades the membership.\n    have hx₂ :\n        interior (closure (interior A)) ⊆ interior (closure A) := by\n      apply interior_mono\n      have : closure (interior A) ⊆ closure A :=\n        closure_mono (interior_subset : (interior A : Set X) ⊆ A)\n      exact this\n    exact hx₂ hx₁",
+    "theorem Topology.P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Dense A) : Topology.P3 A := by\n  -- `Dense A` gives `closure A = univ`.\n  have hclosure : closure A = (Set.univ : Set X) := by\n    simpa using hA.closure_eq\n  -- Apply the existing lemma that turns this equality into `P3`.\n  simpa using Topology.P3_of_closure_eq_univ (A := A) hclosure",
+    "theorem Topology.interior_closure_eq_of_isClosed_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hP3 : Topology.P3 A) :\n    interior (closure A) = A := by\n  -- From `P3` and closedness we get that `A` is open.\n  have hOpen : IsOpen A :=\n    (Topology.isOpen_of_P3_of_isClosed (A := A) hA_closed) hP3\n  -- The interior of an open set is itself.\n  have hInt : interior A = A := hOpen.interior_eq\n  -- The closure of a closed set is itself.\n  have hCl : closure A = A := hA_closed.closure_eq\n  -- Combine the two equalities.\n  simpa [hCl, hInt]"
+  ],
+  "success": true
+}

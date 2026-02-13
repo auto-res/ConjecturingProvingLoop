@@ -1,0 +1,26 @@
+{
+  "times": [
+    275.1023712158203
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 21360,
+      "prompt_tokens": 31574,
+      "total_tokens": 52934,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 21056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n      closure (interior A) := by\n  -- First collapse the two outermost `closure ∘ interior` cycles.\n  have h₁ :\n      closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n        closure (interior (closure (interior (closure (interior A))))) := by\n    simpa using\n      (Topology.closure_interior_closure_interior_eq_closure_interior\n        (A := closure (interior (closure (interior (closure (interior A)))))))\n  -- Next collapse the remaining three–cycle, using the already-established idempotency.\n  have h₂ :\n      closure (interior (closure (interior (closure (interior A))))) =\n        closure (interior A) :=\n    Topology.closure_interior_closure_interior_closure_interior_eq_closure_interior (A := A)\n  -- Put the two reductions together.\n  simpa [h₁] using h₂"
+  ],
+  "success": true
+}

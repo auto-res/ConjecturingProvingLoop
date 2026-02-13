@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.68322944641113
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3704,
+      "prompt_tokens": 52340,
+      "total_tokens": 56044,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interior_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure A ∩ interior B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hx_clA, hx_intB⟩\n  -- We show `x ∈ closure (A ∩ B)` using the neighbourhood characterization.\n  apply (mem_closure_iff).2\n  intro U hU_open hxU\n  -- Refine the neighbourhood to stay inside `B`.\n  have hV_open : IsOpen (U ∩ interior B) := hU_open.inter isOpen_interior\n  have hxV : x ∈ U ∩ interior B := ⟨hxU, hx_intB⟩\n  -- Since `x ∈ closure A`, this refined neighbourhood meets `A`.\n  have h_nonempty : ((U ∩ interior B) ∩ A).Nonempty := by\n    have := (mem_closure_iff).1 hx_clA (U ∩ interior B) hV_open hxV\n    simpa [Set.inter_left_comm, Set.inter_assoc] using this\n  -- Extract a witness in the required intersection.\n  rcases h_nonempty with ⟨y, ⟨⟨hyU, hyIntB⟩, hyA⟩⟩\n  have hyB : y ∈ B := interior_subset hyIntB\n  exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.8708713054657
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4961,
+      "prompt_tokens": 43457,
+      "total_tokens": 48418,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_interior_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A \\ interior A : Set X) = (∅ : Set X) := by\n  -- We prove that `interior (A \\ interior A)` has no points.\n  apply Set.eq_empty_iff_forall_not_mem.2\n  intro x hxIntDiff\n  -- `x` lies in `A \\ interior A`.\n  have hxDiff : x ∈ (A \\ interior A : Set X) := interior_subset hxIntDiff\n  -- Any open subset of `A` is contained in `interior A`.\n  have h_subsetA : interior (A \\ interior A : Set X) ⊆ A := by\n    intro y hy\n    exact (interior_subset hy).1\n  have h_to_intA : interior (A \\ interior A : Set X) ⊆ interior A :=\n    interior_maximal h_subsetA isOpen_interior\n  have hxIntA : x ∈ interior A := h_to_intA hxIntDiff\n  -- Contradiction: `x` is both in and not in `interior A`.\n  exact (hxDiff.2 hxIntA)"
+  ],
+  "success": true
+}

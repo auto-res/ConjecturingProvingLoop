@@ -1,0 +1,26 @@
+{
+  "times": [
+    302.41927123069763
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12046,
+      "prompt_tokens": 41818,
+      "total_tokens": 53864,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure A)))))) =\n      closure (interior (closure A)) := by\n  -- First, collapse the two outermost layers using an existing lemma.\n  have h :\n      closure (interior (closure (interior (closure (interior (closure A)))))) =\n        closure (interior (closure (closure A))) := by\n    simpa using\n      (closure_interior_closure_interior_closure_eq (X := X) (A := closure A))\n  -- Finally, simplify the remaining `closure` and `interior` of a closure.\n  simpa [closure_closure, interior_closure_closure_eq] using h"
+  ],
+  "success": true
+}

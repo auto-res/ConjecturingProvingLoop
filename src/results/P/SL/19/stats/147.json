@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.91856002807617
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4302,
+      "prompt_tokens": 21723,
+      "total_tokens": 26025,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_eq_interior_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    interior (closure (interior A)) = interior A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    -- Since `interior A ⊆ A` and `A` is closed, we have\n    -- `closure (interior A) ⊆ A`.\n    have hSub : closure (interior A) ⊆ A := by\n      have hInt : (interior A : Set X) ⊆ A := interior_subset\n      have hClos : closure (interior A) ⊆ closure A := closure_mono hInt\n      simpa [hA.closure_eq] using hClos\n    -- Monotonicity of `interior` gives the desired inclusion.\n    exact (interior_mono hSub) hx\n  · intro x hx\n    -- Use the maximality of the interior: if `interior A` is contained in a set,\n    -- then its interior contains `interior A`.\n    have hSub : (interior A : Set X) ⊆ closure (interior A) := subset_closure\n    have hInc : interior A ⊆ interior (closure (interior A)) :=\n      interior_maximal hSub isOpen_interior\n    exact hInc hx"
+  ],
+  "success": true
+}

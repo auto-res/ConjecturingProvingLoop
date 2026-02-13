@@ -1,0 +1,26 @@
+{
+  "times": [
+    122.92567801475525
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10006,
+      "prompt_tokens": 39577,
+      "total_tokens": 49583,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closure_union_iff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 (closure (A ∪ B)) ↔ Topology.P2 (closure A ∪ closure B) := by\n  have h : closure (A ∪ B : Set X) = closure A ∪ closure B := by\n    simpa [closure_union]\n  constructor\n  · intro hP2\n    simpa [h] using hP2\n  · intro hP2\n    simpa [h] using hP2"
+  ],
+  "success": true
+}

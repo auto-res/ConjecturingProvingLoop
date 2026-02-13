@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.84163761138916
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3402,
+      "prompt_tokens": 13230,
+      "total_tokens": 16632,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_implies_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → (A : Set X) ⊆ closure (interior (closure (A : Set X))) := by\n  intro hP1\n  dsimp [Topology.P1] at hP1\n  have hcl :\n      closure (interior (A : Set X)) ⊆ closure (interior (closure (A : Set X))) := by\n    apply closure_mono\n    have : interior (A : Set X) ⊆ interior (closure (A : Set X)) :=\n      interior_mono (subset_closure : (A : Set X) ⊆ closure (A : Set X))\n    exact this\n  exact hP1.trans hcl"
+  ],
+  "success": true
+}

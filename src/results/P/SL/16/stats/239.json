@@ -1,0 +1,43 @@
+{
+  "times": [
+    221.6211564540863,
+    33.510993003845215
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10026,
+      "prompt_tokens": 41458,
+      "total_tokens": 51484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1783,
+      "prompt_tokens": 41538,
+      "total_tokens": 43321,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_closure_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∩ closure B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxIntA, hxClB⟩\n  rcases hxIntA with ⟨U, hUopen, hxU, hUsubset⟩\n  -- We prove `x ∈ closure (A ∩ B)` using `mem_closure_iff`.\n  refine (mem_closure_iff).2 ?_\n  intro V hVopen hxV\n  -- Consider the open set `V ∩ U` that contains `x`.\n  have hVU_open : IsOpen (V ∩ U) := hVopen.inter hUopen\n  have hxVU : (x : X) ∈ V ∩ U := ⟨hxV, hxU⟩\n  -- Because `x ∈ closure B`, this open set meets `B`.\n  have hNonempty : ((V ∩ U) ∩ B).Nonempty :=\n    (mem_closure_iff.1 hxClB) (V ∩ U) hVU_open hxVU\n  rcases hNonempty with ⟨y, ⟨⟨hyV, hyU⟩, hyB⟩⟩\n  -- The point `y` lies in `A` (since `U ⊆ A`) and in `B`.\n  have hyA : y ∈ A := hUsubset hyU\n  -- Thus `y ∈ V ∩ (A ∩ B)`, providing the required non‐emptiness.\n  exact ⟨y, ⟨hyV, And.intro hyA hyB⟩⟩",
+    "theorem Topology.closed_P123_iff_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) :\n    (Topology.P1 (X := X) A ∧ Topology.P2 (X := X) A ∧ Topology.P3 (X := X) A) ↔\n      IsOpen A := by\n  constructor\n  · rintro ⟨_, _, hP3⟩\n    exact Topology.closed_P3_isOpen (X := X) (A := A) hClosed hP3\n  · intro hOpen\n    exact\n      Topology.isOpen_satisfies_P1_P2_P3 (X := X) (A := A) hOpen\n"
+  ],
+  "success": true
+}

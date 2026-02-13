@@ -1,0 +1,43 @@
+{
+  "times": [
+    56.83366250991821,
+    187.94008326530457
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5687,
+      "prompt_tokens": 48500,
+      "total_tokens": 54187,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 12112,
+      "prompt_tokens": 48623,
+      "total_tokens": 60735,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_union_of_open_disjoint_closures\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B)\n    (hDisj : Disjoint (closure A) (closure B)) :\n    frontier (A ∪ B : Set X) = frontier A ∪ frontier B := by\n  -- We already have one inclusion.\n  have h_subset : frontier (A ∪ B) ⊆ frontier A ∪ frontier B :=\n    frontier_union_subset (A := A) (B := B)\n  -- To prove the opposite inclusion, we work pointwise.\n  ext x\n  constructor\n  · exact h_subset\n  · intro hx\n    -- `interior (A ∪ B)` simplifies because `A ∪ B` is open.\n    have hIntUnion : interior (A ∪ B) = A ∪ B := by\n      simpa using (hA.union hB).interior_eq\n    -- We treat the two symmetric cases separately.\n    cases hx with\n    | inl hxA =>\n        -- Basic data from `x ∈ frontier A`.\n        have hx_clA : x ∈ closure A := hxA.1\n        have hx_notA : x ∉ A := by\n          have : x ∉ interior A := hxA.2\n          simpa [hA.interior_eq] using this\n        -- `x` cannot lie in `B`, otherwise the disjointness of closures is violated.\n        have hx_notB : x ∉ B := by\n          intro hxB\n          have hx_clB : x ∈ closure B := subset_closure hxB\n          exact (Set.disjoint_left.mp hDisj) hx_clA hx_clB\n        -- Show `x ∈ frontier (A ∪ B)`.\n        have hx_clUnion : x ∈ closure (A ∪ B) := by\n          have hMono : closure A ⊆ closure (A ∪ B) :=\n            closure_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n          exact hMono hx_clA\n        have hx_notIntUnion : x ∉ interior (A ∪ B) := by\n          intro hInt\n          have : x ∈ A ∪ B := by\n            simpa [hIntUnion] using hInt\n          cases this with\n          | inl hAin => exact hx_notA hAin\n          | inr hBin => exact hx_notB hBin\n        exact And.intro hx_clUnion hx_notIntUnion\n    | inr hxB =>\n        -- Symmetric argument for `x ∈ frontier B`.\n        have hx_clB : x ∈ closure B := hxB.1\n        have hx_notB : x ∉ B := by\n          have : x ∉ interior B := hxB.2\n          simpa [hB.interior_eq] using this\n        have hx_notA : x ∉ A := by\n          intro hxA\n          have hx_clA : x ∈ closure A := subset_closure hxA\n          exact (Set.disjoint_left.mp hDisj) hx_clA hx_clB\n        have hx_clUnion : x ∈ closure (A ∪ B) := by\n          have hMono : closure B ⊆ closure (A ∪ B) :=\n            closure_mono (Set.subset_union_right : (B : Set X) ⊆ A ∪ B)\n          exact hMono hx_clB\n        have hx_notIntUnion : x ∉ interior (A ∪ B) := by\n          intro hInt\n          have : x ∈ A ∪ B := by\n            simpa [hIntUnion] using hInt\n          cases this with\n          | inl hAin => exact hx_notA hAin\n          | inr hBin => exact hx_notB hBin\n        exact And.intro hx_clUnion hx_notIntUnion",
+    ""
+  ],
+  "success": true
+}

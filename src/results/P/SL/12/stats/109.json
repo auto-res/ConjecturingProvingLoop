@@ -1,0 +1,26 @@
+{
+  "times": [
+    27.65064024925232
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2265,
+      "prompt_tokens": 21821,
+      "total_tokens": 24086,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_of_subset_closure_interior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B)\n    (hB : B ⊆ interior (closure (interior A))) :\n    Topology.P2 (X := X) B := by\n  dsimp [Topology.P2] at *\n  intro x hxB\n  -- From the hypothesis `hB`, `x` lies in `interior (closure (interior A))`.\n  have hx₁ : x ∈ interior (closure (interior A)) := hB hxB\n  -- We show that this set is contained in `interior (closure (interior B))`.\n  have h_incl :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior B)) := by\n    -- Step 1: `interior A ⊆ interior B` since `A ⊆ B`.\n    have h₁ : (interior A : Set X) ⊆ interior B :=\n      interior_mono hAB\n    -- Step 2: take closures.\n    have h₂ : closure (interior A : Set X) ⊆ closure (interior B) :=\n      closure_mono h₁\n    -- Step 3: take interiors once more.\n    exact interior_mono h₂\n  -- Conclude that `x ∈ interior (closure (interior B))`.\n  exact h_incl hx₁"
+  ],
+  "success": true
+}

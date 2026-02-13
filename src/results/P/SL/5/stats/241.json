@@ -1,0 +1,26 @@
+{
+  "times": [
+    16.946030616760254
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 907,
+      "prompt_tokens": 43172,
+      "total_tokens": 44079,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_P2_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (A : Set X) = Set.univ) :\n    Topology.P1 (X := X) A ↔ Topology.P2 (X := X) A := by\n  -- Both properties hold unconditionally under the dense‐interior hypothesis.\n  have hP1 : Topology.P1 (X := X) A :=\n    Topology.P1_of_dense_interior (X := X) (A := A) h\n  have hP2 : Topology.P2 (X := X) A :=\n    Topology.P2_of_dense_interior (X := X) (A := A) h\n  exact ⟨fun _ => hP2, fun _ => hP1⟩"
+  ],
+  "success": true
+}

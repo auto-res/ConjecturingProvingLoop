@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.84589385986328
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2309,
+      "prompt_tokens": 8756,
+      "total_tokens": 11065,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_P3_iff_interior_eq_self {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    IsClosed A → (Topology.P3 A ↔ interior A = A) := by\n  intro hClosed\n  have h₁ := (Topology.isClosed_isOpen_iff_P3 (A := A) hClosed)\n  have h₂ := (isOpen_iff_interior_eq (A := A))\n  simpa using (h₁.symm.trans h₂)"
+  ],
+  "success": true
+}

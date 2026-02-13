@@ -1,0 +1,26 @@
+{
+  "times": [
+    68.31564903259277
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4856,
+      "prompt_tokens": 36704,
+      "total_tokens": 41560,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interior_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure A ∩ interior B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxIntB⟩\n  -- We will verify the neighbourhood criterion for `x` with respect to `A ∩ B`.\n  apply (mem_closure_iff).2\n  intro U hUopen hxU\n  -- Intersect the given neighbourhood with `interior B`, which is open and contains `x`.\n  have hUI_open : IsOpen (U ∩ interior B) := hUopen.inter isOpen_interior\n  have hx_UI : x ∈ U ∩ interior B := ⟨hxU, hxIntB⟩\n  -- Since `x ∈ closure A`, this new neighbourhood meets `A`.\n  have h_nonempty : ((U ∩ interior B) ∩ A).Nonempty :=\n    (mem_closure_iff).1 hxClA (U ∩ interior B) hUI_open hx_UI\n  -- Re-package the witness to lie in `U ∩ (A ∩ B)`.\n  rcases h_nonempty with ⟨y, ⟨hyU, hyIntB⟩, hyA⟩\n  refine ⟨y, ?_⟩\n  have hyB : y ∈ B := interior_subset hyIntB\n  exact ⟨hyU, ⟨hyA, hyB⟩⟩"
+  ],
+  "success": true
+}

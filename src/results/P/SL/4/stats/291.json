@@ -1,0 +1,43 @@
+{
+  "times": [
+    83.3318464756012,
+    204.54702353477478
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4061,
+      "prompt_tokens": 44360,
+      "total_tokens": 48421,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 11987,
+      "prompt_tokens": 44576,
+      "total_tokens": 56563,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_eq_empty_iff_closure_eq_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier A = (∅ : Set X) ↔ closure A = interior A := by\n  -- A convenient rewriting of `frontier A`.\n  have h_front : (frontier A : Set X) = closure A \\ interior A :=\n    (frontier_eq_closure_diff_interior (X := X) (A := A)).symm\n  constructor\n  · intro hEmpty\n    -- From `frontier A = ∅` derive `closure A \\ interior A = ∅`.\n    have h_diff : closure A \\ interior A = (∅ : Set X) := by\n      simpa [h_front] using hEmpty\n    -- Show `closure A ⊆ interior A`.\n    have h_sub : (closure A : Set X) ⊆ interior A := by\n      intro x hxCl\n      by_cases hxInt : x ∈ interior A\n      · exact hxInt\n      · -- Otherwise `x` lies in the empty set, a contradiction.\n        have : x ∈ closure A \\ interior A := And.intro hxCl hxInt\n        have : x ∈ (∅ : Set X) := by\n          simpa [h_diff] using this\n        cases this\n    -- Combine with the obvious inclusion `interior A ⊆ closure A`.\n    exact Set.Subset.antisymm h_sub interior_subset\n  · intro hEq\n    -- Rewrite `closure A \\ interior A` using `hEq`.\n    have h_diff : closure A \\ interior A = (∅ : Set X) := by\n      simpa [hEq, Set.diff_self]\n    -- Translate back to `frontier A`.\n    simpa [h_front, h_diff]",
+    ""
+  ],
+  "success": true
+}

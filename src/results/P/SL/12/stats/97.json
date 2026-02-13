@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.555094480514526
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2693,
+      "prompt_tokens": 19284,
+      "total_tokens": 21977,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_P3_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P3 (X := X) (closure A)) :\n    Topology.P3 (X := X) A := by\n  dsimp [Topology.P3] at h ⊢\n  intro x hxA\n  -- From `x ∈ A` we know `x ∈ closure A`.\n  have hx_cl : x ∈ closure (A : Set X) := subset_closure hxA\n  -- Apply `P3` for `closure A`.\n  have hx_int : x ∈ interior (closure (closure A)) := h hx_cl\n  -- Simplify `closure (closure A)` to `closure A`.\n  simpa [closure_closure] using hx_int"
+  ],
+  "success": true
+}

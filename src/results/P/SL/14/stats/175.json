@@ -1,0 +1,26 @@
+{
+  "times": [
+    222.42126393318176
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 19959,
+      "prompt_tokens": 32961,
+      "total_tokens": 52920,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ interior (Aᶜ : Set X) = (∅ : Set X) := by\n  classical\n  -- Density is equivalent to `closure A = univ`.\n  have h_dense :\n      Dense (A : Set X) ↔ closure (A : Set X) = (Set.univ : Set X) :=\n    dense_iff_closure_eq (s := (A : Set X))\n  -- `interior (Aᶜ)` is the complement of `closure A`.\n  have h_int_compl : interior (Aᶜ : Set X) = (closure (A : Set X))ᶜ := by\n    simpa using interior_compl\n  -- Relate `closure A = univ` to `interior (Aᶜ) = ∅`.\n  have h_aux :\n      closure (A : Set X) = (Set.univ : Set X) ↔\n        interior (Aᶜ : Set X) = (∅ : Set X) := by\n    constructor\n    · intro h_cl\n      have : interior (Aᶜ : Set X) = (Set.univ : Set X)ᶜ := by\n        simpa [h_cl] using h_int_compl\n      simpa [Set.compl_univ] using this\n    · intro h_int\n      -- From `h_int_compl`, the complement of the closure is empty.\n      have h_compl : (closure (A : Set X))ᶜ = (∅ : Set X) := by\n        have : interior (Aᶜ : Set X) = (closure (A : Set X))ᶜ := h_int_compl\n        simpa [this] using h_int\n      -- Therefore `closure A` is the whole space.\n      have : closure (A : Set X) = ((closure (A : Set X))ᶜ)ᶜ := by\n        simp\n      simpa [h_compl, Set.compl_empty] using this\n  simpa using h_dense.trans h_aux"
+  ],
+  "success": true
+}

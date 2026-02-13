@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.234230041503906
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4071,
+      "prompt_tokens": 20775,
+      "total_tokens": 24846,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_left_denseInterior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (h_dense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P1 (X := X) (A ∪ B) := by\n  dsimp [Topology.P1]\n  intro x hxUnion\n  -- Every point of `X` lies in `closure (interior A)` by the density hypothesis.\n  have hxClosureIntA : x ∈ closure (interior A) := by\n    have : (x : X) ∈ (Set.univ : Set X) := by simp\n    simpa [h_dense] using this\n  -- Monotonicity of `closure ∘ interior` gives the required inclusion.\n  have h_subset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n    apply closure_mono\n    have h_int_subset : interior A ⊆ interior (A ∪ B) := by\n      have h_sub : A ⊆ A ∪ B := by\n        intro y hy; exact Or.inl hy\n      exact interior_mono h_sub\n    exact h_int_subset\n  exact h_subset hxClosureIntA"
+  ],
+  "success": true
+}

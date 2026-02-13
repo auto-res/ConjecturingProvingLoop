@@ -1,0 +1,60 @@
+{
+  "times": [
+    130.30150961875916,
+    179.20227599143982,
+    71.14146971702576
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8155,
+      "prompt_tokens": 43940,
+      "total_tokens": 52095,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 9191,
+      "prompt_tokens": 44068,
+      "total_tokens": 53259,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 4004,
+      "prompt_tokens": 44196,
+      "total_tokens": 48200,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_union_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure ((A ∪ interior (closure (A : Set X))) : Set X)) =\n      interior (closure (A : Set X)) := by\n  -- First, show that taking the closure does not change after adding\n  -- `interior (closure A)` to `A`.\n  have h_subset :\n      ((A : Set X) ∪ interior (closure (A : Set X)) : Set X) ⊆\n        closure (A : Set X) := by\n    intro x hx\n    cases hx with\n    | inl hxA   => exact subset_closure hxA\n    | inr hxInt => exact interior_subset hxInt\n  have h_cl_eq :\n      closure ((A ∪ interior (closure (A : Set X))) : Set X) =\n        closure (A : Set X) := by\n    apply Set.Subset.antisymm\n    · exact closure_mono h_subset\n    · -- Conversely, `A` is contained in the union, hence so are their closures.\n      have h_incl : (A : Set X) ⊆\n          (A : Set X) ∪ interior (closure (A : Set X)) := by\n        intro x hx; exact Or.inl hx\n      exact closure_mono h_incl\n  -- Rewriting with the equality of closures yields the desired identity.\n  simpa [h_cl_eq]",
+    "theorem closure_union_interior_closure_subset {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure ((A ∪ interior (closure (A : Set X))) : Set X) ⊆\n      closure (A : Set X) := by\n  -- First, prove the underlying inclusion without `closure`.\n  have hSub :\n      (A ∪ interior (closure (A : Set X)) : Set X) ⊆\n        closure (A : Set X) := by\n    intro x hx\n    cases hx with\n    | inl hxA =>\n        -- Points from `A` are, by definition, in `closure A`.\n        exact subset_closure hxA\n    | inr hxInt =>\n        -- Points from `interior (closure A)` lie in `closure A`\n        -- because the interior is contained in the set itself.\n        exact interior_subset hxInt\n  -- Taking closures preserves inclusions.\n  exact closure_mono hSub",
+    "theorem closure_iInter_interiors_subset_iInter_closure_interiors\n    {X ι : Type*} [TopologicalSpace X] {F : ι → Set X} :\n    closure (⋂ i, interior (F i : Set X)) ⊆ ⋂ i, closure (interior (F i : Set X)) := by\n  intro x hx\n  -- For each `i`, we show `x ∈ closure (interior (F i))`.\n  have h : ∀ i, x ∈ closure (interior (F i : Set X)) := by\n    intro i\n    -- The set `⋂ i, interior (F i)` is contained in `interior (F i)`.\n    have hSubset :\n        (⋂ j, interior (F j : Set X)) ⊆ interior (F i : Set X) :=\n      Set.iInter_subset _ _\n    -- Taking closures preserves inclusions.\n    have hCl :\n        closure (⋂ j, interior (F j : Set X)) ⊆\n          closure (interior (F i : Set X)) :=\n      closure_mono hSubset\n    exact hCl hx\n  -- Assemble the memberships into an element of the intersection.\n  exact Set.mem_iInter.mpr h"
+  ],
+  "success": true
+}

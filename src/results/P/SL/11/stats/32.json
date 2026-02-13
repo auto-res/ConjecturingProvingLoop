@@ -1,0 +1,26 @@
+{
+  "times": [
+    119.94815421104431
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8344,
+      "prompt_tokens": 4062,
+      "total_tokens": 12406,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8064,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_nonempty_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A) (hne : A.Nonempty) : (interior A).Nonempty := by\n  classical\n  by_contra hInt\n  -- If `interior A` is empty, rewrite it to `∅`.\n  have hIntEq : interior A = (∅ : Set X) := by\n    apply Set.eq_empty_iff_forall_not_mem.mpr\n    intro x hx\n    have : (interior A).Nonempty := ⟨x, hx⟩\n    exact (hInt this).elim\n  -- Pick an element of `A` and send it through the `P2` containment.\n  rcases hne with ⟨x, hxA⟩\n  have hxInner : x ∈ interior (closure (interior A)) := hP2 hxA\n  -- The rewritten set is empty, giving a contradiction.\n  have : x ∈ (∅ : Set X) := by\n    simpa [hIntEq] using hxInner\n  exact (Set.not_mem_empty x) this"
+  ],
+  "success": true
+}

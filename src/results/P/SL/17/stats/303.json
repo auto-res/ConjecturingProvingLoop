@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.952266931533813
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2111,
+      "prompt_tokens": 51830,
+      "total_tokens": 53941,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_interior_of_subset_P3\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hP3B : Topology.P3 B) :\n    frontier A ⊆ closure (interior (closure B)) := by\n  intro x hx\n  -- `x` lies in the closure of `A`.\n  have hx_clA : x ∈ closure A := hx.1\n  -- By monotonicity of `closure`, it also lies in the closure of `B`.\n  have hx_clB : x ∈ closure B := (closure_mono hAB) hx_clA\n  -- `P3 B` gives `B ⊆ interior (closure B)`, hence\n  -- `closure B ⊆ closure (interior (closure B))`.\n  have h_subset : closure B ⊆ closure (interior (closure B)) :=\n    closure_mono (hP3B : B ⊆ interior (closure B))\n  exact h_subset hx_clB"
+  ],
+  "success": true
+}

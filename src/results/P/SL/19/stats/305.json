@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.92431974411011
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2684,
+      "prompt_tokens": 48202,
+      "total_tokens": 50886,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_closure_subset_interior_and_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ closure B) ⊆ interior A ∩ closure B := by\n  intro x hx\n  -- From an existing lemma we get `x ∈ interior A`.\n  have hxIntA : x ∈ interior A :=\n    (Topology.interior_inter_closure_subset_interior_left\n        (A := A) (B := B)) hx\n  -- Since `x` lies in `interior (A ∩ closure B)`, it also lies in `A ∩ closure B`.\n  have hSub : (interior (A ∩ closure B) : Set X) ⊆ A ∩ closure B :=\n    interior_subset\n  have hxAC : x ∈ A ∩ closure B := hSub hx\n  -- Extract the membership in `closure B`.\n  have hxClosB : x ∈ closure B := hxAC.2\n  exact And.intro hxIntA hxClosB"
+  ],
+  "success": true
+}

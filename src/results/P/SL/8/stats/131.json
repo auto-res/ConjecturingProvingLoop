@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.43455719947815
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5244,
+      "prompt_tokens": 18268,
+      "total_tokens": 23512,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_imp_eq_empty_of_interior_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 A) (hInt : interior A = (∅ : Set X)) :\n    A = (∅ : Set X) := by\n  -- From `hInt` we immediately deduce that `closure (interior A)` is empty.\n  have hClInt : closure (interior A) = (∅ : Set X) := by\n    simpa [hInt, closure_empty]\n  -- Apply the existing lemma formulated in terms of the closure of the interior.\n  exact\n    P1_imp_eq_empty_of_closureInterior_empty (X := X) (A := A) hP1 hClInt"
+  ],
+  "success": true
+}

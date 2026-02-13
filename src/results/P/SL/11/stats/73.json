@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.37701725959778
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4379,
+      "prompt_tokens": 10743,
+      "total_tokens": 15122,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_P3_of_closure_eq_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hEq : closure A = closure (interior A)) :\n    Topology.P2 A ↔ Topology.P3 A := by\n  have h := Topology.P2_iff_P3_and_closure_eq_closure_interior (A := A)\n  constructor\n  · intro hP2\n    exact (h.mp hP2).left\n  · intro hP3\n    exact (h.mpr ⟨hP3, hEq⟩)"
+  ],
+  "success": true
+}

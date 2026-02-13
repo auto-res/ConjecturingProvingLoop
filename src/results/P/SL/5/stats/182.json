@@ -1,0 +1,60 @@
+{
+  "times": [
+    83.39875149726868,
+    147.45424938201904,
+    54.86422848701477
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5661,
+      "prompt_tokens": 31380,
+      "total_tokens": 37041,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 11307,
+      "prompt_tokens": 31624,
+      "total_tokens": 42931,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    },
+    {
+      "completion_tokens": 4257,
+      "prompt_tokens": 31703,
+      "total_tokens": 35960,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsClosed (B : Set X)) :\n    interior (A \\ B : Set X) = interior A \\ B := by\n  ext x\n  constructor\n  · intro hx\n    have hx_intA : x ∈ interior A :=\n      (interior_mono (Set.diff_subset : (A \\ B : Set X) ⊆ A)) hx\n    have hx_notB : x ∉ B := by\n      have hxAB : x ∈ A \\ B := interior_subset hx\n      exact hxAB.2\n    exact ⟨hx_intA, hx_notB⟩\n  · rintro ⟨hx_intA, hx_notB⟩\n    rcases mem_interior.1 hx_intA with ⟨U, hUsub, hUopen, hxU⟩\n    have hVopen : IsOpen (U \\ B : Set X) := hUopen.diff hB\n    have hVsub : (U \\ B : Set X) ⊆ A \\ B := by\n      intro y hy\n      exact ⟨hUsub hy.1, hy.2⟩\n    have hxV : x ∈ U \\ B := ⟨hxU, hx_notB⟩\n    exact mem_interior.2 ⟨U \\ B, hVsub, hVopen, hxV⟩",
+    "import Mathlib\n\ntheorem interior_closure_idempotent_seven {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure A)))))))))) =\n      interior (closure A) := by\n  simp [Topology.interior_closure_idempotent]",
+    "theorem IsOpen.diff {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsClosed (B : Set X)) :\n    IsOpen (A \\ B) := by\n  simpa [Set.diff_eq] using hA.inter hB.isOpen_compl"
+  ],
+  "success": true
+}

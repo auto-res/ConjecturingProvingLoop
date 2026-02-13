@@ -1,0 +1,26 @@
+{
+  "times": [
+    159.38932394981384
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5380,
+      "prompt_tokens": 45701,
+      "total_tokens": 51081,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_subset_interior_inter_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ B)) ⊆ interior (closure A ∩ closure B) := by\n  intro x hx\n  have hsubset : closure (A ∩ B) ⊆ closure A ∩ closure B :=\n    closure_inter_subset_inter_closure (A := A) (B := B)\n  exact (interior_mono hsubset) hx"
+  ],
+  "success": true
+}

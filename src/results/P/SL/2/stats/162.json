@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.06663417816162
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4773,
+      "prompt_tokens": 26368,
+      "total_tokens": 31141,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_subset_closure_interior_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A : Set X) ⊆ closure (interior (closure (A : Set X))) := by\n  intro x hxIntA\n  -- Step 1: `x` lies in `interior (closure A)` because `A ⊆ closure A`.\n  have hxIntClA : x ∈ interior (closure (A : Set X)) := by\n    have hSub : (A : Set X) ⊆ closure (A : Set X) := subset_closure\n    have hMono : interior (A : Set X) ⊆ interior (closure (A : Set X)) :=\n      interior_mono hSub\n    exact hMono hxIntA\n  -- Step 2: every point of `interior (closure A)` lies in its closure.\n  exact subset_closure hxIntClA"
+  ],
+  "success": true
+}

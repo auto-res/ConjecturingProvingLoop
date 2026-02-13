@@ -1,0 +1,43 @@
+{
+  "times": [
+    32.376549243927,
+    107.21507716178894
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2989,
+      "prompt_tokens": 54988,
+      "total_tokens": 57977,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 9698,
+      "prompt_tokens": 55110,
+      "total_tokens": 64808,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_frontier_subset_closure_inter_closureCompl\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (frontier (A : Set X)) ⊆ closure A ∩ closure (Aᶜ) := by\n  intro x hx\n  -- Membership in `closure A`.\n  have hx_clA : x ∈ closure A := by\n    have h₁ : closure (frontier (A : Set X)) ⊆ closure A :=\n      Topology.closure_frontier_subset_closure (A := A)\n    exact h₁ hx\n  -- Membership in `closure Aᶜ`.\n  have hx_clAc : x ∈ closure (Aᶜ) := by\n    -- First, `frontier A ⊆ closure Aᶜ`.\n    have h₂ : frontier (A : Set X) ⊆ closure (Aᶜ) :=\n      Topology.frontier_subset_closureCompl (A := A)\n    -- Taking closures preserves inclusions.\n    have h₂' : closure (frontier (A : Set X)) ⊆ closure (Aᶜ) :=\n      closure_mono h₂\n    exact h₂' hx\n  exact ⟨hx_clA, hx_clAc⟩",
+    "theorem Topology.disjoint_interior_frontier {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Disjoint (interior (A : Set X)) (frontier A) := by\n  -- We use `Set.disjoint_left`, which asks to prove that no element\n  -- can belong to both sets simultaneously.\n  exact (Set.disjoint_left).2 (by\n    intro x hxInt hxFront\n    -- From `hxFront : x ∈ frontier A = closure A \\ interior A`\n    -- we have `hxFront.2 : x ∉ interior A`, contradicting `hxInt`.\n    exact hxFront.2 hxInt)"
+  ],
+  "success": true
+}

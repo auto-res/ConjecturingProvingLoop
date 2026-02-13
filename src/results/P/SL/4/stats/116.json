@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.31186890602112
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4827,
+      "prompt_tokens": 16487,
+      "total_tokens": 21314,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_interior_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (closure (interior (closure A))) := by\n  -- First, `interior (closure A)` satisfies `P1`.\n  have hInner : Topology.P1 (interior (closure A)) :=\n    P1_interior_closure (X := X) (A := A)\n  -- Taking the closure of a set that satisfies `P1` yields another set satisfying `P1`.\n  exact P1_imp_P1_closure (A := interior (closure A)) hInner"
+  ],
+  "success": true
+}

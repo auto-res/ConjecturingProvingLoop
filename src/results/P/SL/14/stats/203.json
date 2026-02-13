@@ -1,0 +1,60 @@
+{
+  "times": [
+    103.71685671806335,
+    55.94961977005005,
+    22.303852319717407
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9354,
+      "prompt_tokens": 37935,
+      "total_tokens": 47289,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4545,
+      "prompt_tokens": 38057,
+      "total_tokens": 42602,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    },
+    {
+      "completion_tokens": 1742,
+      "prompt_tokens": 38174,
+      "total_tokens": 39916,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_dense_open_eq\n    {X : Type*} [TopologicalSpace X] {A U : Set X}\n    (hA : Dense (A : Set X)) (hU : IsOpen U) :\n    closure (A ∩ U : Set X) = closure U := by\n  classical\n  -- First inclusion: monotonicity of `closure`.\n  have h₁ : closure (A ∩ U : Set X) ⊆ closure U :=\n    closure_mono (by\n      intro x hx\n      exact hx.2)\n  -- Second inclusion: use density of `A`.\n  have h₂ : closure U ⊆ closure (A ∩ U : Set X) := by\n    intro x hxU\n    -- Show `x ∈ closure (A ∩ U)`.\n    have : (x : X) ∈ closure (A ∩ U : Set X) := by\n      refine (mem_closure_iff).2 ?_\n      intro V hV hxV\n      -- Because `x ∈ closure U`, `V` meets `U`.\n      have hVU : ((V ∩ U) : Set X).Nonempty := by\n        have := (mem_closure_iff).1 hxU V hV hxV\n        simpa [Set.inter_comm, Set.inter_left_comm, Set.inter_assoc] using this\n      -- `V ∩ U` is open and non-empty.\n      have hVU_open : IsOpen (V ∩ U) := IsOpen.inter hV hU\n      -- Density of `A` gives a point in `A ∩ V ∩ U`.\n      have h_nonempty : ((V ∩ U) ∩ A : Set X).Nonempty :=\n        hA.inter_open_nonempty hVU_open hVU\n      -- Rearrange intersections to the required form.\n      simpa [Set.inter_comm, Set.inter_left_comm, Set.inter_assoc] using h_nonempty\n    exact this\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem Topology.nonempty_inter_of_dense_and_open\n    {X : Type*} [TopologicalSpace X] {A U : Set X}\n    (hA : Dense (A : Set X)) (hU_open : IsOpen U) (hU_nonempty : (U : Set X).Nonempty) :\n    (A ∩ U).Nonempty := by\n  -- `Dense.inter_open_nonempty` immediately gives the desired result.\n  exact hA.inter_open_nonempty hU_open hU_nonempty",
+    "theorem Topology.closureInterior_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (interior A)) = closure (interior A) := by\n  simpa [interior_interior]"
+  ],
+  "success": true
+}

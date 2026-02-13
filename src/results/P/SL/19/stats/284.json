@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.91800236701965
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4369,
+      "prompt_tokens": 45553,
+      "total_tokens": 49922,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_interior_eq_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A ∩ interior B) = interior A ∩ interior B := by\n  -- `interior B` is open, so we can apply the general lemma\n  have hOpen : IsOpen (interior B) := isOpen_interior\n  simpa [interior_interior] using\n    (Topology.interior_inter_eq_inter_left_of_isOpen_right\n      (A := A) (B := interior B) hOpen)"
+  ],
+  "success": true
+}

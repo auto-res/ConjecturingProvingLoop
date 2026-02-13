@@ -1,0 +1,43 @@
+{
+  "times": [
+    52.04587912559509,
+    212.56778693199158
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5131,
+      "prompt_tokens": 22698,
+      "total_tokens": 27829,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 17814,
+      "prompt_tokens": 22796,
+      "total_tokens": 40610,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.clopen_of_boundary_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A \\ interior A = (∅ : Set X) → IsOpen A ∧ IsClosed A := by\n  intro hBoundary\n  -- First, show `closure A ⊆ interior A`.\n  have hClosSubInt : (closure A : Set X) ⊆ interior A := by\n    intro x hxClos\n    by_cases hxInt : x ∈ interior A\n    · exact hxInt\n    ·\n      have hx : x ∈ closure A \\ interior A := And.intro hxClos hxInt\n      have : x ∈ (∅ : Set X) := by\n        simpa [hBoundary] using hx\n      exact False.elim (Set.not_mem_empty _ this)\n  -- Hence `interior A = closure A`.\n  have hIntEqClos : interior A = closure A := by\n    apply Set.Subset.antisymm\n    · exact Topology.interior_subset_closure (A := A)\n    · exact hClosSubInt\n  -- Next, prove `interior A = A`.\n  have hIntEqA : interior A = (A : Set X) := by\n    apply Set.Subset.antisymm\n    · exact interior_subset\n    ·\n      intro x hxA\n      have hxClos : x ∈ closure A := subset_closure hxA\n      exact hClosSubInt hxClos\n  -- `A` is open since it equals its interior.\n  have hOpen : IsOpen A := by\n    have : IsOpen (interior A) := isOpen_interior\n    simpa [hIntEqA] using this\n  -- `A` is closed since it equals its closure.\n  have hClosed : IsClosed A := by\n    have hClosedClos : IsClosed (closure A) := isClosed_closure\n    simpa [hIntEqClos] using hClosedClos\n  exact And.intro hOpen hClosed",
+    "theorem Topology.interior_subset_interior_closure_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior A ⊆ interior (closure (A ∪ B)) := by\n  intro x hx\n  -- First, note that `A ⊆ closure (A ∪ B)`.\n  have hSub : (A : Set X) ⊆ closure (A ∪ B) := by\n    intro y hy\n    -- `y ∈ A` implies `y ∈ A ∪ B`.\n    have : (y : X) ∈ (A ∪ B : Set X) := Or.inl hy\n    -- The universal property of the closure yields the claim.\n    exact subset_closure this\n  -- Monotonicity of `interior ∘ closure` gives the desired inclusion.\n  exact (interior_mono hSub) hx"
+  ],
+  "success": true
+}

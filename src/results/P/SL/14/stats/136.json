@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.66575312614441
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4670,
+      "prompt_tokens": 24713,
+      "total_tokens": 29383,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_inter_isOpen_right {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 A) (hB_open : IsOpen B) : Topology.P1 (A ∩ B) := by\n  dsimp [Topology.P1] at hA ⊢\n  intro x hx\n  rcases hx with ⟨hxA, hxB⟩\n  have hx_closure_intA : (x : X) ∈ closure (interior A) := hA hxA\n  -- We first show `closure (interior A) ∩ B ⊆ closure (interior (A ∩ B))`.\n  have h_subset :\n      closure (interior A) ∩ B ⊆ closure (interior (A ∩ B)) := by\n    intro y hy\n    rcases hy with ⟨hy_closureA, hyB⟩\n    -- Use the neighborhood characterization of closure.\n    have : (y : X) ∈ closure (interior (A ∩ B)) := by\n      apply (mem_closure_iff).2\n      intro U hU hUy\n      -- Consider the open set `U ∩ B`, which contains `y`.\n      have hV_open : IsOpen (U ∩ B) := IsOpen.inter hU hB_open\n      have hVy : (y : X) ∈ U ∩ B := ⟨hUy, hyB⟩\n      -- Since `y ∈ closure (interior A)`, this set meets `interior A`.\n      have h_nonempty :\n          ((U ∩ B) ∩ interior A).Nonempty :=\n        ((mem_closure_iff).1 hy_closureA) (U ∩ B) hV_open hVy\n      rcases h_nonempty with ⟨z, hzV, hzIntA⟩\n      -- `z` lies in `interior A ∩ B`, which is open and contained in `A ∩ B`.\n      have hz_interior_AB : (z : X) ∈ interior (A ∩ B) := by\n        have h_open : IsOpen (interior A ∩ B) :=\n          IsOpen.inter isOpen_interior hB_open\n        have h_sub : (interior A ∩ B : Set X) ⊆ A ∩ B := by\n          intro w hw; exact ⟨interior_subset hw.1, hw.2⟩\n        have h_max := interior_maximal h_sub h_open\n        exact h_max ⟨hzIntA, hzV.2⟩\n      have hzU : (z : X) ∈ U := hzV.1\n      exact ⟨z, hzU, hz_interior_AB⟩\n    exact this\n  -- Apply the inclusion to `x`, which belongs to the left-hand side.\n  have hx_in : (x : X) ∈ closure (interior A) ∩ B := ⟨hx_closure_intA, hxB⟩\n  exact h_subset hx_in"
+  ],
+  "success": true
+}

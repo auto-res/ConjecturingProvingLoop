@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.8971893787384
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2321,
+      "prompt_tokens": 59828,
+      "total_tokens": 62149,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 59136
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_eq_self_of_open_closed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_open : IsOpen (A : Set X)) (hB_closed : IsClosed (B : Set X)) :\n    interior (A \\ B : Set X) = A \\ B := by\n  have h :=\n    Topology.interior_diff_eq_interior_diff_closed\n      (X := X) (A := A) (B := B) hB_closed\n  simpa [hA_open.interior_eq] using h"
+  ],
+  "success": true
+}

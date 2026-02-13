@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.71701717376709
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3761,
+      "prompt_tokens": 6218,
+      "total_tokens": 9979,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed A) (hB : IsClosed B) :\n    Topology.P3 A → Topology.P3 B → Topology.P3 (A ∩ B) := by\n  intro hP3A hP3B\n  have hOpenA : IsOpen A :=\n    (Topology.P3_closed_iff_isOpen (A := A) hA).1 hP3A\n  have hOpenB : IsOpen B :=\n    (Topology.P3_closed_iff_isOpen (A := B) hB).1 hP3B\n  have hOpenAB : IsOpen (A ∩ B) := hOpenA.inter hOpenB\n  have hClosedAB : IsClosed (A ∩ B) := hA.inter hB\n  exact\n    (Topology.P3_closed_iff_isOpen (A := A ∩ B) hClosedAB).2 hOpenAB"
+  ],
+  "success": true
+}

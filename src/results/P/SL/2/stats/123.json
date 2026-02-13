@@ -1,0 +1,26 @@
+{
+  "times": [
+    168.8886821269989
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9430,
+      "prompt_tokens": 18592,
+      "total_tokens": 28022,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_subset_closure_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → interior (closure (A : Set X)) ⊆ closure (interior A) := by\n  intro hP1 x hx_int_cl\n  -- First inclusion: `interior (closure A) ⊆ closure A`.\n  have hx_clA : x ∈ closure (A : Set X) := interior_subset hx_int_cl\n  -- Second inclusion provided by `P1 A`: `closure A ⊆ closure (interior A)`.\n  have h_cl_subset :\n      (closure (A : Set X)) ⊆ closure (interior A) :=\n    Topology.P1_implies_closure_subset_closure_interior (A := A) hP1\n  exact h_cl_subset hx_clA"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.31792593002319
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2474,
+      "prompt_tokens": 33277,
+      "total_tokens": 35751,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_P1_and_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) (hDense : closure (A : Set X) = (Set.univ : Set X)) :\n    Topology.P2 A := by\n  -- `P1` yields an equality of closures.\n  have hEq : closure (interior A) = closure A := by\n    simpa using\n      (Topology.closure_eq_closure_interior_of_P1 (A := A) hP1).symm\n  -- Combine with the density assumption to make `closure (interior A)` the whole space.\n  have hDenseInt : closure (interior A) = (Set.univ : Set X) := by\n    simpa [hEq] using hDense\n  -- Invoke the existing lemma that turns this density into `P2`.\n  exact Topology.P2_of_dense_interior (A := A) hDenseInt"
+  ],
+  "success": true
+}

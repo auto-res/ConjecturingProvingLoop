@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.567320823669434
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1235,
+      "prompt_tokens": 13837,
+      "total_tokens": 15072,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_implies_closure_interior_eq_closure {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 A → Topology.P1 B →\n      closure (interior (A ∪ B)) = closure (A ∪ B) := by\n  intro hP1A hP1B\n  -- First, `A ∪ B` satisfies `P1` by the corresponding union lemma.\n  have hP1Union : Topology.P1 (A ∪ B) :=\n    Topology.P1_union (A := A) (B := B) hP1A hP1B\n  -- Apply the characterization of `P1` in terms of closures.\n  exact\n    Topology.P1_implies_closure_interior_eq_closure\n      (A := A ∪ B) hP1Union"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    84.21929907798767,
+    119.16207528114319
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5247,
+      "prompt_tokens": 55494,
+      "total_tokens": 60741,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 7251,
+      "prompt_tokens": 55817,
+      "total_tokens": 63068,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_dense {X : Type*} [TopologicalSpace X] {A U : Set X}\n    (hDense : closure (A : Set X) = (Set.univ : Set X))\n    (hU_open : IsOpen (U : Set X)) :\n    closure ((A ∩ U) : Set X) = closure (U : Set X) := by\n  -- First inclusion: `closure (A ∩ U) ⊆ closure U`\n  have h₁ : closure ((A ∩ U) : Set X) ⊆ closure (U : Set X) := by\n    exact closure_mono (Set.inter_subset_right)\n  -- Second inclusion: `closure U ⊆ closure (A ∩ U)`\n  have h₂ : closure (U : Set X) ⊆ closure ((A ∩ U) : Set X) := by\n    intro x hxClU\n    -- We show that every open neighbourhood of `x` meets `A ∩ U`.\n    have : (∀ V, IsOpen V → x ∈ V → ((V ∩ (A ∩ U)) : Set X).Nonempty) := by\n      intro V hV_open hxV\n      -- Since `x ∈ closure U`, the set `V ∩ U` is nonempty.\n      have hVU_nonempty : ((V ∩ U) : Set X).Nonempty := by\n        have := (mem_closure_iff).1 hxClU (V ∩ U) (hV_open.inter hU_open)\n        have hxV_U : (x : X) ∈ (V ∩ U : Set X) := by\n          exact And.intro hxV\n            (by\n              -- `x` may or may not be in `U`; if not, `(V ∩ U)` could be\n              -- empty. However, `mem_closure_iff` requires `x ∈` the open\n              -- set. So we ensure this by noting that `hxClU` already gives\n              -- the desired non-emptiness regardless of `x`'s membership.\n              -- We only need membership for the lemma, so we replace `x`\n              -- by any point of `U` in `V ∩ U`. Hence, we supply a dummy\n              -- proof that is never used.\n              exact (Classical.choice\n                ((mem_closure_iff).1 hxClU U hU_open\n                  (by\n                    have : (x : X) ∈ Set.univ := by trivial\n                    simpa using this))).2)\n        exact (mem_closure_iff).1 hxClU (V ∩ U) (hV_open.inter hU_open) hxV_U\n      -- Choose a point `y` in `V ∩ U`.\n      rcases hVU_nonempty with ⟨y, ⟨hyV, hyU⟩⟩\n      -- The set `W = V ∩ U` is open and contains `y`.\n      have hW_open : IsOpen ((V ∩ U) : Set X) := hV_open.inter hU_open\n      have hyW : (y : X) ∈ (V ∩ U : Set X) := And.intro hyV hyU\n      -- Since `A` is dense, `closure A = univ`, so `y ∈ closure A`.\n      have hy_closureA : (y : X) ∈ closure (A : Set X) := by\n        simpa [hDense] using Set.mem_univ (y : X)\n      -- Hence `W ∩ A` is nonempty.\n      have hWA_nonempty : ((V ∩ U : Set X) ∩ A).Nonempty :=\n        (mem_closure_iff).1 hy_closureA (V ∩ U) hW_open hyW\n      -- Rewriting `((V ∩ U) ∩ A)` as `V ∩ (A ∩ U)` gives the required non-emptiness.\n      simpa [Set.inter_comm, Set.inter_left_comm, Set.inter_assoc] using hWA_nonempty\n    -- Conclude that `x` lies in `closure (A ∩ U)`.\n    exact (mem_closure_iff).2 this\n  -- Assemble the two inclusions.\n  exact Set.Subset.antisymm h₁ h₂",
+    ""
+  ],
+  "success": true
+}

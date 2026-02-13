@@ -1,0 +1,43 @@
+{
+  "times": [
+    51.234771490097046,
+    100.82475686073303
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3902,
+      "prompt_tokens": 12013,
+      "total_tokens": 15915,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    },
+    {
+      "completion_tokens": 7813,
+      "prompt_tokens": 12146,
+      "total_tokens": 19959,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    exact\n      (closure_mono\n        (interior_subset :\n          interior (closure (interior A)) ⊆ closure (interior A)))\n  ·\n    have h : (interior A : Set X) ⊆ interior (closure (interior A)) := by\n      simpa [interior_interior] using\n        (interior_mono\n          (subset_closure : interior A ⊆ closure (interior A)))\n    exact closure_mono h",
+    "theorem interior_closure_interior_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) ⊆ closure (A : Set X) := by\n  -- First step: the interior of a set is contained in the set itself.\n  have h₁ : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset\n  -- Second step: the closure operator is monotone.\n  have h₂ : closure (interior A) ⊆ closure (A : Set X) := by\n    apply closure_mono\n    exact (interior_subset : interior A ⊆ A)\n  -- Combining the two inclusions yields the desired result.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

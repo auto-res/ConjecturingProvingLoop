@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.61834454536438
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5528,
+      "prompt_tokens": 14316,
+      "total_tokens": 19844,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13184
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_sUnion {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)}\n    (h𝒜 : ∀ A, A ∈ 𝒜 → Topology.P2 (X := X) A) :\n    Topology.P2 (X := X) (⋃₀ 𝒜) := by\n  classical\n  dsimp [Topology.P2] at h𝒜 ⊢\n  intro x hxUnion\n  rcases Set.mem_sUnion.1 hxUnion with ⟨A, hA_mem, hxA⟩\n  -- Use `P2` for the particular set `A`.\n  have hxInt : x ∈ interior (closure (interior A)) := h𝒜 A hA_mem hxA\n  -- `interior A` is contained in the interior of the union.\n  have h_int_subset : interior A ⊆ interior (⋃₀ 𝒜) := by\n    have h_sub : A ⊆ ⋃₀ 𝒜 := by\n      intro y hy\n      exact Set.mem_sUnion.2 ⟨A, hA_mem, hy⟩\n    exact interior_mono h_sub\n  -- Taking closures preserves inclusions.\n  have h_closure_subset :\n      closure (interior A) ⊆ closure (interior (⋃₀ 𝒜)) :=\n    closure_mono h_int_subset\n  -- Apply `interior_mono` once more.\n  have h_int_subset' :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior (⋃₀ 𝒜))) :=\n    interior_mono h_closure_subset\n  exact h_int_subset' hxInt"
+  ],
+  "success": true
+}

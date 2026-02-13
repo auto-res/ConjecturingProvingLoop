@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.18234586715698
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3643,
+      "prompt_tokens": 31450,
+      "total_tokens": 35093,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    }
+  ],
+  "responses": [
+    "theorem isClosed_imp_P1_compl {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    Topology.P1 (Aᶜ) := by\n  have hOpen : IsOpen (Aᶜ) := (isOpen_compl_iff).2 hA_closed\n  simpa using Topology.isOpen_imp_P1 (X := X) (A := Aᶜ) hOpen"
+  ],
+  "success": true
+}

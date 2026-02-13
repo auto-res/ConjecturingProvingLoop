@@ -1,0 +1,26 @@
+{
+  "times": [
+    18.438252925872803
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1071,
+      "prompt_tokens": 31740,
+      "total_tokens": 32811,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosure_eq_closure_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → closure (interior (closure A)) = closure A := by\n  intro hP2\n  -- From `P2` we immediately obtain `P3`.\n  have hP3 : Topology.P3 A :=\n    Topology.P2_implies_P3 (X := X) (A := A) hP2\n  -- The desired equality follows from the corresponding lemma for `P3`.\n  exact\n    Topology.closureInteriorClosure_eq_closure_of_P3\n      (X := X) (A := A) hP3"
+  ],
+  "success": true
+}

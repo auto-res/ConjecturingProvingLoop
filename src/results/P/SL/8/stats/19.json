@@ -1,0 +1,43 @@
+{
+  "times": [
+    18.250558853149414,
+    12.952831745147705
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1840,
+      "prompt_tokens": 2438,
+      "total_tokens": 4278,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1129,
+      "prompt_tokens": 2745,
+      "total_tokens": 3874,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_closure_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A ↔ closure (interior A) = closure A := by\n  constructor\n  · intro hP1\n    dsimp [Topology.P1] at hP1\n    apply Set.Subset.antisymm\n    · -- `closure A` is included in `closure (interior A)` because `A ⊆ _`\n      have : closure A ⊆ closure (interior A) := closure_mono hP1\n      simpa using this\n    · -- The reverse inclusion always holds\n      have : closure (interior A) ⊆ closure A := by\n        have : interior A ⊆ A := interior_subset\n        exact closure_mono this\n      simpa using this\n  · intro hEq\n    dsimp [Topology.P1]\n    -- `A` is included in `closure (interior A)` via the equality of closures\n    have : A ⊆ closure A := subset_closure\n    have : A ⊆ closure (interior A) := by\n      intro x hx\n      have : x ∈ closure A := this hx\n      simpa [hEq] using this\n    exact this",
+    "theorem closed_P2_iff_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    Topology.P2 A ↔ Topology.P3 A := by\n  constructor\n  · intro hP2\n    exact Topology.P2_imp_P3 (X := X) (A := A) hP2\n  · intro hP3\n    have hA_open : IsOpen A :=\n      Topology.closed_P3_isOpen (X := X) (A := A) hA_closed hP3\n    exact Topology.isOpen_imp_P2 (X := X) (A := A) hA_open"
+  ],
+  "success": true
+}

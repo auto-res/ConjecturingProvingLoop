@@ -1,0 +1,26 @@
+{
+  "times": [
+    104.94083309173584
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6950,
+      "prompt_tokens": 15042,
+      "total_tokens": 21992,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_of_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 A → B ⊆ interior (closure (interior A)) → Topology.P2 (A ∪ B) := by\n  intro hA hB\n  dsimp [Topology.P2] at hA ⊢\n  intro x hx\n  -- A handy inclusion used in both cases.\n  have hsubset :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior (A ∪ B))) := by\n    -- First, `interior A ⊆ interior (A ∪ B)`.\n    have h₁ : interior A ⊆ interior (A ∪ B) := by\n      apply interior_mono\n      intro y hy\n      exact Or.inl hy\n    -- Then take closures.\n    have h₂ : closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n      closure_mono h₁\n    -- Finally, take interiors once more.\n    exact interior_mono h₂\n  -- Split on whether `x` comes from `A` or `B`.\n  cases hx with\n  | inl hxA =>\n      have hxInt : x ∈ interior (closure (interior A)) := hA hxA\n      exact hsubset hxInt\n  | inr hxB =>\n      have hxInt : x ∈ interior (closure (interior A)) := hB hxB\n      exact hsubset hxInt"
+  ],
+  "success": true
+}

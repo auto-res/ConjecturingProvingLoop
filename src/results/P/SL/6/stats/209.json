@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.5910165309906
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4365,
+      "prompt_tokens": 33118,
+      "total_tokens": 37483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_eq_univ_implies_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (A : Set X))) = (Set.univ : Set X) →\n      Topology.P2 (A : Set X) := by\n  intro hUniv\n  dsimp [Topology.P2]\n  intro x hxA\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hUniv] using this"
+  ],
+  "success": true
+}

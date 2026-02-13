@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.6161150932312
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4174,
+      "prompt_tokens": 40100,
+      "total_tokens": 44274,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_interior_left {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : Topology.P2 (X := X) B) :\n    Topology.P2 (X := X) (interior A ∪ B) := by\n  -- Reuse the “right‐hand side” lemma with the arguments swapped.\n  have h := Topology.P2_union_interior_right (X := X) (A := B) (B := A) hB\n  simpa [Set.union_comm] using h"
+  ],
+  "success": true
+}

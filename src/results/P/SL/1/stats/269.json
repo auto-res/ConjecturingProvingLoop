@@ -1,0 +1,43 @@
+{
+  "times": [
+    140.48092222213745,
+    294.3173487186432
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9998,
+      "prompt_tokens": 41018,
+      "total_tokens": 51016,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    },
+    {
+      "completion_tokens": 16338,
+      "prompt_tokens": 41205,
+      "total_tokens": 57543,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_closure_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (closure A ∩ closure B : Set X) = closure A ∩ closure B := by\n  -- Both `closure A` and `closure B` are closed, hence so is their intersection.\n  have hClosed : IsClosed (closure A ∩ closure B : Set X) :=\n    (isClosed_closure (s := A)).inter (isClosed_closure (s := B))\n  -- We prove equality via two inclusions.\n  apply Set.Subset.antisymm\n  · -- First, show `closure (closure A ∩ closure B)` is contained in the intersection.\n    intro x hx\n    have hxA : x ∈ closure A := by\n      -- `closure A ∩ closure B` is contained in `closure A`.\n      have hsubset : (closure A ∩ closure B : Set X) ⊆ closure A := by\n        intro y hy; exact hy.1\n      exact (closure_mono hsubset) hx\n    have hxB : x ∈ closure B := by\n      -- `closure A ∩ closure B` is contained in `closure B`.\n      have hsubset : (closure A ∩ closure B : Set X) ⊆ closure B := by\n        intro y hy; exact hy.2\n      exact (closure_mono hsubset) hx\n    exact And.intro hxA hxB\n  · -- The reverse inclusion follows from the universal inclusion `s ⊆ closure s`.\n    intro x hx\n    exact (subset_closure : (closure A ∩ closure B : Set X) ⊆\n        closure (closure A ∩ closure B)) hx",
+    ""
+  ],
+  "success": true
+}

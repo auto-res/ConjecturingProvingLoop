@@ -1,0 +1,26 @@
+{
+  "times": [
+    113.28910374641418
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4832,
+      "prompt_tokens": 48079,
+      "total_tokens": 52911,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_subset_diff_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ A \\ closure B := by\n  intro x hxInt\n  -- From the interior membership we deduce `x ∈ A \\ B`.\n  have hMem : x ∈ A \\ B :=\n    (interior_subset : interior (A \\ B : Set X) ⊆ A \\ B) hxInt\n  have hxA : x ∈ A := hMem.1\n  -- We now show that `x ∉ closure B`.\n  have hxNotCl : x ∉ closure B := by\n    intro hxCl\n    -- `interior (A \\ B)` is an open neighbourhood of `x` disjoint from `B`,\n    -- contradicting the definition of `closure`.\n    have hNonempty :\n        ((interior (A \\ B : Set X)) ∩ B : Set X).Nonempty :=\n      (mem_closure_iff).1 hxCl (interior (A \\ B : Set X))\n        isOpen_interior hxInt\n    rcases hNonempty with ⟨y, ⟨hyInt, hyB⟩⟩\n    have : y ∈ A \\ B :=\n      (interior_subset : interior (A \\ B : Set X) ⊆ A \\ B) hyInt\n    exact this.2 hyB\n  exact ⟨hxA, hxNotCl⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    86.16127157211304,
+    316.3740026950836
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4376,
+      "prompt_tokens": 49521,
+      "total_tokens": 53897,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    },
+    {
+      "completion_tokens": 11594,
+      "prompt_tokens": 49661,
+      "total_tokens": 61255,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closure_eq_closure_diff_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (closure (A : Set X)) =\n      closure (A : Set X) \\ interior (closure (A : Set X)) := by\n  rfl",
+    "theorem Topology.frontier_closure_eq_closure_diff_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (closure (A : Set X)) =\n      closure (A : Set X) \\ interior (closure (A : Set X)) := by\n  -- By definition, `frontier S = closure S \\ interior S`.  Applying this\n  -- with `S = closure A` and simplifying the redundant `closure` yields\n  -- the desired identity.\n  simp [frontier, closure_closure]"
+  ],
+  "success": true
+}

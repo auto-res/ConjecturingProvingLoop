@@ -1,0 +1,43 @@
+{
+  "times": [
+    27.754881381988525,
+    76.03410053253174
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2959,
+      "prompt_tokens": 17448,
+      "total_tokens": 20407,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    },
+    {
+      "completion_tokens": 4937,
+      "prompt_tokens": 17523,
+      "total_tokens": 22460,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hx\n  have h_closure : (closure A : Set X) = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_closure, interior_univ] using this",
+    "theorem P1_iff_closure_subset_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A ↔ closure A ⊆ closure (interior A) := by\n  constructor\n  · intro hP1\n    -- From `A ⊆ closure (interior A)` we deduce the desired inclusion of closures.\n    have h : closure A ⊆ closure (closure (interior A)) := closure_mono hP1\n    simpa [closure_closure] using h\n  · intro hSubset\n    -- Use `closure` monotonicity together with `A ⊆ closure A`.\n    dsimp [Topology.P1]\n    intro x hx\n    have hx_cl : x ∈ closure A := subset_closure hx\n    exact hSubset hx_cl"
+  ],
+  "success": true
+}

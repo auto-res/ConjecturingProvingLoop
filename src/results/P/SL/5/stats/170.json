@@ -1,0 +1,43 @@
+{
+  "times": [
+    66.45430874824524,
+    31.935702085494995
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5995,
+      "prompt_tokens": 29106,
+      "total_tokens": 35101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 2105,
+      "prompt_tokens": 29180,
+      "total_tokens": 31285,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_idempotent_seven {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure A)))))))))))) =\n      interior (closure A) := by\n  simp [Topology.interior_closure_idempotent]",
+    "theorem closure_union_eq_of_closed {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsClosed (A : Set X)) (hB : IsClosed (B : Set X)) :\n    closure (A ∪ B : Set X) = A ∪ B := by\n  have hClosed : IsClosed ((A ∪ B : Set X)) := hA.union hB\n  simpa using hClosed.closure_eq"
+  ],
+  "success": true
+}

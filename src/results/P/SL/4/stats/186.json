@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.6500461101532
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6039,
+      "prompt_tokens": 26264,
+      "total_tokens": 32303,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A))))))))) =\n      closure (interior A) := by\n  -- Use the previously established eight-step idempotence.\n  have h :\n      closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n        closure (interior A) :=\n    closure_interior_closure_interior_closure_interior_closure_interior_eq\n      (X := X) (A := A)\n  -- Apply `closure ∘ interior` to both sides of `h`.\n  simpa using congrArg (fun S : Set X => closure (interior S)) h"
+  ],
+  "success": true
+}

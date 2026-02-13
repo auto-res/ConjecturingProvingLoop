@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.59892559051514
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4677,
+      "prompt_tokens": 53571,
+      "total_tokens": 58248,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_eq_diff_of_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB_closed : IsClosed (B : Set X)) :\n    interior (A \\ B : Set X) = interior A \\ B := by\n  ext x\n  constructor\n  · intro hx\n    -- `x` belongs to `interior A` because `A \\ B ⊆ A`.\n    have hxIntA : x ∈ interior A :=\n      (interior_mono (Set.diff_subset : (A \\ B : Set X) ⊆ A)) hx\n    -- `x` is not in `B` since it lies in `A \\ B`.\n    have hxNotB : x ∉ B := by\n      have : x ∈ (A \\ B : Set X) :=\n        (interior_subset : interior (A \\ B : Set X) ⊆ A \\ B) hx\n      exact this.2\n    exact ⟨hxIntA, hxNotB⟩\n  · rintro ⟨hxIntA, hxNotB⟩\n    -- The set `interior A \\ B` is an open neighbourhood of `x`\n    -- contained in `A \\ B`, so `x` lies in the interior of `A \\ B`.\n    have hOpen : IsOpen ((interior A) \\ B : Set X) :=\n      IsOpen.diff isOpen_interior hB_closed\n    have hxIn : x ∈ (interior A) \\ B := ⟨hxIntA, hxNotB⟩\n    -- `interior A \\ B` is contained in `A \\ B`.\n    have hSub : ((interior A) \\ B : Set X) ⊆ A \\ B := by\n      intro y hy\n      exact ⟨(interior_subset : interior A ⊆ A) hy.1, hy.2⟩\n    exact (interior_maximal hSub hOpen) hxIn"
+  ],
+  "success": true
+}

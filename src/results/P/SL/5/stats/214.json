@@ -1,0 +1,43 @@
+{
+  "times": [
+    283.1586608886719,
+    190.66982173919678
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 17214,
+      "prompt_tokens": 37380,
+      "total_tokens": 54594,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 10411,
+      "prompt_tokens": 37501,
+      "total_tokens": 47912,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_interior_eq_closure_compl_diff_interior_compl\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) \\ interior A =\n      closure ((A : Set X)ᶜ) \\ interior ((A : Set X)ᶜ) := by\n  classical\n  simpa [Set.frontier] using\n    (Set.frontier_compl (s := (A : Set X))).symm",
+    "theorem closure_union_interior_eq_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) ∪ interior (A : Set X) = closure (A : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    cases hx with\n    | inl hCl => exact hCl\n    | inr hInt =>\n        have hsubset : (interior (A : Set X) : Set X) ⊆ closure (A : Set X) :=\n          interior_subset_closure (X := X) (A := A)\n        exact hsubset hInt\n  · intro hx\n    exact Or.inl hx"
+  ],
+  "success": true
+}

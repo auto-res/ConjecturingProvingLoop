@@ -1,0 +1,43 @@
+{
+  "times": [
+    54.94728183746338,
+    21.778841018676758
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3314,
+      "prompt_tokens": 48137,
+      "total_tokens": 51451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 1177,
+      "prompt_tokens": 48219,
+      "total_tokens": 49396,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_interiors_subset_closure_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure ((interior (A : Set X)) ∪ interior B) ⊆\n      closure (interior (A ∪ B)) := by\n  -- First, note the basic inclusion on the level of interiors.\n  have h_subset :\n      (interior (A : Set X) ∪ interior B : Set X) ⊆ interior (A ∪ B) :=\n    Topology.interior_union_subset (X := X) (A := A) (B := B)\n  -- Taking closures of both sides yields the desired inclusion.\n  exact closure_mono h_subset",
+    "theorem Topology.P1_of_interior_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h : interior (A : Set X) = Set.univ) :\n    Topology.P1 (X := X) A := by\n  dsimp [Topology.P1]\n  intro x _\n  -- Since `interior A = univ`, its closure is also `univ`, so every point belongs to it.\n  have : (x : X) ∈ (Set.univ : Set X) := by\n    simp\n  simpa [h, closure_univ] using this"
+  ],
+  "success": true
+}

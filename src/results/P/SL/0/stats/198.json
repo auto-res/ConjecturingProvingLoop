@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.12889504432678
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4721,
+      "prompt_tokens": 33403,
+      "total_tokens": 38124,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem iUnion_open_has_all_Ps {X ι : Type*} [TopologicalSpace X] {F : ι → Set X}\n    (hF : ∀ i, IsOpen (F i : Set X)) :\n    Topology.P1 (⋃ i, F i) ∧ Topology.P2 (⋃ i, F i) ∧ Topology.P3 (⋃ i, F i) := by\n  have hOpen : IsOpen (⋃ i, F i : Set X) := isOpen_iUnion (fun i ↦ hF i)\n  exact Topology.isOpen_has_all_Ps (X := X) (A := (⋃ i, F i : Set X)) hOpen"
+  ],
+  "success": true
+}

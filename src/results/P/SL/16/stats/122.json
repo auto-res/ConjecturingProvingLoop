@@ -1,0 +1,26 @@
+{
+  "times": [
+    156.15069770812988
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11442,
+      "prompt_tokens": 22083,
+      "total_tokens": 33525,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.not_P2_of_nonempty_emptyInteriorClosureInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : A.Nonempty) (hIntEmpty : interior (closure (interior A)) = (∅ : Set X)) :\n    ¬ Topology.P2 (X := X) A := by\n  intro hP2\n  rcases hA with ⟨x, hxA⟩\n  have hxInt : x ∈ interior (closure (interior A)) := hP2 hxA\n  have : x ∈ (∅ : Set X) := by\n    simpa [hIntEmpty] using hxInt\n  exact this.elim"
+  ],
+  "success": true
+}

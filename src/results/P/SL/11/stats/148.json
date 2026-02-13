@@ -1,0 +1,26 @@
+{
+  "times": [
+    200.65376114845276
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13236,
+      "prompt_tokens": 21702,
+      "total_tokens": 34938,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_iUnion_closure_eq {X ι : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    closure (⋃ i, closure (A i)) = closure (⋃ i, A i) := by\n  apply subset_antisymm\n  ·\n    -- `closure (⋃ i, closure (A i)) ⊆ closure (⋃ i, A i)`\n    have hSub : (⋃ i, closure (A i)) ⊆ closure (⋃ i, A i) := by\n      intro x hx\n      rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n      have hCl : closure (A i) ⊆ closure (⋃ j, A j) :=\n        closure_mono (Set.subset_iUnion _ _)\n      exact hCl hx_i\n    have : closure (⋃ i, closure (A i)) ⊆ closure (closure (⋃ i, A i)) :=\n      closure_mono hSub\n    simpa [closure_closure] using this\n  ·\n    -- `closure (⋃ i, A i) ⊆ closure (⋃ i, closure (A i))`\n    have hSub : (⋃ i, A i) ⊆ ⋃ i, closure (A i) := by\n      intro x hx\n      rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n      exact Set.mem_iUnion.2 ⟨i, subset_closure hx_i⟩\n    exact closure_mono hSub"
+  ],
+  "success": true
+}

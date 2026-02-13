@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.37293100357056
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5801,
+      "prompt_tokens": 53530,
+      "total_tokens": 59331,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_frontier_eq_empty_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed A) :\n    interior (frontier (A : Set X)) = (∅ : Set X) := by\n  -- First, rewrite the frontier of a closed set.\n  have hFrontier : frontier (A : Set X) = A \\ interior A := by\n    simpa [frontier, hA_closed.closure_eq]\n  -- Show that the interior of `A \\ interior A` is empty.\n  have hEmpty : interior (A \\ interior A : Set X) = (∅ : Set X) := by\n    apply (Set.eq_empty_iff_forall_not_mem).2\n    intro x hx\n    -- Obtain an open neighbourhood `U` of `x` contained in `A \\ interior A`.\n    rcases (mem_interior).1 hx with ⟨U, hU_sub, hU_open, hxU⟩\n    -- From the inclusion, `U ⊆ A`.\n    have hU_subA : U ⊆ (A : Set X) := by\n      intro y hy\n      exact (hU_sub hy).1\n    -- Hence `U ⊆ interior A`, by maximality of the interior.\n    have hU_subIntA : U ⊆ interior A := interior_maximal hU_subA hU_open\n    -- Therefore `x ∈ interior A`, contradicting `x ∉ interior A`.\n    have hxIntA : x ∈ interior A := hU_subIntA hxU\n    have hxNotIntA : x ∉ interior A := (hU_sub hxU).2\n    exact hxNotIntA hxIntA\n  -- Combine the two equalities.\n  simpa [hFrontier] using hEmpty"
+  ],
+  "success": true
+}

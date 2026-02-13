@@ -1,0 +1,26 @@
+{
+  "times": [
+    202.18292331695557
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14978,
+      "prompt_tokens": 19043,
+      "total_tokens": 34021,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_inter_open_nonempty\n    {X : Type*} [TopologicalSpace X] {A U : Set X}\n    (hDense : Dense (A : Set X)) (hU_open : IsOpen U)\n    (hU_nonempty : (U : Set X).Nonempty) :\n    (A ∩ U : Set X).Nonempty := by\n  classical\n  -- Choose a point `x` in the nonempty open set `U`.\n  rcases hU_nonempty with ⟨x, hxU⟩\n  -- Density provides that `x` lies in the closure of `A`.\n  have hx_closure : x ∈ closure (A : Set X) := hDense x\n  -- The characterization of the closure via open neighbourhoods\n  -- yields a point of `A` inside `U`.\n  have hIntersect : (U ∩ A : Set X).Nonempty :=\n    (mem_closure_iff).1 hx_closure U hU_open hxU\n  -- Reorder the intersection to match the goal.\n  simpa [Set.inter_comm] using hIntersect"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    154.4284930229187
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6579,
+      "prompt_tokens": 38393,
+      "total_tokens": 44972,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.open_and_closed_of_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior A = closure A) :\n    IsOpen A ∧ IsClosed A := by\n  -- First, show that `A` is open.\n  have hInt : interior A = A := by\n    apply subset_antisymm\n    · exact interior_subset\n    ·\n      have hSub : (A : Set X) ⊆ closure A := subset_closure\n      simpa [h] using hSub\n  have hOpen : IsOpen A := by\n    have hOpenInt : IsOpen (interior A) := isOpen_interior\n    simpa [hInt] using hOpenInt\n  -- Next, show that `A` is closed.\n  have hCl : closure A = A := by\n    apply subset_antisymm\n    ·\n      intro x hx\n      have hxInt : x ∈ interior A := by\n        simpa [h] using hx\n      exact interior_subset hxInt\n    · exact subset_closure\n  have hClosed : IsClosed A := by\n    have : IsClosed (closure A) := isClosed_closure\n    simpa [hCl] using this\n  exact And.intro hOpen hClosed"
+  ],
+  "success": true
+}

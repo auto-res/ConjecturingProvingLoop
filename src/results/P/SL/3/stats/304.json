@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.96354031562805
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7044,
+      "prompt_tokens": 51608,
+      "total_tokens": 58652,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_interior_iff_boundary_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (A : Set X) = interior (A : Set X) ↔\n      closure (A : Set X) \\ interior (A : Set X) = (∅ : Set X) := by\n  classical\n  constructor\n  · intro hEq\n    simpa [hEq, Set.diff_self]\n  · intro hEmpty\n    apply Set.Subset.antisymm\n    · intro x hxCl\n      by_cases hxInt : (x : X) ∈ interior (A : Set X)\n      · exact hxInt\n      ·\n        have hxDiff :\n            (x : X) ∈ closure (A : Set X) \\ interior (A : Set X) :=\n          And.intro hxCl hxInt\n        have : (x : X) ∈ (∅ : Set X) := by\n          simpa [hEmpty] using hxDiff\n        cases this\n    · intro x hxInt\n      exact subset_closure (interior_subset hxInt)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.8582489490509
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6825,
+      "prompt_tokens": 63615,
+      "total_tokens": 70440,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 62208
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_prod_closure_of_dense_left_and_dense_right\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    Dense A → Dense B → Dense (closure A ×ˢ closure B) := by\n  intro hA hB\n  -- `A` and `B` are dense, so their closures are the whole space.\n  have hA_closure : (closure (A : Set X)) = (Set.univ : Set X) := by\n    simpa using hA.closure_eq\n  have hB_closure : (closure (B : Set Y)) = (Set.univ : Set Y) := by\n    simpa using hB.closure_eq\n  -- Compute the closure of the product of these closures.\n  have hProd :\n      closure ((closure A) ×ˢ (closure B) : Set (X × Y)) =\n        (Set.univ : Set (X × Y)) := by\n    calc\n      closure ((closure A) ×ˢ (closure B) : Set (X × Y))\n          = closure (closure A) ×ˢ closure (closure B) := by\n            simpa using closure_prod_eq (s := closure A) (t := closure B)\n      _ = (closure A) ×ˢ (closure B) := by\n            simp [closure_closure]\n      _ = (Set.univ : Set X) ×ˢ (Set.univ : Set Y) := by\n            simpa [hA_closure, hB_closure]\n      _ = (Set.univ : Set (X × Y)) := by\n            simpa using Set.univ_prod_univ\n  -- Conclude density from the characterisation via closures.\n  exact (dense_iff_closure_eq (s := closure A ×ˢ closure B)).2 hProd"
+  ],
+  "success": true
+}

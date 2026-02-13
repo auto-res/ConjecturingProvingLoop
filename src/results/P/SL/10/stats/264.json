@@ -1,0 +1,60 @@
+{
+  "times": [
+    115.88904094696045,
+    125.34912252426147,
+    48.92502450942993
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6542,
+      "prompt_tokens": 42710,
+      "total_tokens": 49252,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 5017,
+      "prompt_tokens": 42843,
+      "total_tokens": 47860,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 2600,
+      "prompt_tokens": 42919,
+      "total_tokens": 45519,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iUnion_closure_eq_closure_iUnion\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    closure (⋃ i, closure (A i)) = closure (⋃ i, A i) := by\n  apply Set.Subset.antisymm\n  ·\n    exact Topology.closure_iUnion_subset (X := X) (A := A)\n  ·\n    have h_subset : (⋃ i, A i) ⊆ ⋃ i, closure (A i) := by\n      intro x hx\n      rcases Set.mem_iUnion.1 hx with ⟨i, hxAi⟩\n      exact Set.mem_iUnion.2 ⟨i, subset_closure hxAi⟩\n    exact closure_mono h_subset",
+    "theorem Topology.closure_iUnion_subset {X : Type*} [TopologicalSpace X]\n    {ι : Sort*} {A : ι → Set X} :\n    closure (⋃ i, closure (A i)) ⊆ closure (⋃ i, A i) := by\n  -- First, show the union of the individual closures is contained\n  -- in the closure of the union.\n  have h₁ : (⋃ i, closure (A i)) ⊆ closure (⋃ i, A i) := by\n    intro x hx\n    rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n    -- `A i` is contained in the union, hence so is its closure.\n    have h_sub : A i ⊆ ⋃ j, A j := by\n      intro y hy\n      exact Set.mem_iUnion.2 ⟨i, hy⟩\n    have h_closure_sub : closure (A i) ⊆ closure (⋃ j, A j) :=\n      closure_mono h_sub\n    exact h_closure_sub hx_i\n  -- Taking closures preserves inclusions.\n  exact closure_mono h₁",
+    "theorem Topology.closure_image_preimage_subset\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    (f : X → Y) (A : Set Y) :\n    closure (f '' (f ⁻¹' A)) ⊆ closure A := by\n  -- First, prove the basic inclusion between the sets.\n  have h_subset : f '' (f ⁻¹' A) ⊆ A := by\n    intro y hy\n    rcases hy with ⟨x, hx, rfl⟩\n    exact hx\n  -- Monotonicity of `closure` yields the desired inclusion.\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

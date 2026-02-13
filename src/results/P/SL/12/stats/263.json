@@ -1,0 +1,26 @@
+{
+  "times": [
+    131.58694291114807
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4963,
+      "prompt_tokens": 49843,
+      "total_tokens": 54806,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.preimage_interior_subset_interior_preimage\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}\n    (hf : Continuous f) {B : Set Y} :\n    f ⁻¹' interior (B : Set Y) ⊆ interior (f ⁻¹' B) := by\n  -- The preimage of an open set under a continuous map is open.\n  have h_open : IsOpen (f ⁻¹' interior (B : Set Y)) := by\n    have : IsOpen (interior (B : Set Y)) := isOpen_interior\n    exact this.preimage hf\n  -- `f ⁻¹' interior B` is contained in `f ⁻¹' B` since `interior B ⊆ B`.\n  have h_subset :\n      (f ⁻¹' interior (B : Set Y)) ⊆ f ⁻¹' B :=\n    Set.preimage_mono (interior_subset : interior (B : Set Y) ⊆ B)\n  -- Apply the maximality of the interior for the open set `f ⁻¹' interior B`.\n  intro x hx\n  exact (interior_maximal h_subset h_open) hx"
+  ],
+  "success": true
+}

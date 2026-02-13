@@ -1,0 +1,26 @@
+{
+  "times": [
+    149.05903434753418
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8172,
+      "prompt_tokens": 50331,
+      "total_tokens": 58503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_interiors_eq_inter_interiors\n    {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    interior (interior (A : Set X) ∩ interior B) =\n      interior (A : Set X) ∩ interior B := by\n  have hOpenA : IsOpen (interior (A : Set X)) := isOpen_interior\n  have hOpenB : IsOpen (interior (B : Set X)) := isOpen_interior\n  simpa using\n    (interior_inter_eq_of_isOpen\n        (A := interior (A : Set X)) (B := interior (B : Set X))\n        hOpenA hOpenB)"
+  ],
+  "success": true
+}

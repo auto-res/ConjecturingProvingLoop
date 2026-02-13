@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.45571517944336
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2561,
+      "prompt_tokens": 53810,
+      "total_tokens": 56371,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_union_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Dense (A : Set X) → Dense (A ∪ B : Set X) := by\n  intro hA_dense\n  -- Since `A` is dense, its closure is the whole space.\n  have hA_closure : closure (A : Set X) = (Set.univ : Set X) :=\n    hA_dense.closure_eq\n  -- Hence `closure (A ∪ B)` contains `univ`, because it contains `closure A`.\n  have h_superset : (Set.univ : Set X) ⊆ closure (A ∪ B : Set X) := by\n    have h_incl : closure (A : Set X) ⊆ closure (A ∪ B : Set X) := by\n      have h_subset : (A : Set X) ⊆ A ∪ B := by\n        intro x hx; exact Or.inl hx\n      exact closure_mono h_subset\n    simpa [hA_closure] using h_incl\n  -- The opposite inclusion is trivial.\n  have h_subset : closure (A ∪ B : Set X) ⊆ (Set.univ : Set X) := by\n    intro x _hx; simp\n  -- Therefore `closure (A ∪ B) = univ`, so `A ∪ B` is dense.\n  have h_closure_eq : closure (A ∪ B : Set X) = (Set.univ : Set X) :=\n    Set.Subset.antisymm h_subset h_superset\n  exact (dense_iff_closure_eq).2 h_closure_eq"
+  ],
+  "success": true
+}

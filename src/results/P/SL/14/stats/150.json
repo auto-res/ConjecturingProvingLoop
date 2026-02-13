@@ -1,0 +1,60 @@
+{
+  "times": [
+    389.59677171707153,
+    96.37442779541016,
+    53.611921548843384
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 30855,
+      "prompt_tokens": 27137,
+      "total_tokens": 57992,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 29952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    },
+    {
+      "completion_tokens": 9346,
+      "prompt_tokens": 27520,
+      "total_tokens": 36866,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    },
+    {
+      "completion_tokens": 4402,
+      "prompt_tokens": 27672,
+      "total_tokens": 32074,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ interior ((A : Set X)ᶜ) = (∅ : Set X) := by\n  classical\n  -- First direction: a dense set has complement with empty interior.\n  constructor\n  · intro hDense\n    have hClosure : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n    -- `interior (Aᶜ)` is contained in the (empty) complement of `closure A`.\n    have hSub :\n        interior ((A : Set X)ᶜ) ⊆ (closure (A : Set X))ᶜ := by\n      intro x hxInt\n      -- Suppose `x ∈ closure A`; derive a contradiction.\n      have hxInt' := hxInt\n      by\n        intro hxClos\n        rcases (mem_interior_iff_mem_nhds).1 hxInt' with ⟨U, hU_open, hxU, hU_sub⟩\n        have hUE : ((U : Set X) ∩ A).Nonempty :=\n          (mem_closure_iff).1 hxClos U hU_open hxU\n        rcases hUE with ⟨y, hyU, hyA⟩\n        have : (y : X) ∈ ((A : Set X)ᶜ) := hU_sub hyU\n        exact this hyA\n    -- Since `(closure A)ᶜ = ∅`, the interior is empty.\n    have : interior ((A : Set X)ᶜ) ⊆ (∅ : Set X) := by\n      simpa [hClosure] using\n        (show interior ((A : Set X)ᶜ) ⊆ ((Set.univ : Set X))ᶜ from by\n          simpa [hClosure] using hSub)\n    exact Set.Subset.antisymm this (Set.empty_subset _)\n  -- Second direction: empty interior of the complement implies density.\n  · intro hIntEmpty\n    -- Points outside `closure A` are interior points of `Aᶜ`.\n    have hCompSub :\n        ((closure (A : Set X))ᶜ : Set X) ⊆ interior ((A : Set X)ᶜ) := by\n      intro x hxComp\n      have hOpen : IsOpen ((closure (A : Set X))ᶜ) :=\n        isClosed_closure.isOpen_compl\n      have hSub : ((closure (A : Set X))ᶜ : Set X) ⊆ (A : Set X)ᶜ := by\n        intro y hy\n        intro hyA\n        exact hy (subset_closure hyA)\n      -- `x` is in the interior via the open set `(closure A)ᶜ`.\n      exact (mem_interior_iff_mem_nhds).2 ⟨_, hOpen, hxComp, hSub⟩\n    -- Hence `(closure A)ᶜ` is empty, so `closure A = univ`.\n    have hComplEmpty :\n        ((closure (A : Set X))ᶜ : Set X) = (∅ : Set X) := by\n      apply Set.Subset.antisymm\n      ·\n        have : ((closure (A : Set X))ᶜ : Set X) ⊆ interior ((A : Set X)ᶜ) :=\n          hCompSub\n        simpa [hIntEmpty] using this\n      · exact Set.empty_subset _\n    have hClosureUniv : closure (A : Set X) = (Set.univ : Set X) := by\n      have hCompl : Set.compl (closure (A : Set X)) = (∅ : Set X) := by\n        simpa using hComplEmpty\n      simpa using congrArg Set.compl hCompl\n    exact (dense_iff_closure_eq).2 hClosureUniv",
+    "theorem Topology.dense_iff_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ interior (Aᶜ) = (∅ : Set X) := by\n  -- A convenient rewrite of `interior (Aᶜ)`.\n  have hIntCompl : interior (Aᶜ : Set X) = ((closure A)ᶜ : Set X) := by\n    simpa using interior_compl (A := A)\n  constructor\n  · intro hDense\n    -- For a dense set, its closure is the whole space.\n    have hClosure : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n    -- Rewrite and simplify.\n    have : interior (Aᶜ : Set X) = ((closure A)ᶜ : Set X) := hIntCompl\n    simpa [hClosure] using this\n  · intro hIntEmpty\n    -- `interior (Aᶜ) = ∅` implies `(closure A)ᶜ = ∅`.\n    have hComplEmpty : ((closure (A : Set X))ᶜ : Set X) = (∅ : Set X) := by\n      have : interior (Aᶜ : Set X) = (∅ : Set X) := hIntEmpty\n      simpa [hIntCompl] using this\n    -- Hence `closure A = univ`.\n    have hClosureUniv : closure (A : Set X) = (Set.univ : Set X) := by\n      have hEq : closure (A : Set X) = Set.compl ((closure A)ᶜ : Set X) := by\n        ext x; simp\n      simpa [hComplEmpty, Set.compl_empty] using hEq\n    -- Conclude density.\n    exact (dense_iff_closure_eq).2 hClosureUniv",
+    "theorem Topology.interior_inter_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B) ⊆ interior A ∩ interior B := by\n  intro x hx\n  -- `A ∩ B` is contained in `A`, hence their interiors satisfy the same relation.\n  have hA : (x : X) ∈ interior A := by\n    have h_subset : (A ∩ B : Set X) ⊆ A := by\n      intro y hy\n      exact hy.1\n    exact (interior_mono h_subset) hx\n  -- Similarly, `A ∩ B` is contained in `B`.\n  have hB : (x : X) ∈ interior B := by\n    have h_subset : (A ∩ B : Set X) ⊆ B := by\n      intro y hy\n      exact hy.2\n    exact (interior_mono h_subset) hx\n  exact And.intro hA hB"
+  ],
+  "success": true
+}

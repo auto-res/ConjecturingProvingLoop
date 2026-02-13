@@ -1,0 +1,43 @@
+{
+  "times": [
+    88.54746603965759,
+    34.62797808647156
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6148,
+      "prompt_tokens": 972,
+      "total_tokens": 7120,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2739,
+      "prompt_tokens": 1088,
+      "total_tokens": 3827,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x _\n  -- First, compute that `interior (closure A)` is the whole space.\n  have hInt : interior (closure A) = (Set.univ : Set X) := by\n    have h₁ : interior (closure A) = interior (Set.univ : Set X) := by\n      simpa using congrArg interior hDense\n    simpa [interior_univ] using h₁\n  -- Finish by rewriting with `hInt`.\n  simpa [hInt] using (by\n    simp : x ∈ (Set.univ : Set X))",
+    "theorem dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense A) : Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x hx\n  have h_closure : closure A = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  simpa [h_closure, interior_univ]"
+  ],
+  "success": true
+}

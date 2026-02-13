@@ -1,0 +1,43 @@
+{
+  "times": [
+    216.45645332336426,
+    74.39967131614685
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 17620,
+      "prompt_tokens": 31370,
+      "total_tokens": 48990,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 5686,
+      "prompt_tokens": 31536,
+      "total_tokens": 37222,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_union_eq {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (closure (A ∪ B)) = interior (closure A) ∪ interior (closure B) := by\n  simpa [closure_union, interior_union]",
+    "theorem interior_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) :\n    interior (A ∪ B : Set X) = A ∪ B := by\n  have hOpen : IsOpen (A ∪ B : Set X) := hA.union hB\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

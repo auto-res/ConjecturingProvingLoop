@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.219685316085815
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2847,
+      "prompt_tokens": 6638,
+      "total_tokens": 9485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closed_iff_closure_interior_eq_self {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    Topology.P1 A ↔ closure (interior A) = A := by\n  constructor\n  · intro hP1\n    exact Topology.closure_interior_eq_of_closed_P1 (A := A) hA hP1\n  · intro hEq\n    dsimp [Topology.P1]\n    intro x hx\n    have : x ∈ closure (interior A) := by\n      simpa [hEq] using hx\n    exact this"
+  ],
+  "success": true
+}

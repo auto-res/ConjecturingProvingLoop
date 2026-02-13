@@ -1,0 +1,26 @@
+{
+  "times": [
+    120.55851912498474
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6084,
+      "prompt_tokens": 48961,
+      "total_tokens": 55045,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_iterate_fourteen_eq_interior_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (closure\n      (interior (closure\n        (interior (closure\n          (interior (closure\n            (interior (closure\n              (interior (closure\n                (interior (closure\n                  (interior (closure\n                    (interior (closure\n                      (interior (closure\n                        (interior (closure (A : Set X))))\n                      ))\n                    ))\n                  ))\n                ))\n              ))\n            ))\n          ))\n        ))\n      )) =\n      interior (closure A) := by\n  -- Collapse the innermost thirteen‐layer expression.\n  have h :=\n    Topology.interior_closure_iterate_thirteen_eq_interior_closure\n      (X := X) (A := A)\n  -- Rewrite using `h`, then simplify via the two‐layer idempotency lemma.\n  simpa [h,\n    Topology.interior_closure_interior_closure_eq_interior_closure\n      (X := X) (A := A)]"
+  ],
+  "success": true
+}

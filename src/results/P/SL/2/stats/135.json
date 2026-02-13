@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.16705322265625
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5246,
+      "prompt_tokens": 20753,
+      "total_tokens": 25999,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∩ interior B ⊆ interior (A ∩ B : Set X) := by\n  intro x hx\n  -- `interior A` and `interior B` are open.\n  have hOpen : IsOpen (interior A ∩ interior B) :=\n    (isOpen_interior).inter isOpen_interior\n  -- Their intersection is contained in `A ∩ B`.\n  have hSub : (interior A ∩ interior B : Set X) ⊆ (A ∩ B) := by\n    intro y hy\n    exact And.intro (interior_subset hy.1) (interior_subset hy.2)\n  -- By maximality of the interior, the intersection is contained in\n  -- `interior (A ∩ B)`.\n  have hIncl : (interior A ∩ interior B : Set X) ⊆ interior (A ∩ B) :=\n    interior_maximal hSub hOpen\n  exact hIncl hx"
+  ],
+  "success": true
+}

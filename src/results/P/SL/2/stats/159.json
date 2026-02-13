@@ -1,0 +1,26 @@
+{
+  "times": [
+    14.434552669525146
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1391,
+      "prompt_tokens": 25684,
+      "total_tokens": 27075,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_subset_interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → (A : Set X) ⊆ interior (closure (interior (closure (A : Set X)))) := by\n  intro hP2\n  intro x hxA\n  -- From `P2`, we obtain that `x` lies in `interior (closure (interior A))`.\n  have hx₁ : x ∈ interior (closure (interior (A : Set X))) := hP2 hxA\n  -- Use the monotonicity lemma to move further inside the nested closures.\n  have hsubset :\n      interior (closure (interior (A : Set X))) ⊆\n        interior (closure (interior (closure (A : Set X)))) :=\n    Topology.interior_closure_interior_subset_interior_closure_interior_closure (A := A)\n  exact hsubset hx₁"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    147.10401344299316
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7815,
+      "prompt_tokens": 34613,
+      "total_tokens": 42428,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem not_P1_of_interior_empty {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hIntEmpty : interior A = (∅ : Set X)) (hne : A.Nonempty) :\n    ¬ Topology.P1 A := by\n  intro hP1\n  have hIntNonempty : (interior A).Nonempty :=\n    Topology.interior_nonempty_of_P1 (A := A) hP1 hne\n  simpa [hIntEmpty] using hIntNonempty"
+  ],
+  "success": true
+}

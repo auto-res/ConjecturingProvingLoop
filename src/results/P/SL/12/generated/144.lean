@@ -1,0 +1,7 @@
+
+
+theorem Topology.isOpen_closure_of_P2_closure {X : Type*} [TopologicalSpace X] {A : Set X}
+    (h : Topology.P2 (X := X) (closure (A : Set X))) :
+    IsOpen (closure A) := by
+  exact
+    (Topology.P2_closure_iff_isOpen_closure (X := X) (A := A)).1 h

@@ -1,0 +1,26 @@
+{
+  "times": [
+    238.35122680664062
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 16587,
+      "prompt_tokens": 40036,
+      "total_tokens": 56623,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem nonempty_of_closure_interior_nonempty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure (interior (A : Set X))).Nonempty → (A : Set X).Nonempty := by\n  intro hClInt\n  -- First, obtain a point in `interior A` using the previously proven equivalence.\n  have hInt :\n      (interior (A : Set X)).Nonempty :=\n    ((Topology.closure_interior_nonempty_iff_interior_nonempty\n        (X := X) (A := A))).1 hClInt\n  -- Since `interior A ⊆ A`, this point also lies in `A`.\n  rcases hInt with ⟨x, hxInt⟩\n  exact ⟨x, interior_subset hxInt⟩"
+  ],
+  "success": true
+}

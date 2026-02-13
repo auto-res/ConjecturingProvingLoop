@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.15822196006775
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3034,
+      "prompt_tokens": 50217,
+      "total_tokens": 53251,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_compl_eq_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure A ∩ interior (Aᶜ) = (∅ : Set X) := by\n  -- Rewrite `interior (Aᶜ)` using the complement–closure formula.\n  have h : interior (Aᶜ) = (closure A)ᶜ :=\n    interior_compl_eq_compl_closure (A := A)\n  -- The intersection of a set with its complement is empty.\n  simpa [h] using (Set.inter_compl_self (closure A))"
+  ],
+  "success": true
+}

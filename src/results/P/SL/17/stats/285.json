@@ -1,0 +1,43 @@
+{
+  "times": [
+    110.37827229499817,
+    208.48293161392212
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6704,
+      "prompt_tokens": 49802,
+      "total_tokens": 56506,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    },
+    {
+      "completion_tokens": 13138,
+      "prompt_tokens": 49912,
+      "total_tokens": 63050,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_frontier_subset_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (frontier A) ⊆ frontier A := by\n  intro x hx\n  -- Decompose the membership in the double frontier\n  rcases hx with ⟨hx_clF, hx_not_intF⟩\n  -- `frontier A ⊆ closure A`\n  have hF_subset_closureA : frontier A ⊆ closure A := by\n    intro y hy\n    exact hy.1\n  -- 1. Show `x ∈ closure A`\n  have hx_clA : x ∈ closure A :=\n    (closure_mono hF_subset_closureA) hx_clF\n  -- 2. Show `x ∉ interior A`\n  have hx_not_intA : x ∉ interior A := by\n    intro hx_intA\n    -- Use `mem_closure_iff` with the open set `interior A`\n    have h_nonempty :\n        ((interior A) ∩ frontier A).Nonempty :=\n      (mem_closure_iff).1 hx_clF (interior A) isOpen_interior hx_intA\n    rcases h_nonempty with ⟨y, ⟨hy_intA, hy_frontierA⟩⟩\n    -- From `y ∈ frontier A` we have `y ∉ interior A`, contradiction.\n    exact hy_frontierA.2 hy_intA\n  -- Assemble the membership in `frontier A`\n  exact And.intro hx_clA hx_not_intA",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.82310247421265
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5522,
+      "prompt_tokens": 52742,
+      "total_tokens": 58264,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (Aᶜ) = frontier A := by\n  -- Express both frontiers via closures and complements.\n  have h₁ : frontier (Aᶜ) = closure (Aᶜ) ∩ closure A := by\n    simpa [Set.compl_compl] using\n      (Topology.frontier_eq_closure_inter_closure_compl (A := Aᶜ))\n  have h₂ : frontier A = closure A ∩ closure (Aᶜ) := by\n    simpa using\n      (Topology.frontier_eq_closure_inter_closure_compl (A := A))\n  -- The right‐hand sides are equal up to commutativity of `∩`.\n  simpa [h₁, h₂, Set.inter_comm]"
+  ],
+  "success": true
+}

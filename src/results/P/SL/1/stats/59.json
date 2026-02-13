@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.1304726600647
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3021,
+      "prompt_tokens": 8846,
+      "total_tokens": 11867,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    Topology.P3 (A ∩ B) := by\n  -- The intersection of two open sets is open.\n  have hOpen : IsOpen (A ∩ B) := hA.inter hB\n  -- Any open set satisfies `P3`.\n  exact Topology.P3_of_isOpen (A := A ∩ B) hOpen"
+  ],
+  "success": true
+}

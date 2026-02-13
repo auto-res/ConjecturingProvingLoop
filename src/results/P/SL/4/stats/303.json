@@ -1,0 +1,43 @@
+{
+  "times": [
+    85.93437457084656,
+    130.08985376358032
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4456,
+      "prompt_tokens": 46595,
+      "total_tokens": 51051,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 6888,
+      "prompt_tokens": 46701,
+      "total_tokens": 53589,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_frontier_eq_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A \\ frontier A = interior A := by\n  -- We prove the two inclusions separately and then use extensionality.\n  ext x\n  constructor\n  · -- `x ∈ closure A \\ frontier A → x ∈ interior A`\n    intro hx\n    have hx_cl : x ∈ closure A := hx.1\n    have hx_not_front : x ∉ frontier A := hx.2\n    -- If `x` were not in `interior A`, it would be in the frontier,\n    -- contradicting `hx_not_front`.\n    by_cases hx_int : x ∈ interior A\n    · exact hx_int\n    ·\n      -- Show that `x ∈ frontier A`, contradicting `hx_not_front`.\n      have hx_front : x ∈ frontier A := by\n        -- `frontier A = closure A \\ interior A`\n        have h_eq := frontier_eq_closure_diff_interior (X := X) (A := A)\n        have : x ∈ closure A \\ interior A := And.intro hx_cl hx_int\n        simpa [h_eq] using this\n      exact (hx_not_front hx_front).elim\n  · -- `x ∈ interior A → x ∈ closure A \\ frontier A`\n    intro hx_int\n    -- Membership in `closure A`\n    have hx_cl : x ∈ closure A := subset_closure (interior_subset hx_int)\n    -- `x` is not in the frontier because it lies in the interior.\n    have hx_not_front : x ∉ frontier A := by\n      intro hx_front\n      have h_subset :=\n        frontier_subset_compl_interior (X := X) (A := A) hx_front\n      exact h_subset hx_int\n    exact And.intro hx_cl hx_not_front",
+    "theorem frontier_frontier_subset_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    frontier (frontier (A : Set X)) ⊆ A := by\n  intro x hx\n  -- Step 1: `frontier A ⊆ A` because `A` is closed.\n  have h_sub : frontier A ⊆ A :=\n    frontier_subset_of_closed (A := A) hA\n  -- Step 2: Taking closures preserves inclusions, and `closure A = A`.\n  have h_closure : closure (frontier A) ⊆ A := by\n    have h := closure_mono h_sub\n    simpa [hA.closure_eq] using h\n  -- Step 3: `x` lies in `closure (frontier A)` by definition of the frontier,\n  -- hence in `A` by `h_closure`.\n  exact h_closure hx.1"
+  ],
+  "success": true
+}

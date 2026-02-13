@@ -1,0 +1,26 @@
+{
+  "times": [
+    149.48282670974731
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10177,
+      "prompt_tokens": 27017,
+      "total_tokens": 37194,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_union_left_dense {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) = (Set.univ : Set X) →\n      Topology.P3 (A ∪ B) := by\n  intro hDenseA\n  -- First, show that the union has dense closure.\n  have hCl : closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n    have hEq := closure_union_eq_union_closure (A := A) (B := B)\n    simpa [hDenseA, Set.union_univ, Set.univ_union] using hEq\n  -- Apply the existing lemma for dense sets.\n  exact Topology.P3_of_dense (A := A ∪ B) hCl"
+  ],
+  "success": true
+}

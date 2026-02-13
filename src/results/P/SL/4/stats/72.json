@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.4027955532074
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6601,
+      "prompt_tokens": 10038,
+      "total_tokens": 16639,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_subset_closure_interior_union {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (interior A) ∪ closure (interior B) ⊆\n      closure (interior (A ∪ B)) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      -- `interior A ⊆ interior (A ∪ B)` by monotonicity of `interior`.\n      have h_int_subset :\n          interior A ⊆ interior (A ∪ B) :=\n        interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n      -- Taking closures preserves the inclusion.\n      have h_closure_subset :\n          closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono h_int_subset\n      exact h_closure_subset hA\n  | inr hB =>\n      -- Symmetric case for `B`.\n      have h_int_subset :\n          interior B ⊆ interior (A ∪ B) :=\n        interior_mono (Set.subset_union_right : (B : Set X) ⊆ A ∪ B)\n      have h_closure_subset :\n          closure (interior B) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono h_int_subset\n      exact h_closure_subset hB"
+  ],
+  "success": true
+}

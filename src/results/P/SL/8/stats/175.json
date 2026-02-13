@@ -1,0 +1,43 @@
+{
+  "times": [
+    75.57877326011658,
+    226.84774017333984
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5467,
+      "prompt_tokens": 25331,
+      "total_tokens": 30798,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    },
+    {
+      "completion_tokens": 17670,
+      "prompt_tokens": 25451,
+      "total_tokens": 43121,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_union_eq_union_closureInterior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) =\n      closure (interior A) ∪ closure (interior B) := by\n  simpa [interior_union, closure_union]",
+    "theorem closureInterior_union_eq_union_closureInterior_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  -- Since `A` and `B` are open, so is their union, and the `interior`\n  -- of an open set is itself.\n  have h_union_open : IsOpen (A ∪ B) := hA.union hB\n  simpa [h_union_open.interior_eq, hA.interior_eq, hB.interior_eq] using\n    (closure_union : closure (A ∪ B) = closure A ∪ closure B)"
+  ],
+  "success": true
+}

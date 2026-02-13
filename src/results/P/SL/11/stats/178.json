@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.77301073074341
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6771,
+      "prompt_tokens": 27947,
+      "total_tokens": 34718,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_prod_subset {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    closure (interior A) ×ˢ closure (interior B) ⊆\n      closure (interior (A ×ˢ B)) := by\n  intro p hp\n  -- Step 1: rewrite the hypothesis using `closure_prod_eq`.\n  have h₁ : (p : X × Y) ∈ closure ((interior A) ×ˢ (interior B)) := by\n    simpa [closure_prod_eq] using hp\n  -- Step 2: show the needed containment between the closures.\n  have hsubset :\n      (closure ((interior A) ×ˢ (interior B)) : Set (X × Y)) ⊆\n        closure (interior (A ×ˢ B)) := by\n    apply closure_mono\n    -- Establish the inclusion on the underlying sets via `interior_maximal`.\n    have hInnerSub :\n        (interior A ×ˢ interior B : Set (X × Y)) ⊆ interior (A ×ˢ B) := by\n      -- `interior A ×ˢ interior B` is an open subset of `A ×ˢ B`.\n      have hOpen : IsOpen (interior A ×ˢ interior B) :=\n        (isOpen_interior).prod isOpen_interior\n      have hSub : (interior A ×ˢ interior B : Set _) ⊆ A ×ˢ B := by\n        intro q hq\n        exact ⟨(interior_subset hq.1), (interior_subset hq.2)⟩\n      exact interior_maximal hSub hOpen\n    exact hInnerSub\n  -- Step 3: conclude by applying the inclusion to the membership obtained in Step 1.\n  exact hsubset h₁"
+  ],
+  "success": true
+}

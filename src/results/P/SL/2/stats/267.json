@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.508488416671753
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1750,
+      "prompt_tokens": 45180,
+      "total_tokens": 46930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iUnion_implies_closure_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {ι : Type*} {s : ι → Set X} :\n    (∀ i, Topology.P1 (s i)) →\n      closure (interior (⋃ i, s i : Set X)) = closure (⋃ i, s i : Set X) := by\n  intro hP1\n  -- First, the union itself satisfies `P1`.\n  have hP1Union : Topology.P1 (⋃ i, s i) :=\n    Topology.P1_iUnion (s := s) hP1\n  -- Apply the characterisation of `P1` in terms of closures.\n  exact\n    Topology.P1_implies_closure_interior_eq_closure\n      (A := ⋃ i, s i) hP1Union"
+  ],
+  "success": true
+}

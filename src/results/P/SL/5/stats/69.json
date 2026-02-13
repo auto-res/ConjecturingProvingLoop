@@ -1,0 +1,26 @@
+{
+  "times": [
+    93.70629453659058
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5142,
+      "prompt_tokens": 10805,
+      "total_tokens": 15947,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_nonempty_of_interior_nonempty\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : (interior (A : Set X)).Nonempty) :\n    (interior (closure (A : Set X))).Nonempty := by\n  rcases h with ⟨x, hx⟩\n  have hx' : x ∈ interior (closure (A : Set X)) :=\n    (interior_subset_interior_closure (X := X) (A := A)) hx\n  exact ⟨x, hx'⟩"
+  ],
+  "success": true
+}

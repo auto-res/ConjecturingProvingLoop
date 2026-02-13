@@ -1,0 +1,60 @@
+{
+  "times": [
+    133.21681356430054,
+    40.773146629333496,
+    50.493905544281006
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9300,
+      "prompt_tokens": 39892,
+      "total_tokens": 49192,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 1866,
+      "prompt_tokens": 39998,
+      "total_tokens": 41864,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    },
+    {
+      "completion_tokens": 3397,
+      "prompt_tokens": 40071,
+      "total_tokens": 43468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iterate_closure_interior_stabilizes\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    ∀ n : ℕ,\n      ((fun S : Set X => closure (interior S))^[n + 2]) A =\n        closure (interior A) := by\n  intro n\n  induction n with\n  | zero =>\n      -- Two iterations already stabilise by idempotence.\n      simpa using\n        (Topology.closure_interior_closure_interior_eq_closure_interior\n          (X := X) (A := A))\n  | succ n ih =>\n      -- Rewrite the `(n + 3)`-rd iterate as one more application.\n      have h₁ :\n          ((fun S : Set X => closure (interior S))^[n + 3]) A =\n            ((fun S : Set X => closure (interior S))^[n + 2])\n              (closure (interior A)) := by\n        simpa [Nat.succ_add, Nat.add_comm, Nat.add_assoc] using\n          (Function.iterate_succ_apply'\n            (fun S : Set X => closure (interior S)) (n + 2) A)\n      -- The operator fixes `closure (interior A)` after any number of iterations.\n      have h₂ :\n          ((fun S : Set X => closure (interior S))^[n + 2])\n              (closure (interior A)) = closure (interior A) := by\n        simpa using\n          (Topology.iterate_closure_interior_fixed\n            (X := X) (A := A) (n := n + 2))\n      simpa [h₂, Nat.succ_add, Nat.add_comm, Nat.add_assoc] using h₁",
+    "theorem IsClosed.compl {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) : IsOpen Aᶜ := by\n  exact (isOpen_compl_iff).2 hA",
+    "theorem Topology.closure_inter_interior_eq_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    (closure A ∩ interior A : Set X) = interior A := by\n  ext x\n  constructor\n  · intro hx\n    exact hx.2\n  · intro hxInt\n    have hxA : x ∈ A := interior_subset hxInt\n    have hxCl : x ∈ closure A := subset_closure hxA\n    exact And.intro hxCl hxInt"
+  ],
+  "success": true
+}

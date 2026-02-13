@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.52826309204102
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6366,
+      "prompt_tokens": 29210,
+      "total_tokens": 35576,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_interior_empty_implies_empty {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 (X := X) A) (hInt : interior (A : Set X) = (∅ : Set X)) :\n    (A : Set X) = (∅ : Set X) := by\n  apply le_antisymm\n  · intro x hxA\n    have hx : x ∈ interior (closure (interior (A : Set X))) := hP2 hxA\n    simpa [hInt] using hx\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.72377562522888
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4338,
+      "prompt_tokens": 11616,
+      "total_tokens": 15954,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_nonempty_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) (hne : A.Nonempty) :\n    (interior (closure A)).Nonempty := by\n  -- First, obtain a point in `interior A` using an existing lemma.\n  have hIntA : (interior A).Nonempty :=\n    Topology.interior_nonempty_of_P1 (A := A) hP1 hne\n  rcases hIntA with ⟨x, hxIntA⟩\n  -- Monotonicity of `interior` guarantees the required membership.\n  have hxIntCl : x ∈ interior (closure A) := by\n    have hsubset : interior A ⊆ interior (closure A) :=\n      interior_mono (subset_closure : (A : Set X) ⊆ closure A)\n    exact hsubset hxIntA\n  exact ⟨x, hxIntCl⟩"
+  ],
+  "success": true
+}

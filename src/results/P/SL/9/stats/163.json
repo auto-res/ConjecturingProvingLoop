@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.09888577461243
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2803,
+      "prompt_tokens": 25823,
+      "total_tokens": 28626,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_three {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : Topology.P3 (A := A)) (hB : Topology.P3 (A := B)) (hC : Topology.P3 (A := C)) :\n    Topology.P3 (A := A ∪ B ∪ C) := by\n  have hAB : Topology.P3 (A := A ∪ B) :=\n    Topology.P3_union (A := A) (B := B) hA hB\n  simpa [Set.union_assoc] using\n    (Topology.P3_union (A := A ∪ B) (B := C) hAB hC)"
+  ],
+  "success": true
+}

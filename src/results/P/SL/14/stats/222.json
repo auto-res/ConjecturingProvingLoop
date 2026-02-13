@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.75411629676819
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5880,
+      "prompt_tokens": 41272,
+      "total_tokens": 47152,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_sInter_subset\n    {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    closure (⋂₀ 𝒜 : Set X) ⊆ ⋂₀ ((fun S : Set X => closure S) '' 𝒜) := by\n  intro x hx\n  apply Set.mem_sInter.2\n  intro S hS\n  rcases hS with ⟨T, hT𝒜, rfl⟩\n  -- Since `⋂₀ 𝒜 ⊆ T`, taking closures preserves the inclusion.\n  have h_subset : (⋂₀ 𝒜 : Set X) ⊆ T := by\n    intro y hy\n    exact (Set.mem_sInter.1 hy) T hT𝒜\n  have h_closure_subset :\n      closure (⋂₀ 𝒜 : Set X) ⊆ closure T := closure_mono h_subset\n  exact h_closure_subset hx"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    83.98674869537354
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5676,
+      "prompt_tokens": 24290,
+      "total_tokens": 29966,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) ∩ interior B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxCl, hxInt⟩\n  -- We show `x ∈ closure (A ∩ B)` using the characterization via open neighborhoods.\n  have : x ∈ closure (A ∩ B : Set X) := by\n    refine (mem_closure_iff).2 ?_\n    intro U hUopen hxU\n    -- Consider the open neighborhood `U ∩ interior B` of `x`.\n    have hVopen : IsOpen (U ∩ interior B) := hUopen.inter isOpen_interior\n    have hxV : x ∈ U ∩ interior B := ⟨hxU, hxInt⟩\n    -- Since `x ∈ closure A`, this neighborhood meets `A`.\n    have h_non : ((U ∩ interior B) ∩ (A : Set X)).Nonempty := by\n      have hClosure := (mem_closure_iff).1 hxCl\n      simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm]\n        using hClosure (U ∩ interior B) hVopen hxV\n    -- Extract a witness in `U ∩ (A ∩ B)`.\n    rcases h_non with ⟨y, hy⟩\n    rcases hy with ⟨⟨hyU, hyIntB⟩, hyA⟩\n    have hyB : y ∈ B := interior_subset hyIntB\n    exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩\n  exact this"
+  ],
+  "success": true
+}

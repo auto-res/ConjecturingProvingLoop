@@ -1,0 +1,26 @@
+{
+  "times": [
+    108.11305570602417
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6471,
+      "prompt_tokens": 27563,
+      "total_tokens": 34034,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_P3_prod_right\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : A.Nonempty)\n    (h : Topology.P3 (A ×ˢ B)) :\n    Topology.P3 B := by\n  dsimp [Topology.P3] at h ⊢\n  intro y hyB\n  rcases hA with ⟨x, hxA⟩\n  -- Form the point in the product set.\n  have hxy_prod : (x, y) ∈ A ×ˢ B := ⟨hxA, hyB⟩\n  -- Apply `P3` for the product.\n  have hxy_int : (x, y) ∈ interior (closure (A ×ˢ B)) := h hxy_prod\n  -- Rewrite using properties of `closure` and `interior` for products.\n  have hxy_int' : (x, y) ∈ interior (closure A ×ˢ closure B) := by\n    simpa [closure_prod_eq] using hxy_int\n  have hxy_int'' : (x, y) ∈ interior (closure A) ×ˢ interior (closure B) := by\n    simpa [interior_prod_eq] using hxy_int'\n  -- Extract the second coordinate.\n  exact hxy_int''.2"
+  ],
+  "success": true
+}

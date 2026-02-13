@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.34377670288086
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4322,
+      "prompt_tokens": 49646,
+      "total_tokens": 53968,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_eq_closure_inter_of_open\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    closure (interior (A ∩ B)) = closure (A ∩ B) := by\n  -- For open sets, taking the interior leaves the set unchanged.\n  have hInt : interior (A ∩ B) = A ∩ B :=\n    (Topology.interior_inter_eq_of_open (X := X) (A := A) (B := B) hA hB)\n  simpa [hInt]"
+  ],
+  "success": true
+}

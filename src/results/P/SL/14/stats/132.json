@@ -1,0 +1,26 @@
+{
+  "times": [
+    16.640015363693237
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1503,
+      "prompt_tokens": 23403,
+      "total_tokens": 24906,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_isOpen_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_open : IsOpen A) (hB : Topology.P3 B) :\n    Topology.P3 (A ∩ B) := by\n  -- Reuse the existing lemma with the roles of `A` and `B` swapped.\n  have h : Topology.P3 (B ∩ A) :=\n    Topology.P3_inter_isOpen_right (X := X) (A := B) (B := A) hB hA_open\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

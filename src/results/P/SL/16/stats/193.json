@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.852243423461914
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3690,
+      "prompt_tokens": 33833,
+      "total_tokens": 37523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_implies_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen A) : Topology.P1 (X := X) (closure A) := by\n  -- First, any open set satisfies `P1`.\n  have hP1A : Topology.P1 (X := X) A :=\n    Topology.isOpen_implies_P1 (X := X) (A := A) hOpen\n  -- Transport `P1` from `A` to its closure using the existing lemma.\n  exact Topology.P1_closure_of_P1 (X := X) (A := A) hP1A"
+  ],
+  "success": true
+}

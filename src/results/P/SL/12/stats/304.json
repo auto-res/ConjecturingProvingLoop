@@ -1,0 +1,26 @@
+{
+  "times": [
+    77.63921356201172
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3284,
+      "prompt_tokens": 59552,
+      "total_tokens": 62836,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_closure_inter_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    IsClosed (closure (A : Set X) ∩ closure (interior B)) := by\n  -- Both factors of the intersection are closed.\n  have hA : IsClosed (closure (A : Set X)) := isClosed_closure\n  have hB : IsClosed (closure (interior (B : Set X))) := isClosed_closure\n  -- The intersection of two closed sets is closed.\n  exact hA.inter hB"
+  ],
+  "success": true
+}

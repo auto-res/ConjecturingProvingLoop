@@ -1,0 +1,43 @@
+{
+  "times": [
+    22.59152388572693,
+    32.66008734703064
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1623,
+      "prompt_tokens": 33004,
+      "total_tokens": 34627,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 2558,
+      "prompt_tokens": 33093,
+      "total_tokens": 35651,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_nhds {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = {x | closure A ∈ 𝓝 x} := by\n  ext x\n  exact (mem_interior_iff_mem_nhds).symm",
+    "theorem interior_has_all_P {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (interior A) ∧\n      Topology.P2 (interior A) ∧\n        Topology.P3 (interior A) := by\n  have h_open : IsOpen (interior A) := isOpen_interior\n  exact\n    Topology.isOpen_has_all_P\n      (X := X) (A := interior A) h_open"
+  ],
+  "success": true
+}

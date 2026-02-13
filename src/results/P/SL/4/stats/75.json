@@ -1,0 +1,43 @@
+{
+  "times": [
+    63.30528950691223,
+    284.950172662735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4717,
+      "prompt_tokens": 10801,
+      "total_tokens": 15518,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    },
+    {
+      "completion_tokens": 20616,
+      "prompt_tokens": 10936,
+      "total_tokens": 31552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 20544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply subset_antisymm\n  · -- `closure (interior (closure (interior A))) ⊆ closure (interior A)`\n    have h₁ :\n        interior (closure (interior A)) ⊆ closure (interior A) := by\n      simpa using\n        (interior_subset :\n          interior (closure (interior A)) ⊆ closure (interior A))\n    exact closure_mono h₁\n  · -- `closure (interior A) ⊆ closure (interior (closure (interior A)))`\n    have h₂ :\n        interior A ⊆ interior (closure (interior A)) :=\n      interior_subset_interior_closure_interior (X := X) (A := A)\n    exact closure_mono h₂",
+    "theorem interior_subset_closure_set {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ closure A := by\n  intro x hx\n  exact subset_closure (interior_subset hx)"
+  ],
+  "success": true
+}

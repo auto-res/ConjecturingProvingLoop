@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.84623837471008
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5095,
+      "prompt_tokens": 18181,
+      "total_tokens": 23276,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_inter_subset_inter_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure ((A ∩ B) : Set X)) ⊆\n      interior (closure (A : Set X)) ∩ interior (closure (B : Set X)) := by\n  intro x hx\n  -- Step 1: relate `closure (A ∩ B)` to `closure A` and `closure B`\n  have hclA : closure ((A ∩ B) : Set X) ⊆ closure (A : Set X) := by\n    have hsub : ((A ∩ B) : Set X) ⊆ A := by\n      intro y hy\n      exact hy.1\n    exact closure_mono hsub\n  have hclB : closure ((A ∩ B) : Set X) ⊆ closure (B : Set X) := by\n    have hsub : ((A ∩ B) : Set X) ⊆ B := by\n      intro y hy\n      exact hy.2\n    exact closure_mono hsub\n  -- Step 2: use monotonicity of `interior` to obtain the desired memberships\n  have hxA : x ∈ interior (closure (A : Set X)) :=\n    (interior_mono hclA) hx\n  have hxB : x ∈ interior (closure (B : Set X)) :=\n    (interior_mono hclB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

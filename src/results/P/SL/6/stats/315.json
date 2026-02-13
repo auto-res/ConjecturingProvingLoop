@@ -1,0 +1,43 @@
+{
+  "times": [
+    94.09511637687683,
+    225.39452075958252
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4796,
+      "prompt_tokens": 49626,
+      "total_tokens": 54422,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 11998,
+      "prompt_tokens": 49746,
+      "total_tokens": 61744,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (A : Set X))) ⊆ closure A := by\n  -- `interior (closure A)` is contained in `closure A`.\n  have h : interior (closure (A : Set X)) ⊆ closure A := interior_subset\n  -- Taking `closure` preserves this inclusion.\n  exact closure_mono h",
+    "theorem closure_interior_closure_subset_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    closure (interior (closure (A : Set X))) ⊆ A := by\n  -- Since `A` is closed, its closure is itself.\n  have hEq : closure (A : Set X) = A := hA.closure_eq\n  -- `interior (closure A)` is contained in `closure A`, hence in `A`.\n  have hSub : interior (closure (A : Set X)) ⊆ A := by\n    simpa [hEq] using\n      (interior_subset : interior (closure (A : Set X)) ⊆ closure A)\n  -- Taking closures preserves inclusions; rewrite using `hEq`.\n  simpa [hEq, closure_closure] using (closure_mono hSub)"
+  ],
+  "success": true
+}

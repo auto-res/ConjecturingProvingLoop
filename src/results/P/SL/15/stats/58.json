@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.64066886901855
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5251,
+      "prompt_tokens": 9401,
+      "total_tokens": 14652,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iUnion {ι : Sort _} {X : Type _} [TopologicalSpace X] {f : ι → Set X}\n    (h : ∀ i, Topology.P2 (f i)) : Topology.P2 (⋃ i, f i) := by\n  dsimp [Topology.P2] at h ⊢\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxi⟩\n  have hx_int : x ∈ interior (closure (interior (f i))) := (h i) hxi\n  have h_mono :\n      interior (closure (interior (f i))) ⊆\n        interior (closure (interior (⋃ j, f j))) := by\n    have h_int_subset :\n        interior (f i) ⊆ interior (⋃ j, f j) := by\n      have h_subset : f i ⊆ ⋃ j, f j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact interior_mono h_subset\n    have h_closure_subset :\n        closure (interior (f i)) ⊆ closure (interior (⋃ j, f j)) :=\n      closure_mono h_int_subset\n    exact interior_mono h_closure_subset\n  exact h_mono hx_int"
+  ],
+  "success": true
+}

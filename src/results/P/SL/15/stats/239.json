@@ -1,0 +1,26 @@
+{
+  "times": [
+    120.63313508033752
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7125,
+      "prompt_tokens": 51253,
+      "total_tokens": 58378,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_union_of_dense_left_and_dense_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Dense A → Dense B → Dense (A ∪ B) := by\n  intro hA hB\n  have hA_closure : closure A = (Set.univ : Set X) := by\n    simpa using hA.closure_eq\n  have hB_closure : closure B = (Set.univ : Set X) := by\n    simpa using hB.closure_eq\n  -- Any point of the space belongs to `closure A`, hence to `closure (A ∪ B)`.\n  have h_subset : (Set.univ : Set X) ⊆ closure (A ∪ B) := by\n    have h_incl : closure A ⊆ closure (A ∪ B) :=\n      closure_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n    simpa [hA_closure] using h_incl\n  -- Consequently, `closure (A ∪ B)` is the whole space.\n  have h_closure_union : closure (A ∪ B) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro x _; trivial\n    · exact h_subset\n  -- Translate the closure equality into density.\n  exact (dense_iff_closure_eq (s := A ∪ B)).2 h_closure_union"
+  ],
+  "success": true
+}

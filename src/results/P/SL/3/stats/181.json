@@ -1,0 +1,43 @@
+{
+  "times": [
+    77.75844502449036,
+    73.89758038520813
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5046,
+      "prompt_tokens": 27921,
+      "total_tokens": 32967,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27520
+      }
+    },
+    {
+      "completion_tokens": 4765,
+      "prompt_tokens": 28027,
+      "total_tokens": 32792,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27520
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_of_closure_eq_interior_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X}\n    (h : closure (A : Set X) = interior (closure (A : Set X))) :\n    IsOpen (closure (A : Set X)) := by\n  have hOpen : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n  simpa [h] using hOpen",
+    "theorem closure_subset_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    closure (A : Set X) ⊆ A := by\n  set_option maxRecDepth 20000 in\n  simpa [hA.closure_eq]"
+  ],
+  "success": true
+}

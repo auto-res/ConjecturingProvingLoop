@@ -1,0 +1,60 @@
+{
+  "times": [
+    160.80743288993835,
+    167.05700945854187,
+    110.3803322315216
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8376,
+      "prompt_tokens": 47458,
+      "total_tokens": 55834,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 10947,
+      "prompt_tokens": 47574,
+      "total_tokens": 58521,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 7573,
+      "prompt_tokens": 47650,
+      "total_tokens": 55223,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_frontier_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (frontier A) ⊆ closure A := by\n  -- We already know `frontier A ⊆ closure A`.\n  have h_subset : frontier A ⊆ closure A :=\n    Topology.frontier_subset_closure (A := A)\n  -- Taking closures preserves inclusions.\n  exact closure_mono h_subset",
+    "theorem Topology.frontier_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A ⊆ closure A := by\n  intro x hx\n  exact hx.1",
+    "theorem Topology.frontier_interior_eq_closure_interior_diff_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (interior A) = closure (interior A) \\ interior A := by\n  simp [frontier, interior_interior]"
+  ],
+  "success": true
+}

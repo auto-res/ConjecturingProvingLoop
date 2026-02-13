@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.235957860946655
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2794,
+      "prompt_tokens": 35399,
+      "total_tokens": 38193,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34688
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iUnion_isOpen {X : Type*} [TopologicalSpace X]\n    {ι : Sort*} {A : ι → Set X} (hOpen : ∀ i, IsOpen (A i)) :\n    Topology.P1 (Set.iUnion A) := by\n  -- Each `A i` is open, hence satisfies `P1`.\n  have hP1 : ∀ i, Topology.P1 (A i) :=\n    fun i => Topology.P1_of_isOpen (A := A i) (hOpen i)\n  -- Apply the existing union lemma for `P1`.\n  exact Topology.P1_iUnion (A := A) hP1"
+  ],
+  "success": true
+}

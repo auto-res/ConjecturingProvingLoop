@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.867833852767944
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4056,
+      "prompt_tokens": 21230,
+      "total_tokens": 25286,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_eq_empty_of_empty_interior_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P3 A → interior (closure (A : Set X)) = ∅ → A = (∅ : Set X) := by\n  intro hP3 hIntEq\n  ext x\n  constructor\n  · intro hxA\n    have : x ∈ interior (closure (A : Set X)) := hP3 hxA\n    simpa [hIntEq] using this\n  · intro hxEmpty\n    cases hxEmpty"
+  ],
+  "success": true
+}

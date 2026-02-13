@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.46358919143677
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5235,
+      "prompt_tokens": 43174,
+      "total_tokens": 48409,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interior_subset_inter_closures\n    {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    closure (A ∩ interior B) ⊆ closure A ∩ closure B := by\n  -- `interior B` is contained in `B`.\n  have h₁ : (A ∩ interior B : Set X) ⊆ A ∩ B := by\n    intro x hx\n    exact ⟨hx.1, interior_subset hx.2⟩\n  -- Taking closures preserves inclusions.\n  have h₂ : closure (A ∩ interior B) ⊆ closure (A ∩ B) :=\n    closure_mono h₁\n  -- Use the existing lemma for the intersection.\n  have h₃ : closure (A ∩ B) ⊆ closure A ∩ closure B :=\n    Topology.closure_inter_subset (A := A) (B := B)\n  -- Chain the inclusions.\n  exact subset_trans h₂ h₃"
+  ],
+  "success": true
+}

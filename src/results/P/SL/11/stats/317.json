@@ -1,0 +1,26 @@
+{
+  "times": [
+    160.55222296714783
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8799,
+      "prompt_tokens": 52007,
+      "total_tokens": 60806,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_of_interiors {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior ((interior A) ∪ (interior B)) = (interior A) ∪ (interior B) := by\n  -- The union of two open sets is open.\n  have hOpen : IsOpen ((interior A) ∪ (interior B)) :=\n    (isOpen_interior : IsOpen (interior A)).union\n      (isOpen_interior : IsOpen (interior B))\n  -- For open sets, the interior equals the set itself.\n  simpa [hOpen.interior_eq]"
+  ],
+  "success": true
+}

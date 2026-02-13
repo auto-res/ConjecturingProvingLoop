@@ -1,0 +1,43 @@
+{
+  "times": [
+    235.29066514968872,
+    73.60710835456848
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13498,
+      "prompt_tokens": 44030,
+      "total_tokens": 57528,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 6868,
+      "prompt_tokens": 44226,
+      "total_tokens": 51094,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_inter_of_open_left\n    {X : Type*} [TopologicalSpace X] {U A : Set X}\n    (hU : IsOpen U) (hA : Topology.P1 A) :\n    Topology.P1 (U ∩ A) := by\n  dsimp [Topology.P1] at hA ⊢\n  intro x hx\n  -- Decompose the hypothesis `x ∈ U ∩ A`.\n  have hxU : x ∈ U := hx.1\n  have hxA : x ∈ A := hx.2\n  -- From `P1` for `A`, obtain membership in `closure (interior A)`.\n  have hx_clA : x ∈ closure (interior A) := hA hxA\n  -- Show that `x` also lies in `closure (U ∩ interior A)`.\n  have hx_clUIA : x ∈ closure (U ∩ interior A) := by\n    -- Use the characterization of membership in a closure.\n    have hmem : ∀ V : Set X, IsOpen V → x ∈ V →\n        ((V ∩ U) ∩ interior A).Nonempty := by\n      intro V hV hxV\n      -- Since `U` is open and contains `x`, `V ∩ U` is an open\n      -- neighbourhood of `x`.\n      have hVU_open : IsOpen (V ∩ U) := hV.inter hU\n      have hxVU : x ∈ V ∩ U := And.intro hxV hxU\n      -- Apply the closure condition for `interior A`.\n      have hNon : ((V ∩ U) ∩ interior A).Nonempty := by\n        have : ((V ∩ U) ∩ interior A).Nonempty :=\n          (mem_closure_iff).1 hx_clA (V ∩ U) hVU_open hxVU\n        simpa [Set.inter_assoc, Set.inter_left_comm] using this\n      exact hNon\n    -- Convert the previous statement into membership in the closure.\n    exact (mem_closure_iff).2 fun V hV hxV =>\n      (hmem V hV hxV).mono_right (by\n        intro z hz\n        -- Rearrange intersections to fit the desired shape.\n        simpa [Set.inter_assoc, Set.inter_left_comm] using hz)\n  -- `U ∩ interior A` is an open subset of `U ∩ A`,\n  -- so its closure is contained in `closure (interior (U ∩ A))`.\n  have hSubset :\n      (U ∩ interior A : Set X) ⊆ interior (U ∩ A) := by\n    -- `U ∩ interior A` is open.\n    have hOpen : IsOpen (U ∩ interior A) := hU.inter isOpen_interior\n    -- It is clearly contained in `U ∩ A`.\n    have hIncl : (U ∩ interior A : Set X) ⊆ U ∩ A := by\n      intro y hy; exact And.intro hy.1 ((interior_subset : interior A ⊆ A) hy.2)\n    exact interior_maximal hIncl hOpen\n  -- Use monotonicity of `closure` to upgrade the membership.\n  have hx_goal : x ∈ closure (interior (U ∩ A)) :=\n    (closure_mono hSubset) hx_clUIA\n  exact hx_goal",
+    "theorem Topology.interior_inter_open_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) :\n    interior (A ∩ B) = A ∩ interior B := by\n  -- We prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    intro x hx\n    -- `x` belongs to `A ∩ B`\n    have hxAB : x ∈ A ∩ B :=\n      (interior_subset : interior (A ∩ B) ⊆ A ∩ B) hx\n    -- Extract the individual facts\n    have hxA : x ∈ A := hxAB.1\n    -- Monotonicity of `interior` yields `x ∈ interior B`\n    have hxIntB : x ∈ interior B := by\n      have hsubset : (A ∩ B : Set X) ⊆ B := by\n        intro y hy; exact hy.2\n      exact (interior_mono hsubset) hx\n    exact And.intro hxA hxIntB\n  · -- `⊇` direction\n    intro x hx\n    -- Separate the hypotheses\n    have hxA : x ∈ A := hx.1\n    have hxIntB : x ∈ interior B := hx.2\n    -- Basic facts about `interior B`\n    have hOpenIntB : IsOpen (interior B) := isOpen_interior\n    have hIntSubsetB : (interior B : Set X) ⊆ B := interior_subset\n    -- Consider the open set `V = interior B ∩ A`\n    have hVopen : IsOpen ((interior B) ∩ A) := hOpenIntB.inter hA\n    have hxV : x ∈ (interior B) ∩ A :=\n      And.intro hxIntB hxA\n    -- `V` is contained in `A ∩ B`\n    have hVsubset : ((interior B) ∩ A : Set X) ⊆ A ∩ B := by\n      intro y hy\n      have hyIntB : y ∈ interior B := hy.1\n      have hyA    : y ∈ A := hy.2\n      have hyB    : y ∈ B := hIntSubsetB hyIntB\n      exact And.intro hyA hyB\n    -- Hence `x` is in the interior of `A ∩ B`\n    have : x ∈ interior (A ∩ B) := by\n      -- `interior_maximal` turns the inclusion of the open set `V`\n      -- into an inclusion in the interior.\n      have hsubsetInt : ((interior B) ∩ A : Set X) ⊆ interior (A ∩ B) := by\n        apply interior_maximal hVsubset hVopen\n      exact hsubsetInt hxV\n    exact this"
+  ],
+  "success": true
+}

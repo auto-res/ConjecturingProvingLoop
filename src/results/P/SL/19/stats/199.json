@@ -1,0 +1,43 @@
+{
+  "times": [
+    96.26402521133423,
+    285.4802670478821
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7821,
+      "prompt_tokens": 31466,
+      "total_tokens": 39287,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    },
+    {
+      "completion_tokens": 18834,
+      "prompt_tokens": 31755,
+      "total_tokens": 50589,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_frontier_subset_frontier {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (frontier A) ⊆ frontier A := by\n  intro x hx\n  rcases hx with ⟨hxClosFr, hxNotIntFr⟩\n  -- `x ∈ closure A`\n  have hxClosA : x ∈ closure A := by\n    have hSub : (frontier A : Set X) ⊆ closure A :=\n      Topology.frontier_subset_closure (A := A)\n    have hClosSub : closure (frontier A) ⊆ closure A := closure_mono hSub\n    exact hClosSub hxClosFr\n  -- `x ∉ interior A`\n  have hxNotIntA : x ∉ interior A := by\n    intro hxIntA\n    -- `interior A ∩ frontier A` is empty\n    have hEmpty :\n        (interior A ∩ frontier A : Set X) = (∅ : Set X) :=\n      Topology.interior_inter_frontier_eq_empty (A := A)\n    -- Yet every neighbourhood of `x` meets `frontier A`, so in particular\n    -- `interior A` meets `frontier A`, a contradiction.\n    have hNon :\n        ((interior A) ∩ frontier A : Set X).Nonempty := by\n      have h := (mem_closure_iff).1 hxClosFr\n      simpa using h (interior A) isOpen_interior hxIntA\n    have : (∅ : Set X).Nonempty := by\n      simpa [hEmpty] using hNon\n    cases this\n  exact And.intro hxClosA hxNotIntA",
+    ""
+  ],
+  "success": true
+}

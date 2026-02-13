@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.82700181007385
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5460,
+      "prompt_tokens": 40294,
+      "total_tokens": 45754,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_inter_three_satisfies_P1_P2_P3\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) (hC : IsOpen C) :\n    Topology.P1 (A ∩ B ∩ C) ∧ Topology.P2 (A ∩ B ∩ C) ∧ Topology.P3 (A ∩ B ∩ C) := by\n  -- The intersection of three open sets is open.\n  have hOpen : IsOpen (A ∩ B ∩ C) := by\n    have hAB : IsOpen (A ∩ B) := IsOpen.inter hA hB\n    have hABC : IsOpen ((A ∩ B) ∩ C) := IsOpen.inter hAB hC\n    simpa [Set.inter_assoc] using hABC\n  -- Any open set satisfies `P1`, `P2`, and `P3`.\n  exact\n    Topology.isOpen_satisfies_P1_P2_P3\n      (X := X) (A := A ∩ B ∩ C) hOpen"
+  ],
+  "success": true
+}

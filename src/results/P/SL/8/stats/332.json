@@ -1,0 +1,26 @@
+{
+  "times": [
+    100.99816608428955
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5402,
+      "prompt_tokens": 51909,
+      "total_tokens": 57311,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_imp_P2_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_dense : closure A = (Set.univ : Set X)) :\n    Topology.P2 (closure A) := by\n  -- The set `closure A` is `univ`, hence open.\n  have hOpen : IsOpen (closure A) := by\n    simpa [h_dense] using isOpen_univ\n  -- Openness of `closure A` immediately yields `P2`.\n  exact isOpen_closure_imp_P2_closure (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

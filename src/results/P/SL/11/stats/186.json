@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.130369424819946
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3255,
+      "prompt_tokens": 30293,
+      "total_tokens": 33548,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_iInter_subset_iInter_closure\n    {X ι : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    closure (⋂ i, A i) ⊆ ⋂ i, closure (A i) := by\n  intro x hx\n  -- Show that `x ∈ closure (A i)` for every `i`.\n  have hx_all : ∀ i, x ∈ closure (A i) := by\n    intro i\n    -- `⋂ i, A i` is contained in `A i`.\n    have hsub : (⋂ j, A j : Set X) ⊆ A i :=\n      Set.iInter_subset (fun j => A j) i\n    -- Monotonicity of `closure` upgrades the inclusion.\n    have hcl : closure (⋂ j, A j) ⊆ closure (A i) := closure_mono hsub\n    exact hcl hx\n  -- Collect the memberships into the intersection.\n  exact Set.mem_iInter.2 hx_all"
+  ],
+  "success": true
+}

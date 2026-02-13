@@ -1,0 +1,26 @@
+{
+  "times": [
+    159.0173716545105
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8273,
+      "prompt_tokens": 58739,
+      "total_tokens": 67012,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58112
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.disjoint_interior_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Disjoint (interior (A : Set X)) (closure (Aᶜ : Set X)) := by\n  refine Set.disjoint_left.2 ?_\n  intro x hxInt hxCl\n  -- `interior A` is an open neighbourhood of `x`.\n  have hOpen : IsOpen (interior (A : Set X)) := isOpen_interior\n  -- Since `x ∈ closure (Aᶜ)`, this neighbourhood meets `Aᶜ`.\n  have hNon :\n      ((interior (A : Set X)) ∩ (Aᶜ : Set X)).Nonempty :=\n    (mem_closure_iff).1 hxCl (interior A) hOpen hxInt\n  rcases hNon with ⟨y, hyInt, hyComp⟩\n  -- But `y ∈ interior A ⊆ A`, contradicting `y ∈ Aᶜ`.\n  have : (y : X) ∈ A := interior_subset hyInt\n  exact hyComp this"
+  ],
+  "success": true
+}

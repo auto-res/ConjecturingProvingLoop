@@ -1,0 +1,94 @@
+{
+  "times": [
+    99.93406224250793,
+    96.32849526405334,
+    74.43546223640442,
+    169.533465385437,
+    122.3912672996521
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7216,
+      "prompt_tokens": 53991,
+      "total_tokens": 61207,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 5340,
+      "prompt_tokens": 54069,
+      "total_tokens": 59409,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 5003,
+      "prompt_tokens": 54184,
+      "total_tokens": 59187,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 8631,
+      "prompt_tokens": 54290,
+      "total_tokens": 62921,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 5191,
+      "prompt_tokens": 54396,
+      "total_tokens": 59587,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_subset_closure_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A \\ interior A ⊆ closure (Aᶜ) := by\n  rintro x ⟨hxClA, hxNotIntA⟩\n  -- We verify the neighbourhood criterion for membership in `closure (Aᶜ)`.\n  apply (mem_closure_iff).2\n  intro V hVopen hxV\n  by_cases hNonempty : (V ∩ Aᶜ).Nonempty\n  · exact hNonempty\n  · -- If `V ∩ Aᶜ` is empty, then `V ⊆ A`.\n    have hSub : V ⊆ A := by\n      intro y hyV\n      by_contra hyNotA\n      have : (V ∩ Aᶜ).Nonempty := ⟨y, ⟨hyV, hyNotA⟩⟩\n      exact (hNonempty this).elim\n    -- Hence `x ∈ interior A`, contradicting `hxNotIntA`.\n    have hxIntA : x ∈ interior A :=\n      interior_maximal hSub hVopen hxV\n    exact (hxNotIntA hxIntA).elim",
+    "theorem Topology.boundary_subset_closure_compl' {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A \\ interior A ⊆ closure (Aᶜ) := by\n  simpa using\n    (Topology.boundary_subset_closure (X := X) (A := A))",
+    "theorem Topology.frontier_inter_open_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen A) :\n    frontier A ∩ A = (∅ : Set X) := by\n  -- Rewrite the frontier of `A` using the fact that `A` is open.\n  have h_frontier : frontier A = closure A \\ A := by\n    -- By definition, `frontier A = closure A \\ interior A`.\n    have : frontier A = closure A \\ interior A := by\n      simp [frontier]\n    -- Since `A` is open, `interior A = A`.\n    simpa [hA.interior_eq] using this\n  -- Compute the intersection using the explicit description of the frontier.\n  simpa [h_frontier, Set.inter_comm, Set.inter_diff_self]",
+    "theorem Topology.frontier_subset_closure_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} : frontier A ⊆ closure (Aᶜ) := by\n  intro x hx\n  -- Extract the facts `x ∈ closure A` and `x ∉ interior A`\n  have hx_not_int : x ∉ interior A := hx.2\n  -- We prove by contradiction that `x ∈ closure (Aᶜ)`\n  by_contra h_not\n  -- Using `interior_eq_compl_closure_compl`, the hypothesis `¬ x ∈ closure (Aᶜ)`\n  -- translates into `x ∈ interior A`, contradicting `hx_not_int`.\n  have h_eq : interior A = (closure (Aᶜ))ᶜ :=\n    (Topology.interior_eq_compl_closure_compl (X := X) (A := A))\n  have hx_int : x ∈ interior A := by\n    -- `h_not : x ∉ closure (Aᶜ)` is definitionally\n    -- the same as `x ∈ (closure (Aᶜ))ᶜ`.\n    have : x ∈ (closure (Aᶜ))ᶜ := h_not\n    simpa [h_eq] using this\n  exact hx_not_int hx_int",
+    "theorem Topology.boundary_subset_closure_left {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A \\ interior A ⊆ closure A := by\n  intro x hx\n  exact hx.1"
+  ],
+  "success": true
+}

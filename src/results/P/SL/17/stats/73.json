@@ -1,0 +1,43 @@
+{
+  "times": [
+    115.9838616847992,
+    118.292062997818
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9313,
+      "prompt_tokens": 10568,
+      "total_tokens": 19881,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    },
+    {
+      "completion_tokens": 7238,
+      "prompt_tokens": 10691,
+      "total_tokens": 17929,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Dense (interior (closure A)) := by\n  intro hDense\n  -- Unfold `Dense` in the hypothesis and goal to work with equalities.\n  unfold Dense at hDense ⊢\n  -- `interior A ⊆ interior (closure A)`, since `closure A` contains `A`.\n  have h_subset : interior A ⊆ interior (closure A) := by\n    apply interior_mono\n    exact subset_closure\n  -- Taking closures preserves the inclusion.\n  have h_closure_subset :\n      closure (interior A) ⊆ closure (interior (closure A)) :=\n    closure_mono h_subset\n  -- Every point belongs to `closure (interior (closure A))`.\n  have h_univ_subset : (Set.univ : Set X) ⊆ closure (interior (closure A)) := by\n    intro x hx\n    -- Using the density of `interior A`.\n    have : x ∈ closure (interior A) := by\n      simpa [hDense] using hx\n    exact h_closure_subset this\n  -- Establish the required equality of sets.\n  have h_eq : closure (interior (closure A)) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro x _; trivial\n    · exact h_univ_subset\n  simpa using h_eq",
+    "theorem Topology.closure_interior_closure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure A)) ⊆ closure A := by\n  -- First, `interior (closure A)` is contained in `closure A`.\n  have h : interior (closure A) ⊆ closure A := interior_subset\n  -- Taking closures preserves inclusions; simplify `closure (closure A)`.\n  simpa [closure_closure] using closure_mono h"
+  ],
+  "success": true
+}

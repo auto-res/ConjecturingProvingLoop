@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.4140841960907
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1759,
+      "prompt_tokens": 37983,
+      "total_tokens": 39742,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem all_Ps_iff_P1_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen (A : Set X)) :\n    (Topology.P1 (A : Set X) ∧ Topology.P2 A ∧ Topology.P3 A) ↔ Topology.P1 A := by\n  constructor\n  · intro h\n    exact h.1\n  · intro hP1\n    have hP2 : Topology.P2 (A : Set X) :=\n      (Topology.P1_iff_P2_of_isOpen (A := A) hA).1 hP1\n    have hP3 : Topology.P3 (A : Set X) :=\n      (Topology.P1_iff_P3_of_isOpen (A := A) hA).1 hP1\n    exact And.intro hP1 (And.intro hP2 hP3)"
+  ],
+  "success": true
+}

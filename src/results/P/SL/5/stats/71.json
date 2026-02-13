@@ -1,0 +1,60 @@
+{
+  "times": [
+    51.15758657455444,
+    221.94739985466003,
+    38.273786306381226
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3370,
+      "prompt_tokens": 11079,
+      "total_tokens": 14449,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    },
+    {
+      "completion_tokens": 14566,
+      "prompt_tokens": 11149,
+      "total_tokens": 25715,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    },
+    {
+      "completion_tokens": 2504,
+      "prompt_tokens": 11223,
+      "total_tokens": 13727,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    closure (interior (A ∪ B : Set X)) = closure (interior A ∪ interior B) := by\n  simpa using\n    congrArg (fun S : Set X => closure S)\n      (interior_union (A := A) (B := B))",
+    "theorem interior_closure_idempotent_six {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure A)))))))))) =\n      interior (closure A) := by\n  simp [Topology.interior_closure_idempotent]",
+    "theorem P1_empty {X : Type*} [TopologicalSpace X] :\n    Topology.P1 (X := X) (∅ : Set X) := by\n  dsimp [Topology.P1]\n  intro x hx\n  cases hx"
+  ],
+  "success": true
+}

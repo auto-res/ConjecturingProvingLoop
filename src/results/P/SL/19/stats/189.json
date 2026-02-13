@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.017354249954224
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1955,
+      "prompt_tokens": 29912,
+      "total_tokens": 31867,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_interior_diff_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A := A) →\n      frontier A = closure (interior A) \\ interior A := by\n  intro hP1\n  have hFrontierEq :=\n    Topology.frontier_eq_frontier_interior_of_P1 (A := A) hP1\n  calc\n    frontier A = frontier (interior A) := hFrontierEq\n    _ = closure (interior A) \\ interior A := by\n      simp [frontier, interior_interior]"
+  ],
+  "success": true
+}

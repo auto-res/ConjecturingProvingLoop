@@ -1,0 +1,94 @@
+{
+  "times": [
+    53.1470673084259,
+    127.52698826789856,
+    55.565967082977295,
+    109.42710900306702,
+    117.80895066261292
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3232,
+      "prompt_tokens": 44583,
+      "total_tokens": 47815,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 7528,
+      "prompt_tokens": 44693,
+      "total_tokens": 52221,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 2452,
+      "prompt_tokens": 44811,
+      "total_tokens": 47263,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 4569,
+      "prompt_tokens": 44890,
+      "total_tokens": 49459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 4935,
+      "prompt_tokens": 45022,
+      "total_tokens": 49957,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_eq_empty_iff_closure_eq_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier A = (∅ : Set X) ↔ closure A = interior A := by\n  constructor\n  · intro hFront\n    -- From `hFront`, deduce that `closure A \\ interior A = ∅`.\n    have hDiffEmpty : closure A \\ interior A = (∅ : Set X) := by\n      have h := (frontier_eq_closure_diff_interior (X := X) (A := A)).symm\n      simpa [hFront] using h\n    -- Prove `closure A ⊆ interior A`.\n    have hSub : closure A ⊆ interior A := by\n      intro x hxCl\n      by_cases hxInt : x ∈ interior A\n      · exact hxInt\n      ·\n        have hxDiff : x ∈ closure A \\ interior A := And.intro hxCl hxInt\n        have : x ∈ (∅ : Set X) := by\n          simpa [hDiffEmpty] using hxDiff\n        cases this\n    -- Combine with the obvious inclusion `interior A ⊆ closure A`.\n    have hSub' : interior A ⊆ closure A := interior_subset\n    exact Set.Subset.antisymm hSub' hSub\n  · intro hEq\n    -- Rewrite the frontier using `hEq`.\n    simpa [frontier_eq_closure_diff_interior, hEq, Set.diff_self]",
+    "theorem P2_closure_imp_P1_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure A) → (Topology.P1 (closure A) ∧ Topology.P3 (closure A)) := by\n  intro hP2\n  have hP1 : Topology.P1 (closure A) :=\n    Topology.P2_imp_P1_closure (A := A) hP2\n  have hP3 : Topology.P3 (closure A) :=\n    ((Topology.P2_iff_P3_closure (A := A)).1) hP2\n  exact And.intro hP1 hP3",
+    "import Mathlib\n\ntheorem image_subset_closure_image {α β : Type*} [TopologicalSpace β]\n    (f : α → β) (s : Set α) :\n    f '' s ⊆ closure (f '' s) := by\n  intro x hx\n  exact subset_closure hx",
+    "theorem closure_union_closure_eq {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    closure (closure A ∪ closure B) = closure (A ∪ B) := by\n  apply subset_antisymm\n  · -- `closure A ∪ closure B ⊆ closure (A ∪ B)`\n    have h_sub : (closure A ∪ closure B : Set X) ⊆ closure (A ∪ B) := by\n      intro x hx\n      cases hx with\n      | inl hA =>\n          have : closure A ⊆ closure (A ∪ B) :=\n            closure_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n          exact this hA\n      | inr hB =>\n          have : closure B ⊆ closure (A ∪ B) :=\n            closure_mono (Set.subset_union_right : (B : Set X) ⊆ A ∪ B)\n          exact this hB\n    exact closure_mono h_sub\n  · -- `A ∪ B ⊆ closure A ∪ closure B`\n    have h_sub : (A ∪ B : Set X) ⊆ closure A ∪ closure B := by\n      intro x hx\n      cases hx with\n      | inl hA => exact Or.inl (subset_closure hA)\n      | inr hB => exact Or.inr (subset_closure hB)\n    exact closure_mono h_sub",
+    "theorem interior_diff_of_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsClosed B) :\n    interior (A \\ B) = interior A \\ B := by\n  ext x\n  constructor\n  · intro hx\n    have hAB : x ∈ A \\ B := interior_subset hx\n    -- `A \\ B ⊆ A`, hence `x ∈ interior A`\n    have hIntA : x ∈ interior A := by\n      have hSub : (A \\ B : Set X) ⊆ A := fun y hy => hy.1\n      exact (interior_mono hSub) hx\n    exact And.intro hIntA hAB.2\n  · rintro ⟨hxIntA, hxNotB⟩\n    -- Build an open neighborhood contained in `A \\ B`\n    have hOpen : IsOpen (interior A ∩ Bᶜ) :=\n      isOpen_interior.inter hB.isOpen_compl\n    have hMem  : x ∈ interior A ∩ Bᶜ := And.intro hxIntA hxNotB\n    have hSub  : (interior A ∩ Bᶜ : Set X) ⊆ A \\ B := by\n      intro y hy\n      exact And.intro (interior_subset hy.1) hy.2\n    -- Conclude that `x` belongs to `interior (A \\ B)`\n    have : (A \\ B : Set X) ∈ nhds x :=\n      Filter.mem_of_superset (hOpen.mem_nhds hMem) hSub\n    exact (mem_interior_iff_mem_nhds).2 this"
+  ],
+  "success": true
+}

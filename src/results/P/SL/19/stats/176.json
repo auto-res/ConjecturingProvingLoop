@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.536818981170654
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3008,
+      "prompt_tokens": 27276,
+      "total_tokens": 30284,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_frontier_interior_of_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (A := A) → frontier A = frontier (interior A) := by\n  intro hP1\n  have hClos : closure A = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 (A := A) hP1\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hClosA, hNotIntA⟩\n    have hClosInt : x ∈ closure (interior A) := by\n      simpa [hClos] using hClosA\n    have hNotIntInt : x ∉ interior (interior A) := by\n      simpa [interior_interior] using hNotIntA\n    exact And.intro hClosInt hNotIntInt\n  · intro hx\n    rcases hx with ⟨hClosInt, hNotIntInt⟩\n    have hClosA : x ∈ closure A := by\n      simpa [hClos] using hClosInt\n    have hNotIntA : x ∉ interior A := by\n      simpa [interior_interior] using hNotIntInt\n    exact And.intro hClosA hNotIntA"
+  ],
+  "success": true
+}

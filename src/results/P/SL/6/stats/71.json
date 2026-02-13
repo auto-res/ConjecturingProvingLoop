@@ -1,0 +1,26 @@
+{
+  "times": [
+    12.676057815551758
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1113,
+      "prompt_tokens": 10292,
+      "total_tokens": 11405,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iUnion_of_P3\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {S : ι → Set X}\n    (hS : ∀ i, Topology.P3 (S i)) :\n    Topology.P3 (⋃ i, S i) := by\n  dsimp [Topology.P3] at hS ⊢\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n  -- Use `P3` for the chosen set `S i`.\n  have hx_int : x ∈ interior (closure (S i)) := (hS i) hx_i\n  -- Show this interior is contained in the desired interior.\n  have hIncl :\n      interior (closure (S i)) ⊆ interior (closure (⋃ i, S i)) := by\n    apply interior_mono\n    have : closure (S i) ⊆ closure (⋃ i, S i) := by\n      apply closure_mono\n      intro y hy\n      exact Set.mem_iUnion.2 ⟨i, hy⟩\n    exact this\n  exact hIncl hx_int"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.192482948303223
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2328,
+      "prompt_tokens": 55652,
+      "total_tokens": 57980,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_subset_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) ⊆ closure (A : Set X) := by\n  intro x hx\n  -- Step 1: `interior (closure (interior A)) ⊆ closure (interior A)`.\n  have h₁ : (interior (closure (interior A)) : Set X) ⊆ closure (interior A) :=\n    interior_subset\n  -- Hence the same inclusion holds for the closures.\n  have hx_clIntA : x ∈ closure (interior A) := by\n    have : x ∈ closure (closure (interior A)) :=\n      (closure_mono h₁) hx\n    simpa [closure_closure] using this\n  -- Step 2: `closure (interior A) ⊆ closure A`.\n  have h₂ : closure (interior A) ⊆ closure (A : Set X) :=\n    Topology.closure_interior_subset_closure (X := X) A\n  -- Combine the two steps.\n  exact h₂ hx_clIntA"
+  ],
+  "success": true
+}

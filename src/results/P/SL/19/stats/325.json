@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.4279055595398
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6395,
+      "prompt_tokens": 52101,
+      "total_tokens": 58496,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_closure_interior_compl_subset_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) ∩ closure (interior (Aᶜ)) ⊆ frontier A := by\n  intro x hx\n  rcases hx with ⟨hClosIntA, hClosIntAc⟩\n  -- `x` lies in `closure A` because `closure (interior A) ⊆ closure A`.\n  have hClosA : x ∈ closure A := by\n    have hSub : closure (interior A) ⊆ closure A :=\n      Topology.closure_interior_subset_closure (A := A)\n    exact hSub hClosIntA\n  -- Show that `x ∉ interior A`; otherwise we obtain a contradiction.\n  have hNotIntA : x ∉ interior A := by\n    intro hxIntA\n    -- `interior A` is an open neighbourhood of `x`; since\n    -- `x ∈ closure (interior (Aᶜ))`, this neighbourhood meets `interior (Aᶜ)`.\n    have hNon :\n        ((interior A : Set X) ∩ interior (Aᶜ)).Nonempty :=\n      (mem_closure_iff).1 hClosIntAc (interior A) isOpen_interior hxIntA\n    rcases hNon with ⟨y, ⟨hyIntA, hyIntAc⟩⟩\n    -- But a point cannot belong to both `A` and `Aᶜ`.\n    have hInA  : (y : X) ∈ A   := interior_subset hyIntA\n    have hInAc : (y : X) ∈ Aᶜ := interior_subset hyIntAc\n    exact (hInAc hInA)\n  exact And.intro hClosA hNotIntA"
+  ],
+  "success": true
+}

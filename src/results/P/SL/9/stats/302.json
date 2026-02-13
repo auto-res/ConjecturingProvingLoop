@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.98236656188965
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6965,
+      "prompt_tokens": 53304,
+      "total_tokens": 60269,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriors_inter_subset_closureInteriorUnion\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A) ∩ closure (interior B) ⊆\n      closure (interior (A ∪ B)) := by\n  intro x hx\n  -- `interior A` is contained in `interior (A ∪ B)`.\n  have h_intA_subset : interior A ⊆ interior (A ∪ B) := by\n    have h_sub : (A : Set X) ⊆ A ∪ B := by\n      intro y hy; exact Or.inl hy\n    exact interior_mono h_sub\n  -- Hence their closures satisfy the same inclusion.\n  have h_clA_subset :\n      closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n    closure_mono h_intA_subset\n  -- Apply the inclusion to the first component of `hx`.\n  exact h_clA_subset hx.1"
+  ],
+  "success": true
+}

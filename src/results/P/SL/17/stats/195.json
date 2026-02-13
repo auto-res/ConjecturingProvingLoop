@@ -1,0 +1,26 @@
+{
+  "times": [
+    83.61393880844116
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5723,
+      "prompt_tokens": 34326,
+      "total_tokens": 40049,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_interior_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hP3 : Topology.P3 A) :\n    frontier A ⊆ closure (interior (closure A)) := by\n  intro x hx\n  have hx_closure : x ∈ closure A := hx.1\n  have h_eq :\n      closure (interior (closure A)) = closure A :=\n    Topology.closure_interior_closure_eq_closure_of_P3 (A := A) hP3\n  simpa [h_eq] using hx_closure"
+  ],
+  "success": true
+}

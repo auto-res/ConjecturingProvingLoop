@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.41661500930786
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6064,
+      "prompt_tokens": 22558,
+      "total_tokens": 28622,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_iInter_interior_subset {X ι : Type*} [TopologicalSpace X]\n    {A : ι → Set X} :\n    closure (⋂ i, interior (A i)) ⊆ ⋂ i, closure (interior (A i)) := by\n  intro x hx\n  -- For every `i`, show that `x` belongs to `closure (interior (A i))`.\n  have hforall : ∀ i, x ∈ closure (interior (A i)) := by\n    intro i\n    -- The intersection is contained in each `interior (A i)`.\n    have hsubset :\n        (⋂ j, interior (A j)) ⊆ interior (A i) :=\n      Set.iInter_subset (fun j : ι => interior (A j)) i\n    -- Monotonicity of `closure` transfers membership.\n    exact (closure_mono hsubset) hx\n  -- Collect the witnesses into the intersection.\n  exact Set.mem_iInter.2 hforall"
+  ],
+  "success": true
+}

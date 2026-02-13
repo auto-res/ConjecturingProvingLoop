@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.365875244140625
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3063,
+      "prompt_tokens": 51149,
+      "total_tokens": 54212,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_closed : IsClosed A) (hB_closed : IsClosed B)\n    (hP2A : Topology.P2 A) (hP2B : Topology.P2 B) :\n    Topology.P2 (A ∪ B) := by\n  -- Translate `P2` for the closed sets `A` and `B` into openness.\n  have hOpenA : IsOpen A :=\n    (Topology.P2_closed_iff_open (A := A) hA_closed).1 hP2A\n  have hOpenB : IsOpen B :=\n    (Topology.P2_closed_iff_open (A := B) hB_closed).1 hP2B\n  -- The union of two open sets is open.\n  have hOpenUnion : IsOpen (A ∪ B) := hOpenA.union hOpenB\n  -- Apply `P2` for open sets.\n  exact Topology.P2_of_open hOpenUnion"
+  ],
+  "success": true
+}

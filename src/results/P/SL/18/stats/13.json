@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.247047662734985
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1488,
+      "prompt_tokens": 1830,
+      "total_tokens": 3318,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closed_iff_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    Topology.P2 A ↔ IsOpen A := by\n  -- `P3` and openness are equivalent for closed sets\n  have hP3_iff_open : Topology.P3 A ↔ IsOpen A :=\n    Topology.P3_closed_iff_open hA_closed\n  constructor\n  · intro hP2\n    -- `P2` ⇒ `P3` ⇒ `IsOpen`\n    have hP3 : Topology.P3 A := Topology.P2_implies_P3 hP2\n    exact (hP3_iff_open).1 hP3\n  · intro hOpen\n    -- `IsOpen` ⇒ `P2`\n    exact Topology.P2_of_open hOpen"
+  ],
+  "success": true
+}

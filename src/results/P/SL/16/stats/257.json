@@ -1,0 +1,26 @@
+{
+  "times": [
+    202.6948595046997
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9680,
+      "prompt_tokens": 44778,
+      "total_tokens": 54458,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_open_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) :\n    interior (A ∩ B : Set X) = A ∩ interior B := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    have hx_intB : x ∈ interior B :=\n      (interior_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hx\n    have hx_AB : x ∈ (A ∩ B : Set X) := interior_subset hx\n    exact And.intro hx_AB.1 hx_intB\n  · intro x hx\n    rcases hx with ⟨hxA, hx_intB⟩\n    -- The set `A ∩ interior B` is open and contains `x`\n    have h_open : IsOpen (A ∩ interior B) := hA.inter isOpen_interior\n    have h_subset : (A ∩ interior B : Set X) ⊆ A ∩ B := by\n      intro y hy\n      exact And.intro hy.1 (interior_subset hy.2)\n    have hx_mem : x ∈ (A ∩ interior B : Set X) := And.intro hxA hx_intB\n    exact\n      mem_interior.2\n        ⟨A ∩ interior B, h_subset, h_open, hx_mem⟩"
+  ],
+  "success": true
+}

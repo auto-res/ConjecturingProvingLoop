@@ -1,0 +1,26 @@
+{
+  "times": [
+    131.81480288505554
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5761,
+      "prompt_tokens": 51385,
+      "total_tokens": 57146,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_compl_eq_compl_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (Aᶜ)) = (interior (closure A))ᶜ := by\n  have h₁ : interior (Aᶜ) = (closure A)ᶜ := by\n    simpa using\n      (interior_compl_eq_compl_closure (X := X) (A := A))\n  have h₂ : closure ((closure A)ᶜ) = (interior (closure A))ᶜ := by\n    simpa using\n      (closure_compl_eq_compl_interior (α := X) (s := closure A))\n  simpa [h₁] using h₂"
+  ],
+  "success": true
+}

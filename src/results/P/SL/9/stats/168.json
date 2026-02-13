@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.7246961593628
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5412,
+      "prompt_tokens": 26837,
+      "total_tokens": 32249,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closureDiffSelf_eq_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (closure (A : Set X) \\ A) = (∅ : Set X) := by\n  classical\n  -- We prove that `interior (closure A \\ A)` contains no points.\n  apply Set.eq_empty_iff_forall_not_mem.2\n  intro x hx\n  -- `x` lies in the interior, hence in the set itself.\n  have hx_diff : x ∈ closure A \\ A :=\n    (interior_subset : interior (closure A \\ A) ⊆ closure A \\ A) hx\n  -- In particular, `x ∈ closure A`.\n  have hx_closure : x ∈ closure A := hx_diff.1\n  -- Consider the open neighbourhood `U = interior (closure A \\ A)` of `x`.\n  have h_open : IsOpen (interior (closure A \\ A)) := isOpen_interior\n  have h_nonempty :\n      ((interior (closure A \\ A)) ∩ A).Nonempty :=\n    (mem_closure_iff).1 hx_closure _ h_open hx\n  -- Extract a point `y ∈ A` that is also in `interior (closure A \\ A)`.\n  rcases h_nonempty with ⟨y, hyU, hyA⟩\n  -- But `interior (closure A \\ A)` is contained in `closure A \\ A`,\n  -- so `y ∉ A`, contradicting `hyA`.\n  have hy_notA : y ∉ A := by\n    have : y ∈ closure A \\ A :=\n      (interior_subset : interior (closure A \\ A) ⊆ closure A \\ A) hyU\n    exact this.2\n  exact hy_notA hyA"
+  ],
+  "success": true
+}

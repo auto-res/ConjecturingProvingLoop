@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.75056004524231
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5610,
+      "prompt_tokens": 43638,
+      "total_tokens": 49248,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union_of_subset_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : (B : Set X) ⊆ closure (interior A)) :\n    Topology.P1 (X := X) (A ∪ B) := by\n  dsimp [Topology.P1] at *\n  intro x hx\n  -- `closure (interior A)` is contained in `closure (interior (A ∪ B))`.\n  have h_mono :\n      closure (interior A : Set X) ⊆\n        closure (interior (A ∪ B : Set X)) := by\n    have h_inner :\n        (interior A : Set X) ⊆ interior (A ∪ B) :=\n      interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n    exact closure_mono h_inner\n  cases hx with\n  | inl hxA =>\n      -- Case `x ∈ A`.\n      exact h_mono (hA hxA)\n  | inr hxB =>\n      -- Case `x ∈ B`.\n      exact h_mono (hB hxB)"
+  ],
+  "success": true
+}

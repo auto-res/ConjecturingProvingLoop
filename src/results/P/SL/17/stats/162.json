@@ -1,0 +1,43 @@
+{
+  "times": [
+    86.15544390678406,
+    318.34873366355896
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8441,
+      "prompt_tokens": 26332,
+      "total_tokens": 34773,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8128,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 20947,
+      "prompt_tokens": 26444,
+      "total_tokens": 47391,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 20928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_of_dense_subset {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hDenseA : Dense A) (hAB : A ⊆ B) : Dense B := by\n  -- `closure A = univ`, since `A` is dense.\n  have hClosureA : closure A = (Set.univ : Set X) := hDenseA.closure_eq\n  -- Monotonicity of `closure` under `subset`.\n  have hSubset : closure A ⊆ closure B := closure_mono hAB\n  -- Show `closure B = univ`.\n  have hClosureB : closure B = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · -- Trivial inclusion.\n      intro x _hx; simp\n    · -- Every point belongs to `closure B`.\n      intro x _hx\n      -- From `closure A = univ`, we get `x ∈ closure A`.\n      have hxA : x ∈ closure A := by\n        simpa [hClosureA] using (by simp : x ∈ (Set.univ : Set X))\n      -- Monotonicity gives `x ∈ closure B`.\n      exact hSubset hxA\n  -- Reformulate the closure equality as density.\n  simpa [Dense] using hClosureB",
+    ""
+  ],
+  "success": true
+}

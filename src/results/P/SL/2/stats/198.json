@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.50712060928345
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5892,
+      "prompt_tokens": 32970,
+      "total_tokens": 38862,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_iUnion_implies_P1_P2_P3\n    {X : Type*} [TopologicalSpace X] {ι : Type*} {s : ι → Set X} :\n    (∀ i, IsOpen (s i)) →\n      (Topology.P1 (⋃ i, s i) ∧\n        Topology.P2 (⋃ i, s i) ∧ Topology.P3 (⋃ i, s i)) := by\n  intro hOpen\n  have hP1 : Topology.P1 (⋃ i, s i) :=\n    Topology.isOpen_iUnion_implies_P1 (s := s) hOpen\n  have hP2 : Topology.P2 (⋃ i, s i) :=\n    Topology.isOpen_iUnion_implies_P2 (s := s) hOpen\n  have hP3 : Topology.P3 (⋃ i, s i) :=\n    Topology.isOpen_iUnion_implies_P3 (s := s) hOpen\n  exact And.intro hP1 (And.intro hP2 hP3)"
+  ],
+  "success": true
+}

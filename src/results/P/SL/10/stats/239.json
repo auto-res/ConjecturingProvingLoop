@@ -1,0 +1,77 @@
+{
+  "times": [
+    63.80091047286987,
+    211.78395581245422,
+    46.872385025024414,
+    108.2338137626648
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4614,
+      "prompt_tokens": 38873,
+      "total_tokens": 43487,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    },
+    {
+      "completion_tokens": 14560,
+      "prompt_tokens": 39017,
+      "total_tokens": 53577,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 3901,
+      "prompt_tokens": 39101,
+      "total_tokens": 43002,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 7475,
+      "prompt_tokens": 39480,
+      "total_tokens": 46955,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_univ_iff_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) ↔ closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    -- Since `interior (closure A) = univ`, the inclusion\n    -- `interior (closure A) ⊆ closure A` yields `univ ⊆ closure A`.\n    have h_sub : (Set.univ : Set X) ⊆ closure A := by\n      simpa [hInt] using\n        (interior_subset : interior (closure A) ⊆ closure A)\n    -- The reverse inclusion is trivial, so we obtain equality.\n    exact Set.Subset.antisymm (Set.Subset_univ _) h_sub\n  · intro hCl\n    -- The existing lemma gives the desired implication.\n    exact\n      Topology.interior_closure_eq_univ_of_dense\n        (X := X) (A := A) hCl",
+    "theorem Topology.closure_eq_univ_of_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (interior A) = (Set.univ : Set X)) :\n    closure A = (Set.univ : Set X) := by\n  apply Set.Subset.antisymm\n  ·\n    intro x _\n    simp\n  ·\n    have h_sub : closure (interior A) ⊆ closure A :=\n      Topology.closure_interior_subset_closure (X := X) (A := A)\n    simpa [h] using h_sub",
+    "theorem Topology.boundary_empty_iff_isOpen_and_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A \\ interior A = (∅ : Set X) ↔ (IsOpen A ∧ IsClosed A) := by\n  classical\n  constructor\n  · intro hBoundary\n    -- Step 1: show `closure A ⊆ interior A`.\n    have h_cl_subset_int : closure A ⊆ interior A := by\n      intro x hxCl\n      by_contra hxInt\n      have : x ∈ closure A \\ interior A := ⟨hxCl, hxInt⟩\n      have : x ∈ (∅ : Set X) := by\n        simpa [hBoundary] using this\n      exact this.elim\n    -- Step 2: show `interior A ⊆ closure A`.\n    have h_int_subset_cl : interior A ⊆ closure A := by\n      intro x hxInt\n      exact subset_closure (interior_subset hxInt)\n    -- Step 3: deduce `interior A = closure A`.\n    have h_int_eq_cl : interior A = closure A :=\n      Set.Subset.antisymm h_cl_subset_int h_int_subset_cl\n    -- Step 4: prove `A = interior A` (and hence `A = closure A`).\n    have hA_eq_int : A = interior A := by\n      apply Set.Subset.antisymm\n      · intro x hxA\n        have : x ∈ closure A := subset_closure hxA\n        exact h_cl_subset_int this\n      · exact interior_subset\n    have hA_eq_cl : A = closure A := by\n      simpa [hA_eq_int] using h_int_eq_cl\n    -- Step 5: obtain openness and closedness of `A`.\n    have hOpen : IsOpen A := by\n      simpa [hA_eq_int] using isOpen_interior\n    have hClosed : IsClosed A := by\n      simpa [hA_eq_cl] using isClosed_closure\n    exact And.intro hOpen hClosed\n  · rintro ⟨hOpen, hClosed⟩\n    -- `A` is both open and closed, hence `interior A = A` and `closure A = A`.\n    have h_int : interior A = A := hOpen.interior_eq\n    have h_cl  : closure A  = A := hClosed.closure_eq\n    simpa [h_int, h_cl, Set.diff_self] using rfl",
+    "theorem Topology.P3_of_isOpen_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : IsOpen (closure A)) : Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x hxA\n  have hx_closure : (x : X) ∈ closure A := subset_closure hxA\n  simpa [h.interior_eq] using hx_closure"
+  ],
+  "success": true
+}

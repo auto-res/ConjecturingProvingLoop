@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.60689353942871
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2382,
+      "prompt_tokens": 3829,
+      "total_tokens": 6211,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_dense : Dense (interior A)) : Topology.P1 A := by\n  unfold Topology.P1\n  intro x hxA\n  have h_closure : closure (interior A) = (Set.univ : Set X) := h_dense.closure_eq\n  have h_univ : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [h_closure] using h_univ"
+  ],
+  "success": true
+}

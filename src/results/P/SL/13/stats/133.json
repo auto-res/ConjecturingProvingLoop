@@ -1,0 +1,60 @@
+{
+  "times": [
+    129.71194171905518,
+    63.36667728424072,
+    24.485238552093506
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9735,
+      "prompt_tokens": 21501,
+      "total_tokens": 31236,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 4120,
+      "prompt_tokens": 21583,
+      "total_tokens": 25703,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 1991,
+      "prompt_tokens": 21662,
+      "total_tokens": 23653,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_inter_subset_inter_interior_closure {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A : Set X) ∩ closure B) ⊆\n      interior (closure A) ∩ interior (closure B) := by\n  intro x hx\n  -- Inclusion into `closure A` gives the first component.\n  have h_subset_A :\n      (closure (A : Set X) ∩ closure B) ⊆ closure A := by\n    intro y hy\n    exact hy.1\n  have hxA : x ∈ interior (closure A) :=\n    (interior_mono h_subset_A) hx\n  -- Inclusion into `closure B` gives the second component.\n  have h_subset_B :\n      (closure (A : Set X) ∩ closure B) ⊆ closure B := by\n    intro y hy\n    exact hy.2\n  have hxB : x ∈ interior (closure B) :=\n    (interior_mono h_subset_B) hx\n  exact ⟨hxA, hxB⟩",
+    "import Mathlib\nimport Aesop\n\nnamespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\ntheorem P2_and_emptyInteriorClosureInterior_implies_empty {A : Set X}\n    (hP2 : Topology.P2 (X:=X) A)\n    (h_empty : interior (closure (interior (A : Set X))) = ∅) :\n    (A : Set X) = ∅ := by\n  -- Any point of `A` would lie in the empty set, a contradiction.\n  have h_subset : (A : Set X) ⊆ (∅ : Set X) := by\n    intro x hxA\n    have : x ∈ interior (closure (interior (A : Set X))) := hP2 hxA\n    simpa [h_empty] using this\n  exact Set.Subset.antisymm h_subset (Set.empty_subset _)\n\nend Topology",
+    "theorem Topology.interior_inter_subset_interior_intersection {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    (interior (A : Set X) ∩ interior B) ⊆ interior (A ∩ B) := by\n  -- Let `x` be in the left-hand set.\n  intro x hx\n  -- The set `interior A ∩ interior B` is open.\n  have h_open : IsOpen ((interior (A : Set X)) ∩ interior B) :=\n    (isOpen_interior : IsOpen (interior (A : Set X))).inter isOpen_interior\n  -- Moreover, it is contained in `A ∩ B`.\n  have h_subset :\n      ((interior (A : Set X)) ∩ interior B : Set X) ⊆ A ∩ B := by\n    intro y hy\n    exact ⟨(interior_subset : interior (A : Set X) ⊆ A) hy.1,\n           (interior_subset : interior B ⊆ B) hy.2⟩\n  -- Since `x` belongs to an open subset of `A ∩ B`, it lies in `interior (A ∩ B)`.\n  have : x ∈ interior (A ∩ B) :=\n    (interior_maximal (s := A ∩ B) h_subset h_open) hx\n  exact this"
+  ],
+  "success": true
+}

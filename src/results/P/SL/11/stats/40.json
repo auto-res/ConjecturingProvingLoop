@@ -1,0 +1,43 @@
+{
+  "times": [
+    35.2595853805542,
+    90.91322875022888
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2198,
+      "prompt_tokens": 5397,
+      "total_tokens": 7595,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    },
+    {
+      "completion_tokens": 5452,
+      "prompt_tokens": 5553,
+      "total_tokens": 11005,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_of_closed_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hP3 : Topology.P3 A) : IsOpen (A : Set X) := by\n  -- From `P3`, and the fact that `A` is closed, obtain `A ⊆ interior A`.\n  have hSub : (A : Set X) ⊆ interior A := by\n    simpa [hClosed.closure_eq] using hP3\n  -- Combine with the trivial inclusion `interior A ⊆ A` to get equality.\n  have hEq : interior A = A := by\n    exact Set.Subset.antisymm interior_subset hSub\n  -- Use the characterization of open sets via their interior.\n  simpa [hEq] using (isOpen_iff_interior_eq).2 hEq",
+    "theorem closure_interior_eq_of_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : closure (interior A) = closure A := by\n  simpa [hA.interior_eq]"
+  ],
+  "success": true
+}

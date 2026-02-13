@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.99798893928528
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3279,
+      "prompt_tokens": 5853,
+      "total_tokens": 9132,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (interior A)) : Topology.P3 A := by\n  -- First, obtain P2 for `A` from the density of `interior A`\n  have hP2 : Topology.P2 A := Topology.P2_of_dense_interior (A := A) hDense\n  -- Then, derive P3 from P2\n  exact Topology.P2_implies_P3 (A := A) hP2"
+  ],
+  "success": true
+}

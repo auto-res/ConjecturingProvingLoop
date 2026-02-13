@@ -1,0 +1,26 @@
+{
+  "times": [
+    437.1834990978241
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 23872,
+      "prompt_tokens": 51420,
+      "total_tokens": 75292,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 23744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_preimage_open {X Y : Type*} [TopologicalSpace X]\n    [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {A : Set Y}\n    (hA : IsOpen A) :\n    interior (f ⁻¹' A) = f ⁻¹' A := by\n  have hOpen : IsOpen (f ⁻¹' A) := hA.preimage hf\n  simpa [hOpen.interior_eq]"
+  ],
+  "success": true
+}

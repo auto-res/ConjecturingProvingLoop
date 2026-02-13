@@ -1,0 +1,60 @@
+{
+  "times": [
+    73.89657783508301,
+    35.617260694503784,
+    211.3980951309204
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6676,
+      "prompt_tokens": 49257,
+      "total_tokens": 55933,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    },
+    {
+      "completion_tokens": 3467,
+      "prompt_tokens": 49366,
+      "total_tokens": 52833,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    },
+    {
+      "completion_tokens": 19382,
+      "prompt_tokens": 49592,
+      "total_tokens": 68974,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem Nat.iterate_succ_of_idempotent {α : Type*} {f : α → α}\n    (h : ∀ x : α, f (f x) = f x) (n : ℕ) (x : α) :\n    Nat.iterate f (n.succ) x = f x := by\n  induction n with\n  | zero =>\n      simp [Nat.iterate]\n  | succ n ih =>\n      change Nat.iterate f (Nat.succ n) (f x) = f x\n      have := ih (f x)\n      simpa [h] using this",
+    "theorem iterate_succ_of_idempotent {α : Type*} (f : α → α)\n    (hf : ∀ x : α, f (f x) = f x) :\n    ∀ n : ℕ, (Nat.iterate f n.succ) = f := by\n  intro n\n  funext x\n  induction n with\n  | zero =>\n      simp [Nat.iterate]\n  | succ n ih =>\n      -- Expand the (n + 2)-fold iterate.\n      have h₁ : (Nat.iterate f (n.succ)) (f x) = f (f x) := by\n        simpa using (congrArg (fun g => g (f x)) ih)\n      -- Use idempotency to simplify `f (f x)`.\n      simpa [Nat.iterate, h₁, hf]",
+    "theorem closure_compl_eq_compl_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure ((A : Set X)ᶜ) = (interior (A : Set X))ᶜ := by\n  classical\n  ext x\n  constructor\n  · intro hxCl\n    -- We show `x ∉ interior A`\n    have hnot : x ∉ interior (A : Set X) := by\n      intro hxInt\n      -- Choose an open neighbourhood of `x` contained in `A`.\n      rcases mem_interior.1 hxInt with ⟨U, hUsubA, hUopen, hxU⟩\n      -- Since `x ∈ closure (Aᶜ)`, the neighbourhood `U` meets `Aᶜ`.\n      have hNon : ((U : Set X) ∩ ((A : Set X)ᶜ)).Nonempty :=\n        (mem_closure_iff).1 hxCl U hUopen hxU\n      rcases hNon with ⟨y, ⟨hyU, hyCompl⟩⟩\n      have hyA : y ∈ (A : Set X) := hUsubA hyU\n      exact hyCompl hyA\n    -- Membership in the complement is definitionally `¬`.\n    exact hnot\n  · intro hxNotInt\n    -- `hxNotInt` is a proof that `x ∉ interior A`\n    have hxCl : x ∈ closure ((A : Set X)ᶜ) := by\n      -- Use the neighbourhood characterisation of the closure.\n      refine (mem_closure_iff).2 ?_\n      intro U hUopen hxU\n      -- We must show `U ∩ Aᶜ` is non‐empty.\n      by_cases hNon : ((U : Set X) ∩ ((A : Set X)ᶜ)).Nonempty\n      · exact hNon\n      · -- If not, then `U ⊆ A`, contradicting `hxNotInt`.\n        have hSub : (U : Set X) ⊆ A := by\n          intro y hyU\n          by_contra hyNotA\n          have hyCompl : y ∈ ((A : Set X)ᶜ) := hyNotA\n          have : ((U : Set X) ∩ ((A : Set X)ᶜ)).Nonempty :=\n            ⟨y, ⟨hyU, hyCompl⟩⟩\n          exact (hNon this).elim\n        have hxInt : x ∈ interior (A : Set X) :=\n          mem_interior.2 ⟨U, hSub, hUopen, hxU⟩\n        exact (hxNotInt hxInt).elim\n    exact hxCl"
+  ],
+  "success": true
+}

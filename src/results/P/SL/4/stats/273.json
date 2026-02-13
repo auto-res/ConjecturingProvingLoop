@@ -1,0 +1,26 @@
+{
+  "times": [
+    17.9826717376709
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1097,
+      "prompt_tokens": 41272,
+      "total_tokens": 42369,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_closure_subset_closure_frontier\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (closure A) ⊆ closure (frontier A) := by\n  intro x hx\n  -- First, `frontier (closure A)` is contained in `frontier A`.\n  have h₁ : frontier (closure A) ⊆ frontier A :=\n    frontier_closure_subset_frontier (X := X) (A := A)\n  -- Next, any point of `frontier A` lies in `closure (frontier A)`.\n  have h₂ : frontier A ⊆ closure (frontier A) := by\n    intro y hy\n    exact subset_closure hy\n  -- Combine the two inclusions to obtain the desired result.\n  exact h₂ (h₁ hx)"
+  ],
+  "success": true
+}

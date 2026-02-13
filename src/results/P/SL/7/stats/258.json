@@ -1,0 +1,26 @@
+{
+  "times": [
+    144.70612239837646
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9221,
+      "prompt_tokens": 40285,
+      "total_tokens": 49506,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_open_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsOpen (B : Set X)) :\n    interior (A ∩ B : Set X) = interior A ∩ B := by\n  ext x\n  constructor\n  · intro hx\n    -- From `x ∈ interior (A ∩ B)` we get `x ∈ interior A`.\n    have hxIntA : x ∈ interior A :=\n      (interior_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)) hx\n    -- And `x ∈ B` because the interior is contained in the set itself.\n    have hxB : x ∈ B := ((interior_subset : interior (A ∩ B) ⊆ A ∩ B) hx).2\n    exact ⟨hxIntA, hxB⟩\n  · intro hx\n    rcases hx with ⟨hxIntA, hxB⟩\n    -- The open set we will use in the maximality argument.\n    have hOpen : IsOpen (interior A ∩ B) :=\n      isOpen_interior.inter hB\n    -- This open set is contained in `A ∩ B`.\n    have hSub : (interior A ∩ B : Set X) ⊆ A ∩ B := by\n      intro y hy\n      exact ⟨(interior_subset : interior A ⊆ A) hy.1, hy.2⟩\n    -- Hence it is contained in the interior of `A ∩ B`.\n    have hIncl : (interior A ∩ B : Set X) ⊆ interior (A ∩ B) :=\n      interior_maximal hSub hOpen\n    -- Since `x ∈ interior A ∩ B`, we obtain `x ∈ interior (A ∩ B)`.\n    exact hIncl ⟨hxIntA, hxB⟩"
+  ],
+  "success": true
+}

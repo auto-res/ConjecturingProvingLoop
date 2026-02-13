@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.31989669799805
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6560,
+      "prompt_tokens": 32164,
+      "total_tokens": 38724,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_sUnion_of_P2\n    {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)}\n    (h𝒜 : ∀ A, A ∈ 𝒜 → Topology.P2 (A : Set X)) :\n    Topology.P2 (⋃₀ 𝒜 : Set X) := by\n  dsimp [Topology.P2] at h𝒜 ⊢\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨A, hA_mem, hxA⟩\n  -- Apply `P2` for the particular set `A`.\n  have hx_intA : x ∈ interior (closure (interior (A : Set X))) :=\n    (h𝒜 A hA_mem) hxA\n  -- Show that this interior is contained in the target interior.\n  have hIncl :\n      closure (interior (A : Set X)) ⊆\n        closure (interior (⋃₀ 𝒜 : Set X)) := by\n    apply closure_mono\n    apply interior_mono\n    intro y hy\n    exact Set.mem_sUnion.2 ⟨A, hA_mem, hy⟩\n  have hIntIncl :\n      interior (closure (interior (A : Set X))) ⊆\n        interior (closure (interior (⋃₀ 𝒜 : Set X))) :=\n    interior_mono hIncl\n  exact hIntIncl hx_intA"
+  ],
+  "success": true
+}

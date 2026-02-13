@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.173022985458374
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3535,
+      "prompt_tokens": 10953,
+      "total_tokens": 14488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_interior_closure_interior_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    Topology.P3 (interior (closure (interior (closure A)))) := by\n  -- The set in question is open, since it is an interior.\n  have hOpen : IsOpen (interior (closure (interior (closure A)))) := isOpen_interior\n  -- Any open set satisfies `P3`.\n  exact Topology.isOpen_P3 (A := interior (closure (interior (closure A)))) hOpen"
+  ],
+  "success": true
+}

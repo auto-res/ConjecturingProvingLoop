@@ -1,0 +1,26 @@
+{
+  "times": [
+    96.04284524917603
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6123,
+      "prompt_tokens": 40969,
+      "total_tokens": 47092,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem union_closures_subset_closure_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A : Set X) ∪ closure (B : Set X) ⊆ closure (A ∪ B : Set X) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      exact\n        (Topology.closure_subset_closure_union_left\n          (X := X) (A := A) (B := B)) hxA\n  | inr hxB =>\n      exact\n        (Topology.closure_subset_closure_union_right\n          (X := X) (A := A) (B := B)) hxB"
+  ],
+  "success": true
+}

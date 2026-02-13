@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.52817511558533
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6100,
+      "prompt_tokens": 55722,
+      "total_tokens": 61822,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_subset_interior_closure_iff_P3_of_isClosed {X : Type*}\n    [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed (A : Set X)) :\n    (closure (A : Set X) \\ interior A ⊆ interior (closure A)) ↔\n      Topology.P3 (X := X) A := by\n  -- `A` is closed, so `closure A = A`.\n  have h_cl : closure (A : Set X) = A := hA_closed.closure_eq\n  have h_int_cl : interior (closure (A : Set X)) = interior A := by\n    simpa [h_cl]\n  ------------------------------------------------------------------\n  --  Step 1: translate the boundary–interior inclusion into\n  --          the openness of `A`.\n  ------------------------------------------------------------------\n  have h_equiv_open :\n      (closure (A : Set X) \\ interior A ⊆ interior (closure A)) ↔\n        IsOpen (A : Set X) := by\n    -- First, rewrite the inclusion entirely in terms of `A`.\n    have h_rewrite :\n        (closure (A : Set X) \\ interior A ⊆ interior (closure A)) ↔\n          (A \\ interior A ⊆ interior A) := by\n      simpa [h_cl, h_int_cl]\n    -- Next, characterize the resulting inclusion.\n    have h_aux :\n        (A \\ interior A ⊆ interior A) ↔ IsOpen (A : Set X) := by\n      constructor\n      · intro h_subset\n        -- Show `interior A = A`, hence `A` is open.\n        have h_eq : interior (A : Set X) = A := by\n          apply Set.Subset.antisymm\n          · exact interior_subset\n          · intro x hxA\n            by_cases hx_int : (x : X) ∈ interior A\n            · exact hx_int\n            ·\n              have hx_boundary : (x : X) ∈ A \\ interior A := ⟨hxA, hx_int⟩\n              exact h_subset hx_boundary\n        simpa [h_eq] using (isOpen_interior : IsOpen (interior (A : Set X)))\n      · intro h_open\n        -- If `A` is open, the boundary `A \\ interior A` is empty,\n        -- so the inclusion holds trivially.\n        have h_int_eq : interior (A : Set X) = A := h_open.interior_eq\n        have : (A \\ interior A : Set X) = ∅ := by\n          simpa [h_int_eq, Set.diff_self]\n        simpa [this]\n    exact h_rewrite.trans h_aux\n  ------------------------------------------------------------------\n  --  Step 2: invoke the closed–set equivalence `P3 ↔ isOpen`.\n  ------------------------------------------------------------------\n  have h_equiv_P3 :\n      IsOpen (A : Set X) ↔ Topology.P3 (X := X) A :=\n    (Topology.P3_iff_isOpen_of_isClosed (X := X) (A := A) hA_closed).symm\n  ------------------------------------------------------------------\n  --  Step 3: put the pieces together.\n  ------------------------------------------------------------------\n  simpa using h_equiv_open.trans h_equiv_P3"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.3452889919281
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8193,
+      "prompt_tokens": 29275,
+      "total_tokens": 37468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_P1_prod_right\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : A.Nonempty)\n    (h : Topology.P1 (A ×ˢ B)) :\n    Topology.P1 B := by\n  dsimp [Topology.P1] at h ⊢\n  intro y hyB\n  rcases hA with ⟨x, hxA⟩\n  -- Form the point `(x, y) ∈ A ×ˢ B`.\n  have hxy_prod : (x, y) ∈ A ×ˢ B := ⟨hxA, hyB⟩\n  -- Apply `P1` for the product.\n  have hxy_closure₁ :\n      (x, y) ∈ closure (interior (A ×ˢ B)) := h hxy_prod\n  -- Rewrite `interior (A ×ˢ B)` via `interior_prod_eq`.\n  have hxy_closure₂ :\n      (x, y) ∈ closure ((interior A) ×ˢ (interior B)) := by\n    simpa [interior_prod_eq] using hxy_closure₁\n  -- Rewrite the closure of a product via `closure_prod_eq`.\n  have hxy_closure₃ :\n      (x, y) ∈ closure (interior A) ×ˢ closure (interior B) := by\n    simpa [closure_prod_eq] using hxy_closure₂\n  -- Extract the second coordinate to conclude `P1` for `B`.\n  exact hxy_closure₃.2"
+  ],
+  "success": true
+}

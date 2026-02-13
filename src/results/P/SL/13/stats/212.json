@@ -1,0 +1,43 @@
+{
+  "times": [
+    181.29969930648804,
+    130.4478838443756
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14778,
+      "prompt_tokens": 37745,
+      "total_tokens": 52523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 10077,
+      "prompt_tokens": 37853,
+      "total_tokens": 47930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_compl_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior ((A : Set X)ᶜ) = (closure (A : Set X))ᶜ := by\n  -- We prove the two inclusions separately and then apply `Subset.antisymm`.\n  apply Set.Subset.antisymm\n  · -- First inclusion: `interior (Aᶜ) ⊆ (closure A)ᶜ`.\n    intro x hx\n    -- Suppose, for a contradiction, that `x ∈ closure A`.\n    by_cases h_in : (x : X) ∈ closure (A : Set X)\n    · -- Show that this leads to a contradiction with `hx`.\n      have h_nonempty :\n          ((interior ((A : Set X)ᶜ)) ∩ (A : Set X) : Set X).Nonempty :=\n        (mem_closure_iff).1 h_in _ isOpen_interior hx\n      -- But the two sets are disjoint, since\n      -- `interior (Aᶜ)` is contained in `Aᶜ`.\n      have h_disjoint :\n          ((interior ((A : Set X)ᶜ)) ∩ (A : Set X) : Set X) = ∅ := by\n        apply Set.eq_empty_iff_forall_not_mem.mpr\n        intro y hy\n        have : (y : X) ∈ (A : Set X)ᶜ :=\n          (interior_subset :\n            interior ((A : Set X)ᶜ) ⊆ (A : Set X)ᶜ) hy.1\n        exact this hy.2\n      have : False := by\n        simpa [h_disjoint] using h_nonempty\n      exact this.elim\n    · -- If `x ∉ closure A`, then `x ∈ (closure A)ᶜ`, as desired.\n      exact h_in\n  · -- Second inclusion: `(closure A)ᶜ ⊆ interior (Aᶜ)`.\n    -- The set `(closure A)ᶜ` is open and contained in `Aᶜ`,\n    -- hence lies in the interior of `Aᶜ`.\n    have h_open : IsOpen ((closure (A : Set X))ᶜ) :=\n      (isClosed_closure : IsClosed (closure (A : Set X))).isOpen_compl\n    have h_subset :\n        ((closure (A : Set X))ᶜ : Set X) ⊆ (A : Set X)ᶜ := by\n      -- Taking complements of the inclusion `A ⊆ closure A`.\n      simpa using\n        Set.compl_subset_compl.mpr (subset_closure : (A : Set X) ⊆ closure A)\n    -- Apply `interior_maximal`.\n    intro x hx\n    have h_interior :\n        ((closure (A : Set X))ᶜ : Set X) ⊆ interior ((A : Set X)ᶜ) :=\n      interior_maximal h_subset h_open\n    exact h_interior hx",
+    "theorem Topology.compl_closure_inter_self_nonempty_iff {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    (((closure (A : Set X))ᶜ) ∩ A : Set X).Nonempty ↔ False := by\n  constructor\n  · intro hne\n    rcases hne with ⟨x, ⟨hx_not_cl, hxA⟩⟩\n    have : (x : X) ∈ closure (A : Set X) := subset_closure hxA\n    exact hx_not_cl this\n  · intro hFalse\n    cases hFalse"
+  ],
+  "success": true
+}

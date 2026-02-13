@@ -1,0 +1,77 @@
+{
+  "times": [
+    76.32089924812317,
+    94.95455527305603,
+    95.21274638175964,
+    35.248358726501465
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5109,
+      "prompt_tokens": 2788,
+      "total_tokens": 7897,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 7772,
+      "prompt_tokens": 2894,
+      "total_tokens": 10666,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    },
+    {
+      "completion_tokens": 5682,
+      "prompt_tokens": 3014,
+      "total_tokens": 8696,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 2088,
+      "prompt_tokens": 3135,
+      "total_tokens": 5223,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (X := X) (closure (interior A)) := by\n  dsimp [Topology.P1]\n  intro x hx\n  have hEq := (Topology.closure_interior_idempotent (X := X) (A := A)).symm\n  simpa [hEq] using hx",
+    "theorem closure_interior_closure_subset {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure A)) ⊆ closure A := by\n  have h : (interior (closure A) : Set X) ⊆ closure A := interior_subset\n  exact closure_mono h",
+    "theorem P1_closure_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P1 (X := X) A) :\n    closure A = closure (interior A) := by\n  apply le_antisymm\n  · -- `closure A ⊆ closure (interior A)`\n    have h₁ : (A : Set X) ⊆ closure (interior A) := by\n      simpa using h\n    exact closure_mono h₁\n  · -- `closure (interior A) ⊆ closure A`\n    have h₂ : (interior A : Set X) ⊆ A := interior_subset\n    exact closure_mono h₂",
+    "theorem closure_interior_subset_closure_interior_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior A) ⊆ closure (interior (closure A)) := by\n  have hsubset : (A : Set X) ⊆ closure A := subset_closure\n  exact Topology.closure_interior_mono hsubset"
+  ],
+  "success": true
+}

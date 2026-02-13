@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.47792315483093
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9357,
+      "prompt_tokens": 25972,
+      "total_tokens": 35329,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_subset_interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) ⊆\n      interior (closure (interior (closure (A : Set X)))) := by\n  -- The set `interior (closure A)` is open.\n  have hOpen : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n  -- And it is contained in `closure (interior (closure A))`.\n  have hSub :\n      (interior (closure (A : Set X)) : Set X) ⊆\n        closure (interior (closure (A : Set X))) :=\n    subset_closure\n  -- Apply the maximality property of `interior`.\n  exact interior_maximal hSub hOpen"
+  ],
+  "success": true
+}

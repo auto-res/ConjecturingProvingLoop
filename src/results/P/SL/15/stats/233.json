@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.40957045555115
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2416,
+      "prompt_tokens": 49796,
+      "total_tokens": 52212,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem denseInterior_iff_interior_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) ↔ interior (closure (interior A)) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    exact\n      interior_closure_interior_eq_univ_of_dense\n        (X := X) (A := A) hDense\n  · intro hIntEq\n    -- From `interior (closure (interior A)) = univ` we deduce\n    -- `closure (interior A) = univ`, hence density.\n    have h_closure_eq : closure (interior A : Set X) = (Set.univ : Set X) := by\n      apply Set.Subset.antisymm\n      · intro x _\n        trivial\n      · have h_sub : (Set.univ : Set X) ⊆ closure (interior A) := by\n          have : (Set.univ : Set X) = interior (closure (interior A)) := by\n            simpa [hIntEq]\n          simpa [this] using interior_subset\n        exact h_sub\n    exact\n      (dense_iff_closure_eq (s := interior A)).2 h_closure_eq"
+  ],
+  "success": true
+}

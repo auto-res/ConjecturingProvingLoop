@@ -1,0 +1,60 @@
+{
+  "times": [
+    145.8051836490631,
+    147.18873381614685,
+    106.44755673408508
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10741,
+      "prompt_tokens": 42004,
+      "total_tokens": 52745,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    },
+    {
+      "completion_tokens": 12157,
+      "prompt_tokens": 42163,
+      "total_tokens": 54320,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    },
+    {
+      "completion_tokens": 8197,
+      "prompt_tokens": 42392,
+      "total_tokens": 50589,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8064,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_union_eq_union_frontiers_of_disjoint_open\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) (hDisj : Disjoint A B) :\n    frontier (A ∪ B) = frontier A ∪ frontier B := by\n  -- We already have one inclusion in the library.\n  have hSub : frontier (A ∪ B) ⊆ frontier A ∪ frontier B :=\n    Topology.frontier_union_subset (A := A) (B := B)\n  -- To prove the reverse inclusion we work pointwise.\n  ext x\n  constructor\n  · intro hx; exact hSub hx\n  · intro hx\n    have hUnionOpen : IsOpen (A ∪ B) := hA.union hB\n    -- Handle the two cases separately.\n    cases hx with\n    | inl hFrontA =>\n        -- Basic facts about `x`.\n        have hClosA : x ∈ closure A := hFrontA.1\n        have hNotIntA : x ∉ interior A := hFrontA.2\n        -- `x` lies in the closure of the union.\n        have hClosUnion : x ∈ closure (A ∪ B) := by\n          have hSub : (A : Set X) ⊆ A ∪ B := by\n            intro y hy; exact Or.inl hy\n          exact (closure_mono hSub) hClosA\n        -- Show that `x` is not in `interior (A ∪ B)`.\n        have hNotIntUnion : x ∉ interior (A ∪ B) := by\n          intro hIntUnion\n          -- Since `A ∪ B` is open, its interior equals itself.\n          have hIntEq : interior (A ∪ B) = A ∪ B := hUnionOpen.interior_eq\n          have hMemUnion : x ∈ A ∪ B := by\n            simpa [hIntEq] using hIntUnion\n          cases hMemUnion with\n          | inl hxA_mem =>\n              -- But `A` is open, hence `interior A = A`.\n              have hxIntA : x ∈ interior A := by\n                simpa [hA.interior_eq] using hxA_mem\n              exact hNotIntA hxIntA\n          | inr hxB_mem =>\n              -- Use the neighbourhood `B` to contradict `x ∈ closure A`.\n              have hNon : ((B : Set X) ∩ A).Nonempty := by\n                exact (mem_closure_iff).1 hClosA B hB hxB_mem\n              rcases hNon with ⟨y, ⟨hyB, hyA⟩⟩\n              have hContr : False := (Set.disjoint_left.1 hDisj) hyA hyB\n              exact hContr.elim\n        exact Or.inl ⟨hClosUnion, hNotIntUnion⟩\n    | inr hFrontB =>\n        -- Symmetric argument for the case `x ∈ frontier B`.\n        have hClosB : x ∈ closure B := hFrontB.1\n        have hNotIntB : x ∉ interior B := hFrontB.2\n        have hClosUnion : x ∈ closure (A ∪ B) := by\n          have hSub : (B : Set X) ⊆ A ∪ B := by\n            intro y hy; exact Or.inr hy\n          exact (closure_mono hSub) hClosB\n        have hNotIntUnion : x ∉ interior (A ∪ B) := by\n          intro hIntUnion\n          have hIntEq : interior (A ∪ B) = A ∪ B := hUnionOpen.interior_eq\n          have hMemUnion : x ∈ A ∪ B := by\n            simpa [hIntEq] using hIntUnion\n          cases hMemUnion with\n          | inl hxA_mem =>\n              -- Neighbourhood `A` contradicts `x ∈ closure B`.\n              have hNon : ((A : Set X) ∩ B).Nonempty := by\n                exact (mem_closure_iff).1 hClosB A hA hxA_mem\n              rcases hNon with ⟨y, ⟨hyA, hyB⟩⟩\n              have hContr : False := (Set.disjoint_left.1 hDisj) hyA hyB\n              exact hContr.elim\n          | inr hxB_mem =>\n              have hxIntB : x ∈ interior B := by\n                simpa [hB.interior_eq] using hxB_mem\n              exact hNotIntB hxIntB\n        exact Or.inr ⟨hClosUnion, hNotIntUnion⟩",
+    "replace theorem Topology.frontier_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∪ B) ⊆ frontier A ∪ frontier B := by\n  intro x hx\n  have hxClos : x ∈ closure (A ∪ B) := hx.1\n  have hxNotInt : x ∉ interior (A ∪ B) := hx.2\n  have hClosUnion : x ∈ closure A ∪ closure B := by\n    simpa [closure_union] using hxClos\n  -- Distinguish the two cases coming from the union in the closure.\n  cases hClosUnion with\n  | inl hClosA =>\n      -- If `x ∈ closure A`, show `x ∉ interior A`.\n      have hNotIntA : x ∉ interior A := by\n        intro hIntA\n        have : (x : X) ∈ interior (A ∪ B) :=\n          (interior_mono (by\n            intro y hy; exact Or.inl hy)) hIntA\n        exact hxNotInt this\n      exact Or.inl ⟨hClosA, hNotIntA⟩\n  | inr hClosB =>\n      -- If `x ∈ closure B`, show `x ∉ interior B`.\n      have hNotIntB : x ∉ interior B := by\n        intro hIntB\n        have : (x : X) ∈ interior (A ∪ B) :=\n          (interior_mono (by\n            intro y hy; exact Or.inr hy)) hIntB\n        exact hxNotInt this\n      exact Or.inr ⟨hClosB, hNotIntB⟩\n\nreplace theorem Topology.frontier_inter_subset_frontier_inter_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∩ B) ⊆\n      (frontier A ∩ closure B) ∪ (frontier B ∩ closure A) := by\n  intro x hx\n  rcases hx with ⟨hxClosInter, hxNotIntInter⟩\n  -- `x` lies in the closures of `A` and `B`.\n  have hxClosA : x ∈ closure A :=\n    (closure_mono (by intro y hy; exact hy.1)) hxClosInter\n  have hxClosB : x ∈ closure B :=\n    (closure_mono (by intro y hy; exact hy.2)) hxClosInter\n  by_cases hIntA : x ∈ interior A\n  · -- Then `x ∉ interior B`, otherwise it would be in `interior (A ∩ B)`.\n    have hNotIntB : x ∉ interior B := by\n      intro hIntB\n      -- `interior A ∩ interior B` is an open neighbourhood of `x`\n      -- contained in `A ∩ B`, contradicting `hxNotIntInter`.\n      have hOpen : IsOpen (interior A ∩ interior B) :=\n        isOpen_interior.inter isOpen_interior\n      have hSub : (interior A ∩ interior B : Set X) ⊆ (A ∩ B) := by\n        intro y hy\n        exact And.intro (interior_subset hy.1) (interior_subset hy.2)\n      have hMem : x ∈ interior (A ∩ B) := by\n        have hIncl : (interior A ∩ interior B : Set X) ⊆ interior (A ∩ B) :=\n          interior_maximal hSub hOpen\n        exact hIncl ⟨hIntA, hIntB⟩\n      exact hxNotIntInter hMem\n    -- Assemble the membership in the right-hand side.\n    have hFrontB : x ∈ frontier B := ⟨hxClosB, hNotIntB⟩\n    exact Or.inr ⟨hFrontB, hxClosA⟩\n  · -- Here `x ∉ interior A`, so `x ∈ frontier A`.\n    have hFrontA : x ∈ frontier A := ⟨hxClosA, hIntA⟩\n    exact Or.inl ⟨hFrontA, hxClosB⟩",
+    "theorem Topology.interior_closure_interior_closure_interior_closure_interior_closure_interior_eq_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))) =\n      interior (closure (interior A)) := by\n  simp [Topology.interior_closure_interior_closure_eq_interior_closure,\n        closure_closure, interior_interior]"
+  ],
+  "success": true
+}

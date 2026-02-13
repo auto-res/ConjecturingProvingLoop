@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.12471199035645
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5908,
+      "prompt_tokens": 40640,
+      "total_tokens": 46548,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iff_P2_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (X:=X) A) :\n    Topology.P3 (X:=X) A ↔ Topology.P2 (X:=X) A := by\n  constructor\n  · intro hP3\n    -- Combine the given `P1` with the assumed `P3` to obtain `P2`.\n    have hPair : Topology.P1 (X:=X) A ∧ Topology.P3 (X:=X) A := ⟨hP1, hP3⟩\n    exact\n      (Topology.P2_iff_P1_and_P3 (X:=X) (A:=A)).2 hPair\n  · intro hP2\n    -- Extract `P3` from `P2`.\n    have hPair : Topology.P1 (X:=X) A ∧ Topology.P3 (X:=X) A :=\n      (Topology.P2_iff_P1_and_P3 (X:=X) (A:=A)).1 hP2\n    exact hPair.2"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.31732177734375
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2222,
+      "prompt_tokens": 6201,
+      "total_tokens": 8423,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_subset_interiorClosure_of_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hP2 : Topology.P2 A) (hAB : A ⊆ B) :\n    A ⊆ interior (closure B) := by\n  -- Upgrade `P2` to `P3`\n  have hP3 : Topology.P3 A :=\n    Topology.P2_imp_P3 (X := X) (A := A) hP2\n  -- Use the existing lemma for `P3`\n  exact\n    Topology.P3_subset_interiorClosure_of_subset (X := X) (A := A) (B := B) hP3 hAB"
+  ],
+  "success": true
+}

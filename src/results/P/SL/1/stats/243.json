@@ -1,0 +1,43 @@
+{
+  "times": [
+    107.22058248519897,
+    62.44283580780029
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7579,
+      "prompt_tokens": 37288,
+      "total_tokens": 44867,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    },
+    {
+      "completion_tokens": 4108,
+      "prompt_tokens": 37529,
+      "total_tokens": 41637,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_diff_of_isOpen_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsClosed B) :\n    Topology.P2 (A \\ B) := by\n  -- The set `A \\ B` is open because it is the difference of an open set and a closed set.\n  have hOpen : IsOpen (A \\ B) := hA.diff hB\n  -- Any open set satisfies `P2`.\n  exact Topology.P2_of_isOpen (A := A \\ B) hOpen",
+    "theorem Topology.interior_subset_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ closure (interior A) := by\n  intro x hx\n  exact subset_closure hx"
+  ],
+  "success": true
+}

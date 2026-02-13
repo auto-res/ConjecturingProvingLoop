@@ -1,0 +1,43 @@
+{
+  "times": [
+    271.73687171936035,
+    40.20143008232117
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 22847,
+      "prompt_tokens": 24385,
+      "total_tokens": 47232,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 22464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    },
+    {
+      "completion_tokens": 3087,
+      "prompt_tokens": 24568,
+      "total_tokens": 27655,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_subset_interior_diff_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior ((A \\ B) : Set X) ⊆ interior (A : Set X) \\ closure (B : Set X) := by\n  intro x hx\n  -- `x` lies in `interior A` because `A \\ B ⊆ A`.\n  have hIntA : (x : X) ∈ interior (A : Set X) := by\n    have h_sub : ((A \\ B) : Set X) ⊆ (A : Set X) := Set.diff_subset _ _\n    exact (interior_mono h_sub) hx\n  -- Show that `x` is not in `closure B`.\n  have hNotClB : (x : X) ∉ closure (B : Set X) := by\n    intro hxCl\n    -- Obtain an open neighbourhood `U` of `x` contained in `A \\ B`.\n    rcases (mem_interior_iff_mem_nhds).1 hx with ⟨U, hU_open, hxU, hU_sub⟩\n    -- Since `x` is in the closure of `B`, this neighbourhood meets `B`.\n    have h_nonempty := (mem_closure_iff.1 hxCl) U hU_open hxU\n    rcases h_nonempty with ⟨y, hyU, hyB⟩\n    -- But `U ⊆ A \\ B`, hence `y ∉ B`, a contradiction.\n    exact (hU_sub hyU).2 hyB\n  exact And.intro hIntA hNotClB",
+    "theorem interior_interior_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (interior (closure (A : Set X))) = interior (closure (A : Set X)) := by\n  simpa [interior_interior]"
+  ],
+  "success": true
+}

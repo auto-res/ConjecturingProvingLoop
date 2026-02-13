@@ -1,0 +1,26 @@
+{
+  "times": [
+    13.341246128082275
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1313,
+      "prompt_tokens": 56128,
+      "total_tokens": 57441,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_closure_frontier_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A →\n      closure (frontier (A : Set X)) ⊆\n        closure (interior (closure (A : Set X))) := by\n  intro hP3\n  -- From `P3`, the frontier of `A` is already contained in\n  -- `closure (interior (closure A))`.\n  have hSub :\n      (frontier (A : Set X) : Set X) ⊆\n        closure (interior (closure (A : Set X))) :=\n    Topology.P3_implies_frontier_subset_closure_interior_closure\n      (A := A) hP3\n  -- Taking closures preserves inclusions; simplify the right‐hand side.\n  simpa [closure_closure] using closure_mono hSub"
+  ],
+  "success": true
+}

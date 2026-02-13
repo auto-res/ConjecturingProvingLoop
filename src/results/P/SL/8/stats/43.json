@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.86430382728577
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5401,
+      "prompt_tokens": 5134,
+      "total_tokens": 10535,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_imp_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_open : IsOpen A) :\n    Topology.P1 (closure A) := by\n  -- From openness we get `P2 A`\n  have hP2 : Topology.P2 A :=\n    Topology.isOpen_imp_P2 (X := X) (A := A) hA_open\n  -- And `P2 A` implies `P1 (closure A)`\n  exact Topology.P2_imp_P1_closure (X := X) (A := A) hP2"
+  ],
+  "success": true
+}

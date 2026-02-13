@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.23097443580627
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5602,
+      "prompt_tokens": 57604,
+      "total_tokens": 63206,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57216
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_inter_four_of_open {X : Type*} [TopologicalSpace X] {A B C D : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X))\n    (hC : IsOpen (C : Set X)) (hD : IsOpen (D : Set X)) :\n    Topology.P3 (A ∩ B ∩ C ∩ D) := by\n  -- The four‐fold intersection of open sets is open.\n  have hOpen : IsOpen ((A ∩ B ∩ C ∩ D) : Set X) :=\n    (((hA.inter hB).inter hC).inter hD)\n  -- Every open set satisfies `P3`.\n  exact\n    (Topology.isOpen_has_all_Ps\n      (X := X)\n      (A := (A ∩ B ∩ C ∩ D : Set X))\n      hOpen).2.2"
+  ],
+  "success": true
+}

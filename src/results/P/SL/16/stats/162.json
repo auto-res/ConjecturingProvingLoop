@@ -1,0 +1,26 @@
+{
+  "times": [
+    168.15881276130676
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9793,
+      "prompt_tokens": 28847,
+      "total_tokens": 38640,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_interior_closure_interior_closure_interior_eq_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (closure (interior A)))))) =\n      interior (closure (interior A)) := by\n  -- First, simplify the innermost pattern using the existing lemma with\n  -- `A := interior (closure (interior A))`.\n  have h₁ :\n      interior (closure (interior (closure (interior (closure (interior A)))))) =\n        interior (closure (interior (closure (interior A)))) := by\n    simpa using\n      (Topology.interior_closure_interior_closure_eq_interior_closure\n        (X := X) (A := interior (closure (interior A))))\n  -- Next, collapse the remaining expression once more with `A := interior A`.\n  have h₂ :\n      interior (closure (interior (closure (interior A)))) =\n        interior (closure (interior A)) := by\n    simpa using\n      (Topology.interior_closure_interior_closure_eq_interior_closure\n        (X := X) (A := interior A))\n  -- Combine the two equalities to obtain the desired result.\n  simpa [h₂] using h₁"
+  ],
+  "success": true
+}

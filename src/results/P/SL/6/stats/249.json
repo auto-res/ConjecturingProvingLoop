@@ -1,0 +1,60 @@
+{
+  "times": [
+    136.95375990867615,
+    90.44237470626831,
+    103.95426273345947
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9743,
+      "prompt_tokens": 39494,
+      "total_tokens": 49237,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 4148,
+      "prompt_tokens": 39618,
+      "total_tokens": 43766,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 5723,
+      "prompt_tokens": 39748,
+      "total_tokens": 45471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_inter_of_P1_and_open\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP1A : Topology.P1 (A : Set X)) (hOpenB : IsOpen (B : Set X)) :\n    Topology.P1 (A ∩ B) := by\n  dsimp [Topology.P1] at hP1A ⊢\n  intro x hx\n  rcases hx with ⟨hxA, hxB⟩\n  -- `x` belongs to the closure of `interior A` by `P1` for `A`.\n  have hClA : x ∈ closure (interior (A : Set X)) := hP1A hxA\n  -- We now prove that `x` belongs to the closure of `interior (A ∩ B)`.\n  have : x ∈ closure (interior (A ∩ B : Set X)) := by\n    -- Use the neighborhood characterization of the closure.\n    refine (mem_closure_iff).2 ?_\n    intro U hOpenU hxU\n    -- Consider the open neighborhood `U ∩ B` of `x`.\n    have hOpenUB : IsOpen (U ∩ B) := hOpenU.inter hOpenB\n    have hxUB : x ∈ U ∩ B := And.intro hxU hxB\n    -- Since `x ∈ closure (interior A)`, this neighborhood meets `interior A`.\n    have hNonempty : ((U ∩ B) ∩ interior (A : Set X)).Nonempty :=\n      (mem_closure_iff.1 hClA) hOpenUB hxUB\n    rcases hNonempty with ⟨y, ⟨hyU, hyB⟩, hyIntA⟩\n    -- Express `interior (A ∩ B)` using openness of `B`.\n    have hIntEq :\n        interior (A ∩ B : Set X) = interior (A : Set X) ∩ B :=\n      interior_inter_of_isOpen_right (A := A) (B := B) hOpenB\n    have hyIntAB : y ∈ interior (A ∩ B : Set X) := by\n      have : y ∈ interior (A : Set X) ∩ B := And.intro hyIntA hyB\n      simpa [hIntEq] using this\n    -- The point `y` witnesses non‐emptiness of `U ∩ interior (A ∩ B)`.\n    exact ⟨y, And.intro hyU hyIntAB⟩\n  exact this",
+    "theorem closure_union_closure_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A ∪ closure (B : Set X) : Set X) = closure (A ∪ B) := by\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    have hSub :\n        (A ∪ closure (B : Set X) : Set X) ⊆ closure (A ∪ B) := by\n      intro x hx\n      cases hx with\n      | inl hAx =>\n          -- `x ∈ A ⊆ A ∪ B`\n          have : x ∈ (A ∪ B : Set X) := Or.inl hAx\n          exact (subset_closure this)\n      | inr hClB =>\n          -- `closure B ⊆ closure (A ∪ B)`\n          have hIncl : closure (B : Set X) ⊆ closure (A ∪ B) := by\n            apply closure_mono\n            intro y hy\n            exact Or.inr hy\n          exact hIncl hClB\n    exact closure_mono hSub\n  · -- `⊇` direction\n    have hSub : (A ∪ B : Set X) ⊆ A ∪ closure (B : Set X) := by\n      intro x hx\n      cases hx with\n      | inl hAx =>\n          exact Or.inl hAx\n      | inr hBx =>\n          -- `x ∈ B ⊆ closure B`\n          exact Or.inr (subset_closure hBx)\n    exact closure_mono hSub",
+    "theorem all_Ps_iff_P2_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    (Topology.P1 (A : Set X) ∧ Topology.P2 A ∧ Topology.P3 A) ↔ Topology.P2 A := by\n  constructor\n  · intro h\n    exact h.2.1\n  · intro hP2\n    have hP1 : Topology.P1 (A : Set X) :=\n      Topology.P2_implies_P1_of_closed (A := A) hA hP2\n    have hP3 : Topology.P3 (A : Set X) :=\n      Topology.P2_implies_P3_of_closed (A := A) hA hP2\n    exact And.intro hP1 (And.intro hP2 hP3)"
+  ],
+  "success": true
+}

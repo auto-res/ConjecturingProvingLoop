@@ -1,0 +1,26 @@
+{
+  "times": [
+    128.00097584724426
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8025,
+      "prompt_tokens": 37726,
+      "total_tokens": 45751,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem boundary_eq_closure_inter_closure_compl {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) \\ interior (A : Set X) =\n      closure (A : Set X) ∩ closure ((Aᶜ) : Set X) := by\n  classical\n  -- We prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- First inclusion: from left to right.\n    intro x hx\n    rcases hx with ⟨hx_clA, hx_notInt⟩\n    -- `x` already belongs to `closure A`.\n    have hx_clAc : (x : X) ∈ closure ((Aᶜ) : Set X) := by\n      -- Use the identity `closure (Aᶜ) = (interior A)ᶜ`.\n      have h_eq := closure_compl_eq_complement_interior (A := A)\n      -- Since `x ∉ interior A`, we have `x ∈ (interior A)ᶜ`.\n      have : (x : X) ∈ (interior (A : Set X))ᶜ := hx_notInt\n      simpa [h_eq] using this\n    exact And.intro hx_clA hx_clAc\n  · -- Second inclusion: from right to left.\n    intro x hx\n    rcases hx with ⟨hx_clA, hx_clAc⟩\n    -- Translate membership in `closure (Aᶜ)` to non-membership in `interior A`.\n    have hx_notInt : (x : X) ∉ interior (A : Set X) := by\n      -- Via `closure (Aᶜ) = (interior A)ᶜ`.\n      have h_eq := closure_compl_eq_complement_interior (A := A)\n      have : (x : X) ∈ (interior (A : Set X))ᶜ := by\n        simpa [h_eq] using hx_clAc\n      exact this\n    exact And.intro hx_clA hx_notInt"
+  ],
+  "success": true
+}

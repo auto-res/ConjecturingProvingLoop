@@ -1,0 +1,94 @@
+{
+  "times": [
+    19.53629159927368,
+    148.85147213935852,
+    188.4107747077942,
+    192.9363944530487,
+    90.29368495941162
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1334,
+      "prompt_tokens": 2273,
+      "total_tokens": 3607,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 9652,
+      "prompt_tokens": 2403,
+      "total_tokens": 12055,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 12142,
+      "prompt_tokens": 2529,
+      "total_tokens": 14671,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 13094,
+      "prompt_tokens": 2659,
+      "total_tokens": 15753,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 5374,
+      "prompt_tokens": 3084,
+      "total_tokens": 8458,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P3 (A := interior A) := by\n  dsimp [Topology.P3]\n  intro x hx\n  have h_subset : interior A ⊆ interior (closure (interior A)) :=\n    interior_mono (Set.subset_closure : interior A ⊆ closure (interior A))\n  exact h_subset hx",
+    "theorem Topology.P3_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P3 (A := interior A) := by\n  dsimp [Topology.P3]\n  intro x hx\n  have h_sub : interior A ⊆ interior (closure (interior A)) :=\n    interior_mono (subset_closure : interior A ⊆ closure (interior A))\n  exact h_sub hx",
+    "theorem Topology.P3_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P3 (A := interior A) := by\n  dsimp [Topology.P3]\n  intro x hx\n  have h : interior A ⊆ interior (closure (interior A)) :=\n    interior_mono (Set.subset_closure (s := interior A))\n  exact h hx",
+    "theorem subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    A ⊆ closure A :=\n  Set.subset_closure\n\ntheorem Topology.P1_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 (A := A)) (hB : Topology.P1 (A := B)) :\n    Topology.P1 (A := A ∪ B) := by\n  dsimp [Topology.P1] at *\n  intro x hx_union\n  cases hx_union with\n  | inl hxA =>\n      have hx_closureA : x ∈ closure (interior A) := hA hxA\n      have h_subset : interior A ⊆ interior (A ∪ B) :=\n        interior_mono (Set.subset_union_left A B)\n      have h_closure_subset : closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono h_subset\n      exact h_closure_subset hx_closureA\n  | inr hxB =>\n      have hx_closureB : x ∈ closure (interior B) := hB hxB\n      have h_subset : interior B ⊆ interior (A ∪ B) :=\n        interior_mono (Set.subset_union_right A B)\n      have h_closure_subset : closure (interior B) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono h_subset\n      exact h_closure_subset hx_closureB",
+    "theorem Topology.subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    A ⊆ closure A := by\n  exact Set.subset_closure"
+  ],
+  "success": true
+}

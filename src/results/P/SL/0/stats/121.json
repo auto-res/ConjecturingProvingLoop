@@ -1,0 +1,43 @@
+{
+  "times": [
+    74.96467137336731,
+    260.3629403114319
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5277,
+      "prompt_tokens": 20552,
+      "total_tokens": 25829,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 16658,
+      "prompt_tokens": 20644,
+      "total_tokens": 37302,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iInter_of_open {X ι : Type*} [TopologicalSpace X] [Finite ι]\n    {F : ι → Set X} (hF : ∀ i, IsOpen (F i)) :\n    Topology.P2 (⋂ i, F i) := by\n  -- A finite intersection of open sets is open.\n  have hOpen : IsOpen (⋂ i, F i) := isOpen_iInter hF\n  -- Every open set satisfies `P2`.\n  exact (Topology.isOpen_implies_P2 (X := X) (A := ⋂ i, F i)) hOpen",
+    ""
+  ],
+  "success": true
+}

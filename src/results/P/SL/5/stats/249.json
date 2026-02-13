@@ -1,0 +1,26 @@
+{
+  "times": [
+    130.58006525039673
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7734,
+      "prompt_tokens": 45081,
+      "total_tokens": 52815,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_compl_eq_empty {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) ∩ interior ((A : Set X)ᶜ) = (∅ : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hIntA, hIntAc⟩\n    have hA : x ∈ (A : Set X) := interior_subset hIntA\n    have hAc : x ∈ ((A : Set X)ᶜ) := interior_subset hIntAc\n    have hContr : False := hAc hA\n    exact False.elim hContr\n  · intro hx\n    cases hx"
+  ],
+  "success": true
+}

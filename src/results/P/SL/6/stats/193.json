@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.22335481643677
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5174,
+      "prompt_tokens": 29853,
+      "total_tokens": 35027,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem union_interior_closure_interior_subset_interior_closure_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior (A : Set X))) ∪\n        interior (closure (interior B)) ⊆\n      interior (closure (interior (A ∪ B))) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- Show that `interior (closure (interior A))` is included in the target.\n      have hIncl :\n          closure (interior (A : Set X))\n            ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        apply interior_mono\n        intro y hy\n        exact Or.inl hy\n      have hIntIncl :\n          interior (closure (interior (A : Set X)))\n            ⊆ interior (closure (interior (A ∪ B))) :=\n        interior_mono hIncl\n      exact hIntIncl hxA\n  | inr hxB =>\n      -- Symmetric argument for the `B` component.\n      have hIncl :\n          closure (interior (B : Set X))\n            ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        apply interior_mono\n        intro y hy\n        exact Or.inr hy\n      have hIntIncl :\n          interior (closure (interior (B : Set X)))\n            ⊆ interior (closure (interior (A ∪ B))) :=\n        interior_mono hIncl\n      exact hIntIncl hxB"
+  ],
+  "success": true
+}

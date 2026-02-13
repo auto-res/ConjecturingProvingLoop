@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.51297736167908
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3948,
+      "prompt_tokens": 49918,
+      "total_tokens": 53866,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_eq_closure_inter_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    closure (interior (A ∩ B)) = closure (A ∩ B) := by\n  -- Since `A` and `B` are open, so is `A ∩ B`, and its interior is itself.\n  have hInt : interior (A ∩ B) = A ∩ B := (hA.inter hB).interior_eq\n  -- Rewriting with `hInt` yields the desired equality.\n  simpa [hInt]"
+  ],
+  "success": true
+}

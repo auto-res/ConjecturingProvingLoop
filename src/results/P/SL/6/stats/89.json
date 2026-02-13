@@ -1,0 +1,26 @@
+{
+  "times": [
+    81.24207949638367
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5544,
+      "prompt_tokens": 13166,
+      "total_tokens": 18710,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem nonempty_interior_of_nonempty_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → A.Nonempty → (interior (A : Set X)).Nonempty := by\n  intro hP2 hNon\n  -- Derive `P1` from `P2`.\n  have hP1 : Topology.P1 (A : Set X) :=\n    Topology.P2_implies_P1 (A := A) hP2\n  -- Apply the existing lemma for `P1`.\n  exact nonempty_interior_of_nonempty_P1 (A := A) hP1 hNon"
+  ],
+  "success": true
+}

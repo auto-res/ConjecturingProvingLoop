@@ -1,0 +1,26 @@
+{
+  "times": [
+    114.00776696205139
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7223,
+      "prompt_tokens": 59342,
+      "total_tokens": 66565,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58112
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iUnion\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} [Inhabited ι]\n    {A : ι → Set X} (hA : ∀ i, Dense (A i)) :\n    Dense (⋃ i, A i) := by\n  -- We will show that `closure (⋃ i, A i) = univ`.\n  have h_subset : (Set.univ : Set X) ⊆ closure (⋃ i, A i : Set X) := by\n    -- First, `univ ⊆ ⋃ i, closure (A i)` because each `closure (A i)` is `univ`.\n    have h_univ_to_iUnion : (Set.univ : Set X) ⊆ ⋃ i, closure (A i) := by\n      intro x _\n      classical\n      -- Choose an arbitrary index.\n      let i₀ : ι := Classical.arbitrary ι\n      -- Using density, `closure (A i₀) = univ`, hence `x ∈ closure (A i₀)`.\n      have hx : (x : X) ∈ closure (A i₀) := by\n        simpa [(hA i₀).closure_eq] using (by simp : (x : X) ∈ (Set.univ : Set X))\n      exact Set.mem_iUnion.2 ⟨i₀, hx⟩\n    -- Next, apply monotonicity: `⋃ i, closure (A i) ⊆ closure (⋃ i, A i)`.\n    exact\n      Set.Subset.trans h_univ_to_iUnion\n        (Topology.iUnion_closure_subset_closure_iUnion (X := X) (A := A))\n  -- We now have both inclusions, so the closures are equal.\n  have h_closure_eq :\n      closure (⋃ i, A i : Set X) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro x _; simp\n    · exact h_subset\n  -- Finally, translate the closure condition into density.\n  exact (dense_iff_closure_eq).2 h_closure_eq"
+  ],
+  "success": true
+}

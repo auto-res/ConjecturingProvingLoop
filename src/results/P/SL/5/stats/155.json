@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.58131146430969
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5805,
+      "prompt_tokens": 26196,
+      "total_tokens": 32001,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_closure_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P1 (X := X) A := by\n  -- First obtain `P2` from the density assumption.\n  have hP2 : Topology.P2 (X := X) A :=\n    Topology.P2_of_closure_dense_interior (X := X) (A := A) h\n  -- Then derive `P1` from `P2`.\n  exact Topology.P2_implies_P1 (X := X) (A := A) hP2"
+  ],
+  "success": true
+}

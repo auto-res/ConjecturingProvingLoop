@@ -1,0 +1,43 @@
+{
+  "times": [
+    93.78131484985352,
+    115.88027882575989
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6383,
+      "prompt_tokens": 51143,
+      "total_tokens": 57526,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 6968,
+      "prompt_tokens": 51215,
+      "total_tokens": 58183,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_compl_eq_boundary {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure ((A : Set X)ᶜ) \\ interior ((A : Set X)ᶜ) =\n      closure (A : Set X) \\ interior A := by\n  -- Relate `closure` and `interior` of complements to those of the original set.\n  have h_cl :\n      closure ((A : Set X)ᶜ) = (interior (A : Set X))ᶜ :=\n    Topology.closure_compl_eq_compl_interior (X := X) (A := A)\n  have h_int :\n      interior ((A : Set X)ᶜ) = (closure (A : Set X))ᶜ :=\n    Topology.interior_compl_eq_compl_closure (X := X) (A := A)\n  -- Rewrite and simplify the boundary of the complement.\n  calc\n    closure ((A : Set X)ᶜ) \\ interior ((A : Set X)ᶜ)\n        = (interior (A : Set X))ᶜ ∩ closure (A : Set X) := by\n          simp [h_cl, h_int, Set.diff_eq, Set.compl_compl, Set.inter_comm]\n    _ = closure (A : Set X) ∩ (interior (A : Set X))ᶜ := by\n          simpa [Set.inter_comm]\n    _ = closure (A : Set X) \\ interior (A : Set X) := by\n          simpa [Set.diff_eq, Set.inter_comm]",
+    "theorem Set.compl_compl {α : Type*} (s : Set α) : sᶜᶜ = s := by\n  ext x\n  simp"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    110.29098391532898
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6553,
+      "prompt_tokens": 13545,
+      "total_tokens": 20098,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13184
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_nonempty_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → A.Nonempty → (interior A).Nonempty := by\n  intro hP2 hA\n  rcases hA with ⟨x, hxA⟩\n  -- `P2` supplies a point of `interior (closure (interior A))`.\n  have hx : x ∈ interior (closure (interior A)) := hP2 hxA\n  classical\n  -- Either `interior A` is nonempty, in which case we are done, or it is empty,\n  -- in which case we derive a contradiction from `hx`.\n  by_cases hInt : (interior A).Nonempty\n  · exact hInt\n  ·\n    have hIntEmpty : interior A = (∅ : Set X) := by\n      simpa [Set.not_nonempty_iff_eq_empty] using hInt\n    have : x ∈ (∅ : Set X) := by\n      simpa [hIntEmpty, closure_empty, interior_empty] using hx\n    exact False.elim (Set.not_mem_empty _ this)"
+  ],
+  "success": true
+}

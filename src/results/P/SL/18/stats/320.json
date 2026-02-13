@@ -1,0 +1,43 @@
+{
+  "times": [
+    208.46413111686707,
+    193.69817185401917
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12297,
+      "prompt_tokens": 52748,
+      "total_tokens": 65045,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    },
+    {
+      "completion_tokens": 10706,
+      "prompt_tokens": 53184,
+      "total_tokens": 63890,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_subset_closure_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) \\ closure (B : Set X) ⊆\n      closure (A \\ B : Set X) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxNotClB⟩\n  -- We will show that every open neighbourhood of `x` meets `A \\ B`.\n  have h : x ∈ closure (A \\ B : Set X) := by\n    refine (mem_closure_iff).2 ?_\n    intro U hU_open hxU\n    -- Take the open neighbourhood of `x` that avoids `B`.\n    let V : Set X := (closure (B : Set X))ᶜ\n    have hV_open : IsOpen V := isClosed_closure.isOpen_compl\n    have hxV : x ∈ V := hxNotClB\n    -- Intersect the two neighbourhoods.\n    have hW_open : IsOpen (U ∩ V) := hU_open.inter hV_open\n    have hxW   : x ∈ U ∩ V       := ⟨hxU, hxV⟩\n    -- Since `x ∈ closure A`, the intersection meets `A`.\n    have hNon : ((U ∩ V) ∩ A : Set X).Nonempty :=\n      (mem_closure_iff).1 hxClA (U ∩ V) hW_open hxW\n    rcases hNon with ⟨y, ⟨⟨hyU, hyV⟩, hyA⟩⟩\n    -- `y ∉ B`, because `y ∈ V = (closure B)ᶜ` and `B ⊆ closure B`.\n    have hyNotB : y ∉ B := by\n      intro hyB\n      have : y ∈ closure (B : Set X) := subset_closure hyB\n      have : y ∈ (closure (B : Set X)) := this\n      -- But `y ∈ V = (closure B)ᶜ`, contradiction.\n      have : y ∈ (closure (B : Set X))ᶜ := hyV\n      exact this.2 ‹y ∈ closure (B : Set X)›\n    -- `y` witnesses that `U` meets `A \\ B`.\n    exact ⟨y, ⟨hyU, ⟨hyA, hyNotB⟩⟩⟩\n  exact h",
+    ""
+  ],
+  "success": true
+}

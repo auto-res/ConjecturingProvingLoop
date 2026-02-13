@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.58257865905762
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3351,
+      "prompt_tokens": 9944,
+      "total_tokens": 13295,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9088
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (A ∩ B)) ⊆ closure (interior A) ∩ closure (interior B) := by\n  intro x hx\n  have hSubA : interior (A ∩ B) ⊆ interior A := interior_mono (by\n    intro z hz; exact hz.1)\n  have hxA : x ∈ closure (interior A) := (closure_mono hSubA) hx\n  have hSubB : interior (A ∩ B) ⊆ interior B := interior_mono (by\n    intro z hz; exact hz.2)\n  have hxB : x ∈ closure (interior B) := (closure_mono hSubB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

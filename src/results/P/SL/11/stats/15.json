@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.92552399635315
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2353,
+      "prompt_tokens": 1820,
+      "total_tokens": 4173,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_P1_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (Topology.P1 A ∧ Topology.P3 A) → Topology.P2 A := by\n  rintro ⟨hP1, hP3⟩\n  have hEq : closure A = closure (interior A) :=\n    (Topology.closure_eq_closure_interior_of_P1 hP1)\n  exact Topology.P2_of_P3_and_closure_eq_closure_interior hP3 hEq\n\ntheorem P2_iff_P1_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A ↔ (Topology.P1 A ∧ Topology.P3 A) := by\n  constructor\n  · intro hP2\n    exact Topology.P2_implies_P1_and_P3 hP2\n  · intro hPair\n    exact P2_of_P1_and_P3 hPair"
+  ],
+  "success": true
+}

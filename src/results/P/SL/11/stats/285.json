@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.546062707901
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3158,
+      "prompt_tokens": 46426,
+      "total_tokens": 49584,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ interior B) ⊆ closure (A ∩ B) := by\n  -- First, observe the straightforward set inclusion.\n  have hSub : (A ∩ interior B : Set X) ⊆ A ∩ B := by\n    intro x hx\n    exact ⟨hx.1, (interior_subset : interior B ⊆ B) hx.2⟩\n  -- Taking closures preserves inclusions.\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

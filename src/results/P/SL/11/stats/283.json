@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.068527936935425
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4633,
+      "prompt_tokens": 45988,
+      "total_tokens": 50621,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_closure_right {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∪ closure B) = closure (A ∪ B) := by\n  apply subset_antisymm\n  ·\n    -- First inclusion: `closure (A ∪ closure B) ⊆ closure (A ∪ B)`.\n    have hSub : (A ∪ closure B : Set X) ⊆ closure (A ∪ B) := by\n      intro x hx\n      cases hx with\n      | inl hA =>\n          -- `x ∈ A`, hence `x ∈ closure (A ∪ B)` by closure monotonicity.\n          exact subset_closure (Or.inl hA)\n      | inr hClB =>\n          -- `x ∈ closure B`, and `closure B ⊆ closure (A ∪ B)`.\n          have : closure B ⊆ closure (A ∪ B) :=\n            closure_mono (Set.subset_union_right : (B : Set X) ⊆ A ∪ B)\n          exact this hClB\n    have : closure (A ∪ closure B) ⊆ closure (closure (A ∪ B)) :=\n      closure_mono hSub\n    simpa [closure_closure] using this\n  ·\n    -- Second inclusion: `closure (A ∪ B) ⊆ closure (A ∪ closure B)`.\n    have hSub : (A ∪ B : Set X) ⊆ A ∪ closure B := by\n      intro x hx\n      cases hx with\n      | inl hA => exact Or.inl hA\n      | inr hB => exact Or.inr (subset_closure hB)\n    exact (closure_mono hSub)"
+  ],
+  "success": true
+}

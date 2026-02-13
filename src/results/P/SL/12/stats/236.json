@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.72052240371704
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3016,
+      "prompt_tokens": 44417,
+      "total_tokens": 47433,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P3_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (X := X) (interior A) ↔ Topology.P3 (X := X) (interior A) := by\n  have h_open : IsOpen (interior (A : Set X)) := isOpen_interior\n  simpa using\n    (Topology.P1_iff_P3_of_isOpen (X := X) (A := interior A) h_open)"
+  ],
+  "success": true
+}

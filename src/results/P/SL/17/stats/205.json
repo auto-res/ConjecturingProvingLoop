@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.23757648468018
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5188,
+      "prompt_tokens": 36072,
+      "total_tokens": 41260,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_of_discrete {X : Type*} [TopologicalSpace X]\n    [DiscreteTopology X] {A : Set X} :\n    frontier A = (∅ : Set X) := by\n  -- In a discrete topology every set is open, hence its interior is itself.\n  have hInt : interior A = A := (isOpen_discrete _).interior_eq\n  -- Likewise, every set is closed, so its closure is itself.\n  have hClos : closure A = A := by\n    have hClosed : IsClosed A := isClosed_discrete _\n    simpa using hClosed.closure_eq\n  -- Substituting these equalities into the definition of `frontier`\n  -- yields the empty set.\n  simp [frontier, hInt, hClos, Set.diff_self]"
+  ],
+  "success": true
+}

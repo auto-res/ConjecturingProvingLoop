@@ -1,0 +1,43 @@
+{
+  "times": [
+    20.61855173110962,
+    289.46912932395935
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1770,
+      "prompt_tokens": 34030,
+      "total_tokens": 35800,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 18338,
+      "prompt_tokens": 34145,
+      "total_tokens": 52483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_univ_of_interior_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) →\n    closure A = (Set.univ : Set X) := by\n  intro h_int\n  -- First, show `Set.univ ⊆ closure A`.\n  have h_sub : (Set.univ : Set X) ⊆ closure A := by\n    intro x hx\n    -- Rewrite `hx` using `h_int` to see that `x ∈ interior (closure A)`.\n    have : x ∈ interior (closure A) := by\n      simpa [h_int] using hx\n    -- The interior is contained in the closure.\n    exact interior_subset this\n  -- Conclude the desired equality via `Subset.antisymm`.\n  apply Set.Subset.antisymm\n  · exact Set.Subset_univ _\n  · exact h_sub",
+    "theorem Topology.interior_closure_preimage_subset\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {f : X → Y} (hf : Continuous f) {B : Set Y} :\n    interior (closure (f ⁻¹' B)) ⊆ f ⁻¹' closure B := by\n  intro x hx\n  -- From `hx`, we know `x` lies in the interior of `closure (f ⁻¹' B)`.\n  have hx_cl : x ∈ closure (f ⁻¹' B) := interior_subset hx\n  -- Apply the previously proven inclusion for closures.\n  have h_subset :\n      closure (f ⁻¹' B) ⊆ f ⁻¹' closure B :=\n    Topology.continuous_closure_preimage_subset (X := X) (Y := Y)\n      (f := f) hf (B := B)\n  exact h_subset hx_cl"
+  ],
+  "success": true
+}

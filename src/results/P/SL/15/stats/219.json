@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.7897276878357
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5826,
+      "prompt_tokens": 45933,
+      "total_tokens": 51759,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_prod_eq_univ_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    [Nonempty X] [Nonempty Y] {A : Set X} {B : Set Y} :\n    interior (closure (A ×ˢ B)) = (Set.univ : Set (X × Y)) ↔\n      (interior (closure A) = (Set.univ : Set X)) ∧\n        (interior (closure B) = (Set.univ : Set Y)) := by\n  -- A convenient equality relating the two sides.\n  have hProd :\n      interior (closure (A ×ˢ B)) =\n        interior (closure A) ×ˢ interior (closure B) :=\n    interior_closure_prod (X := X) (Y := Y) (A := A) (B := B)\n  constructor\n  · intro hUniv\n    -- First, show `interior (closure A) = univ`.\n    have hA_sub : (Set.univ : Set X) ⊆ interior (closure A) := by\n      intro x _\n      classical\n      let y : Y := Classical.arbitrary Y\n      have hxy_in :\n          ((x, y) : X × Y) ∈ interior (closure (A ×ˢ B)) := by\n        -- This follows from `hUniv`.\n        have : ((x, y) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n          trivial\n        simpa [hUniv] using this\n      have hxy_prod :\n          ((x, y) : X × Y) ∈\n            interior (closure A) ×ˢ interior (closure B) := by\n        simpa [hProd] using hxy_in\n      exact (Set.mem_prod.1 hxy_prod).1\n    have hIntA_eq :\n        interior (closure A) = (Set.univ : Set X) := by\n      apply Set.Subset.antisymm\n      · intro _ _; trivial\n      · exact hA_sub\n    -- Next, show `interior (closure B) = univ`.\n    have hB_sub : (Set.univ : Set Y) ⊆ interior (closure B) := by\n      intro y _\n      classical\n      let x : X := Classical.arbitrary X\n      have hxy_in :\n          ((x, y) : X × Y) ∈ interior (closure (A ×ˢ B)) := by\n        have : ((x, y) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n          trivial\n        simpa [hUniv] using this\n      have hxy_prod :\n          ((x, y) : X × Y) ∈\n            interior (closure A) ×ˢ interior (closure B) := by\n        simpa [hProd] using hxy_in\n      exact (Set.mem_prod.1 hxy_prod).2\n    have hIntB_eq :\n        interior (closure B) = (Set.univ : Set Y) := by\n      apply Set.Subset.antisymm\n      · intro _ _; trivial\n      · exact hB_sub\n    exact ⟨hIntA_eq, hIntB_eq⟩\n  · rintro ⟨hA, hB⟩\n    -- Use `hProd` together with the two equalities.\n    calc\n      interior (closure (A ×ˢ B))\n          = interior (closure A) ×ˢ interior (closure B) := hProd\n      _ = (Set.univ : Set X) ×ˢ (Set.univ : Set Y) := by\n          simpa [hA, hB]\n      _ = (Set.univ : Set (X × Y)) := by\n          simpa using\n            (Set.univ_prod_univ : ((Set.univ : Set X) ×ˢ (Set.univ : Set Y)) =\n              (Set.univ : Set (X × Y)))"
+  ],
+  "success": true
+}

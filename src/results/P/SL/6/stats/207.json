@@ -1,0 +1,26 @@
+{
+  "times": [
+    14.429535865783691
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1283,
+      "prompt_tokens": 32664,
+      "total_tokens": 33947,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_implies_P1_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (A : Set X)) → Topology.P1 (closure A) := by\n  intro hP2\n  have hP1 : Topology.P1 (closure (A : Set X)) :=\n    Topology.P2_implies_P1 (A := closure (A : Set X)) hP2\n  simpa using hP1"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.0575840473175
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4946,
+      "prompt_tokens": 43639,
+      "total_tokens": 48585,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem nonempty_iff_nonempty_interior_of_open\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen (A : Set X)) :\n    (A : Set X).Nonempty ↔ (interior (A : Set X)).Nonempty := by\n  have hEq : interior (A : Set X) = A := hA.interior_eq\n  constructor\n  · intro hNon\n    simpa [hEq] using hNon\n  · intro hInt\n    simpa [hEq] using hInt"
+  ],
+  "success": true
+}

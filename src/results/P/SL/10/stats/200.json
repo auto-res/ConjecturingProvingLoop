@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.71927237510681
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4279,
+      "prompt_tokens": 32398,
+      "total_tokens": 36677,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iInter_subset\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    closure (⋂ i, A i) ⊆ ⋂ i, closure (A i) := by\n  intro x hx\n  -- Show that `x` belongs to the closure of each `A i`.\n  have hx_i : ∀ i, x ∈ closure (A i) := by\n    intro i\n    -- The intersection is contained in each component `A i`.\n    have h_subset : (⋂ j, A j) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Taking closures preserves inclusions.\n    have h_closure : closure (⋂ j, A j) ⊆ closure (A i) :=\n      closure_mono h_subset\n    exact h_closure hx\n  -- Package the pointwise memberships into an intersection.\n  exact Set.mem_iInter.2 hx_i"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    244.3606116771698
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 16258,
+      "prompt_tokens": 43673,
+      "total_tokens": 59931,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_closure_subset_interior_diff {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) \\ closure B ⊆ interior (A \\ B : Set X) := by\n  intro x hx\n  rcases hx with ⟨hx_intA, hx_not_clB⟩\n  -- Define two auxiliary open sets.\n  have hU_open : IsOpen (interior (A : Set X)) := isOpen_interior\n  have hV_open : IsOpen ((closure B)ᶜ : Set X) := by\n    simpa using (isClosed_closure (A := B)).isOpen_compl\n  -- Their intersection is an open neighbourhood of `x`.\n  have hW_open :\n      IsOpen (interior (A : Set X) ∩ (closure B)ᶜ : Set X) :=\n    hU_open.inter hV_open\n  have hxW :\n      x ∈ (interior (A : Set X) ∩ (closure B)ᶜ : Set X) :=\n    And.intro hx_intA hx_not_clB\n  -- Show that this neighbourhood is contained in `A \\ B`.\n  have hW_subset :\n      (interior (A : Set X) ∩ (closure B)ᶜ : Set X) ⊆ (A \\ B : Set X) := by\n    intro y hy\n    have hyA : y ∈ A :=\n      (interior_subset : interior (A : Set X) ⊆ A) hy.1\n    have hy_notB : y ∉ B := by\n      intro hBy\n      have : y ∈ closure B := subset_closure hBy\n      exact hy.2 this\n    exact And.intro hyA hy_notB\n  -- Apply maximality of the interior to deduce the claim.\n  exact\n    (interior_maximal hW_subset hW_open) hxW"
+  ],
+  "success": true
+}

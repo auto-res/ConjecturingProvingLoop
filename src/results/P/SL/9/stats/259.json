@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.5642294883728
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2647,
+      "prompt_tokens": 44413,
+      "total_tokens": 47060,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_of_isClopen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hA_open : IsOpen A) :\n    frontier (A : Set X) = (∅ : Set X) := by\n  have h_closure : closure (A : Set X) = A := hA_closed.closure_eq\n  have h_interior : interior (A : Set X) = A := hA_open.interior_eq\n  simp [frontier, h_closure, h_interior, Set.diff_self]"
+  ],
+  "success": true
+}

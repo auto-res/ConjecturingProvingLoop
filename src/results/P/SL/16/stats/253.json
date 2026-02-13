@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.33104968070984
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5673,
+      "prompt_tokens": 44010,
+      "total_tokens": 49683,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.nonempty_of_interior_closure_nonempty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (interior (closure A)).Nonempty → A.Nonempty := by\n  rintro ⟨x, hxInt⟩\n  -- `x` lies in `closure A`.\n  have hxCl : x ∈ closure A := interior_subset hxInt\n  -- The set `interior (closure A)` is an open neighbourhood of `x`\n  -- contained in `closure A`.\n  have hOpen : IsOpen (interior (closure A)) := isOpen_interior\n  -- By the characterization of points in the closure, this neighbourhood\n  -- meets `A`, providing the desired element.\n  rcases (mem_closure_iff.1 hxCl) (interior (closure A)) hOpen hxInt with\n    ⟨y, _, hyA⟩\n  exact ⟨y, hyA⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.24836587905884
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3797,
+      "prompt_tokens": 5467,
+      "total_tokens": 9264,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : closure (A : Set X) = (Set.univ : Set X)) :\n    Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x hxA\n  -- The interior of `closure A` is the whole space since `closure A = univ`.\n  have hInt : interior (closure (A : Set X)) = (Set.univ : Set X) := by\n    simpa [hDense] using interior_univ\n  -- Hence any point, in particular `x`, lies in `interior (closure A)`.\n  have : x ∈ interior (closure (A : Set X)) := by\n    simpa [hInt] using (by\n      simp : x ∈ (Set.univ : Set X))\n  exact this"
+  ],
+  "success": true
+}

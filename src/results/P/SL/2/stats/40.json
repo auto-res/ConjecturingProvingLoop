@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.346922636032104
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1710,
+      "prompt_tokens": 5947,
+      "total_tokens": 7657,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_closure_interior_eq_closure_and_P3 {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A ↔ (closure (interior A) = closure A ∧ Topology.P3 A) := by\n  -- We will shuttle between the existing equivalences\n  -- `P2 A ↔ P1 A ∧ P3 A` and `P1 A ↔ closure (interior A) = closure A`.\n  have h₁ := (Topology.P2_iff_P1_and_P3 (A := A))\n  have h₂ := (Topology.P1_iff_closure_interior_eq_closure (A := A))\n  constructor\n  · intro hP2\n    -- From `P2`, obtain `P1` and `P3`.\n    rcases (h₁).1 hP2 with ⟨hP1, hP3⟩\n    -- Turn `P1` into the closure equality.\n    have hEq : closure (interior A) = closure A := (h₂).1 hP1\n    exact ⟨hEq, hP3⟩\n  · rintro ⟨hEq, hP3⟩\n    -- The closure equality gives `P1`.\n    have hP1 : Topology.P1 A := (h₂).2 hEq\n    -- Combine `P1` and `P3` to recover `P2`.\n    exact (h₁).2 ⟨hP1, hP3⟩"
+  ],
+  "success": true
+}

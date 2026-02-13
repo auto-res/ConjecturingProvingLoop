@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.00374436378479
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4157,
+      "prompt_tokens": 53499,
+      "total_tokens": 57656,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_nine {X : Type*} [TopologicalSpace X]\n    {A B C D E F G H I : Set X} :\n    closure (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I : Set X) =\n      closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E ∪\n        closure F ∪ closure G ∪ closure H ∪ closure I := by\n  -- First, distribute `closure` over the last union.\n  have h₁ :\n      closure ((A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H) ∪ I : Set X) =\n        closure (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H : Set X) ∪ closure I := by\n    simpa using\n      closure_union\n        (A := (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H : Set X))\n        (B := I)\n  -- Next, apply the existing eight‐set lemma.\n  have h₂ :\n      closure (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H : Set X) =\n        closure A ∪ closure B ∪ closure C ∪ closure D ∪\n          closure E ∪ closure F ∪ closure G ∪ closure H := by\n    simpa using\n      closure_union_eight (X := X)\n        (A := A) (B := B) (C := C) (D := D)\n        (E := E) (F := F) (G := G) (H := H)\n  -- Assemble the equalities and reassociate unions.\n  calc\n    closure (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I : Set X) =\n        closure ((A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H) ∪ I : Set X) := by\n          simpa [Set.union_assoc]\n    _ = closure (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H : Set X) ∪ closure I := by\n          simpa using h₁\n    _ = (closure A ∪ closure B ∪ closure C ∪ closure D ∪\n          closure E ∪ closure F ∪ closure G ∪ closure H) ∪ closure I := by\n          simpa [h₂]\n    _ = closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E ∪\n          closure F ∪ closure G ∪ closure H ∪ closure I := by\n          simp [Set.union_assoc]"
+  ],
+  "success": true
+}

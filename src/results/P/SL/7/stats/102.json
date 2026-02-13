@@ -1,0 +1,43 @@
+{
+  "times": [
+    115.87591433525085,
+    118.62171816825867
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7454,
+      "prompt_tokens": 14608,
+      "total_tokens": 22062,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    },
+    {
+      "completion_tokens": 7191,
+      "prompt_tokens": 14730,
+      "total_tokens": 21921,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosure_subset_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n  exact closure_mono (interior_subset (s := closure (A : Set X)))",
+    "theorem Topology.closureInterior_subset_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) : closure (interior A) ⊆ closure (A : Set X) := by\n  simpa using (closure_mono (interior_subset : interior A ⊆ A))"
+  ],
+  "success": true
+}

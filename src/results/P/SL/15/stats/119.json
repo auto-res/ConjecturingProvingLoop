@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.396934032440186
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4368,
+      "prompt_tokens": 18618,
+      "total_tokens": 22986,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    Topology.P1 A → Topology.P1 B → Topology.P1 (A ×ˢ B) := by\n  intro hA hB\n  dsimp [Topology.P1] at hA hB ⊢\n  intro p hp\n  rcases hp with ⟨hpA, hpB⟩\n  -- Apply the `P1` property coordinate-wise.\n  have hA' : p.1 ∈ closure (interior A) := hA hpA\n  have hB' : p.2 ∈ closure (interior B) := hB hpB\n  -- Identify the target closure set using `interior_prod_eq` and `closure_prod_eq`.\n  have h_closure_prod :\n      closure (interior (A ×ˢ B)) =\n        closure (interior A) ×ˢ closure (interior B) := by\n    simpa [interior_prod_eq] using\n      (closure_prod_eq (s := interior A) (t := interior B))\n  -- Conclude the desired membership.\n  have : (p : X × Y) ∈ closure (interior A) ×ˢ closure (interior B) :=\n    ⟨hA', hB'⟩\n  simpa [h_closure_prod] using this"
+  ],
+  "success": true
+}

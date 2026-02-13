@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.66573214530945
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4823,
+      "prompt_tokens": 42189,
+      "total_tokens": 47012,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_symmDiff_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier ((A \\ B) ∪ (B \\ A)) ⊆ frontier A ∪ frontier B := by\n  -- First, use the union lemma for the frontier.\n  have h₁ :\n      frontier ((A \\ B) ∪ (B \\ A)) ⊆\n        frontier (A \\ B) ∪ frontier (B \\ A) :=\n    Topology.frontier_union_subset (A := A \\ B) (B := B \\ A)\n  -- Next, control each summand with the corresponding difference lemma.\n  have h₂ : frontier (A \\ B) ⊆ frontier A ∪ frontier B :=\n    Topology.frontier_diff_subset (A := A) (B := B)\n  have h₃ : frontier (B \\ A) ⊆ frontier A ∪ frontier B := by\n    -- Swap the roles of `A` and `B` in the previous lemma.\n    simpa [Set.union_comm] using\n      (Topology.frontier_diff_subset (A := B) (B := A))\n  -- Assemble the three inclusions.\n  intro x hx\n  have hx' : x ∈ frontier (A \\ B) ∪ frontier (B \\ A) := h₁ hx\n  cases hx' with\n  | inl hA =>\n      exact h₂ hA\n  | inr hB =>\n      exact h₃ hB"
+  ],
+  "success": true
+}

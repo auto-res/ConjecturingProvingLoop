@@ -1,0 +1,26 @@
+{
+  "times": [
+    68.1087236404419
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5139,
+      "prompt_tokens": 23367,
+      "total_tokens": 28506,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosure_eq_closure_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (A : Set X))) :\n    closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  -- Since `closure A` is open, its interior is itself.\n  have hInt : interior (closure (A : Set X)) = closure (A : Set X) :=\n    hOpen.interior_eq\n  -- Rewrite using this fact and simplify with idempotency of `closure`.\n  calc\n    closure (interior (closure (A : Set X)))\n        = closure (closure (A : Set X)) := by\n          simpa [hInt]\n    _ = closure (A : Set X) := by\n          simpa [closure_closure]"
+  ],
+  "success": true
+}

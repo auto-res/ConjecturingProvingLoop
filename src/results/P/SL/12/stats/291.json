@@ -1,0 +1,26 @@
+{
+  "times": [
+    125.1230366230011
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7479,
+      "prompt_tokens": 56456,
+      "total_tokens": 63935,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_three {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} :\n    closure (A ∪ B ∪ C : Set X) = closure A ∪ closure B ∪ closure C := by\n  simpa [Set.union_assoc] using\n    calc\n      closure (A ∪ B ∪ C : Set X)\n          = closure (A ∪ B) ∪ closure C := by\n              simpa [Set.union_assoc] using closure_union (A ∪ B) C\n      _ = (closure A ∪ closure B) ∪ closure C := by\n              simpa using\n                congrArg (fun s : Set X => s ∪ closure C) (closure_union A B)"
+  ],
+  "success": true
+}

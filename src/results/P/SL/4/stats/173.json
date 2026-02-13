@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.6105535030365
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6491,
+      "prompt_tokens": 24199,
+      "total_tokens": 30690,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_interior_imp_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hxA\n  -- The closure of `interior A` is the whole space.\n  have hClosureInt : (closure (interior A) : Set X) = Set.univ := hDense.closure_eq\n  -- Hence `closure A` must also be the whole space.\n  have hSubset : closure (interior A) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  have hUnivSub : (Set.univ : Set X) ⊆ closure A := by\n    simpa [hClosureInt] using hSubset\n  have hClosureA : (closure A : Set X) = Set.univ := by\n    apply subset_antisymm\n    · exact Set.subset_univ _\n    · exact hUnivSub\n  -- Therefore `interior (closure A)` is also the whole space.\n  have hIntClosureA : interior (closure A) = (Set.univ : Set X) :=\n    (interior_closure_eq_univ_iff (A := A)).2 hClosureA\n  -- Conclude the desired membership.\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [hIntClosureA] using this"
+  ],
+  "success": true
+}

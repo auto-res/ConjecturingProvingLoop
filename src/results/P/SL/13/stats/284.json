@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.542964220047
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5494,
+      "prompt_tokens": 50351,
+      "total_tokens": 55845,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_interior_subset_closure_interior_union {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure ((interior (A : Set X)) ∪ interior B) ⊆\n      closure (interior (A ∪ B)) := by\n  -- First, establish the basic inclusion on the non-closed level.\n  have h_subset :\n      (interior (A : Set X) ∪ interior B : Set X) ⊆ interior (A ∪ B) := by\n    intro x hx\n    cases hx with\n    | inl hA =>\n        exact\n          (Topology.interior_subset_interior_union_left\n            (X := X) (A := A) (B := B)) hA\n    | inr hB =>\n        exact\n          (Topology.interior_subset_interior_union_right\n            (X := X) (A := A) (B := B)) hB\n  -- Taking closures preserves inclusions.\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.69606566429138
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4725,
+      "prompt_tokens": 21599,
+      "total_tokens": 26324,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_P2_P3_finite_iff_isOpen_of_T1\n    {X : Type*} [TopologicalSpace X] [T1Space X] {F : Set X}\n    (hF : F.Finite) :\n    (Topology.P1 F ∧ Topology.P2 F ∧ Topology.P3 F) ↔ IsOpen F := by\n  have hP1 := Topology.P1_finite_iff_isOpen_of_T1 (F := F) hF\n  have hP2 := Topology.P2_finite_iff_isOpen_of_T1 (F := F) hF\n  have hP3 := Topology.P3_finite_iff_isOpen_of_T1 (F := F) hF\n  constructor\n  · intro hTriple\n    exact (hP1).1 hTriple.1\n  · intro hOpen\n    exact ⟨(hP1).2 hOpen, (hP2).2 hOpen, (hP3).2 hOpen⟩"
+  ],
+  "success": true
+}

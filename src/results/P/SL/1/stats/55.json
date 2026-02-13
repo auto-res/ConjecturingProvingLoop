@@ -1,0 +1,43 @@
+{
+  "times": [
+    52.74095368385315,
+    125.75720405578613
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3856,
+      "prompt_tokens": 8300,
+      "total_tokens": 12156,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    },
+    {
+      "completion_tokens": 9487,
+      "prompt_tokens": 8432,
+      "total_tokens": 17919,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply Set.Subset.antisymm\n  ·\n    -- This inclusion is an instance of a previously proved lemma.\n    have h :\n        interior (closure (interior (closure A))) ⊆\n          interior (closure (closure A)) :=\n      interior_closure_interior_subset_interior_closure (A := closure A)\n    simpa [closure_closure] using h\n  ·\n    -- For the reverse inclusion we use monotonicity of `interior`.\n    have hsubset :\n        interior (closure A) ⊆ closure (interior (closure A)) := by\n      -- `interior (closure A)` is clearly contained in its closure.\n      simpa using\n        (subset_closure :\n          interior (closure A) ⊆ closure (interior (closure A)))\n    have h :\n        interior (closure A) ⊆ interior (closure (interior (closure A))) :=\n      interior_mono hsubset\n    exact h",
+    "theorem closure_interior_univ_eq_univ {X : Type*} [TopologicalSpace X] :\n    closure (interior (Set.univ : Set X)) = (Set.univ : Set X) := by\n  simpa [interior_univ, closure_univ]"
+  ],
+  "success": true
+}

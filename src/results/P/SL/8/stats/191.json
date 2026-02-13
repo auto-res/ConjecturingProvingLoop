@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.237722158432007
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2106,
+      "prompt_tokens": 28026,
+      "total_tokens": 30132,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem closed_P2_imp_closureInterior_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hP2 : Topology.P2 A) :\n    closure (interior A) = A := by\n  -- First, use closedness together with `P2` to obtain `P1`.\n  have hP1 : Topology.P1 A :=\n    closed_P2_imp_P1 (X := X) (A := A) hA_closed hP2\n  -- Translate `P1` into the desired equality via the closed‐set characterization.\n  exact\n    (closed_P1_iff_closure_interior_eq (X := X) (A := A) hA_closed).1 hP1"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.794337034225464
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2797,
+      "prompt_tokens": 11711,
+      "total_tokens": 14508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_P1_and_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) ↔ (Topology.P1 A ∧ Topology.P3 A) := by\n  constructor\n  · intro hP2\n    exact And.intro\n      (Topology.P2_implies_P1 (A := A) hP2)\n      (Topology.P2_implies_P3 (A := A) hP2)\n  · rintro ⟨hP1, hP3⟩\n    exact Topology.P1_and_P3_implies_P2 (A := A) hP1 hP3"
+  ],
+  "success": true
+}

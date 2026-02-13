@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.64446520805359
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2868,
+      "prompt_tokens": 50207,
+      "total_tokens": 53075,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Set.inter_distrib_right {α : Type*} {s t u : Set α} :\n    (t ∪ u) ∩ s = (t ∩ s) ∪ (u ∩ s) := by\n  calc\n    (t ∪ u) ∩ s = s ∩ (t ∪ u) := by\n      simpa [Set.inter_comm]\n    _ = (s ∩ t) ∪ (s ∩ u) := by\n      simpa using (Set.inter_distrib_left (s := s) (t := t) (u := u))\n    _ = (t ∩ s) ∪ (u ∩ s) := by\n      simpa [Set.inter_comm, Set.inter_left_comm]"
+  ],
+  "success": true
+}

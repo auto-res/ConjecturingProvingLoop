@@ -1,0 +1,26 @@
+{
+  "times": [
+    9.073994398117065
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 880,
+      "prompt_tokens": 506,
+      "total_tokens": 1386,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_subset_interior_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (closure (interior A)) ⊆ interior (closure A) := by\n  intro x hx\n  have hsubset : closure (interior A) ⊆ closure A := closure_mono interior_subset\n  exact (interior_mono hsubset) hx"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    35.074562549591064,
+    64.26938581466675,
+    116.83317422866821
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4435,
+      "prompt_tokens": 19957,
+      "total_tokens": 24392,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 4884,
+      "prompt_tokens": 20063,
+      "total_tokens": 24947,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 7009,
+      "prompt_tokens": 20137,
+      "total_tokens": 27146,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → Topology.P1 (closure A) := by\n  intro hP3\n  dsimp [Topology.P1]\n  intro x hx\n  -- Rewrite `hx` using the equality of closures furnished by `P3`.\n  have h_cl_eq :=\n    Topology.closure_eq_closure_interior_closure_of_P3 (X := X) (A := A) hP3\n  have hx' : x ∈ closure (interior (closure A)) := by\n    simpa [h_cl_eq] using hx\n  -- Use `interior_closure_closure_eq` to identify the target set.\n  simpa [Topology.interior_closure_closure_eq (X := X) (A := A)] using hx'",
+    "theorem Set.compl_compl {α : Type*} (s : Set α) : sᶜᶜ = (s : Set α) := by\n  classical\n  ext x\n  by_cases hx : x ∈ s\n  · simp [hx]\n  · simp [hx]",
+    "theorem Topology.closure_interior_subset_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    closure (interior A) ⊆ A := by\n  have h_subset : interior A ⊆ A := interior_subset\n  exact closure_minimal h_subset hA"
+  ],
+  "success": true
+}

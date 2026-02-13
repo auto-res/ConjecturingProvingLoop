@@ -1,0 +1,43 @@
+{
+  "times": [
+    127.56220436096191,
+    83.44228076934814
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12098,
+      "prompt_tokens": 19634,
+      "total_tokens": 31732,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 5440,
+      "prompt_tokens": 19948,
+      "total_tokens": 25388,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_subset_union_closure_interior {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (interior ((A ∪ B) : Set X)) ⊆\n      closure (interior A) ∪ closure (interior B) := by\n  intro x hx\n  by_cases hA : x ∈ closure (interior A)\n  · exact Or.inl hA\n  · by_cases hB : x ∈ closure (interior B)\n    · exact Or.inr hB\n    ·\n      -- `x` lies in neither `closure (interior A)` nor `closure (interior B)`,\n      -- leading to a contradiction with `hx`.\n      have hUA : x ∈ ((closure (interior A))ᶜ : Set X) := by\n        simpa [hA] using (by\n          have : x ∈ closure (interior A) = False := by simpa [hA]\n          simpa [hA])\n      have hUB : x ∈ ((closure (interior B))ᶜ : Set X) := by\n        simpa [hB] using (by\n          have : x ∈ closure (interior B) = False := by simpa [hB]\n          simpa [hB])\n      -- Define the open neighbourhood `U` of `x`.\n      let U : Set X := (closure (interior A))ᶜ ∩ (closure (interior B))ᶜ\n      have hU_open : IsOpen U := by\n        have h1 : IsOpen ((closure (interior A))ᶜ : Set X) := by\n          simpa using\n            (isClosed_closure (s := interior A)).isOpen_compl\n        have h2 : IsOpen ((closure (interior B))ᶜ : Set X) := by\n          simpa using\n            (isClosed_closure (s := interior B)).isOpen_compl\n        simpa [U] using h1.inter h2\n      have hxU : (x : X) ∈ U := by\n        have : x ∈ (closure (interior A))ᶜ := hUA\n        have : x ∈ (closure (interior B))ᶜ ∧ x ∈ (closure (interior A))ᶜ := by\n          exact And.intro hUB hUA\n        simpa [U, And.comm] using this\n      -- The set `U` avoids both `interior A` and `interior B`.\n      have h_disjoint :\n          (U ∩ interior ((A ∪ B) : Set X) : Set X).Nonempty → False := by\n        intro hNE\n        rcases hNE with ⟨y, ⟨hyU, hyInt⟩⟩\n        -- Decompose `y ∈ interior (A ∪ B)` into cases.\n        have hy' : y ∈ interior A ∪ interior B := by\n          simpa [interior_union] using hyInt\n        cases hy' with\n        | inl hyA =>\n            have : y ∈ closure (interior A) := subset_closure hyA\n            have : y ∈ (closure (interior A))ᶜ := by\n              have : y ∈ U := hyU\n              simpa [U] using this.left\n            exact (this) this_1\n        | inr hyB =>\n            have : y ∈ closure (interior B) := subset_closure hyB\n            have : y ∈ (closure (interior B))ᶜ := by\n              have : y ∈ U := hyU\n              simpa [U] using this.right\n            exact (this) this_1\n      -- Apply the closure criterion to `U` to obtain the contradiction.\n      have h_closure :=\n        (Set.mem_closure_iff).1 hx U hU_open hxU\n      exact h_disjoint h_closure\n",
+    "theorem Topology.interior_closure_empty {X : Type*} [TopologicalSpace X] :\n    interior (closure (∅ : Set X)) = (∅ : Set X) := by\n  simp"
+  ],
+  "success": true
+}

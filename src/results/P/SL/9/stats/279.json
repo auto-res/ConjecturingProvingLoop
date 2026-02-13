@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.621257305145264
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2661,
+      "prompt_tokens": 48004,
+      "total_tokens": 50665,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_compl_interior_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : Dense (A : Set X)) :\n    frontier (A : Set X) = (interior A)ᶜ := by\n  classical\n  -- `frontier A = closure A \\ interior A`, and density gives `closure A = univ`.\n  have h₁ : frontier (A : Set X) = (Set.univ : Set X) \\ interior A := by\n    simpa [frontier, hA.closure_eq]\n  -- Rewrite `univ \\ interior A` as the complement of `interior A`.\n  have h₂ : (Set.univ : Set X) \\ interior A = (interior A)ᶜ := by\n    ext x\n    by_cases hx : x ∈ interior A <;> simp [hx]\n  simpa [h₁, h₂]"
+  ],
+  "success": true
+}

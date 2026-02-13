@@ -1,0 +1,43 @@
+{
+  "times": [
+    119.64782166481018,
+    102.3129050731659
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7587,
+      "prompt_tokens": 19829,
+      "total_tokens": 27416,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 7194,
+      "prompt_tokens": 19998,
+      "total_tokens": 27192,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_eq_union_closure_interior {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (interior ((A ∪ B) : Set X)) =\n      closure (interior A) ∪ closure (interior B) := by\n  simpa [interior_union, closure_union]",
+    "theorem Topology.closure_interior_union_subset_union_closure {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (interior ((A ∪ B) : Set X)) ⊆\n      closure (A : Set X) ∪ closure (B : Set X) := by\n  -- `interior (A ∪ B)` is contained in `A ∪ B`\n  have h_subset : interior ((A ∪ B) : Set X) ⊆ (A ∪ B) := interior_subset\n  -- Taking closures preserves this inclusion\n  have h_closure :\n      closure (interior ((A ∪ B) : Set X)) ⊆ closure (A ∪ B) :=\n    closure_mono h_subset\n  -- Rewrite `closure (A ∪ B)` as `closure A ∪ closure B`\n  simpa [closure_union] using h_closure"
+  ],
+  "success": true
+}

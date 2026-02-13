@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.03026366233826
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2365,
+      "prompt_tokens": 56841,
+      "total_tokens": 59206,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem eq_empty_of_P1_and_empty_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (A : Set X) →\n      interior (A : Set X) = (∅ : Set X) →\n      A = (∅ : Set X) := by\n  intro hP1 hIntEmpty\n  ext x\n  constructor\n  · intro hxA\n    have h : (x : X) ∈ closure (interior (A : Set X)) := hP1 hxA\n    have : (x : X) ∈ (∅ : Set X) := by\n      simpa [hIntEmpty, closure_empty] using h\n    exact this\n  · intro hxEmpty\n    cases hxEmpty"
+  ],
+  "success": true
+}

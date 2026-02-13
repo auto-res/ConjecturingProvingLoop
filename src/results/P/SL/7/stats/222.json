@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.10367226600647
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7565,
+      "prompt_tokens": 34109,
+      "total_tokens": 41674,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosure_inter_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (closure (A ∩ B))) ⊆\n      closure (interior (closure A)) ∩ closure (interior (closure B)) := by\n  intro x hx\n  -- First inclusion toward the `A` component.\n  have hA : closure (interior (closure (A ∩ B)))\n      ⊆ closure (interior (closure A)) := by\n    apply closure_mono\n    apply interior_mono\n    -- `closure (A ∩ B)` is contained in `closure A`.\n    have : (closure (A ∩ B) : Set X) ⊆ closure A := by\n      apply closure_mono\n      exact Set.inter_subset_left\n    exact this\n  -- Second inclusion toward the `B` component.\n  have hB : closure (interior (closure (A ∩ B)))\n      ⊆ closure (interior (closure B)) := by\n    apply closure_mono\n    apply interior_mono\n    -- `closure (A ∩ B)` is contained in `closure B`.\n    have : (closure (A ∩ B) : Set X) ⊆ closure B := by\n      apply closure_mono\n      exact Set.inter_subset_right\n    exact this\n  exact ⟨hA hx, hB hx⟩"
+  ],
+  "success": true
+}

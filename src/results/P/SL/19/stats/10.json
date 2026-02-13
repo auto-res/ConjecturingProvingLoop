@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.88829445838928
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5266,
+      "prompt_tokens": 1440,
+      "total_tokens": 6706,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (A := interior A) := by\n  dsimp [Topology.P3]\n  intro x hx\n  have hsubset : interior A ⊆ closure (interior A) := subset_closure\n  have hIsOpen : IsOpen (interior A) := isOpen_interior\n  have hInc : interior A ⊆ interior (closure (interior A)) :=\n    interior_maximal hsubset hIsOpen\n  exact hInc hx"
+  ],
+  "success": true
+}

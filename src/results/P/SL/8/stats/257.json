@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.11483073234558
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5315,
+      "prompt_tokens": 40347,
+      "total_tokens": 45662,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_subset_closure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) :\n    closure (interior A) ⊆ closure B := by\n  -- `interior A` is contained in `A`, hence in `B`.\n  have h : interior A ⊆ B := fun x hx => hAB (interior_subset hx)\n  -- Taking closures preserves inclusions.\n  exact closure_mono h"
+  ],
+  "success": true
+}

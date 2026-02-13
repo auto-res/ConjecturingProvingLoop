@@ -1,0 +1,26 @@
+{
+  "times": [
+    82.06223773956299
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5843,
+      "prompt_tokens": 41287,
+      "total_tokens": 47130,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40832
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_iInter_subset_iInter_closures {X ι : Type*} [TopologicalSpace X]\n    {F : ι → Set X} :\n    closure (⋂ i, F i : Set X) ⊆ ⋂ i, closure (F i : Set X) := by\n  intro x hx\n  apply Set.mem_iInter.2\n  intro i\n  -- Since `⋂ i, F i ⊆ F i`, taking closures preserves the inclusion.\n  have hSub : closure (⋂ j, F j : Set X) ⊆ closure (F i : Set X) := by\n    have hSubset : (⋂ j, F j : Set X) ⊆ (F i : Set X) :=\n      Set.iInter_subset (fun j ↦ F j) i\n    exact closure_mono hSubset\n  exact hSub hx"
+  ],
+  "success": true
+}

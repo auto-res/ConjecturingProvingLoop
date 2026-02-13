@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.31943941116333
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2988,
+      "prompt_tokens": 63066,
+      "total_tokens": 66054,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 62208
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_subset_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → A ⊆ closure (interior A) := by\n  intro hP2\n  intro x hxA\n  -- From `P2`, the point `x` lies in `interior (closure (interior A))`.\n  have hx_int : x ∈ interior (closure (interior A)) := hP2 hxA\n  -- The interior of any set is contained in that set.\n  have h_subset : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset\n  exact h_subset hx_int"
+  ],
+  "success": true
+}

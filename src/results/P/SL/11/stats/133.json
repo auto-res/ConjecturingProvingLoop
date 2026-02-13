@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.03863286972046
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3570,
+      "prompt_tokens": 19798,
+      "total_tokens": 23368,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_eq_of_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed A) (hB : IsClosed B) :\n    interior (A ∩ B) = interior A ∩ interior B := by\n  apply subset_antisymm\n  ·\n    -- The forward inclusion holds for arbitrary sets.\n    exact interior_inter_subset (A := A) (B := B)\n  ·\n    -- For the reverse inclusion, use `interior_maximal`.\n    have hSub : (interior A ∩ interior B : Set X) ⊆ A ∩ B := by\n      intro x hx\n      exact ⟨(interior_subset : interior A ⊆ A) hx.1,\n        (interior_subset : interior B ⊆ B) hx.2⟩\n    have hOpen : IsOpen (interior A ∩ interior B) :=\n      isOpen_interior.inter isOpen_interior\n    exact interior_maximal hSub hOpen"
+  ],
+  "success": true
+}

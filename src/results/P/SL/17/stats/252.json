@@ -1,0 +1,60 @@
+{
+  "times": [
+    50.31415128707886,
+    97.74440789222717,
+    50.135122299194336
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3191,
+      "prompt_tokens": 45259,
+      "total_tokens": 48450,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    },
+    {
+      "completion_tokens": 7096,
+      "prompt_tokens": 45463,
+      "total_tokens": 52559,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    },
+    {
+      "completion_tokens": 4401,
+      "prompt_tokens": 45546,
+      "total_tokens": 49947,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P1_and_P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 A ↔ (Topology.P1 A ∧ Topology.P3 A) := by\n  -- Existing pairwise equivalences for open sets\n  have h₁ : Topology.P1 A ↔ Topology.P2 A :=\n    Topology.P1_iff_P2_of_isOpen (A := A) hA\n  have h₂ : Topology.P1 A ↔ Topology.P3 A :=\n    Topology.P1_iff_P3_of_isOpen (A := A) hA\n  -- Assemble the desired equivalence\n  constructor\n  · intro hP2\n    -- Derive `P1` from `P2`, then `P3` from `P1`\n    have hP1 : Topology.P1 A := h₁.mp hP2\n    have hP3 : Topology.P3 A := h₂.mp hP1\n    exact ⟨hP1, hP3⟩\n  · rintro ⟨hP1, _hP3⟩\n    -- Convert `P1` back to `P2`\n    exact h₁.mpr hP1",
+    "theorem Topology.P1_iff_P2_and_P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) :\n    Topology.P1 A ↔ (Topology.P2 A ∧ Topology.P3 A) := by\n  -- Pairwise equivalences already established for open sets\n  have h₁ : Topology.P1 A ↔ Topology.P2 A :=\n    Topology.P1_iff_P2_of_isOpen (A := A) hA\n  have h₂ : Topology.P1 A ↔ Topology.P3 A :=\n    Topology.P1_iff_P3_of_isOpen (A := A) hA\n  -- Combine them to obtain the desired equivalence\n  constructor\n  · intro hP1\n    exact ⟨h₁.mp hP1, h₂.mp hP1⟩\n  · rintro ⟨hP2, _hP3⟩\n    exact h₁.mpr hP2",
+    "theorem Topology.closure_iInter_subset_iInter_closure {X : Type*} [TopologicalSpace X]\n    {ι : Sort*} {A : ι → Set X} :\n    closure (Set.iInter A) ⊆ Set.iInter (fun i => closure (A i)) := by\n  intro x hx\n  -- Show that `x` lies in the closure of every `A i`.\n  have hx_i : ∀ i, x ∈ closure (A i) := by\n    intro i\n    have h_subset : (Set.iInter A) ⊆ A i := Set.iInter_subset A i\n    exact (closure_mono h_subset) hx\n  exact Set.mem_iInter.2 hx_i"
+  ],
+  "success": true
+}

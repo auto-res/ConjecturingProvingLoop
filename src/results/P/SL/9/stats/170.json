@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.677408933639526
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4683,
+      "prompt_tokens": 27361,
+      "total_tokens": 32044,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_closureCompl_eq_closure_diff_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) ∩ closure (Aᶜ) = closure A \\ interior A := by\n  -- First, rewrite `closure (Aᶜ)` using a previously proved lemma.\n  have h : closure (Aᶜ : Set X) = (interior A)ᶜ :=\n    Topology.closure_compl_eq_compl_interior (A := A)\n  -- Reduce the goal to a set‐theoretic identity.\n  calc\n    closure A ∩ closure (Aᶜ) = closure A ∩ (interior A)ᶜ := by\n      simpa [h]\n    _ = closure A \\ interior A := by\n      -- Both sides are equal to `closure A ∩ (interior A)ᶜ`.\n      ext x\n      constructor\n      · intro hx\n        exact ⟨hx.1, by\n          -- `x ∈ (interior A)ᶜ` means `x ∉ interior A`.\n          simpa using hx.2⟩\n      · intro hx\n        exact ⟨hx.1, by\n          -- `x ∉ interior A` means `x ∈ (interior A)ᶜ`.\n          simpa using hx.2⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.43470644950867
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7089,
+      "prompt_tokens": 18936,
+      "total_tokens": 26025,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    Topology.P2 A → Topology.P2 B → Topology.P2 (A ×ˢ B) := by\n  intro hA hB\n  dsimp [Topology.P2] at hA hB ⊢\n  intro p hp\n  -- Apply the `P2` property to both coordinates of `p`.\n  have hpA : p.1 ∈ interior (closure (interior A)) := hA hp.1\n  have hpB : p.2 ∈ interior (closure (interior B)) := hB hp.2\n  -- The product of these interiors is an open neighbourhood of `p`.\n  have hOpen :\n      IsOpen (Set.prod (interior (closure (interior A)))\n                       (interior (closure (interior B)))) := by\n    have h1 : IsOpen (interior (closure (interior A))) := isOpen_interior\n    have h2 : IsOpen (interior (closure (interior B))) := isOpen_interior\n    exact h1.prod h2\n  have hMem :\n      (p : X × Y) ∈\n        Set.prod (interior (closure (interior A)))\n                 (interior (closure (interior B))) := by\n    exact ⟨hpA, hpB⟩\n  -- Show that this neighbourhood is contained in `closure (interior (A ×ˢ B))`.\n  have hSubset :\n      Set.prod (interior (closure (interior A)))\n               (interior (closure (interior B))) ⊆\n        closure (interior (A ×ˢ B)) := by\n    intro q hq\n    rcases hq with ⟨hqA, hqB⟩\n    -- Each coordinate lies in the corresponding closure.\n    have hqA_cl : q.1 ∈ closure (interior A) := interior_subset hqA\n    have hqB_cl : q.2 ∈ closure (interior B) := interior_subset hqB\n    have hProdMem :\n        (q : X × Y) ∈ closure (interior A) ×ˢ closure (interior B) :=\n      ⟨hqA_cl, hqB_cl⟩\n    -- Relate product closures to the closure of a product.\n    have h_closure_prod :\n        closure ((interior A) ×ˢ (interior B)) =\n          closure (interior A) ×ˢ closure (interior B) := by\n      simpa using closure_prod_eq (s := interior A) (t := interior B)\n    have hq_mem_closure_prod :\n        (q : X × Y) ∈ closure ((interior A) ×ˢ (interior B)) := by\n      simpa [h_closure_prod] using hProdMem\n    -- Identify `interior (A ×ˢ B)`.\n    have h_int_prod :\n        interior (A ×ˢ B) = (interior A) ×ˢ (interior B) := by\n      simpa using interior_prod_eq (s := A) (t := B)\n    simpa [h_int_prod] using hq_mem_closure_prod\n  -- Turn the neighbourhood inclusion into an interior membership.\n  have hNhds :\n      closure (interior (A ×ˢ B)) ∈ 𝓝 p :=\n    Filter.mem_of_superset (hOpen.mem_nhds hMem) hSubset\n  exact (mem_interior_iff_mem_nhds).2 hNhds"
+  ],
+  "success": true
+}

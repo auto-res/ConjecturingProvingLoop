@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.11937737464905
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2263,
+      "prompt_tokens": 40789,
+      "total_tokens": 43052,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_prod_univ_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    [Nonempty Y] {A : Set X} (hA : A.Nonempty) :\n    (Topology.P1 (A ×ˢ (Set.univ : Set Y)) ∧\n      Topology.P2 (A ×ˢ (Set.univ : Set Y)) ∧\n      Topology.P3 (A ×ˢ (Set.univ : Set Y))) ↔\n      (Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A) := by\n  -- A witness that `Set.univ : Set Y` is nonempty.\n  have hB : (Set.univ : Set Y).Nonempty := Set.nonempty_univ\n  -- General equivalence for products.\n  have hEquiv :=\n    (Topology.P123_prod_iff (A := A) (B := (Set.univ : Set Y)) hA hB)\n  -- The triple of properties holds for the whole space.\n  have hTripleUniv :\n      Topology.P1 (Set.univ : Set Y) ∧\n        Topology.P2 (Set.univ : Set Y) ∧\n        Topology.P3 (Set.univ : Set Y) :=\n    Topology.P123_univ (X := Y)\n  constructor\n  · intro hProd\n    -- Extract the factor corresponding to `A`.\n    exact (hEquiv.mp hProd).1\n  · intro hTripleA\n    -- Combine the triple for `A` with that for `univ` and reassemble.\n    have hPair :\n        (Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A) ∧\n          (Topology.P1 (Set.univ : Set Y) ∧\n            Topology.P2 (Set.univ : Set Y) ∧\n            Topology.P3 (Set.univ : Set Y)) :=\n      ⟨hTripleA, hTripleUniv⟩\n    exact hEquiv.mpr hPair"
+  ],
+  "success": true
+}

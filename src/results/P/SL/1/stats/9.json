@@ -1,0 +1,43 @@
+{
+  "times": [
+    94.04931378364563,
+    21.956501007080078
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6737,
+      "prompt_tokens": 1055,
+      "total_tokens": 7792,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1454,
+      "prompt_tokens": 1282,
+      "total_tokens": 2736,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 A → Topology.P2 B → Topology.P2 (A ∪ B) := by\n  intro hA hB\n  dsimp [Topology.P2] at hA hB ⊢\n  intro x hx\n  cases hx with\n  | inl hAx =>\n      have hxA : x ∈ interior (closure (interior A)) := hA hAx\n      have hsubsetA : interior (closure (interior A)) ⊆\n          interior (closure (interior (A ∪ B))) := by\n        have hinterA : interior A ⊆ interior (A ∪ B) := by\n          apply interior_mono\n          exact Set.subset_union_left _ _\n        have hclA : closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n          closure_mono hinterA\n        exact interior_mono hclA\n      exact hsubsetA hxA\n  | inr hBx =>\n      have hxB : x ∈ interior (closure (interior B)) := hB hBx\n      have hsubsetB : interior (closure (interior B)) ⊆\n          interior (closure (interior (A ∪ B))) := by\n        have hinterB : interior B ⊆ interior (A ∪ B) := by\n          apply interior_mono\n          exact Set.subset_union_right _ _\n        have hclB : closure (interior B) ⊆ closure (interior (A ∪ B)) :=\n          closure_mono hinterB\n        exact interior_mono hclB\n      exact hsubsetB hxB",
+    "theorem P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    Topology.P3 A := by\n  dsimp [Topology.P3]\n  have h : interior A ⊆ interior (closure A) := by\n    apply interior_mono\n    exact subset_closure\n  simpa [hA.interior_eq] using h"
+  ],
+  "success": true
+}

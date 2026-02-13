@@ -1,0 +1,43 @@
+{
+  "times": [
+    42.27855110168457,
+    41.567516803741455
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3094,
+      "prompt_tokens": 1273,
+      "total_tokens": 4367,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3444,
+      "prompt_tokens": 1376,
+      "total_tokens": 4820,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_of_isClosed_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hP3 : Topology.P3 A) :\n    IsOpen A := by\n  -- Since `A` is closed, its closure is itself.\n  have h_closure : closure A = A := by\n    simpa using hA_closed.closure_eq\n  -- From `P3`, we have `A ⊆ interior (closure A) = interior A`.\n  have h_subset : (A : Set X) ⊆ interior A := by\n    simpa [h_closure] using hP3\n  -- The interior is always contained in the set.\n  have h_subset_rev : interior A ⊆ (A : Set X) := interior_subset\n  -- Thus `interior A = A`.\n  have h_eq : interior A = A := by\n    exact subset_antisymm h_subset_rev h_subset\n  -- The interior of any set is open, hence so is `A`.\n  have h_open : IsOpen (interior A) := isOpen_interior\n  simpa [h_eq] using h_open",
+    "theorem interior_closure_has_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (interior (closure A)) := by\n  have hOpen : IsOpen (interior (closure A)) := isOpen_interior\n  have hAll := Topology.isOpen_has_all_Ps (X := X) (A := interior (closure A)) hOpen\n  exact hAll.2.1"
+  ],
+  "success": true
+}

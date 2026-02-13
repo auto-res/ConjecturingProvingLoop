@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.52870202064514
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6206,
+      "prompt_tokens": 11220,
+      "total_tokens": 17426,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_union_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (closure (interior (A : Set X))) ∪\n        interior (closure (interior B)) ⊆\n      interior (closure (interior (A ∪ B))) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have h_closure : closure (interior (A : Set X))\n          ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        have h_int : interior (A : Set X) ⊆ interior (A ∪ B) := by\n          apply interior_mono\n          intro y hy\n          exact Or.inl hy\n        exact h_int\n      exact (interior_mono h_closure) hA\n  | inr hB =>\n      have h_closure : closure (interior (B : Set X))\n          ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        have h_int : interior (B : Set X) ⊆ interior (A ∪ B) := by\n          apply interior_mono\n          intro y hy\n          exact Or.inr hy\n        exact h_int\n      exact (interior_mono h_closure) hB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.70444893836975
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4228,
+      "prompt_tokens": 48077,
+      "total_tokens": 52305,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iInter_eq_iInter_of_isClosed\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X}\n    (hA : ∀ i, IsClosed (A i)) :\n    closure (⋂ i, A i) = ⋂ i, A i := by\n  classical\n  have hClosed : IsClosed (⋂ i, A i) := isClosed_iInter hA\n  simpa using hClosed.closure_eq"
+  ],
+  "success": true
+}

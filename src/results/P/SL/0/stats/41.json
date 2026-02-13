@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.53877067565918
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3365,
+      "prompt_tokens": 7547,
+      "total_tokens": 10912,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7040
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_has_all_Ps {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (interior (closure (A : Set X))) ∧\n    Topology.P2 (interior (closure (A : Set X))) ∧\n    Topology.P3 (interior (closure (A : Set X))) := by\n  -- Obtain `P1` and `P3` for `interior (closure A)`.\n  have hP1P3 := Topology.interior_closure_has_P1_and_P3 (X := X) (A := A)\n  -- Obtain `P2` for `interior (closure A)`.\n  have hP2 := Topology.interior_closure_has_P2 (X := X) (A := A)\n  -- Assemble the triple conjunction.\n  exact And.intro hP1P3.1 (And.intro hP2 hP1P3.2)"
+  ],
+  "success": true
+}

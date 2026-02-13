@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.284323930740356
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5033,
+      "prompt_tokens": 28524,
+      "total_tokens": 33557,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_eq_closure_diff_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier A = closure A \\ interior A := by\n  -- Begin with the characterization of the frontier as an intersection\n  have h₁ : closure A ∩ closure (Aᶜ) = frontier A := by\n    simpa using\n      (closure_inter_closure_compl_eq_frontier (X := X) (A := A))\n  -- Express the set difference as an intersection with a complement\n  have h₂ : closure A \\ interior A = closure A ∩ (interior A)ᶜ := rfl\n  -- Relate `closure (Aᶜ)` to the complement of `interior A`\n  have h₃ : (closure (Aᶜ) : Set X) = (interior A)ᶜ :=\n    closure_compl_eq_compl_interior (A := A)\n  -- Rewrite the frontier using `h₃`\n  have h₄ : frontier A = closure A ∩ (interior A)ᶜ := by\n    simpa [h₃] using h₁.symm\n  -- Conclude by substituting the two intermediate identities\n  simpa [h₂] using h₄"
+  ],
+  "success": true
+}

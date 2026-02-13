@@ -1,0 +1,26 @@
+{
+  "times": [
+    110.58319211006165
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7772,
+      "prompt_tokens": 25840,
+      "total_tokens": 33612,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Topology.P2 (closure (A : Set X)) := by\n  intro hDenseInt\n  -- `Dense (interior A)` implies `Dense A`.\n  have hDenseA : Dense (A : Set X) :=\n    Topology.dense_of_dense_interior (A := A) hDenseInt\n  -- Apply the existing lemma for dense sets.\n  exact Topology.P2_closure_of_dense (A := A) hDenseA"
+  ],
+  "success": true
+}

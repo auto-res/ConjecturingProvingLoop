@@ -1,0 +1,26 @@
+{
+  "times": [
+    146.77502751350403
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9868,
+      "prompt_tokens": 12181,
+      "total_tokens": 22049,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_of_subset_of_subset_interior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hIntAB : interior A ⊆ B) (hBA : B ⊆ A) :\n    interior A = interior B := by\n  apply Set.Subset.antisymm\n  ·\n    have h : (interior A : Set X) ⊆ interior B :=\n      interior_maximal hIntAB isOpen_interior\n    exact h\n  ·\n    exact interior_mono hBA"
+  ],
+  "success": true
+}

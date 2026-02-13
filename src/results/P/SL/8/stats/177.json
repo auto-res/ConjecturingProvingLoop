@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.943827867507935
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2663,
+      "prompt_tokens": 25638,
+      "total_tokens": 28301,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_subset_closureInteriorClosure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) ⊆ closure (interior (closure A)) := by\n  -- First, `interior (closure (interior A)) ⊆ interior (closure A)`.\n  have h₁ :\n      interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_closure_interior_subset_interior_closure (X := X) (A := A)\n  -- Second, `interior (closure A) ⊆ closure (interior (closure A))`.\n  have h₂ :\n      interior (closure A) ⊆ closure (interior (closure A)) :=\n    interior_closure_subset_closureInteriorClosure (X := X) (A := A)\n  -- Composing the two inclusions yields the desired result.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

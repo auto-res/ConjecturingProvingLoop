@@ -1,0 +1,43 @@
+{
+  "times": [
+    29.57616138458252,
+    142.47348141670227
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2250,
+      "prompt_tokens": 2759,
+      "total_tokens": 5009,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 9026,
+      "prompt_tokens": 2879,
+      "total_tokens": 11905,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_closure_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → closure (A : Set X) = closure (interior (closure A)) := by\n  intro hP3\n  dsimp [Topology.P3] at hP3\n  apply subset_antisymm\n  · -- First inclusion: `closure A ⊆ closure (interior (closure A))`\n    exact closure_mono hP3\n  · -- Second inclusion: `closure (interior (closure A)) ⊆ closure A`\n    have h : (interior (closure A) : Set X) ⊆ closure A := by\n      simpa using (interior_subset : interior (closure A) ⊆ closure A)\n    exact closure_mono h",
+    "theorem closure_interior_closure_has_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (closure (interior (closure A))) := by\n  -- `interior (closure A)` is open, hence it satisfies `P1`.\n  have hP1_int : Topology.P1 (interior (closure A)) := by\n    have hOpen : IsOpen (interior (closure A)) := isOpen_interior\n    exact (Topology.isOpen_has_all_Ps (X := X) (A := interior (closure A)) hOpen).1\n  -- Property `P1` is preserved under taking closures.\n  exact (Topology.P1_implies_P1_closure (X := X) (A := interior (closure A))) hP1_int"
+  ],
+  "success": true
+}

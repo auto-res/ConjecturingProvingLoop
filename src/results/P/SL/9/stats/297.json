@@ -1,0 +1,43 @@
+{
+  "times": [
+    36.675307273864746,
+    247.18455338478088
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1940,
+      "prompt_tokens": 52455,
+      "total_tokens": 54395,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 14674,
+      "prompt_tokens": 52566,
+      "total_tokens": 67240,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_diff_subset_union_frontier\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A \\ B : Set X) ⊆ frontier A ∪ frontier B := by\n  -- Rewrite the difference as an intersection with a complement.\n  have h₁ :\n      frontier (A ∩ Bᶜ : Set X) ⊆\n        frontier A ∪ frontier (Bᶜ : Set X) :=\n    Topology.frontier_inter_subset_union_frontier (A := A) (B := Bᶜ)\n  -- Use the equality `frontier (Bᶜ) = frontier B`.\n  have h₂ : frontier (Bᶜ : Set X) = frontier (B : Set X) :=\n    (frontier_compl (A := B)).symm\n  -- Combine the two facts to obtain the desired inclusion.\n  intro x hx\n  have hx' : x ∈ frontier A ∪ frontier (Bᶜ : Set X) := h₁ (by\n    -- `A \\ B` and `A ∩ Bᶜ` coincide.\n    simpa [Set.diff_eq] using hx)\n  cases hx' with\n  | inl hA => exact Or.inl hA\n  | inr hBcomp =>\n      have hB : x ∈ frontier B := by\n        simpa [h₂] using hBcomp\n      exact Or.inr hB",
+    "theorem Topology.frontier_compl_swap {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (A : Set X) = frontier (Aᶜ) := by\n  simpa using (frontier_compl (A := A)).symm"
+  ],
+  "success": true
+}

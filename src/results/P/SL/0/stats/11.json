@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.13191795349121
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3492,
+      "prompt_tokens": 1950,
+      "total_tokens": 5442,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_has_all_Ps {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (interior (closure (interior A))) ∧\n    Topology.P2 (interior (closure (interior A))) ∧\n    Topology.P3 (interior (closure (interior A))) := by\n  have hOpen : IsOpen (interior (closure (interior A))) := isOpen_interior\n  have hAll :=\n    Topology.isOpen_has_all_Ps (X := X) (A := interior (closure (interior A))) hOpen\n  simpa using hAll"
+  ],
+  "success": true
+}

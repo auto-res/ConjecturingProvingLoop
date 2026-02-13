@@ -1,0 +1,43 @@
+{
+  "times": [
+    118.48968195915222,
+    74.77820467948914
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6611,
+      "prompt_tokens": 53204,
+      "total_tokens": 59815,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3031,
+      "prompt_tokens": 53284,
+      "total_tokens": 56315,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_eq_diff_interior_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsClosed A) :\n    closure A \\ interior A = A \\ interior A := by\n  simpa [hA.closure_eq]",
+    "theorem Topology.boundary_eq_closure_diff_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A \\ interior A = closure A ∩ (interior A)ᶜ := by\n  ext x\n  simp [Set.diff_eq, Set.inter_comm]"
+  ],
+  "success": true
+}

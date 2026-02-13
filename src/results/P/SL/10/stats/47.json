@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.670143127441406
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3466,
+      "prompt_tokens": 6863,
+      "total_tokens": 10329,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_univ_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) (h_dense : closure A = Set.univ) :\n    closure (interior A) = Set.univ := by\n  have h_eq := Topology.closure_eq_closure_interior_of_P1 (X := X) (A := A) hP1\n  simpa [h_dense] using (h_eq.symm).trans h_dense"
+  ],
+  "success": true
+}

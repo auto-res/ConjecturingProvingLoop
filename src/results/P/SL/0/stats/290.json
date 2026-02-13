@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.39950251579285
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3416,
+      "prompt_tokens": 49593,
+      "total_tokens": 53009,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_P2_and_P3_empty {X : Type*} [TopologicalSpace X] :\n    Topology.P1 (∅ : Set X) ↔\n      (Topology.P2 (∅ : Set X) ∧ Topology.P3 (∅ : Set X)) := by\n  -- All three properties hold for the empty set, so the equivalence is immediate.\n  have hP1 : Topology.P1 (∅ : Set X) := Topology.P1_empty (X := X)\n  have hP2 : Topology.P2 (∅ : Set X) := Topology.P2_empty (X := X)\n  have hP3 : Topology.P3 (∅ : Set X) := Topology.P3_empty (X := X)\n  constructor\n  · intro _; exact And.intro hP2 hP3\n  · intro _; exact hP1"
+  ],
+  "success": true
+}

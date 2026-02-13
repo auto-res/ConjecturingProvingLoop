@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.27859711647034
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7187,
+      "prompt_tokens": 26666,
+      "total_tokens": 33853,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_interior_eq_self_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    Topology.P3 (A : Set X) ↔ interior A = A := by\n  constructor\n  · intro hP3\n    exact interior_eq_self_of_P3_closed (A := A) hA hP3\n  · intro hIntEq\n    -- `A` is open because it coincides with its interior.\n    have hOpen : IsOpen (A : Set X) := by\n      simpa [hIntEq] using (isOpen_interior : IsOpen (interior (A : Set X)))\n    -- Open sets satisfy `P3`.\n    simpa [hIntEq] using Topology.open_satisfies_P3 (A := A) hOpen"
+  ],
+  "success": true
+}

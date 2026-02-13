@@ -1,0 +1,43 @@
+{
+  "times": [
+    137.8041205406189,
+    148.23265099525452
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12544,
+      "prompt_tokens": 18938,
+      "total_tokens": 31482,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 9985,
+      "prompt_tokens": 19064,
+      "total_tokens": 29049,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_nonempty_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) (hne : A.Nonempty) :\n    (interior (closure (interior A))).Nonempty := by\n  -- Obtain a point in `interior A` using `P1` and the non‐emptiness of `A`.\n  have hIntA : (interior A).Nonempty :=\n    Topology.interior_nonempty_of_P1 (A := A) hP1 hne\n  rcases hIntA with ⟨x, hxIntA⟩\n  -- `interior A` is contained in `interior (closure (interior A))`.\n  have hsubset : interior A ⊆ interior (closure (interior A)) :=\n    interior_mono (subset_closure : (interior A : Set X) ⊆ closure (interior A))\n  -- Conclude the required non‐emptiness.\n  exact ⟨x, hsubset hxIntA⟩",
+    "theorem interior_interior_subset_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (interior A) ⊆ interior (closure A) := by\n  -- Step 1: `interior (interior A)` is contained in `interior (closure (interior A))`.\n  have h₁ : interior (interior A) ⊆ interior (closure (interior A)) := by\n    simpa [interior_interior] using\n      interior_mono\n        (subset_closure : (interior A : Set X) ⊆ closure (interior A))\n  -- Step 2: `interior (closure (interior A))` is contained in `interior (closure A)`.\n  have h₂ : interior (closure (interior A)) ⊆ interior (closure A) := by\n    apply interior_mono\n    exact closure_mono (interior_subset : (interior A : Set X) ⊆ A)\n  -- Combine the two inclusions.\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

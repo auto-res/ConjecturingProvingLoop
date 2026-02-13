@@ -1,0 +1,26 @@
+{
+  "times": [
+    137.35594773292542
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8781,
+      "prompt_tokens": 44867,
+      "total_tokens": 53648,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_closure_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Dense (closure A) := by\n  intro hDenseInt\n  -- First, use density of `interior A` to see that `closure A = univ`.\n  have hEq : closure A = (Set.univ : Set X) :=\n    Topology.closure_eq_univ_of_dense_interior (A := A) hDenseInt\n  -- Taking the closure once more does not change the set.\n  have hEq' : closure (closure A) = (Set.univ : Set X) := by\n    simpa [closure_closure] using hEq\n  -- Translate the equality into a density statement.\n  exact (dense_iff_closure_eq).2 hEq'"
+  ],
+  "success": true
+}

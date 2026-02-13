@@ -1,0 +1,43 @@
+{
+  "times": [
+    135.69086384773254,
+    61.799906730651855
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9449,
+      "prompt_tokens": 18026,
+      "total_tokens": 27475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    },
+    {
+      "completion_tokens": 4210,
+      "prompt_tokens": 18100,
+      "total_tokens": 22310,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_idempotent_six {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_idempotent]",
+    "theorem P3_union_four {X : Type*} [TopologicalSpace X] {A B C D : Set X}\n    (hA : Topology.P3 (X := X) A) (hB : Topology.P3 (X := X) B)\n    (hC : Topology.P3 (X := X) C) (hD : Topology.P3 (X := X) D) :\n    Topology.P3 (X := X) (A ∪ B ∪ C ∪ D) := by\n  -- First, combine the properties for `A`, `B`, and `C`.\n  have hABC : Topology.P3 (X := X) (A ∪ B ∪ C) :=\n    Topology.P3_union_three (X := X) (A := A) (B := B) (C := C) hA hB hC\n  -- Then, combine the result with `D`.\n  have hABCD : Topology.P3 (X := X) ((A ∪ B ∪ C) ∪ D) :=\n    Topology.P3_union (X := X) (A := A ∪ B ∪ C) (B := D) hABC hD\n  -- Re-associate the unions to match the required shape.\n  simpa [Set.union_assoc] using hABCD"
+  ],
+  "success": true
+}

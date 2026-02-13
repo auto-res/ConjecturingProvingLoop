@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.44466781616211
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2231,
+      "prompt_tokens": 45300,
+      "total_tokens": 47531,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_three_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) (hC : IsOpen C) :\n    Topology.P2 (A ∩ B ∩ C) := by\n  -- Use the existing lemma that an intersection of three open sets satisfies\n  -- all three `P` properties, then extract the `P2` component.\n  have h :=\n    Topology.isOpen_inter_three_satisfies_P1_P2_P3\n      (X := X) (A := A) (B := B) (C := C) hA hB hC\n  exact h.2.1"
+  ],
+  "success": true
+}

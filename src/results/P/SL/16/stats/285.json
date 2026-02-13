@@ -1,0 +1,94 @@
+{
+  "times": [
+    25.86728072166443,
+    75.1011791229248,
+    22.34193468093872,
+    15.921193838119507,
+    56.08175706863403
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2229,
+      "prompt_tokens": 49930,
+      "total_tokens": 52159,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 5418,
+      "prompt_tokens": 50142,
+      "total_tokens": 55560,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 1578,
+      "prompt_tokens": 50261,
+      "total_tokens": 51839,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 682,
+      "prompt_tokens": 50380,
+      "total_tokens": 51062,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3880,
+      "prompt_tokens": 50499,
+      "total_tokens": 54379,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (X := X) (closure A) → Topology.P1 (X := X) A := by\n  intro hP1Cl\n  dsimp [Topology.P1] at hP1Cl ⊢\n  intro x hxA\n  -- Upgrade `x ∈ A` to `x ∈ closure A`.\n  have hxCl : (x : X) ∈ closure A := subset_closure hxA\n  -- Apply `P1` for `closure A`.\n  have hx : (x : X) ∈ closure (interior (closure A)) := hP1Cl hxCl\n  -- Use the equality `closure (interior (closure A)) = closure (interior A)`.\n  have h_eq :=\n    Topology.closure_interior_closure_eq_closure_interior\n      (X := X) (A := A)\n  simpa [h_eq] using hx",
+    "theorem Topology.closure_interior_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure A)) = closure (interior A) := by\n  simpa using\n    (Topology.closure_interior_closure_interior_eq_closure_interior\n      (X := X) (A := A))",
+    "theorem Topology.closure_interior_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure A)) = closure (interior A) := by\n  simpa using\n    (Topology.closure_interior_closure_interior_eq_closure_interior\n      (X := X) (A := A))",
+    "theorem Topology.closure_interior_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure A)) = closure (interior A) := by\n  simpa using\n    Topology.closure_interior_closure_interior_eq_closure_interior\n      (X := X) (A := A)",
+    "theorem Topology.P3_of_interior_closure_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h : interior (closure A) = closure A) :\n    Topology.P3 (X := X) A := by\n  -- From the equality we obtain that `closure A` is open.\n  have hOpen : IsOpen (closure A) :=\n    (Topology.isOpen_closure_iff_interior_eq_self (X := X) (A := A)).mpr h\n  -- An open closure of `A` implies `P3 A`.\n  exact Topology.P3_of_open_closure (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

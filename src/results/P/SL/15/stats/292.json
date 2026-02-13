@@ -1,0 +1,60 @@
+{
+  "times": [
+    56.43775987625122,
+    183.0922815799713,
+    16.178637504577637
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4215,
+      "prompt_tokens": 62552,
+      "total_tokens": 66767,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    },
+    {
+      "completion_tokens": 13795,
+      "prompt_tokens": 62685,
+      "total_tokens": 76480,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 62208
+      }
+    },
+    {
+      "completion_tokens": 1466,
+      "prompt_tokens": 62756,
+      "total_tokens": 64222,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq_closure_union_interiors {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A ∪ interior B) := by\n  have h : interior (A ∪ B) = interior A ∪ interior B := by\n    simpa using interior_union (A := A) (B := B)\n  simpa [h]",
+    "theorem interior_closure_union_subset_union_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ B)) ⊆ interior (closure A) ∪ interior (closure B) := by\n  simpa [closure_union] using\n    interior_union_subset (closure A) (closure B)",
+    "theorem interior_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∪ interior B ⊆ interior (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have hSub : interior A ⊆ interior (A ∪ B) :=\n        interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n      exact hSub hA\n  | inr hB =>\n      have hSub : interior B ⊆ interior (A ∪ B) :=\n        interior_mono (Set.subset_union_right : (B : Set X) ⊆ A ∪ B)\n      exact hSub hB"
+  ],
+  "success": true
+}

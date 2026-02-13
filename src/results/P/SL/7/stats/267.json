@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.938148736953735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2219,
+      "prompt_tokens": 41409,
+      "total_tokens": 43628,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_diff_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A \\ B : Set X)) ⊆ interior (closure (A : Set X)) := by\n  -- `A \\ B` is contained in `A`.\n  have hSub : (A \\ B : Set X) ⊆ A := Set.diff_subset\n  -- Taking closures preserves this inclusion.\n  have hCl : closure (A \\ B : Set X) ⊆ closure (A : Set X) := closure_mono hSub\n  -- Applying monotonicity of `interior` gives the desired result.\n  exact interior_mono hCl"
+  ],
+  "success": true
+}

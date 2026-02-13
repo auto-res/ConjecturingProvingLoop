@@ -1,0 +1,77 @@
+{
+  "times": [
+    27.453253984451294,
+    86.17510199546814,
+    33.40459418296814,
+    56.13899278640747
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2146,
+      "prompt_tokens": 3025,
+      "total_tokens": 5171,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    },
+    {
+      "completion_tokens": 7029,
+      "prompt_tokens": 3131,
+      "total_tokens": 10160,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    },
+    {
+      "completion_tokens": 2469,
+      "prompt_tokens": 3258,
+      "total_tokens": 5727,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    },
+    {
+      "completion_tokens": 4312,
+      "prompt_tokens": 3346,
+      "total_tokens": 7658,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P3_implies_open {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed A → Topology.P3 A → IsOpen A := by\n  intro hClosed hP3\n  have h_subset1 : A ⊆ interior (closure A) := hP3\n  have h_subset2 : interior A ⊆ A := interior_subset\n  have h_closure_eq : closure A = A := hClosed.closure_eq\n  have h_int_eq : interior (closure A) = interior A := by\n    simpa [h_closure_eq]\n  have h_subset1' : A ⊆ interior A := by\n    simpa [h_int_eq] using h_subset1\n  have h_eq : A = interior A := Set.Subset.antisymm h_subset1' h_subset2\n  simpa [h_eq] using (isOpen_interior : IsOpen (interior A))",
+    "```lean\nimport Mathlib\nimport Aesop\n\nnamespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\ndef P1 (A : Set X) : Prop :=\n  A ⊆ closure (interior A)\n\ndef P2 (A : Set X) : Prop :=\n  A ⊆ interior (closure (interior A))\n\ndef P3 (A : Set X) : Prop :=\n  A ⊆ interior (closure A)\n\n\ntheorem Topology.P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro hA\n  have h_subset : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset\n  exact Set.Subset.trans hA h_subset\n\ntheorem Topology.P2_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P3 A := by\n  intro hA\n  have h_subset : interior (closure (interior A)) ⊆ interior (closure A) := by\n    have h_closure : closure (interior A) ⊆ closure A := closure_mono interior_subset\n    exact interior_mono h_closure\n  exact Set.Subset.trans hA h_subset\n\ntheorem Topology.isOpen_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P3 A := by\n  dsimp [Topology.P3]\n  exact interior_maximal subset_closure hA\n\ntheorem Topology.isOpen_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P1 A := by\n  dsimp [Topology.P1]\n  simpa [hA.interior_eq] using (subset_closure : A ⊆ closure A)\n\ntheorem Topology.P3_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (interior A) := by\n  have h_open : IsOpen (interior A) := isOpen_interior\n  exact Topology.isOpen_implies_P3 (X := X) (A := interior A) h_open\n\ntheorem Topology.isOpen_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 A := by\n  dsimp [Topology.P2]\n  simpa [hA.interior_eq] using (interior_maximal subset_closure hA)\n\ntheorem Topology.P1_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (interior A) := by\n  have h_open : IsOpen (interior A) := isOpen_interior\n  simpa using\n    Topology.isOpen_implies_P1 (X := X) (A := interior A) h_open\n\ntheorem Topology.P2_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (interior A) := by\n  have h_open : IsOpen (interior A) := isOpen_interior\n  simpa using\n    Topology.isOpen_implies_P2 (X := X) (A := interior A) h_open\n\ntheorem Topology.P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 A → Topology.P1 B → Topology.P1 (A ∪ B) := by\n  intro hA hB\n  dsimp [Topology.P1] at *\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hx_clA : x ∈ closure (interior A) := hA hxA\n      have h_subset : closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono (interior_mono (Set.subset_union_left : A ⊆ A ∪ B))\n      exact h_subset hx_clA\n  | inr hxB =>\n      have hx_clB : x ∈ closure (interior B) := hB hxB\n      have h_subset : closure (interior B) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono (interior_mono (Set.subset_union_right : B ⊆ A ∪ B))\n      exact h_subset hx_clB\n\ntheorem Topology.P3_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 A → Topology.P3 B → Topology.P3 (A ∪ B) := by\n  intro hA hB\n  dsimp [Topology.P3] at *\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hx_int : x ∈ interior (closure A) := hA hxA\n      have h_subset : interior (closure A) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono (closure_mono (Set.subset_union_left : A ⊆ A ∪ B))\n      exact h_subset hx_int\n  | inr hxB =>\n      have hx_int : x ∈ interior (closure B) := hB hxB\n      have h_subset : interior (closure B) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono (closure_mono (Set.subset_union_right : B ⊆ A ∪ B))\n      exact h_subset hx_int\n\ntheorem Topology.P2_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 A → Topology.P2 B → Topology.P2 (A ∪ B) := by\n  intro hA hB\n  dsimp [Topology.P2] at *\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hx_int : x ∈ interior (closure (interior A)) := hA hxA\n      have h_subset : interior (closure (interior A)) ⊆\n          interior (closure (interior (A ∪ B))) := by\n        have h_closure : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n          have h_int : interior A ⊆ interior (A ∪ B) :=\n            interior_mono (Set.subset_union_left : A ⊆ A ∪ B)\n          exact closure_mono h_int\n        exact interior_mono h_closure\n      exact h_subset hx_int\n  | inr hxB =>\n      have hx_int : x ∈ interior (closure (interior B)) := hB hxB\n      have h_subset : interior (closure (interior B)) ⊆\n          interior (closure (interior (A ∪ B))) := by\n        have h_closure : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n          have h_int : interior B ⊆ interior (A ∪ B) :=\n            interior_mono (Set.subset_union_right : B ⊆ A ∪ B)\n          exact closure_mono h_int\n        exact interior_mono h_closure\n      exact h_subset hx_int\n\ntheorem Topology.P3_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (interior (closure A)) := by\n  have h_open : IsOpen (interior (closure A)) := isOpen_interior\n  exact Topology.isOpen_implies_P3 (X := X) (A := interior (closure A)) h_open\n\ntheorem Topology.P2_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (interior (closure A)) := by\n  have h_open : IsOpen (interior (closure A)) := isOpen_interior\n  exact Topology.isOpen_implies_P2 (X := X) (A := interior (closure A)) h_open\n\ntheorem Topology.P1_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (interior (closure A)) := by\n  have h_open : IsOpen (interior (closure A)) := isOpen_interior\n  exact Topology.isOpen_implies_P1 (X := X) (A := interior (closure A)) h_open\n\ntheorem Topology.closure_eq_closure_interior_of_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 A → closure A = closure (interior A) := by\n  intro hA\n  apply Set.Subset.antisymm\n  ·\n    have : closure A ⊆ closure (interior A) :=\n      closure_minimal hA isClosed_closure\n    exact this\n  ·\n    exact closure_mono interior_subset\n\ntheorem Topology.closure_eq_closure_interior_of_isOpen {X : Type*}\n    [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    closure A = closure (interior A) := by\n  simpa [hA.interior_eq]\n\ntheorem Topology.closure_interior_eq_of_P1_and_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 A) (hClosed : IsClosed A) :\n    closure (interior A) = A := by\n  apply Set.Subset.antisymm\n  ·\n    have h_subset : interior A ⊆ A := interior_subset\n    exact closure_minimal h_subset hClosed\n  ·\n    exact hP1\n\ntheorem Topology.closure_eq_closure_interior_of_P2 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P2 A → closure A = closure (interior A) := by\n  intro hP2\n  have hP1 : Topology.P1 A :=\n    Topology.P2_implies_P1 (X := X) (A := A) hP2\n  exact Topology.closure_eq_closure_interior_of_P1 (X := X) (A := A) hP1\n\ntheorem Topology.P1_iUnion {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    (∀ i, Topology.P1 (A i)) → Topology.P1 (⋃ i, A i) := by\n  intro h_all\n  dsimp [Topology.P1] at h_all ⊢\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxA⟩\n  have hx_cl : x ∈ closure (interior (A i)) := (h_all i) hxA\n  have h_subset : closure (interior (A i)) ⊆ closure (interior (⋃ i, A i)) := by\n    have h_int : interior (A i) ⊆ interior (⋃ i, A i) := by\n      have h_sub : (A i) ⊆ ⋃ j, A j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact interior_mono h_sub\n    exact closure_mono h_int\n  exact h_subset hx_cl\n\ntheorem Topology.P3_iUnion {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    (∀ i, Topology.P3 (A i)) → Topology.P3 (⋃ i, A i) := by\n  intro h_all\n  dsimp [Topology.P3] at h_all ⊢\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxA⟩\n  have hx_int : x ∈ interior (closure (A i)) := (h_all i) hxA\n  have h_subset : interior (closure (A i)) ⊆ interior (closure (⋃ j, A j)) := by\n    have h_closure : closure (A i) ⊆ closure (⋃ j, A j) := by\n      have h_sub : (A i) ⊆ ⋃ j, A j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact closure_mono h_sub\n    exact interior_mono h_closure\n  exact h_subset hx_int\n```",
+    "theorem Topology.isOpen_of_isClosed_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hP3 : Topology.P3 A) : IsOpen A := by\n  have h_subset : A ⊆ interior A := by\n    have h : A ⊆ interior (closure A) := hP3\n    simpa [hClosed.closure_eq] using h\n  have h_eq : interior A = A := by\n    apply Set.Subset.antisymm\n    · exact interior_subset\n    · exact h_subset\n  simpa [h_eq] using isOpen_interior",
+    "theorem Topology.P1_iff_closure_eq_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 A ↔ closure A = closure (interior A) := by\n  constructor\n  · intro hP1\n    exact Topology.closure_eq_closure_interior_of_P1 (X := X) (A := A) hP1\n  · intro h_eq\n    exact fun x hxA => by\n      have : x ∈ closure A := subset_closure hxA\n      simpa [h_eq] using this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.12409567832947
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5233,
+      "prompt_tokens": 46650,
+      "total_tokens": 51883,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_open_three {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X))\n    (hC : IsOpen (C : Set X)) :\n    Topology.P3 (A ∩ B ∩ C : Set X) := by\n  -- `A` is open, hence satisfies `P3`.\n  have hP3A : Topology.P3 (A : Set X) :=\n    (Topology.IsOpen_P1_and_P3 (A := A) hA).2\n  -- Intersect `A` with the open set `B`.\n  have hP3AB : Topology.P3 (A ∩ B : Set X) :=\n    Topology.P3_inter_open (A := A) (U := B) hP3A hB\n  -- Intersect the result with the open set `C`.\n  have hP3ABC : Topology.P3 ((A ∩ B) ∩ C : Set X) :=\n    Topology.P3_inter_open (A := A ∩ B) (U := C) hP3AB hC\n  -- Reassociate intersections to match the statement.\n  simpa [Set.inter_assoc] using hP3ABC"
+  ],
+  "success": true
+}

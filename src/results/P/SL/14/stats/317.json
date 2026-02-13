@@ -1,0 +1,26 @@
+{
+  "times": [
+    140.88769268989563
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8688,
+      "prompt_tokens": 60254,
+      "total_tokens": 68942,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 59136
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P2_and_P3_of_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (interior A)) :\n    Topology.P1 A ↔ (Topology.P2 A ∧ Topology.P3 A) := by\n  -- Equivalences obtained from the density of `interior A`.\n  have hP1P2 : Topology.P1 A ↔ Topology.P2 A :=\n    (Topology.P2_iff_P1_of_denseInterior (X := X) (A := A) hDense).symm\n  have hP1P3 : Topology.P1 A ↔ Topology.P3 A :=\n    (Topology.P3_iff_P1_of_dense (X := X) (A := A) hDense).symm\n  constructor\n  · intro hP1\n    have hP2 : Topology.P2 A := (hP1P2).1 hP1\n    have hP3 : Topology.P3 A := (hP1P3).1 hP1\n    exact And.intro hP2 hP3\n  · rintro ⟨hP2, _hP3⟩\n    exact (hP1P2).2 hP2"
+  ],
+  "success": true
+}

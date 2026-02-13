@@ -1,0 +1,43 @@
+{
+  "times": [
+    218.48462915420532,
+    152.2502202987671
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 15702,
+      "prompt_tokens": 26860,
+      "total_tokens": 42562,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    },
+    {
+      "completion_tokens": 8832,
+      "prompt_tokens": 26982,
+      "total_tokens": 35814,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_exists_open_subset_closure_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (A : Set X) ↔\n      ∃ U : Set X, IsOpen U ∧ (A : Set X) ⊆ U ∧ closure U = closure A := by\n  classical\n  constructor\n  · intro hP3\n    refine\n      ⟨interior (closure (A : Set X)), isOpen_interior, ?_, ?_⟩\n    · -- `A ⊆ interior (closure A)` by `P3`.\n      simpa using hP3\n    · -- Show `closure (interior (closure A)) = closure A`.\n      have h₁ :\n          closure (interior (closure (A : Set X))) ⊆ closure A := by\n        exact\n          closure_mono\n            (interior_subset :\n              interior (closure (A : Set X)) ⊆ closure A)\n      have h₂ : closure A ⊆ closure (interior (closure (A : Set X))) := by\n        exact closure_mono hP3\n      exact subset_antisymm h₁ h₂\n  · rintro ⟨U, hOpenU, hASubU, hClEq⟩\n    -- Aim: `A ⊆ interior (closure A)`.\n    dsimp [Topology.P3]\n    intro x hxA\n    -- First, place `x` in `U`.\n    have hxU : x ∈ U := hASubU hxA\n    -- Show `U ⊆ interior (closure U)`.\n    have hUsub :\n        (U : Set X) ⊆ interior (closure U) := by\n      -- Since `U` is open, `interior U = U`.\n      have hIntU : interior (U : Set X) = U := hOpenU.interior_eq\n      -- Monotonicity of `interior` with `U ⊆ closure U`.\n      have hIncl :\n          interior (U : Set X) ⊆ interior (closure U) :=\n        interior_mono (subset_closure : (U : Set X) ⊆ closure U)\n      simpa [hIntU] using hIncl\n    -- Convert via the equality of closures.\n    have hIntEq :\n        interior (closure U) = interior (closure (A : Set X)) := by\n      simpa [hClEq]\n    have hxInt : x ∈ interior (closure U) := hUsub hxU\n    simpa [hIntEq] using hxInt",
+    "theorem P2_implies_P3_alt {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → Topology.P3 A := by\n  intro hP2\n  dsimp [Topology.P2, Topology.P3] at *\n  -- `closure (interior A)` sits inside `closure A`.\n  have h₁ : closure (interior (A : Set X)) ⊆ closure A :=\n    closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n  -- Taking interiors preserves the inclusion.\n  have h₂ :\n      interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono h₁\n  exact hP2.trans h₂"
+  ],
+  "success": true
+}

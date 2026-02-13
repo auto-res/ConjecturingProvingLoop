@@ -1,0 +1,26 @@
+{
+  "times": [
+    118.65015935897827
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7852,
+      "prompt_tokens": 44245,
+      "total_tokens": 52097,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_iff_subset_closure {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) = closure B ↔ (A ⊆ closure B ∧ B ⊆ closure A) := by\n  constructor\n  · intro hEq\n    have hAB : (A : Set X) ⊆ closure B := by\n      intro x hxA\n      have : x ∈ closure A := (subset_closure : A ⊆ closure A) hxA\n      simpa [hEq] using this\n    have hBA : (B : Set X) ⊆ closure A := by\n      intro x hxB\n      have : x ∈ closure B := (subset_closure : B ⊆ closure B) hxB\n      simpa [hEq] using this\n    exact And.intro hAB hBA\n  · rintro ⟨hAB, hBA⟩\n    apply Set.Subset.antisymm\n    ·\n      have hClosed : IsClosed (closure B) := isClosed_closure\n      exact closure_minimal hAB hClosed\n    ·\n      have hClosed : IsClosed (closure A) := isClosed_closure\n      exact closure_minimal hBA hClosed"
+  ],
+  "success": true
+}

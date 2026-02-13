@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.48151755332947
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2643,
+      "prompt_tokens": 11197,
+      "total_tokens": 13840,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) ⊆ closure (interior (closure A)) := by\n  intro x hx\n  -- First, use `interior_subset` to move from the interior to the closure.\n  have hx₁ : x ∈ closure (interior A) :=\n    (interior_subset : interior (closure (interior A)) ⊆ closure (interior A)) hx\n  -- Then, apply the monotonicity lemma already proved for closures of interiors.\n  have hSub :\n      closure (interior A) ⊆ closure (interior (closure A)) :=\n    Topology.closure_interior_subset_closure_interior_closure (A := A)\n  exact hSub hx₁"
+  ],
+  "success": true
+}

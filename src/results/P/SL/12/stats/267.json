@@ -1,0 +1,26 @@
+{
+  "times": [
+    108.86261224746704
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7385,
+      "prompt_tokens": 50528,
+      "total_tokens": 57913,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_union_closure {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : Topology.P1 (X := X) B) :\n    Topology.P1 (X := X) (closure A ∪ closure B) := by\n  -- Step 1: `P1` holds for `A ∪ B`.\n  have hUnion : Topology.P1 (X := X) (A ∪ B) :=\n    Topology.P1_union (X := X) (A := A) (B := B) hA hB\n  -- Step 2: upgrade to `P1` for the closure of the union.\n  have hClosureUnion : Topology.P1 (X := X) (closure (A ∪ B)) :=\n    Topology.P1_closure_of_P1 (X := X) (A := A ∪ B) hUnion\n  -- Step 3: identify the goal set via `closure_union`.\n  have h_eq :\n      (closure (A ∪ B : Set X)) =\n        closure (A : Set X) ∪ closure (B : Set X) := by\n    simpa [closure_union]\n  -- Step 4: unfold the goal and transport memberships through the equality.\n  dsimp [Topology.P1] at hClosureUnion ⊢\n  intro x hx\n  -- Convert membership in `closure A ∪ closure B` to membership in `closure (A ∪ B)`.\n  have hx_closure : x ∈ closure (A ∪ B : Set X) := by\n    have : x ∈ (closure (A : Set X) ∪ closure (B : Set X)) := hx\n    simpa [h_eq] using this\n  -- Apply `P1` for `closure (A ∪ B)`.\n  have hx_goal :\n      x ∈ closure (interior (closure (A ∪ B : Set X))) :=\n    hClosureUnion hx_closure\n  -- Rewrite the target set back to the desired one.\n  have h_int_eq :\n      interior (closure (A ∪ B : Set X)) =\n        interior (closure (A : Set X) ∪ closure (B : Set X)) := by\n    simpa [h_eq]\n  simpa [h_int_eq] using hx_goal"
+  ],
+  "success": true
+}

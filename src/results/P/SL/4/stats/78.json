@@ -1,0 +1,26 @@
+{
+  "times": [
+    12.233295679092407
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 921,
+      "prompt_tokens": 11079,
+      "total_tokens": 12000,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closed_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    Topology.P3 A → Topology.P1 A := by\n  intro hP3\n  -- From `P3` and closedness, deduce that `A` is open.\n  have hOpen : IsOpen A :=\n    ((Topology.P3_closed_iff_isOpen (A := A) hA).1) hP3\n  -- Any open set satisfies `P1`.\n  exact Topology.isOpen_P1 (A := A) hOpen"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.800911903381348
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2495,
+      "prompt_tokens": 22338,
+      "total_tokens": 24833,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_prod_open {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : IsOpen A) (hB : IsOpen B) :\n    Topology.P1 (Set.prod A B) := by\n  have hOpen : IsOpen (Set.prod A B) := hA.prod hB\n  simpa using Topology.P1_of_open (A := Set.prod A B) hOpen"
+  ],
+  "success": true
+}

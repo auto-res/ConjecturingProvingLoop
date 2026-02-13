@@ -1,0 +1,77 @@
+{
+  "times": [
+    85.0437798500061,
+    191.74035453796387,
+    68.78588342666626,
+    71.98217582702637
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6249,
+      "prompt_tokens": 39459,
+      "total_tokens": 45708,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    },
+    {
+      "completion_tokens": 14372,
+      "prompt_tokens": 39598,
+      "total_tokens": 53970,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 4889,
+      "prompt_tokens": 39731,
+      "total_tokens": 44620,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 4674,
+      "prompt_tokens": 39885,
+      "total_tokens": 44559,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_open_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) :\n    interior (A ∩ B) = A ∩ interior B := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨U, hU_open, hxU, hU_subset⟩\n    have hxA : x ∈ A := (hU_subset hxU).1\n    have hU_subset_B : U ⊆ B := by\n      intro y hy\n      exact (hU_subset hy).2\n    have hxIntB : x ∈ interior B := ⟨U, hU_open, hxU, hU_subset_B⟩\n    exact And.intro hxA hxIntB\n  · intro hx\n    rcases hx with ⟨hxA, hxIntB⟩\n    rcases hxIntB with ⟨U, hU_open, hxU, hU_subsetB⟩\n    have hV_open : IsOpen (U ∩ A) := hU_open.inter hA\n    have hxV : x ∈ U ∩ A := And.intro hxU hxA\n    have hV_subset : (U ∩ A) ⊆ A ∩ B := by\n      intro y hy\n      exact And.intro hy.2 (hU_subsetB hy.1)\n    exact ⟨U ∩ A, hV_open, hxV, hV_subset⟩",
+    "theorem Topology.interior_diff_subset_diff_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ A \\ closure B := by\n  intro x hxInt\n  -- First, `x` lies in `A \\ B`.\n  have hxDiff : x ∈ A \\ B := interior_subset hxInt\n  have hxA : x ∈ A := hxDiff.1\n  -- Show that `x` is not in `closure B`.\n  have hxNotClB : x ∉ closure B := by\n    intro hxClB\n    -- `interior (A \\ B)` is an open neighbourhood of `x` disjoint from `B`.\n    have hOpen : IsOpen (interior (A \\ B : Set X)) := isOpen_interior\n    -- If `x ∈ closure B`, every neighbourhood of `x` meets `B`.\n    have hNonempty : ((interior (A \\ B : Set X)) ∩ B).Nonempty :=\n      (mem_closure_iff.1 hxClB) (interior (A \\ B : Set X)) hOpen hxInt\n    rcases hNonempty with ⟨y, hMem⟩\n    rcases hMem with ⟨hyInt, hyB⟩\n    -- But `interior (A \\ B)` is contained in `A \\ B`, hence disjoint from `B`.\n    have : y ∈ A \\ B := interior_subset hyInt\n    exact (this.2) hyB\n  exact And.intro hxA hxNotClB\n\ntheorem Topology.interior_inter_open_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsOpen B) :\n    interior (A ∩ B) = interior A ∩ B := by\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    intro x hxInt\n    have hxIntA : x ∈ interior A :=\n      (interior_mono (Set.inter_subset_left : (A ∩ B) ⊆ A)) hxInt\n    have hxInAB : x ∈ A ∩ B := interior_subset hxInt\n    exact And.intro hxIntA hxInAB.2\n  · -- `⊇` direction\n    intro x hx\n    rcases hx with ⟨hxIntA, hxB⟩\n    -- `interior A ∩ B` is an open neighbourhood of `x` contained in `A ∩ B`.\n    have hOpen : IsOpen (interior A ∩ B) := isOpen_interior.inter hB\n    have hSubset : (interior A ∩ B : Set X) ⊆ A ∩ B := by\n      intro y hy\n      exact And.intro (interior_subset hy.1) hy.2\n    exact interior_maximal hSubset hOpen (And.intro hxIntA hxB)",
+    "theorem Topology.iterate_closure_interior_succ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    ∀ n : ℕ,\n      ((fun S : Set X => closure (interior S))^[n.succ]) A =\n        closure (interior A) := by\n  intro n\n  induction n with\n  | zero =>\n      simp\n  | succ n ih =>\n      simpa [Function.iterate_succ_apply', ih,\n        Topology.closure_interior_closure_interior_eq_closure_interior\n          (X := X) (A := A)]",
+    "theorem Topology.closure_interior_closure_inter_subset_inter_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (closure (A ∩ B))) ⊆\n      closure (interior (closure A)) ∩ closure (interior (closure B)) := by\n  intro x hx\n  -- `closure (A ∩ B) ⊆ closure A`\n  have h_cl_subset_left : closure (A ∩ B) ⊆ closure A :=\n    closure_mono Set.inter_subset_left\n  -- Hence `interior (closure (A ∩ B)) ⊆ interior (closure A)`\n  have h_int_subset_left :\n      interior (closure (A ∩ B)) ⊆ interior (closure A) :=\n    interior_mono h_cl_subset_left\n  -- Taking closures preserves this inclusion\n  have h_cl_int_subset_left :\n      closure (interior (closure (A ∩ B))) ⊆\n        closure (interior (closure A)) :=\n    closure_mono h_int_subset_left\n  -- Obtain the left component of the goal\n  have hx_left : x ∈ closure (interior (closure A)) :=\n    h_cl_int_subset_left hx\n  -- The corresponding statements for `B`\n  have h_cl_subset_right : closure (A ∩ B) ⊆ closure B :=\n    closure_mono Set.inter_subset_right\n  have h_int_subset_right :\n      interior (closure (A ∩ B)) ⊆ interior (closure B) :=\n    interior_mono h_cl_subset_right\n  have h_cl_int_subset_right :\n      closure (interior (closure (A ∩ B))) ⊆\n        closure (interior (closure B)) :=\n    closure_mono h_int_subset_right\n  have hx_right : x ∈ closure (interior (closure B)) :=\n    h_cl_int_subset_right hx\n  -- Combine the two components\n  exact And.intro hx_left hx_right"
+  ],
+  "success": true
+}

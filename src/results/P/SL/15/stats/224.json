@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.438048839569092
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1825,
+      "prompt_tokens": 47752,
+      "total_tokens": 49577,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_closure_interior_of_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (interior A)) : IsOpen (closure (interior A)) := by\n  -- By density, the closure of `interior A` is the whole space.\n  have h_closure_eq : closure (interior A : Set X) = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  -- Since `univ` is open, the required set is open as well.\n  simpa [h_closure_eq] using isOpen_univ"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    135.06811714172363,
+    127.61137962341309
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9665,
+      "prompt_tokens": 34743,
+      "total_tokens": 44408,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 8530,
+      "prompt_tokens": 34823,
+      "total_tokens": 43353,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (A : Set X)))) =\n      interior (closure A) := by\n  -- First inclusion: `⊆`\n  apply Set.Subset.antisymm\n  · exact\n      Topology.interior_closure_interior_closure_subset_interior_closure\n        (X := X) (A := A)\n  ·\n    -- Second inclusion: `⊇`\n    -- `interior (closure A)` is open …\n    have h_open : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    -- … and contained in `closure (interior (closure A))`.\n    have h_subset :\n        (interior (closure (A : Set X)) : Set X) ⊆\n          closure (interior (closure (A : Set X))) :=\n      subset_closure\n    -- Hence it is contained in the interior of that closure.\n    exact interior_maximal h_subset h_open",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    51.210200786590576,
+    56.927618980407715,
+    44.26577401161194
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3982,
+      "prompt_tokens": 10660,
+      "total_tokens": 14642,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    },
+    {
+      "completion_tokens": 4768,
+      "prompt_tokens": 10884,
+      "total_tokens": 15652,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    },
+    {
+      "completion_tokens": 4475,
+      "prompt_tokens": 10964,
+      "total_tokens": 15439,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9088
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_closure_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P3 (X := X) A) :\n    closure (A : Set X) = closure (interior (closure A)) := by\n  apply Set.Subset.antisymm\n  · -- `closure (interior (closure A)) ⊆ closure A`\n    have h₁ : (interior (closure (A : Set X)) : Set X) ⊆ closure A :=\n      interior_subset\n    exact closure_mono h₁\n  · -- `closure A ⊆ closure (interior (closure A))`\n    have h₂ : (A : Set X) ⊆ interior (closure A) := hA\n    exact closure_mono h₂",
+    "theorem Topology.interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (A : Set X)))) =\n      interior (closure A) := by\n  -- First inclusion: `⊆`\n  have h₁ :\n      interior (closure (interior (closure (A : Set X)))) ⊆\n        interior (closure A) := by\n    -- Since `interior (closure A) ⊆ closure A`, taking closures gives\n    -- `closure (interior (closure A)) ⊆ closure A`.\n    have h_subset :\n        closure (interior (closure (A : Set X))) ⊆ closure A := by\n      have : (interior (closure (A : Set X)) : Set X) ⊆ closure A :=\n        interior_subset\n      exact closure_mono this\n    -- Applying `interior_mono` yields the desired inclusion.\n    exact interior_mono h_subset\n  -- Second inclusion: `⊇`\n  have h₂ :\n      interior (closure A) ⊆\n        interior (closure (interior (closure (A : Set X)))) := by\n    -- The set `interior (closure A)` is open …\n    have h_open : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    -- … and contained in `closure (interior (closure A))`.\n    have h_subset :\n        (interior (closure (A : Set X)) : Set X) ⊆\n          closure (interior (closure (A : Set X))) :=\n      subset_closure\n    -- By maximality of the interior we obtain the inclusion.\n    exact interior_maximal h_subset h_open\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem Topology.P1_closure_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (X := X) (closure (interior A)) := by\n  dsimp [Topology.P1]\n  intro x hx\n  -- We will show that `closure (interior A)` is contained in\n  -- `closure (interior (closure (interior A)))`.\n  have h_sub :\n      closure (interior A : Set X) ⊆\n        closure (interior (closure (interior A))) := by\n    -- First, `interior A ⊆ interior (closure (interior A))`.\n    have h₁ :\n        (interior A : Set X) ⊆ interior (closure (interior A)) := by\n      simpa [interior_interior] using\n        (Topology.interior_subset_interior_closure\n          (X := X) (A := interior A))\n    -- Taking closures preserves this inclusion.\n    exact closure_mono h₁\n  exact h_sub hx"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.86773228645325
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7503,
+      "prompt_tokens": 42848,
+      "total_tokens": 50351,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_prod_univ_right_of_dense\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty X]\n    {B : Set Y} :\n    Dense ((Set.univ : Set X) ×ˢ B) → Dense B := by\n  intro hDenseProd\n  -- We show that `closure B = univ`, from which density follows.\n  have h_closureB_univ : (closure (B : Set Y)) = (Set.univ : Set Y) := by\n    -- First, the easy inclusion `closure B ⊆ univ`.\n    have h₁ : (closure (B : Set Y)) ⊆ (Set.univ : Set Y) := by\n      intro y _; trivial\n    -- For the reverse inclusion, fix an arbitrary `y : Y`.\n    have h₂ : (Set.univ : Set Y) ⊆ closure B := by\n      intro y _hy\n      classical\n      -- Pick an arbitrary `x : X`.\n      let x : X := Classical.arbitrary X\n      -- The point `(x, y)` belongs to `univ`.\n      have h_mem_univ : ((x, y) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n        trivial\n      -- Since the product set is dense, its closure is `univ`.\n      have h_closure_prod_univ :\n          closure ((Set.univ : Set X) ×ˢ B : Set (X × Y)) =\n            (Set.univ : Set (X × Y)) := by\n        simpa using hDenseProd.closure_eq\n      -- The closure of the product can also be written as a product of closures.\n      have h_closure_prod :\n          closure ((Set.univ : Set X) ×ˢ B : Set (X × Y)) =\n            (Set.univ : Set X) ×ˢ closure (B : Set Y) := by\n        simpa [closure_univ] using\n          closure_prod_eq (s := (Set.univ : Set X)) (t := B)\n      -- Transport the membership of `(x, y)` through these equalities.\n      have h_mem_prod_closure :\n          ((x, y) : X × Y) ∈ (Set.univ : Set X) ×ˢ closure (B : Set Y) := by\n        -- `(x, y)` lies in the closure of the product...\n        have h_in_closure :\n            ((x, y) : X × Y) ∈\n              closure ((Set.univ : Set X) ×ˢ B : Set (X × Y)) := by\n          simpa [h_closure_prod_univ] using h_mem_univ\n        -- ...and hence in the product of the closures.\n        simpa [h_closure_prod] using h_in_closure\n      -- Extract the `Y`–component to obtain `y ∈ closure B`.\n      exact (Set.mem_prod.1 h_mem_prod_closure).2\n    -- Assemble the equality of sets.\n    exact Set.Subset.antisymm h₁ h₂\n  -- Conclude density from the characterization via closures.\n  exact (dense_iff_closure_eq).2 h_closureB_univ"
+  ],
+  "success": true
+}

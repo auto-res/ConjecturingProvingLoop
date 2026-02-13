@@ -1,0 +1,94 @@
+{
+  "times": [
+    49.85499572753906,
+    130.96414494514465,
+    28.887634992599487,
+    34.82534885406494,
+    19.690213680267334
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3582,
+      "prompt_tokens": 46483,
+      "total_tokens": 50065,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 8421,
+      "prompt_tokens": 46727,
+      "total_tokens": 55148,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 1964,
+      "prompt_tokens": 46799,
+      "total_tokens": 48763,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 2841,
+      "prompt_tokens": 46885,
+      "total_tokens": 49726,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1285,
+      "prompt_tokens": 47015,
+      "total_tokens": 48300,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_diff_closed {X : Type*} [TopologicalSpace X] {U V : Set X}\n    (hU_open : IsOpen (U : Set X)) (hV_closed : IsClosed (V : Set X)) :\n    Topology.P2 (U \\ V) := by\n  have hOpen : IsOpen (U \\ V : Set X) := hU_open.diff hV_closed\n  exact Topology.P2_of_open (A := U \\ V) hOpen",
+    "theorem IsOpen.diff {α : Type*} [TopologicalSpace α] {U V : Set α}\n    (hU : IsOpen (U : Set α)) (hV : IsClosed (V : Set α)) :\n    IsOpen (U \\ V : Set α) := by\n  -- The complement of a closed set is open.\n  have hV_open : IsOpen (Vᶜ : Set α) := by\n    simpa using hV.isOpen_compl\n  -- The difference `U \\ V` is `U ∩ Vᶜ`, an intersection of two open sets.\n  simpa [Set.diff_eq] using hU.inter hV_open",
+    "theorem closure_inter_open_right_eq_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hB : IsOpen (B : Set X)) :\n    closure (A ∩ B : Set X) ∩ B = closure (A : Set X) ∩ B := by\n  apply Set.Subset.antisymm\n  · -- First inclusion: `⊆`\n    intro x hx\n    rcases hx with ⟨hxCl, hxB⟩\n    exact ⟨(closure_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)) hxCl, hxB⟩\n  · -- Second inclusion: `⊇`\n    intro x hx\n    rcases hx with ⟨hxClA, hxB⟩\n    -- We show `x ∈ closure (A ∩ B)`.\n    have hxClAB : x ∈ closure (A ∩ B : Set X) := by\n      -- Use the neighbourhood characterization of `closure`.\n      refine (mem_closure_iff).2 ?_\n      intro U hU_open hxU\n      -- Consider the open neighbourhood `U ∩ B` of `x`.\n      have hUB_open : IsOpen (U ∩ B) := hU_open.inter hB\n      have hxUB : x ∈ U ∩ B := ⟨hxU, hxB⟩\n      -- Since `x ∈ closure A`, this neighbourhood meets `A`.\n      have hNonempty : ((U ∩ B) ∩ A).Nonempty :=\n        (mem_closure_iff).1 hxClA (U ∩ B) hUB_open hxUB\n      rcases hNonempty with ⟨y, ⟨⟨hyU, hyB⟩, hyA⟩⟩\n      -- The point `y` witnesses the required intersection with `A ∩ B`.\n      exact ⟨y, ⟨⟨hyA, hyB⟩, hyU⟩⟩\n    exact ⟨hxClAB, hxB⟩",
+    "theorem closure_union_closure_right\n    {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    closure (A ∪ closure (B : Set X)) = closure (A ∪ B) := by\n  apply Set.Subset.antisymm\n  ·\n    have hSub : (A ∪ closure (B : Set X) : Set X) ⊆ closure (A ∪ B) := by\n      intro x hx\n      cases hx with\n      | inl hA =>\n          -- `x ∈ A` ⇒ `x ∈ A ∪ B` ⇒ `x ∈ closure (A ∪ B)`.\n          have : (x : X) ∈ (A ∪ B : Set X) := Or.inl hA\n          exact (subset_closure : (A ∪ B : Set X) ⊆ closure (A ∪ B)) this\n      | inr hClB =>\n          -- `closure B ⊆ closure (A ∪ B)` by monotonicity.\n          have hIncl : closure (B : Set X) ⊆ closure (A ∪ B) := by\n            apply closure_mono\n            intro y hyB\n            exact Or.inr hyB\n          exact hIncl hClB\n    exact closure_mono hSub\n  ·\n    have hSub : (A ∪ B : Set X) ⊆ A ∪ closure (B : Set X) := by\n      intro x hx\n      cases hx with\n      | inl hA => exact Or.inl hA\n      | inr hB =>\n          have : (x : X) ∈ closure (B : Set X) := subset_closure hB\n          exact Or.inr this\n    exact closure_mono hSub",
+    "theorem interior_eq_univ_of_closed_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hDense : Dense (A : Set X)) :\n    interior (A : Set X) = Set.univ := by\n  have hA : (A : Set X) = Set.univ :=\n    Topology.dense_closed_eq_univ (A := A) hDense hClosed\n  simpa [hA, interior_univ]"
+  ],
+  "success": true
+}

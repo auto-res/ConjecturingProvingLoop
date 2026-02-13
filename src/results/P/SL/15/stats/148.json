@@ -1,0 +1,43 @@
+{
+  "times": [
+    123.49246168136597,
+    95.94971179962158
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8871,
+      "prompt_tokens": 29307,
+      "total_tokens": 38178,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    },
+    {
+      "completion_tokens": 7092,
+      "prompt_tokens": 29490,
+      "total_tokens": 36582,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq_closure_interiors {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  simpa [interior_union] using\n    (closure_union (interior A) (interior B))",
+    "theorem closure_interior_union_subset_closure_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A) ∪ closure (interior B) ⊆\n      closure (interior (A ∪ B)) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      -- Handle the case `x ∈ closure (interior A)`\n      have h_subset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        -- `interior A ⊆ interior (A ∪ B)`\n        have hIntSubset : interior A ⊆ interior (A ∪ B) := by\n          have : (A : Set X) ⊆ A ∪ B := Set.subset_union_left\n          exact interior_mono this\n        -- Taking closures preserves inclusion\n        exact closure_mono hIntSubset\n      exact h_subset hA\n  | inr hB =>\n      -- Handle the case `x ∈ closure (interior B)`\n      have h_subset : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n        -- `interior B ⊆ interior (A ∪ B)`\n        have hIntSubset : interior B ⊆ interior (A ∪ B) := by\n          have : (B : Set X) ⊆ A ∪ B := Set.subset_union_right\n          exact interior_mono this\n        -- Taking closures preserves inclusion\n        exact closure_mono hIntSubset\n      exact h_subset hB"
+  ],
+  "success": true
+}

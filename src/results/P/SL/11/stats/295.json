@@ -1,0 +1,26 @@
+{
+  "times": [
+    261.89890789985657
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10843,
+      "prompt_tokens": 48783,
+      "total_tokens": 59626,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_sUnion_open {X : Type*} [TopologicalSpace X] {𝔄 : Set (Set X)}\n    (hA : ∀ A, A ∈ 𝔄 → IsOpen (A : Set X)) :\n    interior (⋃₀ 𝔄 : Set X) = ⋃₀ 𝔄 := by\n  have hOpen : IsOpen (⋃₀ 𝔄 : Set X) := by\n    refine isOpen_sUnion ?_\n    intro U hU\n    exact hA U hU\n  simpa [hOpen.interior_eq]"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    159.7230339050293
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12120,
+      "prompt_tokens": 21358,
+      "total_tokens": 33478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_inter_interior {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    Topology.P3 (interior (A : Set X) ∩ interior B) := by\n  have hA : IsOpen (interior (A : Set X)) := isOpen_interior\n  have hB : IsOpen (interior (B : Set X)) := isOpen_interior\n  simpa using\n    (Topology.P3_inter_of_isOpen\n        (A := interior (A : Set X)) (B := interior (B : Set X)) hA hB)"
+  ],
+  "success": true
+}

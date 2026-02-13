@@ -1,0 +1,26 @@
+{
+  "times": [
+    116.76281666755676
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9986,
+      "prompt_tokens": 20990,
+      "total_tokens": 30976,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_closed {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    IsClosed A → IsClosed B → Topology.P3 A → Topology.P3 B → Topology.P3 (A ∩ B) := by\n  intro hClosedA hClosedB hP3A hP3B\n  -- From closedness and `P3`, we infer that both `A` and `B` are open.\n  have hOpenA : IsOpen A :=\n    Topology.isClosed_P3_implies_isOpen (A := A) hClosedA hP3A\n  have hOpenB : IsOpen B :=\n    Topology.isClosed_P3_implies_isOpen (A := B) hClosedB hP3B\n  -- The intersection of two open sets is open.\n  have hOpenInter : IsOpen (A ∩ B : Set X) := hOpenA.inter hOpenB\n  -- Any open set satisfies `P3`.\n  exact Topology.isOpen_implies_P3 (A := A ∩ B) hOpenInter"
+  ],
+  "success": true
+}

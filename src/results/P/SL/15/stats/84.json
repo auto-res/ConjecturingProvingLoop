@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.93302917480469
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3493,
+      "prompt_tokens": 13077,
+      "total_tokens": 16570,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_univ_of_P1_and_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 A) (hDense : Dense A) :\n    closure (interior A) = (Set.univ : Set X) := by\n  -- From `P1`, we have `closure A = closure (interior A)`.\n  have h_closure_eq : closure A = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closure_interior (X := X) (A := A)).1 hP1\n  -- Since `A` is dense, `closure A = univ`.\n  have h_closure_univ : closure A = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  -- Combining the two equalities yields the desired result.\n  simpa [h_closure_eq] using h_closure_univ"
+  ],
+  "success": true
+}

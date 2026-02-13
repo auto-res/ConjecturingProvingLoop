@@ -1,0 +1,26 @@
+{
+  "times": [
+    123.22461414337158
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7501,
+      "prompt_tokens": 49417,
+      "total_tokens": 56918,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_eq_inter_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    interior (A ∩ B) = interior A ∩ interior B := by\n  calc\n    interior (A ∩ B) = A ∩ B := (hA.inter hB).interior_eq\n    _ = interior A ∩ interior B := by\n      simpa [hA.interior_eq, hB.interior_eq]"
+  ],
+  "success": true
+}

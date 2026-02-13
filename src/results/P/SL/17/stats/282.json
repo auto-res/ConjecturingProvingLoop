@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.19589281082153
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4121,
+      "prompt_tokens": 48985,
+      "total_tokens": 53106,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_interior_iff_closure_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A ⊆ closure (interior A) ↔ closure (interior A) = closure A := by\n  constructor\n  · intro hSub\n    -- We already have `closure (interior A) ⊆ closure A`.\n    apply Set.Subset.antisymm\n    ·\n      exact closure_mono (interior_subset : interior A ⊆ A)\n    ·\n      intro x hxClosA\n      by_cases hxInt : x ∈ interior A\n      ·\n        -- Case `x ∈ interior A`\n        exact subset_closure hxInt\n      ·\n        -- Case `x ∉ interior A`, so `x ∈ frontier A`\n        have hxFront : x ∈ frontier A := by\n          exact And.intro hxClosA hxInt\n        exact hSub hxFront\n  · intro hEq\n    -- Rewrite membership using the equality of closures.\n    intro x hxFront\n    have : x ∈ closure A := hxFront.1\n    simpa [hEq] using this"
+  ],
+  "success": true
+}

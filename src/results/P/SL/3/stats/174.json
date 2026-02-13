@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.2378089427948
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2952,
+      "prompt_tokens": 26834,
+      "total_tokens": 29786,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_of_isClosed_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hP3 : Topology.P3 (A : Set X)) :\n    closure (interior (A : Set X)) = A := by\n  -- From `P3` and the fact that `A` is closed, deduce `P2`.\n  have hP2 : Topology.P2 (A : Set X) :=\n    Topology.P2_of_isClosed_and_P3 (A := A) hA_closed hP3\n  -- Apply the existing result that relates `P2`, closedness, and the desired equality.\n  exact closure_interior_eq_of_isClosed_and_P2 (A := A) hA_closed hP2"
+  ],
+  "success": true
+}

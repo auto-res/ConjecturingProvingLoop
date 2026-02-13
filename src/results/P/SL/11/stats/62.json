@@ -1,0 +1,43 @@
+{
+  "times": [
+    103.25146007537842,
+    40.3844473361969
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6222,
+      "prompt_tokens": 8695,
+      "total_tokens": 14917,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    },
+    {
+      "completion_tokens": 2759,
+      "prompt_tokens": 8864,
+      "total_tokens": 11623,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  classical\n  calc\n    closure (interior (A ∪ B))\n        = closure (interior A ∪ interior B) := by\n          simpa [interior_union]\n    _   = closure (interior A) ∪ closure (interior B) := by\n          simpa [closure_union]",
+    "theorem closure_interior_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A) ∪ closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have hsubset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        have : (interior A : Set X) ⊆ interior (A ∪ B) := by\n          apply interior_mono\n          exact Set.subset_union_left\n        exact this\n      exact hsubset hA\n  | inr hB =>\n      have hsubset : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        have : (interior B : Set X) ⊆ interior (A ∪ B) := by\n          apply interior_mono\n          exact Set.subset_union_right\n        exact this\n      exact hsubset hB"
+  ],
+  "success": true
+}

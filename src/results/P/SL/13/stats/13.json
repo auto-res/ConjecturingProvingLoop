@@ -1,0 +1,43 @@
+{
+  "times": [
+    68.62264609336853,
+    40.467408895492554
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5327,
+      "prompt_tokens": 2029,
+      "total_tokens": 7356,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3040,
+      "prompt_tokens": 2146,
+      "total_tokens": 5186,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_eq_univ_of_dense_and_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h_dense : Dense (A : Set X)) (hP1 : Topology.P1 (X:=X) A) :\n    closure (interior (A : Set X)) = (Set.univ : Set X) := by\n  -- `Dense` gives `closure A = univ`\n  have h_closureA : closure (A : Set X) = (Set.univ : Set X) := h_dense.closure_eq\n  -- From `P1` we get `closure A ⊆ closure (interior A)`\n  have h_univ_subset : (Set.univ : Set X) ⊆ closure (interior (A : Set X)) := by\n    have h : closure (A : Set X) ⊆ closure (interior (A : Set X)) := by\n      have : (A : Set X) ⊆ closure (interior (A : Set X)) := hP1\n      exact closure_mono this\n    simpa [h_closureA] using h\n  -- The reverse inclusion is obvious\n  have h_subset_univ : closure (interior (A : Set X)) ⊆ (Set.univ : Set X) := by\n    intro x hx\n    trivial\n  exact Set.Subset.antisymm h_subset_univ h_univ_subset",
+    "theorem Topology.interior_closure_interior_eq_interior_closure_of_isOpen {X : Type*}\n    [TopologicalSpace X] {A : Set X} (hA : IsOpen (A : Set X)) :\n    interior (closure (interior A)) = interior (closure A) := by\n  simpa [hA.interior_eq]"
+  ],
+  "success": true
+}

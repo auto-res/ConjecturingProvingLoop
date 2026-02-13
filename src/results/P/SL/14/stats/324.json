@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.51850509643555
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4207,
+      "prompt_tokens": 61464,
+      "total_tokens": 65671,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 60160
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_union_eq_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed (A : Set X)) (hB : IsClosed (B : Set X)) :\n    interior (closure (A ∪ B : Set X)) = interior (A ∪ B) := by\n  -- Since `A ∪ B` is closed, its closure coincides with itself.\n  have hClosure : closure (A ∪ B : Set X) = A ∪ B :=\n    (IsClosed.union hA hB).closure_eq\n  -- Rewriting with `hClosure` gives the desired equality.\n  simpa [hClosure]"
+  ],
+  "success": true
+}

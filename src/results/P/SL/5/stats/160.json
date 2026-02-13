@@ -1,0 +1,26 @@
+{
+  "times": [
+    17.54805040359497
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1655,
+      "prompt_tokens": 27006,
+      "total_tokens": 28661,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_six {X : Type*} [TopologicalSpace X] {A B C D E F : Set X}\n    (hA : Topology.P2 (X := X) A) (hB : Topology.P2 (X := X) B)\n    (hC : Topology.P2 (X := X) C) (hD : Topology.P2 (X := X) D)\n    (hE : Topology.P2 (X := X) E) (hF : Topology.P2 (X := X) F) :\n    Topology.P2 (X := X) (A ∪ B ∪ C ∪ D ∪ E ∪ F) := by\n  -- Combine the properties for the first five sets.\n  have hABCDE : Topology.P2 (X := X) (A ∪ B ∪ C ∪ D ∪ E) :=\n    Topology.P2_union_five (X := X)\n      (A := A) (B := B) (C := C) (D := D) (E := E)\n      hA hB hC hD hE\n  -- Unite the resulting set with `F`.\n  have hABCDEF : Topology.P2 (X := X) ((A ∪ B ∪ C ∪ D ∪ E) ∪ F) :=\n    Topology.P2_union (X := X)\n      (A := A ∪ B ∪ C ∪ D ∪ E) (B := F)\n      hABCDE hF\n  -- Re‐associate the unions to match the desired expression.\n  simpa [Set.union_assoc] using hABCDEF"
+  ],
+  "success": true
+}

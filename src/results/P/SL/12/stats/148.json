@@ -1,0 +1,43 @@
+{
+  "times": [
+    66.90227890014648,
+    148.45415949821472
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4537,
+      "prompt_tokens": 28307,
+      "total_tokens": 32844,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    },
+    {
+      "completion_tokens": 11785,
+      "prompt_tokens": 28429,
+      "total_tokens": 40214,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_subset_of_subset_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ interior (closure B)) :\n    closure (A : Set X) ⊆ closure B := by\n  -- First enlarge `A` to its closure.\n  have h₁ : closure (A : Set X) ⊆ closure (interior (closure B)) :=\n    closure_mono hAB\n  -- Next, relate `closure (interior (closure B))` to `closure B`.\n  have h₂ : closure (interior (closure B)) ⊆ closure B := by\n    -- `interior (closure B)` is contained in `closure B`.\n    have h_sub : (interior (closure B) : Set X) ⊆ closure B := interior_subset\n    -- Taking closures preserves the inclusion.\n    exact closure_mono h_sub\n  -- Combine the two inclusions.\n  exact Set.Subset.trans h₁ h₂",
+    "theorem Topology.interior_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) ⊆ closure A := by\n  exact Set.Subset.trans interior_subset subset_closure"
+  ],
+  "success": true
+}

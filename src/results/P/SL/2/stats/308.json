@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.945297479629517
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1416,
+      "prompt_tokens": 52492,
+      "total_tokens": 53908,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_closed_eq_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    IsClosed (A : Set X) → IsClosed (B : Set X) →\n      closure (A ∩ B : Set X) = (A ∩ B : Set X) := by\n  intro hClosedA hClosedB\n  have hClosed : IsClosed (A ∩ B : Set X) := hClosedA.inter hClosedB\n  simpa using hClosed.closure_eq"
+  ],
+  "success": true
+}

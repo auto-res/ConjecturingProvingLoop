@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.76432299613953
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8892,
+      "prompt_tokens": 56860,
+      "total_tokens": 65752,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_self_union_frontier {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) = (A : Set X) ∪ frontier (A : Set X) := by\n  ext x\n  constructor\n  · intro hxCl\n    by_cases hxA : x ∈ (A : Set X)\n    · exact Or.inl hxA\n    ·\n      -- Since `x ∉ A` and `x ∈ closure A`, we have `x ∈ frontier A`.\n      have hxFront : x ∈ frontier (A : Set X) := by\n        have hxNotInt : x ∉ interior (A : Set X) := by\n          intro hxInt\n          exact hxA (interior_subset hxInt)\n        exact And.intro hxCl hxNotInt\n      exact Or.inr hxFront\n  · intro h\n    cases h with\n    | inl hxA =>\n        exact subset_closure hxA\n    | inr hxFront =>\n        exact hxFront.1"
+  ],
+  "success": true
+}

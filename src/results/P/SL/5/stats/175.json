@@ -1,0 +1,43 @@
+{
+  "times": [
+    223.57077479362488,
+    172.13165926933289
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12921,
+      "prompt_tokens": 29770,
+      "total_tokens": 42691,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    },
+    {
+      "completion_tokens": 11461,
+      "prompt_tokens": 29869,
+      "total_tokens": 41330,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_interior_right {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ interior (B : Set X)) = interior (A ∩ B) := by\n  apply le_antisymm\n  · -- `⊆` : monotonicity of `interior`\n    have hsubset : (A ∩ interior (B : Set X) : Set X) ⊆ A ∩ B := by\n      intro x hx\n      exact ⟨hx.1, interior_subset hx.2⟩\n    exact interior_mono hsubset\n  · -- `⊇` : a point of `interior (A ∩ B)` is also in the RHS\n    intro x hxInt\n    -- From `x ∈ interior (A ∩ B)` obtain an open neighbourhood `V`.\n    rcases mem_interior.1 hxInt with ⟨V, hVsub, hVopen, hxV⟩\n    -- `x` is in the interior of `B`, hence there is an open `W`.\n    have hxIntB : x ∈ interior (B : Set X) :=\n      (interior_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hxInt\n    rcases mem_interior.1 hxIntB with ⟨W, hWsub, hWopen, hxW⟩\n    -- Intersect the two neighbourhoods.\n    let U : Set X := V ∩ W\n    have hUopen : IsOpen U := hVopen.inter hWopen\n    have hxU : x ∈ U := ⟨hxV, hxW⟩\n    -- `U` is contained in `A ∩ interior B`.\n    have hUsub : (U : Set X) ⊆ A ∩ interior (B : Set X) := by\n      intro y hy\n      have hyV : y ∈ V := hy.1\n      have hyW : y ∈ W := hy.2\n      have hyA : y ∈ A := (hVsub hyV).1\n      have hyIntB : y ∈ interior (B : Set X) := hWsub hyW\n      exact ⟨hyA, hyIntB⟩\n    -- Hence `x ∈ interior (A ∩ interior B)`.\n    exact mem_interior.2 ⟨U, hUsub, hUopen, hxU⟩",
+    "theorem closure_inter_interior_subset_closure_inter' {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A : Set X) ∩ interior B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxIntB⟩\n  -- We will show `x ∈ closure (A ∩ B)` via the neighbourhood\n  -- characterisation of the closure.\n  have : x ∈ closure (A ∩ B : Set X) := by\n    -- Reformulate membership in the closure.\n    refine (mem_closure_iff).2 ?_\n    intro U hUopen hxU\n    -- Consider the open neighbourhood `U ∩ interior B` of `x`.\n    have hVopen : IsOpen (U ∩ interior B) := hUopen.inter isOpen_interior\n    have hxV : x ∈ U ∩ interior B := ⟨hxU, hxIntB⟩\n    -- As `x ∈ closure A`, this neighbourhood meets `A`.\n    have hNon : ((U ∩ interior B) ∩ (A : Set X)).Nonempty := by\n      have h := (mem_closure_iff).1 hxClA\n      simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm]\n        using h (U ∩ interior B) hVopen hxV\n    -- Extract a witness `y` in the intersection.\n    rcases hNon with ⟨y, ⟨⟨hyU, hyIntB⟩, hyA⟩⟩\n    -- `y` also lies in `B` since it is in `interior B`.\n    have hyB : y ∈ B := interior_subset hyIntB\n    exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩\n  exact this"
+  ],
+  "success": true
+}

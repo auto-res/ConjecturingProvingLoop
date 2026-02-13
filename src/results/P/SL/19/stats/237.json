@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.23470282554626
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4032,
+      "prompt_tokens": 37040,
+      "total_tokens": 41072,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_iff_closure_subset {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed A ↔ closure A ⊆ A := by\n  constructor\n  · intro hClosed\n    simpa [hClosed.closure_eq]\n  · intro hSubset\n    have hEq : closure A = A := Set.Subset.antisymm hSubset subset_closure\n    simpa [hEq] using (isClosed_closure (s := A))"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.51611638069153
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2790,
+      "prompt_tokens": 55386,
+      "total_tokens": 58176,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_isOpen_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure A)) : Topology.P3 A := by\n  -- `IsOpen (closure A)` is equivalent to `P3 (closure A)`.\n  have hP3_closure : Topology.P3 (closure A) :=\n    (Topology.P3_closure_iff_isOpen_closure (A := A)).mpr hOpen\n  -- Transfer the `P3` property from `closure A` to `A`.\n  exact Topology.P3_of_P3_closure (A := A) hP3_closure"
+  ],
+  "success": true
+}

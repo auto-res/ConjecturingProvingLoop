@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.92095994949341
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2216,
+      "prompt_tokens": 58132,
+      "total_tokens": 60348,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57216
+      }
+    }
+  ],
+  "responses": [
+    "theorem open_union_three_has_all_Ps {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) (hC : IsOpen (C : Set X)) :\n    Topology.P1 (A ∪ B ∪ C) ∧ Topology.P2 (A ∪ B ∪ C) ∧ Topology.P3 (A ∪ B ∪ C) := by\n  -- The triple union of open sets is open.\n  have hOpen : IsOpen ((A ∪ B ∪ C) : Set X) :=\n    isOpen_union_three hA hB hC\n  -- Every open set satisfies `P1`, `P2`, and `P3`.\n  exact\n    Topology.isOpen_has_all_Ps\n      (X := X) (A := ((A ∪ B ∪ C) : Set X)) hOpen"
+  ],
+  "success": true
+}

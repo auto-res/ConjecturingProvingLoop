@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.51701331138611
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3587,
+      "prompt_tokens": 33972,
+      "total_tokens": 37559,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_subset_closureInterior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (A := A)) :\n    closure (A : Set X) \\ interior A ⊆ closure (interior A) := by\n  intro x hx\n  -- `hx` provides `x ∈ closure A`.\n  have hx_closureA : x ∈ closure A := hx.1\n  -- From `P1`, we have `A ⊆ closure (interior A)`.\n  have h_closure_subset : closure A ⊆ closure (interior A) := by\n    have hA_subset : (A : Set X) ⊆ closure (interior A) := hP1\n    have h_closure : closure A ⊆ closure (closure (interior A)) :=\n      closure_mono hA_subset\n    simpa [closure_closure] using h_closure\n  -- Therefore, `x ∈ closure (interior A)`.\n  exact h_closure_subset hx_closureA"
+  ],
+  "success": true
+}

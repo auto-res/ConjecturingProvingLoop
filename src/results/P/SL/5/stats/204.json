@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.29397940635681
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4183,
+      "prompt_tokens": 35570,
+      "total_tokens": 39753,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_interior_eq_empty {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A \\ B : Set X) ∩ interior B = (∅ : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hxCl, hxInt⟩\n    have h : x ∈ closure A \\ interior B :=\n      (closure_diff_subset (A := A) (B := B)) hxCl\n    exact (h.2 hxInt).elim\n  · intro hx\n    cases hx"
+  ],
+  "success": true
+}

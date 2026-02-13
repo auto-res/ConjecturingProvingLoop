@@ -1,0 +1,43 @@
+{
+  "times": [
+    180.21587109565735,
+    60.19294023513794
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11513,
+      "prompt_tokens": 56104,
+      "total_tokens": 67617,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    },
+    {
+      "completion_tokens": 3345,
+      "prompt_tokens": 56174,
+      "total_tokens": 59519,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_union_eq_union_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A : Set X) ∪ closure (B : Set X)) =\n      interior (closure (A : Set X)) ∪ interior (closure (B : Set X)) := by\n  simpa using\n    interior_union (closure (A : Set X)) (closure (B : Set X))",
+    "theorem interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) :\n    interior (A ∪ B : Set X) = A ∪ B := by\n  -- The union of two open sets is open.\n  have hOpen : IsOpen (A ∪ B : Set X) := hA.union hB\n  -- For an open set, its interior coincides with itself.\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

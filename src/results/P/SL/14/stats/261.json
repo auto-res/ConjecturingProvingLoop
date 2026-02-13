@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.47178077697754
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2574,
+      "prompt_tokens": 48137,
+      "total_tokens": 50711,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.clopen_closure_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) →\n      IsOpen (closure (A : Set X)) ∧ IsClosed (closure (A : Set X)) := by\n  intro hDense\n  have hOpen : IsOpen (closure (A : Set X)) :=\n    Topology.isOpen_closure_of_dense (X := X) (A := A) hDense\n  exact ⟨hOpen, isClosed_closure⟩"
+  ],
+  "success": true
+}

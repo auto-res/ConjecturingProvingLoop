@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.48822212219238
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2245,
+      "prompt_tokens": 13295,
+      "total_tokens": 15540,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_implies_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_dense : Dense (A : Set X)) :\n    Topology.P1 (X := X) (closure (A : Set X)) := by\n  -- The closure of a dense set is the whole space.\n  have h_closure : closure (A : Set X) = (Set.univ : Set X) := hA_dense.closure_eq\n  -- P1 holds for the whole space.\n  have hP1_univ : Topology.P1 (X := X) (Set.univ : Set X) :=\n    Topology.P1_univ (X := X)\n  -- Rewrite via `h_closure`.\n  simpa [h_closure] using hP1_univ"
+  ],
+  "success": true
+}

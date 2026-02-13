@@ -1,0 +1,60 @@
+{
+  "times": [
+    94.79760766029358,
+    24.083447217941284,
+    22.83461332321167
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6866,
+      "prompt_tokens": 34061,
+      "total_tokens": 40927,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 2202,
+      "prompt_tokens": 34215,
+      "total_tokens": 36417,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 2029,
+      "prompt_tokens": 34293,
+      "total_tokens": 36322,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iterate_closure_interior_succ {X : Type*} [TopologicalSpace X]\n    {A : Set X} (n : ℕ) :\n    ((fun S : Set X => closure (interior S))^[n.succ]) A =\n      closure (interior A) := by\n  induction n with\n  | zero =>\n      simp\n  | succ n ih =>\n      simpa [Function.iterate_succ_apply', ih,\n        Topology.closure_interior_closure_interior_eq_closure_interior\n          (X := X) (A := A)]",
+    "theorem Topology.iterate_closure_interior_fixed {X : Type*} [TopologicalSpace X] {A : Set X} :\n    ∀ n : ℕ,\n      ((fun S : Set X => closure (interior S))^[n]) (closure (interior A)) =\n        closure (interior A) := by\n  intro n\n  induction n with\n  | zero =>\n      simp\n  | succ n ih =>\n      simpa [Function.iterate_succ_apply', ih,\n        Topology.closure_interior_closure_interior_eq_closure_interior\n          (X := X) (A := A)]",
+    "theorem Topology.iterate_closure_interior_fixed_aux {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    ∀ n : ℕ,\n      ((fun S : Set X => closure (interior S))^[n]) (closure (interior A)) =\n        closure (interior A) := by\n  intro n\n  induction n with\n  | zero =>\n      simp\n  | succ n ih =>\n      -- `closure (interior A)` is a fixed point of the operator `S ↦ closure (interior S)`\n      have h_fix :\n          closure (interior (closure (interior A))) = closure (interior A) := by\n        simpa using\n          Topology.closure_interior_closure_interior_eq_closure_interior\n            (X := X) (A := A)\n      -- Use the fixed-point property to simplify the `(n + 1)`-st iterate.\n      simp [Function.iterate_succ_apply', ih, h_fix]"
+  ],
+  "success": true
+}

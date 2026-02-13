@@ -1,0 +1,94 @@
+{
+  "times": [
+    40.19242238998413,
+    72.35290312767029,
+    110.13621783256531,
+    65.48764896392822,
+    74.25040602684021
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2557,
+      "prompt_tokens": 881,
+      "total_tokens": 3438,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5119,
+      "prompt_tokens": 1005,
+      "total_tokens": 6124,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 7916,
+      "prompt_tokens": 1084,
+      "total_tokens": 9000,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4723,
+      "prompt_tokens": 1213,
+      "total_tokens": 5936,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 6736,
+      "prompt_tokens": 1301,
+      "total_tokens": 8037,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_closure_of_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP3 : Topology.P3 A) :\n    closure A = closure (interior (closure A)) := by\n  apply Set.Subset.antisymm\n  ·\n    have hSub : closure A ⊆ closure (interior (closure A)) := by\n      exact closure_mono hP3\n    simpa using hSub\n  ·\n    have hSub : closure (interior (closure A)) ⊆ closure A := by\n      have hIntSub : interior (closure A) ⊆ closure A := by\n        exact interior_subset\n      exact closure_mono hIntSub\n    simpa using hSub",
+    "import Mathlib\nimport Aesop\n\nnamespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\ndef P1 (A : Set X) : Prop :=\n  A ⊆ closure (interior A)\n\ndef P2 (A : Set X) : Prop :=\n  A ⊆ interior (closure (interior A))\n\ndef P3 (A : Set X) : Prop :=\n  A ⊆ interior (closure A)\n\ntheorem P2_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P3 A := by\n  intro hP2\n  have hInt : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono (closure_mono interior_subset)\n  exact Set.Subset.trans hP2 hInt\n\ntheorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro hP2\n  exact Set.Subset.trans hP2 interior_subset\n\ntheorem closure_eq_closure_interior_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P1 A) :\n    closure A = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    have : closure A ⊆ closure (closure (interior A)) := closure_mono h\n    simpa [closure_closure] using this\n  ·\n    simpa using closure_mono interior_subset\n\ntheorem P1_of_closure_eq_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure A = closure (interior A)) :\n    Topology.P1 A := by\n  have : A ⊆ closure (interior A) := by\n    simpa [h] using (subset_closure : (A : Set X) ⊆ closure A)\n  exact this\n\ntheorem P1_iff_closure_eq_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A ↔ closure A = closure (interior A) := by\n  constructor\n  · exact closure_eq_closure_interior_of_P1\n  · intro h\n    exact P1_of_closure_eq_closure_interior h\n\ntheorem closure_eq_closure_interior_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A) :\n    closure A = closure (interior A) := by\n  exact closure_eq_closure_interior_of_P1 (P2_implies_P1 hP2)",
+    "theorem P2_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 A := by\n  have hInt : interior A = A := hA.interior_eq\n  have hSub : A ⊆ interior (closure (interior A)) := by\n    have hSub' : interior A ⊆ interior (closure (interior A)) := by\n      have : interior A ⊆ closure (interior A) := subset_closure\n      exact interior_maximal isOpen_interior this\n    simpa [hInt] using hSub'\n  simpa [Topology.P2] using hSub",
+    "theorem interior_closure_interior_closure_eq {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply Set.Subset.antisymm\n  ·\n    -- `closure (interior (closure A))` is contained in `closure A`\n    have h_subset : closure (interior (closure A)) ⊆ closure A := by\n      apply closure_mono\n      exact interior_subset\n    -- taking interiors preserves the inclusion\n    exact interior_mono h_subset\n  ·\n    -- `interior (closure A)` is an open subset of `closure (interior (closure A))`\n    have h_subset : interior (closure A) ⊆ closure (interior (closure A)) := subset_closure\n    have h_isOpen : IsOpen (interior (closure A)) := isOpen_interior\n    -- so it is contained in the interior of that set\n    exact interior_maximal h_subset h_isOpen",
+    "theorem P2_of_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 A := by\n  -- `interior A` coincides with `A` since `A` is open\n  have hInt : interior A = A := hA.interior_eq\n  -- an open set is contained in the interior of its closure\n  have hGoal : (A : Set X) ⊆ interior (closure A) :=\n    interior_maximal subset_closure hA\n  -- rewrite the target using `hInt`\n  have hClosEq : closure (interior A) = closure A := by\n    simpa [hInt]\n  have : A ⊆ interior (closure (interior A)) := by\n    simpa [hClosEq] using hGoal\n  exact this"
+  ],
+  "success": true
+}

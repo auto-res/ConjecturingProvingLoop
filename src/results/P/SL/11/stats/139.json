@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.89264702796936
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4642,
+      "prompt_tokens": 20562,
+      "total_tokens": 25204,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_closed_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hP3 : Topology.P3 A) :\n    Topology.P2 A := by\n  -- For closed sets, `P2` and `P3` are equivalent.\n  have hEquiv : Topology.P2 A ↔ Topology.P3 A :=\n    Topology.P2_iff_P3_of_closed (A := A) hClosed\n  -- Apply the equivalence to turn the given `P3` into `P2`.\n  exact (hEquiv.mpr hP3)"
+  ],
+  "success": true
+}

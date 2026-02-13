@@ -1,0 +1,26 @@
+{
+  "times": [
+    77.47779679298401
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5511,
+      "prompt_tokens": 42141,
+      "total_tokens": 47652,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.nonempty_iff_nonempty_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    A.Nonempty ↔ (closure A).Nonempty := by\n  classical\n  constructor\n  · intro hA\n    exact hA.closure\n  · intro hCl\n    by_contra hA\n    -- From `¬ A.Nonempty` obtain `A = ∅`.\n    have hAempty : A = (∅ : Set X) :=\n      (Set.not_nonempty_iff_eq_empty).1 hA\n    -- Hence `closure A = ∅` by the existing characterization.\n    have hClEmpty : closure A = (∅ : Set X) :=\n      ((Topology.closure_eq_empty_iff (X := X) (A := A)).2 hAempty)\n    -- But this contradicts the assumed non‐emptiness of `closure A`.\n    rcases hCl with ⟨x, hx⟩\n    have : x ∈ (∅ : Set X) := by\n      simpa [hClEmpty] using hx\n    cases this"
+  ],
+  "success": true
+}

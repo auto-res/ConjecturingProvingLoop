@@ -1,0 +1,43 @@
+{
+  "times": [
+    61.552839517593384,
+    72.79471802711487
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4568,
+      "prompt_tokens": 38390,
+      "total_tokens": 42958,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    },
+    {
+      "completion_tokens": 4712,
+      "prompt_tokens": 38496,
+      "total_tokens": 43208,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_frontier_eq_frontier_diff_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (frontier A) = frontier A \\ interior (frontier A) := by\n  simp [frontier, Topology.closure_frontier_eq_frontier]",
+    "theorem Topology.frontier_interior_eq_frontier_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    frontier (interior A) = frontier A := by\n  have hInt : interior A = A := hA.interior_eq\n  simpa [frontier, hInt, interior_interior]"
+  ],
+  "success": true
+}

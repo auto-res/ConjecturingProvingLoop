@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.21856951713562
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2924,
+      "prompt_tokens": 14494,
+      "total_tokens": 17418,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_univ_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → closure (interior (closure A)) = (Set.univ : Set X) := by\n  intro hDense\n  -- `closure A = univ` because `A` is dense.\n  have h_closure_univ : (closure A : Set X) = Set.univ := hDense.closure_eq\n  -- Hence `interior (closure A) = univ`.\n  have h_int_univ : interior (closure A) = (Set.univ : Set X) := by\n    have h_univ : interior (Set.univ : Set X) = (Set.univ : Set X) := by\n      simpa using (isOpen_univ : IsOpen (Set.univ : Set X)).interior_eq\n    simpa [h_closure_univ] using h_univ\n  -- Taking closures preserves the equality, so the target closure is also `univ`.\n  calc\n    closure (interior (closure A))\n        = closure (Set.univ : Set X) := by\n          simpa [h_int_univ]\n    _ = (Set.univ : Set X) := by\n          simpa using closure_univ"
+  ],
+  "success": true
+}

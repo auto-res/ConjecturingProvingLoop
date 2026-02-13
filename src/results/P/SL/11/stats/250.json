@@ -1,0 +1,26 @@
+{
+  "times": [
+    82.97213459014893
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5329,
+      "prompt_tokens": 40245,
+      "total_tokens": 45574,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_prod_univ_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} [Nonempty Y] (hA : A.Nonempty) :\n    Topology.P3 (A ×ˢ (Set.univ : Set Y)) ↔ Topology.P3 A := by\n  -- A witness that `Set.univ : Set Y` is nonempty.\n  have hB : (Set.univ : Set Y).Nonempty := Set.nonempty_univ\n  -- Use the general product equivalence for `P3`.\n  have hEquiv :=\n    (Topology.P3_prod_iff (A := A) (B := (Set.univ : Set Y)) hA hB)\n  -- `P3` holds trivially for the whole space.\n  have hP3_univ : Topology.P3 (Set.univ : Set Y) := Topology.P3_univ\n  constructor\n  · intro hProd\n    exact (hEquiv.mp hProd).1\n  · intro hPA\n    exact hEquiv.mpr ⟨hPA, hP3_univ⟩"
+  ],
+  "success": true
+}

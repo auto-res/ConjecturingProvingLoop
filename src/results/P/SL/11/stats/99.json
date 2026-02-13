@@ -1,0 +1,60 @@
+{
+  "times": [
+    112.82798171043396,
+    94.82233333587646,
+    106.5796480178833
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7238,
+      "prompt_tokens": 14277,
+      "total_tokens": 21515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    },
+    {
+      "completion_tokens": 7486,
+      "prompt_tokens": 14398,
+      "total_tokens": 21884,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 6770,
+      "prompt_tokens": 14474,
+      "total_tokens": 21244,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_iInter_subset {X ι : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    closure (interior (⋂ i, A i)) ⊆ ⋂ i, closure (interior (A i)) := by\n  intro x hx\n  -- Establish the goal componentwise.\n  have hx_all : ∀ i, x ∈ closure (interior (A i)) := by\n    intro i\n    -- Use monotonicity of `interior` and `closure`.\n    have hsubset : closure (interior (⋂ j, A j)) ⊆ closure (interior (A i)) := by\n      apply closure_mono\n      have hinner : interior (⋂ j, A j) ⊆ interior (A i) := by\n        apply interior_mono\n        intro y hy\n        have hy' : y ∈ ⋂ j, A j := interior_subset hy\n        exact (Set.mem_iInter.1 hy') i\n      exact hinner\n    exact hsubset hx\n  exact Set.mem_iInter.2 hx_all",
+    "theorem interior_closure_iInter_subset {X ι : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    interior (closure (⋂ i, A i)) ⊆ ⋂ i, interior (closure (A i)) := by\n  intro x hx\n  -- For each `i`, we will show `x ∈ interior (closure (A i))`.\n  have hx_i : ∀ i, x ∈ interior (closure (A i)) := by\n    intro i\n    -- First, note `closure (⋂ i, A i) ⊆ closure (A i)`.\n    have hsubset : closure (⋂ j, A j) ⊆ closure (A i) := by\n      refine closure_mono ?_\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Use `interior_mono` to transport membership through this inclusion.\n    exact (interior_mono hsubset) hx\n  -- Assemble the witnesses for all `i`.\n  exact Set.mem_iInter.2 hx_i",
+    "theorem interior_inter_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B) ⊆ interior A ∩ interior B := by\n  intro x hx\n  have hxA : x ∈ interior A := by\n    have hsubset : (A ∩ B : Set X) ⊆ A := Set.inter_subset_left\n    exact (interior_mono hsubset) hx\n  have hxB : x ∈ interior B := by\n    have hsubset : (A ∩ B : Set X) ⊆ B := Set.inter_subset_right\n    exact (interior_mono hsubset) hx\n  exact ⟨hxA, hxB⟩"
+  ],
+  "success": true
+}

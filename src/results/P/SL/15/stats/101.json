@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.65515542030334
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9015,
+      "prompt_tokens": 15518,
+      "total_tokens": 24533,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n      closure (interior A) := by\n  -- First, collapse three inner `closure ∘ interior` pairs.\n  have h₁ :\n      closure (interior (closure (interior (closure (interior A))))) =\n        closure (interior A) :=\n    closure_interior_closure_interior_closure_interior_eq (X := X) (A := A)\n  -- Apply `closure ∘ interior` once more to both sides of `h₁`.\n  have h₂ :\n      closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n        closure (interior (closure (interior A))) := by\n    simpa using congrArg (fun S : Set X => closure (interior S)) h₁\n  -- Finally, collapse the remaining pair.\n  have h₃ : closure (interior (closure (interior A))) = closure (interior A) :=\n    closure_interior_closure_eq (X := X) (A := A)\n  simpa [h₃] using h₂"
+  ],
+  "success": true
+}

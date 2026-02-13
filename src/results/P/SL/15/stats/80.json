@@ -1,0 +1,26 @@
+{
+  "times": [
+    96.68444299697876
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5985,
+      "prompt_tokens": 12449,
+      "total_tokens": 18434,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_subset_interior_closure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hP3 : Topology.P3 A) :\n    A ⊆ interior (closure B) := by\n  intro x hxA\n  -- From `P3`, the point `x` belongs to `interior (closure A)`.\n  have hx_intA : x ∈ interior (closure A) := hP3 hxA\n  -- Since `A ⊆ B`, we have `closure A ⊆ closure B`.\n  have h_closure_mono : closure A ⊆ closure B := closure_mono hAB\n  -- Taking interiors preserves inclusion.\n  have h_int_mono : interior (closure A) ⊆ interior (closure B) :=\n    interior_mono h_closure_mono\n  exact h_int_mono hx_intA"
+  ],
+  "success": true
+}

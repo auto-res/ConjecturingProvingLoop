@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.2052652835846
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3559,
+      "prompt_tokens": 37294,
+      "total_tokens": 40853,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_isOpen_implies_frontier_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    IsClosed (A : Set X) → IsOpen A → frontier (A : Set X) = (∅ : Set X) := by\n  intro hClosed hOpen\n  -- Any open set satisfies `P2`.\n  have hP2 : Topology.P2 A := Topology.isOpen_implies_P2 (A := A) hOpen\n  -- Apply the closed‐plus‐`P2` lemma.\n  exact Topology.isClosed_P2_implies_frontier_eq_empty (A := A) hClosed hP2"
+  ],
+  "success": true
+}

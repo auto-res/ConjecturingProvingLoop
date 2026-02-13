@@ -1,0 +1,26 @@
+{
+  "times": [
+    105.66675519943237
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6913,
+      "prompt_tokens": 32239,
+      "total_tokens": 39152,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_P2_and_P3_of_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (interior (A : Set X)) ↔\n      (Topology.P2 (interior (A : Set X)) ∧ Topology.P3 (interior (A : Set X))) := by\n  -- Pairwise equivalences for the open set `interior A`.\n  have h₁ :\n      Topology.P1 (interior (A : Set X)) ↔\n        Topology.P2 (interior (A : Set X)) :=\n    (Topology.P1_iff_P2_of_interior (X := X) (A := A))\n  have h₂ :\n      Topology.P2 (interior (A : Set X)) ↔\n        Topology.P3 (interior (A : Set X)) :=\n    (Topology.P2_iff_P3_of_interior (X := X) (A := A))\n  -- Assemble the desired equivalence.\n  constructor\n  · intro hP1\n    -- Convert `P1` into `P2`, then into `P3`.\n    have hP2 : Topology.P2 (interior (A : Set X)) := (h₁).1 hP1\n    have hP3 : Topology.P3 (interior (A : Set X)) := (h₂).1 hP2\n    exact And.intro hP2 hP3\n  · rintro ⟨hP2, _⟩\n    -- Convert `P2` back into `P1` using the first equivalence.\n    exact (h₁).2 hP2"
+  ],
+  "success": true
+}

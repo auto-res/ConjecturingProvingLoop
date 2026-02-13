@@ -1,0 +1,26 @@
+{
+  "times": [
+    162.50178170204163
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7181,
+      "prompt_tokens": 46497,
+      "total_tokens": 53678,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_eq_inter_of_closed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsClosed (B : Set X)) :\n    interior ((A \\ B) : Set X) = interior A \\ B := by\n  have hOpenComp : IsOpen (Bᶜ : Set X) := hB.isOpen_compl\n  simpa [Set.diff_eq] using\n    (interior_inter_of_isOpen_right (A := A) (B := Bᶜ) hOpenComp)"
+  ],
+  "success": true
+}

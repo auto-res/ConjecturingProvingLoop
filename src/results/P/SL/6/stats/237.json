@@ -1,0 +1,26 @@
+{
+  "times": [
+    87.20515608787537
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5610,
+      "prompt_tokens": 37830,
+      "total_tokens": 43440,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_closure_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure ((A ∩ closure B) : Set X)) ⊆ interior (closure A) := by\n  intro x hx\n  -- Since `A ∩ closure B ⊆ A`, their closures satisfy the same inclusion.\n  have hSub : closure ((A ∩ closure B) : Set X) ⊆ closure A := by\n    apply closure_mono\n    intro y hy\n    exact hy.1\n  -- Monotonicity of `interior` gives the desired inclusion.\n  exact (interior_mono hSub) hx"
+  ],
+  "success": true
+}

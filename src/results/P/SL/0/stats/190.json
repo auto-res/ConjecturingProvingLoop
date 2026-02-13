@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.761460065841675
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3993,
+      "prompt_tokens": 31780,
+      "total_tokens": 35773,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_iInter_subset_iInter_interiors {X ι : Type*} [TopologicalSpace X]\n    {F : ι → Set X} :\n    interior (⋂ i, F i : Set X) ⊆ ⋂ i, interior (F i : Set X) := by\n  intro x hx\n  -- Show that `x` belongs to every `interior (F i)`.\n  have h_mem : ∀ i, x ∈ interior (F i : Set X) := by\n    intro i\n    -- Use the inclusion `⋂ i, F i ⊆ F i`.\n    have h_subset : (⋂ j, F j : Set X) ⊆ (F i : Set X) :=\n      Set.iInter_subset (fun j ↦ F j) i\n    exact (interior_mono h_subset) hx\n  exact Set.mem_iInter.2 h_mem"
+  ],
+  "success": true
+}

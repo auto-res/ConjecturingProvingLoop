@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.699759006500244
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3076,
+      "prompt_tokens": 34066,
+      "total_tokens": 37142,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_closureInteriorClosureInterior_eq_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X:=X) A →\n      closure (interior (closure (interior (A : Set X)))) = closure (A : Set X) := by\n  intro hP2\n  -- First, collapse the nested `closure ∘ interior` expression.\n  have h₁ :\n      closure (interior (closure (interior (A : Set X)))) =\n        closure (interior A) :=\n    Topology.closure_interior_closure_interior_eq_closure_interior (X := X) (A := A)\n  -- Next, identify `closure (interior A)` with `closure A` using `P2`.\n  have h₂ :\n      closure (A : Set X) = closure (interior A) :=\n    Topology.P2_implies_closure_eq_closureInterior (X := X) (A := A) hP2\n  -- Combine the two equalities.\n  simpa [h₂] using h₁"
+  ],
+  "success": true
+}

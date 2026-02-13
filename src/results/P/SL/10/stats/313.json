@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.198269844055176
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1474,
+      "prompt_tokens": 50685,
+      "total_tokens": 52159,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_preimage_closed {X Y : Type*} [TopologicalSpace X]\n    [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {A : Set Y}\n    (hA : IsClosed A) :\n    Topology.P2 (f ⁻¹' A) ↔ Topology.P3 (f ⁻¹' A) := by\n  -- The preimage of a closed set under a continuous map is closed.\n  have hClosed : IsClosed (f ⁻¹' A) := hA.preimage hf\n  -- Apply the existing equivalence for closed sets.\n  simpa using\n    (Topology.P2_iff_P3_of_isClosed (X := X) (A := f ⁻¹' A) hClosed)"
+  ],
+  "success": true
+}

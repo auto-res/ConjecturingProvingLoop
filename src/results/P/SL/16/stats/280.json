@@ -1,0 +1,26 @@
+{
+  "times": [
+    146.6322603225708
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8747,
+      "prompt_tokens": 48893,
+      "total_tokens": 57640,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.open_and_closed_iff_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (IsOpen A ∧ IsClosed A) ↔ interior A = closure A := by\n  constructor\n  · rintro ⟨hOpen, hClosed⟩\n    have hInt : interior A = A := hOpen.interior_eq\n    have hCl : closure A = A := hClosed.closure_eq\n    simpa [hInt, hCl]\n  · intro h_eq\n    exact\n      Topology.open_and_closed_of_interior_eq_closure\n        (X := X) (A := A) h_eq"
+  ],
+  "success": true
+}

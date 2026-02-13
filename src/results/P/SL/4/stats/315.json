@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.0376296043396
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2944,
+      "prompt_tokens": 48606,
+      "total_tokens": 51550,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_subset_inter_closure_compl\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A \\ B) ⊆ closure A ∩ closure (Bᶜ) := by\n  intro x hx\n  -- `A \\ B` is contained in `A`, hence its closure is contained in `closure A`.\n  have hA : x ∈ closure A := by\n    have h_sub : (A \\ B : Set X) ⊆ A := by\n      intro y hy; exact hy.1\n    exact (closure_mono h_sub) hx\n  -- `A \\ B` is also contained in `Bᶜ`, yielding membership in `closure (Bᶜ)`.\n  have hB : x ∈ closure (Bᶜ) := by\n    have h_sub : (A \\ B : Set X) ⊆ Bᶜ := by\n      intro y hy; exact hy.2\n    exact (closure_mono h_sub) hx\n  exact And.intro hA hB"
+  ],
+  "success": true
+}

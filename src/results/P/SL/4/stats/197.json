@@ -1,0 +1,43 @@
+{
+  "times": [
+    39.759482860565186,
+    226.36353945732117
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2908,
+      "prompt_tokens": 28523,
+      "total_tokens": 31431,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27520
+      }
+    },
+    {
+      "completion_tokens": 16787,
+      "prompt_tokens": 28634,
+      "total_tokens": 45421,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_iff_interior_closure_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense A ↔ interior (closure A) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    exact interior_closure_eq_univ_of_dense (A := A) hDense\n  · intro hInt\n    have hClosure : (closure A : Set X) = (Set.univ : Set X) :=\n      (interior_closure_eq_univ_iff (A := A)).1 hInt\n    simpa [Dense] using hClosure",
+    ""
+  ],
+  "success": true
+}

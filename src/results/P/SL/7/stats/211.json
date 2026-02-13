@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.8618586063385
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2286,
+      "prompt_tokens": 32462,
+      "total_tokens": 34748,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P3_finite_of_T1\n    {X : Type*} [TopologicalSpace X] [T1Space X] {F : Set X}\n    (hF : F.Finite) :\n    Topology.P1 F ↔ Topology.P3 F := by\n  have h₁ : Topology.P1 F ↔ IsOpen F :=\n    Topology.P1_finite_iff_isOpen_of_T1 (F := F) hF\n  have h₂ : Topology.P3 F ↔ IsOpen F :=\n    Topology.P3_finite_iff_isOpen_of_T1 (F := F) hF\n  simpa using h₁.trans h₂.symm"
+  ],
+  "success": true
+}

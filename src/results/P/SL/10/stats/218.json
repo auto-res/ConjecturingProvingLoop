@@ -1,0 +1,77 @@
+{
+  "times": [
+    219.34830975532532,
+    59.988850593566895,
+    94.68554854393005,
+    85.75612044334412
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13035,
+      "prompt_tokens": 35130,
+      "total_tokens": 48165,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 4562,
+      "prompt_tokens": 35219,
+      "total_tokens": 39781,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 6748,
+      "prompt_tokens": 35297,
+      "total_tokens": 42045,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 6230,
+      "prompt_tokens": 35441,
+      "total_tokens": 41671,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_subset_diff_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B) ⊆ interior A \\ closure B := by\n  classical\n  intro x hx\n  -- Step 1: from `x ∈ interior (A \\ B)` we get `x ∈ interior A`.\n  have hxIntA : x ∈ interior A := by\n    have h_subset : (A \\ B) ⊆ A := Set.diff_subset\n    exact (interior_mono h_subset) hx\n  -- Step 2: prove `x ∉ closure B`.\n  have hxNotClB : x ∉ closure B := by\n    by_contra hxClB\n    -- Unpack the neighbourhood information coming from `hx`.\n    rcases mem_interior_iff_mem_nhds.1 hx with ⟨U, hUopen, hxU, hUsub⟩\n    -- Since `x ∈ closure B`, every neighbourhood of `x` meets `B`.\n    have h_nonempty : (U ∩ B).Nonempty :=\n      (mem_closure_iff).1 hxClB U hUopen hxU\n    rcases h_nonempty with ⟨y, hyU, hyB⟩\n    -- But `U ⊆ A \\ B`, hence `y ∉ B`, contradiction.\n    have : y ∈ A \\ B := hUsub hyU\n    exact (this.2) hyB\n  exact And.intro hxIntA hxNotClB",
+    "theorem Topology.closure_diff_subset_closure_diff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A \\ B) ⊆ closure A \\ interior B := by\n  intro x hx\n  -- First, note that `A \\ B ⊆ A`, so taking closures preserves this inclusion.\n  have hxClA : x ∈ closure A :=\n    (closure_mono (Set.diff_subset : A \\ B ⊆ A)) hx\n  -- Next, we show that `x ∉ interior B`.\n  have hxNotIntB : x ∉ interior B := by\n    intro hxIntB\n    -- Because `x ∈ closure (A \\ B)`, every open neighbourhood of `x`\n    -- intersects `A \\ B`.  In particular, this holds for `interior B`,\n    -- which is an open set containing `x`.\n    have h_nonempty : (interior B ∩ (A \\ B)).Nonempty := by\n      have h_open : IsOpen (interior B) := isOpen_interior\n      exact (mem_closure_iff).1 hx (interior B) h_open hxIntB\n    -- Extract a point `y` witnessing the non-emptiness.\n    rcases h_nonempty with ⟨y, ⟨hyIntB, hyDiff⟩⟩\n    -- From `y ∈ interior B` we obtain `y ∈ B`.\n    have hyB : y ∈ B := interior_subset hyIntB\n    -- But `y ∈ A \\ B` means `y ∉ B`, yielding a contradiction.\n    exact hyDiff.2 hyB\n  -- Assemble the result.\n  exact And.intro hxClA hxNotIntB",
+    "theorem Topology.interior_closure_eq_univ_iff_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) ↔ closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    have h_subset : (Set.univ : Set X) ⊆ closure A := by\n      have h_incl : interior (closure A) ⊆ closure A := interior_subset\n      simpa [hInt] using h_incl\n    exact Set.Subset.antisymm (Set.Subset_univ _) h_subset\n  · intro hCl\n    have hIntEq : interior (closure A) = interior (Set.univ : Set X) :=\n      congrArg (fun s : Set X => interior s) hCl\n    simpa [interior_univ] using hIntEq",
+    "theorem Topology.closure_interior_subset_closure_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n  -- First, note the inclusion `A ⊆ A ∪ B`, and pass to interiors.\n  have h : interior A ⊆ interior (A ∪ B) :=\n    interior_mono (Set.subset_union_left : A ⊆ A ∪ B)\n  -- Taking closures preserves set inclusion.\n  exact closure_mono h"
+  ],
+  "success": true
+}

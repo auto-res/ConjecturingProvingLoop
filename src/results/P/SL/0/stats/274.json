@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.82291436195374
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5677,
+      "prompt_tokens": 46774,
+      "total_tokens": 52451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_univ_iff_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) = (Set.univ : Set X) ↔\n      closure (A : Set X) = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    -- Since `interior (closure A) = univ`, the inclusion\n    -- `interior (closure A) ⊆ closure A` yields `univ ⊆ closure A`.\n    have hSub : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      simpa [hInt] using\n        (interior_subset :\n          interior (closure (A : Set X)) ⊆ closure (A : Set X))\n    -- Combine with the trivial inclusion `closure A ⊆ univ`.\n    exact Set.Subset.antisymm (Set.subset_univ _) hSub\n  · intro hCl\n    -- If `closure A = univ`, its interior is also `univ`.\n    simpa [hCl] using\n      (interior_univ : interior (Set.univ : Set X) = (Set.univ : Set X))"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    329.0190019607544
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 21416,
+      "prompt_tokens": 50424,
+      "total_tokens": 71840,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 20672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_compl_iff_interior_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense ((Aᶜ) : Set X) ↔ interior (A : Set X) = ∅ := by\n  classical\n  -- `→`  Direction: density of the complement forces `interior A = ∅`.\n  have h₁ : Dense (Aᶜ : Set X) → interior (A : Set X) = ∅ := by\n    intro hDense\n    by_contra hIntNe\n    -- From `hIntNe`, obtain a point in `interior A`.\n    have hIntNonempty : (interior (A : Set X)).Nonempty :=\n      Set.nonempty_iff_ne_empty.mpr hIntNe\n    -- Use the open–intersection characterization of density.\n    have hProp :=\n      (Topology.dense_iff_open_inter_nonempty\n          (A := (Aᶜ : Set X))).1 hDense\n    have hInter :=\n      hProp (interior (A : Set X)) isOpen_interior hIntNonempty\n    rcases hInter with ⟨x, ⟨hxCompl, hxInt⟩⟩\n    -- But `interior A ⊆ A`, contradicting `x ∈ Aᶜ`.\n    have hxA : (x : X) ∈ A := interior_subset hxInt\n    exact (hxCompl hxA).elim\n  -- `←`  Direction: empty interior implies density of the complement.\n  have h₂ : interior (A : Set X) = ∅ → Dense (Aᶜ : Set X) := by\n    intro hIntEmpty\n    -- Establish the open–intersection property required for density.\n    have hProp :\n        ∀ U : Set X, IsOpen U → U.Nonempty →\n          ((Aᶜ : Set X) ∩ U).Nonempty := by\n      intro U hU_open hU_nonempty\n      by_contra hEmpty\n      -- If the intersection is empty, `U` is contained in `A`.\n      have hSub : (U : Set X) ⊆ A := by\n        intro x hxU\n        by_contra hxNotA\n        have hxCompl : x ∈ (Aᶜ : Set X) := hxNotA\n        have hNE : ((Aᶜ : Set X) ∩ U).Nonempty := ⟨x, ⟨hxCompl, hxU⟩⟩\n        exact hEmpty hNE\n      -- Since `U` is open and `U ⊆ A`, we get `U ⊆ interior A = ∅`.\n      have hSubInt : (U : Set X) ⊆ interior A :=\n        interior_maximal hSub hU_open\n      rcases hU_nonempty with ⟨x, hxU⟩\n      have : (x : X) ∈ interior A := hSubInt hxU\n      simpa [hIntEmpty] using this\n    -- Apply the characterization to conclude density.\n    exact\n      (Topology.dense_iff_open_inter_nonempty (A := (Aᶜ : Set X))).2 hProp\n  exact ⟨h₁, h₂⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.10231590270996
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1562,
+      "prompt_tokens": 53104,
+      "total_tokens": 54666,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_frontier_eq_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) ∪ frontier A = closure A := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    cases hx with\n    | inl hxInt =>\n        -- Points of `interior A` are certainly in `closure A`.\n        exact subset_closure (interior_subset hxInt)\n    | inr hxFront =>\n        -- The first component of `frontier` membership is `closure A`.\n        exact hxFront.1\n  · intro hxCl\n    -- Split depending on whether `x` lies in `interior A`.\n    by_cases hxInt : x ∈ interior (A : Set X)\n    · exact Or.inl hxInt\n    · exact Or.inr ⟨hxCl, hxInt⟩"
+  ],
+  "success": true
+}

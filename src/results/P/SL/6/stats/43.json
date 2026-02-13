@@ -1,0 +1,43 @@
+{
+  "times": [
+    234.96261620521545,
+    55.00888204574585
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 17726,
+      "prompt_tokens": 6168,
+      "total_tokens": 23894,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    },
+    {
+      "completion_tokens": 4442,
+      "prompt_tokens": 6271,
+      "total_tokens": 10713,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_preimage_of_continuous\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {f : X → Y} (hf : Continuous f) {B : Set Y}\n    (hP1 : Topology.P1 (B : Set Y)) :\n    Topology.P1 (f ⁻¹' B) := by\n  dsimp [Topology.P1] at hP1 ⊢\n  -- We need to show: `f ⁻¹' B ⊆ closure (interior (f ⁻¹' B))`.\n  intro x hx\n  -- Step 1: move the `P1` property through `f`.\n  have hx₁ : f x ∈ closure (interior B) := hP1 hx\n  -- Interpret this membership as one in a preimage.\n  have hx₂ : x ∈ (f ⁻¹' closure (interior B)) := hx₁\n  -- Step 2: use continuity to pass from a preimage of a closure\n  --         to the closure of a preimage.\n  have hx₃ : x ∈ closure (f ⁻¹' interior B) := by\n    have hSet :=\n      (hf.preimage_closure_subset_closure_preimage (s := interior B))\n    exact hSet hx₂\n  -- Step 3: relate the two closures via interior monotonicity.\n  -- First, show `f ⁻¹' interior B ⊆ interior (f ⁻¹' B)`.\n  have hIncl : f ⁻¹' interior B ⊆ interior (f ⁻¹' B) := by\n    -- `f ⁻¹' interior B` is open and contained in `f ⁻¹' B`.\n    have hOpen : IsOpen (f ⁻¹' interior B) := by\n      have hIntOpen : IsOpen (interior B) := isOpen_interior\n      simpa using hIntOpen.preimage hf\n    have hSub : f ⁻¹' interior B ⊆ f ⁻¹' B := by\n      intro y hy\n      dsimp [Set.preimage] at hy ⊢\n      exact (interior_subset : interior B ⊆ B) hy\n    -- An open subset of a set lies in its interior.\n    intro y hy\n    have : y ∈ interior (f ⁻¹' B) := by\n      have hIncl' := interior_maximal hSub hOpen\n      exact hIncl' hy\n    exact this\n  -- Taking closures preserves inclusion.\n  have hIncl' : closure (f ⁻¹' interior B) ⊆ closure (interior (f ⁻¹' B)) :=\n    closure_mono hIncl\n  -- Combine the inclusions to obtain the goal element.\n  exact hIncl' hx₃",
+    "theorem P1_and_open_closure_interior_implies_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (A : Set X))\n    (hOpen : IsOpen (closure (interior (A : Set X)))) :\n    Topology.P2 (A : Set X) := by\n  dsimp [Topology.P2] at *\n  intro x hx\n  -- From `P1`, we obtain membership in `closure (interior A)`.\n  have hx' : x ∈ closure (interior A) := hP1 hx\n  -- Since this set is open, its interior equals itself.\n  have hInt : interior (closure (interior A)) = closure (interior A) :=\n    hOpen.interior_eq\n  -- Rewriting with this equality gives the desired result.\n  simpa [hInt] using hx'"
+  ],
+  "success": true
+}

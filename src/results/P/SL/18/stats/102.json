@@ -1,0 +1,26 @@
+{
+  "times": [
+    107.14516496658325
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7213,
+      "prompt_tokens": 14343,
+      "total_tokens": 21556,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_closure_iff_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (closure (A : Set X)) ↔ Dense (A : Set X) := by\n  classical\n  constructor\n  · intro hDenseClos\n    -- Translate density of `closure A` into a closure equality.\n    have hEq₁ : closure (closure (A : Set X)) = (Set.univ : Set X) :=\n      (Topology.dense_iff_closure_eq_univ).1 hDenseClos\n    -- Use `closure_closure` to rewrite.\n    have hEq₂ : closure (A : Set X) = (Set.univ : Set X) := by\n      simpa [closure_closure] using hEq₁\n    -- Re‐encode as density of `A`.\n    exact (Topology.dense_iff_closure_eq_univ).2 hEq₂\n  · intro hDenseA\n    -- Translate density of `A` into a closure equality.\n    have hEq₁ : closure (A : Set X) = (Set.univ : Set X) :=\n      (Topology.dense_iff_closure_eq_univ).1 hDenseA\n    -- Apply `closure_closure` to obtain the desired equality.\n    have hEq₂ : closure (closure (A : Set X)) = (Set.univ : Set X) := by\n      simpa [closure_closure] using hEq₁\n    -- Re‐encode as density of `closure A`.\n    exact (Topology.dense_iff_closure_eq_univ).2 hEq₂"
+  ],
+  "success": true
+}

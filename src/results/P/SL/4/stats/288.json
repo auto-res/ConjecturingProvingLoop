@@ -1,0 +1,43 @@
+{
+  "times": [
+    137.08491802215576,
+    68.841228723526
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6756,
+      "prompt_tokens": 43940,
+      "total_tokens": 50696,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    },
+    {
+      "completion_tokens": 4048,
+      "prompt_tokens": 44046,
+      "total_tokens": 48094,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_eq_of_closure_eq_and_interior_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (h_cl : closure A = closure B) (h_int : interior A = interior B) :\n    frontier (A : Set X) = frontier B := by\n  simpa [frontier, h_cl, h_int]",
+    "theorem frontier_univ_eq_empty {X : Type*} [TopologicalSpace X] :\n    frontier (Set.univ : Set X) = (∅ : Set X) := by\n  simpa [frontier_eq_closure_diff_interior, closure_univ, interior_univ]"
+  ],
+  "success": true
+}

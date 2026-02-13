@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.38219451904297
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3884,
+      "prompt_tokens": 11310,
+      "total_tokens": 15194,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_eq_univ_of_dense {X : Type*}\n    [TopologicalSpace X] {A : Set X} (hDense : Dense A) :\n    closure (interior (closure A)) = (Set.univ : Set X) := by\n  -- Since `A` is dense, its closure is the whole space.\n  have h_closure : closure A = (Set.univ : Set X) := hDense.closure_eq\n  -- Consequently, the interior of its closure is also the whole space.\n  have h_int : interior (closure A) = (Set.univ : Set X) := by\n    simpa [h_closure] using interior_univ\n  -- Taking the closure again yields the whole space.\n  calc\n    closure (interior (closure A))\n        = closure (Set.univ : Set X) := by\n          simpa [h_int]\n    _ = (Set.univ : Set X) := by\n          simpa using closure_univ"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    87.51812100410461
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5724,
+      "prompt_tokens": 35841,
+      "total_tokens": 41565,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_inter_of_isClosed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hB_closed : IsClosed (B : Set X))\n    (hA_P3 : Topology.P3 (A : Set X)) (hB_P3 : Topology.P3 (B : Set X)) :\n    Topology.P3 (A ∩ B) := by\n  -- From `P3` and closedness, both `A` and `B` are open.\n  have hA_open : IsOpen (A : Set X) :=\n    isOpen_of_isClosed_and_P3 (A := A) hA_closed hA_P3\n  have hB_open : IsOpen (B : Set X) :=\n    isOpen_of_isClosed_and_P3 (A := B) hB_closed hB_P3\n  -- The intersection of two open sets is open.\n  have hOpen : IsOpen (A ∩ B : Set X) := hA_open.inter hB_open\n  -- Any open set satisfies `P3`.\n  simpa using Topology.P3_of_isOpen (A := A ∩ B) hOpen"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.911787033081055
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3820,
+      "prompt_tokens": 22241,
+      "total_tokens": 26061,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_isOpen_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : Topology.P2 B) : Topology.P2 (A ∪ B) := by\n  -- Since `A` is open, it satisfies `P2`.\n  have hA_P2 : Topology.P2 A :=\n    Topology.isOpen_implies_P2 (X := X) (A := A) hA\n  -- Apply the existing `P2_union` lemma.\n  exact Topology.P2_union (X := X) (A := A) (B := B) hA_P2 hB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.959558725357056
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4319,
+      "prompt_tokens": 26252,
+      "total_tokens": 30571,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_closure_diff_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (closure A \\ interior A) := by\n  have h₁ : IsClosed (closure A) := isClosed_closure\n  have h₂ : IsClosed ((interior A)ᶜ) :=\n    (isOpen_interior : IsOpen (interior A)).isClosed_compl\n  -- `A \\ B` is definitionally `A ∩ Bᶜ`, so this is an intersection of two closed sets.\n  simpa [Set.diff_eq] using h₁.inter h₂"
+  ],
+  "success": true
+}

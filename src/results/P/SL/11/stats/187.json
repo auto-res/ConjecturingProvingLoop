@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.26811838150024
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5369,
+      "prompt_tokens": 30523,
+      "total_tokens": 35892,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_prod_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : A.Nonempty) (hB : B.Nonempty) :\n    Topology.P1 (A ×ˢ B) ↔ (Topology.P1 A ∧ Topology.P1 B) := by\n  constructor\n  · intro hP1Prod\n    have hP1A : Topology.P1 A :=\n      Topology.P1_of_P1_prod_left (A := A) (B := B) hB hP1Prod\n    have hP1B : Topology.P1 B :=\n      Topology.P1_of_P1_prod_right (A := A) (B := B) hA hP1Prod\n    exact ⟨hP1A, hP1B⟩\n  · rintro ⟨hP1A, hP1B⟩\n    exact Topology.P1_prod hP1A hP1B"
+  ],
+  "success": true
+}

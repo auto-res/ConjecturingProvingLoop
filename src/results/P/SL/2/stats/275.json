@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.11218523979187
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1024,
+      "prompt_tokens": 47245,
+      "total_tokens": 48269,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iUnion_implies_closure_interior_closure_eq_closure\n    {X : Type*} [TopologicalSpace X] {ι : Type*} {s : ι → Set X} :\n    (∀ i, Topology.P3 (s i)) →\n      closure (interior (closure (⋃ i, s i : Set X))) = closure (⋃ i, s i : Set X) := by\n  intro hP3\n  have hP3Union : Topology.P3 (⋃ i, s i) :=\n    Topology.P3_iUnion (s := s) hP3\n  exact\n    Topology.P3_implies_closure_interior_closure_eq_closure\n      (A := ⋃ i, s i) hP3Union"
+  ],
+  "success": true
+}

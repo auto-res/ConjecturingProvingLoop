@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.64414739608765
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3177,
+      "prompt_tokens": 49260,
+      "total_tokens": 52437,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_open_left_eq_inter_interior_compl\n    {X : Type*} [TopologicalSpace X] {U A : Set X} (hU : IsOpen U) :\n    interior (U \\ A) = U ∩ interior (Aᶜ) := by\n  -- Step 1: rewrite `interior (U \\ A)` using an existing lemma.\n  have h₁ :=\n    Topology.interior_diff_eq_diff_closure_of_isOpen\n      (X := X) (A := U) (B := A) hU\n  -- Step 2: express `interior (Aᶜ)` in terms of `closure A`.\n  have h_int_compl :\n      interior (Aᶜ) = (closure A)ᶜ :=\n    Topology.interior_compl_eq_compl_closure (X := X) (A := A)\n  -- Step 3: chain the equalities to reach the desired identity.\n  calc\n    interior (U \\ A)\n        = U \\ closure A := h₁\n    _ = U ∩ (closure A)ᶜ := by\n        simp [Set.diff_eq]\n    _ = U ∩ interior (Aᶜ) := by\n        simpa [h_int_compl]"
+  ],
+  "success": true
+}

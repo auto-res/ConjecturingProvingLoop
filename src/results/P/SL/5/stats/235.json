@@ -1,0 +1,43 @@
+{
+  "times": [
+    74.27786016464233,
+    21.987613677978516
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6867,
+      "prompt_tokens": 42250,
+      "total_tokens": 49117,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2547,
+      "prompt_tokens": 42467,
+      "total_tokens": 45014,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq_closure_union_of_P2\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 (X := X) A) (hB : Topology.P2 (X := X) B) :\n    closure (interior (A : Set X)) ∪ closure (interior B) =\n      closure (A ∪ B : Set X) := by\n  -- Rewrite `closure A` and `closure B` using `P2`.\n  have hA_eq : closure (A : Set X) = closure (interior A) :=\n    (Topology.closure_eq_closure_interior_of_P2 (X := X) (A := A) hA).symm\n  have hB_eq : closure (B : Set X) = closure (interior B) :=\n    (Topology.closure_eq_closure_interior_of_P2 (X := X) (A := B) hB).symm\n  -- Use the equality `closure (A ∪ B) = closure A ∪ closure B`.\n  calc\n    closure (interior (A : Set X)) ∪ closure (interior B)\n        = closure (A : Set X) ∪ closure B := by\n          simpa [hA_eq, hB_eq]\n    _ = closure (A ∪ B : Set X) := by\n          simpa using (closure_union (A : Set X) B).symm",
+    "theorem closure_interior_eq_closure_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P2 (X := X) A) :\n    closure (interior A) = closure (A : Set X) := by\n  simpa using\n    (Topology.closure_eq_closure_interior_of_P2 (X := X) (A := A) hA).symm"
+  ],
+  "success": true
+}

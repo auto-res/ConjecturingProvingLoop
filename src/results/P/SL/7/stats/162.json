@@ -1,0 +1,43 @@
+{
+  "times": [
+    41.59834694862366,
+    173.8876247406006
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3059,
+      "prompt_tokens": 25249,
+      "total_tokens": 28308,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    },
+    {
+      "completion_tokens": 13394,
+      "prompt_tokens": 25361,
+      "total_tokens": 38755,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_P3_closureInterior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (interior A)) → Topology.P3 A := by\n  intro hP3\n  dsimp [Topology.P3] at hP3 ⊢\n  intro x hxA\n  -- `x` lies in `closure (interior A)` because `interior A ⊆ A ⊆ closure (interior A)`.\n  have hxClInt : x ∈ closure (interior A) := subset_closure hxA\n  -- Apply the `P3` hypothesis for `closure (interior A)`.\n  have hxInt₁ : x ∈ interior (closure (closure (interior A))) := hP3 hxClInt\n  -- Simplify the double closure.\n  have hxInt₂ : x ∈ interior (closure (interior A)) := by\n    simpa [closure_closure] using hxInt₁\n  -- Use the monotonicity lemma to pass from `closure (interior A)` to `closure A`.\n  have hIncl :\n      interior (closure (interior A)) ⊆ interior (closure A) :=\n    interiorClosureInterior_subset_interiorClosure (A := A)\n  exact hIncl hxInt₂",
+    "theorem Topology.interior_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) ⊆ closure (interior (A : Set X)) := by\n  intro x hx\n  exact subset_closure hx"
+  ],
+  "success": true
+}

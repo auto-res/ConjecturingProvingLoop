@@ -1,0 +1,43 @@
+{
+  "times": [
+    13.601575136184692,
+    54.98390483856201
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1020,
+      "prompt_tokens": 3789,
+      "total_tokens": 4809,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2816
+      }
+    },
+    {
+      "completion_tokens": 4313,
+      "prompt_tokens": 3900,
+      "total_tokens": 8213,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2816
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_mono {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) :\n    Topology.P3 (X := X) B → Topology.P3 (X := X) A := by\n  intro hP3B\n  dsimp [Topology.P3] at hP3B ⊢\n  intro x hxA\n  exact hP3B (hAB hxA)",
+    "theorem Topology.closed_P3_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hP3 : Topology.P3 (X := X) A) : IsOpen A := by\n  -- Since `A` is closed, its closure is itself.\n  have h_closure : closure A = A := hClosed.closure_eq\n  -- From `P3`, every point of `A` lies in `interior (closure A) = interior A`.\n  have h_subset : A ⊆ interior A := by\n    intro x hx\n    have hxInt : x ∈ interior (closure A) := hP3 hx\n    simpa [h_closure] using hxInt\n  -- We already have `interior A ⊆ A`, so the two sets are equal.\n  have h_eq : interior A = A := by\n    apply subset_antisymm\n    · exact interior_subset\n    · exact h_subset\n  -- The interior of any set is open; rewrite with the equality to conclude.\n  have h_open : IsOpen (interior A) := isOpen_interior\n  simpa [h_eq] using h_open"
+  ],
+  "success": true
+}

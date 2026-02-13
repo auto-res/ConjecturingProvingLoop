@@ -1,0 +1,60 @@
+{
+  "times": [
+    62.20036768913269,
+    214.55288672447205,
+    36.42496681213379
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4434,
+      "prompt_tokens": 5310,
+      "total_tokens": 9744,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    },
+    {
+      "completion_tokens": 15399,
+      "prompt_tokens": 5413,
+      "total_tokens": 20812,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    },
+    {
+      "completion_tokens": 2712,
+      "prompt_tokens": 5611,
+      "total_tokens": 8323,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closed_iff_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    Topology.P3 (X := X) A ↔ IsOpen (A : Set X) := by\n  constructor\n  · intro hP3\n    -- From `P3` and `hA_closed`, obtain `A ⊆ interior A`.\n    have h_subset : (A : Set X) ⊆ interior (A : Set X) := by\n      simpa [hA_closed.closure_eq] using hP3\n    -- Together with `interior_subset`, this yields equality.\n    have h_eq : interior (A : Set X) = A :=\n      Set.Subset.antisymm interior_subset h_subset\n    -- The interior is open, hence `A` is open.\n    have h_open : IsOpen (interior (A : Set X)) := isOpen_interior\n    simpa [h_eq] using h_open\n  · intro hA_open\n    exact Topology.isOpen_P3 (X := X) (A := A) hA_open",
+    "theorem Nat.factorial_le_pow (n : ℕ) : n! ≤ n ^ n := by\n  induction n with\n  | zero =>\n      simp\n  | succ n ih =>\n      -- First, upgrade the induction hypothesis to a bound with a larger base.\n      have h₁ : n! ≤ (n.succ) ^ n := by\n        have hpow : n ^ n ≤ (n.succ) ^ n :=\n          Nat.pow_le_pow_of_le_left (Nat.le_succ n) n\n        exact ih.trans hpow\n      -- Multiply both sides by `n.succ` to prepare for rewriting with `factorial_succ`.\n      have h₂ : (n.succ) * n! ≤ (n.succ) * (n.succ) ^ n :=\n        Nat.mul_le_mul_left (n.succ) h₁\n      -- Rewrite factorial and power, then conclude.\n      simpa [Nat.factorial_succ, pow_succ, mul_comm] using h₂",
+    "theorem Topology.interior_closure_mono {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) :\n    interior (closure A) ⊆ interior (closure B) := by\n  exact interior_mono (closure_mono hAB)"
+  ],
+  "success": true
+}

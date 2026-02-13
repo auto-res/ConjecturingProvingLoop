@@ -1,0 +1,26 @@
+{
+  "times": [
+    100.62483763694763
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6604,
+      "prompt_tokens": 51357,
+      "total_tokens": 57961,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_union_three {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) (hC : IsOpen (C : Set X)) :\n    IsOpen ((A ∪ B ∪ C) : Set X) := by\n  have hAB : IsOpen ((A ∪ B) : Set X) := hA.union hB\n  simpa [Set.union_assoc] using hAB.union hC"
+  ],
+  "success": true
+}

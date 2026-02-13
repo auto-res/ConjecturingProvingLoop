@@ -1,0 +1,26 @@
+{
+  "times": [
+    16.516552448272705
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1809,
+      "prompt_tokens": 20068,
+      "total_tokens": 21877,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosure_eq_closure_of_isOpen_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure A)) :\n    closure (interior (closure A)) = closure A := by\n  have hInt : interior (closure A) = closure A := hOpen.interior_eq\n  calc\n    closure (interior (closure A)) = closure (closure A) := by\n      simpa [hInt]\n    _ = closure A := by\n      simpa [closure_closure]"
+  ],
+  "success": true
+}

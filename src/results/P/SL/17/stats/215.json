@@ -1,0 +1,26 @@
+{
+  "times": [
+    145.55954313278198
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9809,
+      "prompt_tokens": 37841,
+      "total_tokens": 47650,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_dense_iff_interior_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed A) :\n    Dense A ↔ interior A = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    -- Since `A` is both closed and dense, it is the whole space.\n    have h_eq : A = (Set.univ : Set X) :=\n      Topology.closed_dense_eq_univ (A := A) hA_closed hDense\n    -- Rewriting `interior A` along this equality yields the result.\n    simpa [h_eq, interior_univ] using\n      (interior_univ : interior (Set.univ : Set X) = Set.univ)\n  · intro hInt\n    -- From `interior A = univ` we get `A = univ`.\n    have h_subset : (Set.univ : Set X) ⊆ A := by\n      have : interior A ⊆ A := interior_subset\n      simpa [hInt] using this\n    have h_eq : A = (Set.univ : Set X) := by\n      apply Set.Subset.antisymm\n      · intro _ _; simp\n      · exact h_subset\n    -- The whole space is dense, hence so is `A`.\n    simpa [h_eq] using (dense_univ : Dense (Set.univ : Set X))"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    13.982229232788086
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1210,
+      "prompt_tokens": 59448,
+      "total_tokens": 60658,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_interior_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (closure (interior (A : Set X)) ∪ closure (interior (B : Set X))) := by\n  -- `P1` holds for each `closure (interior A)` and `closure (interior B)`.\n  have hA : Topology.P1 (closure (interior (A : Set X))) :=\n    Topology.closure_interior_has_P1 (X := X) (A := A)\n  have hB : Topology.P1 (closure (interior (B : Set X))) :=\n    Topology.closure_interior_has_P1 (X := X) (A := B)\n  -- Combine the two sets using the existing union lemma for `P1`.\n  exact\n    Topology.P1_union\n      (X := X)\n      (A := closure (interior (A : Set X)))\n      (B := closure (interior (B : Set X)))\n      hA hB"
+  ],
+  "success": true
+}

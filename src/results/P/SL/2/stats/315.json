@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.80452370643616
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7479,
+      "prompt_tokens": 54060,
+      "total_tokens": 61539,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_frontier_subset_closure_inter_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (frontier (A : Set X)) ⊆\n      closure (A : Set X) ∩ closure (Aᶜ : Set X) := by\n  intro x hx\n  -- `frontier A ⊆ closure A`\n  have h₁ :\n      (frontier (A : Set X) : Set X) ⊆ closure (A : Set X) :=\n    Topology.frontier_subset_closure (A := A)\n  -- Taking closures preserves inclusions.\n  have h₁' :\n      closure (frontier (A : Set X)) ⊆ closure (closure (A : Set X)) :=\n    closure_mono h₁\n  -- Simplify the right‐hand side.\n  have hx₁ : x ∈ closure (A : Set X) := by\n    have : x ∈ closure (closure (A : Set X)) := h₁' hx\n    simpa [closure_closure] using this\n  -- `frontier A ⊆ closure Aᶜ`\n  have h₂ :\n      (frontier (A : Set X) : Set X) ⊆ closure (Aᶜ : Set X) :=\n    Topology.frontier_subset_closure_compl (A := A)\n  -- Again, take closures.\n  have h₂' :\n      closure (frontier (A : Set X)) ⊆ closure (closure (Aᶜ : Set X)) :=\n    closure_mono h₂\n  have hx₂ : x ∈ closure (Aᶜ : Set X) := by\n    have : x ∈ closure (closure (Aᶜ : Set X)) := h₂' hx\n    simpa [closure_closure] using this\n  exact And.intro hx₁ hx₂"
+  ],
+  "success": true
+}

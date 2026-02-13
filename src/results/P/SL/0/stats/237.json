@@ -1,0 +1,26 @@
+{
+  "times": [
+    68.95939517021179
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4971,
+      "prompt_tokens": 40719,
+      "total_tokens": 45690,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_left_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure ((A ∩ interior (B : Set X)) : Set X)) ⊆\n      interior (closure (A : Set X)) := by\n  -- `A ∩ interior B` is contained in `A`.\n  have hSub : (A ∩ interior (B : Set X) : Set X) ⊆ (A : Set X) := by\n    intro x hx\n    exact hx.1\n  -- Apply monotonicity of `closure` and then of `interior`.\n  exact interior_mono (closure_mono hSub)"
+  ],
+  "success": true
+}

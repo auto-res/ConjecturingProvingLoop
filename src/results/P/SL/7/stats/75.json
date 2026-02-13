@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.72783041000366
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5840,
+      "prompt_tokens": 10388,
+      "total_tokens": 16228,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_singleton_iff_isOpen_of_T1\n    {X : Type*} [TopologicalSpace X] [T1Space X] {x : X} :\n    Topology.P1 ({x} : Set X) ↔ IsOpen ({x} : Set X) := by\n  constructor\n  · intro hP1\n    -- First, show that `interior {x}` is non-empty.\n    have hIntNonempty : (interior ({x} : Set X)).Nonempty := by\n      classical\n      by_contra hEmpty\n      have hIntEq : interior ({x} : Set X) = (∅ : Set X) := by\n        simpa [Set.not_nonempty_iff_eq_empty] using hEmpty\n      have hClosureEq : closure (interior ({x} : Set X)) = (∅ : Set X) := by\n        simpa [hIntEq] using (closure_empty : closure (∅ : Set X) = (∅ : Set X))\n      have hx_cl : (x : X) ∈ closure (interior ({x} : Set X)) := by\n        have : (x : X) ∈ ({x} : Set X) := by\n          simp\n        exact hP1 this\n      have : (x : X) ∈ (∅ : Set X) := by\n        simpa [hClosureEq] using hx_cl\n      exact this\n    -- Obtain a point of the interior; it must be `x`.\n    rcases hIntNonempty with ⟨y, hy⟩\n    have hysingleton : y = x := by\n      have : y ∈ ({x} : Set X) := (interior_subset : interior ({x} : Set X) ⊆ {x}) hy\n      simpa [Set.mem_singleton_iff] using this\n    have hxInt : (x : X) ∈ interior ({x} : Set X) := by\n      simpa [hysingleton] using hy\n    -- Hence `interior {x} = {x}`.\n    have hSubset : ({x} : Set X) ⊆ interior ({x} : Set X) := by\n      intro z hz\n      have : z = x := by\n        simpa [Set.mem_singleton_iff] using hz\n      simpa [this] using hxInt\n    have hIntEq : interior ({x} : Set X) = ({x} : Set X) := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      · exact hSubset\n    -- Therefore `{x}` is open.\n    have : IsOpen (interior ({x} : Set X)) := isOpen_interior\n    simpa [hIntEq] using this\n  · intro hOpen\n    exact Topology.IsOpen_P1 (A := ({x} : Set X)) hOpen"
+  ],
+  "success": true
+}

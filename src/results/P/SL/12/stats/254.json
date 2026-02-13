@@ -1,0 +1,26 @@
+{
+  "times": [
+    104.51409268379211
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7893,
+      "prompt_tokens": 48508,
+      "total_tokens": 56401,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.preimage_closure_subset_closure_preimage\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}\n    (hf : Continuous f) {A : Set Y} :\n    closure (f ⁻¹' A) ⊆ f ⁻¹' closure A := by\n  intro x hx\n  -- We show `f x ∈ closure A` using the neighbourhood\n  -- characterisation of the closure.\n  have h_fx : f x ∈ closure A := by\n    -- Apply `mem_closure_iff` at `f x`.\n    apply (mem_closure_iff).2\n    intro V hV_open h_fxV\n    -- Consider the open neighbourhood `f ⁻¹' V` of `x`.\n    have hU_open : IsOpen (f ⁻¹' V) := hV_open.preimage hf\n    have hxU : x ∈ f ⁻¹' V := by\n      simpa using h_fxV\n    -- Since `x ∈ closure (f ⁻¹' A)`, this neighbourhood meets\n    -- `f ⁻¹' A` non‐trivially.\n    have h_nonempty : ((f ⁻¹' V) ∩ f ⁻¹' A).Nonempty := by\n      have := (mem_closure_iff).1 hx (f ⁻¹' V) hU_open hxU\n      simpa [Set.preimage_inter] using this\n    -- Map a witnessing point through `f` to obtain a point in `V ∩ A`.\n    rcases h_nonempty with ⟨y, hyV, hyA⟩\n    have hyV' : f y ∈ V := by\n      simpa using hyV\n    have hyA' : f y ∈ A := by\n      simpa using hyA\n    exact ⟨f y, And.intro hyV' hyA'⟩\n  -- Reinterpret the membership in terms of the preimage.\n  simpa using h_fx"
+  ],
+  "success": true
+}

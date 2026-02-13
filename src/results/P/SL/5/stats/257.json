@@ -1,0 +1,26 @@
+{
+  "times": [
+    93.36991357803345
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7423,
+      "prompt_tokens": 46951,
+      "total_tokens": 54374,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_diff_subset_closure_diff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (A \\ B : Set X)) ⊆ closure (A : Set X) \\ interior B := by\n  -- `interior (A \\ B)` is contained in `A \\ B`.\n  have h₁ : (interior (A \\ B : Set X) : Set X) ⊆ A \\ B :=\n    interior_subset\n  -- Taking closures preserves inclusions.\n  have h₂ : closure (interior (A \\ B : Set X)) ⊆ closure (A \\ B) :=\n    closure_mono h₁\n  -- From an existing lemma we have `closure (A \\ B) ⊆ closure A \\ interior B`.\n  have h₃ :\n      closure (A \\ B : Set X) ⊆ closure (A : Set X) \\ interior B :=\n    closure_diff_subset (A := A) (B := B)\n  -- Combine the two inclusions.\n  exact h₂.trans h₃"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.460861444473267
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2200,
+      "prompt_tokens": 23390,
+      "total_tokens": 25590,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_open_left {X : Type*} [TopologicalSpace X] {U A : Set X}\n    (hU : IsOpen U) :\n    Topology.P2 A → Topology.P2 (U ∪ A) := by\n  intro hP2A\n  have hP2U : Topology.P2 U :=\n    Topology.isOpen_implies_P2 (X := X) (A := U) hU\n  simpa using\n    Topology.P2_union (X := X) (A := U) (B := A) hP2U hP2A"
+  ],
+  "success": true
+}

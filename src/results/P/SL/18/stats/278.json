@@ -1,0 +1,26 @@
+{
+  "times": [
+    106.7404522895813
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6785,
+      "prompt_tokens": 44596,
+      "total_tokens": 51381,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_inter_open_right {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP3A : Topology.P3 A) (hOpenB : IsOpen (B : Set X)) :\n    Topology.P3 (A ∩ B) := by\n  -- Unfold the definition of `P3`.\n  dsimp [Topology.P3] at hP3A ⊢\n  intro x hxAB\n  rcases hxAB with ⟨hxA, hxB⟩\n  -- From `P3` for `A`, obtain that `x` lies in `interior (closure A)`.\n  have hxIntA : x ∈ interior (closure A) := hP3A hxA\n  -- Consider the open set `W = interior (closure A) ∩ B`.\n  let W : Set X := interior (closure A) ∩ B\n  have hW_open : IsOpen W :=\n    isOpen_interior.inter hOpenB\n  have hxW : x ∈ W := by\n    exact And.intro hxIntA hxB\n  -- We show that `W` is contained in `closure (A ∩ B)`.\n  have hW_sub_cl : (W : Set X) ⊆ closure (A ∩ B) := by\n    intro y hy\n    rcases hy with ⟨hyIntA, hyB⟩\n    -- `y ∈ interior (closure A)` implies `y ∈ closure A`.\n    have hyClA : y ∈ closure A :=\n      (interior_subset : interior (closure A) ⊆ closure A) hyIntA\n    -- Use the neighbourhood characterisation of the closure.\n    have : y ∈ closure (A ∩ B) := by\n      -- Reformulate `hyClA` via `mem_closure_iff`.\n      have hClosureA :=\n        (mem_closure_iff).1 hyClA\n      -- Show that every open neighbourhood of `y` meets `A ∩ B`.\n      have hClosureAB : ∀ U : Set X, IsOpen U → y ∈ U →\n          (U ∩ (A ∩ B) : Set X).Nonempty := by\n        intro U hU_open hyU\n        -- Intersect the neighbourhood with `B`, which is open.\n        have hV_open : IsOpen (U ∩ B) := hU_open.inter hOpenB\n        have hyV : y ∈ U ∩ B := ⟨hyU, hyB⟩\n        -- `U ∩ B` meets `A` since `y ∈ closure A`.\n        have hNonempty : ((U ∩ B) ∩ A).Nonempty :=\n          hClosureA (U ∩ B) hV_open hyV\n        rcases hNonempty with ⟨z, ⟨⟨hzU, hzB⟩, hzA⟩⟩\n        -- The point `z` lies in `U ∩ (A ∩ B)`.\n        exact ⟨z, ⟨hzU, ⟨hzA, hzB⟩⟩⟩\n      -- Translate the neighbourhood property back into membership in the closure.\n      exact (mem_closure_iff).2 hClosureAB\n    exact this\n  -- By maximality of the interior, `W ⊆ interior (closure (A ∩ B))`.\n  have hW_sub_int :\n      (W : Set X) ⊆ interior (closure (A ∩ B)) :=\n    interior_maximal hW_sub_cl hW_open\n  -- Conclude by applying the inclusion to `x`.\n  exact hW_sub_int hxW"
+  ],
+  "success": true
+}

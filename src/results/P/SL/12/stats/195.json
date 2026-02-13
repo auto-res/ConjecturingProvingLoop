@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.94500803947449
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7010,
+      "prompt_tokens": 36892,
+      "total_tokens": 43902,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6720,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iUnion_interior_closure_subset_interior_closure_iUnion\n    {X ι : Type*} [TopologicalSpace X] (A : ι → Set X) :\n    (⋃ i, interior (closure (A i)) : Set X) ⊆\n      interior (closure (⋃ i, A i : Set X)) := by\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n  have h_sub :\n      (interior (closure (A i)) : Set X) ⊆\n        interior (closure (⋃ j, A j : Set X)) := by\n    -- First, relate the closures of the sets.\n    have h_closure :\n        (closure (A i : Set X)) ⊆ closure (⋃ j, A j) := by\n      have : (A i : Set X) ⊆ ⋃ j, A j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact closure_mono this\n    -- Then, pass to interiors via monotonicity.\n    exact interior_mono h_closure\n  exact h_sub hx_i"
+  ],
+  "success": true
+}

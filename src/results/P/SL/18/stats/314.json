@@ -1,0 +1,43 @@
+{
+  "times": [
+    52.77885150909424,
+    150.04536724090576
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3944,
+      "prompt_tokens": 51844,
+      "total_tokens": 55788,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    },
+    {
+      "completion_tokens": 8539,
+      "prompt_tokens": 51950,
+      "total_tokens": 60489,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_eq_closure_interior_intersection\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X) ∩ interior B) =\n      closure (interior (A ∩ B : Set X)) := by\n  -- First, identify `interior A ∩ interior B` with `interior (A ∩ B)`.\n  have hInt : interior (A : Set X) ∩ interior B =\n      interior (A ∩ B : Set X) := by\n    -- `interior_inter` gives the equality in the opposite direction.\n    have h' : interior (A ∩ B : Set X) =\n        interior (A : Set X) ∩ interior B :=\n      interior_inter (A := A) (B := B)\n    simpa using h'.symm\n  -- Rewriting with `hInt` yields the desired equality of closures.\n  simpa [hInt]",
+    "theorem interior_compl_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    interior ((Aᶜ) : Set X) = Aᶜ := by\n  simpa using hA_closed.isOpen_compl.interior_eq"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    116.59983205795288
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6116,
+      "prompt_tokens": 53012,
+      "total_tokens": 59128,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem union_three_interiors_has_all_Ps {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} :\n    Topology.P1\n        ((interior (A : Set X)) ∪ interior (B : Set X) ∪ interior (C : Set X)) ∧\n      Topology.P2\n        ((interior (A : Set X)) ∪ interior (B : Set X) ∪ interior (C : Set X)) ∧\n        Topology.P3\n        ((interior (A : Set X)) ∪ interior (B : Set X) ∪ interior (C : Set X)) := by\n  -- The union of three open sets is open.\n  have hOpen :\n      IsOpen\n        ((interior (A : Set X)) ∪ interior (B : Set X) ∪ interior (C : Set X) : Set X) := by\n    have hAB :\n        IsOpen\n          ((interior (A : Set X)) ∪ interior (B : Set X) : Set X) :=\n      (isOpen_interior).union isOpen_interior\n    simpa [Set.union_assoc] using hAB.union isOpen_interior\n  -- Every open set satisfies `P1`, `P2`, and `P3`.\n  exact\n    Topology.isOpen_has_all_Ps\n      (X := X)\n      (A :=\n        ((interior (A : Set X)) ∪ interior (B : Set X) ∪ interior (C : Set X) : Set X))\n      hOpen"
+  ],
+  "success": true
+}

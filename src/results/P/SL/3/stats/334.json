@@ -1,0 +1,43 @@
+{
+  "times": [
+    48.6570143699646,
+    285.46610379219055
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3174,
+      "prompt_tokens": 56540,
+      "total_tokens": 59714,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    },
+    {
+      "completion_tokens": 13394,
+      "prompt_tokens": 56614,
+      "total_tokens": 70008,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → Topology.P2 (closure (A : Set X)) := by\n  intro hP2A\n  -- From `P2` we obtain `P3`.\n  have hP3A : Topology.P3 (A : Set X) :=\n    Topology.P2_implies_P3 (A := A) hP2A\n  -- A set satisfying `P3` has its closure satisfying `P2`.\n  exact (P2_closure_of_P3 (A := A)) hP3A",
+    ""
+  ],
+  "success": true
+}

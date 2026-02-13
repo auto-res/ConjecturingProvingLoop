@@ -1,0 +1,26 @@
+{
+  "times": [
+    180.45643734931946
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10308,
+      "prompt_tokens": 55470,
+      "total_tokens": 65778,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_compl_of_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) : Topology.P3 (Aᶜ) := by\n  -- We already have a result giving all three properties for the complement of a closed set.\n  -- Extract the `P3` component from that result.\n  have h := (Topology.P1_P2_P3_compl_of_closed (A := A) hA)\n  exact h.2.2"
+  ],
+  "success": true
+}

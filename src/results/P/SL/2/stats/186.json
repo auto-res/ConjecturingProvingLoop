@@ -1,0 +1,26 @@
+{
+  "times": [
+    115.81046485900879
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10035,
+      "prompt_tokens": 30620,
+      "total_tokens": 40655,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_eq_empty_of_empty_interior_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → interior (closure (A : Set X)) = ∅ → A = (∅ : Set X) := by\n  intro hP2 hIntEq\n  -- From `P2`, derive `P3`.\n  have hP3 : Topology.P3 A := Topology.P2_implies_P3 (A := A) hP2\n  -- Apply the corresponding result for `P3`.\n  exact\n    Topology.P3_implies_eq_empty_of_empty_interior_closure\n      (A := A) hP3 hIntEq"
+  ],
+  "success": true
+}

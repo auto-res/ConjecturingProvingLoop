@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.59462928771973
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5192,
+      "prompt_tokens": 12068,
+      "total_tokens": 17260,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_univ_of_dense_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hDense : Dense (interior A)) :\n    interior (closure A) = (Set.univ : Set X) := by\n  -- The density of `interior A` implies its closure is the whole space.\n  have h_closure_int : closure (interior A) = (Set.univ : Set X) := hDense.closure_eq\n  -- `closure (interior A)` is contained in `closure A`.\n  have h_subset : closure (interior A) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  -- Hence, `closure A` is also the whole space.\n  have h_closureA : closure A = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro _x _hx; simp\n    ·\n      have : (Set.univ : Set X) ⊆ closure A := by\n        have : closure (interior A) ⊆ closure A := h_subset\n        simpa [h_closure_int] using this\n      exact this\n  -- Taking interiors yields the desired equality.\n  simpa [h_closureA] using\n    (interior_univ : interior (Set.univ : Set X) = Set.univ)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    203.1718339920044
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13332,
+      "prompt_tokens": 40138,
+      "total_tokens": 53470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_compl_interior_union_interior_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (interior A ∪ interior (Aᶜ))ᶜ := by\n  ext x\n  constructor\n  · intro hx\n    -- `hx` gives `x ∈ closure A` and `x ∉ interior A`\n    have hNotIntA : x ∉ interior A := hx.2\n    -- Show that `x ∉ interior (Aᶜ)`\n    have hNotIntAc : x ∉ interior (Aᶜ) := by\n      intro hxIntAc\n      -- `interior (Aᶜ)` is open and contains `x`\n      -- but it is disjoint from `A`, contradicting `x ∈ closure A`.\n      have hNon :\n          ((interior (Aᶜ) : Set X) ∩ A).Nonempty :=\n        (mem_closure_iff).1 hx.1 (interior (Aᶜ)) isOpen_interior hxIntAc\n      rcases hNon with ⟨y, ⟨hyIntAc, hyA⟩⟩\n      have : (y : X) ∈ Aᶜ := interior_subset hyIntAc\n      exact this hyA\n    -- Hence `x` lies in the complement of the union of the interiors.\n    have : x ∉ interior A ∪ interior (Aᶜ) := by\n      intro h\n      cases h with\n      | inl hIntA  => exact hNotIntA hIntA\n      | inr hIntAc => exact hNotIntAc hIntAc\n    simpa [Set.mem_compl] using this\n  · intro hxComp\n    -- `hxComp` says `x` is not in `interior A` nor in `interior (Aᶜ)`\n    have hNotUnion : x ∉ interior A ∪ interior (Aᶜ) := by\n      simpa [Set.mem_compl] using hxComp\n    have hNotIntA : x ∉ interior A := by\n      intro hIntA\n      exact hNotUnion (Or.inl hIntA)\n    have hNotIntAc : x ∉ interior (Aᶜ) := by\n      intro hIntAc\n      exact hNotUnion (Or.inr hIntAc)\n    -- Show `x ∈ closure A`\n    have hClos : x ∈ closure A := by\n      by_contra hNotClos\n      have hxOpen : x ∈ (closure A)ᶜ := hNotClos\n      have hOpenCompl : IsOpen ((closure A)ᶜ) :=\n        (isClosed_closure (s := A)).isOpen_compl\n      -- `(closure A)ᶜ` is an open neighbourhood of `x` contained in `Aᶜ`\n      have hSub : ((closure A)ᶜ : Set X) ⊆ Aᶜ := by\n        intro y hy\n        by_cases hyA : y ∈ A\n        · have : y ∈ closure A := subset_closure hyA\n          exact (hy this).elim\n        · exact hyA\n      have hxIntAc : x ∈ interior (Aᶜ) :=\n        (interior_maximal hSub hOpenCompl) hxOpen\n      exact hNotIntAc hxIntAc\n    exact And.intro hClos hNotIntA"
+  ],
+  "success": true
+}

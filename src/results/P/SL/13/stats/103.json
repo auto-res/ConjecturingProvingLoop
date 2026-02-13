@@ -1,0 +1,60 @@
+{
+  "times": [
+    102.72840189933777,
+    183.6130771636963,
+    40.723888635635376
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10913,
+      "prompt_tokens": 17220,
+      "total_tokens": 28133,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 14126,
+      "prompt_tokens": 17520,
+      "total_tokens": 31646,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    },
+    {
+      "completion_tokens": 2472,
+      "prompt_tokens": 17599,
+      "total_tokens": 20071,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_dense_interior_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense (A : Set X) ↔ Dense (interior (closure (A : Set X))) := by\n  dsimp [Dense]\n  constructor\n  · intro hA_dense\n    have h_clA : closure (A : Set X) = (Set.univ : Set X) := hA_dense\n    have h_int : interior (closure (A : Set X)) = (Set.univ : Set X) := by\n      simpa [h_clA, interior_univ]\n    simpa [h_int, closure_univ]\n  · intro h_dense_int\n    have h_sub :\n        closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) :=\n      Topology.closure_interior_closure_subset_closure (X := X) (A := A)\n    have h_univ_subset : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      simpa [h_dense_int] using h_sub\n    simpa using\n      (Set.Subset.antisymm Set.Subset_univ h_univ_subset)",
+    "import Mathlib\nimport Aesop\n\nopen Topology\n\ntheorem Topology.denseInterior_implies_P3_fixed {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Topology.P3 (X:=X) A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hxA\n  -- First, `closure (interior A)` is the whole space by density.\n  have h_closure_int : closure (interior (A : Set X)) = (Set.univ : Set X) :=\n    hDense.closure_eq\n  -- Since `interior A ⊆ A`, taking closures yields\n  -- `closure (interior A) ⊆ closure A`, hence `closure A = univ`.\n  have h_closureA : closure (A : Set X) = (Set.univ : Set X) := by\n    have : (Set.univ : Set X) ⊆ closure A := by\n      -- Rewrite `univ` as `closure (interior A)` and use monotonicity of `closure`.\n      simpa [h_closure_int] using\n        (closure_mono (interior_subset : interior (A : Set X) ⊆ A))\n    exact Set.Subset.antisymm this Set.Subset_univ\n  -- Therefore, the interior of `closure A` is also the whole space.\n  have h_interior : interior (closure (A : Set X)) = (Set.univ : Set X) := by\n    simpa [h_closureA, interior_univ]\n  -- Conclude: every point of `A` lies in `interior (closure A)`.\n  simpa [h_interior] using (by\n    have : (x : X) ∈ (Set.univ : Set X) := by simp\n    exact this)",
+    "theorem Topology.closure_inter_subset_inter_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure ((A ∩ B) : Set X) ⊆ closure A ∩ closure B := by\n  intro x hx\n  have hxA : x ∈ closure A :=\n    (closure_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)) hx\n  have hxB : x ∈ closure B :=\n    (closure_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hx\n  exact ⟨hxA, hxB⟩"
+  ],
+  "success": true
+}

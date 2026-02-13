@@ -1,0 +1,43 @@
+{
+  "times": [
+    183.38913130760193,
+    211.1831090450287
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10492,
+      "prompt_tokens": 8574,
+      "total_tokens": 19066,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    },
+    {
+      "completion_tokens": 11384,
+      "prompt_tokens": 8680,
+      "total_tokens": 20064,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (A : Set X)))) =\n      interior (closure (A : Set X)) := by\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    have h :\n        closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n      apply closure_mono\n      exact interior_subset (s := closure (A : Set X))\n    exact interior_mono h\n  · -- `⊇` direction\n    have h :\n        interior (closure (A : Set X)) ⊆\n          interior (closure (interior (closure (A : Set X)))) := by\n      apply interior_maximal\n      · -- `interior (closure A) ⊆ closure (interior (closure A))`\n        exact subset_closure\n      · -- `interior (closure A)` is open\n        exact isOpen_interior\n    exact h",
+    "theorem P1_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : closure (interior (A : Set X)) = Set.univ) :\n    Topology.P1 A := by\n  dsimp [Topology.P1]\n  intro x hx\n  have : (x : X) ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hA] using this"
+  ],
+  "success": true
+}

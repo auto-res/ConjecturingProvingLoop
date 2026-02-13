@@ -1,0 +1,26 @@
+{
+  "times": [
+    138.2923333644867
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7468,
+      "prompt_tokens": 30983,
+      "total_tokens": 38451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1_iff_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → (Topology.P1 A ↔ Topology.P3 A) := by\n  intro hP2\n  have hP1 : Topology.P1 A :=\n    Topology.P2_implies_P1 (X := X) (A := A) hP2\n  have hP3 : Topology.P3 A :=\n    Topology.P2_implies_P3 (X := X) (A := A) hP2\n  exact ⟨fun _ => hP3, fun _ => hP1⟩"
+  ],
+  "success": true
+}

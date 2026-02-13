@@ -1,0 +1,26 @@
+{
+  "times": [
+    100.31145024299622
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5429,
+      "prompt_tokens": 36071,
+      "total_tokens": 41500,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_and_isClosed_of_frontier_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier A = (∅ : Set X) → IsOpen A ∧ IsClosed A := by\n  intro hFrontier\n  -- Step 1: show `closure A ⊆ interior A`\n  have hClosSubInt : closure A ⊆ interior A := by\n    intro x hxClos\n    by_cases hInt : x ∈ interior A\n    · exact hInt\n    ·\n      have hFront : x ∈ frontier A := And.intro hxClos hInt\n      have : False := by\n        simpa [hFrontier] using hFront\n      exact this.elim\n  -- Step 2: deduce `A ⊆ interior A`\n  have hASubInt : (A : Set X) ⊆ interior A := by\n    intro x hxA\n    exact hClosSubInt (subset_closure hxA)\n  -- Equalities `interior A = A` and `closure A = A`\n  have hIntEq : interior A = A := by\n    apply Set.Subset.antisymm\n    · exact interior_subset\n    · exact hASubInt\n  have hClosEq : closure A = A := by\n    apply Set.Subset.antisymm\n    · intro x hxClos\n      exact interior_subset (hClosSubInt hxClos)\n    · exact subset_closure\n  -- Conclude openness and closedness\n  have hOpen : IsOpen A := by\n    have : IsOpen (interior A) := isOpen_interior\n    simpa [hIntEq] using this\n  have hClosed : IsClosed A := by\n    have : IsClosed (closure A) := isClosed_closure\n    simpa [hClosEq] using this\n  exact And.intro hOpen hClosed"
+  ],
+  "success": true
+}

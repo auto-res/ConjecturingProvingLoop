@@ -1,0 +1,26 @@
+{
+  "times": [
+    114.80978322029114
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7856,
+      "prompt_tokens": 27472,
+      "total_tokens": 35328,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_diff_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (closure (A \\ B)) ⊆ interior (closure A) := by\n  have h_closure : closure (A \\ B) ⊆ closure A :=\n    closure_mono (Set.diff_subset : A \\ B ⊆ A)\n  exact interior_mono h_closure"
+  ],
+  "success": true
+}

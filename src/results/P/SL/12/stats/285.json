@@ -1,0 +1,43 @@
+{
+  "times": [
+    132.17982125282288,
+    85.6233823299408
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7092,
+      "prompt_tokens": 55109,
+      "total_tokens": 62201,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 5413,
+      "prompt_tokens": 55227,
+      "total_tokens": 60640,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_sUnion_eq_sUnion_of_isOpen {X : Type*} [TopologicalSpace X]\n    (F : Set (Set X)) (hF : ∀ A : Set X, A ∈ F → IsOpen (A : Set X)) :\n    interior (⋃₀ F : Set X) = ⋃₀ F := by\n  -- The union of any collection of open sets is open.\n  have h_open : IsOpen (⋃₀ F : Set X) := by\n    refine IsOpen.sUnion ?_\n    intro A hA\n    exact hF A hA\n  -- For an open set `U`, `interior U = U`.\n  simpa [h_open.interior_eq]",
+    "theorem IsOpen.sUnion {X : Type*} [TopologicalSpace X] {F : Set (Set X)}\n    (hF : ∀ A : Set X, A ∈ F → IsOpen (A : Set X)) :\n    IsOpen (⋃₀ F : Set X) := by\n  simpa using isOpen_sUnion (X := X) hF"
+  ],
+  "success": true
+}

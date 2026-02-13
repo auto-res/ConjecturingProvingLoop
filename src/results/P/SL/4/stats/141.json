@@ -1,0 +1,43 @@
+{
+  "times": [
+    77.2057740688324,
+    246.6910376548767
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5763,
+      "prompt_tokens": 19501,
+      "total_tokens": 25264,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 16658,
+      "prompt_tokens": 19597,
+      "total_tokens": 36255,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_iff_interior_closure_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A ↔ interior (closure A) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    exact interior_closure_eq_univ_of_dense (A := A) hDense\n  · intro hInt\n    -- Show that `closure A = univ`, whence `A` is dense.\n    have hClosureUniv : closure A = (Set.univ : Set X) := by\n      apply subset_antisymm\n      · intro _ _; trivial\n      · intro x hx_univ\n        -- Use `hInt` to turn `x ∈ univ` into `x ∈ interior (closure A)`,\n        -- then use `interior_subset` to land in `closure A`.\n        have : (x : X) ∈ interior (closure A) := by\n          simpa [hInt] using hx_univ\n        exact interior_subset this\n    exact ⟨hClosureUniv⟩",
+    ""
+  ],
+  "success": true
+}

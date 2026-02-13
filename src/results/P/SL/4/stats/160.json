@@ -1,0 +1,26 @@
+{
+  "times": [
+    81.45217490196228
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2514,
+      "prompt_tokens": 22359,
+      "total_tokens": 24873,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_interior_imp_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Topology.P2 A := by\n  intro hDense\n  dsimp [Topology.P2]\n  intro x hxA\n  -- Since `interior A` is dense, its closure is `univ`.\n  have h_closure : (closure (interior A) : Set X) = Set.univ := hDense.closure_eq\n  -- Hence the interior of this closure is also `univ`.\n  have h_int : interior (closure (interior A)) = (Set.univ : Set X) := by\n    have h_univ : interior (Set.univ : Set X) = (Set.univ : Set X) := by\n      simpa using (isOpen_univ : IsOpen (Set.univ : Set X)).interior_eq\n    simpa [h_closure] using h_univ\n  -- Every point lies in `univ`, so the desired inclusion holds.\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_int] using this"
+  ],
+  "success": true
+}

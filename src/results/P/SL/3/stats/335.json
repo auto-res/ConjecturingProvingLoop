@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.34694337844849
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5054,
+      "prompt_tokens": 56541,
+      "total_tokens": 61595,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_subset_inter_closures {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure ((A ∩ interior (B : Set X)) : Set X) ⊆\n      closure (A : Set X) ∩ closure (B : Set X) := by\n  -- We start with the inclusion into `closure A ∩ closure (interior B)`\n  have h₁ :\n      closure ((A ∩ interior (B : Set X)) : Set X) ⊆\n        closure (A : Set X) ∩ closure (interior (B : Set X)) :=\n    closure_inter_interior_subset_closure_interiors (A := A) (B := B)\n  -- Since `interior B ⊆ B`, taking closures yields\n  -- `closure (interior B) ⊆ closure B`.\n  have h₂ : closure (interior (B : Set X)) ⊆ closure (B : Set X) :=\n    closure_mono (interior_subset (s := B))\n  -- Combine the two inclusions to obtain the desired result.\n  intro x hx\n  have hx' : (x : X) ∈ closure (A : Set X) ∩ closure (interior (B : Set X)) := h₁ hx\n  exact And.intro hx'.1 (h₂ hx'.2)"
+  ],
+  "success": true
+}

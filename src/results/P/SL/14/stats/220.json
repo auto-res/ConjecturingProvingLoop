@@ -1,0 +1,26 @@
+{
+  "times": [
+    121.34260582923889
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8812,
+      "prompt_tokens": 40789,
+      "total_tokens": 49601,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_sInter_subset\n    {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    interior (⋂₀ 𝒜 : Set X) ⊆ ⋂₀ ((fun S : Set X => interior S) '' 𝒜) := by\n  intro x hx\n  -- For each `S ∈ 𝒜`, we have `x ∈ interior S`.\n  have h₁ : ∀ S : Set X, S ∈ 𝒜 → (x : X) ∈ interior S := by\n    intro S hS\n    have h_subset : (⋂₀ 𝒜 : Set X) ⊆ S := by\n      intro y hy\n      exact (Set.mem_sInter.1 hy) S hS\n    have h_int_mono :\n        interior (⋂₀ 𝒜 : Set X) ⊆ interior S :=\n      interior_mono h_subset\n    exact h_int_mono hx\n  -- Show that `x` lies in every element of the image `interior '' 𝒜`.\n  have : ∀ T : Set X,\n      T ∈ ((fun S : Set X => interior S) '' 𝒜) → (x : X) ∈ T := by\n    intro T hT\n    rcases hT with ⟨S, hS𝒜, rfl⟩\n    exact h₁ S hS𝒜\n  exact (Set.mem_sInter.2 this)"
+  ],
+  "success": true
+}

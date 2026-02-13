@@ -1,0 +1,43 @@
+{
+  "times": [
+    48.907794713974,
+    108.45965600013733
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3372,
+      "prompt_tokens": 2651,
+      "total_tokens": 6023,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    },
+    {
+      "completion_tokens": 7769,
+      "prompt_tokens": 2782,
+      "total_tokens": 10551,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_eq {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    have h : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    exact closure_mono h\n  ·\n    have h : interior (A : Set X) ⊆ interior (closure (interior A)) :=\n      Topology.interior_subset_interior_closure_interior (X := X) (A := A)\n    exact closure_mono h",
+    "theorem Topology.interior_closure_eq_interior_closure_interior_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P2 (X := X) A) :\n    interior (closure (A : Set X)) = interior (closure (interior A)) := by\n  have h_closure_eq : closure (A : Set X) = closure (interior A) :=\n    Topology.P2_implies_closure_eq_closure_interior (X := X) (A := A) hA\n  simpa [h_closure_eq]"
+  ],
+  "success": true
+}

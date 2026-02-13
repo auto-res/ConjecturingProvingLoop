@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.88546919822693
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4582,
+      "prompt_tokens": 13072,
+      "total_tokens": 17654,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosureInterior_idempotent {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior A)))) = interior (closure (interior A)) := by\n  have h := Topology.closureInteriorClosureInterior_eq_closureInterior (A := A)\n  simpa using congrArg interior h"
+  ],
+  "success": true
+}

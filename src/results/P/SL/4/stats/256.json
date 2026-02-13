@@ -1,0 +1,26 @@
+{
+  "times": [
+    122.73574113845825
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9968,
+      "prompt_tokens": 37912,
+      "total_tokens": 47880,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_inter_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∩ B) ⊆ frontier A ∪ frontier B := by\n  intro x hx\n  rcases hx with ⟨hx_cl, hx_notInt⟩\n  -- `x` lies in the closure of each factor.\n  have h_clA : x ∈ closure A := by\n    have h : closure (A ∩ B) ⊆ closure A :=\n      closure_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)\n    exact h hx_cl\n  have h_clB : x ∈ closure B := by\n    have h : closure (A ∩ B) ⊆ closure B :=\n      closure_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)\n    exact h hx_cl\n  -- Case distinction on whether `x` is in `interior A`.\n  by_cases hIntA : x ∈ interior A\n  · -- If `x ∈ interior A`, show `x ∉ interior B`.\n    have h_notIntB : x ∉ interior B := by\n      intro hIntB\n      -- Both `A` and `B` are neighbourhoods of `x`.\n      have hA_nhds : (A : Set X) ∈ nhds x :=\n        (mem_interior_iff_mem_nhds).1 hIntA\n      have hB_nhds : (B : Set X) ∈ nhds x :=\n        (mem_interior_iff_mem_nhds).1 hIntB\n      -- Their intersection is also a neighbourhood of `x`.\n      have hAB_nhds : (A ∩ B : Set X) ∈ nhds x :=\n        Filter.inter_mem hA_nhds hB_nhds\n      -- Hence `x ∈ interior (A ∩ B)`, contradicting `hx_notInt`.\n      have : x ∈ interior (A ∩ B) :=\n        (mem_interior_iff_mem_nhds).2 hAB_nhds\n      exact hx_notInt this\n    -- Therefore `x ∈ frontier B`.\n    exact Or.inr ⟨h_clB, h_notIntB⟩\n  · -- Otherwise `x ∉ interior A`, so `x ∈ frontier A`.\n    exact Or.inl ⟨h_clA, hIntA⟩"
+  ],
+  "success": true
+}

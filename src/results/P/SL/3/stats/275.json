@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.77453327178955
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6310,
+      "prompt_tokens": 46222,
+      "total_tokens": 52532,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem boundary_eq_closure_interior_diff_interior_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) →\n      closure (A : Set X) \\ interior (A : Set X) =\n        closure (interior (A : Set X)) \\ interior (A : Set X) := by\n  intro hP2\n  have hP1 : Topology.P1 (A : Set X) :=\n    Topology.P2_implies_P1 (A := A) hP2\n  exact boundary_eq_closure_interior_diff_interior_of_P1 (A := A) hP1"
+  ],
+  "success": true
+}

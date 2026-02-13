@@ -1,0 +1,26 @@
+{
+  "times": [
+    70.22725534439087
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8246,
+      "prompt_tokens": 62345,
+      "total_tokens": 70591,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_eleven {X : Type*} [TopologicalSpace X]\n    {A B C D E F G H I J K : Set X} :\n    closure (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J ∪ K : Set X) =\n      closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E ∪\n        closure F ∪ closure G ∪ closure H ∪ closure I ∪ closure J ∪ closure K := by\n  -- First, distribute `closure` over the last union using the two-set lemma.\n  have h₁ :\n      closure\n        ((A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J) ∪ K : Set X) =\n        closure (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J : Set X) ∪\n          closure K := by\n    simpa using\n      closure_union\n        (A :=\n          (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J : Set X))\n        (B := K)\n  -- Apply the already-proved ten-set lemma to the first part.\n  have h₂ :\n      closure (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J : Set X) =\n        closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E ∪\n          closure F ∪ closure G ∪ closure H ∪ closure I ∪ closure J := by\n    simpa using\n      closure_union_ten (X := X)\n        (A := A) (B := B) (C := C) (D := D) (E := E) (F := F)\n        (G := G) (H := H) (I := I) (J := J)\n  -- Assemble the equalities and tidy up with associativity of `∪`.\n  calc\n    closure (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J ∪ K : Set X)\n        = closure\n            ((A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J) ∪ K : Set X) := by\n          simpa [Set.union_assoc]\n    _ = closure (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J : Set X) ∪\n          closure K := by\n          simpa using h₁\n    _ = (closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E ∪\n          closure F ∪ closure G ∪ closure H ∪ closure I ∪ closure J) ∪\n          closure K := by\n          simpa [h₂]\n    _ = closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E ∪\n        closure F ∪ closure G ∪ closure H ∪ closure I ∪ closure J ∪\n        closure K := by\n          simp [Set.union_assoc]"
+  ],
+  "success": true
+}

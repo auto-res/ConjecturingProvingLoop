@@ -1,0 +1,26 @@
+{
+  "times": [
+    18.578434705734253
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1781,
+      "prompt_tokens": 23172,
+      "total_tokens": 24953,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P2_and_P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen (A : Set X)) :\n    Topology.P1 A ↔ (Topology.P2 A ∧ Topology.P3 A) := by\n  -- Existing equivalences under the openness assumption.\n  have h₁ : Topology.P1 A ↔ Topology.P2 A :=\n    Topology.P1_iff_P2_of_isOpen (A := A) hA\n  have h₂ : Topology.P1 A ↔ Topology.P3 A :=\n    Topology.P1_iff_P3_of_isOpen (A := A) hA\n  -- Prove the desired equivalence.\n  constructor\n  · intro hP1\n    exact ⟨h₁.mp hP1, h₂.mp hP1⟩\n  · rintro ⟨hP2, _⟩\n    exact h₁.mpr hP2"
+  ],
+  "success": true
+}

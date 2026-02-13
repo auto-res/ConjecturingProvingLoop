@@ -1,0 +1,43 @@
+{
+  "times": [
+    250.11172533035278,
+    99.36898994445801
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 15766,
+      "prompt_tokens": 49679,
+      "total_tokens": 65445,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 6994,
+      "prompt_tokens": 49785,
+      "total_tokens": 56779,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.compl_boundary_eq_union_interiors {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    (closure A \\ interior A)ᶜ = interior A ∪ interior (Aᶜ) := by\n  -- Start with an existing description of the complement of the boundary.\n  have h₁ :=\n    Topology.compl_boundary_eq_union_interior_compl_closure (X := X) (A := A)\n  -- Express `((closure A)ᶜ)` in terms of `interior (Aᶜ)`.\n  have h₂ : (closure A)ᶜ = interior (Aᶜ) := by\n    simpa using\n      (Topology.interior_compl_eq_compl_closure (X := X) (A := A)).symm\n  -- Substitute and conclude.\n  simpa [h₂] using h₁",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    145.68012690544128
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7216,
+      "prompt_tokens": 54942,
+      "total_tokens": 62158,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_closure_subset_closure_diff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A : Set X) \\ closure (B : Set X) ⊆ closure ((A \\ B) : Set X) := by\n  intro x hx\n  rcases hx with ⟨hClA, hNotClB⟩\n  -- We prove that `x` lies in the closure of `A \\ B`.\n  apply (mem_closure_iff).2\n  intro U hUopen hxU\n  -- Consider the open neighbourhood `U ∩ (closure B)ᶜ` of `x`,\n  -- which is disjoint from `B`.\n  let V : Set X := U ∩ (closure (B : Set X))ᶜ\n  have hVopen : IsOpen V := hUopen.inter (isClosed_closure.isOpen_compl)\n  have hxV : (x : X) ∈ V := And.intro hxU hNotClB\n  -- Since `x ∈ closure A`, this open set meets `A`.\n  obtain ⟨y, ⟨hyU, hyComplB⟩, hyA⟩ :=\n    (mem_closure_iff).1 hClA V hVopen hxV\n  -- The point `y` is in `U`, in `A`, and not in `B`.\n  have hyNotB : (y : X) ∉ (B : Set X) := by\n    intro hYB\n    have : (y : X) ∈ closure (B : Set X) := subset_closure hYB\n    exact hyComplB this\n  -- Hence `y` witnesses that `U` meets `A \\ B`.\n  exact ⟨y, And.intro hyU (And.intro hyA hyNotB)⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.53114366531372
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1757,
+      "prompt_tokens": 17448,
+      "total_tokens": 19205,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_P1_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_closed : IsClosed (A : Set X)) (hP3 : Topology.P3 (X := X) A) :\n    Topology.P1 (X := X) A := by\n  dsimp [Topology.P1, Topology.P3] at *\n  intro x hxA\n  -- From `P3`, `x` lies in the interior of `closure A`.\n  have hx_int_closure : x ∈ interior (closure A) := hP3 hxA\n  -- Since `A` is closed, `closure A = A`.\n  have h_closure_eq : closure (A : Set X) = A := h_closed.closure_eq\n  -- Hence `x` actually lies in `interior A`.\n  have hx_int : x ∈ interior A := by\n    simpa [h_closure_eq] using hx_int_closure\n  -- The interior of a set is always contained in the closure of the interior.\n  have h_subset : (interior A : Set X) ⊆ closure (interior A) := subset_closure\n  exact h_subset hx_int"
+  ],
+  "success": true
+}

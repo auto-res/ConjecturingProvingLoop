@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.837977170944214
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2163,
+      "prompt_tokens": 36228,
+      "total_tokens": 38391,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_subset_frontier {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A \\ A ⊆ frontier A := by\n  rintro x ⟨hx_cl, hx_notA⟩\n  have hx_notInt : x ∉ interior A := by\n    intro hx_int\n    exact hx_notA (interior_subset hx_int)\n  exact And.intro hx_cl hx_notInt"
+  ],
+  "success": true
+}

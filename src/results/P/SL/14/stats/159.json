@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.602505922317505
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4145,
+      "prompt_tokens": 29051,
+      "total_tokens": 33196,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_three\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : Topology.P1 A) (hB : Topology.P1 B) (hC : Topology.P1 C) :\n    Topology.P1 (A ∪ B ∪ C) := by\n  -- First, obtain `P1` for `A ∪ B`.\n  have hAB : Topology.P1 (A ∪ B) :=\n    Topology.P1_union (X := X) (A := A) (B := B) hA hB\n  -- Next, union the result with `C`.\n  have hABC : Topology.P1 ((A ∪ B) ∪ C) :=\n    Topology.P1_union (X := X) (A := A ∪ B) (B := C) hAB hC\n  -- Rewrite to the desired (left-associative) form.\n  simpa [Set.union_assoc] using hABC"
+  ],
+  "success": true
+}

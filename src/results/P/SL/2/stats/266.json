@@ -1,0 +1,60 @@
+{
+  "times": [
+    160.36699986457825,
+    118.06455254554749,
+    133.67003679275513
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7423,
+      "prompt_tokens": 45179,
+      "total_tokens": 52602,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    },
+    {
+      "completion_tokens": 6696,
+      "prompt_tokens": 45285,
+      "total_tokens": 51981,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    },
+    {
+      "completion_tokens": 6802,
+      "prompt_tokens": 45395,
+      "total_tokens": 52197,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_compl_of_open_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen (A : Set X) → Dense A → frontier (A : Set X) = (Aᶜ : Set X) := by\n  intro hOpen hDense\n  -- Replace `interior A` and `closure A` using openness and density.\n  have hInt : interior (A : Set X) = A := hOpen.interior_eq\n  have hCl : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Unfold `frontier` and simplify.\n  calc\n    frontier (A : Set X)\n        = closure (A : Set X) \\ interior (A : Set X) := by\n          simp [frontier]\n    _ = (Set.univ : Set X) \\ (A : Set X) := by\n          simpa [hInt, hCl]\n    _ = (Aᶜ : Set X) := by\n          ext x; simp",
+    "theorem Topology.closure_inter_interior_eq_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) ∩ interior A = interior A := by\n  ext x\n  constructor\n  · intro hx\n    exact hx.2\n  · intro hx\n    exact And.intro (subset_closure hx) hx",
+    ""
+  ],
+  "success": true
+}

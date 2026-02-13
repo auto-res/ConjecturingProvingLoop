@@ -1,0 +1,60 @@
+{
+  "times": [
+    57.76630663871765,
+    250.57016229629517,
+    60.60840916633606
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4437,
+      "prompt_tokens": 21641,
+      "total_tokens": 26078,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 16134,
+      "prompt_tokens": 21806,
+      "total_tokens": 37940,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 4755,
+      "prompt_tokens": 21882,
+      "total_tokens": 26637,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B : Set X)) =\n      closure (interior A ∪ interior B) := by\n  simp [interior_union]",
+    "theorem Topology.interiorClosure_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ B : Set X)) = interior (closure A ∪ closure B) := by\n  --  Using `closure_union`, `closure (A ∪ B)` rewrites to `closure A ∪ closure B`;\n  --  after this rewrite both sides of the desired equality coincide, and `simp`\n  --  closes the goal.\n  simpa [closure_union]",
+    "theorem Topology.P2_of_subset_closureInterior\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B)\n    (hBsubset : (B : Set X) ⊆ interior (closure (interior A))) :\n    Topology.P2 B := by\n  dsimp [Topology.P2] at *\n  intro x hxB\n  -- From the assumption, `x` lies in `interior (closure (interior A))`.\n  have hxA : (x : X) ∈ interior (closure (interior A)) := hBsubset hxB\n  -- We now show that\n  -- `interior (closure (interior A)) ⊆ interior (closure (interior B))`.\n  have h_mono :\n      interior (closure (interior A)) ⊆ interior (closure (interior B)) := by\n    -- Monotonicity of `interior` with respect to set inclusion.\n    have h_int : interior A ⊆ interior B := interior_mono hAB\n    -- Taking closures preserves inclusion.\n    have h_closure : closure (interior A) ⊆ closure (interior B) :=\n      closure_mono h_int\n    -- Finally, apply monotonicity of `interior` once more.\n    exact interior_mono h_closure\n  -- Combining the two facts yields the desired result.\n  exact h_mono hxA"
+  ],
+  "success": true
+}

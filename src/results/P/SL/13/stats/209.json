@@ -1,0 +1,60 @@
+{
+  "times": [
+    162.9822120666504,
+    60.52056550979614,
+    65.80628609657288
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13100,
+      "prompt_tokens": 37270,
+      "total_tokens": 50370,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 4531,
+      "prompt_tokens": 37344,
+      "total_tokens": 41875,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 3996,
+      "prompt_tokens": 37456,
+      "total_tokens": 41452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_iterate_ten_eq_interior_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (closure\n      (interior (closure\n        (interior (closure\n          (interior (closure\n            (interior (closure\n              (interior (closure\n                (interior (closure\n                  (interior (closure\n                    (interior (closure (A : Set X))))))))))))))) =\n      interior (closure A) := by\n  -- Collapse the innermost nine iterations using the existing lemma.\n  have h9 :=\n    Topology.interior_closure_iterate_nine_eq_interior_closure (X := X) (A := A)\n  -- Apply the two-layer idempotency lemma after rewriting with `h9`.\n  have h2 :=\n    Topology.interior_closure_interior_closure_eq_interior_closure (X := X) (A := A)\n  simpa [h9] using h2",
+    "theorem Topology.dense_iff_closure_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ closure (A : Set X) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    simpa using hDense.closure_eq\n  · intro h_closure\n    simpa [Dense] using h_closure",
+    "theorem Topology.interior_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) ⊆ closure A := by\n  intro x hx\n  have hxA : (x : X) ∈ A := interior_subset hx\n  exact subset_closure hxA"
+  ],
+  "success": true
+}

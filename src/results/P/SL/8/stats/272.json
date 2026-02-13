@@ -1,0 +1,26 @@
+{
+  "times": [
+    100.46480798721313
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5570,
+      "prompt_tokens": 42212,
+      "total_tokens": 47782,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_interiorClosure_inter_eq_self {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP3 : Topology.P3 A) :\n    interior (closure A) ∩ A = A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    exact hx.2\n  · intro x hxA\n    have hxInt : x ∈ interior (closure A) := hP3 hxA\n    exact And.intro hxInt hxA"
+  ],
+  "success": true
+}

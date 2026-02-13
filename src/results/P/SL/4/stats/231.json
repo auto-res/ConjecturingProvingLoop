@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.65358090400696
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4346,
+      "prompt_tokens": 33531,
+      "total_tokens": 37877,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    }
+  ],
+  "responses": [
+    "theorem union_closure_eq_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (A ∪ closure A : Set X) = closure A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    cases hx with\n    | inl hA   => exact subset_closure hA\n    | inr hClA => exact hClA\n  · intro x hx\n    exact Or.inr hx"
+  ],
+  "success": true
+}

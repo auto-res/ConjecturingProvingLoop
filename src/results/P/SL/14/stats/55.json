@@ -1,0 +1,26 @@
+{
+  "times": [
+    13.268088340759277
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1262,
+      "prompt_tokens": 9896,
+      "total_tokens": 11158,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_sUnion {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)}\n    (h𝒜 : ∀ S : Set X, S ∈ 𝒜 → Topology.P2 S) : Topology.P2 (⋃₀ 𝒜) := by\n  dsimp [Topology.P2] at h𝒜 ⊢\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨S, hS𝒜, hxS⟩\n  -- From `P2` for `S`, we know `x` lies in `interior (closure (interior S))`.\n  have hx_int : (x : X) ∈ interior (closure (interior S)) := (h𝒜 S hS𝒜) hxS\n  -- Show that `interior (closure (interior S)) ⊆ interior (closure (interior (⋃₀ 𝒜)))`.\n  have h_incl : interior (closure (interior S)) ⊆\n      interior (closure (interior (⋃₀ 𝒜))) := by\n    -- We first show `closure (interior S) ⊆ closure (interior (⋃₀ 𝒜))`.\n    have h_closure_mono : closure (interior S) ⊆ closure (interior (⋃₀ 𝒜)) := by\n      -- This follows from `interior S ⊆ interior (⋃₀ 𝒜)`.\n      have h_int_mono : interior S ⊆ interior (⋃₀ 𝒜) := by\n        have h_subset : (S : Set X) ⊆ ⋃₀ 𝒜 := by\n          intro y hy\n          exact Set.mem_sUnion.2 ⟨S, hS𝒜, hy⟩\n        exact interior_mono h_subset\n      exact closure_mono h_int_mono\n    -- Taking interiors yields the desired inclusion.\n    exact interior_mono h_closure_mono\n  exact h_incl hx_int"
+  ],
+  "success": true
+}

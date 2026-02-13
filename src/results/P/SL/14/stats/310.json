@@ -1,0 +1,60 @@
+{
+  "times": [
+    108.66393184661865,
+    22.69355010986328,
+    87.1524269580841
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7793,
+      "prompt_tokens": 58468,
+      "total_tokens": 66261,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    },
+    {
+      "completion_tokens": 1131,
+      "prompt_tokens": 58542,
+      "total_tokens": 59673,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58112
+      }
+    },
+    {
+      "completion_tokens": 3617,
+      "prompt_tokens": 58648,
+      "total_tokens": 62265,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58112
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_diff_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen (A : Set X)) :\n    frontier (A : Set X) = closure (A : Set X) \\ A := by\n  simpa [hA.interior_eq] using (Set.frontier_eq_closure_diff (s := (A : Set X)))",
+    "theorem Topology.frontier_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) ⊆ closure A := by\n  intro x hx\n  -- `frontier A = closure A \\ interior A`, so membership implies `x ∈ closure A`.\n  dsimp [frontier] at hx\n  exact hx.1",
+    "theorem Topology.Dense.inter_nonempty_of_open\n    {X : Type*} [TopologicalSpace X] {A U : Set X}\n    (hA : Dense (A : Set X)) (hU : IsOpen U) (hU_non : U.Nonempty) :\n    ((A : Set X) ∩ U).Nonempty := by\n  classical\n  rcases hU_non with ⟨x, hxU⟩\n  -- Since `A` is dense, every point of the space belongs to the closure of `A`.\n  have hx_closure : (x : X) ∈ closure (A : Set X) := by\n    -- `closure A = univ`\n    have h_closure_eq : closure (A : Set X) = (Set.univ : Set X) := hA.closure_eq\n    simpa [h_closure_eq] using (by trivial)\n  -- Apply the characterization of closure with respect to the open set `U`.\n  have h_inter : ((U : Set X) ∩ A).Nonempty :=\n    (mem_closure_iff).1 hx_closure U hU hxU\n  -- Reorder the intersection to match the goal.\n  simpa [Set.inter_comm] using h_inter"
+  ],
+  "success": true
+}

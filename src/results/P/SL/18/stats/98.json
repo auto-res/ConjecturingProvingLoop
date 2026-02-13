@@ -1,0 +1,60 @@
+{
+  "times": [
+    63.19816207885742,
+    46.66970443725586,
+    194.99026083946228
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4894,
+      "prompt_tokens": 13926,
+      "total_tokens": 18820,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    },
+    {
+      "completion_tokens": 3433,
+      "prompt_tokens": 14100,
+      "total_tokens": 17533,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    },
+    {
+      "completion_tokens": 13894,
+      "prompt_tokens": 14319,
+      "total_tokens": 28213,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq_union_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B : Set X)) =\n      closure (interior A) ∪ closure (interior B) := by\n  classical\n  apply Set.Subset.antisymm\n  · intro x hx\n    -- Rewrite the set inside the closure using `interior_union`.\n    have hx' : x ∈ closure (interior A ∪ interior B) := by\n      simpa [interior_union] using hx\n    -- Turn the closure of a union into the union of closures.\n    have hx'' : x ∈ closure (interior A) ∪ closure (interior B) := by\n      simpa [closure_union] using hx'\n    exact hx''\n  ·\n    exact closure_interior_union_subset (A := A) (B := B)",
+    "theorem closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    have h : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    exact closure_mono h\n  ·\n    have h : interior A ⊆ interior (closure (interior A)) := by\n      apply interior_mono\n      exact (subset_closure : interior A ⊆ closure (interior A))\n    exact closure_mono h",
+    "theorem interior_diff_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ interior A := by\n  exact interior_mono (Set.diff_subset)"
+  ],
+  "success": true
+}

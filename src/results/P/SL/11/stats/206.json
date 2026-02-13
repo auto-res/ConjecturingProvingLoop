@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.08089542388916
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5243,
+      "prompt_tokens": 33779,
+      "total_tokens": 39022,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_iInter_eq_iInter {X ι : Type*} [TopologicalSpace X] {A : ι → Set X}\n    (hA : ∀ i, IsClosed (A i)) :\n    closure (⋂ i, A i) = ⋂ i, A i := by\n  have hClosed : IsClosed (⋂ i, A i) := by\n    simpa using isClosed_iInter hA\n  simpa using hClosed.closure_eq"
+  ],
+  "success": true
+}

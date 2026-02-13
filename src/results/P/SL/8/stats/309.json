@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.25439262390137
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2142,
+      "prompt_tokens": 48167,
+      "total_tokens": 50309,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_iInter_subset_iInter_interior_closure\n    {X ι : Type*} [TopologicalSpace X] (A : ι → Set X) :\n    interior (closure (⋂ i, A i)) ⊆ ⋂ i, interior (closure (A i)) := by\n  intro x hx\n  -- For each index `i`, show that `x` lies in `interior (closure (A i))`.\n  have h_mem : ∀ i, x ∈ interior (closure (A i)) := by\n    intro i\n    -- `⋂ i, A i` is contained in `A i`\n    have h_subset : (⋂ j, A j) ⊆ A i := Set.iInter_subset _ i\n    -- Taking closures preserves inclusions\n    have h_closure : closure (⋂ j, A j) ⊆ closure (A i) :=\n      closure_mono h_subset\n    -- Interiority is monotone\n    have h_interior : interior (closure (⋂ j, A j)) ⊆ interior (closure (A i)) :=\n      interior_mono h_closure\n    exact h_interior hx\n  exact Set.mem_iInter.2 h_mem"
+  ],
+  "success": true
+}

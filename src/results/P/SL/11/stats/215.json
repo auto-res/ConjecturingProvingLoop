@@ -1,0 +1,26 @@
+{
+  "times": [
+    70.12998008728027
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4327,
+      "prompt_tokens": 35241,
+      "total_tokens": 39568,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_iUnion {X ι : Type*} [TopologicalSpace X] {A : ι → Set X}\n    (hA : ∀ i, Topology.P1 (A i) ∧ Topology.P2 (A i) ∧ Topology.P3 (A i)) :\n    Topology.P1 (⋃ i, A i) ∧ Topology.P2 (⋃ i, A i) ∧ Topology.P3 (⋃ i, A i) := by\n  -- Extract each component property for every `A i`.\n  have hP1 : ∀ i, Topology.P1 (A i) := fun i => (hA i).1\n  have hP2 : ∀ i, Topology.P2 (A i) := fun i => (hA i).2.1\n  have hP3 : ∀ i, Topology.P3 (A i) := fun i => (hA i).2.2\n  -- Apply the existing `iUnion` lemmas for each property.\n  have hP1Union : Topology.P1 (⋃ i, A i) := Topology.P1_iUnion hP1\n  have hP3Union : Topology.P3 (⋃ i, A i) := Topology.P3_iUnion hP3\n  have hP2Union : Topology.P2 (⋃ i, A i) := Topology.P2_iUnion hP2\n  exact ⟨hP1Union, hP2Union, hP3Union⟩"
+  ],
+  "success": true
+}

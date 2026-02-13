@@ -1,0 +1,26 @@
+{
+  "times": [
+    100.7234902381897
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4546,
+      "prompt_tokens": 55050,
+      "total_tokens": 59596,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_interiors_eq_union_interiors\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (interior A ∪ interior B) = interior A ∪ interior B := by\n  have hOpen : IsOpen (interior A ∪ interior B) :=\n    (isOpen_interior : IsOpen (interior A)).union\n      (isOpen_interior : IsOpen (interior B))\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    152.4504005908966
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9651,
+      "prompt_tokens": 7064,
+      "total_tokens": 16715,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iff_isOpen_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_closed : IsClosed (A : Set X)) :\n    Topology.P3 (X := X) A ↔ IsOpen (A : Set X) := by\n  constructor\n  · intro hP3\n    -- `A ⊆ interior (closure A)` and `closure A = A` yield `A ⊆ interior A`.\n    have h_sub : (A : Set X) ⊆ interior A := by\n      dsimp [Topology.P3] at hP3\n      simpa [h_closed.closure_eq] using hP3\n    -- Together with `interior A ⊆ A` we get equality.\n    have h_eq : interior (A : Set X) = A :=\n      Set.Subset.antisymm interior_subset h_sub\n    -- An equality with an open set yields openness of `A`.\n    have h_open : IsOpen (A : Set X) := by\n      have : IsOpen (interior (A : Set X)) := isOpen_interior\n      simpa [h_eq] using this\n    exact h_open\n  · intro h_open\n    exact Topology.isOpen_P3 (X := X) (A := A) h_open"
+  ],
+  "success": true
+}

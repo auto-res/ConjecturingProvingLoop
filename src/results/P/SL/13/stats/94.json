@@ -1,0 +1,26 @@
+{
+  "times": [
+    14.720173120498657
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1137,
+      "prompt_tokens": 15890,
+      "total_tokens": 17027,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closure_iff_P3_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) (closure (A : Set X)) ↔\n      Topology.P3 (X := X) (closure (A : Set X)) := by\n  -- Both properties are equivalent to `IsOpen (closure A)`.\n  have hP2 := Topology.P2_closure_iff_isOpen_closure (X := X) (A := A)\n  have hP3 := Topology.P3_closure_iff_isOpen_closure (X := X) (A := A)\n  simpa using hP2.trans hP3.symm"
+  ],
+  "success": true
+}

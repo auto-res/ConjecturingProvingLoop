@@ -1,0 +1,26 @@
+{
+  "times": [
+    221.83429479599
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8573,
+      "prompt_tokens": 50048,
+      "total_tokens": 58621,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem clopen_iff_closure_eq_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (IsOpen (A : Set X) ∧ IsClosed (A : Set X)) ↔\n      closure (A : Set X) = interior (A : Set X) := by\n  constructor\n  · rintro ⟨hOpen, hClosed⟩\n    have h₁ : closure (A : Set X) = A := hClosed.closure_eq\n    have h₂ : interior (A : Set X) = A := hOpen.interior_eq\n    simpa [h₁, h₂]\n  · intro hEq\n    simpa using isClopen_of_closure_eq_interior (A := A) hEq"
+  ],
+  "success": true
+}

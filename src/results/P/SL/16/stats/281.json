@@ -1,0 +1,60 @@
+{
+  "times": [
+    70.46197438240051,
+    126.07071781158447,
+    81.78915548324585
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4376,
+      "prompt_tokens": 49045,
+      "total_tokens": 53421,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 6346,
+      "prompt_tokens": 49269,
+      "total_tokens": 55615,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 2500,
+      "prompt_tokens": 49344,
+      "total_tokens": 51844,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_closed_eq {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsClosed (B)) :\n    interior (A \\ B) = interior A \\ B := by\n  ext x\n  constructor\n  · intro hx\n    -- `x` lies in `A \\ B`.\n    have h₀ : x ∈ A \\ B := interior_subset hx\n    -- `A \\ B ⊆ A`, so monotonicity of `interior` yields\n    -- `x ∈ interior A`.\n    have h₁ : x ∈ interior A :=\n      (interior_mono (Set.diff_subset A B)) hx\n    exact And.intro h₁ h₀.2\n  · rintro ⟨hxIntA, hxNotB⟩\n    -- The open neighbourhood `interior A \\ B` of `x`\n    -- is contained in `A \\ B`.\n    have hOpenIntA : IsOpen (interior A) := isOpen_interior\n    have hOpenCompB : IsOpen (Bᶜ) := (isOpen_compl_iff).2 hB\n    have hOpenU : IsOpen (interior A \\ B) :=\n      hOpenIntA.inter hOpenCompB\n    have hSubset : (interior A \\ B : Set X) ⊆ A \\ B := by\n      intro y hy\n      exact And.intro (interior_subset hy.1) hy.2\n    have hxU : x ∈ interior A \\ B := And.intro hxIntA hxNotB\n    -- Conclude that `x` is in the interior of `A \\ B`.\n    exact\n      (interior_maximal hSubset hOpenU) hxU",
+    "theorem Topology.interior_diff_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ interior A := by\n  exact interior_mono (Set.diff_subset)",
+    "theorem Topology.interior_inter_closure_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∩ closure B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxIntA, hxClB⟩\n  -- We will use the characterization `mem_closure_iff`.\n  -- It suffices to show that every open neighbourhood `U` of `x`\n  -- meets `A ∩ B`.\n  refine (mem_closure_iff).2 ?_\n  intro U hUopen hxU\n  -- Consider `U ∩ interior A`, an open neighbourhood of `x`\n  -- contained in `A`.\n  have hU_intA_open : IsOpen (U ∩ interior A) := hUopen.inter isOpen_interior\n  have hxU_intA : x ∈ (U ∩ interior A) := And.intro hxU hxIntA\n  -- Since `x ∈ closure B`, this neighbourhood intersects `B`.\n  have h_nonempty : ((U ∩ interior A) ∩ B).Nonempty :=\n    (mem_closure_iff.1 hxClB) (U ∩ interior A) hU_intA_open hxU_intA\n  -- Extract a point `y` witnessing the intersection.\n  rcases h_nonempty with ⟨y, ⟨hyU_intA, hyB⟩⟩\n  -- From `y ∈ U ∩ interior A` we get `y ∈ U` and `y ∈ A`.\n  have hyU : y ∈ U := hyU_intA.1\n  have hyA : y ∈ A := interior_subset hyU_intA.2\n  -- Thus `y ∈ U ∩ (A ∩ B)`, as required.\n  exact ⟨y, And.intro hyU (And.intro hyA hyB)⟩"
+  ],
+  "success": true
+}

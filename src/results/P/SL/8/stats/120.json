@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.61338996887207
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3733,
+      "prompt_tokens": 16206,
+      "total_tokens": 19939,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_imp_eq_empty_of_interiorClosure_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP3 : Topology.P3 A)\n    (hInt : interior (closure A) = (∅ : Set X)) :\n    A = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hxA\n    have : (x : X) ∈ interior (closure A) := hP3 hxA\n    simpa [hInt] using this\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

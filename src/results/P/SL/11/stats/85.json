@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.78093409538269
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5392,
+      "prompt_tokens": 12340,
+      "total_tokens": 17732,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply subset_antisymm\n  ·\n    -- `closure (interior (closure (interior A))) ⊆ closure (interior A)`\n    have h₁ : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    have h₂ :\n        closure (interior (closure (interior A))) ⊆ closure (closure (interior A)) :=\n      closure_mono h₁\n    simpa [closure_closure] using h₂\n  ·\n    -- `closure (interior A) ⊆ closure (interior (closure (interior A)))`\n    have h₁ : interior A ⊆ interior (closure (interior A)) := by\n      -- `interior A` is open and contained in `closure (interior A)`\n      have hsub : (interior A : Set X) ⊆ closure (interior A) := subset_closure\n      have := interior_mono hsub\n      simpa [interior_interior] using this\n    have h₂ :\n        closure (interior A) ⊆ closure (interior (closure (interior A))) :=\n      closure_mono h₁\n    simpa using h₂"
+  ],
+  "success": true
+}

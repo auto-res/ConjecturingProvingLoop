@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.34045624732971
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2916,
+      "prompt_tokens": 46075,
+      "total_tokens": 48991,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem boundary_of_dense_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (A : Set X))\n    (hDense : closure (A : Set X) = (Set.univ : Set X)) :\n    closure (A : Set X) \\ A = ((Aᶜ) : Set X) := by\n  -- Start with the general description of the boundary of a dense set.\n  have h := boundary_of_dense (A := A) hDense\n  -- Since `A` is open, `interior A = A`; rewrite both sides accordingly.\n  simpa [hOpen.interior_eq] using h"
+  ],
+  "success": true
+}

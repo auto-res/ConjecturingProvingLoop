@@ -1,0 +1,43 @@
+{
+  "times": [
+    93.47238826751709,
+    90.59285640716553
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8360,
+      "prompt_tokens": 56904,
+      "total_tokens": 65264,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    },
+    {
+      "completion_tokens": 6406,
+      "prompt_tokens": 56978,
+      "total_tokens": 63384,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56192
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_idempotent_six {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_idempotent]",
+    "theorem closure_inter_interior_eq_closure_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure ((A : Set X) ∩ interior A) = closure (interior A) := by\n  have h : ((A : Set X) ∩ interior A) = interior A := by\n    ext x\n    constructor\n    · intro hx; exact hx.2\n    · intro hx; exact ⟨interior_subset hx, hx⟩\n  simpa [h]"
+  ],
+  "success": true
+}

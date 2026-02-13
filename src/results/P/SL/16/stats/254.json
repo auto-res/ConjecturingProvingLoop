@@ -1,0 +1,43 @@
+{
+  "times": [
+    97.60686445236206,
+    216.29673409461975
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6799,
+      "prompt_tokens": 44227,
+      "total_tokens": 51026,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 12819,
+      "prompt_tokens": 44402,
+      "total_tokens": 57221,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iterate_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    ∀ n : ℕ, 0 < n →\n      ((fun S : Set X => closure (interior S))^[n]) A = closure (interior A) := by\n  intro n hn\n  -- Define the operator `f`.\n  let f : Set X → Set X := fun S => closure (interior S)\n  -- Handle the first two natural numbers separately.\n  cases n with\n  | zero =>\n      exact (Nat.lt_irrefl 0 hn).elim\n  | succ n =>\n      -- `n` is now `n.succ`; distinguish the case `n = 0`.\n      cases n with\n      | zero =>\n          -- This is the case `n = 1`.\n          simpa [f, Function.iterate_one] using rfl\n      | succ m =>\n          -- Here the original index is `m + 2`.\n          -- The iterate at step `m + 1` stabilises on `f A`.\n          have h_fixed :\n              ((f^[Nat.succ m]) (closure (interior A))) = closure (interior A) := by\n            simpa [f] using\n              Topology.iterate_closure_interior_fixed\n                (X := X) (A := A) (n := Nat.succ m)\n          -- Rewrite the `(m + 2)`-fold iterate and use the fixed-point property.\n          have : ((f^[Nat.succ (Nat.succ m)]) A) = closure (interior A) := by\n            simp [f, Function.iterate_succ_apply', h_fixed]\n          simpa [f] using this",
+    "theorem Topology.closure_interior_closure_interior_eq_closure_interior_simple\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply subset_antisymm\n  · -- `closure (interior (closure (interior A))) ⊆ closure (interior A)`\n    have : closure (interior (closure (interior A))) ⊆\n        closure (interior A) := by\n      -- This is an instance of `closure (interior (closure B)) ⊆ closure B`\n      -- with `B = interior A`.\n      simpa using\n        (Topology.closure_interior_closure_subset_closure\n          (X := X) (A := interior A))\n    exact this\n  · -- `closure (interior A) ⊆ closure (interior (closure (interior A)))`\n    have : interior A ⊆ interior (closure (interior A)) :=\n      Topology.interior_subset_interior_closure_interior\n        (X := X) (A := A)\n    exact closure_mono this"
+  ],
+  "success": true
+}

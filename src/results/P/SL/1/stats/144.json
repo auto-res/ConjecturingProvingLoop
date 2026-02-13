@@ -1,0 +1,43 @@
+{
+  "times": [
+    18.725538730621338,
+    107.2576584815979
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1518,
+      "prompt_tokens": 22222,
+      "total_tokens": 23740,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 8016,
+      "prompt_tokens": 22297,
+      "total_tokens": 30313,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7872,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  have hEq : closure A = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  exact Topology.P3_of_closure_eq_univ (A := A) hEq",
+    "theorem Topology.P1_compl_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    Topology.P1 (Aᶜ) := by\n  -- The complement of a closed set is open.\n  have hOpen : IsOpen (Aᶜ) := by\n    simpa using (isOpen_compl_iff).2 hA\n  -- Every open set satisfies `P1`.\n  exact Topology.P1_of_isOpen (A := Aᶜ) hOpen"
+  ],
+  "success": true
+}

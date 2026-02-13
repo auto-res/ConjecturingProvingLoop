@@ -1,0 +1,43 @@
+{
+  "times": [
+    142.05841588974,
+    182.84648251533508
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10439,
+      "prompt_tokens": 31845,
+      "total_tokens": 42284,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    },
+    {
+      "completion_tokens": 12480,
+      "prompt_tokens": 31936,
+      "total_tokens": 44416,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_nonempty_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (A : Set X)) :\n    (interior (closure (A : Set X))).Nonempty := by\n  -- Density gives `interior (closure A) = univ`.\n  have hEq : interior (closure (A : Set X)) = (Set.univ : Set X) :=\n    Topology.interior_closure_eq_univ_of_dense (A := A) hDense\n  -- The universe set is obviously nonempty.\n  have hUniv : (Set.univ : Set X).Nonempty := by\n    classical\n    exact ⟨Classical.arbitrary X, by\n      trivial⟩\n  simpa [hEq] using hUniv",
+    "theorem P123_of_clopen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen A) (hClosed : IsClosed A) :\n    Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A := by\n  -- Since `A` is open, all three properties follow immediately from\n  -- `Topology.P123_of_open`.\n  simpa using Topology.P123_of_open (A := A) hOpen"
+  ],
+  "success": true
+}

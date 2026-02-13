@@ -1,0 +1,26 @@
+{
+  "times": [
+    211.17633295059204
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 17134,
+      "prompt_tokens": 41503,
+      "total_tokens": 58637,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_eq_closure_compl\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) :\n    interior (A \\ B : Set X) = A \\ closure B := by\n  classical\n  -- First, show `interior (A \\ B) ⊆ A \\ closure B`.\n  have h₁ : interior (A \\ B : Set X) ⊆ A \\ closure B := by\n    intro x hx_int\n    -- `x ∈ A \\ B`\n    have hx_mem : (x : X) ∈ A \\ B :=\n      (interior_subset : interior (A \\ B : Set X) ⊆ A \\ B) hx_int\n    rcases hx_mem with ⟨hxA, hxNotB⟩\n    -- Show `x ∉ closure B`\n    have hNotClB : (x : X) ∉ closure B := by\n      by_contra h_cl\n      -- Every neighbourhood of `x` meets `B`, so in particular `interior (A \\ B)` does.\n      have h_nonempty :\n          ((interior (A \\ B) : Set X) ∩ B).Nonempty :=\n        ((mem_closure_iff).1 h_cl) (interior (A \\ B)) isOpen_interior hx_int\n      rcases h_nonempty with ⟨y, hyInt, hyB⟩\n      -- But `interior (A \\ B)` is disjoint from `B`.\n      have : (y : X) ∈ A \\ B :=\n        (interior_subset : interior (A \\ B) ⊆ A \\ B) hyInt\n      exact this.2 hyB\n    exact And.intro hxA hNotClB\n  -- Second, show `A \\ closure B ⊆ interior (A \\ B)`.\n  have h₂ : A \\ closure B ⊆ interior (A \\ B : Set X) := by\n    intro x hx\n    rcases hx with ⟨hxA, hxNotClB⟩\n    -- The set `U = A ∩ (closure B)ᶜ` is an open neighbourhood of `x`\n    -- contained in `A \\ B`.\n    let U : Set X := A ∩ (closure B)ᶜ\n    have hU_open : IsOpen U :=\n      IsOpen.inter hA isClosed_closure.isOpen_compl\n    have hxU : (x : X) ∈ U := by\n      have : (x : X) ∈ (closure B)ᶜ := hxNotClB\n      simpa [U] using And.intro hxA this\n    have hU_subset : (U : Set X) ⊆ A \\ B := by\n      intro y hy\n      rcases hy with ⟨hyA, hyNotClB⟩\n      have hyNotB : (y : X) ∉ B := by\n        intro hyB\n        have : (y : X) ∈ closure B := subset_closure hyB\n        exact hyNotClB this\n      exact And.intro hyA hyNotB\n    -- Since `U` is open and contained in `A \\ B`, it lies in the interior.\n    have hU_interior : (U : Set X) ⊆ interior (A \\ B : Set X) :=\n      interior_maximal hU_subset hU_open\n    exact hU_interior hxU\n  -- Combine both inclusions to obtain equality.\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

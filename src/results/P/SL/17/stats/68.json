@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.69168019294739
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4884,
+      "prompt_tokens": 9990,
+      "total_tokens": 14874,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) ⊆ closure (interior (closure A)) := by\n  -- Step 1: `interior A ⊆ interior (closure A)`\n  have h_int : interior A ⊆ interior (closure A) := by\n    apply interior_mono\n    exact subset_closure\n  -- Step 2: Apply `closure_mono` to get the desired inclusion\n  exact closure_mono h_int"
+  ],
+  "success": true
+}

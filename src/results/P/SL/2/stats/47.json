@@ -1,0 +1,43 @@
+{
+  "times": [
+    48.918163776397705,
+    30.18825387954712
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3863,
+      "prompt_tokens": 7388,
+      "total_tokens": 11251,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    },
+    {
+      "completion_tokens": 1645,
+      "prompt_tokens": 7462,
+      "total_tokens": 9107,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_P3_implies_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed A → Topology.P3 A → IsOpen A := by\n  intro hClosed hP3\n  -- Using `P3` and `IsClosed`, we have `A ⊆ interior A`.\n  have hSubset : (A : Set X) ⊆ interior A := by\n    intro x hxA\n    have hx : x ∈ interior (closure A) := hP3 hxA\n    simpa [hClosed.closure_eq] using hx\n  -- Together with `interior_subset`, this yields `interior A = A`.\n  have hEq : interior A = A := subset_antisymm interior_subset hSubset\n  -- The equality with the interior characterizes openness.\n  exact (isOpen_iff_interior_eq).2 hEq",
+    "theorem isOpen_iff_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen A ↔ interior A = A := by\n  constructor\n  · intro hOpen\n    simpa using hOpen.interior_eq\n  · intro hEq\n    have : IsOpen (interior A) := isOpen_interior\n    simpa [hEq] using this"
+  ],
+  "success": true
+}

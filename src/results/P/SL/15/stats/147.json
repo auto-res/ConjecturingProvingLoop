@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.466002225875854
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4242,
+      "prompt_tokens": 29178,
+      "total_tokens": 33420,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem subset_interiorClosure_of_subset_P3 {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) (hP3B : Topology.P3 B) :\n    A ⊆ interior (closure B) := by\n  intro x hxA\n  -- Since `A ⊆ B`, the point `x` belongs to `B`.\n  have hxB : x ∈ B := hAB hxA\n  -- Apply the `P3` property of `B`.\n  exact hP3B hxB"
+  ],
+  "success": true
+}

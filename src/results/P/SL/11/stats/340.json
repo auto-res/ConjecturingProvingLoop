@@ -1,0 +1,43 @@
+{
+  "times": [
+    307.2056930065155,
+    176.2531237602234
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12085,
+      "prompt_tokens": 54956,
+      "total_tokens": 67041,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 10725,
+      "prompt_tokens": 55073,
+      "total_tokens": 65798,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_P1_and_P3_of_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) :\n    Topology.P2 A ↔ (Topology.P1 A ∧ Topology.P3 A) := by\n  -- Equivalences already established for open sets.\n  have h12 : Topology.P1 A ↔ Topology.P2 A :=\n    Topology.P1_iff_P2_of_open (A := A) hA\n  have h13 : Topology.P1 A ↔ Topology.P3 A :=\n    Topology.P1_iff_P3_of_open (A := A) hA\n  constructor\n  · intro hP2\n    -- Derive `P1` from `P2`, then obtain `P3` from `P1`.\n    have hP1 : Topology.P1 A := (h12.symm).mpr hP2\n    have hP3 : Topology.P3 A := (h13).mp hP1\n    exact ⟨hP1, hP3⟩\n  · rintro ⟨hP1, _hP3⟩\n    -- Convert `P1` back to `P2` using the equivalence.\n    exact (h12).mp hP1",
+    "theorem P1_iff_P2_and_P3_of_open_fixed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) :\n    Topology.P1 A ↔ (Topology.P2 A ∧ Topology.P3 A) := by\n  -- Equivalences already established for open sets.\n  have h12 : Topology.P1 A ↔ Topology.P2 A :=\n    Topology.P1_iff_P2_of_open (A := A) hA\n  have h13 : Topology.P1 A ↔ Topology.P3 A :=\n    Topology.P1_iff_P3_of_open (A := A) hA\n  constructor\n  · intro hP1\n    exact ⟨h12.mp hP1, h13.mp hP1⟩\n  · rintro ⟨hP2, _hP3⟩\n    exact h12.mpr hP2"
+  ],
+  "success": true
+}

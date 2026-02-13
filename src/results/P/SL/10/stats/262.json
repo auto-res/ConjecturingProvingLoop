@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.75374698638916
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3708,
+      "prompt_tokens": 42386,
+      "total_tokens": 46094,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_univ_iff_P1_and_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) = (Set.univ : Set X) ↔\n      (Topology.P1 A ∧ closure A = Set.univ) := by\n  constructor\n  · intro h_cl_int\n    have hP1 : Topology.P1 A :=\n      Topology.P1_of_closure_interior_eq_univ (X := X) (A := A) h_cl_int\n    have h_dense : closure A = (Set.univ : Set X) :=\n      Topology.closure_eq_univ_of_closure_interior_eq_univ\n        (X := X) (A := A) h_cl_int\n    exact And.intro hP1 h_dense\n  · rintro ⟨hP1, h_dense⟩\n    exact\n      Topology.closure_interior_eq_univ_of_P1\n        (X := X) (A := A) hP1 h_dense"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.519662618637085
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1983,
+      "prompt_tokens": 35661,
+      "total_tokens": 37644,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34688
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_of_subset_of_subset_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hB : B ⊆ closure (interior A)) :\n    closure (interior A) = closure (interior B) := by\n  -- We will prove the two inclusions separately and then invoke `subset_antisymm`.\n  apply subset_antisymm\n  ·\n    -- From `A ⊆ B` we get `interior A ⊆ interior B`,\n    -- and taking closures preserves inclusions.\n    exact closure_mono (interior_mono hAB)\n  ·\n    -- From `B ⊆ closure (interior A)` we obtain\n    -- `interior B ⊆ interior (closure (interior A))`.\n    have h₁ : interior B ⊆ interior (closure (interior A)) :=\n      interior_mono hB\n    -- Taking closures preserves inclusions.\n    have h₂ : closure (interior B) ⊆ closure (interior (closure (interior A))) :=\n      closure_mono h₁\n    -- Simplify the right‐hand side using idempotence of `closure ∘ interior`.\n    simpa [Topology.closure_interior_idempotent (A := A)] using h₂"
+  ],
+  "success": true
+}

@@ -1,0 +1,77 @@
+{
+  "times": [
+    106.13367557525635,
+    211.91511225700378,
+    39.56046676635742,
+    68.66332507133484
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6408,
+      "prompt_tokens": 47656,
+      "total_tokens": 54064,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 11719,
+      "prompt_tokens": 47731,
+      "total_tokens": 59450,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 2564,
+      "prompt_tokens": 47857,
+      "total_tokens": 50421,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 3794,
+      "prompt_tokens": 48108,
+      "total_tokens": 51902,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hx\n  have hClosure : closure A = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [hClosure, interior_univ] using this",
+    "theorem closure_interior_union_subset_union_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) ⊆\n      closure (interior A) ∪ closure (interior B) := by\n  intro x hx\n  -- Rewrite the interior of the union as a union of interiors.\n  have hInt : interior (A ∪ B) = interior A ∪ interior B := by\n    simpa using interior_union (s := A) (t := B)\n  -- Transport the membership through this equality.\n  have hx' : x ∈ closure (interior A ∪ interior B) := by\n    simpa [hInt] using hx\n  -- Use the general fact that the closure of a union\n  -- is contained in the union of the closures.\n  have h_subset :\n      closure (interior A ∪ interior B) ⊆\n        closure (interior A) ∪ closure (interior B) :=\n    closure_union_subset (interior A) (interior B)\n  exact h_subset hx'",
+    "theorem P2_iff_interiorClosureInterior_mem_nhds {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P2 A ↔ ∀ x ∈ A, interior (closure (interior A)) ∈ 𝓝 x := by\n  classical\n  constructor\n  · intro hP2 x hx\n    have hx_mem : x ∈ interior (closure (interior A)) := hP2 hx\n    exact (mem_interior_iff_mem_nhds).1 hx_mem\n  · intro h\n    dsimp [Topology.P2]\n    intro x hx\n    have hN : interior (closure (interior A)) ∈ 𝓝 x := h x hx\n    exact (mem_interior_iff_mem_nhds).2 hN",
+    ""
+  ],
+  "success": true
+}

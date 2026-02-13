@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.70725131034851
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3321,
+      "prompt_tokens": 14636,
+      "total_tokens": 17957,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_P2_and_P3_of_open_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (interior (A : Set X)))) :\n    Topology.P1 (A : Set X) ↔ (Topology.P2 A ∧ Topology.P3 A) := by\n  constructor\n  · intro hP1\n    have hP2 : Topology.P2 (A : Set X) :=\n      Topology.P1_and_open_closure_interior_implies_P2 (A := A) hP1 hOpen\n    have hP3 : Topology.P3 (A : Set X) :=\n      Topology.P1_and_open_closure_interior_implies_P3 (A := A) hP1 hOpen\n    exact And.intro hP2 hP3\n  · rintro ⟨hP2, _hP3⟩\n    exact Topology.P2_implies_P1 (A := A) hP2"
+  ],
+  "success": true
+}

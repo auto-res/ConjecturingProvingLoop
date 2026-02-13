@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.147043228149414
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4745,
+      "prompt_tokens": 16217,
+      "total_tokens": 20962,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_mono_to_closure {X : Type*}\n    [TopologicalSpace X] {A B : Set X} (h : (A : Set X) ⊆ B) :\n    interior (closure (interior A)) ⊆ interior (closure B) := by\n  intro x hx\n  -- First, use `interior_subset` to see that `interior A ⊆ B`.\n  have hInt : (interior A : Set X) ⊆ B := by\n    intro y hy\n    exact h (interior_subset hy)\n  -- Apply monotonicity of `interior ∘ closure`.\n  have hIncl :=\n    Topology.interior_closure_mono (X := X) (A := interior A) (B := B) hInt\n  exact hIncl hx"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.73040294647217
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5562,
+      "prompt_tokens": 42074,
+      "total_tokens": 47636,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_subset_inter_closures\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure ((A : Set X) ∩ interior (B : Set X)) ⊆\n      closure (A : Set X) ∩ closure (B : Set X) := by\n  intro x hx\n  -- From `A ∩ interior B ⊆ A`, deduce membership in `closure A`.\n  have hSubA :\n      ((A : Set X) ∩ interior (B : Set X)) ⊆ (A : Set X) := by\n    intro y hy; exact hy.1\n  have hxA : x ∈ closure (A : Set X) := (closure_mono hSubA) hx\n  -- From `A ∩ interior B ⊆ B`, deduce membership in `closure B`.\n  have hSubB :\n      ((A : Set X) ∩ interior (B : Set X)) ⊆ (B : Set X) := by\n    intro y hy; exact\n      (interior_subset : interior (B : Set X) ⊆ (B : Set X)) hy.2\n  have hxB : x ∈ closure (B : Set X) := (closure_mono hSubB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

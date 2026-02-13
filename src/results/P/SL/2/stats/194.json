@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.499265909194946
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2379,
+      "prompt_tokens": 32332,
+      "total_tokens": 34711,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_interior_closure_interior_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A →\n      interior (closure (interior (closure (A : Set X)))) =\n        interior (closure (A : Set X)) := by\n  intro hP2\n  have h :=\n    Topology.P2_implies_closure_interior_closure_eq_closure (A := A) hP2\n  simpa using congrArg interior h"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.07386565208435
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4571,
+      "prompt_tokens": 13920,
+      "total_tokens": 18491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → Topology.P1 (closure (A : Set X)) := by\n  intro hP1\n  dsimp [Topology.P1] at *\n  intro x hx_clA\n  -- From `P1 A` we have `closure A = closure (interior A)`.\n  have hEq : closure (A : Set X) = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closureInterior (A := A)).1 hP1\n  -- Rewriting `hx_clA` using this equality yields membership in `closure (interior A)`.\n  have hx_clIntA : x ∈ closure (interior A) := by\n    simpa [hEq] using hx_clA\n  -- Monotonicity of `interior` and `closure` gives the required inclusion.\n  have hSub :\n      closure (interior A) ⊆ closure (interior (closure (A : Set X))) :=\n    Topology.closureInterior_subset_closureInteriorClosure (A := A)\n  exact hSub hx_clIntA"
+  ],
+  "success": true
+}

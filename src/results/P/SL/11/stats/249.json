@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.30445694923401
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2727,
+      "prompt_tokens": 39967,
+      "total_tokens": 42694,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_prod_univ_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} [Nonempty Y] (hA : A.Nonempty) :\n    Topology.P2 (A ×ˢ (Set.univ : Set Y)) ↔ Topology.P2 A := by\n  -- `Set.univ : Set Y` is nonempty under the given typeclass assumption.\n  have hB : (Set.univ : Set Y).Nonempty := Set.nonempty_univ\n  -- Invoke the general product equivalence for `P2`.\n  have hEquiv :=\n    (Topology.P2_prod_iff (A := A) (B := (Set.univ : Set Y)) hA hB)\n  -- Use the fact that `P2` holds for `Set.univ`.\n  have hP2_univ : Topology.P2 (Set.univ : Set Y) :=\n    Topology.P2_univ (X := Y)\n  -- Split the equivalence into the desired two implications.\n  constructor\n  · intro hProd\n    exact (hEquiv.mp hProd).1\n  · intro hPA\n    exact hEquiv.mpr ⟨hPA, hP2_univ⟩"
+  ],
+  "success": true
+}

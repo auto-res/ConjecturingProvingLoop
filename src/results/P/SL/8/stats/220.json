@@ -1,0 +1,26 @@
+{
+  "times": [
+    126.24273014068604
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7754,
+      "prompt_tokens": 33028,
+      "total_tokens": 40782,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_union_P1 {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (closure (interior A) ∪ closure (interior B)) := by\n  -- Each `closure (interior _)` individually satisfies `P1`.\n  have hA : Topology.P1 (closure (interior A)) :=\n    closureInterior_P1 (X := X) (A := A)\n  have hB : Topology.P1 (closure (interior B)) :=\n    closureInterior_P1 (X := X) (A := B)\n  -- The union of two `P1` sets is again `P1`.\n  exact\n    Topology.P1_union (X := X)\n      (A := closure (interior A)) (B := closure (interior B)) hA hB"
+  ],
+  "success": true
+}

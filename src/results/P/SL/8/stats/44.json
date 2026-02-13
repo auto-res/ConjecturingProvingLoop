@@ -1,0 +1,26 @@
+{
+  "times": [
+    102.92059206962585
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8591,
+      "prompt_tokens": 5270,
+      "total_tokens": 13861,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_nonempty_interiorClosureInterior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 A) (hA : A.Nonempty) :\n    (interior (closure (interior A))).Nonempty := by\n  classical\n  -- First, show that `interior A` is non-empty.\n  have hIntA : (interior A).Nonempty := by\n    by_contra hIntEmpty\n    have hIntEqEmpty : interior A = (∅ : Set X) :=\n      Set.not_nonempty_iff_eq_empty.mp hIntEmpty\n    have hClEmpty : closure (interior A) = (∅ : Set X) := by\n      simpa [hIntEqEmpty, closure_empty] using\n        (closure_empty : closure (∅ : Set X) = ∅)\n    rcases hA with ⟨x, hxA⟩\n    have hxCl : x ∈ closure (interior A) := hP1 hxA\n    have : False := by\n      simpa [hClEmpty] using hxCl\n    exact this\n  -- Pick a point of `interior A`.\n  rcases hIntA with ⟨y, hyInt⟩\n  -- `interior A` is contained in `interior (closure (interior A))`.\n  have hSubset : interior A ⊆ interior (closure (interior A)) := by\n    have : interior A ⊆ closure (interior A) := subset_closure\n    have := interior_mono this\n    simpa [interior_interior] using this\n  exact ⟨y, hSubset hyInt⟩"
+  ],
+  "success": true
+}

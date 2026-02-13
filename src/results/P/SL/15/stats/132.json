@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.72510552406311
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5205,
+      "prompt_tokens": 26660,
+      "total_tokens": 31865,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_nonempty_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → A.Nonempty → (interior A).Nonempty := by\n  intro hP1 hAne\n  classical\n  by_contra hInt\n  have hIntEq : interior A = (∅ : Set X) :=\n    (Set.not_nonempty_iff_eq_empty).1 hInt\n  have hAeq : A = (∅ : Set X) :=\n    Topology.P1_imp_eq_empty_of_empty_interior\n      (X := X) (A := A) hP1 hIntEq\n  rcases hAne with ⟨x, hx⟩\n  have : x ∈ (∅ : Set X) := by\n    simpa [hAeq] using hx\n  exact this.elim"
+  ],
+  "success": true
+}

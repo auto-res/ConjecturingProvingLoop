@@ -1,0 +1,26 @@
+{
+  "times": [
+    204.78022027015686
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6107,
+      "prompt_tokens": 40596,
+      "total_tokens": 46703,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_eq_closure_of_isOpen_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_open : IsOpen (closure (A : Set X))) :\n    closure (interior (closure A)) = closure A := by\n  -- First, use the existing lemma giving `interior (closure A) = closure A`.\n  have h₁ :\n      interior (closure (A : Set X)) = closure A :=\n    Topology.interior_closure_eq_closure_of_isOpen_closure\n      (X := X) (A := A) h_open\n  -- Taking closures of both sides and simplifying yields the desired result.\n  calc\n    closure (interior (closure (A : Set X))) =\n        closure (closure A) := by\n          simpa [h₁]\n    _ = closure A := by\n          simp [closure_closure]"
+  ],
+  "success": true
+}

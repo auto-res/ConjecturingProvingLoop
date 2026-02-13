@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.386534690856934
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3403,
+      "prompt_tokens": 12727,
+      "total_tokens": 16130,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12160
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A = Set.univ → Topology.P3 A := by\n  intro h_dense\n  dsimp [Topology.P3]\n  intro x hxA\n  have : (x : X) ∈ interior (closure A) := by\n    have : (x : X) ∈ (Set.univ : Set X) := by\n      simp\n    simpa [h_dense, interior_univ] using this\n  exact this"
+  ],
+  "success": true
+}

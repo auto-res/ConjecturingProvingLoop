@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.617135524749756
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3421,
+      "prompt_tokens": 61047,
+      "total_tokens": 64468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 60160
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_union_four {X : Type*} [TopologicalSpace X] {A B C D : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X))\n    (hC : IsOpen (C : Set X)) (hD : IsOpen (D : Set X)) :\n    IsOpen ((A ∪ B ∪ C ∪ D) : Set X) := by\n  -- First, the union `A ∪ B ∪ C` is open.\n  have hABC : IsOpen ((A ∪ B ∪ C) : Set X) := by\n    have hAB : IsOpen ((A ∪ B) : Set X) := hA.union hB\n    simpa [Set.union_assoc] using hAB.union hC\n  -- Adding `D` preserves openness.\n  simpa [Set.union_assoc] using hABC.union hD"
+  ],
+  "success": true
+}

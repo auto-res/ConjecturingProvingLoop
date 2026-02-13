@@ -1,0 +1,60 @@
+{
+  "times": [
+    108.16057872772217,
+    299.37732553482056,
+    14.303771257400513
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5743,
+      "prompt_tokens": 44453,
+      "total_tokens": 50196,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    },
+    {
+      "completion_tokens": 20091,
+      "prompt_tokens": 44559,
+      "total_tokens": 64650,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    },
+    {
+      "completion_tokens": 1009,
+      "prompt_tokens": 44655,
+      "total_tokens": 45664,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_frontier_eq_frontier_diff_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (frontier A) = frontier A \\ interior (frontier A) := by\n  have h : closure (frontier A) = frontier A :=\n    Topology.closure_frontier_eq_frontier (A := A)\n  simpa [frontier, h]",
+    "theorem Topology.interior_closure_interior_closure_interior_closure_interior_closure_interior_eq_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))) =\n      interior (closure (interior A)) := by\n  -- Define the operator `T := interior ∘ closure`.\n  let T : Set X → Set X := fun S => interior (closure S)\n  -- `T` is idempotent: `T (T S) = T S`.\n  have h_idem : ∀ S : Set X, T (T S) = T S := by\n    intro S\n    dsimp [T]\n    simpa using\n      Topology.interior_closure_interior_closure_eq_interior_closure (A := S)\n  -- Set `S0 = interior A`.\n  let S0 : Set X := interior A\n  -- The left-hand side is `T⁴ S0`.\n  have h_lhs :\n      interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))) =\n        T (T (T (T S0))) := by\n    rfl\n  -- Collapse the four iterates of `T` using idempotence.\n  have h_collapse : T (T (T (T S0))) = T S0 := by\n    calc\n      T (T (T (T S0)))\n          = T (T (T S0)) := h_idem (T (T S0))\n      _ = T (T S0)       := h_idem (T S0)\n      _ = T S0           := h_idem S0\n  -- Replace the fourfold iterate with a single application of `T`.\n  have h_final :\n      interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))) =\n        T S0 := by\n    simpa [h_collapse] using h_lhs\n  -- Unfold `T` and `S0` to obtain the desired statement.\n  simpa [T, S0] using h_final",
+    "theorem Topology.frontier_eq_closure_compl_of_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hDense : closure A = (Set.univ : Set X)) :\n    frontier A = closure (Aᶜ) := by\n  calc\n    frontier A = closure A ∩ closure (Aᶜ) := by\n      simpa using\n        (Topology.closure_inter_closure_compl_eq_frontier (X := X) (A := A)).symm\n    _ = (Set.univ : Set X) ∩ closure (Aᶜ) := by\n      simpa [hDense]\n    _ = closure (Aᶜ) := by\n      simp"
+  ],
+  "success": true
+}

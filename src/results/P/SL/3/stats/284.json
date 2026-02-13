@@ -1,0 +1,26 @@
+{
+  "times": [
+    120.7142550945282
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8356,
+      "prompt_tokens": 48307,
+      "total_tokens": 56663,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_complement_eq_empty_iff_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior ((Aᶜ) : Set X) = (∅ : Set X) ↔\n      closure (A : Set X) = (Set.univ : Set X) := by\n  -- A handy rewriting of `interior (Aᶜ)`.\n  have hEq : interior ((Aᶜ) : Set X) = (closure (A : Set X))ᶜ :=\n    interior_complement_eq_complement_closure (A := A)\n  constructor\n  · intro hIntEmpty\n    -- Convert the assumption using `hEq`.\n    have hComplEmpty : (closure (A : Set X))ᶜ = (∅ : Set X) := by\n      simpa [hEq] using hIntEmpty\n    -- Show that `closure A = univ`.\n    apply Set.Subset.antisymm (Set.subset_univ _)\n    intro x _\n    -- If `x ∉ closure A`, we get a contradiction with `hComplEmpty`.\n    by_cases hx : (x : X) ∈ closure (A : Set X)\n    · exact hx\n    ·\n      have : (x : X) ∈ (closure (A : Set X))ᶜ := hx\n      have : (x : X) ∈ (∅ : Set X) := by\n        simpa [hComplEmpty] using this\n      exact this.elim\n  · intro hDense\n    -- Rewrite via `hEq` and `hDense`.\n    have : interior ((Aᶜ) : Set X) = (Set.univ : Set X)ᶜ := by\n      simpa [hDense] using hEq\n    simpa [Set.compl_univ] using this"
+  ],
+  "success": true
+}

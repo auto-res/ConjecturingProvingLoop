@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.41639041900635
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3199,
+      "prompt_tokens": 31004,
+      "total_tokens": 34203,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_iInter_subset_iInter_interior_closure\n    {X : Type*} [TopologicalSpace X] {ι : Type*} {s : ι → Set X} :\n    interior (closure (⋂ i, s i : Set X)) ⊆ ⋂ i, interior (closure (s i)) := by\n  intro x hx\n  -- For each index `i`, we show that `x` belongs to `interior (closure (s i))`.\n  have h : ∀ i, x ∈ interior (closure (s i)) := by\n    intro i\n    -- Since `⋂ j, s j ⊆ s i`, the same holds after taking closures and interiors.\n    have hSub : (⋂ j, s j : Set X) ⊆ s i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    have hCl : closure (⋂ j, s j : Set X) ⊆ closure (s i) :=\n      closure_mono hSub\n    have hInt :\n        interior (closure (⋂ j, s j : Set X)) ⊆ interior (closure (s i)) :=\n      interior_mono hCl\n    exact hInt hx\n  -- Combine the pointwise facts into membership in the intersection.\n  exact Set.mem_iInter.2 h"
+  ],
+  "success": true
+}

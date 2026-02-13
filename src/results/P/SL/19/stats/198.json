@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.74614429473877
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3121,
+      "prompt_tokens": 31242,
+      "total_tokens": 34363,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_closure_subset_inter_closure {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ closure B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- First show `x ∈ closure A`.\n  have hxClosA : x ∈ closure A := by\n    have hSub : (A ∩ closure B : Set X) ⊆ A := fun y hy => hy.1\n    exact (closure_mono hSub) hx\n  -- Then show `x ∈ closure B`.\n  have hxClosB : x ∈ closure B := by\n    have hSub : (A ∩ closure B : Set X) ⊆ closure B := fun y hy => hy.2\n    have hx' : x ∈ closure (closure B) := (closure_mono hSub) hx\n    simpa [closure_closure] using hx'\n  exact And.intro hxClosA hxClosB"
+  ],
+  "success": true
+}

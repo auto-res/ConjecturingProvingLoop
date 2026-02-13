@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.05159306526184
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4657,
+      "prompt_tokens": 59707,
+      "total_tokens": 64364,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_frontier_union_interior_compl_eq_univ\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) ∪ frontier (A : Set X) ∪ interior (Aᶜ : Set X) =\n      (Set.univ : Set X) := by\n  calc\n    interior (A : Set X) ∪ frontier (A : Set X) ∪ interior (Aᶜ : Set X)\n        = frontier (A : Set X) ∪ (interior (A : Set X) ∪ interior (Aᶜ : Set X)) := by\n          -- Reassociate and commute unions so that `frontier A` comes first\n          simp [Set.union_left_comm, Set.union_comm, Set.union_assoc]\n    _ = frontier (A : Set X) ∪ (frontier (A : Set X))ᶜ := by\n          -- Replace the union of interiors with the complement of the frontier\n          simpa [Topology.compl_frontier_eq_union_interiors (A := A), Set.union_comm]\n    _ = (Set.univ : Set X) := by\n          -- A set union its complement is the whole space\n          simpa using Set.union_compl_self (frontier (A : Set X))"
+  ],
+  "success": true
+}

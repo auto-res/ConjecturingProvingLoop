@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.086095571517944
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2872,
+      "prompt_tokens": 51244,
+      "total_tokens": 54116,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A ⊆ closure (Aᶜ) := by\n  intro x hx\n  have h : x ∈ closure A ∩ closure (Aᶜ) := by\n    simpa [Topology.frontier_eq_closure_inter_closure_compl (A := A)] using hx\n  exact h.2"
+  ],
+  "success": true
+}

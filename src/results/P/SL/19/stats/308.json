@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.36077284812927
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1855,
+      "prompt_tokens": 48628,
+      "total_tokens": 50483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.open_inter_frontier_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    (A ∩ frontier A : Set X) = (∅ : Set X) := by\n  -- First show that `A ∩ frontier A` is empty.\n  have hSub : (A ∩ frontier A : Set X) ⊆ (∅ : Set X) := by\n    intro x hx\n    rcases hx with ⟨hxA, hxFront⟩\n    -- For an open set `A`, the frontier is contained in the complement of `A`.\n    have hFrontSub : frontier A ⊆ Aᶜ :=\n      Topology.frontier_subset_compl_of_isOpen (A := A) hA\n    -- Hence `x ∈ Aᶜ`, contradicting `x ∈ A`.\n    have : x ∈ Aᶜ := hFrontSub hxFront\n    exact (this hxA).elim\n  -- The reverse inclusion is trivial.\n  have hEmptySub : (∅ : Set X) ⊆ (A ∩ frontier A : Set X) := by\n    intro x hx\n    cases hx\n  -- Combine the two inclusions to get the desired equality of sets.\n  exact Set.Subset.antisymm hSub hEmptySub"
+  ],
+  "success": true
+}

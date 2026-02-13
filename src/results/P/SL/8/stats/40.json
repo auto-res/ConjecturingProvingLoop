@@ -1,0 +1,43 @@
+{
+  "times": [
+    24.393240213394165,
+    72.26638507843018
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2090,
+      "prompt_tokens": 4865,
+      "total_tokens": 6955,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4954,
+      "prompt_tokens": 5290,
+      "total_tokens": 10244,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P3 A) (hB : Topology.P3 B) :\n    Topology.P3 (A ∪ B) := by\n  dsimp [Topology.P3] at hA hB ⊢\n  intro x hx\n  cases hx with\n  | inl hAx =>\n      have hxA : x ∈ interior (closure A) := hA hAx\n      have hsubset : interior (closure A) ⊆ interior (closure (A ∪ B)) := by\n        have hcl : closure A ⊆ closure (A ∪ B) :=\n          closure_mono (Set.subset_union_left A B)\n        exact interior_mono hcl\n      exact hsubset hxA\n  | inr hBx =>\n      have hxB : x ∈ interior (closure B) := hB hBx\n      have hsubset : interior (closure B) ⊆ interior (closure (A ∪ B)) := by\n        have hcl : closure B ⊆ closure (A ∪ B) :=\n          closure_mono (Set.subset_union_right A B)\n        exact interior_mono hcl\n      exact hsubset hxB",
+    "theorem P3_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP3 : Topology.P3 A) :\n    A ⊆ closure A := by\n  dsimp [Topology.P3] at hP3\n  exact Set.Subset.trans hP3 interior_subset"
+  ],
+  "success": true
+}

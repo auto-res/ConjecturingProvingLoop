@@ -1,0 +1,43 @@
+{
+  "times": [
+    21.167357206344604,
+    134.2508201599121
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1455,
+      "prompt_tokens": 35738,
+      "total_tokens": 37193,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34688
+      }
+    },
+    {
+      "completion_tokens": 7504,
+      "prompt_tokens": 35849,
+      "total_tokens": 43353,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_mono {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B) (hB : Topology.P1 B) : Topology.P1 A := by\n  dsimp [Topology.P1] at hB ⊢\n  intro x hxA\n  exact hB (hAB hxA)",
+    "theorem Topology.dense_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Dense (A : Set X)) (hB : Dense (B : Set X)) :\n    Dense (A ∪ B : Set X) := by\n  -- The closure of `A` is the whole space.\n  have hA_closure : closure (A : Set X) = (Set.univ : Set X) := hA.closure_eq\n  -- Since `A ⊆ A ∪ B`, we have `closure A ⊆ closure (A ∪ B)`.\n  have h_superset : (Set.univ : Set X) ⊆ closure (A ∪ B : Set X) := by\n    have h₁ : closure (A : Set X) ⊆ closure (A ∪ B : Set X) := by\n      have h_subset : (A : Set X) ⊆ A ∪ B := by\n        intro x hx; exact Or.inl hx\n      exact closure_mono h_subset\n    simpa [hA_closure] using h₁\n  -- The reverse inclusion is trivial.\n  have h_subset : closure (A ∪ B : Set X) ⊆ (Set.univ : Set X) := by\n    intro x _hx; simp\n  -- Therefore the closure of `A ∪ B` is the whole space.\n  have h_closure_union : closure (A ∪ B : Set X) = (Set.univ : Set X) :=\n    Set.Subset.antisymm h_subset h_superset\n  -- Conclude that `A ∪ B` is dense.\n  exact (dense_iff_closure_eq).2 h_closure_union"
+  ],
+  "success": true
+}

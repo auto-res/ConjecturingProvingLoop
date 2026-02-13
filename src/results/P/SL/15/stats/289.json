@@ -1,0 +1,43 @@
+{
+  "times": [
+    59.212244749069214,
+    35.14684820175171
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5025,
+      "prompt_tokens": 61865,
+      "total_tokens": 66890,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    },
+    {
+      "completion_tokens": 2661,
+      "prompt_tokens": 61940,
+      "total_tokens": 64601,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hxA\n  -- Since `A` is dense, its closure is the whole space.\n  have h_closure : (closure A : Set X) = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  -- Hence the interior of this closure is also the whole space.\n  have h_int : interior (closure A) = (Set.univ : Set X) := by\n    simpa [h_closure, interior_univ]\n  -- Trivially, every point belongs to `univ`, and we rewrite via `h_int`.\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_int] using this",
+    "theorem interior_inter_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) (hB : IsOpen B) :\n    interior (A ∩ B) = A ∩ B := by\n  -- Start from the general description of the interior of an intersection.\n  have h : interior (A ∩ B) = interior A ∩ interior B := by\n    simpa using interior_inter (A := A) (B := B)\n  -- Use the fact that the interior of an open set is the set itself.\n  simpa [hA.interior_eq, hB.interior_eq] using h"
+  ],
+  "success": true
+}

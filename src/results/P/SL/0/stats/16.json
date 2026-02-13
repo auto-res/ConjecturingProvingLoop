@@ -1,0 +1,43 @@
+{
+  "times": [
+    36.10353136062622,
+    73.52698349952698
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2127,
+      "prompt_tokens": 2635,
+      "total_tokens": 4762,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 4173,
+      "prompt_tokens": 2754,
+      "total_tokens": 6927,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_closure_eq_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P2 A → closure (A : Set X) = closure (interior A) := by\n  intro hP2\n  -- First inclusion: `closure A ⊆ closure (interior A)`.\n  have h₁ : closure (A : Set X) ⊆ closure (interior A) := by\n    have hsubset : (A : Set X) ⊆ closure (interior A) := by\n      -- From `P2`, we have `A ⊆ interior (closure (interior A))`,\n      -- and the latter is contained in `closure (interior A)`.\n      exact (hP2.trans interior_subset)\n    exact closure_mono hsubset\n  -- Second inclusion: `closure (interior A) ⊆ closure A`.\n  have h₂ : closure (interior A) ⊆ closure (A : Set X) :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  exact subset_antisymm h₁ h₂",
+    "theorem closure_eq_closure_interior_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → closure (A : Set X) = closure (interior A) := by\n  intro hP2\n  have hP1 : Topology.P1 A := (Topology.P2_implies_P1 (X := X) (A := A)) hP2\n  exact (Topology.P1_iff_closure_eq_closure_interior (X := X) (A := A)).1 hP1"
+  ],
+  "success": true
+}

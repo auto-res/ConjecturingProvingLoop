@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.1271026134491
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3874,
+      "prompt_tokens": 11123,
+      "total_tokens": 14997,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_iff_open {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure A) ↔ IsOpen (closure A) := by\n  have h₁ : Topology.P2 (closure A) ↔ Topology.P3 (closure A) := by\n    simpa using (Topology.P2_iff_P3_closure (A := A))\n  have h₂ : Topology.P3 (closure A) ↔ IsOpen (closure A) := by\n    simpa using (Topology.P3_closure_iff_open (A := A))\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    65.95200896263123,
+    73.72870230674744
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4579,
+      "prompt_tokens": 1314,
+      "total_tokens": 5893,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5217,
+      "prompt_tokens": 1516,
+      "total_tokens": 6733,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : Topology.P1 (X := X) B) :\n    Topology.P1 (X := X) (A ∪ B) := by\n  dsimp [Topology.P1] at *\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hxA' : x ∈ closure (interior A) := hA hxA\n      have h_subset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        have h_int_subset : interior A ⊆ interior (A ∪ B) := by\n          intro y hy\n          have hYA : y ∈ A := interior_subset hy\n          exact Or.inl hYA\n        exact closure_mono h_int_subset\n      exact h_subset hxA'\n  | inr hxB =>\n      have hxB' : x ∈ closure (interior B) := hB hxB\n      have h_subset : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n        have h_int_subset : interior B ⊆ interior (A ∪ B) := by\n          intro y hy\n          have hYB : y ∈ B := interior_subset hy\n          exact Or.inr hYB\n        exact closure_mono h_int_subset\n      exact h_subset hxB'",
+    "theorem Topology.P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (X := X) A → Topology.P1 (X := X) B → Topology.P1 (X := X) (A ∪ B) := by\n  intro hPA hPB\n  dsimp [Topology.P1] at hPA hPB ⊢\n  intro x hxAB\n  cases hxAB with\n  | inl hxA =>\n      have hx_closure_intA : x ∈ closure (interior A) := hPA hxA\n      have h_subset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        have h_interior_subset : interior A ⊆ interior (A ∪ B) := by\n          -- `interior` is monotone, so it respects subset relations\n          have hA_subset : A ⊆ A ∪ B := by\n            intro y hy\n            exact Or.inl hy\n          exact interior_mono hA_subset\n        exact h_interior_subset\n      exact h_subset hx_closure_intA\n  | inr hxB =>\n      have hx_closure_intB : x ∈ closure (interior B) := hPB hxB\n      have h_subset : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n        apply closure_mono\n        have h_interior_subset : interior B ⊆ interior (A ∪ B) := by\n          have hB_subset : B ⊆ A ∪ B := by\n            intro y hy\n            exact Or.inr hy\n          exact interior_mono hB_subset\n        exact h_interior_subset\n      exact h_subset hx_closure_intB"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    222.57293510437012,
+    94.32038474082947
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14363,
+      "prompt_tokens": 42718,
+      "total_tokens": 57081,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    },
+    {
+      "completion_tokens": 5275,
+      "prompt_tokens": 42792,
+      "total_tokens": 48067,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter7_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure A)))))))))) =\n      interior (closure A) := by\n  -- Let `B` be the five-fold iterate.\n  set B : Set X :=\n      interior (closure (interior (closure (interior (closure (interior (closure A))))))) with hBdef\n  -- Apply the basic idempotence lemma once more.\n  have h₁ :\n      interior (closure (interior (closure B))) = interior (closure B) :=\n    Topology.interiorClosure_idempotent (A := B)\n  -- The six-fold iterate collapses to `interior (closure A)` by the previous lemma.\n  have h₂ : interior (closure B) = interior (closure A) := by\n    simpa [hBdef] using\n      Topology.interiorClosure_iter6_idempotent (A := A)\n  -- Combine the two equalities.\n  simpa [hBdef, h₂] using h₁",
+    "theorem Topology.P3_interiorClosureClosure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (interior (closure (closure (A : Set X)))) := by\n  simpa [closure_closure] using\n    (Topology.P3_interiorClosure (A := A))"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    31.960339307785034,
+    62.575671672821045
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2032,
+      "prompt_tokens": 3710,
+      "total_tokens": 5742,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 3963,
+      "prompt_tokens": 3816,
+      "total_tokens": 7779,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_and_isClosed_implies_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hClosed : IsClosed A) (hP3 : Topology.P3 A) :\n    IsOpen A := by\n  have h₁ : A ⊆ interior A := by\n    intro x hx\n    have : x ∈ interior (closure A) := hP3 hx\n    simpa [hClosed.closure_eq] using this\n  have h_eq : (A : Set X) = interior A :=\n    Set.Subset.antisymm h₁ interior_subset\n  simpa [h_eq] using (isOpen_interior : IsOpen (interior A))",
+    "theorem Topology.P3_iff_exists_open_between {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A ↔ ∃ U : Set X, IsOpen U ∧ A ⊆ U ∧ U ⊆ closure A := by\n  constructor\n  · intro hA\n    refine ⟨interior (closure A), isOpen_interior, hA, interior_subset⟩\n  · rintro ⟨U, hUopen, hAU, hUcl⟩\n    dsimp [Topology.P3]\n    have hUsubset : U ⊆ interior (closure A) :=\n      interior_maximal hUcl hUopen\n    exact Set.Subset.trans hAU hUsubset"
+  ],
+  "success": true
+}

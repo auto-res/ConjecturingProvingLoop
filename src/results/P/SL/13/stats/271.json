@@ -1,0 +1,43 @@
+{
+  "times": [
+    46.67140555381775,
+    49.248440742492676
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2996,
+      "prompt_tokens": 47975,
+      "total_tokens": 50971,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 2335,
+      "prompt_tokens": 48078,
+      "total_tokens": 50413,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) → Dense (closure (A : Set X)) := by\n  intro hDense\n  dsimp [Dense] at *\n  -- `hDense` tells us that `closure A = univ`.\n  have h_cl : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Rewriting with `h_cl` shows that `closure (closure A) = univ`.\n  simpa [closure_closure, h_cl] using\n    (rfl : closure (closure (A : Set X)) = closure (A : Set X))",
+    "theorem Dense.closure_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Dense (A : Set X)) : closure (A : Set X) = (Set.univ : Set X) := by\n  ext x\n  constructor\n  · intro _; simp\n  · intro _; exact h x"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.5359456539154
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5511,
+      "prompt_tokens": 43210,
+      "total_tokens": 48721,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_closure_eq_of_closed {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsClosed A) (hB : IsClosed B) :\n    interior (closure A ∩ closure B) = interior A ∩ interior B := by\n  -- Since `A` and `B` are closed, their closures are the sets themselves.\n  have hA_cl : closure A = (A : Set X) := hA.closure_eq\n  have hB_cl : closure B = (B : Set X) := hB.closure_eq\n  -- Rewrite and apply the existing equality for closed intersections.\n  simpa [hA_cl, hB_cl] using\n    (interior_inter_eq_of_closed (A := A) (B := B) hA hB)"
+  ],
+  "success": true
+}

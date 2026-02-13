@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.721457719802856
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4675,
+      "prompt_tokens": 45018,
+      "total_tokens": 49693,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iInter_subset_iInter_interior\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    interior (Set.iInter A) ⊆ Set.iInter (fun i => interior (A i)) := by\n  intro x hx\n  -- For every index `i`, derive `x ∈ interior (A i)`.\n  have hxi : ∀ i, x ∈ interior (A i) := by\n    intro i\n    -- `⋂ i, A i ⊆ A i`\n    have h_subset : (Set.iInter A) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Monotonicity of `interior` yields the desired inclusion.\n    have h_mono : interior (Set.iInter A) ⊆ interior (A i) :=\n      interior_mono h_subset\n    exact h_mono hx\n  -- Assemble the memberships into the required intersection.\n  exact Set.mem_iInter.2 hxi"
+  ],
+  "success": true
+}

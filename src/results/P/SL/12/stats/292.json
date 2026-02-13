@@ -1,0 +1,60 @@
+{
+  "times": [
+    63.81665229797363,
+    41.112165689468384,
+    87.7497763633728
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4457,
+      "prompt_tokens": 56621,
+      "total_tokens": 61078,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    },
+    {
+      "completion_tokens": 2345,
+      "prompt_tokens": 56939,
+      "total_tokens": 59284,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    },
+    {
+      "completion_tokens": 4038,
+      "prompt_tokens": 57017,
+      "total_tokens": 61055,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_union_three_subset {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} :\n    interior (A : Set X) ∪ interior B ∪ interior C ⊆\n      interior (A ∪ B ∪ C : Set X) := by\n  intro x hx\n  -- Analyse the membership of `x` in the triple union.\n  cases hx with\n  | inl hAB =>\n      -- `x ∈ interior A ∪ interior B`\n      cases hAB with\n      | inl hA =>\n          -- Case `x ∈ interior A`\n          have h_subset : (A : Set X) ⊆ A ∪ B ∪ C := by\n            intro y hy; exact Or.inl hy\n          have h_int : (interior (A : Set X)) ⊆ interior (A ∪ B ∪ C) :=\n            interior_mono h_subset\n          exact h_int hA\n      | inr hB =>\n          -- Case `x ∈ interior B`\n          have h_subset : (B : Set X) ⊆ A ∪ B ∪ C := by\n            intro y hy; exact Or.inr (Or.inl hy)\n          have h_int : (interior (B : Set X)) ⊆ interior (A ∪ B ∪ C) :=\n            interior_mono h_subset\n          exact h_int hB\n  | inr hC =>\n      -- Case `x ∈ interior C`\n      have h_subset : (C : Set X) ⊆ A ∪ B ∪ C := by\n        intro y hy; exact Or.inr (Or.inr hy)\n      have h_int : (interior (C : Set X)) ⊆ interior (A ∪ B ∪ C) :=\n        interior_mono h_subset\n      exact h_int hC",
+    "theorem Topology.closure_interior_union_three_subset\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    closure (interior (A : Set X)) ∪ closure (interior B) ∪ closure (interior C) ⊆\n      closure (interior (A ∪ B ∪ C : Set X)) := by\n  intro x hx\n  --  We analyse the membership of `x` in the triple union.\n  cases hx with\n  | inl hxAB =>\n      --  `x` lies in the union of the first two closures.\n      cases hxAB with\n      | inl hxA =>\n          --  Case `x ∈ closure (interior A)`\n          have h_sub :\n              closure (interior (A : Set X)) ⊆\n                closure (interior (A ∪ B ∪ C : Set X)) := by\n            --  Use monotonicity with the obvious inclusion `A ⊆ A ∪ B ∪ C`.\n            have h_inc : (A : Set X) ⊆ A ∪ B ∪ C := by\n              intro y hy\n              exact Or.inl <| Or.inl hy\n            exact\n              Topology.closure_interior_mono\n                (X := X) (A := A) (B := A ∪ B ∪ C) h_inc\n          exact h_sub hxA\n      | inr hxB =>\n          --  Case `x ∈ closure (interior B)`\n          have h_sub :\n              closure (interior (B : Set X)) ⊆\n                closure (interior (A ∪ B ∪ C : Set X)) := by\n            have h_inc : (B : Set X) ⊆ A ∪ B ∪ C := by\n              intro y hy\n              exact Or.inl <| Or.inr hy\n            exact\n              Topology.closure_interior_mono\n                (X := X) (A := B) (B := A ∪ B ∪ C) h_inc\n          exact h_sub hxB\n  | inr hxC =>\n      --  Case `x ∈ closure (interior C)`\n      have h_sub :\n          closure (interior (C : Set X)) ⊆\n            closure (interior (A ∪ B ∪ C : Set X)) := by\n        have h_inc : (C : Set X) ⊆ A ∪ B ∪ C := by\n          intro y hy\n          exact Or.inr hy\n        exact\n          Topology.closure_interior_mono\n            (X := X) (A := C) (B := A ∪ B ∪ C) h_inc\n      exact h_sub hxC",
+    "theorem Topology.closure_idempotent {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (closure (A : Set X)) = closure A := by\n  simpa [closure_closure]"
+  ],
+  "success": true
+}

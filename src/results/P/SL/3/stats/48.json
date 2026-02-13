@@ -1,0 +1,43 @@
+{
+  "times": [
+    81.79223561286926,
+    140.51560640335083
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5914,
+      "prompt_tokens": 6990,
+      "total_tokens": 12904,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    },
+    {
+      "completion_tokens": 10050,
+      "prompt_tokens": 7099,
+      "total_tokens": 17149,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_sUnion {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)}\n    (h𝒜 : ∀ A : Set X, A ∈ 𝒜 → Topology.P2 A) :\n    Topology.P2 (⋃₀ 𝒜) := by\n  dsimp [Topology.P2] at h𝒜 ⊢\n  intro x hx\n  rcases Set.mem_sUnion.mp hx with ⟨A, hA_mem, hxA⟩\n  have hx_int : (x : X) ∈ interior (closure (interior A)) :=\n    h𝒜 A hA_mem hxA\n  have h_subset :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior (⋃₀ 𝒜))) := by\n    have h_closure :\n        closure (interior A) ⊆ closure (interior (⋃₀ 𝒜)) := by\n      apply closure_mono\n      have h_int : interior A ⊆ interior (⋃₀ 𝒜) := by\n        apply interior_mono\n        intro y hy\n        have hyA : (y : X) ∈ A := interior_subset hy\n        exact Set.mem_sUnion.mpr ⟨A, hA_mem, hyA⟩\n      exact h_int\n    exact interior_mono h_closure\n  exact h_subset hx_int",
+    "theorem Topology.P2_iff_P1_and_P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen (A : Set X)) :\n    Topology.P2 A ↔ (Topology.P1 A ∧ Topology.P3 A) := by\n  -- Reuse the existing equivalences between the properties under the openness assumption\n  have h₁ : Topology.P1 A ↔ Topology.P2 A :=\n    Topology.P1_iff_P2_of_isOpen (A := A) hA\n  have h₂ : Topology.P3 A ↔ Topology.P2 A :=\n    Topology.P3_iff_P2_of_isOpen (A := A) hA\n  constructor\n  · intro hP2\n    -- From `P2` we obtain `P1` and `P3` via the equivalences\n    have hP1 : Topology.P1 A := (h₁.mpr) hP2\n    have hP3 : Topology.P3 A := (h₂.mpr) hP2\n    exact And.intro hP1 hP3\n  · rintro ⟨hP1, _⟩\n    -- From `P1` we recover `P2`; `P3` is not needed for this direction\n    exact h₁.mp hP1"
+  ],
+  "success": true
+}

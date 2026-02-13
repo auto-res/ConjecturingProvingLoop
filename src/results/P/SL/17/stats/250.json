@@ -1,0 +1,26 @@
+{
+  "times": [
+    99.79248905181885
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7529,
+      "prompt_tokens": 44802,
+      "total_tokens": 52331,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_eq_univ_of_discrete\n    {X : Type*} [TopologicalSpace X] [DiscreteTopology X] {A : Set X} :\n    Dense A ↔ A = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    -- In a discrete space every set is closed, so its closure is itself.\n    have hClosed : IsClosed A := isClosed_discrete _\n    have hClosureSelf : closure A = A := hClosed.closure_eq\n    -- Density gives `closure A = univ`; rewrite to obtain the desired equality.\n    have hClosureUniv : closure A = (Set.univ : Set X) := hDense.closure_eq\n    simpa [hClosureSelf] using hClosureUniv\n  · intro hEq\n    -- If `A = univ`, it is trivially dense.\n    simpa [hEq] using (dense_univ : Dense (Set.univ : Set X))"
+  ],
+  "success": true
+}

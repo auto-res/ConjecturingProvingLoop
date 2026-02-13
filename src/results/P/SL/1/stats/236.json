@@ -1,0 +1,60 @@
+{
+  "times": [
+    279.48273944854736,
+    144.24647641181946,
+    99.00747513771057
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 20665,
+      "prompt_tokens": 36652,
+      "total_tokens": 57317,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    },
+    {
+      "completion_tokens": 10391,
+      "prompt_tokens": 37029,
+      "total_tokens": 47420,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    },
+    {
+      "completion_tokens": 6890,
+      "prompt_tokens": 37154,
+      "total_tokens": 44044,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A ↔ interior (Aᶜ) = (∅ : Set X) := by\n  constructor\n  · intro hDense\n    -- Assume `x ∈ interior (Aᶜ)`; we derive a contradiction,\n    -- showing that this interior must be empty.\n    apply Set.eq_empty_iff_forall_not_mem.2\n    intro x hxInt\n    rcases hxInt with ⟨U, hU_open, hxU, hU_sub⟩\n    -- Since `A` is dense, every neighbourhood of `x` meets `A`.\n    have h_clos : x ∈ closure A := by\n      -- `closure A = univ` by density.\n      have : closure A = (Set.univ : Set X) := hDense.closure_eq\n      simpa [this] using (by simp : x ∈ (Set.univ : Set X))\n    -- The neighbourhood `U` of `x` is disjoint from `A`, contradicting density.\n    have h_nonempty : (U ∩ A).Nonempty :=\n      (mem_closure_iff.1 h_clos) U hU_open hxU\n    rcases h_nonempty with ⟨y, hyU, hyA⟩\n    have : y ∈ Aᶜ := hU_sub hyU\n    exact this hyA\n  · intro hIntEmpty\n    -- To show `Dense A`, it suffices to prove `closure A = univ`.\n    have h_closure : closure A = (Set.univ : Set X) := by\n      apply Set.eq_univ_of_forall\n      intro x\n      by_contra hx\n      -- The open set `V = (closure A)ᶜ` contains `x` and is disjoint from `A`.\n      have hxV : x ∈ (closure A)ᶜ := hx\n      have hV_open : IsOpen ((closure A)ᶜ) := isClosed_closure.isOpen_compl\n      -- Hence `x` belongs to `interior (Aᶜ)`, contradicting the hypothesis.\n      have hxInt : x ∈ interior (Aᶜ) := by\n        have hSub : ((closure A)ᶜ : Set X) ⊆ Aᶜ := by\n          intro y hy\n          by_cases hAy : y ∈ A\n          · have : y ∈ closure A := subset_closure hAy\n            exact (hy this).elim\n          · simpa using hAy\n        exact mem_interior.2 ⟨(closure A)ᶜ, hV_open, hxV, hSub⟩\n      have : x ∉ interior (Aᶜ) := by\n        simpa [hIntEmpty] using hxInt\n      exact this.elim\n    -- Conclude density from the closure equality.\n    simpa using (dense_iff_closure_eq).2 h_closure",
+    "theorem Topology.closure_interior_union_subset_union_closures\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) ⊆ closure (interior A) ∪ closure (interior B) := by\n  intro x hx\n  -- Rewrite the hypothesis using `interior_union`.\n  have h : x ∈ closure (interior A ∪ interior B) := by\n    simpa [interior_union] using hx\n  -- Use `closure_union` to conclude.\n  simpa [closure_union] using h",
+    "theorem Topology.P2_iff_P1_of_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClopen A) :\n    Topology.P2 A ↔ Topology.P1 A := by\n  simpa using\n    (Topology.P1_iff_P2_of_isOpen (A := A) hA.2).symm"
+  ],
+  "success": true
+}

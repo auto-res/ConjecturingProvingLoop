@@ -1,0 +1,43 @@
+{
+  "times": [
+    32.92885637283325,
+    130.58947205543518
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3171,
+      "prompt_tokens": 55798,
+      "total_tokens": 58969,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    },
+    {
+      "completion_tokens": 10711,
+      "prompt_tokens": 55913,
+      "total_tokens": 66624,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_interior_union_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A = interior A ∪ frontier A := by\n  ext x\n  constructor\n  · intro hx\n    by_cases hInt : x ∈ interior A\n    · exact Or.inl hInt\n    ·\n      have hFront : x ∈ frontier A := And.intro hx hInt\n      exact Or.inr hFront\n  · intro hx\n    cases hx with\n    | inl hInt =>\n        exact interior_subset hInt\n    | inr hFront =>\n        exact hFront.1",
+    "theorem Topology.innerInterior_subset_interiorClosure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior A ⊆ interior (closure A) := by\n  intro x hx\n  exact (interior_mono (subset_closure : A ⊆ closure A)) hx"
+  ],
+  "success": true
+}

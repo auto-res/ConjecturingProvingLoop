@@ -1,0 +1,26 @@
+{
+  "times": [
+    141.27593326568604
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8235,
+      "prompt_tokens": 36206,
+      "total_tokens": 44441,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8064,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_eq_of_open {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) :\n    interior ((A ∩ B) : Set X) = interior A ∩ interior B := by\n  -- `A ∩ B` is open because it is the intersection of two open sets.\n  have hOpen : IsOpen ((A ∩ B) : Set X) := hA.inter hB\n  -- The interior of an open set is the set itself.\n  simpa [hA.interior_eq, hB.interior_eq, hOpen.interior_eq]"
+  ],
+  "success": true
+}

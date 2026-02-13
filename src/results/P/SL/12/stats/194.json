@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.78296637535095
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5816,
+      "prompt_tokens": 36725,
+      "total_tokens": 42541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_interior_right {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 (X := X) A) :\n    Topology.P2 (X := X) (A ∪ interior B) := by\n  -- `P2` holds for `interior B` because it is an open set.\n  have hB : Topology.P2 (X := X) (interior B) :=\n    Topology.P2_interior (X := X) (A := B)\n  -- Use the existing union lemma for `P2`.\n  simpa using\n    Topology.P2_union (X := X) (A := A) (B := interior B) hA hB"
+  ],
+  "success": true
+}

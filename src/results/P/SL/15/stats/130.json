@@ -1,0 +1,26 @@
+{
+  "times": [
+    81.58521318435669
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5626,
+      "prompt_tokens": 24434,
+      "total_tokens": 30060,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_prod_implies_P1_left_and_right\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y}\n    (hProd : Topology.P1 (A ×ˢ B))\n    (hAne : A.Nonempty) (hBne : B.Nonempty) :\n    Topology.P1 A ∧ Topology.P1 B := by\n  -- First derive `P1 A`\n  have hP1A : Topology.P1 A := by\n    dsimp [Topology.P1] at hProd ⊢\n    intro x hxA\n    -- Choose an element of `B` to form a point in the product.\n    rcases hBne with ⟨y, hyB⟩\n    have hxy_mem : ((x, y) : X × Y) ∈ A ×ˢ B := ⟨hxA, hyB⟩\n    -- Apply `P1` to the product.\n    have h_cl_prod : ((x, y) : X × Y) ∈ closure (interior (A ×ˢ B)) :=\n      hProd hxy_mem\n    -- Rewrite the relevant closures using product rules.\n    have h_int_prod :\n        interior (A ×ˢ B) = interior A ×ˢ interior B := by\n      simpa using interior_prod_eq (s := A) (t := B)\n    have h_closure_prod :\n        closure (interior (A ×ˢ B)) =\n          closure (interior A) ×ˢ closure (interior B) := by\n      calc\n        closure (interior (A ×ˢ B))\n            = closure (interior A ×ˢ interior B) := by\n                simpa [h_int_prod]\n        _ = closure (interior A) ×ˢ closure (interior B) := by\n                simpa using\n                  closure_prod_eq (s := interior A) (t := interior B)\n    -- Extract the `X`-coordinate.\n    have h_mem :\n        ((x, y) : X × Y) ∈\n          closure (interior A) ×ˢ closure (interior B) := by\n      simpa [h_closure_prod] using h_cl_prod\n    exact (Set.mem_prod.1 h_mem).1\n  -- Next derive `P1 B`\n  have hP1B : Topology.P1 B := by\n    dsimp [Topology.P1] at hProd ⊢\n    intro y hyB\n    -- Choose an element of `A` to form a point in the product.\n    rcases hAne with ⟨x, hxA⟩\n    have hxy_mem : ((x, y) : X × Y) ∈ A ×ˢ B := ⟨hxA, hyB⟩\n    -- Apply `P1` to the product.\n    have h_cl_prod : ((x, y) : X × Y) ∈ closure (interior (A ×ˢ B)) :=\n      hProd hxy_mem\n    -- Rewrite closures as above.\n    have h_int_prod :\n        interior (A ×ˢ B) = interior A ×ˢ interior B := by\n      simpa using interior_prod_eq (s := A) (t := B)\n    have h_closure_prod :\n        closure (interior (A ×ˢ B)) =\n          closure (interior A) ×ˢ closure (interior B) := by\n      calc\n        closure (interior (A ×ˢ B))\n            = closure (interior A ×ˢ interior B) := by\n                simpa [h_int_prod]\n        _ = closure (interior A) ×ˢ closure (interior B) := by\n                simpa using\n                  closure_prod_eq (s := interior A) (t := interior B)\n    -- Extract the `Y`-coordinate.\n    have h_mem :\n        ((x, y) : X × Y) ∈\n          closure (interior A) ×ˢ closure (interior B) := by\n      simpa [h_closure_prod] using h_cl_prod\n    exact (Set.mem_prod.1 h_mem).2\n  exact ⟨hP1A, hP1B⟩"
+  ],
+  "success": true
+}

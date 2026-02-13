@@ -1,0 +1,43 @@
+{
+  "times": [
+    26.69681477546692,
+    93.91428804397583
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1507,
+      "prompt_tokens": 55158,
+      "total_tokens": 56665,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 7943,
+      "prompt_tokens": 55291,
+      "total_tokens": 63234,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iUnion {X : Type*} [TopologicalSpace X] {ι : Sort _} {A : ι → Set X}\n    (hA : ∀ i, Topology.P1 (X := X) (A i)) :\n    Topology.P1 (X := X) (⋃ i, A i) := by\n  dsimp [Topology.P1] at hA ⊢\n  intro x hx_union\n  rcases mem_iUnion.1 hx_union with ⟨i, hxAi⟩\n  -- Use `P1` for the particular index `i`.\n  have hx_closure : x ∈ closure (interior (A i)) := (hA i) hxAi\n  -- Relate the closures via monotonicity.\n  have h_subset : interior (A i) ⊆ interior (⋃ j, A j) :=\n    interior_mono\n      (subset_iUnion_of_subset i (interior_subset : interior (A i) ⊆ A i))\n  have h_closure_subset :\n      closure (interior (A i)) ⊆ closure (interior (⋃ j, A j)) :=\n    closure_mono h_subset\n  exact h_closure_subset hx_closure",
+    "theorem Topology.closure_inter_interiorCompl_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (A : Set X) ∩ interior ((A : Set X)ᶜ) = (∅ : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    have hFalse : False := by\n      rcases hx with ⟨h_clA, h_intCompl⟩\n      -- Using the neighbourhood characterization of the closure,\n      -- obtain a point of `A` inside `interior (Aᶜ)`, which is impossible.\n      have h_nonempty :\n          ((interior ((A : Set X)ᶜ)) ∩ (A : Set X)).Nonempty := by\n        have h := (mem_closure_iff).1 h_clA\n        have := h (interior ((A : Set X)ᶜ)) isOpen_interior h_intCompl\n        -- Rearrange intersections to the required form.\n        simpa [Set.inter_comm, Set.inter_left_comm, Set.inter_assoc] using this\n      rcases h_nonempty with ⟨y, ⟨hy_intCompl, hyA⟩⟩\n      -- The point `y` lies in both `A` and `Aᶜ`, a contradiction.\n      have hy_notA : (y : X) ∈ (A : Set X)ᶜ :=\n        (interior_subset : interior ((A : Set X)ᶜ) ⊆ (A : Set X)ᶜ) hy_intCompl\n      exact hy_notA hyA\n    exact hFalse.elim\n  · intro hx\n    cases hx"
+  ],
+  "success": true
+}

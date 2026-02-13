@@ -1,0 +1,26 @@
+{
+  "times": [
+    149.84208917617798
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8595,
+      "prompt_tokens": 22688,
+      "total_tokens": 31283,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_eq_self_imp_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_int : interior A = A) :\n    Topology.P2 A := by\n  -- From `interior A = A`, we deduce that `A` is open.\n  have hOpen : IsOpen A := by\n    simpa [h_int] using (isOpen_interior : IsOpen (interior A))\n  -- Openness immediately yields `P2`.\n  exact Topology.isOpen_imp_P2 (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

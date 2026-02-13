@@ -1,0 +1,43 @@
+{
+  "times": [
+    164.24006843566895,
+    51.46943187713623
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10705,
+      "prompt_tokens": 43735,
+      "total_tokens": 54440,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 3486,
+      "prompt_tokens": 43872,
+      "total_tokens": 47358,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem sUnion_image_closure_subset_closure_sUnion\n    {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    ⋃₀ (closure '' 𝒜) ⊆ closure (⋃₀ 𝒜 : Set X) := by\n  intro x hx\n  rcases Set.mem_sUnion.mp hx with ⟨S, hS_in, hxS⟩\n  rcases Set.mem_image_iff_bex.1 hS_in with ⟨A, hA_mem, rfl⟩\n  -- `x` lies in `closure A` for some `A ∈ 𝒜`\n  have hSub : closure (A : Set X) ⊆ closure (⋃₀ 𝒜 : Set X) := by\n    have hA_sub : (A : Set X) ⊆ ⋃₀ 𝒜 := by\n      intro y hyA\n      exact Set.mem_sUnion.mpr ⟨A, hA_mem, hyA⟩\n    exact closure_mono hA_sub\n  exact hSub hxS",
+    "theorem P1_iUnion_closure {X ι : Type*} [TopologicalSpace X] {F : ι → Set X}\n    (hF : ∀ i, Topology.P1 (F i)) :\n    Topology.P1 (⋃ i, closure (F i : Set X)) := by\n  -- Each `closure (F i)` inherits `P1` from `F i`.\n  have hF_cl : ∀ i, Topology.P1 (closure (F i : Set X)) := by\n    intro i\n    exact Topology.P1_implies_P1_closure (X := X) (A := F i) (hF i)\n  -- Apply the existing `iUnion` lemma to the family of closures.\n  have h :=\n    Topology.P1_iUnion (X := X)\n      (F := fun i ↦ closure (F i : Set X)) hF_cl\n  simpa using h"
+  ],
+  "success": true
+}

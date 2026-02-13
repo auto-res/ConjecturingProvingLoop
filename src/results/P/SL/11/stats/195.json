@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.56385636329651
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2251,
+      "prompt_tokens": 32091,
+      "total_tokens": 34342,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_mono {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B) :\n    interior (closure (interior A)) ⊆ interior (closure (interior B)) := by\n  intro x hx\n  have hcl : closure (interior A) ⊆ closure (interior B) := by\n    apply closure_mono\n    exact interior_mono hAB\n  exact (interior_mono hcl) hx"
+  ],
+  "success": true
+}

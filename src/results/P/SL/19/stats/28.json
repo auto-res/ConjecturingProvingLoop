@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.166534900665283
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1600,
+      "prompt_tokens": 3813,
+      "total_tokens": 5413,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P3 (A := A)) (hB : Topology.P3 (A := B)) :\n    Topology.P3 (A := A ∪ B) := by\n  dsimp [Topology.P3] at hA hB ⊢\n  intro x hx\n  cases hx with\n  | inl hA_mem =>\n      have hxA : x ∈ interior (closure A) := hA hA_mem\n      have hSubset : interior (closure A) ⊆ interior (closure (A ∪ B)) := by\n        have hClos : closure A ⊆ closure (A ∪ B) := closure_mono (by\n          intro z hz; exact Or.inl hz)\n        exact interior_mono hClos\n      exact hSubset hxA\n  | inr hB_mem =>\n      have hxB : x ∈ interior (closure B) := hB hB_mem\n      have hSubset : interior (closure B) ⊆ interior (closure (A ∪ B)) := by\n        have hClos : closure B ⊆ closure (A ∪ B) := closure_mono (by\n          intro z hz; exact Or.inr hz)\n        exact interior_mono hClos\n      exact hSubset hxB"
+  ],
+  "success": true
+}

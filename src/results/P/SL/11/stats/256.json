@@ -1,0 +1,26 @@
+{
+  "times": [
+    116.91621041297913
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8125,
+      "prompt_tokens": 41595,
+      "total_tokens": 49720,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7872,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_nonempty_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure A).Nonempty ↔ A.Nonempty := by\n  classical\n  constructor\n  · intro hCl\n    by_cases hA : (A : Set X).Nonempty\n    · exact hA\n    · exfalso\n      have hAeq : (A : Set X) = (∅ : Set X) :=\n        (Set.not_nonempty_iff_eq_empty).1 hA\n      have hCleq : closure A = (∅ : Set X) := by\n        simpa [hAeq, closure_empty]\n      have hContr : (∅ : Set X).Nonempty := by\n        simpa [hCleq] using hCl\n      rcases hContr with ⟨x, hx⟩\n      exact hx.elim\n  · intro hA\n    rcases hA with ⟨x, hxA⟩\n    exact ⟨x, subset_closure hxA⟩"
+  ],
+  "success": true
+}

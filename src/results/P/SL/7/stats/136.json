@@ -1,0 +1,26 @@
+{
+  "times": [
+    110.2687475681305
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8037,
+      "prompt_tokens": 20598,
+      "total_tokens": 28635,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_open {X : Type*} [TopologicalSpace X] {A U : Set X} :\n    Topology.P2 A → IsOpen U → Topology.P2 (A ∩ U) := by\n  intro hP2A hUopen\n  dsimp [Topology.P2] at *\n  intro x hxAU\n  rcases hxAU with ⟨hxA, hxU⟩\n  -- `x` already lies in the interior of the closure of `interior A`.\n  have hxInt : x ∈ interior (closure (interior A)) := hP2A hxA\n  -- The open set we'll work with.\n  set M : Set X := interior (closure (interior A)) ∩ U with hMdef\n  have hOpenM : IsOpen M := by\n    simpa [hMdef] using (isOpen_interior).inter hUopen\n  have hxM : x ∈ M := by\n    simpa [hMdef] using And.intro hxInt hxU\n  -- Show that `M` is contained in the closure of `interior (A ∩ U)`.\n  have hSubM : (M : Set X) ⊆ closure (interior (A ∩ U)) := by\n    intro y hyM\n    have hyIntA : y ∈ interior (closure (interior A)) := by\n      simpa [hMdef] using hyM.1\n    have hyU : y ∈ U := by\n      simpa [hMdef] using hyM.2\n    -- From `hyIntA` we deduce `y ∈ closure (interior A)`.\n    have hyClA : y ∈ closure (interior A) := interior_subset hyIntA\n    -- We first show `y ∈ closure (interior A ∩ U)`.\n    have hClosure1 : y ∈ closure (interior A ∩ U) := by\n      -- Use the neighbourhood characterisation of closure.\n      apply (mem_closure_iff).2\n      intro V hVopen hyV\n      -- `V ∩ U` is an open neighbourhood of `y`.\n      have hVUopen : IsOpen (V ∩ U) := hVopen.inter hUopen\n      have hyVU : y ∈ V ∩ U := ⟨hyV, hyU⟩\n      -- Since `y ∈ closure (interior A)`, this neighbourhood meets `interior A`.\n      have hNonempty : ((V ∩ U) ∩ interior A).Nonempty :=\n        (mem_closure_iff).1 hyClA (V ∩ U) hVUopen hyVU\n      -- Rearrange intersections to fit the goal.\n      simpa [Set.inter_assoc, Set.inter_comm, Set.inter_left_comm] using hNonempty\n    -- `interior A ∩ U` is open and contained in `interior (A ∩ U)`.\n    have hIncl : (interior A ∩ U : Set X) ⊆ interior (A ∩ U) := by\n      -- Openness.\n      have hOpen : IsOpen (interior A ∩ U) := (isOpen_interior).inter hUopen\n      -- Containment.\n      have hSub : (interior A ∩ U : Set X) ⊆ A ∩ U := by\n        intro z hz\n        exact ⟨(interior_subset : interior A ⊆ A) hz.1, hz.2⟩\n      exact interior_maximal hSub hOpen\n    -- Monotonicity of closure turns the previous step into the desired inclusion.\n    have hClosureIncl : closure (interior A ∩ U) ⊆ closure (interior (A ∩ U)) :=\n      closure_mono hIncl\n    exact hClosureIncl hClosure1\n  -- Maximality of the interior now yields the result.\n  have hFinal :\n      (M : Set X) ⊆ interior (closure (interior (A ∩ U))) :=\n    interior_maximal hSubM hOpenM\n  -- Conclude for our original `x`.\n  exact hFinal hxM"
+  ],
+  "success": true
+}

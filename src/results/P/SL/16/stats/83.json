@@ -1,0 +1,43 @@
+{
+  "times": [
+    78.6333634853363,
+    37.446061849594116
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5558,
+      "prompt_tokens": 14706,
+      "total_tokens": 20264,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    },
+    {
+      "completion_tokens": 3423,
+      "prompt_tokens": 14826,
+      "total_tokens": 18249,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure A)) ⊆ closure A := by\n  -- `interior (closure A)` is obviously contained in `closure A`.\n  have h : interior (closure A) ⊆ closure A := interior_subset\n  -- Taking closures preserves this inclusion.\n  exact closure_mono h",
+    "theorem Topology.closure_interior_eq_self_of_clopen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hClosed : IsClosed A) (hOpen : IsOpen A) :\n    closure (interior A) = A := by\n  simpa [hOpen.interior_eq, hClosed.closure_eq]"
+  ],
+  "success": true
+}

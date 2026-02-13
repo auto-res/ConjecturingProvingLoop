@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.95873260498047
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7088,
+      "prompt_tokens": 31687,
+      "total_tokens": 38775,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure A))))) =\n      interior (closure A) := by\n  calc\n    interior (closure (interior (closure (interior (closure A))))) =\n        interior (closure (interior (closure A))) := by\n          simpa using\n            (Topology.interior_closure_interior_closure\n                (A := interior (closure (A : Set X))))\n    _ = interior (closure A) := by\n          simpa using\n            (Topology.interior_closure_interior_closure (A := A))"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    320.12602186203003,
+    38.94565677642822,
+    113.08478331565857
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 17089,
+      "prompt_tokens": 39105,
+      "total_tokens": 56194,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 2378,
+      "prompt_tokens": 39297,
+      "total_tokens": 41675,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 6284,
+      "prompt_tokens": 39376,
+      "total_tokens": 45660,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_union_eq_of_open_closures\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (closure (A : Set X))) (hB : IsOpen (closure (B : Set X))) :\n    interior (closure (A : Set X)) ∪ interior (closure (B : Set X)) =\n      interior (closure (A ∪ B : Set X)) := by\n  -- `interior (closure A)` and `interior (closure B)` coincide with\n  -- `closure A` and `closure B`, respectively, since these closures are open.\n  have hIntA : interior (closure (A : Set X)) = closure (A : Set X) := hA.interior_eq\n  have hIntB : interior (closure (B : Set X)) = closure (B : Set X) := hB.interior_eq\n  -- The set `closure (A ∪ B)` is the union of two open sets, hence open.\n  have hOpenUnion : IsOpen (closure (A ∪ B : Set X)) := by\n    have hEq : closure (A ∪ B : Set X) =\n        closure (A : Set X) ∪ closure (B : Set X) := by\n      simpa [closure_union]\n    have hOpenUnion' : IsOpen (closure (A : Set X) ∪ closure (B : Set X)) :=\n      hA.union hB\n    simpa [hEq] using hOpenUnion'\n  -- Consequently, its interior is itself.\n  have hIntUnion : interior (closure (A ∪ B : Set X)) = closure (A ∪ B : Set X) :=\n    hOpenUnion.interior_eq\n  -- Put everything together.\n  calc\n    interior (closure (A : Set X)) ∪ interior (closure (B : Set X))\n        = closure (A : Set X) ∪ closure (B : Set X) := by\n          simp [hIntA, hIntB]\n    _ = closure (A ∪ B : Set X) := by\n          simpa [closure_union]\n    _ = interior (closure (A ∪ B : Set X)) := by\n          simpa [hIntUnion]",
+    "theorem Topology.closureInterior_union_eq_closure_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) (hB : IsOpen B) :\n    closure (interior (A ∪ B)) = closure A ∪ closure B := by\n  -- Since `A` and `B` are open, so is their union, hence its interior is itself.\n  have hInt : interior (A ∪ B : Set X) = A ∪ B := by\n    have hOpen : IsOpen (A ∪ B : Set X) := hA.union hB\n    simpa using hOpen.interior_eq\n  -- Rewrite using this fact and finish with `closure_union`.\n  simpa [hInt] using (closure_union (A := A) (B := B))",
+    "theorem Topology.interiorClosure_union_eq_union_of_open_closures\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (closure (A : Set X))) (hB : IsOpen (closure (B : Set X))) :\n    interior (closure (A ∪ B : Set X)) =\n      closure (A : Set X) ∪ closure (B : Set X) := by\n  apply Set.Subset.antisymm\n  · -- `⊆`: every point in the interior of the closure of `A ∪ B`\n    --       belongs to `closure A ∪ closure B`.\n    intro x hx\n    have : (x : X) ∈ closure (A ∪ B : Set X) := interior_subset hx\n    simpa [closure_union] using this\n  · -- `⊇`: each point in `closure A ∪ closure B`\n    --       lies in the interior of the closure of `A ∪ B`.\n    intro x hx\n    cases hx with\n    | inl hxA =>\n        -- Handle the case `x ∈ closure A`.\n        have hSub : (closure (A : Set X)) ⊆ closure (A ∪ B : Set X) := by\n          apply closure_mono\n          exact Set.subset_union_left\n        have hIncl :\n            closure (A : Set X) ⊆ interior (closure (A ∪ B : Set X)) :=\n          interior_maximal hSub hA\n        exact hIncl hxA\n    | inr hxB =>\n        -- Handle the case `x ∈ closure B`.\n        have hSub : (closure (B : Set X)) ⊆ closure (A ∪ B : Set X) := by\n          apply closure_mono\n          exact Set.subset_union_right\n        have hIncl :\n            closure (B : Set X) ⊆ interior (closure (A ∪ B : Set X)) :=\n          interior_maximal hSub hB\n        exact hIncl hxB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    47.63741326332092
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4505,
+      "prompt_tokens": 25713,
+      "total_tokens": 30218,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iff_interior_eq_self_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed (A : Set X)) :\n    Topology.P3 (X:=X) A ↔ interior (A : Set X) = A := by\n  -- First, translate `P3` into the openness of `A` using the existing equivalence.\n  have h₁ : Topology.P3 (X:=X) A ↔ IsOpen (A : Set X) :=\n    Topology.P3_iff_isOpen_of_isClosed (X:=X) (A:=A) hA_closed\n  -- Next, characterize openness via equality with the interior.\n  have h₂ : IsOpen (A : Set X) ↔ interior (A : Set X) = A := by\n    constructor\n    · intro h_open\n      simpa [h_open.interior_eq]\n    · intro h_eq\n      have h_open_int : IsOpen (interior (A : Set X)) := isOpen_interior\n      simpa [h_eq] using h_open_int\n  -- Combine the two equivalences.\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.28698754310608
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3945,
+      "prompt_tokens": 43156,
+      "total_tokens": 47101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_eq_closure_of_isOpen_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_open : IsOpen (closure A)) :\n    closure (interior (closure A)) = closure A := by\n  -- Since `closure A` is open, its interior is itself.\n  have h_int : interior (closure A) = closure A := h_open.interior_eq\n  -- Taking closures and simplifying yields the desired equality.\n  calc\n    closure (interior (closure A))\n        = closure (closure A) := by\n            simpa [h_int]\n    _ = closure A := by\n            simpa [closure_closure]"
+  ],
+  "success": true
+}

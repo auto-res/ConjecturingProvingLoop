@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.94324278831482
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3097,
+      "prompt_tokens": 46254,
+      "total_tokens": 49351,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A := closure (interior (closure A))) := by\n  dsimp [Topology.P1]\n  intro x hx\n  have hEq :=\n    Topology.closure_interior_closure_interior_closure_eq_closure_interior_closure\n      (X := X) (A := A)\n  have : x ∈ closure (interior (closure (interior (closure A)))) := by\n    simpa [hEq] using hx\n  exact this"
+  ],
+  "success": true
+}

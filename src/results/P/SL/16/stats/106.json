@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.05953121185303
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3891,
+      "prompt_tokens": 19147,
+      "total_tokens": 23038,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_closure_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen A) : Topology.P1 (X := X) (closure A) := by\n  dsimp [Topology.P1]\n  intro x hx_cl\n  -- First, `A` is an open subset of `closure A`, hence contained in its interior.\n  have h_subset : A ⊆ interior (closure A) :=\n    interior_maximal subset_closure hOpen\n  -- Taking closures preserves inclusions.\n  have h_closure_subset : closure A ⊆ closure (interior (closure A)) :=\n    closure_mono h_subset\n  exact h_closure_subset hx_cl"
+  ],
+  "success": true
+}

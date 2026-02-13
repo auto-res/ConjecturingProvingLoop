@@ -1,0 +1,26 @@
+{
+  "times": [
+    44.06544327735901
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3638,
+      "prompt_tokens": 22088,
+      "total_tokens": 25726,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_interior_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Topology.P2 A := by\n  intro hDenseInt\n  intro x hxA\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hDenseInt.closure_eq, interior_univ] using this"
+  ],
+  "success": true
+}

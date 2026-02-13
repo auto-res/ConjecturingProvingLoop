@@ -1,0 +1,43 @@
+{
+  "times": [
+    50.94103217124939,
+    55.464168071746826
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3994,
+      "prompt_tokens": 21506,
+      "total_tokens": 25500,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 4598,
+      "prompt_tokens": 21675,
+      "total_tokens": 26273,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) =\n      closure (interior A) ∪ closure (interior B) := by\n  calc\n    closure (interior (A ∪ B))\n        = closure (interior A ∪ interior B) := by\n          simpa [interior_union]\n    _ = closure (interior A) ∪ closure (interior B) :=\n          Topology.closure_union_interiors_eq (A := A) (B := B)",
+    "theorem Topology.interior_closure_eq_univ_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) ↔ closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    -- We show `closure A = Set.univ`.\n    have h_univ_subset : (Set.univ : Set X) ⊆ closure A := by\n      intro x _hx\n      -- Since `interior (closure A) = Set.univ`, every point lies in it.\n      have : x ∈ interior (closure A) := by\n        simpa [hInt] using (by\n          have : x ∈ (Set.univ : Set X) := by\n            simp\n          exact this)\n      exact interior_subset this\n    have h_closure_subset : closure A ⊆ (Set.univ : Set X) := by\n      intro x _hx\n      simp\n    exact Set.Subset.antisymm h_closure_subset h_univ_subset\n  · intro hClosure\n    -- From `closure A = Set.univ`, we immediately get the desired equality.\n    simpa [hClosure] using\n      (interior_univ : interior (Set.univ : Set X) = Set.univ)"
+  ],
+  "success": true
+}

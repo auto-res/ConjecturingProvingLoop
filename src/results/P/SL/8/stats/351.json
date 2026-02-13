@@ -1,0 +1,26 @@
+{
+  "times": [
+    125.68311309814453
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9106,
+      "prompt_tokens": 55179,
+      "total_tokens": 64285,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54144
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_closure_compl_eq_closure_diff_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A ∩ closure (Aᶜ) = closure A \\ interior A := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hxClA, hxClAc⟩\n    have hEq : closure (Aᶜ) = (interior A)ᶜ :=\n      closure_compl_eq_compl_interior (α := X) (s := A)\n    have hNotIntA : x ∉ interior A := by\n      have : x ∈ (interior A)ᶜ := by\n        simpa [hEq] using hxClAc\n      simpa using this\n    exact And.intro hxClA hNotIntA\n  · intro hx\n    rcases hx with ⟨hxClA, hNotIntA⟩\n    have hEq : closure (Aᶜ) = (interior A)ᶜ :=\n      closure_compl_eq_compl_interior (α := X) (s := A)\n    have hxClAc : x ∈ closure (Aᶜ) := by\n      have : x ∈ (interior A)ᶜ := hNotIntA\n      simpa [hEq] using this\n    exact And.intro hxClA hxClAc"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.42319369316101
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2748,
+      "prompt_tokens": 34251,
+      "total_tokens": 36999,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_subset_of_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    frontier A ⊆ A := by\n  intro x hx\n  -- From `hx` we have `x ∈ closure A`.\n  have hx_closure : x ∈ closure A := hx.1\n  -- For a closed set, its closure is itself.\n  simpa [hA.closure_eq] using hx_closure"
+  ],
+  "success": true
+}

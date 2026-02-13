@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.840320348739624
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2341,
+      "prompt_tokens": 20478,
+      "total_tokens": 22819,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_subset_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed (A : Set X)) :\n    interior (closure (A : Set X)) ⊆ A := by\n  -- First, we have the general inclusion into the closure of `A`.\n  have h_subset : interior (closure (A : Set X)) ⊆ closure A :=\n    Topology.interior_closure_subset_closure (X := X) (A := A)\n  -- Since `A` is closed, `closure A = A`.\n  simpa [hA_closed.closure_eq] using h_subset"
+  ],
+  "success": true
+}

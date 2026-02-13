@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.38620114326477
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2414,
+      "prompt_tokens": 27571,
+      "total_tokens": 29985,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26496
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_nonempty_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → (A : Set X).Nonempty → (interior (A : Set X)).Nonempty := by\n  intro hP2 hA\n  -- First, upgrade `P2` to `P1`.\n  have hP1 : Topology.P1 A :=\n    (Topology.P2_implies_P1 (X := X) (A := A)) hP2\n  -- Then apply the existing non‐emptiness lemma for `P1`.\n  exact (Topology.interior_nonempty_of_P1 (X := X) (A := A)) hP1 hA"
+  ],
+  "success": true
+}

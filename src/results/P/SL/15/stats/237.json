@@ -1,0 +1,26 @@
+{
+  "times": [
+    287.49621534347534
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 18441,
+      "prompt_tokens": 50721,
+      "total_tokens": 69162,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_four_iter_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n      closure (interior A) := by\n  -- Define the iteration `F` := closure ∘ interior.\n  let F : Set X → Set X := fun S ↦ closure (interior S)\n  -- Idempotence: `F (F S) = F S`.\n  have h_id : ∀ S : Set X, F (F S) = F S := by\n    intro S\n    simpa [F] using\n      (closure_interior_closure_interior_closure_eq (X := X) (A := S))\n  -- Apply idempotence successively to collapse four iterations to one.\n  have h1 : F (F (F (F A))) = F (F (F A)) := by\n    simpa [F] using h_id (F (F A))\n  have h2 : F (F (F A)) = F (F A) := by\n    simpa [F] using h_id (F A)\n  have h3 : F (F A) = F A := by\n    simpa [F] using h_id A\n  have h_final : F (F (F (F A))) = F A := by\n    calc\n      F (F (F (F A))) = F (F (F A)) := h1\n      _ = F (F A) := h2\n      _ = F A := h3\n  -- Unfold `F` to obtain the desired equality.\n  simpa [F] using h_final"
+  ],
+  "success": true
+}

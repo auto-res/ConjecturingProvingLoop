@@ -1,0 +1,43 @@
+{
+  "times": [
+    201.3047239780426,
+    40.48623299598694
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12756,
+      "prompt_tokens": 19426,
+      "total_tokens": 32182,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15232
+      }
+    },
+    {
+      "completion_tokens": 2461,
+      "prompt_tokens": 19512,
+      "total_tokens": 21973,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n      closure (interior A) := by\n  calc\n    closure (interior (closure (interior (closure (interior (closure (interior A)))))))\n        = closure (interior (closure (interior (closure (interior A))))) := by\n          simpa using\n            (closure_interior_closure_interior_eq\n              (X := X) (A := closure (interior (closure (interior A)))))\n    _ = closure (interior A) := by\n          simpa using\n            (closure_interior_closure_interior_eq (X := X) (A := A))",
+    "theorem closure_interior_eq_empty_of_interior_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A = (∅ : Set X) → closure (interior A) = (∅ : Set X) := by\n  intro h\n  simpa [h, closure_empty]"
+  ],
+  "success": true
+}

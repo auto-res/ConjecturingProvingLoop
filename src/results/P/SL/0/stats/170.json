@@ -1,0 +1,77 @@
+{
+  "times": [
+    146.59615278244019,
+    77.14177536964417,
+    57.223410844802856,
+    109.32237529754639
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9976,
+      "prompt_tokens": 28779,
+      "total_tokens": 38755,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    },
+    {
+      "completion_tokens": 5593,
+      "prompt_tokens": 28907,
+      "total_tokens": 34500,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    },
+    {
+      "completion_tokens": 4505,
+      "prompt_tokens": 28986,
+      "total_tokens": 33491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    },
+    {
+      "completion_tokens": 8290,
+      "prompt_tokens": 29106,
+      "total_tokens": 37396,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_interior_closure_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure ((A : Set X) ∪ interior (closure (A : Set X))) =\n      closure (A : Set X) := by\n  apply Set.Subset.antisymm\n  · -- `⊆` : the union is contained in `closure A`, hence so is its closure.\n    have hSub :\n        ((A : Set X) ∪ interior (closure (A : Set X)) : Set X) ⊆\n          closure (A : Set X) := by\n      intro x hx\n      cases hx with\n      | inl hA =>\n          exact subset_closure hA\n      | inr hInt =>\n          exact (interior_subset : interior (closure (A : Set X)) ⊆\n            closure (A : Set X)) hInt\n    exact closure_mono hSub\n  · -- `⊇` : since `A ⊆` the union, the closure of `A` is contained in the closure of the union.\n    have hSub :\n        (A : Set X) ⊆ ((A : Set X) ∪ interior (closure (A : Set X))) := by\n      intro x hx\n      exact Or.inl hx\n    exact closure_mono hSub",
+    "import Mathlib\n\nopen Set\n\ntheorem closure_union_interior_closure_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure ((A ∪ interior (closure (A : Set X))) : Set X) = closure (A : Set X) := by\n  -- Left-to-right inclusion.\n  have h₁ :\n      (A ∪ interior (closure (A : Set X)) : Set X) ⊆ closure (A : Set X) := by\n    intro x hx\n    cases hx with\n    | inl hxA     => exact subset_closure hxA\n    | inr hxInt   =>\n        have : interior (closure (A : Set X)) ⊆ closure (A : Set X) :=\n          interior_subset\n        exact this hxInt\n  have h_left : closure ((A ∪ interior (closure (A : Set X))) : Set X) ⊆\n      closure (A : Set X) := closure_mono h₁\n\n  -- Right-to-left inclusion.\n  have h₂ : (A : Set X) ⊆ A ∪ interior (closure (A : Set X)) := by\n    intro x hxA\n    exact Or.inl hxA\n  have h_right : closure (A : Set X) ⊆\n      closure ((A ∪ interior (closure (A : Set X))) : Set X) :=\n    closure_mono h₂\n\n  exact Set.Subset.antisymm h_left h_right",
+    "theorem closure_interior_closure_eq_closure_of_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 A →\n      closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  intro hP1\n  -- First inclusion: `closure (interior (closure A)) ⊆ closure A`.\n  have h₁ :\n      closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n    have : (interior (closure (A : Set X)) : Set X) ⊆ closure (A : Set X) :=\n      interior_subset\n    exact closure_mono this\n  -- Second inclusion: `closure A ⊆ closure (interior (closure A))`.\n  have hEq :\n      closure (A : Set X) = closure (interior (A : Set X)) :=\n    (Topology.P1_iff_closure_eq_closure_interior (X := X) (A := A)).1 hP1\n  have h₂ :\n      closure (interior (A : Set X)) ⊆\n        closure (interior (closure (A : Set X))) := by\n    apply closure_mono\n    have : (interior (A : Set X)) ⊆ interior (closure (A : Set X)) :=\n      interior_mono (subset_closure : (A : Set X) ⊆ closure (A : Set X))\n    exact this\n  have h₃ :\n      closure (A : Set X) ⊆\n        closure (interior (closure (A : Set X))) := by\n    simpa [hEq] using h₂\n  exact Set.Subset.antisymm h₁ h₃",
+    "theorem interior_subset_interior_union_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) ⊆ interior (A ∪ B : Set X) := by\n  exact interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)"
+  ],
+  "success": true
+}

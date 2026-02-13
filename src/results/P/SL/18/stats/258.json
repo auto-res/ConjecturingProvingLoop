@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.280315399169922
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1837,
+      "prompt_tokens": 40890,
+      "total_tokens": 42727,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P2 A := by\n  -- The hypothesis yields the density of `interior A`.\n  have hDenseInt : Dense (interior (A : Set X)) :=\n    (Topology.dense_interior_iff_closure_interior_eq_univ (A := A)).2 h\n  -- Density of `interior A` implies `P2` for `A`.\n  exact Topology.P2_of_dense_interior (A := A) hDenseInt"
+  ],
+  "success": true
+}

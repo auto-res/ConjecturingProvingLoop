@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.16647577285767
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4175,
+      "prompt_tokens": 54095,
+      "total_tokens": 58270,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_univ_diff_interior_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hDense : Dense A) :\n    frontier A = (Set.univ : Set X) \\ interior A := by\n  -- Since `A` is dense, its closure is the whole space.\n  have hClosure : closure A = (Set.univ : Set X) := hDense.closure_eq\n  -- Rewrite `frontier A` using its definition and the closure equality.\n  simpa [frontier, hClosure]"
+  ],
+  "success": true
+}

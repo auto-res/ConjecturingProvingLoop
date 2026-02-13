@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.71608066558838
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2355,
+      "prompt_tokens": 35096,
+      "total_tokens": 37451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_diff_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsClosed (B : Set X)) :\n    P2 (X := X) (A \\ B) := by\n  -- `A \\ B` is open because it is the difference of an open and a closed set.\n  have hOpen : IsOpen ((A \\ B : Set X)) :=\n    IsOpen.diff (X := X) (A := A) (B := B) hA hB\n  -- Every open set satisfies `P2`.\n  exact isOpen_implies_P2 (X := X) (A := A \\ B) hOpen"
+  ],
+  "success": true
+}

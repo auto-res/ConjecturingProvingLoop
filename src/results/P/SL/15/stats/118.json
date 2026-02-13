@@ -1,0 +1,26 @@
+{
+  "times": [
+    143.1879003047943
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12303,
+      "prompt_tokens": 18045,
+      "total_tokens": 30348,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_prod {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    Topology.P3 A → Topology.P3 B → Topology.P3 (A ×ˢ B) := by\n  intro hA hB\n  dsimp [Topology.P3] at hA hB ⊢\n  intro p hp\n  -- Coordinates of the point `p`.\n  have hAx : p.1 ∈ A := hp.1\n  have hBy : p.2 ∈ B := hp.2\n  -- Apply the `P3` property to each coordinate.\n  have hIntA : p.1 ∈ interior (closure A) := hA hAx\n  have hIntB : p.2 ∈ interior (closure B) := hB hBy\n  -- The product of these interiors is an open neighbourhood of `p`.\n  have hOpen :\n      IsOpen (Set.prod (interior (closure A)) (interior (closure B))) :=\n    (isOpen_interior).prod isOpen_interior\n  have hMem :\n      (p : X × Y) ∈ Set.prod (interior (closure A)) (interior (closure B)) :=\n    ⟨hIntA, hIntB⟩\n  -- This neighbourhood is contained in `closure (A ×ˢ B)`.\n  have hSub :\n      Set.prod (interior (closure A)) (interior (closure B)) ⊆\n        closure (A ×ˢ B) := by\n    intro q hq\n    rcases hq with ⟨hqA, hqB⟩\n    have hqA_cl : q.1 ∈ closure A := interior_subset hqA\n    have hqB_cl : q.2 ∈ closure B := interior_subset hqB\n    have h_eq :\n        closure (A ×ˢ B) = (closure A) ×ˢ (closure B) := by\n      simpa using closure_prod_eq\n    have : (q : X × Y) ∈ (closure A) ×ˢ (closure B) :=\n      ⟨hqA_cl, hqB_cl⟩\n    simpa [h_eq] using this\n  -- Turn the neighbourhood into an interior membership.\n  have h_nhds :\n      closure (A ×ˢ B) ∈ 𝓝 p :=\n    Filter.mem_of_superset (hOpen.mem_nhds hMem) hSub\n  exact (mem_interior_iff_mem_nhds).2 h_nhds"
+  ],
+  "success": true
+}

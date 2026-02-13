@@ -1,0 +1,77 @@
+{
+  "times": [
+    79.20063281059265,
+    160.40718698501587,
+    24.756113529205322,
+    50.33171367645264
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6059,
+      "prompt_tokens": 12966,
+      "total_tokens": 19025,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 16171,
+      "prompt_tokens": 13097,
+      "total_tokens": 29268,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 2570,
+      "prompt_tokens": 13212,
+      "total_tokens": 15782,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    },
+    {
+      "completion_tokens": 3386,
+      "prompt_tokens": 13381,
+      "total_tokens": 16767,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply subset_antisymm\n  · -- `closure (interior (closure (interior A))) ⊆ closure (interior A)`\n    have h :\n        interior (closure (interior A)) ⊆ closure (interior A) := by\n      intro x hx\n      -- `interior S ⊆ S` for every set `S`\n      exact interior_subset hx\n    exact closure_mono h\n  · -- `closure (interior A) ⊆ closure (interior (closure (interior A)))`\n    have h :\n        interior A ⊆ interior (closure (interior A)) :=\n      interior_subset_interior_closure_interior (X := X) (A := A)\n    exact closure_mono h",
+    "theorem closure_interior_eq_of_closed_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) (hP2 : Topology.P2 A) :\n    closure (interior A) = A := by\n  -- From `P2` and closedness we obtain `P1`.\n  have hP1 : Topology.P1 A :=\n    (Topology.P2_closed_imp_P1 (A := A) hA) hP2\n  -- A closed set satisfying `P1` is exactly the closure of its interior.\n  exact Topology.closed_eq_closure_interior_of_P1 (A := A) hA hP1",
+    "theorem closure_interior_union_eq {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  calc\n    closure (interior (A ∪ B))\n        = closure (interior A ∪ interior B) := by\n          simpa [interior_union]\n    _ = closure (interior A) ∪ closure (interior B) := by\n          simpa [closure_union]",
+    "theorem interior_closure_eq_of_clopen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hAopen : IsOpen A) (hAclosed : IsClosed A) :\n    interior (closure A) = A := by\n  -- Since `A` is closed, its closure equals itself.\n  have hClosure : closure A = A := hAclosed.closure_eq\n  -- Since `A` is open, its interior equals itself.\n  have hInterior : interior A = A := hAopen.interior_eq\n  -- Combine the two equalities to reach the goal.\n  calc\n    interior (closure A) = interior A := by\n      simpa [hClosure]\n    _ = A := by\n      simpa [hInterior]"
+  ],
+  "success": true
+}

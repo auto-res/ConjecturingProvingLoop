@@ -1,0 +1,43 @@
+{
+  "times": [
+    167.90481805801392,
+    176.80327606201172
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14713,
+      "prompt_tokens": 27794,
+      "total_tokens": 42507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    },
+    {
+      "completion_tokens": 12380,
+      "prompt_tokens": 27937,
+      "total_tokens": 40317,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior\n      (closure (interior\n        (closure (interior\n          (closure (interior\n            (closure A)))))))) =\n      closure (interior A) := by\n  -- First, collapse the innermost four alternating layers.\n  have h₁ :\n      closure (interior\n        (closure (interior\n          (closure (interior\n            (closure (interior A))))))) =\n        closure (interior A) := by\n    simpa using\n      (closure_interior_closure_interior_closure_interior_closure_interior_eq\n        (X := X) (A := A))\n  -- Rewrite the target using `h₁` and then collapse the remaining two layers.\n  calc\n    closure (interior\n      (closure (interior\n        (closure (interior\n          (closure (interior\n            (closure A)))))))) =\n        closure (interior (closure (interior A))) := by\n          simpa [h₁]\n    _ = closure (interior A) := by\n          simpa using\n            (closure_interior_closure_interior_eq (X := X) (A := A))",
+    "theorem interior_nonempty_imp_nonempty {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : (interior A).Nonempty) : A.Nonempty := by\n  rcases h with ⟨x, hx⟩\n  exact ⟨x, interior_subset hx⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.24504566192627
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2920,
+      "prompt_tokens": 40403,
+      "total_tokens": 43323,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_subset_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) ∪ closure B ⊆ closure (A ∪ B : Set X) := by\n  intro x hx\n  cases hx with\n  | inl hAx =>\n      -- `closure A ⊆ closure (A ∪ B)` via monotonicity of `closure`.\n      have hIncl : closure (A : Set X) ⊆ closure (A ∪ B) := by\n        apply closure_mono\n        intro y hy\n        exact Or.inl hy\n      exact hIncl hAx\n  | inr hBx =>\n      -- Symmetric argument for `closure B`.\n      have hIncl : closure (B : Set X) ⊆ closure (A ∪ B) := by\n        apply closure_mono\n        intro y hy\n        exact Or.inr hy\n      exact hIncl hBx"
+  ],
+  "success": true
+}

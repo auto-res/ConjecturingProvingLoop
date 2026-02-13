@@ -1,0 +1,26 @@
+{
+  "times": [
+    27.528337478637695
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2205,
+      "prompt_tokens": 2136,
+      "total_tokens": 4341,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_has_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (interior A) := by\n  dsimp [Topology.P2]\n  intro x hx\n  have hx' : x ∈ interior (closure (interior A)) :=\n    Topology.interior_subset_interior_closure_interior (X := X) (A := A) hx\n  have hIntInt : interior (interior A) = interior A := by\n    simpa using (isOpen_interior (A := A)).interior_eq\n  simpa [hIntInt] using hx'"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.1378128528595
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4236,
+      "prompt_tokens": 11588,
+      "total_tokens": 15824,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    }
+  ],
+  "responses": [
+    "theorem open_closure_interior_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → IsOpen (closure A) → IsOpen (closure (interior A)) := by\n  intro hP2 hOpen\n  have hEq : closure (interior (A : Set X)) = closure A :=\n    Topology.P2_implies_closure_interior_eq_closure (A := A) hP2\n  simpa [hEq] using hOpen"
+  ],
+  "success": true
+}

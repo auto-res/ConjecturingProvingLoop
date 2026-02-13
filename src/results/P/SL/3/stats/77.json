@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.871257066726685
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4709,
+      "prompt_tokens": 12488,
+      "total_tokens": 17197,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_univ_iff_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) = (Set.univ : Set X) ↔\n      closure (A : Set X) = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    have hSub : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      intro x _\n      have hx : (x : X) ∈ interior (closure (A : Set X)) := by\n        simpa [hInt] using (Set.mem_univ (x : X))\n      exact (interior_subset (s := closure (A : Set X))) hx\n    exact Set.Subset.antisymm (Set.subset_univ _) hSub\n  · intro hCl\n    exact interior_closure_eq_univ_of_dense (A := A) hCl"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.23745894432068
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3909,
+      "prompt_tokens": 24021,
+      "total_tokens": 27930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_closure_diff_interior_eq_self {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (closure (A : Set X) \\ interior (A : Set X)) =\n      closure (A : Set X) \\ interior (A : Set X) := by\n  have hClosed :\n      IsClosed (closure (A : Set X) \\ interior (A : Set X)) :=\n    isClosed_closure_diff_interior (A := A)\n  simpa using hClosed.closure_eq"
+  ],
+  "success": true
+}

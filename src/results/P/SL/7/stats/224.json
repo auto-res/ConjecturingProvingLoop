@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.09324097633362
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4230,
+      "prompt_tokens": 34484,
+      "total_tokens": 38714,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iInter_subset {X : Type*} [TopologicalSpace X]\n    {ι : Sort _} {F : ι → Set X} :\n    interior (⋂ i, F i) ⊆ ⋂ i, interior (F i) := by\n  intro x hx\n  -- For each index `i`, show `x ∈ interior (F i)`.\n  have h : ∀ i, x ∈ interior (F i) := by\n    intro i\n    -- The set `⋂ i, F i` is contained in `F i`.\n    have hSub : (⋂ j, F j : Set X) ⊆ F i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Monotonicity of `interior` transports the inclusion.\n    have hIncl : interior (⋂ j, F j) ⊆ interior (F i) :=\n      interior_mono hSub\n    exact hIncl hx\n  -- Assemble the pointwise memberships into one for the intersection.\n  exact Set.mem_iInter.2 h"
+  ],
+  "success": true
+}

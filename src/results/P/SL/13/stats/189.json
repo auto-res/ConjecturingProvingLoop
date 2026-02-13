@@ -1,0 +1,60 @@
+{
+  "times": [
+    104.93292737007141,
+    137.85464477539062,
+    55.26361584663391
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9397,
+      "prompt_tokens": 33892,
+      "total_tokens": 43289,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 10562,
+      "prompt_tokens": 33972,
+      "total_tokens": 44534,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 3967,
+      "prompt_tokens": 34051,
+      "total_tokens": 38018,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_self_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_open : IsOpen (A : Set X)) :\n    interior (closure (A : Set X)) = A := by\n  -- Prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- `interior (closure A) ⊆ A`\n    intro x hx_int\n    -- `x` is also in `closure A`.\n    have hx_cl : x ∈ closure (A : Set X) := interior_subset hx_int\n    -- Assume, for contradiction, that `x ∉ A`.\n    by_contra h_notA\n    -- Unpack the neighbourhood witnessing `x ∈ interior (closure A)`.\n    rcases hx_int with ⟨U, hU_open, hxU, hU_sub⟩\n    -- The set `U \\ A` is an open neighbourhood of `x`, disjoint from `A`.\n    have hW_open : IsOpen (U \\ A) := hU_open.diff hA_open\n    have hxW : (x : X) ∈ U \\ A := by\n      exact ⟨hxU, h_notA⟩\n    -- Since `x ∈ closure A`, this neighbourhood must intersect `A`.\n    have h_nonempty :=\n      (mem_closure_iff).1 hx_cl (U \\ A) hW_open hxW\n    -- Extract a witness leading to a contradiction.\n    rcases h_nonempty with ⟨y, ⟨hyW, hyA⟩⟩\n    exact (hyW.2 hyA).elim\n  · -- `A ⊆ interior (closure A)`\n    have h_subset : (A : Set X) ⊆ closure (A : Set X) := subset_closure\n    exact interior_maximal h_subset hA_open",
+    "import Mathlib\nimport Aesop\n\nopen Set\n\nnamespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\n/--  \nIf `A` satisfies `P1` and `B` is open, then the intersection `A ∩ B`\nalso satisfies `P1`. -/\ntheorem P1_inter_left_of_open {A B : Set X}\n    (hPA : P1 (X := X) A) (hB_open : IsOpen (B : Set X)) :\n    P1 (X := X) (A ∩ B) := by\n  -- Unfold the definition of `P1`.\n  dsimp [P1] at hPA ⊢\n  intro x hxAB\n  -- Split the membership in the intersection.\n  rcases hxAB with ⟨hxA, hxB⟩\n  -- First put `x` in `closure (interior A)` using `P1` for `A`.\n  have hx_clA : (x : X) ∈ closure (interior A) := hPA hxA\n  -- Show that `x` also lies in `closure (interior A ∩ B)`.\n  have hx_cl_inter : (x : X) ∈ closure (interior A ∩ B) := by\n    -- Use the neighbourhood characterisation of closure.\n    apply (mem_closure_iff).2\n    intro U hU_open hxU\n    -- Intersect the neighbourhood with the open set `B`.\n    have hUB_open : IsOpen (U ∩ B) := hU_open.inter hB_open\n    have hxUB : (x : X) ∈ U ∩ B := ⟨hxU, hxB⟩\n    -- Since `x ∈ closure (interior A)`, the set `U ∩ B` meets `interior A`.\n    have h_nonempty : ((U ∩ B) ∩ interior A).Nonempty := by\n      have h_cl := (mem_closure_iff).1 hx_clA\n      simpa [inter_assoc, inter_left_comm, inter_comm] using h_cl (U ∩ B) hUB_open hxUB\n    -- Extract a witness in `U ∩ (interior A ∩ B)`.\n    rcases h_nonempty with ⟨y, ⟨⟨hyU, hyB⟩, hy_intA⟩⟩\n    refine ⟨y, ?_⟩\n    refine ⟨hyU, ?_⟩\n    -- `B` is open, so `interior B = B`.\n    have hy_intB : (y : X) ∈ interior B := by\n      simpa [hB_open.interior_eq] using hyB\n    -- Hence `y ∈ interior A ∩ B`.\n    exact ⟨hy_intA, by\n      -- Rewrite `hy_intB` to a membership in `B`.\n      simpa [hB_open.interior_eq] using hy_intB⟩\n  -- Rewrite `interior (A ∩ B)` using openness of `B`.\n  have h_int_eq : interior ((A ∩ B) : Set X) = interior A ∩ B := by\n    simpa [hB_open.interior_eq] using interior_inter (A := A) (B := B)\n  -- Convert the membership obtained above.\n  simpa [h_int_eq] using hx_cl_inter\n\nend Topology",
+    "theorem Topology.P2_union_right_of_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hPA : Topology.P2 (X := X) A) (hB_open : IsOpen (B : Set X)) :\n    Topology.P2 (X := X) (A ∪ B) := by\n  -- `B` is open, hence it satisfies `P2`.\n  have hPB : Topology.P2 (X := X) B :=\n    (isOpen_implies_P2 (X := X) (A := B) hB_open)\n  -- Combine the two `P2` hypotheses using the existing union lemma.\n  exact Topology.P2_union (X := X) (A := A) (B := B) hPA hPB"
+  ],
+  "success": true
+}

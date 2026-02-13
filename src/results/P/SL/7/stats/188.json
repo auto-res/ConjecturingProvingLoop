@@ -1,0 +1,26 @@
+{
+  "times": [
+    20.80952548980713
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1932,
+      "prompt_tokens": 29451,
+      "total_tokens": 31383,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_closure {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 A → Topology.P1 B →\n      Topology.P1 (closure (A : Set X) ∪ closure (B : Set X)) := by\n  intro hP1A hP1B\n  -- First, upgrade `P1 A` and `P1 B` to their closures.\n  have hP1_clA : Topology.P1 (closure (A : Set X)) :=\n    Topology.P1_closure_of_P1 (A := A) hP1A\n  have hP1_clB : Topology.P1 (closure (B : Set X)) :=\n    Topology.P1_closure_of_P1 (A := B) hP1B\n  -- Apply the union lemma for `P1`.\n  have hUnion :=\n    Topology.P1_union (A := closure (A : Set X)) (B := closure (B : Set X))\n      hP1_clA hP1_clB\n  -- Rewrite the goal in a convenient form.\n  simpa using hUnion"
+  ],
+  "success": true
+}

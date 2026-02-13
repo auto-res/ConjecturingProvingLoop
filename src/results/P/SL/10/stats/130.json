@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.78508234024048
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3736,
+      "prompt_tokens": 21720,
+      "total_tokens": 25456,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_open_left {X : Type*} [TopologicalSpace X] {U A : Set X}\n    (hU : IsOpen U) :\n    Topology.P3 A → Topology.P3 (U ∪ A) := by\n  intro hP3A\n  have hP3U : Topology.P3 U :=\n    Topology.isOpen_implies_P3 (X := X) (A := U) hU\n  simpa using\n    Topology.P3_union (X := X) (A := U) (B := A) hP3U hP3A"
+  ],
+  "success": true
+}

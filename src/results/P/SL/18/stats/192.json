@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.43286395072937
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4502,
+      "prompt_tokens": 28950,
+      "total_tokens": 33452,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_empty_iff\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (A : Set X)) = (∅ : Set X) ↔ interior (A : Set X) = ∅ := by\n  constructor\n  · intro h\n    -- Since `interior A ⊆ closure (interior A)`, the hypothesis forces `interior A = ∅`.\n    have hSub : interior (A : Set X) ⊆ (∅ : Set X) := by\n      have : interior (A : Set X) ⊆ closure (interior (A : Set X)) :=\n        subset_closure\n      simpa [h] using this\n    exact\n      (Set.Subset.antisymm hSub (Set.empty_subset _))\n  · intro h\n    simpa [h, closure_empty]"
+  ],
+  "success": true
+}

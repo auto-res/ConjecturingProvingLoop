@@ -1,0 +1,26 @@
+{
+  "times": [
+    118.89977431297302
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6308,
+      "prompt_tokens": 41224,
+      "total_tokens": 47532,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_interior_closure_interior_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen A → interior (closure (interior A)) = interior (closure A) := by\n  intro hOpen\n  -- Any open set satisfies property `P2`.\n  have hP2 : Topology.P2 A := Topology.isOpen_implies_P2 (A := A) hOpen\n  -- Apply the equality furnished by `P2`.\n  exact\n    Topology.P2_implies_interior_closure_interior_eq_interior_closure\n      (A := A) hP2"
+  ],
+  "success": true
+}

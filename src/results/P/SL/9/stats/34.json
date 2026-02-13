@@ -1,0 +1,60 @@
+{
+  "times": [
+    115.786208152771,
+    133.768536567688,
+    71.77380704879761
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5727,
+      "prompt_tokens": 4908,
+      "total_tokens": 10635,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3968
+      }
+    },
+    {
+      "completion_tokens": 6896,
+      "prompt_tokens": 5146,
+      "total_tokens": 12042,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3968
+      }
+    },
+    {
+      "completion_tokens": 4598,
+      "prompt_tokens": 5268,
+      "total_tokens": 9866,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4992
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P1 (A := closure A) := by\n  -- First establish the equality `closure (interior (closure A)) = closure A`.\n  have h_eq : closure (interior (closure A)) = closure A := by\n    -- One inclusion is immediate from monotonicity of `closure`.\n    have h₁ : closure (interior (closure A)) ⊆ closure A :=\n      closure_mono (interior_subset : interior (closure A) ⊆ closure A)\n    -- For the other inclusion we use `closure A = closure (interior A)` (since `A` is open).\n    have h₂ : closure A ⊆ closure (interior (closure A)) := by\n      -- `closure A = closure (interior A)` for an open set `A`.\n      have h_cl_eq : closure A = closure (interior A) :=\n        (Topology.closureInterior_eq_closure_of_isOpen (A := A) hA).symm\n      -- `interior A` is contained in `interior (closure A)`.\n      have h_sub : interior A ⊆ interior (closure A) :=\n        interior_mono subset_closure\n      -- Taking closures preserves this inclusion.\n      have h_cl_sub : closure (interior A) ⊆ closure (interior (closure A)) :=\n        closure_mono h_sub\n      simpa [h_cl_eq] using h_cl_sub\n    exact subset_antisymm h₁ h₂\n  -- Translate the equality of closures into the desired `P1` property.\n  exact\n    ((Topology.P1_iff_closureInterior_eq_closure (A := closure A)).2 h_eq)",
+    "theorem Topology.P1_closureInterior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (A := closure (interior A)) := by\n  dsimp [Topology.P1]\n  intro x hx\n  -- We show `closure (interior A) ⊆ closure (interior (closure (interior A)))`.\n  have h_subset : closure (interior A) ⊆ closure (interior (closure (interior A))) := by\n    -- First, `interior A ⊆ interior (closure (interior A))` by monotonicity of `interior`.\n    have h_int : (interior A : Set X) ⊆ interior (closure (interior A)) := by\n      have : (interior A : Set X) ⊆ closure (interior A) := Set.subset_closure\n      exact interior_mono this\n    -- Taking closures preserves inclusion.\n    exact closure_mono h_int\n  exact h_subset hx",
+    "theorem interior_closure_eq_univ_of_dense {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : Dense (A : Set X)) :\n    interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  simpa [hA.closure_eq] using\n    (by\n      simp : interior (Set.univ : Set X) = (Set.univ : Set X))"
+  ],
+  "success": true
+}

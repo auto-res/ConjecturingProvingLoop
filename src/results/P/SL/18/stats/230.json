@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.63091158866882
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4969,
+      "prompt_tokens": 35923,
+      "total_tokens": 40892,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P3 A := by\n  -- Obtain density of `interior A` from the closure equality.\n  have hDenseInt : Dense (interior (A : Set X)) :=\n    (Topology.dense_iff_closure_eq_univ\n        (A := interior (A : Set X))).2 h\n  -- Convert density into the desired property.\n  exact Topology.P3_of_dense_interior (A := A) hDenseInt"
+  ],
+  "success": true
+}

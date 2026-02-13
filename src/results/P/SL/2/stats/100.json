@@ -1,0 +1,77 @@
+{
+  "times": [
+    105.82801866531372,
+    63.48750448226929,
+    51.331669330596924,
+    65.96581387519836
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8095,
+      "prompt_tokens": 15509,
+      "total_tokens": 23604,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    },
+    {
+      "completion_tokens": 4566,
+      "prompt_tokens": 15605,
+      "total_tokens": 20171,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    },
+    {
+      "completion_tokens": 4298,
+      "prompt_tokens": 15675,
+      "total_tokens": 19973,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    },
+    {
+      "completion_tokens": 5135,
+      "prompt_tokens": 15795,
+      "total_tokens": 20930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_closure_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense A ↔ interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    exact Topology.dense_implies_interior_closure_eq_univ (A := A) hDense\n  · intro hEq\n    -- We show `closure A = univ`, which gives density.\n    have hSubset : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      intro x _\n      have hx_int : x ∈ interior (closure (A : Set X)) := by\n        -- Rewrite using `hEq`.\n        have : x ∈ (Set.univ : Set X) := by\n          trivial\n        simpa [hEq] using this\n      exact interior_subset hx_int\n    have hClosureEq :\n        closure (A : Set X) = (Set.univ : Set X) := by\n      apply subset_antisymm\n      · exact Set.subset_univ _\n      · exact hSubset\n    exact ⟨hClosureEq⟩",
+    "theorem Topology.interior_closure_union {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    interior (closure (A ∪ B : Set X)) =\n      interior (closure (A : Set X)) ∪ interior (closure (B : Set X)) := by\n  have h : closure (A ∪ B : Set X) = closure (A : Set X) ∪ closure (B : Set X) :=\n    closure_union\n  simpa [h] using\n    (interior_union (closure (A : Set X)) (closure (B : Set X)))",
+    "theorem Topology.interior_closure_interior_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (A : Set X))))\n      = interior (closure (A : Set X)) := by\n  apply subset_antisymm\n  ·\n    -- `⊆` direction: monotonicity of `interior`\n    have h :\n        closure (interior (closure (A : Set X)))\n          ⊆ closure (A : Set X) := by\n      have : (interior (closure (A : Set X)) : Set X)\n          ⊆ closure (A : Set X) := interior_subset\n      exact closure_mono this\n    exact interior_mono h\n  ·\n    -- `⊇` direction: maximality of `interior`\n    have hOpen :\n        IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    have hIncl :\n        (interior (closure (A : Set X)) : Set X)\n          ⊆ closure (interior (closure (A : Set X))) :=\n      subset_closure\n    have hIncl' :\n        (interior (closure (A : Set X)) : Set X)\n          ⊆ interior (closure (interior (closure (A : Set X)))) :=\n      interior_maximal hIncl hOpen\n    exact hIncl'",
+    "theorem Topology.isOpen_iUnion_implies_P2 {X : Type*} [TopologicalSpace X] {ι : Type*}\n    {s : ι → Set X} :\n    (∀ i, IsOpen (s i)) → Topology.P2 (⋃ i, s i) := by\n  intro hOpen\n  have hOpenUnion : IsOpen (⋃ i, s i) := isOpen_iUnion (fun i => hOpen i)\n  exact Topology.isOpen_implies_P2 (A := ⋃ i, s i) hOpenUnion"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.113959074020386
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2211,
+      "prompt_tokens": 3674,
+      "total_tokens": 5885,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2816
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (interior A) := by\n  dsimp [Topology.P1]\n  intro x hx\n  have : (x ∈ closure (interior A)) := subset_closure hx\n  simpa [interior_interior] using this"
+  ],
+  "success": true
+}

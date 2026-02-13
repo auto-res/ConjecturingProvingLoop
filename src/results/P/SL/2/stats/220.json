@@ -1,0 +1,26 @@
+{
+  "times": [
+    114.08129143714905
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7205,
+      "prompt_tokens": 35967,
+      "total_tokens": 43172,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34688
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_P3_implies_interior_eq_self\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed A → Topology.P3 A → interior A = A := by\n  intro hClosed hP3\n  -- We already have `interior (closure A) = A` under the same hypotheses.\n  have h :=\n    Topology.isClosed_P3_implies_interior_closure_eq_self\n      (A := A) hClosed hP3\n  -- Since `A` is closed, `closure A = A`; rewriting yields the desired equality.\n  simpa [hClosed.closure_eq] using h"
+  ],
+  "success": true
+}

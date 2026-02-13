@@ -1,0 +1,26 @@
+{
+  "times": [
+    93.22553825378418
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8597,
+      "prompt_tokens": 20020,
+      "total_tokens": 28617,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_open {X : Type*} [TopologicalSpace X] {A U : Set X} :\n    Topology.P3 A → IsOpen U → Topology.P3 (A ∩ U) := by\n  intro hP3A hUopen\n  dsimp [Topology.P3] at hP3A ⊢\n  intro x hxAU\n  rcases hxAU with ⟨hxA, hxU⟩\n  have hxInt : x ∈ interior (closure A) := hP3A hxA\n  -- `S` is an open neighbourhood of `x`\n  have hOpenS : IsOpen (interior (closure A) ∩ U) :=\n    (isOpen_interior).inter hUopen\n  have hSubS : (interior (closure A) ∩ U : Set X) ⊆ closure (A ∩ U) := by\n    intro y hy\n    have hyInt : y ∈ interior (closure A) := hy.1\n    have hyU   : y ∈ U := hy.2\n    have hyClA : y ∈ closure A := interior_subset hyInt\n    -- Show `y ∈ closure (A ∩ U)`\n    have hMem : y ∈ closure (A ∩ U) := by\n      -- Employ the neighbourhood characterisation of closure\n      apply (mem_closure_iff).2\n      intro V hVopen hyV\n      -- Work with the open neighbourhood `V ∩ U` of `y`\n      have hVUopen : IsOpen (V ∩ U) := hVopen.inter hUopen\n      have hyVU : y ∈ V ∩ U := ⟨hyV, hyU⟩\n      -- Since `y ∈ closure A`, this neighbourhood meets `A`\n      have hNonempty : ((V ∩ U) ∩ A).Nonempty :=\n        (mem_closure_iff).1 hyClA (V ∩ U) hVUopen hyVU\n      -- Re-arrange intersections to obtain the required non-emptiness\n      simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm] using hNonempty\n    exact hMem\n  have hxS : x ∈ interior (closure A) ∩ U := ⟨hxInt, hxU⟩\n  -- Maximality of the interior gives the desired inclusion\n  have hIncl : (interior (closure A) ∩ U : Set X) ⊆\n      interior (closure (A ∩ U)) :=\n    interior_maximal hSubS hOpenS\n  exact hIncl hxS"
+  ],
+  "success": true
+}

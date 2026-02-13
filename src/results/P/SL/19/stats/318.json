@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.41778326034546
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2422,
+      "prompt_tokens": 51044,
+      "total_tokens": 53466,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_self_iff_isClosed {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A = A ↔ IsClosed A := by\n  constructor\n  · intro hEq\n    have hClosed : IsClosed (closure A) := isClosed_closure (s := A)\n    simpa [hEq] using hClosed\n  · intro hClosed\n    simpa using hClosed.closure_eq"
+  ],
+  "success": true
+}

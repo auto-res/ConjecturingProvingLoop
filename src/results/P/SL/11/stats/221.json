@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.71773362159729
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3996,
+      "prompt_tokens": 36241,
+      "total_tokens": 40237,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_diff_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A \\ B)) ⊆ interior (closure A) := by\n  intro x hx\n  -- Since `A \\ B ⊆ A`, their closures satisfy the same inclusion.\n  have hsubset : closure (A \\ B) ⊆ closure A :=\n    closure_mono (Set.diff_subset : (A \\ B : Set X) ⊆ A)\n  -- Monotonicity of `interior` yields the desired subset relation.\n  exact (interior_mono hsubset) hx"
+  ],
+  "success": true
+}

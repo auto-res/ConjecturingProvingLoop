@@ -1,0 +1,26 @@
+{
+  "times": [
+    137.69073915481567
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10315,
+      "prompt_tokens": 19833,
+      "total_tokens": 30148,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem open_of_subset_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (A : Set X) ⊆ interior A → IsOpen A := by\n  intro hA\n  have h₁ : interior (A : Set X) ⊆ A := interior_subset\n  have hEq : interior (A : Set X) = A := subset_antisymm h₁ hA\n  simpa [hEq] using (isOpen_interior : IsOpen (interior (A : Set X)))"
+  ],
+  "success": true
+}

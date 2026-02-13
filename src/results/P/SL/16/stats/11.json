@@ -1,0 +1,26 @@
+{
+  "times": [
+    17.09247851371765
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2398,
+      "prompt_tokens": 2037,
+      "total_tokens": 4435,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 (X := X) A → Topology.P2 (X := X) B → Topology.P2 (X := X) (A ∪ B) := by\n  intro hPA hPB\n  dsimp [Topology.P2] at hPA hPB ⊢\n  intro x hxAB\n  cases hxAB with\n  | inl hxA =>\n      have hxA' : x ∈ interior (closure (interior A)) := hPA hxA\n      have h_subset : interior (closure (interior A)) ⊆ interior (closure (interior (A ∪ B))) := by\n        have h_closure_subset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n          apply closure_mono\n          have h_int_subset : interior A ⊆ interior (A ∪ B) := by\n            have hA_subset : A ⊆ A ∪ B := by\n              intro y hy\n              exact Or.inl hy\n            exact interior_mono hA_subset\n          exact h_int_subset\n        exact interior_mono h_closure_subset\n      exact h_subset hxA'\n  | inr hxB =>\n      have hxB' : x ∈ interior (closure (interior B)) := hPB hxB\n      have h_subset : interior (closure (interior B)) ⊆ interior (closure (interior (A ∪ B))) := by\n        have h_closure_subset : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n          apply closure_mono\n          have h_int_subset : interior B ⊆ interior (A ∪ B) := by\n            have hB_subset : B ⊆ A ∪ B := by\n              intro y hy\n              exact Or.inr hy\n            exact interior_mono hB_subset\n          exact h_int_subset\n        exact interior_mono h_closure_subset\n      exact h_subset hxB'"
+  ],
+  "success": true
+}

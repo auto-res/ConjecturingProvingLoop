@@ -1,0 +1,26 @@
+{
+  "times": [
+    111.39077854156494
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6004,
+      "prompt_tokens": 45298,
+      "total_tokens": 51302,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_prod_subset_interior_prod\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    (interior A) ×ˢ (interior B) ⊆ interior (A ×ˢ B) := by\n  intro p hp\n  -- `interior A ×ˢ interior B` is open.\n  have hOpen : IsOpen ((interior A) ×ˢ (interior B)) :=\n    (isOpen_interior).prod isOpen_interior\n  -- It is contained in `A ×ˢ B`.\n  have hSub : ((interior A) ×ˢ (interior B) : Set (X × Y)) ⊆ A ×ˢ B := by\n    intro q hq\n    exact ⟨(interior_subset hq.1), (interior_subset hq.2)⟩\n  -- Apply `interior_maximal`.\n  exact interior_maximal hSub hOpen hp"
+  ],
+  "success": true
+}

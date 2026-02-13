@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.04950428009033
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1957,
+      "prompt_tokens": 52088,
+      "total_tokens": 54045,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_empty_implies_all_P {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_boundary : closure (A : Set X) \\ interior A = (∅ : Set X)) :\n    Topology.P1 (X:=X) A ∧ Topology.P2 (X:=X) A ∧ Topology.P3 (X:=X) A := by\n  -- From the empty boundary, we learn that `A` is both open and closed.\n  have h_clopen : IsOpen (A : Set X) ∧ IsClosed (A : Set X) :=\n    (Topology.boundary_empty_iff_isClopen (X := X) (A := A)).1 h_boundary\n  -- Any open set satisfies all three properties `P1`, `P2`, and `P3`.\n  simpa using\n    Topology.isOpen_implies_all_P (X := X) (A := A) h_clopen.1"
+  ],
+  "success": true
+}

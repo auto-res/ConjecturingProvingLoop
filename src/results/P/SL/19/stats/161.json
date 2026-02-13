@@ -1,0 +1,60 @@
+{
+  "times": [
+    112.26584577560425,
+    81.96312594413757,
+    102.44226121902466
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9033,
+      "prompt_tokens": 24365,
+      "total_tokens": 33398,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 6798,
+      "prompt_tokens": 24747,
+      "total_tokens": 31545,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 7683,
+      "prompt_tokens": 24837,
+      "total_tokens": 32520,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_interior_eq_empty {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A \\ interior A) = (∅ : Set X) := by\n  apply Set.eq_empty_iff_forall_not_mem.2\n  intro x hx\n  rcases mem_interior.1 hx with ⟨U, hU_open, hxU, hU_subset⟩\n  -- From `U ⊆ A \\ interior A` we deduce `U ⊆ A`.\n  have hU_subset_A : U ⊆ A := fun y hy => (hU_subset hy).1\n  -- Hence `x ∈ interior A`.\n  have hx_intA : x ∈ interior A :=\n    mem_interior.2 ⟨U, hU_open, hxU, hU_subset_A⟩\n  -- But `x ∉ interior A` since `x ∈ A \\ interior A`.\n  have hx_not_intA : x ∉ interior A := (hU_subset hxU).2\n  exact (hx_not_intA hx_intA).elim",
+    "theorem Topology.interior_diff_self_interior_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} : interior (A \\ interior A) = (∅ : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    rcases mem_interior_iff_mem_nhds.1 hx with ⟨U, hU_open, hxU, hU_subset⟩\n    -- `U` is an open set with `x ∈ U ⊆ A \\ interior A`.\n    have hU_subA : U ⊆ A := fun y hy => (hU_subset hy).1\n    -- Any open set contained in `A` is contained in `interior A`.\n    have hU_sub_intA : U ⊆ interior A := interior_maximal hU_subA hU_open\n    have hx_intA : x ∈ interior A := hU_sub_intA hxU\n    have hx_not_intA : x ∉ interior A := (hU_subset hxU).2\n    exact (hx_not_intA hx_intA).elim\n  · intro hx\n    cases hx",
+    "theorem Topology.closure_diff_interior_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (A \\ interior A) ⊆ closure A := by\n  -- The set difference `A \\ interior A` is clearly contained in `A`.\n  have hSub : (A \\ interior A : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  -- Taking closures preserves inclusions.\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

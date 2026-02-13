@@ -1,0 +1,26 @@
+{
+  "times": [
+    218.98364210128784
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14483,
+      "prompt_tokens": 46814,
+      "total_tokens": 61297,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_prod_eq_univ_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty X] [Nonempty Y]\n    {A : Set X} {B : Set Y} :\n    closure (A ×ˢ B) = (Set.univ : Set (X × Y)) ↔\n      (closure (A : Set X) = (Set.univ : Set X)) ∧\n        (closure (B : Set Y) = (Set.univ : Set Y)) := by\n  classical\n  -- Express the closure of a product as a product of closures.\n  have hProd :\n      closure (A ×ˢ B) =\n        (closure (A : Set X)) ×ˢ (closure (B : Set Y)) := by\n    simpa using closure_prod_eq (s := A) (t := B)\n  constructor\n  · intro hUniv\n    -- From `hUniv`, deduce that the product of closures is `univ`.\n    have hProdUniv :\n        (closure (A : Set X)) ×ˢ (closure (B : Set Y)) =\n          (Set.univ : Set (X × Y)) := by\n      simpa [hProd] using hUniv\n    -- Prove `closure A = univ`.\n    have hA_univ : closure (A : Set X) = (Set.univ : Set X) := by\n      apply Set.Subset.antisymm\n      · intro _ _; trivial\n      · intro x _\n        -- Choose an arbitrary `y : Y`.\n        let y : Y := Classical.arbitrary Y\n        have : ((x, y) : X × Y) ∈\n            (closure (A : Set X)) ×ˢ (closure (B : Set Y)) := by\n          have : ((x, y) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n            trivial\n          simpa [hProdUniv] using this\n        exact (Set.mem_prod.1 this).1\n    -- Prove `closure B = univ`.\n    have hB_univ : closure (B : Set Y) = (Set.univ : Set Y) := by\n      apply Set.Subset.antisymm\n      · intro _ _; trivial\n      · intro y _\n        -- Choose an arbitrary `x : X`.\n        let x : X := Classical.arbitrary X\n        have : ((x, y) : X × Y) ∈\n            (closure (A : Set X)) ×ˢ (closure (B : Set Y)) := by\n          have : ((x, y) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n            trivial\n          simpa [hProdUniv] using this\n        exact (Set.mem_prod.1 this).2\n    exact ⟨hA_univ, hB_univ⟩\n  · rintro ⟨hA_univ, hB_univ⟩\n    -- The product of `univ` sets is `univ`.\n    have hProdEqUniv :\n        (closure (A : Set X)) ×ˢ (closure (B : Set Y)) =\n          (Set.univ : Set (X × Y)) := by\n      simpa [hA_univ, hB_univ, Set.univ_prod_univ]\n    -- Rewrite back to the closure of the product.\n    simpa [hProd] using hProdEqUniv"
+  ],
+  "success": true
+}

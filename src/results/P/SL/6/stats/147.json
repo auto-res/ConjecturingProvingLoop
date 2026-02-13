@@ -1,0 +1,43 @@
+{
+  "times": [
+    60.51563596725464,
+    12.657165765762329
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5404,
+      "prompt_tokens": 22167,
+      "total_tokens": 27571,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    },
+    {
+      "completion_tokens": 812,
+      "prompt_tokens": 22336,
+      "total_tokens": 23148,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior ((A ∪ B) : Set X)) =\n      closure (interior A) ∪ closure (interior B) := by\n  simpa [interior_union, closure_union]",
+    "theorem closure_inter_subset_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure ((A ∩ B) : Set X) ⊆ closure A ∩ closure B := by\n  intro x hx\n  have hA : closure ((A ∩ B) : Set X) ⊆ closure A := by\n    apply closure_mono\n    intro y hy\n    exact hy.1\n  have hB : closure ((A ∩ B) : Set X) ⊆ closure B := by\n    apply closure_mono\n    intro y hy\n    exact hy.2\n  exact And.intro (hA hx) (hB hx)"
+  ],
+  "success": true
+}

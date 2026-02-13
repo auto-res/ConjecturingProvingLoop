@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.142189502716064
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4785,
+      "prompt_tokens": 25116,
+      "total_tokens": 29901,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_subset_inter_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B) ⊆ interior A ∩ interior B := by\n  intro x hx\n  have hA : x ∈ interior A := by\n    have hsubset : (A ∩ B) ⊆ A := Set.inter_subset_left\n    exact (interior_mono hsubset) hx\n  have hB : x ∈ interior B := by\n    have hsubset : (A ∩ B) ⊆ B := Set.inter_subset_right\n    exact (interior_mono hsubset) hx\n  exact And.intro hA hB"
+  ],
+  "success": true
+}

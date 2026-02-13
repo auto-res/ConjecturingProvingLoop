@@ -1,0 +1,26 @@
+{
+  "times": [
+    84.30016422271729
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6949,
+      "prompt_tokens": 15154,
+      "total_tokens": 22103,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_open_left {X : Type*} [TopologicalSpace X]\n    {U A : Set X} (hU : IsOpen U) :\n    Topology.P2 A → Topology.P2 (U ∩ A) := by\n  intro hP2\n  dsimp [Topology.P2] at hP2 ⊢\n  intro x hxUA\n  rcases hxUA with ⟨hxU, hxA⟩\n  -- `P2 A` supplies a neighbourhood of `x` inside `closure (interior A)`.\n  have hx_intA : x ∈ interior (closure (interior A)) := hP2 hxA\n  -- Consider the open neighbourhood `V := interior (closure (interior A)) ∩ U` of `x`.\n  set V : Set X := interior (closure (interior A)) ∩ U with hVdef\n  have hV_open : IsOpen V := (isOpen_interior).inter hU\n  have hxV : x ∈ V := by\n    have : x ∈ interior (closure (interior A)) ∧ x ∈ U := ⟨hx_intA, hxU⟩\n    simpa [hVdef] using this\n  -- We show that every point of `V` lies in `closure (interior (U ∩ A))`.\n  have hV_subset : V ⊆ closure (interior (U ∩ A)) := by\n    intro y hyV\n    have hy_intA : y ∈ interior (closure (interior A)) := by\n      have : y ∈ V := hyV\n      have : y ∈ interior (closure (interior A)) ∧ y ∈ U := by\n        simpa [hVdef] using this\n      exact this.1\n    have hyU : y ∈ U := by\n      have : y ∈ V := hyV\n      have : y ∈ interior (closure (interior A)) ∧ y ∈ U := by\n        simpa [hVdef] using this\n      exact this.2\n    -- Convert membership in the interior of the closure to the closure itself.\n    have hy_closure_intA : y ∈ closure (interior A) :=\n      interior_subset hy_intA\n    -- Use the neighbourhood characterisation of the closure to prove\n    -- `y ∈ closure (interior (U ∩ A))`.\n    have : y ∈ closure (interior (U ∩ A)) := by\n      -- Reformulate via `mem_closure_iff`.\n      apply (mem_closure_iff).2\n      intro W hWopen hyW\n      -- Intersect the neighbourhood with `U`, which is open and contains `y`.\n      have hWU_open : IsOpen (W ∩ U) := hWopen.inter hU\n      have hyWU : y ∈ W ∩ U := ⟨hyW, hyU⟩\n      -- Since `y ∈ closure (interior A)`, this neighbourhood meets `interior A`.\n      have h_nonempty : (W ∩ U ∩ interior A).Nonempty :=\n        (mem_closure_iff).1 hy_closure_intA (W ∩ U) hWU_open hyWU\n      -- `U` is open, so `U ∩ interior A` sits inside `interior (U ∩ A)`.\n      have h_subset : U ∩ interior A ⊆ interior (U ∩ A) := by\n        have h_open : IsOpen (U ∩ interior A) := hU.inter isOpen_interior\n        have h_sub : U ∩ interior A ⊆ U ∩ A := by\n          intro z hz\n          exact ⟨hz.1, interior_subset hz.2⟩\n        exact interior_maximal h_sub h_open\n      -- Hence the neighbourhood meets `interior (U ∩ A)`.\n      have : (W ∩ interior (U ∩ A)).Nonempty := by\n        rcases h_nonempty with ⟨z, ⟨hzW, hzU⟩, hzIntA⟩\n        have hzIntUA : z ∈ interior (U ∩ A) := h_subset ⟨hzU, hzIntA⟩\n        exact ⟨z, ⟨hzW, hzIntUA⟩⟩\n      exact this\n    exact this\n  -- `V` is an open neighbourhood of `x` contained in the target set,\n  -- hence `x` is in the interior.\n  have : x ∈ interior (closure (interior (U ∩ A))) :=\n    (interior_maximal hV_subset hV_open) hxV\n  exact this"
+  ],
+  "success": true
+}

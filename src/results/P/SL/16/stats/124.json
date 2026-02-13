@@ -1,0 +1,26 @@
+{
+  "times": [
+    146.06855607032776
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11066,
+      "prompt_tokens": 22397,
+      "total_tokens": 33463,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_open {X : Type*} [TopologicalSpace X] {A U : Set X}\n    (hP2A : Topology.P2 (X := X) A) (hOpenU : IsOpen U) :\n    Topology.P2 (X := X) (A ∪ U) := by\n  -- Any open set satisfies `P2`.\n  have hP2U : Topology.P2 (X := X) U :=\n    Topology.isOpen_implies_P2 (X := X) (A := U) hOpenU\n  -- Apply the union lemma for `P2`.\n  exact Topology.P2_union (X := X) (A := A) (B := U) hP2A hP2U"
+  ],
+  "success": true
+}

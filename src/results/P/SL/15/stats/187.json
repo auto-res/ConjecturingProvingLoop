@@ -1,0 +1,43 @@
+{
+  "times": [
+    104.98644089698792,
+    101.97111701965332
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5192,
+      "prompt_tokens": 37634,
+      "total_tokens": 42826,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    },
+    {
+      "completion_tokens": 6623,
+      "prompt_tokens": 37704,
+      "total_tokens": 44327,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq_union_closure_interiors\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) =\n      closure (interior A) ∪ closure (interior B) := by\n  have hInt : interior (A ∪ B) = interior A ∪ interior B := by\n    simpa using interior_union\n  simpa [hInt] using\n    (closure_union (s := interior A) (t := interior B))",
+    "theorem interior_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∪ interior B ⊆ interior (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      -- `x` lies in `interior A`\n      have h_open : IsOpen (interior A) := isOpen_interior\n      have h_nhds : interior A ∈ 𝓝 x := h_open.mem_nhds hA\n      have h_sub : interior A ⊆ A ∪ B := by\n        intro y hy\n        exact Or.inl (interior_subset hy)\n      have h_union : A ∪ B ∈ 𝓝 x := Filter.mem_of_superset h_nhds h_sub\n      exact (mem_interior_iff_mem_nhds).2 h_union\n  | inr hB =>\n      -- `x` lies in `interior B`\n      have h_open : IsOpen (interior B) := isOpen_interior\n      have h_nhds : interior B ∈ 𝓝 x := h_open.mem_nhds hB\n      have h_sub : interior B ⊆ A ∪ B := by\n        intro y hy\n        exact Or.inr (interior_subset hy)\n      have h_union : A ∪ B ∈ 𝓝 x := Filter.mem_of_superset h_nhds h_sub\n      exact (mem_interior_iff_mem_nhds).2 h_union"
+  ],
+  "success": true
+}

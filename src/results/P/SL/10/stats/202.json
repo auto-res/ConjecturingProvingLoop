@@ -1,0 +1,26 @@
+{
+  "times": [
+    157.2429518699646
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11262,
+      "prompt_tokens": 32848,
+      "total_tokens": 44110,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_inter_interiors_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ interior B)) ⊆\n      interior (closure A) ∩ interior (closure B) := by\n  intro x hx\n  -- `A ∩ interior B` sits inside `A`, hence its closure sits inside `closure A`.\n  have h_closureA : closure (A ∩ interior B) ⊆ closure A :=\n    closure_mono (Set.inter_subset_left : (A ∩ interior B) ⊆ A)\n  -- Likewise, `A ∩ interior B` is contained in `B`, since `interior B ⊆ B`.\n  have h_closureB : closure (A ∩ interior B) ⊆ closure B := by\n    have h_subset : (A ∩ interior B) ⊆ B := by\n      intro y hy\n      exact interior_subset hy.2\n    exact closure_mono h_subset\n  -- Pass to interiors via monotonicity.\n  have hxA : x ∈ interior (closure A) := (interior_mono h_closureA) hx\n  have hxB : x ∈ interior (closure B) := (interior_mono h_closureB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

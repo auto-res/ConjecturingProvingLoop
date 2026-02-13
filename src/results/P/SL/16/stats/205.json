@@ -1,0 +1,26 @@
+{
+  "times": [
+    91.14707636833191
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4594,
+      "prompt_tokens": 35932,
+      "total_tokens": 40526,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_unionInterior_subset_closure_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A ∪ interior B : Set X) ⊆\n      closure (interior (A ∪ B)) := by\n  -- `interior A ∪ interior B` is contained in `interior (A ∪ B)`\n  have h_subset :\n      (interior A ∪ interior B : Set X) ⊆ interior (A ∪ B) :=\n    Topology.interior_union_subset_interior_union (X := X) (A := A) (B := B)\n  -- Taking closures preserves inclusions\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

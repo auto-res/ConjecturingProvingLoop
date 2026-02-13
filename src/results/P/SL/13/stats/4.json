@@ -1,0 +1,43 @@
+{
+  "times": [
+    20.699449062347412,
+    94.6613347530365
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1958,
+      "prompt_tokens": 751,
+      "total_tokens": 2709,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 6916,
+      "prompt_tokens": 877,
+      "total_tokens": 7793,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_subset_interiorClosureInterior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 (X:=X) A := by\n  dsimp [Topology.P2]\n  intro x hx\n  have hx_int : x ∈ interior A := by\n    simpa [hA.interior_eq] using hx\n  have h_incl : (interior A : Set X) ⊆ interior (closure (interior A)) :=\n    interior_mono (subset_closure : (interior A : Set X) ⊆ closure (interior A))\n  exact h_incl hx_int",
+    "theorem isOpen_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    Topology.P2 (X := X) A := by\n  dsimp [Topology.P2]\n  intro x hx\n  have hx' : x ∈ interior (closure A) :=\n    (Topology.isOpen_subset_interiorClosure (X:=X) (A:=A) hA) hx\n  simpa [hA.interior_eq] using hx'"
+  ],
+  "success": true
+}

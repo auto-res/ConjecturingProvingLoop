@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.02823519706726
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3691,
+      "prompt_tokens": 38676,
+      "total_tokens": 42367,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_interior_iff_isOpen_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (X := X) (closure (interior A)) ↔ IsOpen (closure (interior A)) := by\n  -- `closure (interior A)` is a closed set, so we may apply the general equivalence.\n  have h_closed : IsClosed (closure (interior (A : Set X))) := isClosed_closure\n  simpa using\n    (Topology.P3_iff_isOpen_of_isClosed\n      (X := X) (A := closure (interior A)) h_closed)"
+  ],
+  "success": true
+}

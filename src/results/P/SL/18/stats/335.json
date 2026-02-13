@@ -1,0 +1,43 @@
+{
+  "times": [
+    29.771924018859863,
+    200.25955772399902
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2258,
+      "prompt_tokens": 54933,
+      "total_tokens": 57191,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 14635,
+      "prompt_tokens": 55055,
+      "total_tokens": 69690,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_closure_right_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ closure (B : Set X) : Set X)) ⊆\n      interior (closure (B : Set X)) := by\n  -- `A ∩ closure B` is contained in `closure B`.\n  have hSub : (A ∩ closure (B : Set X) : Set X) ⊆ closure (B : Set X) := by\n    intro x hx\n    exact hx.2\n  -- The closure operator preserves inclusions.\n  have hClos :\n      closure (A ∩ closure (B : Set X) : Set X) ⊆ closure (B : Set X) :=\n    closure_mono hSub\n  -- Taking interiors preserves inclusions.\n  exact interior_mono hClos",
+    "theorem interior_closure_union_eq_univ_of_dense\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hDenseA : Dense (A : Set X)) (hDenseB : Dense (B : Set X)) :\n    interior (closure (A ∪ B : Set X)) = (Set.univ : Set X) := by\n  -- `Dense` sets have closures equal to `univ`.\n  have hClosA : closure (A : Set X) = (Set.univ : Set X) :=\n    (Topology.dense_iff_closure_eq_univ (A := A)).1 hDenseA\n  have hClosB : closure (B : Set X) = (Set.univ : Set X) :=\n    (Topology.dense_iff_closure_eq_univ (A := B)).1 hDenseB\n  -- Compute the closure of the union.\n  have hClosUnion : closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n    calc\n      closure (A ∪ B : Set X)\n          = closure (A : Set X) ∪ closure (B : Set X) := by\n              simpa [closure_union]\n      _ = (Set.univ : Set X) ∪ (Set.univ : Set X) := by\n              simpa [hClosA, hClosB]\n      _ = (Set.univ : Set X) := by\n              simp\n  -- The interior of `univ` is `univ`.\n  simpa [hClosUnion, interior_univ]"
+  ],
+  "success": true
+}

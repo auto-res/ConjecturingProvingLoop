@@ -1,0 +1,26 @@
+{
+  "times": [
+    57.10333013534546
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2865,
+      "prompt_tokens": 46435,
+      "total_tokens": 49300,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_interior_subset_closure_frontier\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (interior A) ⊆ closure (frontier A) := by\n  intro x hx\n  -- `frontier (interior A)` is contained in `frontier A`.\n  have h_subset : frontier (interior A) ⊆ frontier A :=\n    frontier_interior_subset_frontier (X := X) (A := A)\n  -- Hence `x` belongs to `frontier A`.\n  have hx_frontier : x ∈ frontier A := h_subset hx\n  -- Every point of a set lies in the closure of that set.\n  exact subset_closure hx_frontier"
+  ],
+  "success": true
+}

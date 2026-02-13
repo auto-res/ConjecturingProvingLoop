@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.646193742752075
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2533,
+      "prompt_tokens": 52864,
+      "total_tokens": 55397,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_open {X : Type*} [TopologicalSpace X] {A U : Set X}\n    (hP1A : Topology.P1 (X := X) A) (hOpenU : IsOpen U) :\n    Topology.P1 (X := X) (A ∪ U) := by\n  have hP1U : Topology.P1 (X := X) U :=\n    Topology.isOpen_implies_P1 (X := X) (A := U) hOpenU\n  exact\n    Topology.P1_union (X := X) (A := A) (B := U) hP1A hP1U"
+  ],
+  "success": true
+}

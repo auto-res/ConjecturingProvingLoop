@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.277379274368286
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2770,
+      "prompt_tokens": 42620,
+      "total_tokens": 45390,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_subset_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n  -- Apply the generic inclusion with `A := closure A`\n  have h :\n      closure (interior (closure (A : Set X))) ⊆\n        closure (closure (A : Set X)) :=\n    closure_interior_subset_closure (A := closure (A : Set X))\n  simpa [closure_closure] using h"
+  ],
+  "success": true
+}

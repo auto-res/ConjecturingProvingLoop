@@ -1,0 +1,26 @@
+{
+  "times": [
+    93.80083274841309
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6718,
+      "prompt_tokens": 38803,
+      "total_tokens": 45521,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_closure_complement {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) ∪ closure ((Aᶜ) : Set X) = (Set.univ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x _; exact Set.mem_univ x\n  · intro x _\n    classical\n    by_cases h : (x : X) ∈ closure (A : Set X)\n    · exact Or.inl h\n    · have h_not_int : (x : X) ∉ interior (A : Set X) := by\n        intro hx_int\n        have hx_cl : (x : X) ∈ closure (A : Set X) :=\n          (interior_subset_closure_self (A := A)) hx_int\n        exact h hx_cl\n      -- `closure (Aᶜ) = (interior A)ᶜ`\n      have h_eq := closure_compl_eq_complement_interior (A := A)\n      have hx_cl_compl : (x : X) ∈ closure ((Aᶜ) : Set X) := by\n        have : (x : X) ∈ (interior (A : Set X))ᶜ := h_not_int\n        simpa [h_eq] using this\n      exact Or.inr hx_cl_compl"
+  ],
+  "success": true
+}

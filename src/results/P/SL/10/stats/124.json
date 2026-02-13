@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.64990234375
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6501,
+      "prompt_tokens": 20444,
+      "total_tokens": 26945,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_compl_eq_compl_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (Aᶜ)) = (closure (interior A))ᶜ := by\n  -- First, rewrite `closure (Aᶜ)` using the complement–interior relation.\n  have h₁ := Topology.closure_compl_eq_compl_interior (X := X) (A := A)\n  -- Chain equalities, finishing with the complement–closure relation for `interior A`.\n  calc\n    interior (closure (Aᶜ))\n        = interior ((interior A)ᶜ) := by\n          simpa [h₁]\n    _ = (closure (interior A))ᶜ := by\n          simpa using\n            (Topology.interior_compl_eq_compl_closure\n              (X := X) (A := interior A))"
+  ],
+  "success": true
+}

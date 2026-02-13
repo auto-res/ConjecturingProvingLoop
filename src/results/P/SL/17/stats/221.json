@@ -1,0 +1,26 @@
+{
+  "times": [
+    120.48692965507507
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9543,
+      "prompt_tokens": 39073,
+      "total_tokens": 48616,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_eq_interior_diff\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A \\ B) = interior A \\ closure B := by\n  apply Set.Subset.antisymm\n  ·\n    -- One inclusion is already available.\n    exact\n      Topology.interior_diff_subset_interior_diff (A := A) (B := B)\n  ·\n    -- Prove the reverse inclusion.\n    intro x hx\n    rcases hx with ⟨hxIntA, hxNotClB⟩\n    -- Consider the open set `interior A ∩ (closure B)ᶜ` containing `x`.\n    have h_open : IsOpen (interior A ∩ (closure B)ᶜ) :=\n      isOpen_interior.inter isClosed_closure.isOpen_compl\n    have hx_mem : x ∈ interior A ∩ (closure B)ᶜ :=\n      And.intro hxIntA hxNotClB\n    -- This open set is contained in `A \\ B`.\n    have h_subset : (interior A ∩ (closure B)ᶜ) ⊆ (A \\ B) := by\n      intro y hy\n      rcases hy with ⟨hyIntA, hyNotClB⟩\n      have hyA : y ∈ A := interior_subset hyIntA\n      have hyNotB : y ∉ B := by\n        intro hyB\n        have : y ∈ closure B := subset_closure hyB\n        exact hyNotClB this\n      exact And.intro hyA hyNotB\n    -- Hence, the open set is contained in the interior of `A \\ B`.\n    have h_interior :\n        interior A ∩ (closure B)ᶜ ⊆ interior (A \\ B) :=\n      interior_maximal h_subset h_open\n    -- Conclude that `x` is in the interior of `A \\ B`.\n    exact h_interior hx_mem"
+  ],
+  "success": true
+}

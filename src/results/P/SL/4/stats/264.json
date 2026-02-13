@@ -1,0 +1,60 @@
+{
+  "times": [
+    58.499510526657104,
+    144.27218198776245,
+    15.427131414413452
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4080,
+      "prompt_tokens": 39621,
+      "total_tokens": 43701,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 7570,
+      "prompt_tokens": 39812,
+      "total_tokens": 47382,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 1206,
+      "prompt_tokens": 39886,
+      "total_tokens": 41092,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_frontier_eq_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A \\ frontier A = interior A := by\n  -- Rewrite `frontier A` in terms of `closure` and `interior`.\n  have hFront : (frontier A : Set X) = closure A \\ interior A := by\n    simpa [frontier_eq_closure_diff_interior]\n  -- A purely set-theoretic computation.\n  have hCalc : closure A \\ (closure A \\ interior A) = interior A := by\n    ext x\n    constructor\n    · intro hx\n      rcases hx with ⟨hx_cl, hx_not⟩\n      by_cases hInt : x ∈ interior A\n      · exact hInt\n      · have : x ∈ closure A \\ interior A := ⟨hx_cl, hInt⟩\n        exact False.elim (hx_not this)\n    · intro hxInt\n      have hx_cl : x ∈ closure A :=\n        subset_closure (interior_subset hxInt)\n      have hx_not : x ∉ closure A \\ interior A := by\n        intro h\n        exact h.2 hxInt\n      exact And.intro hx_cl hx_not\n  simpa [hFront] using hCalc",
+    "theorem Set.compl_compl {α : Type*} {s : Set α} : ((sᶜ)ᶜ : Set α) = s := by\n  ext x\n  by_cases hx : x ∈ s\n  · simp [hx]\n  · simp [hx]",
+    "theorem closure_frontier_subset_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (frontier A) ⊆ closure A := by\n  -- `frontier A` is closed, hence its closure equals itself.\n  have h_eq : closure (frontier A) = frontier A := by\n    have hClosed : IsClosed (frontier A) := frontier_isClosed (X := X) (A := A)\n    simpa using hClosed.closure_eq\n  -- The frontier of `A` is contained in `closure A`.\n  have h_subset : frontier A ⊆ closure A :=\n    frontier_subset_closure (X := X) (A := A)\n  simpa [h_eq] using h_subset"
+  ],
+  "success": true
+}

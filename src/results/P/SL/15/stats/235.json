@@ -1,0 +1,26 @@
+{
+  "times": [
+    152.59869980812073
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8617,
+      "prompt_tokens": 50251,
+      "total_tokens": 58868,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_subset_closure_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure A ∪ closure B ⊆ closure (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      -- `closure A` is contained in the closure of the union.\n      have h_subset : closure A ⊆ closure (A ∪ B) := by\n        have : (A : Set X) ⊆ A ∪ B := Set.subset_union_left\n        exact closure_mono this\n      exact h_subset hA\n  | inr hB =>\n      -- `closure B` is contained in the closure of the union.\n      have h_subset : closure B ⊆ closure (A ∪ B) := by\n        have : (B : Set X) ⊆ A ∪ B := Set.subset_union_right\n        exact closure_mono this\n      exact h_subset hB"
+  ],
+  "success": true
+}

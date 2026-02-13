@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.3887095451355
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4965,
+      "prompt_tokens": 5893,
+      "total_tokens": 10858,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_and_open_closure_interior_implies_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (A : Set X))\n    (hOpen : IsOpen (closure (interior (A : Set X)))) :\n    Topology.P3 (A : Set X) := by\n  dsimp [Topology.P3]\n  intro x hx\n  -- From `P1`, we have membership in `closure (interior A)`.\n  have hx_cl : x ∈ closure (interior A) := hP1 hx\n  -- Since this set is open, its interior equals itself.\n  have hEq : interior (closure (interior A)) = closure (interior A) :=\n    hOpen.interior_eq\n  -- Reinterpret the membership using this equality.\n  have hx_int : x ∈ interior (closure (interior A)) := by\n    simpa [hEq] using hx_cl\n  -- Monotonicity of `interior` and `closure` gives the desired inclusion.\n  have hIncl : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono (closure_mono interior_subset)\n  exact hIncl hx_int"
+  ],
+  "success": true
+}

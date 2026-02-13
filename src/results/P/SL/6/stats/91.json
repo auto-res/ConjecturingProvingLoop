@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.86194324493408
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2706,
+      "prompt_tokens": 13492,
+      "total_tokens": 16198,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem nonempty_interior_closure_of_nonempty_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (A : Set X) → A.Nonempty →\n      (interior (closure (A : Set X))).Nonempty := by\n  intro hP3 hNon\n  rcases hNon with ⟨x, hxA⟩\n  have hxInt : x ∈ interior (closure (A : Set X)) := hP3 hxA\n  exact ⟨x, hxInt⟩"
+  ],
+  "success": true
+}

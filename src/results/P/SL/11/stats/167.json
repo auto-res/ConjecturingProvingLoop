@@ -1,0 +1,26 @@
+{
+  "times": [
+    189.3273503780365
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14311,
+      "prompt_tokens": 26017,
+      "total_tokens": 40328,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure A))))) =\n      interior (closure A) := by\n  -- First apply the idempotence lemma to the inner expression.\n  have h₁ :\n      interior (closure (interior (closure (interior (closure A))))) =\n        interior (closure (interior (closure A))) := by\n    simpa using\n      (interior_closure_interior_closure_eq\n        (A := interior (closure A)))\n  -- A second application collapses one more layer.\n  have h₂ :\n      interior (closure (interior (closure A))) =\n        interior (closure A) :=\n    interior_closure_interior_closure_eq (A := A)\n  -- Combine the two equalities to obtain the desired result.\n  simpa [h₂] using h₁"
+  ],
+  "success": true
+}

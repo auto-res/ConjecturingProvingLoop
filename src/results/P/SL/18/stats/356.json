@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.33120083808899
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2408,
+      "prompt_tokens": 58293,
+      "total_tokens": 60701,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_P3_of_clopen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClopen : IsClopen (A : Set X)) :\n    Topology.P1 A ↔ Topology.P3 A := by\n  have h₁ : Topology.P1 A ↔ Topology.P2 A :=\n    Topology.P1_iff_P2_of_clopen (A := A) hClopen\n  have h₂ : Topology.P2 A ↔ Topology.P3 A :=\n    Topology.P2_iff_P3_of_clopen (A := A) hClopen\n  simpa using h₁.trans h₂"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    75.49889945983887,
+    163.85801529884338
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5548,
+      "prompt_tokens": 38610,
+      "total_tokens": 44158,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    },
+    {
+      "completion_tokens": 9602,
+      "prompt_tokens": 38716,
+      "total_tokens": 48318,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_inter_union_closure_diff {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) = closure (A ∩ B) ∪ closure (A \\ B) := by\n  -- Step 1: decompose `A` as the union of `A ∩ B` and `A \\ B`.\n  have h_decomp : (A : Set X) = (A ∩ B) ∪ (A \\ B) := by\n    ext x\n    constructor\n    · intro hxA\n      by_cases hxB : x ∈ B\n      · exact Or.inl ⟨hxA, hxB⟩\n      · exact Or.inr ⟨hxA, hxB⟩\n    · intro hx\n      cases hx with\n      | inl hAB => exact hAB.1\n      | inr hA_diff => exact hA_diff.1\n  -- Step 2: rewrite the left-hand side and use `closure_union`.\n  simpa [h_decomp] using\n    (closure_union : closure ((A ∩ B : Set X) ∪ (A \\ B)) =\n      closure (A ∩ B) ∪ closure (A \\ B))",
+    "theorem Topology.closure_inter_subset_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure ((A ∩ B) : Set X) ⊆ closure (A : Set X) := by\n  -- `A ∩ B` is contained in `A`, so applying `closure` (a monotone operator)\n  -- yields the desired inclusion.\n  exact closure_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)"
+  ],
+  "success": true
+}

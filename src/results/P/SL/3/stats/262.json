@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.83502769470215
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1936,
+      "prompt_tokens": 44096,
+      "total_tokens": 46032,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem isClosed_closure_interior_diff_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    IsClosed (closure (interior (A : Set X)) \\ interior (A : Set X)) := by\n  -- Rewrite the set as an intersection of two closed sets.\n  have h_eq :\n      (closure (interior (A : Set X)) \\ interior (A : Set X)) =\n        closure (interior (A : Set X)) ∩ (interior (A : Set X))ᶜ := rfl\n  -- `closure (interior A)` is closed.\n  have h_closed₁ : IsClosed (closure (interior (A : Set X))) := isClosed_closure\n  -- The complement of `interior A` is closed because `interior A` is open.\n  have h_closed₂ : IsClosed ((interior (A : Set X))ᶜ) :=\n    (isOpen_interior : IsOpen (interior (A : Set X))).isClosed_compl\n  -- The intersection of closed sets is closed.\n  simpa [h_eq] using h_closed₁.inter h_closed₂"
+  ],
+  "success": true
+}

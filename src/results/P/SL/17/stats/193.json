@@ -1,0 +1,26 @@
+{
+  "times": [
+    92.42207169532776
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6049,
+      "prompt_tokens": 33747,
+      "total_tokens": 39796,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_self_of_discrete\n    {X : Type*} [TopologicalSpace X] [DiscreteTopology X] {A : Set X} :\n    closure (interior A) = A := by\n  -- In a discrete topology every set is open, in particular `A`.\n  have hOpen : IsOpen A := isOpen_discrete _\n  -- Hence `interior A = A`.\n  have hInt : interior A = A := hOpen.interior_eq\n  -- It suffices to show `closure A = A`.\n  suffices closure A = A by\n    simpa [hInt] using this\n  -- Prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  · -- Show `closure A ⊆ A`.\n    intro x hx\n    -- The singleton `{x}` is open in a discrete space.\n    have hOpenSingleton : IsOpen ({x} : Set X) := isOpen_discrete _\n    -- By definition of the closure, `{x}` meets `A`.\n    have hNonempty :\n        (({x} : Set X) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hx ({x}) hOpenSingleton (by\n        -- `x` belongs to the open set `{x}`.\n        simp)\n    -- Extract a witness from the non-empty intersection.\n    rcases hNonempty with ⟨y, ⟨hySingle, hyA⟩⟩\n    -- From `y ∈ {x}` we deduce `y = x`.\n    have : y = x := by\n      simpa [Set.mem_singleton_iff] using hySingle\n    -- Conclude `x ∈ A`.\n    simpa [this] using hyA\n  · -- The reverse inclusion is always true.\n    exact subset_closure"
+  ],
+  "success": true
+}

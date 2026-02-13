@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.32960629463196
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2711,
+      "prompt_tokens": 17029,
+      "total_tokens": 19740,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_exists_open_subset_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) A ↔\n      ∃ U : Set X, IsOpen U ∧ A ⊆ U ∧ U ⊆ interior (closure (interior A)) := by\n  classical\n  constructor\n  · intro hP2\n    refine ⟨interior (closure (interior A)), isOpen_interior, ?_, ?_⟩\n    · exact hP2\n    · exact subset_rfl\n  · rintro ⟨U, _, hAU, hUsubset⟩\n    dsimp [Topology.P2]\n    intro x hxA\n    have hxU : x ∈ U := hAU hxA\n    exact hUsubset hxU"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.441256046295166
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3153,
+      "prompt_tokens": 12885,
+      "total_tokens": 16038,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_subset_interior_closure_interior_of_subset {X : Type*}\n    [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) (hP2 : Topology.P2 A) :\n    A ⊆ interior (closure (interior B)) := by\n  intro x hxA\n  have hx_int : x ∈ interior (closure (interior A)) := hP2 hxA\n  have h_mono : interior (closure (interior A)) ⊆ interior (closure (interior B)) := by\n    have h_int : interior A ⊆ interior B := interior_mono hAB\n    have h_closure : closure (interior A) ⊆ closure (interior B) := closure_mono h_int\n    exact interior_mono h_closure\n  exact h_mono hx_int"
+  ],
+  "success": true
+}

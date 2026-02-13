@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.76210284233093
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1742,
+      "prompt_tokens": 58423,
+      "total_tokens": 60165,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_iff_frontier_subset_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen (A : Set X) ↔ frontier (A : Set X) ⊆ Aᶜ := by\n  classical\n  constructor\n  · intro hA_open\n    -- For an open set, the frontier is `closure A \\ A`, whence the claim.\n    intro x hx_front\n    have h_frontier :\n        frontier (A : Set X) = closure A \\ A :=\n      Topology.frontier_eq_closure_diff_self_of_isOpen (A := A) hA_open\n    have : x ∈ closure A \\ A := by\n      simpa [h_frontier] using hx_front\n    exact this.2\n  · intro h_frontier_sub\n    -- Show `A ⊆ interior A`; the reverse inclusion is automatic.\n    have h_eq_int : interior (A : Set X) = A := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      · intro x hxA\n        by_contra hx_not_int\n        -- Then `x` lies in the frontier, contradicting the assumption.\n        have hx_cl : x ∈ closure (A : Set X) := subset_closure hxA\n        have hx_front : x ∈ frontier (A : Set X) := ⟨hx_cl, hx_not_int⟩\n        have : x ∈ (Aᶜ : Set X) := h_frontier_sub hx_front\n        exact this hxA\n    -- An interior equals the set itself iff the set is open.\n    simpa [h_eq_int] using (isOpen_interior : IsOpen (interior A))"
+  ],
+  "success": true
+}

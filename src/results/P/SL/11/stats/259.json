@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.43314480781555
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3149,
+      "prompt_tokens": 42088,
+      "total_tokens": 45237,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_iInter_eq {X ι : Type*} [TopologicalSpace X] {A : ι → Set X}\n    (hA : ∀ i, IsClosed (A i)) :\n    interior (closure (⋂ i, A i)) = interior (⋂ i, A i) := by\n  have hEq : closure (⋂ i, A i) = (⋂ i, A i) :=\n    (closure_iInter_eq_iInter (A := A) (hA := hA))\n  simpa [hEq]"
+  ],
+  "success": true
+}

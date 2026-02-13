@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.737530946731567
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1794,
+      "prompt_tokens": 47176,
+      "total_tokens": 48970,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.subset_interior_union_frontier {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (A : Set X) ⊆ interior A ∪ frontier A := by\n  intro x hxA\n  by_cases hInt : x ∈ interior A\n  · exact Or.inl hInt\n  ·\n    have hClos : x ∈ closure A := subset_closure hxA\n    exact Or.inr ⟨hClos, hInt⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    138.41036009788513,
+    196.14927911758423,
+    24.67442011833191
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9308,
+      "prompt_tokens": 19542,
+      "total_tokens": 28850,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 12005,
+      "prompt_tokens": 19711,
+      "total_tokens": 31716,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 2275,
+      "prompt_tokens": 19850,
+      "total_tokens": 22125,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B : Set X)) =\n      closure (interior (A : Set X) ∪ interior (B : Set X)) := by\n  simpa [interior_union]",
+    "theorem interior_inter {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B : Set X) = interior (A : Set X) ∩ interior (B : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨U, hU_open, hxU, hU_sub⟩\n    have hA : x ∈ interior (A : Set X) := by\n      exact ⟨U, hU_open, hxU, fun y hy => (hU_sub hy).1⟩\n    have hB : x ∈ interior (B : Set X) := by\n      exact ⟨U, hU_open, hxU, fun y hy => (hU_sub hy).2⟩\n    exact ⟨hA, hB⟩\n  · intro hx\n    rcases hx with ⟨hA, hB⟩\n    rcases hA with ⟨U, hU_open, hxU, hU_subA⟩\n    rcases hB with ⟨V, hV_open, hxV, hV_subB⟩\n    have hUV_open : IsOpen (U ∩ V) := hU_open.inter hV_open\n    have hxUV : x ∈ (U ∩ V : Set X) := ⟨hxU, hxV⟩\n    have hUV_sub : (U ∩ V : Set X) ⊆ A ∩ B := by\n      intro y hy\n      exact ⟨hU_subA hy.1, hV_subB hy.2⟩\n    exact ⟨U ∩ V, hUV_open, hxUV, hUV_sub⟩",
+    "theorem interior_closure_interior_inter_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior (A ∩ B : Set X))) ⊆\n      interior (closure (interior A)) ∩\n        interior (closure (interior B)) := by\n  intro x hx\n  have hA :\n      interior (closure (interior (A ∩ B : Set X))) ⊆\n        interior (closure (interior A)) := by\n    apply interior_mono\n    have hSub_int : interior (A ∩ B : Set X) ⊆ interior A := by\n      apply interior_mono\n      exact Set.inter_subset_left\n    exact closure_mono hSub_int\n  have hB :\n      interior (closure (interior (A ∩ B : Set X))) ⊆\n        interior (closure (interior B)) := by\n    apply interior_mono\n    have hSub_int : interior (A ∩ B : Set X) ⊆ interior B := by\n      apply interior_mono\n      exact Set.inter_subset_right\n    exact closure_mono hSub_int\n  exact ⟨hA hx, hB hx⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.45439028739929
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2157,
+      "prompt_tokens": 52479,
+      "total_tokens": 54636,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_empty_iff_empty_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hP2 : Topology.P2 A) :\n    interior (closure A) = (∅ : Set X) ↔ A = ∅ := by\n  -- Upgrade `P2` to `P3` in order to use the existing equivalence.\n  have hP3 : Topology.P3 A := Topology.P2_implies_P3 (A := A) hP2\n  -- Apply the equivalence already proved for `P3`.\n  simpa using (interior_closure_empty_iff_empty_of_P3 (A := A) hP3)"
+  ],
+  "success": true
+}

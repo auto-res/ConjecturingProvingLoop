@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.04089713096619
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5376,
+      "prompt_tokens": 23653,
+      "total_tokens": 29029,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_interiorCompl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A ∪ interior (Aᶜ) = (Set.univ : Set X) := by\n  classical\n  ext x\n  constructor\n  · intro _; trivial\n  · intro _\n    by_cases hx : x ∈ closure A\n    · exact Or.inl hx\n    ·\n      have hx_interior : x ∈ interior (Aᶜ) := by\n        have h_eq := Topology.interior_compl_eq_compl_closure (A := A)\n        have h_mem : x ∈ (closure A)ᶜ := hx\n        simpa [h_eq] using h_mem\n      exact Or.inr hx_interior"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.923245668411255
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1779,
+      "prompt_tokens": 19758,
+      "total_tokens": 21537,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_isOpen_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (A : Set X))) : Topology.P3 (X := X) A := by\n  dsimp [Topology.P3]\n  intro x hxA\n  -- Since `closure A` is open, its interior equals itself.\n  have hInt : interior (closure (A : Set X)) = closure (A : Set X) :=\n    hOpen.interior_eq\n  -- Every point of `A` lies in `closure A`.\n  have hxCl : x ∈ closure (A : Set X) := subset_closure hxA\n  simpa [hInt] using hxCl"
+  ],
+  "success": true
+}

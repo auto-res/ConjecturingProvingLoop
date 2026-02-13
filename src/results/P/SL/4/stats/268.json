@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.21147274971008
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4194,
+      "prompt_tokens": 40147,
+      "total_tokens": 44341,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_closure_eq_closure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior A) ∪ closure A = closure A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    cases hx with\n    | inl h₁ =>\n        have h_subset : closure (interior A) ⊆ closure A :=\n          closure_interior_subset_closure (X := X) (A := A)\n        exact h_subset h₁\n    | inr h₂ =>\n        exact h₂\n  · intro x hx\n    exact Or.inr hx"
+  ],
+  "success": true
+}

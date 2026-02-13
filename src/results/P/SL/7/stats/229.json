@@ -1,0 +1,26 @@
+{
+  "times": [
+    228.0288441181183
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 16951,
+      "prompt_tokens": 35275,
+      "total_tokens": 52226,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosureInterior_subset_closureInteriorClosure\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) ⊆\n      closure (interior (closure A)) := by\n  -- First, relate the interiors of the two sets.\n  have h₁ :\n      interior (closure (interior A)) ⊆ interior (closure A) :=\n    interiorClosureInterior_subset_interiorClosure (A := A)\n  -- Next, every set is contained in the closure of itself.\n  have h₂ :\n      interior (closure A) ⊆ closure (interior (closure A)) :=\n    subset_closure\n  -- Combine the two inclusions.\n  have hIncl :\n      interior (closure (interior A)) ⊆ closure (interior (closure A)) :=\n    Set.Subset.trans h₁ h₂\n  -- Taking closures preserves inclusions; simplify the right‐hand side.\n  simpa [closure_closure] using closure_mono hIncl"
+  ],
+  "success": true
+}

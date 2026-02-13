@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.481109142303467
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2300,
+      "prompt_tokens": 33721,
+      "total_tokens": 36021,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_right_of_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hPA : Topology.P1 (X:=X) A) (hB_open : IsOpen (B : Set X)) :\n    Topology.P1 (X:=X) (A ∪ B) := by\n  -- An open set automatically satisfies `P1`.\n  have hPB : Topology.P1 (X:=X) B :=\n    Topology.isOpen_subset_closureInterior (X:=X) (A:=B) hB_open\n  -- Combine the two `P1` properties via the existing union lemma.\n  exact Topology.P1_union (X:=X) (A:=A) (B:=B) hPA hPB"
+  ],
+  "success": true
+}

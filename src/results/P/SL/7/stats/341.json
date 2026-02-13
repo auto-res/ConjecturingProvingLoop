@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.467703104019165
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2591,
+      "prompt_tokens": 54007,
+      "total_tokens": 56598,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iInter_closure_subset\n    {X : Type*} [TopologicalSpace X] {ι : Sort _} {F : ι → Set X} :\n    interior (⋂ i, closure (F i) : Set X) ⊆ ⋂ i, interior (closure (F i)) := by\n  intro x hx\n  have h : ∀ i, x ∈ interior (closure (F i)) := by\n    intro i\n    have hSub : (⋂ j, closure (F j) : Set X) ⊆ closure (F i) := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    have hIncl : interior (⋂ j, closure (F j) : Set X) ⊆ interior (closure (F i)) :=\n      interior_mono hSub\n    exact hIncl hx\n  exact Set.mem_iInter.2 h"
+  ],
+  "success": true
+}

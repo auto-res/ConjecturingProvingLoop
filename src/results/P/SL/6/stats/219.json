@@ -1,0 +1,26 @@
+{
+  "times": [
+    21.32046341896057
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1799,
+      "prompt_tokens": 34508,
+      "total_tokens": 36307,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_self_of_P2_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    Topology.P2 (A : Set X) → closure (interior A) = A := by\n  intro hP2\n  -- `interior A = A` because `A` is closed and satisfies `P2`.\n  have hInt : interior A = A :=\n    (interior_eq_self_of_P2_closed (A := A) hA) hP2\n  -- Apply `closure` to both sides and rewrite using `hA.closure_eq`.\n  have hClos : closure (interior A) = closure A :=\n    congrArg closure hInt\n  simpa [hA.closure_eq] using hClos"
+  ],
+  "success": true
+}

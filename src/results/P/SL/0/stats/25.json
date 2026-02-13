@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.25258445739746
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3793,
+      "prompt_tokens": 4596,
+      "total_tokens": 8389,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_isOpen_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    Topology.P2 A ↔ IsOpen (A : Set X) := by\n  dsimp [Topology.P2]\n  constructor\n  · intro hP2\n    -- First, `closure (interior A)` is contained in `A` since `A` is closed.\n    have hcl : closure (interior (A : Set X)) ⊆ (A : Set X) := by\n      have : closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n        closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n      simpa [hA.closure_eq] using this\n    -- Hence the target of `hP2` is contained in `interior A`.\n    have hsubset : (A : Set X) ⊆ interior (A : Set X) := by\n      have hmono : interior (closure (interior (A : Set X))) ⊆ interior (A : Set X) :=\n        interior_mono hcl\n      exact hP2.trans hmono\n    -- `A` equals its interior, so it is open.\n    have h_eq : interior (A : Set X) = A := by\n      apply subset_antisymm\n      · exact interior_subset\n      · exact hsubset\n    simpa [h_eq] using (isOpen_interior : IsOpen (interior (A : Set X)))\n  · intro hOpen\n    exact (Topology.isOpen_has_all_Ps (X := X) (A := A) hOpen).2.1"
+  ],
+  "success": true
+}

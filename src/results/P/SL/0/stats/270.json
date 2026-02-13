@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.906147956848145
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2832,
+      "prompt_tokens": 46038,
+      "total_tokens": 48870,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_interior_left {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 B → Topology.P2 (interior (A : Set X) ∪ B) := by\n  intro hP2B\n  have hOpenInt : IsOpen (interior (A : Set X)) := isOpen_interior\n  exact\n    Topology.P2_union_left_of_open\n      (X := X) (A := interior (A : Set X)) (B := B) hOpenInt hP2B"
+  ],
+  "success": true
+}

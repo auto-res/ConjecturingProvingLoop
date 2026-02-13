@@ -1,0 +1,60 @@
+{
+  "times": [
+    121.40963196754456,
+    43.444759130477905,
+    129.61275434494019
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7623,
+      "prompt_tokens": 48050,
+      "total_tokens": 55673,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 2892,
+      "prompt_tokens": 48124,
+      "total_tokens": 51016,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 7208,
+      "prompt_tokens": 48196,
+      "total_tokens": 55404,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iter_six_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure (interior (A : Set X))))))))))) =\n      closure (interior A) := by\n  -- First, collapse the five-fold iteration that appears inside.\n  have h₁ :\n      closure (interior (closure (interior (closure (interior\n        (closure (interior (closure (interior (A : Set X))))))))) ) =\n        closure (interior A) :=\n    Topology.closure_interior_iter_five_eq (X := X) (A := A)\n  -- Rewriting with `h₁` turns the left side into\n  -- `closure (interior (closure (interior A)))`, which can be\n  -- simplified using the idempotence lemma.\n  simpa [h₁,\n        Topology.closure_interior_closure_interior_eq (X := X) (A := A)]",
+    "theorem Topology.interior_inter_closure_compl_eq_empty {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) ∩ closure (Aᶜ : Set X) = (∅ : Set X) := by\n  -- Apply the previously proved lemma to the complement of `A`.\n  simpa [Set.compl_compl, Set.inter_comm]\n    using\n      (Topology.interior_compl_inter_closure_eq_empty\n        (X := X) (A := Aᶜ))",
+    "theorem Topology.interior_eq_compl_closure_compl {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (A : Set X) = (closure ((A : Set X)ᶜ))ᶜ := by\n  simpa [compl_compl] using (interior_compl (s := (Aᶜ : Set X)))"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    133.63047552108765,
+    362.60613083839417
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9549,
+      "prompt_tokens": 15447,
+      "total_tokens": 24996,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    },
+    {
+      "completion_tokens": 27027,
+      "prompt_tokens": 15677,
+      "total_tokens": 42704,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 27008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInteriorClosureInteriorClosure_P1 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (closure (interior (closure (interior (closure A))))) := by\n  -- First, rewrite the complicated set using an existing equality.\n  have h_eq :\n      closure (interior (closure (interior (closure A)))) =\n        closure (interior A) :=\n    (closure_interior_closure_interior_closure_eq (X := X) (A := A))\n  -- We already know `P1` holds for `closure (interior A)`.\n  have hP1 : Topology.P1 (closure (interior A)) :=\n    closureInterior_P1 (X := X) (A := A)\n  -- Transport the property along the equality.\n  simpa [h_eq] using hP1",
+    ""
+  ],
+  "success": true
+}

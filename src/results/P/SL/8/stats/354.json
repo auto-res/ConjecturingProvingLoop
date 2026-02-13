@@ -1,0 +1,26 @@
+{
+  "times": [
+    127.68587875366211
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10989,
+      "prompt_tokens": 55633,
+      "total_tokens": 66622,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_eq_union_interiors_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    interior (A ∪ B) = interior A ∪ interior B := by\n  -- `A` and `B` are open, so their interiors coincide with themselves.\n  have hIntA : interior A = A := hA.interior_eq\n  have hIntB : interior B = B := hB.interior_eq\n  -- The union of two open sets is open.\n  have hOpenUnion : IsOpen (A ∪ B) := hA.union hB\n  -- Hence the interior of the union is the union itself.\n  have hIntUnion : interior (A ∪ B) = A ∪ B := hOpenUnion.interior_eq\n  -- Rewrite everything in terms of `interior`.\n  simpa [hIntUnion, hIntA, hIntB]"
+  ],
+  "success": true
+}

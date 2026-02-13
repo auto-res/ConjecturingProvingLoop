@@ -1,0 +1,26 @@
+{
+  "times": [
+    198.40636014938354
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10459,
+      "prompt_tokens": 50111,
+      "total_tokens": 60570,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_open_diff_closed {X : Type*} [TopologicalSpace X] {U V : Set X}\n    (hU_open : IsOpen (U : Set X)) (hV_closed : IsClosed (V : Set X)) :\n    Topology.P1 (U \\ V) := by\n  -- `U \\ V` is open as the difference of an open set and a closed set.\n  have hOpenDiff : IsOpen (U \\ V : Set X) := IsOpen.diff hU_open hV_closed\n  -- An open set satisfies property `P1`.\n  exact Topology.P1_of_open hOpenDiff"
+  ],
+  "success": true
+}

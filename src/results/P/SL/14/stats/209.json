@@ -1,0 +1,43 @@
+{
+  "times": [
+    214.84524512290955,
+    146.82555484771729
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14218,
+      "prompt_tokens": 38857,
+      "total_tokens": 53075,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    },
+    {
+      "completion_tokens": 10307,
+      "prompt_tokens": 39055,
+      "total_tokens": 49362,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_closure_satisfies_P1_P2_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_open : IsOpen (closure (A : Set X))) :\n    Topology.P1 (closure (A : Set X)) ∧\n      Topology.P2 (closure (A : Set X)) ∧\n      Topology.P3 (closure (A : Set X)) := by\n  have hP1 : Topology.P1 (closure (A : Set X)) :=\n    Topology.closure_has_P1_of_isOpen (X := X) (A := A) h_open\n  have hP2 : Topology.P2 (closure (A : Set X)) :=\n    Topology.P2_of_isOpen_closure (X := X) (A := A) h_open\n  have hP3 : Topology.P3 (closure (A : Set X)) :=\n    Topology.P3_of_isOpen_closure (X := X) (A := A) h_open\n  exact ⟨hP1, hP2, hP3⟩",
+    "theorem Topology.closure_iUnion_interior_subset_closureInterior_iUnion\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    closure (⋃ i, interior (A i) : Set X) ⊆\n      closure (interior (⋃ i, A i)) := by\n  -- First, prove the set inside the left‐hand closure is contained in the right‐hand interior.\n  have h_subset : (⋃ i, interior (A i) : Set X) ⊆ interior (⋃ i, A i) := by\n    intro x hx\n    rcases Set.mem_iUnion.1 hx with ⟨i, hx_int⟩\n    -- `A i` is contained in the union, hence its interior is contained in the interior of the union.\n    have h_int_mono :\n        interior (A i : Set X) ⊆ interior (⋃ j, A j) := by\n      have h_subset' : (A i : Set X) ⊆ ⋃ j, A j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact interior_mono h_subset'\n    exact h_int_mono hx_int\n  -- Taking closures preserves inclusions, yielding the desired result.\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

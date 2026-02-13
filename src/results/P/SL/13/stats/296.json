@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.07343554496765
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2438,
+      "prompt_tokens": 52523,
+      "total_tokens": 54961,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closureInterior_union_boundary {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) =\n      closure (interior A) ∪ (closure (A : Set X) \\ interior A) := by\n  -- We establish both inclusions and then apply `Subset.antisymm`.\n  apply Set.Subset.antisymm\n  · -- `closure A ⊆ …`\n    intro x hx_clA\n    by_cases hx_int : (x : X) ∈ interior A\n    · -- If `x ∈ interior A`, then `x ∈ closure (interior A)`.\n      have : (x : X) ∈ closure (interior A) := subset_closure hx_int\n      exact Or.inl this\n    · -- Otherwise `x ∈ closure A \\ interior A`.\n      exact Or.inr ⟨hx_clA, hx_int⟩\n  · -- The reverse inclusion is straightforward since both summands lie in `closure A`.\n    intro x hx\n    cases hx with\n    | inl hx_clIntA =>\n        -- `closure (interior A) ⊆ closure A`\n        exact (closure_mono (interior_subset : interior A ⊆ A)) hx_clIntA\n    | inr hx_boundary =>\n        -- The boundary is defined using `closure A`.\n        exact hx_boundary.1"
+  ],
+  "success": true
+}

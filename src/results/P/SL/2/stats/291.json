@@ -1,0 +1,26 @@
+{
+  "times": [
+    166.97461891174316
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7375,
+      "prompt_tokens": 49330,
+      "total_tokens": 56705,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_diff_isClosed_right_implies_P1 {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    IsOpen A → IsClosed (B : Set X) → Topology.P1 (A \\ B) := by\n  intro hOpenA hClosedB\n  -- `A \\ B` is the intersection of two open sets: `A` and `Bᶜ`.\n  have hOpenDiff : IsOpen (A \\ B : Set X) := by\n    have hOpenComplB : IsOpen ((Bᶜ) : Set X) := hClosedB.isOpen_compl\n    simpa [Set.diff_eq] using hOpenA.inter hOpenComplB\n  -- Any open set satisfies `P1`.\n  exact Topology.isOpen_implies_P1 (A := A \\ B) hOpenDiff"
+  ],
+  "success": true
+}

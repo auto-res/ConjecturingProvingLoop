@@ -1,0 +1,43 @@
+{
+  "times": [
+    90.16581058502197,
+    56.299734115600586
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7817,
+      "prompt_tokens": 25349,
+      "total_tokens": 33166,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4043,
+      "prompt_tokens": 25467,
+      "total_tokens": 29510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_subset_closure_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A : Set X) ∩ interior (B : Set X) ⊆ closure ((A ∩ B) : Set X) := by\n  intro x hx\n  rcases hx with ⟨h_clA, h_intB⟩\n  -- We prove `x ∈ closure (A ∩ B)` using the neighbourhood\n  -- characterization of the closure.\n  apply (Set.mem_closure).2\n  intro V hV_open hxV\n  -- Intersect the neighbourhood `V` with `interior B`, which is also open.\n  have h_open : IsOpen (V ∩ interior (B : Set X)) := hV_open.inter isOpen_interior\n  have hx_mem : (x : X) ∈ V ∩ interior B := ⟨hxV, h_intB⟩\n  -- Since `x ∈ closure A`, the open set `V ∩ interior B` intersects `A`.\n  have h_nonempty : ((V ∩ interior (B : Set X)) ∩ A).Nonempty := by\n    have h_closureA := (Set.mem_closure).1 h_clA\n    simpa [Set.inter_comm, Set.inter_left_comm, Set.inter_assoc] using\n      h_closureA (V ∩ interior (B : Set X)) h_open hx_mem\n  -- Extract a witness from the non-empty intersection and show that it lies in\n  -- `V ∩ (A ∩ B)`.\n  rcases h_nonempty with ⟨y, ⟨⟨hyV, hyIntB⟩, hyA⟩⟩\n  have hyB : (y : X) ∈ B := interior_subset hyIntB\n  exact ⟨y, ⟨hyV, ⟨hyA, hyB⟩⟩⟩",
+    "theorem closure_interior_univ {X : Type*} [TopologicalSpace X] :\n    closure (interior (Set.univ : Set X)) = (Set.univ : Set X) := by\n  simp [interior_univ, closure_univ]"
+  ],
+  "success": true
+}

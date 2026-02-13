@@ -1,0 +1,94 @@
+{
+  "times": [
+    78.98701858520508,
+    385.4673180580139,
+    165.6983141899109,
+    165.219402551651,
+    43.44367790222168
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3724,
+      "prompt_tokens": 53630,
+      "total_tokens": 57354,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    },
+    {
+      "completion_tokens": 21636,
+      "prompt_tokens": 53828,
+      "total_tokens": 75464,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 21312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    },
+    {
+      "completion_tokens": 8916,
+      "prompt_tokens": 53936,
+      "total_tokens": 62852,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    },
+    {
+      "completion_tokens": 10013,
+      "prompt_tokens": 54033,
+      "total_tokens": 64046,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2136,
+      "prompt_tokens": 54101,
+      "total_tokens": 56237,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_P2_P3_closure_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_open : IsOpen (closure (A : Set X))) :\n    Topology.P1 (X := X) (closure A) ∧\n      Topology.P2 (X := X) (closure A) ∧\n      Topology.P3 (X := X) (closure A) := by\n  have hP1 : Topology.P1 (X := X) (closure A) :=\n    Topology.P1_closure_of_isOpen (X := X) (A := A) h_open\n  have hP2 : Topology.P2 (X := X) (closure A) :=\n    Topology.P2_closure_of_isOpen_closure (X := X) (A := A) h_open\n  have hP3 : Topology.P3 (X := X) (closure A) :=\n    Topology.P3_of_isOpen_closure (X := X) (A := A) h_open\n  exact And.intro hP1 (And.intro hP2 hP3)",
+    "theorem Topology.P1_P3_of_isOpen_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_open : IsOpen (closure (A : Set X))) :\n    Topology.P1 (X := X) (closure A) ∧ Topology.P3 (X := X) (closure A) := by\n  -- `P1` for `closure A` follows from openness of `closure A`\n  have hP1 : Topology.P1 (X := X) (closure A) :=\n    Topology.P1_closure_of_isOpen (X := X) (A := closure A) h_open\n  -- `P3` for `closure A`\n  have hP3 : Topology.P3 (X := X) (closure A) := by\n    dsimp [Topology.P3]\n    intro x hx\n    -- Since `closure A` is open, its interior is itself\n    have h_int : interior (closure (A : Set X)) = closure A :=\n      h_open.interior_eq\n    -- `closure (closure A)` simplifies to `closure A`\n    have h_cl : closure (closure (A : Set X)) = closure A := by\n      simpa [closure_closure]\n    -- Rewrite the goal using the two equalities\n    simpa [h_cl, h_int] using hx\n  exact And.intro hP1 hP3",
+    "theorem Topology.isOpen_iff_interior_closure_eq_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed (A : Set X)) :\n    IsOpen (A : Set X) ↔ interior (closure (A : Set X)) = A := by\n  constructor\n  · intro h_open\n    -- For a set that is both open and closed we already have the equality.\n    simpa using\n      Topology.interior_closure_eq_self_of_isClosed_isOpen\n        (X := X) (A := A) hA h_open\n  · intro h_eq\n    -- `interior (closure A)` is open, hence so is `A`.\n    have h_open : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    simpa [h_eq] using h_open",
+    "Lean code not provided due to unresolved compile issues.",
+    "theorem Topology.P3_union_four {X : Type*} [TopologicalSpace X]\n    {A B C D : Set X}\n    (hA : Topology.P3 (X := X) A)\n    (hB : Topology.P3 (X := X) B)\n    (hC : Topology.P3 (X := X) C)\n    (hD : Topology.P3 (X := X) D) :\n    Topology.P3 (X := X) (A ∪ B ∪ C ∪ D) := by\n  -- First union `A` and `B`.\n  have hAB : Topology.P3 (X := X) (A ∪ B) :=\n    Topology.P3_union (X := X) (A := A) (B := B) hA hB\n  -- Then add `C`.\n  have hABC : Topology.P3 (X := X) (A ∪ B ∪ C) := by\n    -- `(A ∪ B ∪ C)` is definitionally `(A ∪ B) ∪ C`.\n    have : Topology.P3 (X := X) ((A ∪ B) ∪ C) :=\n      Topology.P3_union (X := X) (A := (A ∪ B)) (B := C) hAB hC\n    simpa [Set.union_assoc] using this\n  -- Finally, add `D`.\n  have hABCD : Topology.P3 (X := X) ((A ∪ B ∪ C) ∪ D) :=\n    Topology.P3_union (X := X) (A := (A ∪ B ∪ C)) (B := D) hABC hD\n  -- Rewrite to the desired union ordering.\n  simpa [Set.union_assoc] using hABCD"
+  ],
+  "success": true
+}

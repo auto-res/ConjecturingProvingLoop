@@ -1,0 +1,43 @@
+{
+  "times": [
+    233.18284916877747,
+    251.51891493797302
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13568,
+      "prompt_tokens": 48836,
+      "total_tokens": 62404,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 12306,
+      "prompt_tokens": 48966,
+      "total_tokens": 61272,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_closure_right_eq {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A ∪ closure B) = closure (A ∪ B) := by\n  apply subset_antisymm\n  · -- `closure (A ∪ closure B) ⊆ closure (A ∪ B)`\n    have h_subset : (A ∪ closure B : Set X) ⊆ closure (A ∪ B) := by\n      intro x hx\n      cases hx with\n      | inl hxA =>\n          -- `x ∈ A ⊆ A ∪ B ⊆ closure (A ∪ B)`\n          have : (x : X) ∈ A ∪ B := Or.inl hxA\n          exact subset_closure this\n      | inr hxClB =>\n          -- `closure B ⊆ closure (A ∪ B)` by monotonicity of `closure`\n          have h_closure_subset : closure B ⊆ closure (A ∪ B) := by\n            apply closure_mono\n            intro y hy\n            exact Or.inr hy\n          exact h_closure_subset hxClB\n    exact closure_mono h_subset\n  · -- `closure (A ∪ B) ⊆ closure (A ∪ closure B)`\n    have h_subset : (A ∪ B : Set X) ⊆ A ∪ closure B := by\n      intro x hx\n      cases hx with\n      | inl hxA =>\n          exact Or.inl hxA\n      | inr hxB =>\n          exact Or.inr (subset_closure hxB)\n    exact closure_mono h_subset",
+    ""
+  ],
+  "success": true
+}

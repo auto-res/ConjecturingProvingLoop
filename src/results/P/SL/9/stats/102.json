@@ -1,0 +1,26 @@
+{
+  "times": [
+    184.64432001113892
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12131,
+      "prompt_tokens": 15567,
+      "total_tokens": 27698,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_compl_eq_compl_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (Aᶜ) = (interior A)ᶜ := by\n  classical\n  apply subset_antisymm\n  ·\n    exact Topology.closure_compl_subset_compl_interior (A := A)\n  ·\n    intro x hx_not_intA\n    have hx_closure : x ∈ closure (Aᶜ) := by\n      -- Use the neighborhood characterization of closure.\n      have h : ∀ s : Set X, IsOpen s → x ∈ s → (s ∩ Aᶜ).Nonempty := by\n        intro s hs hxs\n        by_cases h_sub : s ⊆ A\n        ·\n          -- Then `x ∈ interior A`, contradicting `hx_not_intA`.\n          have hx_intA : x ∈ interior A := by\n            have h_sub_int : s ⊆ interior A := interior_maximal h_sub hs\n            exact h_sub_int hxs\n          exact (hx_not_intA hx_intA).elim\n        ·\n          -- Find a point of `s` outside `A`.\n          rcases Set.not_subset.1 h_sub with ⟨y, hy_s, hy_notA⟩\n          exact ⟨y, ⟨hy_s, hy_notA⟩⟩\n      exact (mem_closure_iff).2 h\n    exact hx_closure\n"
+  ],
+  "success": true
+}

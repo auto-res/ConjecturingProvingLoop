@@ -1,0 +1,77 @@
+{
+  "times": [
+    164.84771466255188,
+    52.44273567199707,
+    104.7805905342102,
+    61.50621199607849
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12538,
+      "prompt_tokens": 12842,
+      "total_tokens": 25380,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 3896,
+      "prompt_tokens": 13131,
+      "total_tokens": 17027,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 8246,
+      "prompt_tokens": 13258,
+      "total_tokens": 21504,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    },
+    {
+      "completion_tokens": 5133,
+      "prompt_tokens": 13939,
+      "total_tokens": 19072,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_subset_interior_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior A ∩ interior B ⊆ interior (A ∩ B) := by\n  intro x hx\n  -- The intersection of two open interiors is itself open.\n  have hOpen : IsOpen (interior A ∩ interior B) :=\n    (isOpen_interior (A := A)).inter (isOpen_interior (A := B))\n  -- This intersection is contained in `A ∩ B`.\n  have hSub : (interior A ∩ interior B) ⊆ (A ∩ B) := by\n    intro y hy\n    exact And.intro (interior_subset hy.1) (interior_subset hy.2)\n  -- Use the definition of `interior` to exhibit an open neighbourhood of `x`\n  -- contained in `A ∩ B`.\n  exact\n    (mem_interior.2 ⟨interior A ∩ interior B, hOpen, hSub, hx⟩)",
+    "theorem interior_inter_subset_interior_intersection\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior A ∩ interior B ⊆ interior (A ∩ B) := by\n  -- `interior A ∩ interior B` is open because it is the intersection of two open sets.\n  have hOpen : IsOpen (interior A ∩ interior B) := by\n    have hA : IsOpen (interior A) := isOpen_interior\n    have hB : IsOpen (interior B) := isOpen_interior\n    exact hA.inter hB\n  -- Every point of `interior A ∩ interior B` belongs to `A ∩ B`.\n  have hSub : interior A ∩ interior B ⊆ A ∩ B := by\n    intro x hx\n    exact And.intro (interior_subset hx.1) (interior_subset hx.2)\n  -- Apply `interior_maximal` to upgrade the inclusion.\n  exact interior_maximal hOpen hSub",
+    "theorem interior_inter_eq_left_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) :\n    interior (A ∩ B) = A ∩ interior B := by\n  apply subset_antisymm\n  · -- `interior (A ∩ B) ⊆ A ∩ interior B`\n    intro x hx\n    have hAB : x ∈ A ∩ B := interior_subset hx\n    have hxA : x ∈ A := hAB.1\n    have hxIntB : x ∈ interior B :=\n      (interior_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hx\n    exact And.intro hxA hxIntB\n  · -- `A ∩ interior B ⊆ interior (A ∩ B)`\n    intro x hx\n    rcases hx with ⟨hxA, hxIntB⟩\n    rcases (mem_interior.1 hxIntB) with ⟨U, hUopen, hxU, hUsubB⟩\n    let V : Set X := U ∩ A\n    have hVopen : IsOpen V := hUopen.inter hA\n    have hxV : x ∈ V := And.intro hxU hxA\n    have hVsub : V ⊆ A ∩ B := by\n      intro y hy\n      have hyU : y ∈ U := hy.1\n      have hyA : y ∈ A := hy.2\n      have hyB : y ∈ B := hUsubB hyU\n      exact And.intro hyA hyB\n    have : x ∈ interior (A ∩ B) := by\n      apply mem_interior.2\n      exact ⟨V, hVopen, hxV, hVsub⟩\n    exact this",
+    "theorem closure_interior_eq_of_clopen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hAopen : IsOpen A) (hAclosed : IsClosed A) :\n    closure (interior A) = A := by\n  have hInt : interior A = A := hAopen.interior_eq\n  have hCl : closure A = A := hAclosed.closure_eq\n  calc\n    closure (interior A) = closure A := by\n      simpa [hInt]\n    _ = A := hCl"
+  ],
+  "success": true
+}

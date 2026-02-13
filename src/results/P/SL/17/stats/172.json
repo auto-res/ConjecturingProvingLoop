@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.01662182807922
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6021,
+      "prompt_tokens": 29392,
+      "total_tokens": 35413,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.nonempty_interior_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → A.Nonempty → (interior A).Nonempty := by\n  classical\n  intro hP2 hAne\n  rcases hAne with ⟨x, hxA⟩\n  have hxInt : x ∈ interior (closure (interior A)) := hP2 hxA\n  by_cases hIntEmpty : interior A = (∅ : Set X)\n  ·\n    -- If `interior A` is empty, we derive a contradiction from `hxInt`.\n    have hFalse : x ∈ (∅ : Set X) := by\n      simpa [hIntEmpty, closure_empty, interior_empty] using hxInt\n    cases hFalse\n  ·\n    -- Otherwise, `interior A` is non-empty, which is what we wanted.\n    have h_ne : interior A ≠ (∅ : Set X) := hIntEmpty\n    exact (Set.nonempty_iff_ne_empty).2 h_ne"
+  ],
+  "success": true
+}

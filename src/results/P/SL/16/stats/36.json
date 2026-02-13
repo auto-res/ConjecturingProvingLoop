@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.5690495967865
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4346,
+      "prompt_tokens": 6075,
+      "total_tokens": 10421,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.univ_satisfies_P1_P2_P3 {X : Type*} [TopologicalSpace X] :\n    Topology.P1 (X := X) (Set.univ : Set X) ∧\n    Topology.P2 (X := X) (Set.univ : Set X) ∧\n    Topology.P3 (X := X) (Set.univ : Set X) := by\n  -- Prove `P1`.\n  have hP1 : Topology.P1 (X := X) (Set.univ : Set X) := by\n    dsimp [Topology.P1]\n    intro x hx\n    simpa [closure_univ, interior_univ] using hx\n  -- Prove `P2`.\n  have hP2 : Topology.P2 (X := X) (Set.univ : Set X) := by\n    dsimp [Topology.P2]\n    intro x hx\n    simpa [closure_univ, interior_univ] using hx\n  -- Prove `P3`.\n  have hP3 : Topology.P3 (X := X) (Set.univ : Set X) := by\n    dsimp [Topology.P3]\n    intro x hx\n    simpa [closure_univ, interior_univ] using hx\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

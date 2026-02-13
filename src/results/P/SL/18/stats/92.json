@@ -1,0 +1,43 @@
+{
+  "times": [
+    22.858657836914062,
+    89.57752680778503
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1932,
+      "prompt_tokens": 13038,
+      "total_tokens": 14970,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12160
+      }
+    },
+    {
+      "completion_tokens": 5980,
+      "prompt_tokens": 13152,
+      "total_tokens": 19132,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12160
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_univ_of_dense_and_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (A : Set X)) (hP1 : Topology.P1 A) :\n    closure (interior (A : Set X)) = (Set.univ : Set X) := by\n  classical\n  -- From density of `A`, its closure is the whole space.\n  have hClA : closure (A : Set X) = (Set.univ : Set X) :=\n    (Topology.dense_iff_closure_eq_univ).1 hDense\n  -- `P1` gives `A ⊆ closure (interior A)`, hence their closures are related.\n  have hIncl : closure (A : Set X) ⊆ closure (interior (A : Set X)) :=\n    closure_mono hP1\n  -- Put the two inclusions together to get equality.\n  apply Set.Subset.antisymm\n  · -- `closure (interior A)` is certainly contained in `univ`.\n    intro _ _; trivial\n  · -- Using `hClA` and `hIncl`, we have `univ ⊆ closure (interior A)`.\n    have : (Set.univ : Set X) ⊆ closure (interior (A : Set X)) := by\n      simpa [hClA] using hIncl\n    exact this",
+    "theorem closure_subset_closure_interior_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) :\n    closure A ⊆ closure (interior A) := by\n  simpa [closure_closure] using (closure_mono hP1)"
+  ],
+  "success": true
+}

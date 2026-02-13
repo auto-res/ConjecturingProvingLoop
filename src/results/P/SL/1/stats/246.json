@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.83333086967468
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4793,
+      "prompt_tokens": 37559,
+      "total_tokens": 42352,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_interior_of_P1_and_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → Dense A → Dense (interior A) := by\n  intro hP1 hDense\n  -- From `P1`, we have `A ⊆ closure (interior A)`.\n  have hA : (A : Set X) ⊆ closure (interior A) := hP1\n  -- Taking closures preserves inclusion.\n  have hClosure : closure A ⊆ closure (interior A) := by\n    have h := closure_mono hA\n    simpa [closure_closure] using h\n  -- Because `A` is dense, its closure is `univ`.\n  have hUniv : (Set.univ : Set X) ⊆ closure (interior A) := by\n    simpa [hDense.closure_eq] using hClosure\n  -- Conclude that `closure (interior A) = univ`.\n  have hEq : closure (interior A) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro _ _; simp\n    · exact hUniv\n  -- Translate the closure equality into density.\n  exact (dense_iff_closure_eq).2 hEq"
+  ],
+  "success": true
+}

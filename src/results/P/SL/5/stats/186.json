@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.65491676330566
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5166,
+      "prompt_tokens": 31837,
+      "total_tokens": 37003,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_three_subset {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    closure (A : Set X) ∪ closure B ∪ closure C ⊆ closure (A ∪ B ∪ C) := by\n  intro x hx\n  cases hx with\n  | inl hAB =>\n      cases hAB with\n      | inl hxA =>\n          -- Case `x ∈ closure A`\n          have hsubset : (A : Set X) ⊆ A ∪ B ∪ C := by\n            intro y hy\n            exact Or.inl (Or.inl hy)\n          exact (closure_mono hsubset) hxA\n      | inr hxB =>\n          -- Case `x ∈ closure B`\n          have hsubset : (B : Set X) ⊆ A ∪ B ∪ C := by\n            intro y hy\n            exact Or.inl (Or.inr hy)\n          exact (closure_mono hsubset) hxB\n  | inr hxC =>\n      -- Case `x ∈ closure C`\n      have hsubset : (C : Set X) ⊆ A ∪ B ∪ C := by\n        intro y hy\n        exact Or.inr hy\n      exact (closure_mono hsubset) hxC"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    20.088093519210815
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1406,
+      "prompt_tokens": 37764,
+      "total_tokens": 39170,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iUnion_of_isOpen\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X}\n    (hA : ∀ i, IsOpen (A i)) : Topology.P2 (⋃ i, A i) := by\n  -- Each open set `A i` satisfies `P2`.\n  have hA_P2 : ∀ i, Topology.P2 (A i) := by\n    intro i\n    exact Topology.isOpen_implies_P2 (X := X) (A := A i) (hA i)\n  -- Apply the existing union lemma for `P2`.\n  exact Topology.P2_iUnion (X := X) (A := A) hA_P2"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.33790230751038
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6897,
+      "prompt_tokens": 30387,
+      "total_tokens": 37284,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.preimage_interior_subset_interior {X Y : Type*} [TopologicalSpace X]\n    [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {B : Set Y} :\n    f ⁻¹' interior B ⊆ interior (f ⁻¹' B) := by\n  -- The preimage of an open set under a continuous map is open.\n  have h_open : IsOpen (f ⁻¹' interior B) :=\n    (isOpen_interior : IsOpen (interior B)).preimage hf\n  -- Since `interior B ⊆ B`, their preimages satisfy the same inclusion.\n  have h_subset : f ⁻¹' interior B ⊆ f ⁻¹' B := by\n    intro x hx\n    dsimp [Set.preimage] at hx ⊢\n    exact interior_subset hx\n  -- Any open subset of `f ⁻¹' B` is contained in its interior.\n  exact interior_maximal h_subset h_open"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.1906418800354
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4432,
+      "prompt_tokens": 31947,
+      "total_tokens": 36379,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_closure_of_isOpen {X : Type*}\n    [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    closure A = closure (interior (closure A)) := by\n  have hP3 : Topology.P3 A :=\n    Topology.isOpen_implies_P3 (X := X) (A := A) hA\n  exact\n    Topology.closure_eq_closure_interior_closure_of_P3\n      (X := X) (A := A) hP3"
+  ],
+  "success": true
+}

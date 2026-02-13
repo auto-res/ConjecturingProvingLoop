@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.1119065284729
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4689,
+      "prompt_tokens": 8171,
+      "total_tokens": 12860,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iff_exists_open_superset_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P3 A ↔ ∃ U : Set X, IsOpen U ∧ A ⊆ U ∧ U ⊆ closure A := by\n  classical\n  unfold Topology.P3\n  constructor\n  · intro hP3\n    exact ⟨interior (closure A), isOpen_interior, hP3, interior_subset⟩\n  · rintro ⟨U, hU_open, hA_subU, hU_sub_cl⟩\n    have hU_sub_int : U ⊆ interior (closure A) := interior_maximal hU_sub_cl hU_open\n    intro x hxA\n    exact hU_sub_int (hA_subU hxA)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    128.2401692867279
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10087,
+      "prompt_tokens": 40222,
+      "total_tokens": 50309,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P3_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P3 (interior (A : Set X)) := by\n  intro hP2\n  -- Step 1: `P2` propagates from `A` to its interior.\n  have hP2_int : Topology.P2 (interior (A : Set X)) :=\n    (Topology.P2_implies_P2_interior (X := X) (A := A)) hP2\n  -- Step 2: For the open set `interior A`, `P2` and `P3` are equivalent.\n  have hEquiv :=\n    (Topology.P2_iff_P3_of_interior (X := X) (A := A))\n  -- Step 3: Convert `P2` into `P3` via the equivalence.\n  exact (hEquiv).1 hP2_int"
+  ],
+  "success": true
+}

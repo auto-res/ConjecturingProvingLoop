@@ -1,0 +1,43 @@
+{
+  "times": [
+    27.614854335784912,
+    92.76220846176147
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2259,
+      "prompt_tokens": 37967,
+      "total_tokens": 40226,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 6048,
+      "prompt_tokens": 38073,
+      "total_tokens": 44121,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_compl {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (Aᶜ) = frontier A := by\n  classical\n  simpa [frontier] using (Topology.boundary_complement (A := A)).symm",
+    "theorem Topology.closure_diff_closureInterior_subset_frontier\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) \\ closure (interior A) ⊆ frontier A := by\n  intro x hx\n  rcases hx with ⟨hx_cl, hx_not_cl_int⟩\n  have hx_not_int : x ∉ interior A := by\n    intro hx_int\n    have : x ∈ closure (interior A) := subset_closure hx_int\n    exact hx_not_cl_int this\n  exact ⟨hx_cl, hx_not_int⟩"
+  ],
+  "success": true
+}

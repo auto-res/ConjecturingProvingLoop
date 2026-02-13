@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.5437982082367
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5059,
+      "prompt_tokens": 45937,
+      "total_tokens": 50996,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_subset_closed_eq_univ {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hDense : Dense (A : Set X)) (hClosed : IsClosed (B : Set X))\n    (hSub : (A : Set X) ⊆ B) : (B : Set X) = (Set.univ : Set X) := by\n  -- From density of `A` we have `closure A = univ`.\n  have hClosureA : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Since `A ⊆ B` and `B` is closed, `closure A ⊆ B`.\n  have hClosureASubB : closure (A : Set X) ⊆ B := by\n    have : closure (A : Set X) ⊆ closure (B : Set X) := closure_mono hSub\n    simpa [hClosed.closure_eq] using this\n  -- Hence `univ ⊆ B`.\n  have hUnivSubB : (Set.univ : Set X) ⊆ B := by\n    simpa [hClosureA] using hClosureASubB\n  -- Combine the inclusions to obtain the equality.\n  exact Set.Subset.antisymm (by\n    intro x _\n    simp) hUnivSubB"
+  ],
+  "success": true
+}

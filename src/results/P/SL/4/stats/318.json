@@ -1,0 +1,43 @@
+{
+  "times": [
+    81.92159128189087,
+    85.11544704437256
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9203,
+      "prompt_tokens": 49091,
+      "total_tokens": 58294,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8640,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    },
+    {
+      "completion_tokens": 7894,
+      "prompt_tokens": 49197,
+      "total_tokens": 57091,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_frontier_eq_closure_iff_empty_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (frontier A) = closure A ↔ interior A = (∅ : Set X) := by\n  constructor\n  · intro hEq\n    -- `frontier A` is closed, so its closure is itself.\n    have hClosedFront : IsClosed (frontier A) := frontier_isClosed (X := X) (A := A)\n    have hClFront : closure (frontier A) = frontier A := hClosedFront.closure_eq\n    -- Hence `frontier A = closure A`.\n    have hFrontEq : frontier A = closure A := by\n      simpa [hClFront] using hEq\n    -- But `frontier A = closure A \\ interior A`.\n    have hFrontDef :\n        frontier A = closure A \\ interior A :=\n      frontier_eq_closure_diff_interior (X := X) (A := A)\n    -- Combine the two equalities.\n    have hEquality : closure A = closure A \\ interior A := by\n      simpa [hFrontEq] using hFrontDef\n    -- Show that `interior A` is empty.\n    have hIntEmpty : interior A = (∅ : Set X) := by\n      by_contra hNonEmpty\n      rcases (Set.nonempty_iff_ne_empty).mpr hNonEmpty with ⟨x, hxInt⟩\n      have hxClos : x ∈ closure A :=\n        subset_closure (interior_subset hxInt)\n      -- Using `hEquality`, rewrite membership in `closure A`.\n      have hxDiff : x ∈ closure A \\ interior A := by\n        simpa [hEquality] using hxClos\n      exact (hxDiff.2 hxInt).elim\n    exact hIntEmpty\n  · intro hIntEmpty\n    -- If `interior A = ∅`, then `frontier A = closure A`.\n    have hFrontEq : frontier A = closure A :=\n      frontier_eq_closure_of_empty_interior (A := A) hIntEmpty\n    -- Since `frontier A` is closed, its closure is itself.\n    have hClosedFront : IsClosed (frontier A) := frontier_isClosed (X := X) (A := A)\n    have hClFront : closure (frontier A) = frontier A := hClosedFront.closure_eq\n    -- Combine the equalities.\n    simpa [hFrontEq, hClFront]",
+    "theorem frontier_inter_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (A : Set X) ∩ interior (Aᶜ) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    have hxFront : x ∈ frontier A := hx.1\n    have hxIntComp : x ∈ interior (Aᶜ) := hx.2\n    -- `interior (Aᶜ)` is the complement of `closure A`\n    have hIntEq : interior (Aᶜ : Set X) = (closure A)ᶜ :=\n      interior_compl_eq_compl_closure (A := A)\n    have hxNotClosure : x ∉ closure A := by\n      have : x ∈ (closure A)ᶜ := by\n        simpa [hIntEq] using hxIntComp\n      exact this\n    have hxClosure : x ∈ closure A := hxFront.1\n    have hFalse : False := hxNotClosure hxClosure\n    exact False.elim hFalse\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

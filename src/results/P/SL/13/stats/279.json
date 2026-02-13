@@ -1,0 +1,60 @@
+{
+  "times": [
+    18.30927586555481,
+    52.43877029418945,
+    49.543628215789795
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1581,
+      "prompt_tokens": 49383,
+      "total_tokens": 50964,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 3743,
+      "prompt_tokens": 49504,
+      "total_tokens": 53247,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 2275,
+      "prompt_tokens": 49583,
+      "total_tokens": 51858,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_closure_implies_all_P_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h_open : IsOpen (closure (A : Set X))) :\n    Topology.P1 (X := X) (closure (A : Set X)) ∧\n      Topology.P2 (X := X) (closure (A : Set X)) ∧\n        Topology.P3 (X := X) (closure (A : Set X)) := by\n  have hP1 := Topology.isOpen_closure_implies_P1_closure (X := X) (A := A) h_open\n  have hP2 := Topology.isOpen_closure_implies_P2 (X := X) (A := A) h_open\n  have hP3 := Topology.isOpen_closure_implies_P3 (X := X) (A := A) h_open\n  exact ⟨hP1, hP2, hP3⟩",
+    "theorem Topology.dense_implies_all_P_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (A : Set X)) :\n    (Topology.P1 (X := X) (closure (A : Set X))) ∧\n      (Topology.P2 (X := X) (closure (A : Set X))) ∧\n        (Topology.P3 (X := X) (closure (A : Set X))) := by\n  have hP1 : Topology.P1 (X := X) (closure (A : Set X)) :=\n    Topology.dense_implies_P1_closure (X := X) (A := A) hDense\n  have hP2 : Topology.P2 (X := X) (closure (A : Set X)) :=\n    Topology.dense_implies_P2_closure (X := X) (A := A) hDense\n  have hP3 : Topology.P3 (X := X) (closure (A : Set X)) :=\n    Topology.dense_implies_P3_closure (X := X) (A := A) hDense\n  exact And.intro hP1 (And.intro hP2 hP3)",
+    "theorem Topology.interior_closure_eq_univ_iff_closure_eq_univ {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) = (Set.univ : Set X) ↔\n      closure (A : Set X) = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    apply Set.Subset.antisymm\n    · exact Set.subset_univ _\n    · intro x _\n      -- Since `interior (closure A) = univ`, every point belongs to it,\n      -- hence to `closure A`.\n      have : (x : X) ∈ interior (closure (A : Set X)) := by\n        simpa [hInt]\n      exact interior_subset this\n  · intro hCl\n    -- Rewrite using `hCl` and simplify with `interior_univ`.\n    simpa [hCl, interior_univ]"
+  ],
+  "success": true
+}

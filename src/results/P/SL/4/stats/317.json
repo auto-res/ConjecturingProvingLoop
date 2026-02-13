@@ -1,0 +1,43 @@
+{
+  "times": [
+    67.72901749610901,
+    87.95631241798401
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5553,
+      "prompt_tokens": 48932,
+      "total_tokens": 54485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 8113,
+      "prompt_tokens": 49038,
+      "total_tokens": 57151,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_eq_closure_iff_interior_eq_empty\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier A = closure A ↔ interior A = (∅ : Set X) := by\n  constructor\n  · intro hEq\n    -- Rewrite `closure A` using the standard description of the frontier.\n    have hDiff : (closure A : Set X) = closure A \\ interior A := by\n      have h := frontier_eq_closure_diff_interior (X := X) (A := A)\n      simpa [hEq] using h.symm\n    -- Show that `interior A` is contained in `∅`.\n    have hSub : (interior A : Set X) ⊆ (∅ : Set X) := by\n      intro x hxInt\n      -- `x` lies in `closure A` because `interior A ⊆ closure A`.\n      have hxCl : x ∈ closure A :=\n        subset_closure (interior_subset hxInt)\n      -- Using `hDiff`, this membership places `x` in `closure A \\ interior A`,\n      -- forcing `x ∉ interior A`—a contradiction.\n      have hxInDiff : x ∈ closure A \\ interior A := by\n        simpa [hDiff] using hxCl\n      exact (hxInDiff.2) hxInt\n    -- Conclude that `interior A = ∅`.\n    apply Set.Subset.antisymm hSub (Set.empty_subset _)\n  · intro hInt\n    exact frontier_eq_closure_of_empty_interior (A := A) hInt",
+    "theorem frontier_eq_closure_inter_compl_of_open\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    frontier A = closure A ∩ Aᶜ := by\n  -- Start from the general characterization\n  -- `frontier A = closure A ∩ (interior A)ᶜ`.\n  have h :=\n    frontier_eq_closure_inter_compl_interior (X := X) (A := A)\n  -- For an open set `A` we have `interior A = A`, so the right‐hand side\n  -- simplifies to `closure A ∩ Aᶜ`.\n  simpa [hA.interior_eq] using h"
+  ],
+  "success": true
+}

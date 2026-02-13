@@ -1,0 +1,43 @@
+{
+  "times": [
+    77.51598644256592,
+    200.56009483337402
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4557,
+      "prompt_tokens": 40016,
+      "total_tokens": 44573,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    },
+    {
+      "completion_tokens": 10130,
+      "prompt_tokens": 40138,
+      "total_tokens": 50268,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_preimage_subset_preimage_closure\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {f : X → Y} (hf : Continuous f) {B : Set Y} :\n    interior (f ⁻¹' B) ⊆ f ⁻¹' closure B := by\n  intro x hx\n  -- First, view the point as lying in the closure of the preimage.\n  have hxCl : (x : X) ∈ closure (f ⁻¹' B) := subset_closure hx\n  -- Next, apply the previously proved inclusion for closures of preimages.\n  have hIncl :=\n    Topology.continuous_closure_preimage_subset\n      (X := X) (Y := Y) (f := f) hf (B := B)\n  exact hIncl hxCl",
+    ""
+  ],
+  "success": true
+}

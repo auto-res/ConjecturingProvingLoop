@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.20187211036682
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2470,
+      "prompt_tokens": 49936,
+      "total_tokens": 52406,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_interior_inter {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (interior A ∩ interior B) := by\n  -- Both `interior A` and `interior B` are open.\n  have hOpenA : IsOpen (interior A) := isOpen_interior\n  have hOpenB : IsOpen (interior B) := isOpen_interior\n  -- The intersection of two open sets is open, hence satisfies `P1`.\n  exact Topology.P1_inter_of_isOpen\n    (A := interior A) (B := interior B) hOpenA hOpenB"
+  ],
+  "success": true
+}

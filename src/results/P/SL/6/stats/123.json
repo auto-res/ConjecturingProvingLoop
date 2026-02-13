@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.85195231437683
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6379,
+      "prompt_tokens": 18855,
+      "total_tokens": 25234,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem nonempty_interior_closure_of_nonempty_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A : Set X) → A.Nonempty →\n      (interior (closure (A : Set X))).Nonempty := by\n  intro hP1 hNon\n  -- Obtain a point in `interior A` using the existing lemma.\n  have hIntNon : (interior (A : Set X)).Nonempty :=\n    nonempty_interior_of_nonempty_P1 (A := A) hP1 hNon\n  rcases hIntNon with ⟨x, hxIntA⟩\n  -- `interior A` is contained in `interior (closure A)`.\n  have hxIntCl : x ∈ interior (closure (A : Set X)) :=\n    (interior_subset_interior_closure (A := A)) hxIntA\n  exact ⟨x, hxIntCl⟩"
+  ],
+  "success": true
+}

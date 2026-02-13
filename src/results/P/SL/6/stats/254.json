@@ -1,0 +1,26 @@
+{
+  "times": [
+    127.79937672615051
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8884,
+      "prompt_tokens": 40304,
+      "total_tokens": 49188,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem open_closure_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (closure (A : Set X))) (hB : IsOpen (closure B)) :\n    IsOpen (closure (A ∪ B : Set X)) := by\n  have h : IsOpen (closure A ∪ closure B) := hA.union hB\n  simpa [closure_union] using h"
+  ],
+  "success": true
+}

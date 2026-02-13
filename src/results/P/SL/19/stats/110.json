@@ -1,0 +1,26 @@
+{
+  "times": [
+    333.7860436439514
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 24624,
+      "prompt_tokens": 16401,
+      "total_tokens": 41025,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 24256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n      closure (interior A) := by\n  -- First reduction of the innermost four operations.\n  have h₁ :\n      closure (interior (closure (interior A))) = closure (interior A) := by\n    simpa using\n      (Topology.closure_interior_closure_interior_eq_closure_interior\n        (X := X) (A := A))\n  -- Second reduction after replacing `A` by `interior A`.\n  have h₂ :\n      closure (interior (closure (interior (closure (interior A))))) =\n        closure (interior (closure (interior A))) := by\n    simpa using\n      (Topology.closure_interior_closure_interior_closure_eq_closure_interior_closure\n        (X := X) (A := interior A))\n  -- Assemble the reductions.\n  calc\n    closure (interior (closure (interior (closure (interior (closure (interior A)))))))\n        = closure (interior (closure (interior (closure (interior A))))) := by\n          simpa [h₁]\n    _ = closure (interior (closure (interior A))) := by\n          simpa using h₂\n    _ = closure (interior A) := by\n          simpa using h₁"
+  ],
+  "success": true
+}

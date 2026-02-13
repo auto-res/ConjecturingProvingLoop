@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.76541137695312
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8490,
+      "prompt_tokens": 33736,
+      "total_tokens": 42226,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) ⊆ closure (interior (closure A)) := by\n  -- Step 1: enlarge `interior A` to `interior (closure A)` using monotonicity\n  -- of `interior` with respect to the inclusion `A ⊆ closure A`.\n  have h₁ :\n      (interior (A : Set X)) ⊆ interior (closure A) :=\n    interior_mono (subset_closure : (A : Set X) ⊆ closure A)\n  -- Step 2: every set is contained in the closure of itself.\n  have h₂ :\n      (interior (closure A) : Set X) ⊆ closure (interior (closure A)) :=\n    subset_closure\n  -- Combine the two inclusions.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

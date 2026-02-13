@@ -1,0 +1,43 @@
+{
+  "times": [
+    147.78403210639954,
+    63.775583267211914
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10199,
+      "prompt_tokens": 24026,
+      "total_tokens": 34225,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 5115,
+      "prompt_tokens": 24195,
+      "total_tokens": 29310,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_eq {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  calc\n    closure (interior (A ∪ B))\n        = closure (interior A ∪ interior B) := by\n          simpa [interior_union]\n    _   = closure (interior A) ∪ closure (interior B) := by\n          simpa using closure_union (interior A) (interior B)",
+    "theorem Topology.interior_iUnion_of_open {X : Type*} [TopologicalSpace X]\n    {ι : Sort _} {F : ι → Set X} (hF : ∀ i, IsOpen (F i)) :\n    interior (⋃ i, F i) = ⋃ i, F i := by\n  have hOpen : IsOpen (⋃ i, F i) := isOpen_iUnion hF\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

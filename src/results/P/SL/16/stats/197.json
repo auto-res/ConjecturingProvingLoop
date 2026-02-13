@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.38004422187805
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6011,
+      "prompt_tokens": 34563,
+      "total_tokens": 40574,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iInter_subset_iInter_closure_interior\n    {ι X : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    closure (interior (⋂ i, A i : Set X)) ⊆ ⋂ i, closure (interior (A i)) := by\n  intro x hx\n  have hxi : ∀ i, x ∈ closure (interior (A i)) := by\n    intro i\n    -- `interior` is monotone, so transport the basic inclusion\n    have h_subset : interior (⋂ j, A j : Set X) ⊆ interior (A i) := by\n      have h₀ : (⋂ j, A j : Set X) ⊆ A i :=\n        Set.iInter_subset (fun j => A j) i\n      exact interior_mono h₀\n    -- Apply `closure_mono` to obtain the desired membership\n    exact (closure_mono h_subset) hx\n  exact Set.mem_iInter.2 hxi"
+  ],
+  "success": true
+}

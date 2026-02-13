@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.68780183792114
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2511,
+      "prompt_tokens": 34731,
+      "total_tokens": 37242,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_prod_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : A.Nonempty) (hB : B.Nonempty) :\n    (Topology.P1 (A ×ˢ B) ∧ Topology.P2 (A ×ˢ B) ∧ Topology.P3 (A ×ˢ B)) ↔\n      ((Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A) ∧\n        (Topology.P1 B ∧ Topology.P2 B ∧ Topology.P3 B)) := by\n  constructor\n  · -- From the product triple, deduce triples for each factor.\n    rintro ⟨hP1Prod, hP2Prod, hP3Prod⟩\n    -- Extract the `P1` properties.\n    have hP1Factors :=\n      (Topology.P1_prod_iff (A := A) (B := B) hA hB).1 hP1Prod\n    rcases hP1Factors with ⟨hP1A, hP1B⟩\n    -- Extract the `P2` properties.\n    have hP2Factors :=\n      (Topology.P2_prod_iff (A := A) (B := B) hA hB).1 hP2Prod\n    rcases hP2Factors with ⟨hP2A, hP2B⟩\n    -- Extract the `P3` properties.\n    have hP3Factors :=\n      (Topology.P3_prod_iff (A := A) (B := B) hA hB).1 hP3Prod\n    rcases hP3Factors with ⟨hP3A, hP3B⟩\n    -- Assemble the result.\n    exact ⟨⟨hP1A, hP2A, hP3A⟩, ⟨hP1B, hP2B, hP3B⟩⟩\n  · -- From triples for the factors, build the product triple.\n    rintro ⟨hTripleA, hTripleB⟩\n    exact\n      Topology.P123_prod (A := A) (B := B) hTripleA hTripleB"
+  ],
+  "success": true
+}

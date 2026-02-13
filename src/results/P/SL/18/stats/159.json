@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.56205868721008
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4313,
+      "prompt_tokens": 23560,
+      "total_tokens": 27873,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Topology.P2 A := by\n  intro hDenseInt\n  -- From density, obtain `interior (closure (interior A)) = univ`.\n  have hUniv :\n      interior (closure (interior (A : Set X))) = (Set.univ : Set X) :=\n    (Topology.dense_interior_iff_interior_closure_interior_eq_univ\n        (A := A)).1 hDenseInt\n  -- Unfold `P2` and finish the proof.\n  dsimp [Topology.P2]\n  intro x _hxA\n  have hx_univ : (x : X) ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [hUniv] using hx_univ"
+  ],
+  "success": true
+}

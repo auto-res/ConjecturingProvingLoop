@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.367467164993286
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1959,
+      "prompt_tokens": 30705,
+      "total_tokens": 32664,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_closure_interior_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (closure (interior A)) ⊆ closure A := by\n  -- First, eliminate the redundant double closure.\n  have h_eq : closure (closure (interior A)) = closure (interior A) := by\n    simpa [closure_closure]\n  -- Then use the already known inclusion for a single closure of the interior.\n  have h_sub : closure (interior A) ⊆ closure A :=\n    Topology.closure_interior_subset_closure (A := A)\n  simpa [h_eq] using h_sub"
+  ],
+  "success": true
+}

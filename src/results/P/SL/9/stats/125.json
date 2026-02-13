@@ -1,0 +1,26 @@
+{
+  "times": [
+    105.20569705963135
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7674,
+      "prompt_tokens": 19244,
+      "total_tokens": 26918,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.disjoint_closureCompl_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Disjoint (closure (Aᶜ)) (interior A) := by\n  -- `closure (Aᶜ)` is contained in the complement of `interior A`.\n  have hsubset : closure (Aᶜ) ⊆ (interior A)ᶜ :=\n    Topology.closure_compl_subset_compl_interior (A := A)\n  -- Translate this containment into disjointness.\n  exact (Set.disjoint_left).2 (by\n    intro x hx_cl hx_int\n    have : x ∈ (interior A)ᶜ := hsubset hx_cl\n    exact this hx_int)"
+  ],
+  "success": true
+}

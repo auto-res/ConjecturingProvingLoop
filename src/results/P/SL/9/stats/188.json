@@ -1,0 +1,26 @@
+{
+  "times": [
+    99.83642387390137
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8385,
+      "prompt_tokens": 30652,
+      "total_tokens": 39037,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_isOpen_of_discrete {X : Type*} [TopologicalSpace X]\n    [DiscreteTopology X] {A : Set X} :\n    Topology.P2 (A := A) ↔ IsOpen A := by\n  -- In a discrete topology every set is open.\n  have hOpen : IsOpen A := isOpen_discrete _\n  constructor\n  · intro _; exact hOpen\n  · intro _; exact Topology.P2_of_discrete (A := A)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.022347450256348
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2480,
+      "prompt_tokens": 50386,
+      "total_tokens": 52866,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_frontier_subset_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 A ↔ frontier A ⊆ closure (interior A) := by\n  -- First equivalence: `P1 A ↔ closure (interior A) = closure A`.\n  have h₁ : Topology.P1 A ↔ closure (interior A) = closure A :=\n    Topology.P1_iff_closure_interior_eq_closure (A := A)\n  -- Second equivalence: `closure (interior A) = closure A ↔ frontier A ⊆ closure (interior A)`.\n  have h₂ : closure (interior A) = closure A ↔ frontier A ⊆ closure (interior A) :=\n    (Topology.frontier_subset_closure_interior_iff_closure_interior_eq_closure (A := A)).symm\n  -- Combine the two equivalences.\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

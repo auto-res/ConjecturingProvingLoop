@@ -1,0 +1,43 @@
+{
+  "times": [
+    122.35801029205322,
+    205.26764488220215
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9189,
+      "prompt_tokens": 21644,
+      "total_tokens": 30833,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 13524,
+      "prompt_tokens": 21768,
+      "total_tokens": 35292,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_closure_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    closure (interior (closure A)) = closure A := by\n  -- First inclusion: `closure (interior (closure A)) ⊆ closure A`.\n  have h₁ : closure (interior (closure A)) ⊆ closure A := by\n    have hIntSub : interior (closure A) ⊆ closure A := interior_subset\n    exact closure_mono hIntSub\n  -- Second inclusion: `closure A ⊆ closure (interior (closure A))`.\n  have hA_sub : A ⊆ interior (closure A) := by\n    -- `A` is an open subset of `closure A`, hence contained in its interior.\n    exact interior_maximal (subset_closure : A ⊆ closure A) hA\n  have h₂ : closure A ⊆ closure (interior (closure A)) := by\n    have h := closure_mono hA_sub\n    simpa [closure_closure] using h\n  -- Combine the two inclusions to obtain the desired equality.\n  exact Set.Subset.antisymm h₁ h₂",
+    ""
+  ],
+  "success": true
+}

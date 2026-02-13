@@ -1,0 +1,26 @@
+{
+  "times": [
+    189.30919003486633
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11826,
+      "prompt_tokens": 4990,
+      "total_tokens": 16816,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_idempotent_four {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n      closure (interior A) := by\n  -- The three-step idempotency.\n  have h3 :=\n    Topology.closure_interior_idempotent_three (X := X) (A := A)\n  -- Apply `closure ∘ interior` once more to both sides.\n  have h4 :\n      closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n        closure (interior (closure (interior A))) := by\n    simpa using (congrArg (fun S : Set X => closure (interior S)) h3)\n  -- The basic idempotency.\n  have h1 :=\n    Topology.closure_interior_idempotent (X := X) (A := A)\n  -- Assemble the equalities.\n  calc\n    closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n        closure (interior (closure (interior A))) := by\n          simpa using h4\n    _ = closure (interior A) := by\n          simpa using h1"
+  ],
+  "success": true
+}

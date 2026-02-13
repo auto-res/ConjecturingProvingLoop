@@ -1,0 +1,26 @@
+{
+  "times": [
+    112.46305632591248
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8342,
+      "prompt_tokens": 26722,
+      "total_tokens": 35064,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26496
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_univ_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  -- First, translate the density assumption into an interior statement.\n  have hIntUniv :\n      interior (closure (interior (A : Set X))) = (Set.univ : Set X) := by\n    simpa [hDense] using\n      (interior_univ : interior (Set.univ : Set X) = (Set.univ : Set X))\n  -- Monotonicity of `closure` and `interior` yields the key inclusion.\n  have hMono :\n      interior (closure (interior (A : Set X))) ⊆\n        interior (closure (A : Set X)) := by\n    have hCl :\n        closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n      closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n    exact interior_mono hCl\n  -- Hence `univ ⊆ interior (closure A)`.\n  have hUnivSub :\n      (Set.univ : Set X) ⊆ interior (closure (A : Set X)) := by\n    simpa [hIntUniv] using hMono\n  -- The reverse inclusion is trivial.\n  have hSubUniv :\n      interior (closure (A : Set X)) ⊆ (Set.univ : Set X) :=\n    Set.subset_univ _\n  exact Set.Subset.antisymm hSubUniv hUnivSub"
+  ],
+  "success": true
+}

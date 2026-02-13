@@ -1,0 +1,26 @@
+{
+  "times": [
+    12.247986555099487
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 998,
+      "prompt_tokens": 11511,
+      "total_tokens": 12509,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closed_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    Topology.P2 A → Topology.P1 A := by\n  intro hP2\n  -- From closedness, `P2` is equivalent to `P3`.\n  have hP3 : Topology.P3 A :=\n    ((Topology.P2_iff_P3_of_closed (A := A) hA).1) hP2\n  -- A closed set satisfying `P3` also satisfies `P1`.\n  exact (Topology.P3_closed_imp_P1 (A := A) hA) hP3"
+  ],
+  "success": true
+}

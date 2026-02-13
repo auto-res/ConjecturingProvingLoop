@@ -1,0 +1,60 @@
+{
+  "times": [
+    57.91173696517944,
+    135.65657329559326,
+    89.68435883522034
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4034,
+      "prompt_tokens": 45113,
+      "total_tokens": 49147,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    },
+    {
+      "completion_tokens": 10464,
+      "prompt_tokens": 45229,
+      "total_tokens": 55693,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    },
+    {
+      "completion_tokens": 5778,
+      "prompt_tokens": 45344,
+      "total_tokens": 51122,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_frontier_subset_frontier {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (frontier (A : Set X)) ⊆ frontier A := by\n  intro x hx\n  -- Decompose the membership in the frontier of the frontier.\n  have hx_cl_frontier : x ∈ closure (frontier (A : Set X)) := hx.1\n  -- `frontier A ⊆ closure A`, hence their closures relate likewise.\n  have h_closure_subset : closure (frontier (A : Set X)) ⊆ closure (A : Set X) := by\n    have h_sub : frontier (A : Set X) ⊆ closure (A : Set X) := by\n      intro y hy\n      exact hy.1\n    exact closure_mono h_sub\n  -- Therefore `x ∈ closure A`.\n  have hx_clA : x ∈ closure (A : Set X) := h_closure_subset hx_cl_frontier\n  -- Show that `x ∉ interior A`.\n  have hx_not_intA : x ∉ interior (A : Set X) := by\n    intro hx_intA\n    -- Any neighbourhood of `x` meets `frontier A`; take `interior A`.\n    have h_nonempty :\n        ((interior (A : Set X)) ∩ frontier (A : Set X)).Nonempty := by\n      have h := (mem_closure_iff).1 hx_cl_frontier\n      exact h _ isOpen_interior hx_intA\n    rcases h_nonempty with ⟨y, ⟨hy_intA, hy_frontier⟩⟩\n    -- But points of `frontier A` are not in `interior A`, contradiction.\n    exact (hy_frontier.2) hy_intA\n  -- Assemble the two facts to obtain the desired membership in `frontier A`.\n  exact ⟨hx_clA, hx_not_intA⟩",
+    "theorem Topology.closure_eq_interior_union_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = interior A ∪ frontier A := by\n  ext x\n  constructor\n  · intro hx_cl\n    by_cases hx_int : x ∈ interior A\n    · exact Or.inl hx_int\n    · exact Or.inr ⟨hx_cl, hx_int⟩\n  · intro hx\n    cases hx with\n    | inl hx_int =>\n        exact interior_subset hx_int\n    | inr hx_frontier =>\n        exact hx_frontier.1",
+    ""
+  ],
+  "success": true
+}

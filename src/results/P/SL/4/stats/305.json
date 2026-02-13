@@ -1,0 +1,43 @@
+{
+  "times": [
+    70.17655825614929,
+    295.6660122871399
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3101,
+      "prompt_tokens": 46933,
+      "total_tokens": 50034,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 12691,
+      "prompt_tokens": 47055,
+      "total_tokens": 59746,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_interior_eq_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A ∪ interior A) = closure A := by\n  apply subset_antisymm\n  · -- `closure (A ∪ interior A) ⊆ closure A`\n    have h_sub : (A ∪ interior A : Set X) ⊆ closure A := by\n      intro x hx\n      cases hx with\n      | inl hA    => exact subset_closure hA\n      | inr hIntA => exact subset_closure (interior_subset hIntA)\n    exact closure_mono h_sub\n  · -- `closure A ⊆ closure (A ∪ interior A)`\n    have h_sub : (A : Set X) ⊆ A ∪ interior A := by\n      intro x hx\n      exact Or.inl hx\n    exact closure_mono h_sub",
+    ""
+  ],
+  "success": true
+}

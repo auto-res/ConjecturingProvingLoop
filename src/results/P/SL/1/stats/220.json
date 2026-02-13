@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.10545492172241
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2776,
+      "prompt_tokens": 34006,
+      "total_tokens": 36782,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_subset_closure_interior_union_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n  -- Since `B ⊆ A ∪ B`, the corresponding interiors satisfy the same inclusion.\n  have hInt : interior B ⊆ interior (A ∪ B) := by\n    apply interior_mono\n    intro x hx\n    exact Or.inr hx\n  -- Taking closures preserves inclusions.\n  exact closure_mono hInt"
+  ],
+  "success": true
+}

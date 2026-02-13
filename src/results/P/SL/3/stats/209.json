@@ -1,0 +1,60 @@
+{
+  "times": [
+    70.33326649665833,
+    133.56671047210693,
+    30.56259560585022
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5707,
+      "prompt_tokens": 33548,
+      "total_tokens": 39255,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    },
+    {
+      "completion_tokens": 10453,
+      "prompt_tokens": 33722,
+      "total_tokens": 44175,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    },
+    {
+      "completion_tokens": 2489,
+      "prompt_tokens": 33836,
+      "total_tokens": 36325,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_complement_eq_complement_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior ((Aᶜ) : Set X) = (closure (A : Set X))ᶜ := by\n  -- Start from the known relation applied to the complement `Aᶜ`.\n  have h :=\n    closure_compl_eq_complement_interior (A := (Aᶜ : Set X))\n  -- This gives `closure A = (interior (Aᶜ))ᶜ`.\n  have h₁ : closure (A : Set X) = (interior ((Aᶜ) : Set X))ᶜ := by\n    simpa [Set.compl_compl] using h\n  -- Taking complements of both sides yields the desired equality.\n  have h₂ : (closure (A : Set X))ᶜ = interior ((Aᶜ) : Set X) := by\n    have := congrArg Set.compl h₁\n    simpa [Set.compl_compl] using this\n  simpa [Set.compl_compl] using h₂.symm",
+    "theorem interior_compl_eq_complement_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior ((A : Set X)ᶜ) = (closure (A : Set X))ᶜ := by\n  -- First, show `interior (Aᶜ) ⊆ (closure A)ᶜ`.\n  have h₁ : interior ((A : Set X)ᶜ) ⊆ (closure (A : Set X))ᶜ := by\n    intro x hx\n    -- Assume, for a contradiction, that `x ∈ closure A`.\n    by_contra hxCl\n    have hxCl' : (x : X) ∈ closure (A : Set X) := by\n      -- From `hxCl : x ∉ (closure A)ᶜ`, we obtain `x ∈ closure A`.\n      by_cases hmem : (x : X) ∈ closure (A : Set X)\n      · exact hmem\n      · have : (x : X) ∈ (closure (A : Set X))ᶜ := by\n          simpa [hmem] using (byCases_true (p := (x : X) ∈ closure (A : Set X)))\n        exact (hxCl this).elim\n    -- Use `mem_closure_iff` with the open set `interior (Aᶜ)`.\n    have h_nonempty :\n        (interior ((A : Set X)ᶜ) ∩ (A : Set X)).Nonempty := by\n      have h_open : IsOpen (interior ((A : Set X)ᶜ)) := isOpen_interior\n      exact (mem_closure_iff.1 hxCl') _ h_open hx\n    -- But `interior (Aᶜ)` is contained in `Aᶜ`, so the intersection is empty.\n    rcases h_nonempty with ⟨y, ⟨hyInt, hyA⟩⟩\n    have : (y : X) ∈ ((A : Set X)ᶜ) := interior_subset hyInt\n    exact this hyA\n  -- Next, show `(closure A)ᶜ ⊆ interior (Aᶜ)`.\n  have h₂ : (closure (A : Set X))ᶜ ⊆ interior ((A : Set X)ᶜ) := by\n    -- The set `(closure A)ᶜ` is open and contained in `Aᶜ`,\n    -- hence it is contained in `interior (Aᶜ)`.\n    apply interior_maximal\n    · -- `(closure A)ᶜ ⊆ Aᶜ`\n      intro x hx\n      by_contra hA\n      have hxCl : (x : X) ∈ closure (A : Set X) := subset_closure hA\n      exact hx hxCl\n    · -- `(closure A)ᶜ` is open.\n      have : IsOpen ((closure (A : Set X))ᶜ) :=\n        (isClosed_closure : IsClosed (closure (A : Set X))).isOpen_compl\n      simpa using this\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem closure_union_eq_union_closure_left_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsClosed (A : Set X)) :\n    closure ((A ∪ B) : Set X) = A ∪ closure (B : Set X) := by\n  have h := closure_union_eq_union_closure (A := A) (B := B)\n  simpa [hA.closure_eq] using h"
+  ],
+  "success": true
+}

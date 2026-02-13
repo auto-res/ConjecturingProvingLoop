@@ -1,0 +1,43 @@
+{
+  "times": [
+    119.01985096931458,
+    86.95711064338684
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12130,
+      "prompt_tokens": 52713,
+      "total_tokens": 64843,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 6994,
+      "prompt_tokens": 52835,
+      "total_tokens": 59829,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_imp_closureInterior_eq_closureInteriorClosure\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hP1 : Topology.P1 A) :\n    closure (interior A) = closure (interior (closure A)) := by\n  -- We prove the two inclusions separately and then use `Set.Subset.antisymm`.\n  apply Set.Subset.antisymm\n  ·\n    exact\n      closure_interior_subset_closure_interior_closure (X := X) (A := A)\n  ·\n    -- First, note that `interior (closure A) ⊆ closure A`.\n    have h₁ : closure (interior (closure A)) ⊆ closure A := by\n      exact closure_mono (interior_subset : interior (closure A) ⊆ closure A)\n    -- From `P1`, we have `closure A ⊆ closure (interior A)`.\n    have h₂ :\n        closure A ⊆ closure (interior A) :=\n      (Topology.P1_iff_closure_subset_closureInterior (X := X) (A := A)).1 hP1\n    -- Combine the two inclusions.\n    exact Set.Subset.trans h₁ h₂",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.36086344718933
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3324,
+      "prompt_tokens": 39147,
+      "total_tokens": 42471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.denseInterior_implies_P2_closureInterior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) →\n      Topology.P2 (X := X) (closure (interior (A : Set X))) := by\n  intro hDense\n  -- The density assumption yields `closure (interior A) = univ`.\n  have h_closure : closure (interior (A : Set X)) = (Set.univ : Set X) :=\n    hDense.closure_eq\n  -- `P2` holds for `univ`, and rewriting via `h_closure` gives the desired result.\n  simpa [h_closure] using Topology.P2_univ (X := X)"
+  ],
+  "success": true
+}

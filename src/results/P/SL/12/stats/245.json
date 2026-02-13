@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.45620799064636
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3880,
+      "prompt_tokens": 46877,
+      "total_tokens": 50757,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_and_empty_interior_closure_iff_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    (Topology.P3 (X := X) A ∧ interior (closure (A : Set X)) = ∅) ↔ A = ∅ := by\n  constructor\n  · rintro ⟨hP3, hInt⟩\n    -- From `P3`, we have `A ⊆ interior (closure A)`.\n    have h_sub : (A : Set X) ⊆ interior (closure A) := hP3\n    -- Using the hypothesis `interior (closure A) = ∅`, we deduce `A ⊆ ∅`.\n    have h_empty : (A : Set X) ⊆ (∅ : Set X) := by\n      simpa [hInt] using h_sub\n    -- Combine with the trivial inclusion `∅ ⊆ A` to get the desired equality.\n    exact Set.Subset.antisymm h_empty (Set.empty_subset _)\n  · intro hA\n    -- Rewrite everything in terms of `∅`.\n    have hP3 : Topology.P3 (X := X) A := by\n      simpa [hA] using Topology.P3_empty (X := X)\n    have hInt : interior (closure (A : Set X)) = (∅ : Set X) := by\n      simpa [hA] using Topology.interior_closure_empty (X := X)\n    exact And.intro hP3 hInt"
+  ],
+  "success": true
+}

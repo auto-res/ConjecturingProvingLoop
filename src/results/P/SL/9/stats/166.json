@@ -1,0 +1,43 @@
+{
+  "times": [
+    107.2147159576416,
+    49.36716675758362
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8558,
+      "prompt_tokens": 26437,
+      "total_tokens": 34995,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    },
+    {
+      "completion_tokens": 3722,
+      "prompt_tokens": 26547,
+      "total_tokens": 30269,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorCompl_subset_compl_closureInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ) ⊆ (closure (interior A))ᶜ := by\n  intro x hxIntCompl\n  by_cases hMem : x ∈ closure (interior A)\n  ·\n    -- If `x` lies in both sets, we contradict their established disjointness.\n    have hInter : x ∈ closure (interior A) ∩ interior (Aᶜ) :=\n      ⟨hMem, hxIntCompl⟩\n    have : x ∈ (∅ : Set X) := by\n      simpa [Topology.closureInterior_inter_interiorCompl_eq_empty (A := A)] using hInter\n    exact this.elim\n  ·\n    -- Otherwise, `x` belongs to the complement of `closure (interior A)`.\n    simpa [Set.compl_def] using hMem",
+    "theorem Topology.P2_union_three {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : Topology.P2 (A := A)) (hB : Topology.P2 (A := B)) (hC : Topology.P2 (A := C)) :\n    Topology.P2 (A := A ∪ B ∪ C) := by\n  -- First, combine `A` and `B`.\n  have hAB : Topology.P2 (A := A ∪ B) :=\n    Topology.P2_union (A := A) (B := B) hA hB\n  -- Now union the result with `C`.\n  simpa [Set.union_assoc] using\n    (Topology.P2_union (A := A ∪ B) (B := C) hAB hC)"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    48.67912411689758,
+    226.44845008850098
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4125,
+      "prompt_tokens": 20789,
+      "total_tokens": 24914,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 15735,
+      "prompt_tokens": 20892,
+      "total_tokens": 36627,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_of_isClosed_and_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed (A : Set X)) (hP3 : Topology.P3 (A : Set X)) :\n    closure (interior (A : Set X)) = A := by\n  -- From `P3` and the closedness of `A`, we get `A ⊆ interior A`.\n  have h₁ : (A : Set X) ⊆ interior (A : Set X) := by\n    simpa [hA_closed.closure_eq] using hP3\n  -- The interior is always contained in the set itself.\n  have h₂ : interior (A : Set X) ⊆ A := interior_subset (s := A)\n  -- Hence `interior A = A`.\n  have h_int : interior (A : Set X) = A := Set.Subset.antisymm h₂ h₁\n  -- Taking closures yields the desired equality.\n  calc\n    closure (interior (A : Set X)) = closure (A : Set X) := by\n      simpa [h_int]\n    _ = A := hA_closed.closure_eq",
+    "theorem P2_inter_interior {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    Topology.P2 (interior (A : Set X) ∩ interior B) := by\n  -- Both `interior A` and `interior B` are open sets.\n  have hA : IsOpen (interior (A : Set X)) := isOpen_interior\n  have hB : IsOpen (interior (B : Set X)) := isOpen_interior\n  -- Apply the lemma for the intersection of two open sets.\n  simpa using\n    (Topology.P2_inter_of_isOpen\n        (A := interior (A : Set X)) (B := interior (B : Set X)) hA hB)"
+  ],
+  "success": true
+}

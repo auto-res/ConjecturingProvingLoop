@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.65143966674805
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3158,
+      "prompt_tokens": 35383,
+      "total_tokens": 38541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_subset_interior_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ interior (closure A) := by\n  -- First include `A \\ B ⊆ A`, then apply monotonicity of `interior`.\n  have h₁ : interior (A \\ B : Set X) ⊆ interior A :=\n    interior_mono (Set.diff_subset : (A \\ B : Set X) ⊆ A)\n  -- Next, use the general inclusion `interior A ⊆ interior (closure A)`.\n  have h₂ : interior A ⊆ interior (closure A) :=\n    Topology.interior_subset_interior_closure (X := X) (A := A)\n  -- Combine the two inclusions.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

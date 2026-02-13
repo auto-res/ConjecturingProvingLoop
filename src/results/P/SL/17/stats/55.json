@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.579663038253784
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3283,
+      "prompt_tokens": 7763,
+      "total_tokens": 11046,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_sUnion_of_P2 {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    (∀ A, A ∈ 𝒜 → Topology.P2 A) → Topology.P1 (⋃₀ 𝒜) := by\n  intro hP2\n  -- Derive P1 for every set in 𝒜 from the assumed P2 property\n  have hP1 : ∀ A, A ∈ 𝒜 → Topology.P1 A := by\n    intro A hA\n    exact Topology.P2_implies_P1 (A := A) (hP2 A hA)\n  -- Apply the existing `P1_sUnion` theorem\n  exact Topology.P1_sUnion (X := X) (𝒜 := 𝒜) hP1"
+  ],
+  "success": true
+}

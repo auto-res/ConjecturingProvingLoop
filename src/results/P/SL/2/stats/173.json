@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.5679669380188
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3921,
+      "prompt_tokens": 28471,
+      "total_tokens": 32392,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_eq_empty_of_empty_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P2 A → interior A = (∅ : Set X) → A = (∅ : Set X) := by\n  intro hP2 hIntEq\n  have hP1 : Topology.P1 A := Topology.P2_implies_P1 (A := A) hP2\n  exact Topology.P1_implies_eq_empty_of_empty_interior (A := A) hP1 hIntEq"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    28.972275972366333,
+    141.5188386440277
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2424,
+      "prompt_tokens": 29984,
+      "total_tokens": 32408,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    },
+    {
+      "completion_tokens": 10940,
+      "prompt_tokens": 30073,
+      "total_tokens": 41013,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_closure_eq_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = interior (A : Set X) → Topology.P2 A := by\n  intro hEq\n  dsimp [Topology.P2]\n  intro x hxA\n  -- From `hxA : x ∈ A`, deduce `x ∈ interior A` using the equality of closure and interior.\n  have hxIntA : (x : X) ∈ interior (A : Set X) := by\n    have : (x : X) ∈ closure (A : Set X) := subset_closure hxA\n    simpa [hEq] using this\n  -- `interior A` is contained in `interior (closure (interior A))`\n  have hSubset :\n      interior (A : Set X) ⊆ interior (closure (interior (A : Set X))) := by\n    apply interior_mono\n    exact subset_closure\n  exact hSubset hxIntA",
+    "theorem closure_interior_closure_interior_triple_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (A : Set X))))))) =\n      closure (interior (closure (A : Set X))) := by\n  simpa using\n    (closure_interior_closure_interior_double_idempotent\n      (A := closure (A : Set X)))"
+  ],
+  "success": true
+}

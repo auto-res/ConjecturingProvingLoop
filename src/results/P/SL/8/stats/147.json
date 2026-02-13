@@ -1,0 +1,43 @@
+{
+  "times": [
+    91.44093823432922,
+    49.76617980003357
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6551,
+      "prompt_tokens": 20784,
+      "total_tokens": 27335,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    },
+    {
+      "completion_tokens": 3604,
+      "prompt_tokens": 20890,
+      "total_tokens": 24494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem eq_interiorClosure_imp_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : A = interior (closure A)) :\n    Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x hx\n  simpa [h] using hx",
+    "theorem closureInteriorClosureInterior_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior A))) ⊆ closure A := by\n  -- We already have `interior (closure (interior A)) ⊆ closure A`.\n  have h :\n      interior (closure (interior A)) ⊆ closure A :=\n    interior_closure_interior_subset_closure (X := X) (A := A)\n  -- Taking closures preserves inclusions.\n  simpa [closure_closure] using closure_mono h"
+  ],
+  "success": true
+}

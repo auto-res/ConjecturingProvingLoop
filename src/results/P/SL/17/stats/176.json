@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.932551860809326
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2578,
+      "prompt_tokens": 30968,
+      "total_tokens": 33546,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_isOpen_right {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP2A : Topology.P2 A) (hOpenB : IsOpen B) :\n    Topology.P2 (A ∩ B) := by\n  -- Swap the roles of `A` and `B` and reuse the existing left‐hand variant.\n  have h := Topology.P2_inter_isOpen_left (A := B) (B := A) hOpenB hP2A\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

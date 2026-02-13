@@ -1,0 +1,26 @@
+{
+  "times": [
+    13.32725715637207
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 973,
+      "prompt_tokens": 30268,
+      "total_tokens": 31241,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_mono {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 A → (A : Set X) ⊆ B →\n      (A : Set X) ⊆ closure (interior (B : Set X)) := by\n  intro hP1 hAB\n  dsimp [Topology.P1] at hP1\n  intro x hxA\n  -- `P1` yields membership of `x` in `closure (interior A)`.\n  have hx_clA : x ∈ closure (interior (A : Set X)) := hP1 hxA\n  -- Monotonicity: `closure (interior A) ⊆ closure (interior B)`.\n  have hSub : closure (interior (A : Set X)) ⊆\n      closure (interior (B : Set X)) := by\n    have hInt : interior (A : Set X) ⊆ interior (B : Set X) :=\n      interior_mono hAB\n    exact closure_mono hInt\n  -- Conclude the desired membership.\n  exact hSub hx_clA"
+  ],
+  "success": true
+}

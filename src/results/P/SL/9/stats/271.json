@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.9312391281128
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7774,
+      "prompt_tokens": 45833,
+      "total_tokens": 53607,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_union_eq_union_frontier_of_open_disjoint\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X))\n    (hAB : Disjoint (A : Set X) B) :\n    frontier (A ∪ B : Set X) = frontier A ∪ frontier B := by\n  classical\n  -- One inclusion is already available.\n  have h₁ :\n      frontier (A ∪ B : Set X) ⊆ frontier A ∪ frontier B :=\n    frontier_union_subset_of_open (A := A) (B := B) hA hB\n  -- For the reverse inclusion, treat each frontier separately.\n  have h₂ :\n      frontier A ∪ frontier B ⊆ frontier (A ∪ B : Set X) := by\n    intro x hx\n    cases hx with\n    | inl hxA =>\n        -- `x` lies in the frontier of `A`.\n        have hx_clA : x ∈ closure (A : Set X) := hxA.1\n        have hx_not_intA : x ∉ interior (A : Set X) := hxA.2\n        -- `interior A = A` since `A` is open.\n        have h_intA : interior (A : Set X) = A := hA.interior_eq\n        have hx_not_A : x ∉ A := by\n          simpa [h_intA] using hx_not_intA\n        -- Show that `x ∉ B`.\n        have hx_not_B : x ∉ B := by\n          intro hxB\n          -- Every open neighbourhood of `x` meets `A`, contradiction with disjointness.\n          have hForall := (mem_closure_iff).1 hx_clA\n          have h_nonempty : ((B : Set X) ∩ A).Nonempty :=\n            hForall B hB hxB\n          have h_empty : (A ∩ B : Set X) = ∅ := hAB.eq_bot\n          have : (A ∩ B : Set X).Nonempty := by\n            -- Convert `B ∩ A` to `A ∩ B`.\n            simpa [Set.inter_comm] using h_nonempty\n          simpa [h_empty] using this\n        -- Membership in the closure of the union.\n        have hx_cl_union : x ∈ closure (A ∪ B : Set X) :=\n          (closure_mono (by\n            intro y hy; exact Or.inl hy)) hx_clA\n        -- `A ∪ B` is open, hence its interior equals itself.\n        have h_int_union : interior (A ∪ B : Set X) = A ∪ B := by\n          have h_open_union : IsOpen (A ∪ B) := IsOpen.union hA hB\n          simpa using h_open_union.interior_eq\n        -- `x` is not in the interior of the union.\n        have hx_not_int_union : x ∉ interior (A ∪ B : Set X) := by\n          have : x ∉ A ∪ B := by\n            intro h_in\n            cases h_in with\n            | inl hA_in => exact hx_not_A hA_in\n            | inr hB_in => exact hx_not_B hB_in\n          simpa [h_int_union] using this\n        exact ⟨hx_cl_union, hx_not_int_union⟩\n    | inr hxB =>\n        -- Symmetric argument with roles of `A` and `B` swapped.\n        have hx_clB : x ∈ closure (B : Set X) := hxB.1\n        have hx_not_intB : x ∉ interior (B : Set X) := hxB.2\n        have h_intB : interior (B : Set X) = B := hB.interior_eq\n        have hx_not_B : x ∉ B := by\n          simpa [h_intB] using hx_not_intB\n        -- Show `x ∉ A`.\n        have hx_not_A : x ∉ A := by\n          intro hxA\n          have hForall := (mem_closure_iff).1 hx_clB\n          have h_nonempty : ((A : Set X) ∩ B).Nonempty :=\n            hForall A hA hxA\n          have h_empty : (A ∩ B : Set X) = ∅ := hAB.eq_bot\n          have : (A ∩ B : Set X).Nonempty := by\n            simpa using h_nonempty\n          simpa [h_empty] using this\n        have hx_cl_union : x ∈ closure (A ∪ B : Set X) :=\n          (closure_mono (by\n            intro y hy; exact Or.inr hy)) hx_clB\n        have h_int_union : interior (A ∪ B : Set X) = A ∪ B := by\n          have h_open_union : IsOpen (A ∪ B) := IsOpen.union hA hB\n          simpa using h_open_union.interior_eq\n        have hx_not_int_union : x ∉ interior (A ∪ B : Set X) := by\n          have : x ∉ A ∪ B := by\n            intro h_in\n            cases h_in with\n            | inl hA_in => exact hx_not_A hA_in\n            | inr hB_in => exact hx_not_B hB_in\n          simpa [h_int_union] using this\n        exact ⟨hx_cl_union, hx_not_int_union⟩\n  exact subset_antisymm h₁ h₂"
+  ],
+  "success": true
+}

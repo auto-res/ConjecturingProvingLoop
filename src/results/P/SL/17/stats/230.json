@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.689871072769165
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2693,
+      "prompt_tokens": 41475,
+      "total_tokens": 44168,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_union_subset_union_frontier {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    frontier (A ∪ B) ⊆ frontier A ∪ frontier B := by\n  intro x hx\n  rcases hx with ⟨hClUnion, hNotIntUnion⟩\n  -- `x` lies in either `closure A` or `closure B`\n  have hCl : x ∈ closure A ∪ closure B := by\n    simpa [closure_union] using hClUnion\n  -- The interiors satisfy `interior A ∪ interior B ⊆ interior (A ∪ B)`\n  have hIntSubset : interior A ∪ interior B ⊆ interior (A ∪ B) := by\n    intro y hy\n    cases hy with\n    | inl hIntA =>\n        exact\n          (interior_mono (Set.subset_union_left : A ⊆ A ∪ B)) hIntA\n    | inr hIntB =>\n        exact\n          (interior_mono (Set.subset_union_right : B ⊆ A ∪ B)) hIntB\n  -- Case analysis on which closure contains `x`\n  cases hCl with\n  | inl hClA =>\n      have hNotIntA : x ∉ interior A := by\n        intro hIntA\n        have : x ∈ interior (A ∪ B) := hIntSubset (Or.inl hIntA)\n        exact hNotIntUnion this\n      exact Or.inl ⟨hClA, hNotIntA⟩\n  | inr hClB =>\n      have hNotIntB : x ∉ interior B := by\n        intro hIntB\n        have : x ∈ interior (A ∪ B) := hIntSubset (Or.inr hIntB)\n        exact hNotIntUnion this\n      exact Or.inr ⟨hClB, hNotIntB⟩"
+  ],
+  "success": true
+}

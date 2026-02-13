@@ -1,0 +1,43 @@
+{
+  "times": [
+    66.87237787246704,
+    106.16280603408813
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2599,
+      "prompt_tokens": 39580,
+      "total_tokens": 42179,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 6578,
+      "prompt_tokens": 39686,
+      "total_tokens": 46264,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_subset_union_frontier\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier ((A ∩ B) : Set X) ⊆ frontier A ∪ frontier B := by\n  simpa [frontier] using\n    (Topology.boundary_inter_subset_union_boundary (A := A) (B := B))",
+    "theorem frontier_eq_empty_of_discrete\n    {X : Type*} [TopologicalSpace X] [DiscreteTopology X] (A : Set X) :\n    frontier (A : Set X) = (∅ : Set X) := by\n  classical\n  -- In a discrete space, every set is both closed and open.\n  have h_closure : closure (A : Set X) = A := (isClosed_discrete _).closure_eq\n  have h_interior : interior (A : Set X) = A := (isOpen_discrete _).interior_eq\n  -- Hence the frontier, defined as `closure A \\ interior A`, is empty.\n  simp [frontier, h_closure, h_interior, Set.diff_self]"
+  ],
+  "success": true
+}

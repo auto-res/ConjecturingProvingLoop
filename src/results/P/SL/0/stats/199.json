@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.55800151824951
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3286,
+      "prompt_tokens": 33561,
+      "total_tokens": 36847,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem compl_closed_has_all_Ps {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    Topology.P1 (Aᶜ) ∧ Topology.P2 (Aᶜ) ∧ Topology.P3 (Aᶜ) := by\n  have hOpen : IsOpen ((Aᶜ) : Set X) := hA.isOpen_compl\n  exact Topology.isOpen_has_all_Ps (X := X) (A := (Aᶜ : Set X)) hOpen"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    91.69303822517395
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7489,
+      "prompt_tokens": 17129,
+      "total_tokens": 24618,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_closure_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense A ↔ interior (closure A) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    exact Topology.interior_closure_eq_univ_of_dense (A := A) hDense\n  · intro hInt\n    -- First, deduce `closure A = Set.univ`.\n    have h_closure_univ : closure A = (Set.univ : Set X) := by\n      apply Set.Subset.antisymm\n      · intro _x _hx; simp\n      ·\n        have h_subset : interior (closure A) ⊆ closure A := interior_subset\n        simpa [hInt] using h_subset\n    -- Build the desired `Dense A`.\n    have hDense : Dense A := by\n      intro x\n      have : x ∈ (Set.univ : Set X) := by simp\n      simpa [h_closure_univ] using this\n    exact hDense"
+  ],
+  "success": true
+}

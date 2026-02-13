@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.869853496551514
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4187,
+      "prompt_tokens": 28802,
+      "total_tokens": 32989,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_subset_interior_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ B)) ⊆ interior (closure A ∩ closure B) := by\n  -- First, show the underlying inclusion for the closed sets themselves.\n  have h_subset : closure (A ∩ B) ⊆ closure A ∩ closure B := by\n    intro x hx\n    have hxA : x ∈ closure A :=\n      (closure_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)) hx\n    have hxB : x ∈ closure B :=\n      (closure_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hx\n    exact And.intro hxA hxB\n  -- Taking interiors preserves inclusions.\n  exact interior_mono h_subset"
+  ],
+  "success": true
+}

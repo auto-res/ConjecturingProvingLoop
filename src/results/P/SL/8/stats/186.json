@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.03465986251831
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3704,
+      "prompt_tokens": 27253,
+      "total_tokens": 30957,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem closed_P2_inter {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_closed : IsClosed A) (hB_closed : IsClosed B)\n    (hP2A : Topology.P2 A) (hP2B : Topology.P2 B) :\n    Topology.P2 (A ∩ B) := by\n  -- `A` and `B` are closed and satisfy `P2`, hence they are open.\n  have hOpenA : IsOpen A :=\n    Topology.closed_P2_isOpen (X := X) (A := A) hA_closed hP2A\n  have hOpenB : IsOpen B :=\n    Topology.closed_P2_isOpen (X := X) (A := B) hB_closed hP2B\n  -- The intersection of two open sets is open, and open sets satisfy `P2`.\n  simpa using\n    isOpen_inter_imp_P2 (X := X) (A := A) (B := B) hOpenA hOpenB"
+  ],
+  "success": true
+}

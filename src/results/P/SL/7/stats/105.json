@@ -1,0 +1,43 @@
+{
+  "times": [
+    68.8313455581665,
+    257.1206374168396
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3275,
+      "prompt_tokens": 15036,
+      "total_tokens": 18311,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    },
+    {
+      "completion_tokens": 17748,
+      "prompt_tokens": 15158,
+      "total_tokens": 32906,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosure_eq_closure_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  refine Set.Subset.antisymm ?_ ?_\n  ·\n    have hSub : (interior (closure (A : Set X)) : Set X) ⊆ closure (A : Set X) :=\n      interior_subset\n    exact closure_mono hSub\n  ·\n    have hA_sub : (A : Set X) ⊆ interior (closure (A : Set X)) :=\n      interior_maximal (subset_closure : (A : Set X) ⊆ closure A) hA\n    exact closure_mono hA_sub",
+    ""
+  ],
+  "success": true
+}

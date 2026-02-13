@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.6977379322052
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3263,
+      "prompt_tokens": 13043,
+      "total_tokens": 16306,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11136
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_interior_closure_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (X := X) (interior (closure (interior A))) := by\n  have h_open : IsOpen (interior (closure (interior A))) := isOpen_interior\n  exact\n    Topology.isOpen_implies_P1\n      (X := X)\n      (A := interior (closure (interior A)))\n      h_open"
+  ],
+  "success": true
+}

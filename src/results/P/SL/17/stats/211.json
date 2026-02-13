@@ -1,0 +1,43 @@
+{
+  "times": [
+    162.6595425605774,
+    77.85249710083008
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11431,
+      "prompt_tokens": 37137,
+      "total_tokens": 48568,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5991,
+      "prompt_tokens": 37211,
+      "total_tokens": 43202,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_idempotent_iter6 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure (interior A)))))))))))) =\n      closure (interior A) := by\n  -- Apply the iterated idempotence established at the previous step.\n  have h5 :\n      closure (interior (closure (interior (closure (interior\n        (closure (interior (closure (interior A))))))))) =\n        closure (interior A) :=\n    Topology.closure_interior_idempotent_iter5 (A := A)\n  -- Rewrite using `h5` and a single additional application of idempotence.\n  calc\n    closure (interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure (interior A)))))))))))) =\n        closure (interior (closure (interior A))) := by\n          simpa [h5]\n    _ = closure (interior A) := by\n          simpa using Topology.closure_interior_idempotent (A := A)",
+    "theorem Topology.closure_interior_subset_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    closure (interior A) ⊆ A := by\n  -- First, by monotonicity of `closure`, we have\n  -- `closure (interior A) ⊆ closure A`.\n  have h : closure (interior A) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  -- Since `A` is closed, `closure A = A`; rewrite to conclude.\n  simpa [hA.closure_eq] using h"
+  ],
+  "success": true
+}

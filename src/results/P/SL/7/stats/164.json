@@ -1,0 +1,26 @@
+{
+  "times": [
+    105.15912461280823
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8004,
+      "prompt_tokens": 25423,
+      "total_tokens": 33427,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_singleton_of_T1\n    {X : Type*} [TopologicalSpace X] [T1Space X] {x : X} :\n    Topology.P2 ({x} : Set X) ↔ Topology.P3 ({x} : Set X) := by\n  have hP2 : Topology.P2 ({x} : Set X) ↔ IsOpen ({x} : Set X) :=\n    Topology.P2_singleton_iff_isOpen_of_T1 (x := x)\n  have hP3 : Topology.P3 ({x} : Set X) ↔ IsOpen ({x} : Set X) :=\n    Topology.P3_singleton_iff_isOpen_of_T1 (x := x)\n  simpa using hP2.trans hP3.symm"
+  ],
+  "success": true
+}

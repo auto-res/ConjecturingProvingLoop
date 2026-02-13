@@ -1,0 +1,26 @@
+{
+  "times": [
+    57.13092565536499
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4643,
+      "prompt_tokens": 39405,
+      "total_tokens": 44048,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_iUnion_interior_subset_closure_interior_iUnion\n    {ι : Sort _} {X : Type _} [TopologicalSpace X] (A : ι → Set X) :\n    closure (⋃ i, interior (A i : Set X)) ⊆\n      closure (interior (⋃ i, A i : Set X)) := by\n  -- First, show that the union of the interiors is contained in the\n  -- interior of the union.\n  have hSub :\n      (⋃ i, interior (A i : Set X)) ⊆ interior (⋃ i, A i : Set X) := by\n    intro y hy\n    rcases Set.mem_iUnion.1 hy with ⟨i, hyInt⟩\n    -- `interior (A i)` sits inside the desired interior by monotonicity.\n    have hIntSub :\n        interior (A i : Set X) ⊆ interior (⋃ j, A j : Set X) := by\n      apply interior_mono\n      intro z hz\n      exact Set.mem_iUnion.2 ⟨i, hz⟩\n    exact hIntSub hyInt\n  -- Taking closures preserves inclusions.\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

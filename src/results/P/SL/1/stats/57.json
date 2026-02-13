@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.13065576553345
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3106,
+      "prompt_tokens": 8599,
+      "total_tokens": 11705,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Topology.P3 (closure A) := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hx\n  have hEq : closure A = (Set.univ : Set X) :=\n    Topology.closure_eq_univ_of_dense_interior (A := A) hDense\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [closure_closure, hEq, interior_univ] using this"
+  ],
+  "success": true
+}

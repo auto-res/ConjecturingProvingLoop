@@ -1,0 +1,43 @@
+{
+  "times": [
+    455.0527837276459,
+    71.06571173667908
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 33489,
+      "prompt_tokens": 20776,
+      "total_tokens": 54265,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 33216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 5084,
+      "prompt_tokens": 20890,
+      "total_tokens": 25974,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.compl_closure_subset_interior_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (closure (A : Set X))ᶜ ⊆ interior ((A : Set X)ᶜ) := by\n  classical\n  -- The complement of the closure is open.\n  have h_open : IsOpen ((closure (A : Set X))ᶜ) :=\n    (isClosed_closure : IsClosed (closure (A : Set X))).isOpen_compl\n  -- The complement of the closure is contained in the complement of `A`.\n  have h_subset_compl : ((closure (A : Set X))ᶜ : Set X) ⊆ (A : Set X)ᶜ := by\n    intro x hx\n    by_contra hA\n    -- `hA : x ∈ A`\n    have hx_closure : x ∈ closure (A : Set X) := subset_closure hA\n    have : False := hx hx_closure\n    exact this\n  -- Use the maximality property of `interior` to conclude.\n  exact interior_maximal h_subset_compl h_open",
+    "theorem Topology.interior_closure_eq_interior_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed (A : Set X)) :\n    interior (closure (A : Set X)) = interior A := by\n  simpa [hA_closed.closure_eq]"
+  ],
+  "success": true
+}

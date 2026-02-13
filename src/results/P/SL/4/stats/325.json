@@ -1,0 +1,26 @@
+{
+  "times": [
+    47.34570074081421
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4855,
+      "prompt_tokens": 50353,
+      "total_tokens": 55208,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_closure_eq_empty_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → frontier (closure A) = (∅ : Set X) := by\n  intro hDense\n  have h_closure_univ : (closure A : Set X) = Set.univ := hDense.closure_eq\n  simpa [h_closure_univ, frontier_univ_eq_empty (X := X)]"
+  ],
+  "success": true
+}

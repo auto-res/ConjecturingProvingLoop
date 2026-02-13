@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.38362646102905
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4346,
+      "prompt_tokens": 37767,
+      "total_tokens": 42113,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_exists_open_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A ↔ ∃ U : Set X, IsOpen U ∧ U ⊆ A ∧ A ⊆ closure U := by\n  constructor\n  · intro hP1\n    refine ⟨interior A, isOpen_interior, interior_subset, ?_⟩\n    simpa using hP1\n  · rintro ⟨U, hUopen, hUsubA, hAclU⟩\n    dsimp [Topology.P1]\n    intro x hxA\n    have hx_clU : x ∈ closure U := hAclU hxA\n    have hUsubInt : (U : Set X) ⊆ interior A :=\n      interior_maximal hUsubA hUopen\n    have h_cl_subset : closure U ⊆ closure (interior A) :=\n      closure_mono hUsubInt\n    exact h_cl_subset hx_clU"
+  ],
+  "success": true
+}

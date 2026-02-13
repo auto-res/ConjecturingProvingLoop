@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.17820239067078
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4977,
+      "prompt_tokens": 12329,
+      "total_tokens": 17306,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X)) ∪ closure (interior B) ⊆\n      closure (interior (A ∪ B)) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      -- Handle the case `x ∈ closure (interior A)`.\n      have h_sub : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        -- Since `A ⊆ A ∪ B`, their interiors satisfy the same inclusion.\n        have h_int : (interior A : Set X) ⊆ interior (A ∪ B) := by\n          have : (A : Set X) ⊆ A ∪ B := Set.subset_union_left\n          exact interior_mono this\n        -- Taking closures preserves the inclusion.\n        exact closure_mono h_int\n      exact h_sub hA\n  | inr hB =>\n      -- Symmetric argument for the case `x ∈ closure (interior B)`.\n      have h_sub : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n        have h_int : (interior B : Set X) ⊆ interior (A ∪ B) := by\n          have : (B : Set X) ⊆ A ∪ B := Set.subset_union_right\n          exact interior_mono this\n        exact closure_mono h_int\n      exact h_sub hB"
+  ],
+  "success": true
+}

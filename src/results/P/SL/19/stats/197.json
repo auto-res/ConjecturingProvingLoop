@@ -1,0 +1,26 @@
+{
+  "times": [
+    165.5248680114746
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12819,
+      "prompt_tokens": 30921,
+      "total_tokens": 43740,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_closure_compl_eq_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A ∩ closure (Aᶜ) = frontier A := by\n  ext x\n  constructor\n  · -- `→`  direction\n    intro hx\n    rcases hx with ⟨hxClosA, hxClosCompl⟩\n    have hxNotInt : x ∉ interior A := by\n      intro hInt\n      -- Since `x ∈ closure (Aᶜ)`, every open neighbourhood of `x`\n      -- meets `Aᶜ`. Taking `interior A`, we obtain a contradiction.\n      have hNonempty :=\n        (mem_closure_iff.1 hxClosCompl) (interior A) isOpen_interior hInt\n      rcases hNonempty with ⟨y, ⟨hyInt, hyCompl⟩⟩\n      have hyA : y ∈ A := interior_subset hyInt\n      exact hyCompl hyA\n    exact And.intro hxClosA hxNotInt\n  · -- `←` direction\n    intro hxFront\n    have hxClosA : x ∈ closure A := hxFront.1\n    have hxClosCompl : x ∈ closure (Aᶜ) :=\n      (Topology.frontier_subset_closure_compl (A := A)) hxFront\n    exact And.intro hxClosA hxClosCompl"
+  ],
+  "success": true
+}

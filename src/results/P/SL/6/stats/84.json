@@ -1,0 +1,77 @@
+{
+  "times": [
+    126.28114819526672,
+    121.03770184516907,
+    70.10010170936584,
+    140.85211181640625
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9971,
+      "prompt_tokens": 12310,
+      "total_tokens": 22281,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 8564,
+      "prompt_tokens": 12441,
+      "total_tokens": 21005,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 4920,
+      "prompt_tokens": 12520,
+      "total_tokens": 17440,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    },
+    {
+      "completion_tokens": 9197,
+      "prompt_tokens": 12758,
+      "total_tokens": 21955,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply subset_antisymm\n  · -- `⊆` direction\n    have h : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    exact closure_mono h\n  · -- `⊇` direction\n    have h : interior A ⊆ interior (closure (interior A)) :=\n      interior_maximal (subset_closure : interior A ⊆ closure (interior A))\n        isOpen_interior\n    exact closure_mono h",
+    "import Mathlib\n\nnamespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\ntheorem interior_closure_interior_subset_closure {A : Set X} :\n    interior (closure (interior A)) ⊆ interior (closure A) := by\n  -- First, from `interior A ⊆ A` we obtain\n  -- `closure (interior A) ⊆ closure A`.\n  have h₁ : closure (interior A) ⊆ closure A := by\n    have h : interior A ⊆ (A : Set X) := interior_subset\n    exact closure_mono h\n  -- Then apply monotonicity of `interior`.\n  exact interior_mono h₁\n\nend Topology",
+    "theorem closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (A : Set X))))\n      = closure (interior A) := by\n  -- First inclusion: `⊆`.\n  have h₁ :\n      closure (interior (closure (interior A))) ⊆ closure (interior A) := by\n    exact closure_mono\n      (interior_subset :\n        interior (closure (interior A)) ⊆ closure (interior A))\n  -- Second inclusion: `⊇`.\n  have h₂ :\n      closure (interior A) ⊆ closure (interior (closure (interior A))) := by\n    have h :\n        interior A ⊆ interior (closure (interior A)) := by\n      exact interior_mono\n        (subset_closure : (interior A) ⊆ closure (interior A))\n    exact closure_mono h\n  exact subset_antisymm h₁ h₂",
+    "theorem nonempty_interior_of_nonempty_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (A : Set X)) (hNon : (A : Set X).Nonempty) :\n    (interior (A : Set X)).Nonempty := by\n  classical\n  by_contra hInt\n  -- From `¬ (interior A).Nonempty`, deduce `interior A = ∅`.\n  have hIntEmpty : interior (A : Set X) = (∅ : Set X) :=\n    (Set.not_nonempty_iff_eq_empty).1 hInt\n  -- Hence its closure is also empty.\n  have hClosureEmpty : closure (interior (A : Set X)) = (∅ : Set X) := by\n    simpa [hIntEmpty, closure_empty] using rfl\n  -- Pick an element of `A` (it exists by `hNon`).\n  rcases hNon with ⟨x, hxA⟩\n  -- `P1` puts this element inside the (empty) closure, contradiction.\n  have : x ∈ closure (interior (A : Set X)) := hP1 hxA\n  simpa [hClosureEmpty] using this"
+  ],
+  "success": true
+}

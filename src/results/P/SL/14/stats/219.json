@@ -1,0 +1,43 @@
+{
+  "times": [
+    108.17302179336548,
+    106.79793190956116
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5222,
+      "prompt_tokens": 40621,
+      "total_tokens": 45843,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    },
+    {
+      "completion_tokens": 5690,
+      "prompt_tokens": 40832,
+      "total_tokens": 46522,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_has_P1_P2_P3_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    Topology.P1 (closure A) ∧ Topology.P2 (closure A) ∧ Topology.P3 (closure A) := by\n  have hP1 : Topology.P1 (closure A) :=\n    Topology.closure_has_P1_of_isOpen (X := X) (A := A) hA\n  have hP2 : Topology.P2 (closure A) :=\n    Topology.P2_of_isOpen_closure (X := X) (A := A) hA\n  have hP3 : Topology.P3 (closure A) :=\n    Topology.P3_of_isOpen_closure (X := X) (A := A) hA\n  exact ⟨hP1, hP2, hP3⟩",
+    "theorem Topology.P2_and_P3_of_isOpen_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_open : IsOpen (closure (A : Set X))) :\n    Topology.P2 (closure A) ∧ Topology.P3 (closure A) := by\n  have hP2 : Topology.P2 (closure A) :=\n    (Topology.P2_of_isOpen_closure (X := X) (A := A)) h_open\n  have hP3 : Topology.P3 (closure A) :=\n    ((Topology.P3_closure_iff_isOpen_closure (X := X) (A := A)).2) h_open\n  exact ⟨hP2, hP3⟩"
+  ],
+  "success": true
+}

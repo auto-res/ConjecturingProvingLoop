@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.82112860679626
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4772,
+      "prompt_tokens": 7804,
+      "total_tokens": 12576,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Dense (interior A)) : Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x hx\n  -- First, show that `closure A = univ`.\n  have hclosureA : closure A = (Set.univ : Set X) := by\n    -- Since `interior A ⊆ A`, we get `closure (interior A) ⊆ closure A`.\n    have hmono : closure (interior A) ⊆ closure A :=\n      closure_mono (interior_subset : (interior A : Set X) ⊆ A)\n    -- But `closure (interior A) = univ` because `interior A` is dense.\n    have hsubset : (Set.univ : Set X) ⊆ closure A := by\n      simpa [h.closure_eq] using hmono\n    -- The reverse inclusion always holds.\n    have hsubset' : closure A ⊆ (Set.univ : Set X) := by\n      intro y hy\n      simp\n    exact Set.Subset.antisymm hsubset' hsubset\n  -- With `closure A = univ`, its interior is also `univ`.\n  have : x ∈ interior (closure A) := by\n    have : x ∈ (Set.univ : Set X) := by\n      simp\n    simpa [hclosureA, interior_univ] using this\n  exact this"
+  ],
+  "success": true
+}

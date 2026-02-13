@@ -1,0 +1,43 @@
+{
+  "times": [
+    64.91738104820251,
+    149.91752171516418
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5859,
+      "prompt_tokens": 47922,
+      "total_tokens": 53781,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 11026,
+      "prompt_tokens": 48157,
+      "total_tokens": 59183,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) ∩ interior B ⊆ closure (A ∩ B : Set X) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxIntB⟩\n  -- We will show that every open neighbourhood of `x` meets `A ∩ B`.\n  have h : x ∈ closure (A ∩ B : Set X) := by\n    apply (mem_closure_iff).2\n    intro U hU_open hxU\n    -- `interior B` is an open subset of `B`.\n    have hV_open : IsOpen (interior B) := isOpen_interior\n    have hV_subB : (interior B : Set X) ⊆ B := interior_subset\n    -- Consider the open set `U ∩ interior B` containing `x`.\n    have hW_open : IsOpen (U ∩ interior B) := hU_open.inter hV_open\n    have hxW : x ∈ U ∩ interior B := ⟨hxU, hxIntB⟩\n    -- Since `x ∈ closure A`, the set `A` meets `U ∩ interior B`.\n    have hNonempty : ((U ∩ interior B) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hxClA (U ∩ interior B) hW_open hxW\n    rcases hNonempty with ⟨y, ⟨hyW, hyA⟩⟩\n    have hyU : y ∈ U := (Set.mem_inter_iff.1 hyW).1\n    have hyIntB : y ∈ interior B := (Set.mem_inter_iff.1 hyW).2\n    have hyB : y ∈ B := hV_subB hyIntB\n    exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩\n  exact h",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    186.06667041778564
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9251,
+      "prompt_tokens": 54598,
+      "total_tokens": 63849,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem inter_interiors_subset_interior_closure_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A : Set X) ∩ interior B ⊆\n      interior (closure ((A ∩ B) : Set X)) := by\n  intro x hx\n  -- First, `x` belongs to `interior (A ∩ B)`.\n  have hx_int : (x : X) ∈ interior ((A ∩ B) : Set X) :=\n    inter_interiors_subset_interior_inter (A := A) (B := B) hx\n  -- Then use the inclusion `interior S ⊆ interior (closure S)`.\n  have h_subset :\n      interior ((A ∩ B) : Set X) ⊆\n        interior (closure ((A ∩ B) : Set X)) :=\n    interior_subset_interior_closure (A := A ∩ B)\n  exact h_subset hx_int"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    113.76404023170471
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7832,
+      "prompt_tokens": 35320,
+      "total_tokens": 43152,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_iUnion_of_open {ι : Sort _} {X : Type _} [TopologicalSpace X]\n    (A : ι → Set X) (hOpen : ∀ i, IsOpen (A i)) :\n    interior (⋃ i, A i : Set X) = ⋃ i, A i := by\n  -- The union of open sets is open.\n  have hUnionOpen : IsOpen (⋃ i, A i : Set X) := isOpen_iUnion hOpen\n  -- For an open set, its interior coincides with itself.\n  simpa using hUnionOpen.interior_eq"
+  ],
+  "success": true
+}

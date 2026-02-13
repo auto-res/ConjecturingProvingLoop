@@ -1,0 +1,26 @@
+{
+  "times": [
+    10.455445766448975
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 686,
+      "prompt_tokens": 40532,
+      "total_tokens": 41218,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closure_interior_iff_P3_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) (closure (interior A)) ↔\n      Topology.P3 (X := X) (closure (interior A)) := by\n  have h₁ :=\n    Topology.P2_closure_interior_iff_open_closure_interior\n      (X := X) (A := A)\n  have h₂ :=\n    Topology.P3_closure_interior_iff_open_closure_interior\n      (X := X) (A := A)\n  exact h₁.trans h₂.symm"
+  ],
+  "success": true
+}

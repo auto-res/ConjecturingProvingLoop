@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.49443554878235
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3428,
+      "prompt_tokens": 48096,
+      "total_tokens": 51524,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_eq_empty_of_disjoint_closures\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) ∩ closure (B : Set X) = (∅ : Set X) →\n      interior (closure ((A ∩ B) : Set X)) = (∅ : Set X) := by\n  intro hDisjoint\n  apply Set.Subset.antisymm\n  · intro x hx\n    have hx_cl : (x : X) ∈ closure ((A ∩ B) : Set X) :=\n      interior_subset hx\n    have hx_inter :\n        (x : X) ∈ closure (A : Set X) ∩ closure (B : Set X) :=\n      (closure_inter_subset_inter_closures (A := A) (B := B)) hx_cl\n    simpa [hDisjoint] using hx_inter\n  · intro x hx\n    cases hx"
+  ],
+  "success": true
+}

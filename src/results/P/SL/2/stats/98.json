@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.03132820129395
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4218,
+      "prompt_tokens": 15324,
+      "total_tokens": 19542,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_subset_interior_closure_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior A ⊆ interior (closure (interior A)) := by\n  have hOpen : IsOpen (interior A) := isOpen_interior\n  have hSub : (interior A : Set X) ⊆ closure (interior A) := subset_closure\n  exact interior_maximal hSub hOpen"
+  ],
+  "success": true
+}

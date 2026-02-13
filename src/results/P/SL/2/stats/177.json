@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.78675508499146
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5522,
+      "prompt_tokens": 29314,
+      "total_tokens": 34836,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_univ_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) = (Set.univ : Set X) ↔ (A : Set X) = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    -- Since `interior A ⊆ A`, the equality `interior A = univ` forces `univ ⊆ A`.\n    have hSub : (Set.univ : Set X) ⊆ (A : Set X) := by\n      intro x hx\n      have : (x : X) ∈ interior (A : Set X) := by\n        simpa [hInt] using hx\n      exact interior_subset this\n    -- The reverse inclusion `A ⊆ univ` is always true.\n    have hSub' : (A : Set X) ⊆ (Set.univ : Set X) := by\n      intro x hx\n      simp\n    exact subset_antisymm hSub' hSub\n  · intro hA\n    simpa [hA, interior_univ] using rfl"
+  ],
+  "success": true
+}

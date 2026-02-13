@@ -1,0 +1,43 @@
+{
+  "times": [
+    62.63102674484253,
+    30.074217081069946
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3624,
+      "prompt_tokens": 50609,
+      "total_tokens": 54233,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 1802,
+      "prompt_tokens": 50684,
+      "total_tokens": 52486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense A) : Topology.P3 A := by\n  unfold Topology.P3\n  intro x hxA\n  -- The density of `A` gives `closure A = univ`.\n  have hClosure : closure A = (Set.univ : Set X) := hDense.closure_eq\n  -- Consequently, the interior of its closure is also `univ`.\n  have hInterior : interior (closure A) = (Set.univ : Set X) := by\n    simpa [hClosure] using (interior_univ : interior (Set.univ : Set X) = Set.univ)\n  -- Trivially, every point lies in `univ`.\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  -- Conclude by rewriting with `hInterior`.\n  simpa [hInterior] using this",
+    "theorem Topology.P1_iff_subset_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} : Topology.P1 A ↔ A ⊆ closure (interior A) := by\n  rfl"
+  ],
+  "success": true
+}

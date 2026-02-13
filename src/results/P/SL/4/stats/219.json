@@ -1,0 +1,43 @@
+{
+  "times": [
+    28.657472372055054,
+    166.68012237548828
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2319,
+      "prompt_tokens": 32017,
+      "total_tokens": 34336,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    },
+    {
+      "completion_tokens": 13137,
+      "prompt_tokens": 32139,
+      "total_tokens": 45276,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_self_closure_eq {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A ∩ closure A) = closure A := by\n  apply subset_antisymm\n  · -- `A ∩ closure A` is contained in `closure A`\n    have h_subset : (A ∩ closure A : Set X) ⊆ closure A := by\n      intro x hx\n      exact hx.2\n    exact closure_mono h_subset\n  · -- `A` is contained in `A ∩ closure A`\n    have h_subset : (A : Set X) ⊆ A ∩ closure A := by\n      intro x hx\n      exact And.intro hx (subset_closure hx)\n    have : closure A ⊆ closure (A ∩ closure A) := closure_mono h_subset\n    exact this",
+    ""
+  ],
+  "success": true
+}

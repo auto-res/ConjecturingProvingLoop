@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.0172438621521
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6706,
+      "prompt_tokens": 53893,
+      "total_tokens": 60599,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_three_subset_inter_closures\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    closure ((A ∩ B ∩ C) : Set X) ⊆\n      closure (A : Set X) ∩ closure (B : Set X) ∩ closure (C : Set X) := by\n  intro x hx\n  -- Each of `A`, `B`, and `C` contains `A ∩ B ∩ C`, hence their closures\n  -- contain `closure (A ∩ B ∩ C)`.\n  have hSubA : (A ∩ B ∩ C : Set X) ⊆ (A : Set X) := by\n    intro y hy\n    exact (hy.1).1\n  have hSubB : (A ∩ B ∩ C : Set X) ⊆ (B : Set X) := by\n    intro y hy\n    exact (hy.1).2\n  have hSubC : (A ∩ B ∩ C : Set X) ⊆ (C : Set X) := by\n    intro y hy\n    exact hy.2\n  have hxA : x ∈ closure (A : Set X) := (closure_mono hSubA) hx\n  have hxB : x ∈ closure (B : Set X) := (closure_mono hSubB) hx\n  have hxC : x ∈ closure (C : Set X) := (closure_mono hSubC) hx\n  exact And.intro (And.intro hxA hxB) hxC"
+  ],
+  "success": true
+}

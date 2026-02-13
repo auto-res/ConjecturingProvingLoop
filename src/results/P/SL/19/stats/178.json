@@ -1,0 +1,26 @@
+{
+  "times": [
+    103.58461570739746
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6503,
+      "prompt_tokens": 27836,
+      "total_tokens": 34339,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27520
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_interior_eq_empty {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A \\ interior A) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    -- `x` lies in `A \\ interior A`\n    have hxDiff : x ∈ A \\ interior A := interior_subset hx\n    -- Any open subset of `A` is contained in `interior A`\n    have hSubInt :\n        (interior (A \\ interior A) : Set X) ⊆ interior A := by\n      -- First, `interior (A \\ interior A)` is contained in `A`\n      have hSubA :\n          (interior (A \\ interior A) : Set X) ⊆ A := fun y hy =>\n        (interior_subset hy).1\n      -- Use the maximality of the interior\n      exact interior_maximal hSubA isOpen_interior\n    -- Therefore `x ∈ interior A`\n    have hxInt : x ∈ interior A := hSubInt hx\n    -- Contradiction with `x ∉ interior A`\n    exact (hxDiff.2 hxInt).elim\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

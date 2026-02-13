@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.62627077102661
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3109,
+      "prompt_tokens": 55535,
+      "total_tokens": 58644,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_frontier_eq_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen (A : Set X)) :\n    closure (A : Set X) \\ frontier A = A := by\n  classical\n  -- Use the description of the frontier for open sets.\n  have h_front : frontier (A : Set X) = closure A \\ A :=\n    Topology.frontier_eq_closure_diff_self_of_isOpen (A := A) hA\n  -- First, show `closure A \\ frontier A ⊆ A`.\n  have h_sub : closure A \\ frontier A ⊆ A := by\n    intro x hx\n    rcases hx with ⟨hx_cl, hx_not_front⟩\n    by_cases hxa : x ∈ A\n    · exact hxa\n    · have : x ∈ closure A \\ A := ⟨hx_cl, hxa⟩\n      have : x ∈ frontier (A : Set X) := by\n        simpa [h_front] using this\n      exact (hx_not_front this).elim\n  -- Next, show `A ⊆ closure A \\ frontier A`.\n  have h_sup : (A : Set X) ⊆ closure A \\ frontier A := by\n    intro x hxA\n    have hx_cl : x ∈ closure A := subset_closure hxA\n    have hx_not_front : x ∉ frontier (A : Set X) := by\n      intro hfront\n      have : x ∈ closure A \\ A := by\n        simpa [h_front] using hfront\n      exact this.2 hxA\n    exact ⟨hx_cl, hx_not_front⟩\n  -- Combine the two inclusions to obtain equality.\n  exact Set.Subset.antisymm h_sub h_sup"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.155903339385986
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5359,
+      "prompt_tokens": 19252,
+      "total_tokens": 24611,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter2_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure A))))) =\n      interior (closure A) := by\n  -- First, use idempotence for `closure (interior _ )` with `A := closure A`.\n  have h₁ :\n      closure (interior (closure (interior (closure (A : Set X))))) =\n        closure (interior (closure (A : Set X))) := by\n    simpa using\n      (Topology.closureInteriorClosureInterior_eq_closureInterior\n        (A := closure (A : Set X)))\n  -- Apply `interior` to both sides of this equality.\n  have h₂ :\n      interior (closure (interior (closure (interior (closure A))))) =\n        interior (closure (interior (closure A))) :=\n    congrArg interior h₁\n  -- Use the basic idempotence lemma to simplify the right‐hand side.\n  have h₃ :\n      interior (closure (interior (closure A))) =\n        interior (closure A) :=\n    Topology.interiorClosure_idempotent (A := A)\n  -- Combine the results.\n  simpa [h₃] using h₂"
+  ],
+  "success": true
+}

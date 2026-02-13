@@ -1,0 +1,26 @@
+{
+  "times": [
+    110.47725439071655
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8479,
+      "prompt_tokens": 32158,
+      "total_tokens": 40637,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 A) (hB : Topology.P1 B) :\n    Topology.P1 (closure A ∪ closure B) := by\n  -- First, lift `P1` from `A` and `B` to their closures.\n  have hA_cl : Topology.P1 (closure A) :=\n    Topology.P1_imp_P1_closure (X := X) (A := A) hA\n  have hB_cl : Topology.P1 (closure B) :=\n    Topology.P1_imp_P1_closure (X := X) (A := B) hB\n  -- Apply the existing union lemma for `P1`.\n  exact\n    Topology.P1_union (X := X) (A := closure A) (B := closure B) hA_cl hB_cl"
+  ],
+  "success": true
+}

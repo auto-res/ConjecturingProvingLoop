@@ -1,0 +1,60 @@
+{
+  "times": [
+    14.871683835983276,
+    83.17774748802185,
+    58.90298390388489
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1752,
+      "prompt_tokens": 1661,
+      "total_tokens": 3413,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5447,
+      "prompt_tokens": 1764,
+      "total_tokens": 7211,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3796,
+      "prompt_tokens": 1867,
+      "total_tokens": 5663,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P1 A := by\n  simpa [hA.interior_eq] using (subset_closure : (A : Set X) ⊆ closure A)",
+    "theorem P1_of_open {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P1 A := by\n  -- Since `A` is open, its interior is itself.\n  have hInt : interior A = A := hA.interior_eq\n  -- The goal now follows from the basic fact that a set is contained in its closure.\n  simpa [hInt] using (subset_closure : (A : Set X) ⊆ closure A)",
+    "theorem P2_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P2 (interior A) := by\n  have hOpen : IsOpen (interior A) := isOpen_interior\n  exact Topology.P2_of_open hOpen"
+  ],
+  "success": true
+}

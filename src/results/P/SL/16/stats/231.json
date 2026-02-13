@@ -1,0 +1,26 @@
+{
+  "times": [
+    164.15285801887512
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10632,
+      "prompt_tokens": 40101,
+      "total_tokens": 50733,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_empty_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A = (∅ : Set X) ↔ A = (∅ : Set X) := by\n  constructor\n  · intro h\n    -- Show that `A` is contained in `∅`.\n    have h_subset : (A : Set X) ⊆ (∅ : Set X) := by\n      intro x hx\n      have : (x : X) ∈ closure A := subset_closure hx\n      simpa [h] using this\n    -- Combine the two inclusions to obtain the equality.\n    apply Set.Subset.antisymm h_subset\n    intro x hx\n    exact hx.elim\n  · intro h\n    simpa [h, closure_empty]"
+  ],
+  "success": true
+}

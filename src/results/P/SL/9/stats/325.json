@@ -1,0 +1,43 @@
+{
+  "times": [
+    70.48897075653076,
+    195.41437101364136
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5921,
+      "prompt_tokens": 58893,
+      "total_tokens": 64814,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    },
+    {
+      "completion_tokens": 9862,
+      "prompt_tokens": 59503,
+      "total_tokens": 69365,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_eq_diff_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsClosed (B : Set X)) :\n    interior (A \\ B) = interior A \\ B := by\n  ext x\n  constructor\n  · intro hx\n    -- From `x ∈ interior (A \\ B)` obtain `x ∈ A` and `x ∉ B`.\n    have hx_diff : x ∈ A \\ B := interior_subset hx\n    -- `A \\ B ⊆ A`, hence `x ∈ interior A`.\n    have h_subset : (A \\ B : Set X) ⊆ A := by\n      intro y hy; exact hy.1\n    have hx_intA : x ∈ interior A := (interior_mono h_subset) hx\n    exact ⟨hx_intA, hx_diff.2⟩\n  · intro hx\n    rcases hx with ⟨hx_intA, hx_notB⟩\n    -- Construct an open neighbourhood of `x` contained in `A \\ B`.\n    rcases (mem_interior).1 hx_intA with ⟨U, hU_open, hU_subA, hxU⟩\n    have h_open_complB : IsOpen ((B : Set X)ᶜ) := hB.isOpen_compl\n    have hV_open : IsOpen (U \\ B) := by\n      simpa [Set.diff_eq] using hU_open.inter h_open_complB\n    have hV_sub : (U \\ B : Set X) ⊆ A \\ B := by\n      intro y hy\n      exact ⟨hU_subA hy.1, hy.2⟩\n    have hxV : x ∈ U \\ B := ⟨hxU, hx_notB⟩\n    -- `U \\ B` witnesses that `x ∈ interior (A \\ B)`.\n    exact\n      (mem_interior).2 ⟨U \\ B, hV_open, hV_sub, hxV⟩",
+    "theorem closure_diff_closure_subset_closure_diff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A : Set X) \\ closure B ⊆ closure (A \\ B) := by\n  classical\n  intro x hx\n  rcases hx with ⟨hx_clA, hx_not_clB⟩\n  -- We shall show that every open neighbourhood of `x` meets `A \\ B`.\n  have key : ∀ s : Set X, IsOpen s → x ∈ s → (s ∩ (A \\ B)).Nonempty := by\n    intro s hs hxs\n    -- First, obtain an open neighbourhood `u` of `x` disjoint from `B`.\n    have h_neigh : ∃ u : Set X, IsOpen u ∧ x ∈ u ∧ u ∩ B = ∅ := by\n      by_contra h\n      push_neg at h\n      have : x ∈ closure B := (mem_closure_iff).2 h\n      exact hx_not_clB this\n    rcases h_neigh with ⟨u, hu_open, hxu, hu_disj⟩\n    -- Work inside the open set `s ∩ u`, which contains `x`.\n    have hsu_open : IsOpen (s ∩ u) := IsOpen.inter hs hu_open\n    have hx_su : x ∈ s ∩ u := ⟨hxs, hxu⟩\n    -- Because `x ∈ closure A`, the neighbourhood `s ∩ u` meets `A`.\n    obtain ⟨y, ⟨hy_s, hy_u⟩, hyA⟩ :=\n      (mem_closure_iff).1 hx_clA _ hsu_open hx_su\n    -- The point `y` cannot belong to `B`, for `u` is disjoint from `B`.\n    have hy_notB : y ∉ B := by\n      intro hyB\n      have : y ∈ u ∩ B := ⟨hy_u, hyB⟩\n      have : y ∈ (∅ : Set X) := by\n        simpa [hu_disj] using this\n      exact this.elim\n    -- Hence `y ∈ s ∩ (A \\ B)`.\n    exact ⟨y, ⟨hy_s, ⟨hyA, hy_notB⟩⟩⟩\n  -- The characterisation of closure now yields the desired membership.\n  exact (mem_closure_iff).2 key"
+  ],
+  "success": true
+}

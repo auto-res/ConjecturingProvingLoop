@@ -1,0 +1,26 @@
+{
+  "times": [
+    143.085054397583
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11610,
+      "prompt_tokens": 21243,
+      "total_tokens": 32853,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_compl_eq_univ_iff_interior_empty {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    closure (Aᶜ : Set X) = Set.univ ↔ interior A = (∅ : Set X) := by\n  -- The basic relation between closure of a complement and interior.\n  have h_rel := Topology.closure_compl_eq_compl_interior (X := X) (A := A)\n  constructor\n  · intro h_cl\n    -- Rewrite `h_cl` using `h_rel` to get an equality of complements.\n    have h_compl : (interior A)ᶜ = (Set.univ : Set X) := by\n      simpa [h_rel] using h_cl\n    -- Complement both sides to deduce `interior A = ∅`.\n    have : interior A = (∅ : Set X) := by\n      simpa using congrArg (fun s : Set X => sᶜ) h_compl\n    simpa using this\n  · intro h_int\n    -- Substitute `h_int` into `h_rel` to obtain the desired equality.\n    simpa [h_int] using h_rel"
+  ],
+  "success": true
+}

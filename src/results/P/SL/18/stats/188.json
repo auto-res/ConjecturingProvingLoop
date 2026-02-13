@@ -1,0 +1,26 @@
+{
+  "times": [
+    83.20599794387817
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5396,
+      "prompt_tokens": 28228,
+      "total_tokens": 33624,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_iUnion_of_dense\n    {ι : Sort _} {X : Type _} [TopologicalSpace X] (A : ι → Set X) (i₀ : ι)\n    (hDense : Dense (A i₀)) :\n    Dense (⋃ i, A i) := by\n  classical\n  intro x\n  -- `hDense` tells us that `x` lies in the closure of `A i₀`.\n  have hx : x ∈ closure (A i₀ : Set X) := hDense x\n  -- Since `A i₀ ⊆ ⋃ i, A i`, the closures satisfy the analogous inclusion.\n  have hSub : (A i₀ : Set X) ⊆ ⋃ i, A i := by\n    intro y hy\n    exact Set.mem_iUnion.2 ⟨i₀, hy⟩\n  have hClosSub :\n      closure (A i₀ : Set X) ⊆ closure (⋃ i, A i : Set X) :=\n    closure_mono hSub\n  -- Conclude that `x` lies in the desired closure.\n  exact hClosSub hx"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    93.37442708015442,
+    37.14804172515869
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6327,
+      "prompt_tokens": 3825,
+      "total_tokens": 10152,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    },
+    {
+      "completion_tokens": 2870,
+      "prompt_tokens": 3926,
+      "total_tokens": 6796,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_imp_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x _\n  have h_closure : closure A = (Set.univ : Set X) := by\n    simpa using hDense\n  simpa [h_closure, interior_univ] using (Set.mem_univ x)",
+    "theorem interior_closure_interior_closure_eq {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  have hClosed : IsClosed (closure A) := isClosed_closure\n  simpa using\n    (interior_closure_interior_eq_interior_of_closed\n      (X := X) (A := closure A) hClosed)"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    167.50260519981384,
+    181.12801671028137
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9842,
+      "prompt_tokens": 47868,
+      "total_tokens": 57710,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 12306,
+      "prompt_tokens": 47982,
+      "total_tokens": 60288,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_compl_interior_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A = (interior (Aᶜ))ᶜ := by\n  classical\n  apply Set.Subset.antisymm\n  · intro x hxClos\n    -- We show that `x ∉ interior (Aᶜ)`.\n    have hNotInt : x ∉ interior (Aᶜ) := by\n      intro hxInt\n      -- `interior (Aᶜ)` is an open neighbourhood of `x`\n      -- that is disjoint from `A`, contradicting `x ∈ closure A`.\n      have hNon :\n          ((interior (Aᶜ) : Set X) ∩ A).Nonempty :=\n        (mem_closure_iff).1 hxClos _ isOpen_interior hxInt\n      rcases hNon with ⟨y, ⟨hyInt, hyA⟩⟩\n      have : (y : X) ∈ Aᶜ :=\n        (interior_subset : interior (Aᶜ) ⊆ Aᶜ) hyInt\n      exact this hyA\n    simpa [Set.mem_compl] using hNotInt\n  · intro x hxCompl\n    -- Assume, for contradiction, that `x ∉ closure A`.\n    by_contra hNotClos\n    have hxInComplClos : x ∈ (closure A)ᶜ := hNotClos\n    -- The open set `(closure A)ᶜ` contains `x` and is included in `Aᶜ`.\n    have hOpen : IsOpen ((closure A)ᶜ) :=\n      (isClosed_closure (s := A)).isOpen_compl\n    have hSub : ((closure A)ᶜ : Set X) ⊆ Aᶜ := by\n      intro y hy\n      by_contra hyA\n      have : (y : X) ∈ closure A := subset_closure hyA\n      exact hy this\n    -- Hence `x ∈ interior (Aᶜ)`, contradicting `hxCompl`.\n    have hxIntAc : x ∈ interior (Aᶜ) :=\n      interior_maximal hSub hOpen hxInComplClos\n    have hNotInt : x ∉ interior (Aᶜ) := by\n      simpa [Set.mem_compl] using hxCompl\n    exact hNotInt hxIntAc",
+    ""
+  ],
+  "success": true
+}

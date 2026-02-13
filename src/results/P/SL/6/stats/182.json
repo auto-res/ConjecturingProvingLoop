@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.64227986335754
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7203,
+      "prompt_tokens": 28166,
+      "total_tokens": 35369,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem open_closure_interior_eq_closure_implies_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen (closure (interior (A : Set X))))\n    (hEq  : closure (interior (A : Set X)) = closure A) :\n    Topology.P3 (A : Set X) := by\n  dsimp [Topology.P3]\n  intro x hxA\n  -- First, place `x` inside `closure (interior A)` using the equality of closures.\n  have hx_clInt : x ∈ closure (interior (A : Set X)) := by\n    have hx_cl : x ∈ closure (A : Set X) := subset_closure hxA\n    simpa [hEq] using hx_cl\n  -- Since this set is open, its interior equals itself.\n  have hx_int_clInt :\n      x ∈ interior (closure (interior (A : Set X))) := by\n    simpa [hOpen.interior_eq] using hx_clInt\n  -- The equality of closures yields an equality of their interiors.\n  have hIntEq :\n      interior (closure (interior (A : Set X))) =\n        interior (closure (A : Set X)) := by\n    simpa using congrArg interior hEq\n  -- Reinterpret the membership in the desired interior.\n  have hx_int : x ∈ interior (closure (A : Set X)) := by\n    simpa [hIntEq] using hx_int_clInt\n  exact hx_int"
+  ],
+  "success": true
+}

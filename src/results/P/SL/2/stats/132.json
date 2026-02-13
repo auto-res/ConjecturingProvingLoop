@@ -1,0 +1,26 @@
+{
+  "times": [
+    82.91447806358337
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6721,
+      "prompt_tokens": 20202,
+      "total_tokens": 26923,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X)) ∪ closure (interior (B : Set X)) ⊆\n      closure (interior (A ∪ B)) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- `x ∈ closure (interior A)`; transport along the inclusions\n      have hsubset :\n          closure (interior (A : Set X)) ⊆ closure (interior (A ∪ B)) := by\n        -- first relate the interiors\n        have hInt : (interior (A : Set X)) ⊆ interior (A ∪ B) := by\n          have hSub : (A : Set X) ⊆ A ∪ B := by\n            intro y hy\n            exact Or.inl hy\n          exact interior_mono hSub\n        -- taking closures preserves inclusion\n        exact closure_mono hInt\n      exact hsubset hxA\n  | inr hxB =>\n      -- symmetric argument for the second summand\n      have hsubset :\n          closure (interior (B : Set X)) ⊆ closure (interior (A ∪ B)) := by\n        have hInt : (interior (B : Set X)) ⊆ interior (A ∪ B) := by\n          have hSub : (B : Set X) ⊆ A ∪ B := by\n            intro y hy\n            exact Or.inr hy\n          exact interior_mono hSub\n        exact closure_mono hInt\n      exact hsubset hxB"
+  ],
+  "success": true
+}

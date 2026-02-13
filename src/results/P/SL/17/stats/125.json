@@ -1,0 +1,26 @@
+{
+  "times": [
+    188.7970380783081
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14130,
+      "prompt_tokens": 18851,
+      "total_tokens": 32981,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_dense_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A ↔ Dense (interior (closure A)) := by\n  constructor\n  · intro hDenseA\n    -- `closure A` is the whole space.\n    have h_closureA : closure A = (Set.univ : Set X) := hDenseA.closure_eq\n    -- Hence its interior is also the whole space.\n    have h_int : interior (closure A) = (Set.univ : Set X) := by\n      simpa [h_closureA] using (interior_univ :\n        interior (Set.univ : Set X) = Set.univ)\n    -- Consequently, the closure of that interior is the whole space.\n    have h_closure_int : closure (interior (closure A)) = (Set.univ : Set X) := by\n      simpa [h_int] using (closure_univ :\n        closure (Set.univ : Set X) = Set.univ)\n    -- Turn the equality into a `Dense` statement.\n    intro x\n    have : (x : X) ∈ (Set.univ : Set X) := by\n      simp\n    simpa [h_closure_int] using this\n  · intro hDenseInt\n    -- The closure of `interior (closure A)` is the whole space.\n    have h_closure_int : closure (interior (closure A)) = (Set.univ : Set X) :=\n      hDenseInt.closure_eq\n    -- `closure (interior (closure A)) ⊆ closure A`.\n    have h_subset : closure (interior (closure A)) ⊆ closure A :=\n      Topology.closure_interior_closure_subset_closure (A := A)\n    -- Therefore, `closure A` is also the whole space.\n    have h_univ_subset : (Set.univ : Set X) ⊆ closure A := by\n      simpa [h_closure_int] using h_subset\n    have h_closureA : closure A = (Set.univ : Set X) := by\n      apply Set.Subset.antisymm\n      · intro _x _hx; simp\n      · exact h_univ_subset\n    -- Convert the equality into a `Dense` statement for `A`.\n    intro x\n    have : (x : X) ∈ (Set.univ : Set X) := by\n      simp\n    simpa [h_closureA] using this"
+  ],
+  "success": true
+}

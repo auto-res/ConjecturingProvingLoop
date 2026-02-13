@@ -1,0 +1,43 @@
+{
+  "times": [
+    38.854559659957886,
+    41.22923946380615
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2650,
+      "prompt_tokens": 5037,
+      "total_tokens": 7687,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    },
+    {
+      "completion_tokens": 2653,
+      "prompt_tokens": 5143,
+      "total_tokens": 7796,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closed_iff_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) : Topology.P3 A ↔ IsOpen A := by\n  dsimp [Topology.P3]\n  constructor\n  · intro hP3\n    -- From `P3` we obtain `A ⊆ interior (closure A)`.\n    -- Since `A` is closed, `closure A = A`, so we actually have `A ⊆ interior A`.\n    have hSubset : (A : Set X) ⊆ interior A := by\n      simpa [hA.closure_eq] using hP3\n    -- The reverse inclusion `interior A ⊆ A` is always true.\n    have hSuperset : interior A ⊆ (A : Set X) := interior_subset\n    -- Hence `A = interior A`, and `A` is open.\n    have hEq : (A : Set X) = interior A :=\n      Set.Subset.antisymm_iff.mpr ⟨hSubset, hSuperset⟩\n    have : IsOpen (interior A) := isOpen_interior\n    simpa [hEq] using this\n  · intro hOpen\n    -- Because `A` is open and closed, `interior A = A`\n    -- and `closure A = A`. Thus `A ⊆ interior (closure A)` holds.\n    have hIntEq : interior A = (A : Set X) := hOpen.interior_eq\n    have hClosEq : closure A = (A : Set X) := hA.closure_eq\n    have : (A : Set X) ⊆ A := subset_rfl\n    simpa [hIntEq, hClosEq] using this",
+    "theorem interior_nonempty_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A) (hne : A.Nonempty) : (interior A).Nonempty := by\n  classical\n  -- Assume, for a contradiction, that `interior A` is empty.\n  by_contra hInt\n  have hIntEq : interior A = (∅ : Set X) := by\n    apply Set.eq_empty_iff_forall_not_mem.mpr\n    intro x hx\n    have : (interior A).Nonempty := ⟨x, hx⟩\n    exact (hInt this).elim\n  -- Pick an element of `A`.\n  rcases hne with ⟨x, hxA⟩\n  -- Use `P1` to map it into the closure of the interior.\n  have hxClosure : x ∈ closure (interior A) := hP1 hxA\n  -- Contradiction with the fact that the interior is empty.\n  have : x ∈ (∅ : Set X) := by\n    simpa [hIntEq] using hxClosure\n  exact (Set.not_mem_empty x) this"
+  ],
+  "success": true
+}

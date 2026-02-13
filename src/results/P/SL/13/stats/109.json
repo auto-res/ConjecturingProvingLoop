@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.128953218460083
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2887,
+      "prompt_tokens": 17975,
+      "total_tokens": 20862,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_implies_all_P {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen (A : Set X)) :\n    (Topology.P1 (X:=X) A) ∧ (Topology.P2 (X:=X) A) ∧ (Topology.P3 (X:=X) A) := by\n  have hP1 := Topology.isOpen_subset_closureInterior (X := X) (A := A) hA\n  have hP2 := isOpen_implies_P2 (X := X) (A := A) hA\n  have hP3 := Topology.isOpen_subset_interiorClosure (X := X) (A := A) hA\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

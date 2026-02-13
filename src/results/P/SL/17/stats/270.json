@@ -1,0 +1,43 @@
+{
+  "times": [
+    131.32488679885864,
+    165.28860139846802
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7741,
+      "prompt_tokens": 47526,
+      "total_tokens": 55267,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 9427,
+      "prompt_tokens": 47912,
+      "total_tokens": 57339,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_eq_interior_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) :\n    interior (closure (interior A)) = interior A := by\n  -- We establish both inclusions and then use `subset_antisymm`.\n  apply Set.Subset.antisymm\n  · -- First inclusion: `interior (closure (interior A)) ⊆ interior A`.\n    -- Step 1: `closure (interior A)` is contained in `A` because `A` is closed.\n    have h_cl_sub : closure (interior A) ⊆ A := by\n      have h : closure (interior A) ⊆ closure A :=\n        closure_mono (interior_subset : interior A ⊆ A)\n      simpa [hA_closed.closure_eq] using h\n    -- Step 2: apply `interior_maximal` to obtain the desired inclusion.\n    apply interior_maximal h_cl_sub isOpen_interior\n  · -- Second inclusion: `interior A ⊆ interior (closure (interior A))`.\n    -- This follows from monotonicity of `interior` and the fact\n    -- that `interior A ⊆ closure (interior A)`.\n    apply interior_mono\n    exact subset_closure",
+    ""
+  ],
+  "success": true
+}

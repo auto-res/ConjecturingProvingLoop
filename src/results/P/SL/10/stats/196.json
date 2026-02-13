@@ -1,0 +1,43 @@
+{
+  "times": [
+    186.3922097682953,
+    181.2629165649414
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12326,
+      "prompt_tokens": 31947,
+      "total_tokens": 44273,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    },
+    {
+      "completion_tokens": 11474,
+      "prompt_tokens": 32067,
+      "total_tokens": 43541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_subset_union_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) ⊆ closure (interior A) ∪ closure (interior B) := by\n  -- Step 1: relate the interiors.\n  have h_int :\n      interior (A ∪ B) ⊆ interior A ∪ interior B :=\n    Topology.interior_union_subset (X := X) (A := A) (B := B)\n  -- Step 2: take closures, preserving the inclusion.\n  have h_cl :\n      closure (interior (A ∪ B)) ⊆ closure (interior A ∪ interior B) :=\n    closure_mono h_int\n  -- Step 3: rewrite the right–hand side using an existing equality.\n  have h_eq :\n      closure (interior A ∪ interior B) =\n        closure (interior A) ∪ closure (interior B) :=\n    Topology.closure_union_interior_eq_union_closure_interior\n      (X := X) (A := A) (B := B)\n  -- Step 4: combine the two facts.\n  simpa [h_eq] using h_cl",
+    ""
+  ],
+  "success": true
+}

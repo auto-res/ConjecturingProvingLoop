@@ -1,0 +1,26 @@
+{
+  "times": [
+    212.44033360481262
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13787,
+      "prompt_tokens": 14668,
+      "total_tokens": 28455,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_iInter_subset\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {𝒜 : ι → Set X} :\n    closure (interior (⋂ i, 𝒜 i)) ⊆ ⋂ i, closure (interior (𝒜 i)) := by\n  intro x hx\n  -- Show that `x` lies in every `closure (interior (𝒜 i))`.\n  have h_forall : ∀ i, x ∈ closure (interior (𝒜 i)) := by\n    intro i\n    -- Since `⋂ j, 𝒜 j ⊆ 𝒜 i`, the same holds for their interiors.\n    have h_subset : interior (⋂ j, 𝒜 j) ⊆ interior (𝒜 i) := by\n      -- The intersection is contained in each component.\n      have h_set : (⋂ j, 𝒜 j : Set X) ⊆ 𝒜 i := by\n        intro y hy\n        exact (Set.mem_iInter.1 hy) i\n      exact interior_mono h_set\n    -- Taking closures preserves inclusion.\n    have h_closure : closure (interior (⋂ j, 𝒜 j)) ⊆\n        closure (interior (𝒜 i)) := closure_mono h_subset\n    exact h_closure hx\n  exact Set.mem_iInter.2 h_forall"
+  ],
+  "success": true
+}

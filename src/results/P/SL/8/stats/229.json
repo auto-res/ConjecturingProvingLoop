@@ -1,0 +1,26 @@
+{
+  "times": [
+    155.62320280075073
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11252,
+      "prompt_tokens": 34779,
+      "total_tokens": 46031,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_subset_interior_diff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB_closed : IsClosed B) :\n    interior A \\ closure B ⊆ interior (A \\ B) := by\n  intro x hx\n  rcases hx with ⟨hxIntA, hxNotClB⟩\n  -- Choose an open neighbourhood `U` of `x` contained in `A`.\n  rcases (Set.mem_interior).1 hxIntA with ⟨U, hU_open, hU_subA, hxU⟩\n  -- The complement of the closed set `B` is open.\n  have hOpenCompl : IsOpen (Bᶜ) := by\n    simpa using (isOpen_compl_iff).2 hB_closed\n  -- `x` is not in `B`.\n  have hxNotB : x ∉ B := by\n    intro hxB\n    have : (x : X) ∈ closure B := subset_closure hxB\n    exact hxNotClB this\n  -- Define the open set `V = U ∩ Bᶜ`.\n  let V : Set X := U ∩ Bᶜ\n  have hV_open : IsOpen V := hU_open.inter hOpenCompl\n  have hV_sub : V ⊆ A \\ B := by\n    intro y hyV\n    have hyA : y ∈ A := hU_subA hyV.1\n    have hyNotB : y ∉ B := hyV.2\n    exact And.intro hyA hyNotB\n  have hxV : x ∈ V := And.intro hxU hxNotB\n  -- Conclude that `x ∈ interior (A \\ B)`.\n  exact\n    (Set.mem_interior).2 ⟨V, hV_open, hV_sub, hxV⟩"
+  ],
+  "success": true
+}

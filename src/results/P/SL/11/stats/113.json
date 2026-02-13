@@ -1,0 +1,26 @@
+{
+  "times": [
+    146.64727425575256
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13057,
+      "prompt_tokens": 16561,
+      "total_tokens": 29618,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_inter_right_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P3 A) (hB_open : IsOpen B) :\n    Topology.P3 (A ∩ B) := by\n  dsimp [Topology.P3] at hA ⊢\n  intro x hxAB\n  rcases hxAB with ⟨hxA, hxB⟩\n  -- `x` lies in `interior (closure A)` by `P3`.\n  have hxInt : x ∈ interior (closure A) := hA hxA\n  -- Consider the open set `U = interior (closure A) ∩ B` that contains `x`.\n  have hxU : x ∈ interior (closure A) ∩ B := ⟨hxInt, hxB⟩\n  have hU_open : IsOpen (interior (closure A) ∩ B) :=\n    isOpen_interior.inter hB_open\n  -- Show that `U ⊆ closure (A ∩ B)`.\n  have hU_sub : (interior (closure A) ∩ B : Set X) ⊆ closure (A ∩ B) := by\n    intro y hyU\n    -- Decompose the membership of `y` in `U`.\n    have hyB : y ∈ B := hyU.2\n    have hyClA : y ∈ closure A :=\n      (interior_subset : interior (closure A) ⊆ closure A) hyU.1\n    -- Use the neighbourhood characterization of closure.\n    have : y ∈ closure (A ∩ B) := by\n      -- Reformulate via `mem_closure_iff`.\n      apply (mem_closure_iff).2\n      intro s hs_open hy_in_s\n      -- `s ∩ B` is an open neighbourhood of `y`.\n      have hOpen' : IsOpen (s ∩ B) := hs_open.inter hB_open\n      have hy_in' : y ∈ s ∩ B := ⟨hy_in_s, hyB⟩\n      -- Since `y ∈ closure A`, this neighbourhood meets `A`.\n      have hNonempty : ((s ∩ B) ∩ A).Nonempty :=\n        ((mem_closure_iff).1 hyClA) (s ∩ B) hOpen' hy_in'\n      -- Extract a witness in `s ∩ (A ∩ B)`.\n      rcases hNonempty with ⟨z, ⟨hz_sB, hzA⟩⟩\n      exact ⟨z, ⟨hz_sB.1, ⟨hzA, hz_sB.2⟩⟩⟩\n    exact this\n  -- `U` is an open neighbourhood of `x` contained in `closure (A ∩ B)`,\n  -- hence `x ∈ interior (closure (A ∩ B))`.\n  have hxTarget :\n      x ∈ interior (closure (A ∩ B)) :=\n    (interior_maximal hU_sub hU_open) hxU\n  exact hxTarget"
+  ],
+  "success": true
+}

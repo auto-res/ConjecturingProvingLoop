@@ -1,0 +1,43 @@
+{
+  "times": [
+    36.443355083465576,
+    15.594154596328735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2525,
+      "prompt_tokens": 27911,
+      "total_tokens": 30436,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    },
+    {
+      "completion_tokens": 827,
+      "prompt_tokens": 27983,
+      "total_tokens": 28810,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_univ_iff_closure_eq_univ {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) ↔ closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    -- Since `interior (closure A) = univ`, it is in particular contained in `closure A`.\n    have h_subset : (Set.univ : Set X) ⊆ closure A := by\n      have : interior (closure A) ⊆ closure A := interior_subset\n      simpa [hInt] using this\n    exact Set.Subset.antisymm (Set.Subset_univ _) h_subset\n  · intro hCl\n    -- Rewrite `interior (closure A)` using `closure A = univ`.\n    simpa [hCl, interior_univ]",
+    "theorem Set.Subset_univ {α : Type*} {s : Set α} : s ⊆ (Set.univ : Set α) := by\n  intro x _\n  simp"
+  ],
+  "success": true
+}

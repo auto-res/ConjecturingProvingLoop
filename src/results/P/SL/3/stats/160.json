@@ -1,0 +1,26 @@
+{
+  "times": [
+    128.32499837875366
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9443,
+      "prompt_tokens": 24706,
+      "total_tokens": 34149,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_and_P3_of_closure_eq_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = interior (A : Set X) →\n      (Topology.P1 A ∧ Topology.P3 A) := by\n  intro hEq\n  -- First, note that every point of `A` lies in `interior A`,\n  -- since `A ⊆ closure A = interior A`.\n  have hA_subset_int : (A : Set X) ⊆ interior (A : Set X) := by\n    intro x hx\n    have hx_cl : (x : X) ∈ closure (A : Set X) := subset_closure hx\n    simpa [hEq] using hx_cl\n  -- Prove `P1`.\n  have hP1 : Topology.P1 (A : Set X) := by\n    dsimp [Topology.P1]\n    intro x hx\n    have hx_int : (x : X) ∈ interior (A : Set X) := hA_subset_int hx\n    exact subset_closure hx_int\n  -- Prove `P3`.\n  have hP3 : Topology.P3 (A : Set X) := by\n    dsimp [Topology.P3]\n    intro x hx\n    have hx_int : (x : X) ∈ interior (A : Set X) := hA_subset_int hx\n    simpa [hEq, interior_interior] using hx_int\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

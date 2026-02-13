@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.24229574203491
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3396,
+      "prompt_tokens": 19251,
+      "total_tokens": 22647,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_interior_closure_univ {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hInt : interior (closure (A : Set X)) = (Set.univ : Set X)) :\n    Topology.P3 A := by\n  dsimp [Topology.P3] at *\n  intro x _\n  have hx_univ : (x : X) ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hInt] using hx_univ"
+  ],
+  "success": true
+}

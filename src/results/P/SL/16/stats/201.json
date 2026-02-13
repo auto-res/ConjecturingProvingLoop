@@ -1,0 +1,43 @@
+{
+  "times": [
+    138.53185153007507,
+    24.05009174346924
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9154,
+      "prompt_tokens": 35196,
+      "total_tokens": 44350,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 1727,
+      "prompt_tokens": 35401,
+      "total_tokens": 37128,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.sUnion_interior_subset_interior_sUnion\n    {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    ⋃₀ (interior '' 𝒜) ⊆ interior (⋃₀ 𝒜) := by\n  classical\n  intro x hx\n  -- Unpack the membership `x ∈ ⋃₀ (interior '' 𝒜)`.\n  rcases Set.mem_sUnion.1 hx with ⟨B, hB_mem, hxB⟩\n  -- Write `B` as `interior A` for some `A ∈ 𝒜`.\n  rcases Set.mem_image.1 hB_mem with ⟨A, hA_mem, rfl⟩\n  -- `A` is contained in the big union `⋃₀ 𝒜`.\n  have h_subset : (A : Set X) ⊆ ⋃₀ 𝒜 := by\n    intro y hy\n    exact Set.mem_sUnion.2 ⟨A, hA_mem, hy⟩\n  -- Use monotonicity of `interior` to upgrade `hxB`.\n  have h_int_subset : interior A ⊆ interior (⋃₀ 𝒜) :=\n    interior_mono h_subset\n  exact h_int_subset hxB",
+    "theorem Topology.interior_diff_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ interior A := by\n  -- `A \\ B` is contained in `A`.\n  have h_subset : (A \\ B : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  -- Apply monotonicity of `interior`.\n  exact interior_mono h_subset"
+  ],
+  "success": true
+}

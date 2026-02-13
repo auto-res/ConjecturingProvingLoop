@@ -1,0 +1,43 @@
+{
+  "times": [
+    79.35315418243408,
+    48.604400873184204
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4432,
+      "prompt_tokens": 52699,
+      "total_tokens": 57131,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 3260,
+      "prompt_tokens": 52771,
+      "total_tokens": 56031,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_compl_interior_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) = (interior (closure (Aᶜ)))ᶜ := by\n  -- Start from the existing relation between the complements.\n  have h :=\n    Topology.compl_closure_interior_eq_interior_closure_compl (A := A)\n  -- Take complements of both sides and simplify.\n  simpa [Set.compl_compl] using congrArg Set.compl h",
+    "theorem Set.compl_compl {α : Type*} (s : Set α) : sᶜᶜ = s := by\n  simpa using (compl_compl s)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    106.89837098121643
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5448,
+      "prompt_tokens": 51560,
+      "total_tokens": 57008,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_compl_inter_interior_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (Aᶜ) ∩ interior A = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxClosCompl, hxIntA⟩\n    -- `interior A` is an open neighbourhood of `x` contained in `A`.\n    have hNon :\n        ((interior A : Set X) ∩ Aᶜ).Nonempty :=\n      (mem_closure_iff).1 hxClosCompl (interior A) isOpen_interior hxIntA\n    rcases hNon with ⟨y, ⟨hyIntA, hyCompl⟩⟩\n    -- The point `y` lies both in `A` and `Aᶜ`, a contradiction.\n    have : (y : X) ∈ A := interior_subset hyIntA\n    exact (hyCompl this).elim\n  · intro x hx\n    cases hx"
+  ],
+  "success": true
+}

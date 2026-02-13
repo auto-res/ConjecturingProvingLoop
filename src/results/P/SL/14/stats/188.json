@@ -1,0 +1,26 @@
+{
+  "times": [
+    142.41127705574036
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9923,
+      "prompt_tokens": 35033,
+      "total_tokens": 44956,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34688
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iInter_subset\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    closure ((⋂ i, A i) : Set X) ⊆ ⋂ i, closure (A i) := by\n  intro x hx\n  -- For each index `i`, we show that `x ∈ closure (A i)`.\n  have h_each : ∀ i, (x : X) ∈ closure (A i) := by\n    intro i\n    -- Since `⋂ i, A i ⊆ A i`, taking closures preserves the inclusion.\n    have h_subset : (⋂ j, A j : Set X) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    have h_closure_subset :\n        closure ((⋂ j, A j) : Set X) ⊆ closure (A i) :=\n      closure_mono h_subset\n    exact h_closure_subset hx\n  exact Set.mem_iInter.2 h_each"
+  ],
+  "success": true
+}

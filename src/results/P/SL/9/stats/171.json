@@ -1,0 +1,26 @@
+{
+  "times": [
+    134.53215861320496
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9979,
+      "prompt_tokens": 27673,
+      "total_tokens": 37652,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_inter_three_of_open {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) (hC : IsOpen C) :\n    Topology.P1 (A := A ∩ B ∩ C) := by\n  -- The intersection of three open sets is open.\n  have h_open : IsOpen (A ∩ B ∩ C) := by\n    have hAB : IsOpen (A ∩ B) := IsOpen.inter hA hB\n    exact IsOpen.inter hAB hC\n  -- Any open set satisfies `P1`.\n  exact Topology.P1_of_isOpen (A := A ∩ B ∩ C) h_open"
+  ],
+  "success": true
+}

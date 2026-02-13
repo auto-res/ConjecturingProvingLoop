@@ -1,0 +1,26 @@
+{
+  "times": [
+    142.70701909065247
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11404,
+      "prompt_tokens": 20525,
+      "total_tokens": 31929,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_univ_of_dense_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h_dense : closure (interior A) = (Set.univ : Set X)) :\n    closure A = (Set.univ : Set X) := by\n  -- From `interior A ⊆ A` we get `closure (interior A) ⊆ closure A`.\n  have h_subset : closure (interior A) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  -- Rewrite the density hypothesis to obtain `univ ⊆ closure A`.\n  have h_univ_subset : (Set.univ : Set X) ⊆ closure A := by\n    intro x _\n    have hx : x ∈ closure (interior A) := by\n      simpa [h_dense] using (by simp : (x : X) ∈ (Set.univ : Set X))\n    exact h_subset hx\n  -- Combine the two inclusions.\n  apply subset_antisymm\n  · intro _ _; simp\n  · exact h_univ_subset"
+  ],
+  "success": true
+}

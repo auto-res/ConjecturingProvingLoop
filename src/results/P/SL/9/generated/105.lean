@@ -1,0 +1,7 @@
+
+
+theorem Topology.P3_closure_iff_isOpen_closure {X : Type*} [TopologicalSpace X] {A : Set X} :
+    Topology.P3 (A := closure A) ↔ IsOpen (closure A) := by
+  have h_closed : IsClosed (closure A) := isClosed_closure
+  simpa using
+    (Topology.P3_iff_isOpen_of_isClosed (A := closure A) h_closed)

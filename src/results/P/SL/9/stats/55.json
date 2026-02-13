@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.30117225646973
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2926,
+      "prompt_tokens": 8502,
+      "total_tokens": 11428,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_eq_self_of_isClosed_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hP2 : Topology.P2 (A := A)) :\n    closure (interior A) = A := by\n  -- `P2` implies `P1`.\n  have hP1 : Topology.P1 (A := A) := Topology.P2_implies_P1 hP2\n  -- Use the characterisation of `P1` for closed sets.\n  exact\n    (Topology.P1_iff_closureInterior_eq_of_isClosed (A := A) hA_closed).1 hP1"
+  ],
+  "success": true
+}

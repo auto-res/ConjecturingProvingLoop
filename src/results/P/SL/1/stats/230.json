@@ -1,0 +1,26 @@
+{
+  "times": [
+    68.00963830947876
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5317,
+      "prompt_tokens": 35732,
+      "total_tokens": 41049,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_of_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hEq : interior (closure A) = interior (closure (interior A))) :\n    Topology.P2 A ↔ Topology.P3 A := by\n  constructor\n  · intro hP2\n    -- Extract `P3 A` from the existing equivalence.\n    have h := (Topology.P2_iff_P3_and_interior_closure_eq (A := A)).1 hP2\n    exact h.1\n  · intro hP3\n    -- Build `P2 A` using the provided equality.\n    exact\n      Topology.P2_of_P3_and_interior_closure_eq\n        (A := A) hP3 hEq"
+  ],
+  "success": true
+}

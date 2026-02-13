@@ -1,0 +1,43 @@
+{
+  "times": [
+    104.8448657989502,
+    70.92065858840942
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6442,
+      "prompt_tokens": 43877,
+      "total_tokens": 50319,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    },
+    {
+      "completion_tokens": 4499,
+      "prompt_tokens": 43955,
+      "total_tokens": 48454,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_P2_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (A : Set X)) → Topology.P3 (closure (A : Set X)) := by\n  intro hP2\n  exact (Topology.P2_iff_P3_of_closure (A := A)).1 hP2",
+    "theorem Topology.P3_of_P2_closure_alt {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (A : Set X)) → Topology.P3 A := by\n  intro hP2cl\n  -- `closure A` is closed.\n  have hClosed : IsClosed (closure (A : Set X)) := isClosed_closure\n  -- From `P2 (closure A)` and closedness we deduce that `closure A` is open.\n  have hOpenClosure : IsOpen (closure (A : Set X)) :=\n    (Topology.P2_closed_iff_isOpen (A := closure (A : Set X)) hClosed).1 hP2cl\n  -- Openness of `closure A` gives `P3 (closure A)`.\n  have hP3Closure : Topology.P3 (closure (A : Set X)) :=\n    (Topology.P3_closure_iff_isOpen (A := A)).2 hOpenClosure\n  -- `P3` transfers from `closure A` to `A` itself.\n  exact Topology.P3_of_P3_closure (A := A) hP3Closure"
+  ],
+  "success": true
+}

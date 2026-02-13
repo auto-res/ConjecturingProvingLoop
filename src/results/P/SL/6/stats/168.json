@@ -1,0 +1,60 @@
+{
+  "times": [
+    53.279704093933105,
+    27.27125906944275,
+    88.16051387786865
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3909,
+      "prompt_tokens": 25944,
+      "total_tokens": 29853,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    },
+    {
+      "completion_tokens": 2096,
+      "prompt_tokens": 26069,
+      "total_tokens": 28165,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    },
+    {
+      "completion_tokens": 6576,
+      "prompt_tokens": 26153,
+      "total_tokens": 32729,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_subset_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    interior (closure (interior (A : Set X))) ⊆ A := by\n  have h : interior (closure (interior (A : Set X))) ⊆ closure A :=\n    Topology.interior_closure_interior_subset_closure (A := A)\n  simpa [hA.closure_eq] using h",
+    "theorem closure_interior_closure_interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (A : Set X)))) ⊆\n      closure (interior (closure A)) := by\n  exact\n    closure_mono\n      (Topology.interior_closure_interior_subset_closure (A := A))",
+    "theorem nonempty_interior_closure_of_nonempty_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → A.Nonempty →\n      (interior (closure (A : Set X))).Nonempty := by\n  intro hP2 hNon\n  -- From `P2` we can derive `P3`.\n  have hP3 : Topology.P3 (A : Set X) :=\n    Topology.P2_implies_P3 (A := A) hP2\n  -- Apply the existing lemma for `P3`.\n  exact nonempty_interior_closure_of_nonempty_P3 (A := A) hP3 hNon"
+  ],
+  "success": true
+}

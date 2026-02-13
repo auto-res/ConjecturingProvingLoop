@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.21662092208862
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3669,
+      "prompt_tokens": 7152,
+      "total_tokens": 10821,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 A) (hB : Topology.P1 B) :\n    Topology.P1 (A ∪ B) := by\n  dsimp [Topology.P1] at hA hB ⊢\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hxA' := hA hxA\n      have h_subset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        have hInt_subset : interior A ⊆ interior (A ∪ B) := by\n          have h_sub : A ⊆ A ∪ B := by\n            intro y hy\n            exact Or.inl hy\n          exact interior_mono h_sub\n        exact closure_mono hInt_subset\n      exact h_subset hxA'\n  | inr hxB =>\n      have hxB' := hB hxB\n      have h_subset : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n        have hInt_subset : interior B ⊆ interior (A ∪ B) := by\n          have h_sub : B ⊆ A ∪ B := by\n            intro y hy\n            exact Or.inr hy\n          exact interior_mono h_sub\n        exact closure_mono hInt_subset\n      exact h_subset hxB'"
+  ],
+  "success": true
+}

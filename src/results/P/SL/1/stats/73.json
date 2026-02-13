@@ -1,0 +1,43 @@
+{
+  "times": [
+    119.11011099815369,
+    140.06846117973328
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8036,
+      "prompt_tokens": 10855,
+      "total_tokens": 18891,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    },
+    {
+      "completion_tokens": 7490,
+      "prompt_tokens": 10987,
+      "total_tokens": 18477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply Set.Subset.antisymm\n  ·\n    have hsubset : closure (interior (closure A)) ⊆ closure A := by\n      have hinner : interior (closure A) ⊆ (closure A : Set X) := interior_subset\n      have hclosure : closure (interior (closure A)) ⊆ closure (closure A) :=\n        closure_mono hinner\n      simpa [closure_closure] using hclosure\n    exact interior_mono hsubset\n  ·\n    have hsubset : interior (closure A) ⊆ closure (interior (closure A)) := by\n      intro x hx\n      exact subset_closure hx\n    exact interior_mono hsubset",
+    "theorem Topology.P3_implies_P1_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    Topology.P3 A → Topology.P1 A := by\n  intro hP3\n  have hOpen : IsOpen A :=\n    (Topology.P3_iff_isOpen_of_isClosed (A := A) hA).1 hP3\n  exact Topology.P1_of_isOpen (A := A) hOpen"
+  ],
+  "success": true
+}

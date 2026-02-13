@@ -1,0 +1,43 @@
+{
+  "times": [
+    43.125789642333984,
+    87.47803783416748
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3270,
+      "prompt_tokens": 2318,
+      "total_tokens": 5588,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 6205,
+      "prompt_tokens": 2440,
+      "total_tokens": 8645,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P3 (A := interior A) := by\n  dsimp [Topology.P3]\n  intro x hx\n  have hsubset : interior A ⊆ interior (closure (interior A)) := by\n    have h : interior A ⊆ closure (interior A) :=\n      Topology.subset_closure (A := interior A)\n    exact interior_mono h\n  exact hsubset hx",
+    "theorem Topology.P1_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (A := interior A) := by\n  dsimp [Topology.P1]\n  intro x hx\n  have hx' : x ∈ closure (interior A) := Set.subset_closure hx\n  have h_open : IsOpen (interior A) := isOpen_interior\n  simpa [h_open.interior_eq] using hx'"
+  ],
+  "success": true
+}

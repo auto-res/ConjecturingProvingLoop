@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.915221691131592
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2162,
+      "prompt_tokens": 45965,
+      "total_tokens": 48127,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A) :\n    A ⊆ closure A := by\n  intro x hxA\n  -- From `P2`, we have `x ∈ interior (closure (interior A))`.\n  have hxInt : x ∈ interior (closure (interior A)) := hP2 hxA\n  -- The interior is contained in the closure of the same set.\n  have hIntSubset : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset\n  have hxClInt : x ∈ closure (interior A) := hIntSubset hxInt\n  -- Finally, `closure (interior A)` is contained in `closure A`.\n  have hClSubset : closure (interior A) ⊆ closure A :=\n    closure_interior_subset_closure (X := X) (A := A)\n  exact hClSubset hxClInt"
+  ],
+  "success": true
+}

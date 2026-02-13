@@ -1,0 +1,26 @@
+{
+  "times": [
+    130.20450568199158
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6426,
+      "prompt_tokens": 44292,
+      "total_tokens": 50718,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_subset_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X) ∪ interior B) ⊆ closure (A ∪ B) := by\n  -- First, show the underlying inclusion without the closures.\n  have hSub : (interior (A : Set X) ∪ interior B) ⊆ A ∪ B := by\n    intro x hx\n    cases hx with\n    | inl hA =>\n        exact Or.inl ((interior_subset : interior (A : Set X) ⊆ A) hA)\n    | inr hB =>\n        exact Or.inr ((interior_subset : interior (B : Set X) ⊆ B) hB)\n  -- The `closure` operator is monotone, so the desired inclusion follows.\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

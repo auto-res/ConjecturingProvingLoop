@@ -1,0 +1,26 @@
+{
+  "times": [
+    134.57142758369446
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7438,
+      "prompt_tokens": 41885,
+      "total_tokens": 49323,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_self_of_isClosed_and_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) :\n    Topology.P3 A → closure (interior (A : Set X)) = A := by\n  intro hP3\n  -- From `P3` and closedness, deduce that `A` is open.\n  have hOpen : IsOpen (A : Set X) :=\n    ((Topology.P3_iff_isOpen_of_isClosed (X := X) (A := A) hClosed).1) hP3\n  -- A clopen set satisfies `closure (interior A) = A`.\n  exact\n    Topology.closure_interior_eq_self_of_clopen\n      (X := X) (A := A) hOpen hClosed"
+  ],
+  "success": true
+}

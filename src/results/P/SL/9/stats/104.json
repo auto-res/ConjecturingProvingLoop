@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.668914556503296
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3957,
+      "prompt_tokens": 15943,
+      "total_tokens": 19900,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_compl_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ) = (closure A)ᶜ := by\n  classical\n  -- Start from the known relation with `Aᶜ`.\n  have h := Topology.closure_compl_eq_compl_interior (A := Aᶜ)\n  -- `h : closure A = (interior (Aᶜ))ᶜ`\n  -- Take complements of both sides.\n  have h' := congrArg (fun s : Set X => sᶜ) h\n  -- Rearrange and simplify double complements.\n  simpa [compl_compl] using h'.symm"
+  ],
+  "success": true
+}

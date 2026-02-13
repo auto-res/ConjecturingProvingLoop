@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.46996569633484
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2144,
+      "prompt_tokens": 50896,
+      "total_tokens": 53040,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_six_eq {X : Type*} [TopologicalSpace X]\n    (A B C D E F : Set X) :\n    closure (A ∪ B ∪ C ∪ D ∪ E ∪ F) =\n      closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E ∪ closure F := by\n  classical\n  -- Regroup the big union so that we can apply the existing five-set lemma.\n  have h₁ :\n      (A ∪ B ∪ C ∪ D ∪ E ∪ F : Set X) = ((A ∪ B ∪ C ∪ D ∪ E) ∪ F) := by\n    simp [Set.union_assoc]\n  -- Apply the lemma for five sets to the regrouped part.\n  have h₂ :\n      closure (A ∪ B ∪ C ∪ D ∪ E) =\n        closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E :=\n    Topology.closure_union_five_eq (A := A) (B := B) (C := C) (D := D) (E := E)\n  -- Put everything together.\n  calc\n    closure (A ∪ B ∪ C ∪ D ∪ E ∪ F) =\n        closure ((A ∪ B ∪ C ∪ D ∪ E) ∪ F) := by\n          simpa [h₁]\n    _ = closure (A ∪ B ∪ C ∪ D ∪ E) ∪ closure F := by\n          simpa using\n            (Topology.closure_union_eq\n                (A := A ∪ B ∪ C ∪ D ∪ E) (B := F))\n    _ = (closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E) ∪\n          closure F := by\n          simpa [h₂]\n    _ = closure A ∪ closure B ∪ closure C ∪ closure D ∪ closure E ∪\n          closure F := by\n          simp [Set.union_assoc, Set.union_left_comm, Set.union_comm]"
+  ],
+  "success": true
+}

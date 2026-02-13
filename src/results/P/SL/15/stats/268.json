@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.48730564117432
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3748,
+      "prompt_tokens": 57458,
+      "total_tokens": 61206,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_iff_closure_mem_nhds {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A ↔ ∀ x : X, closure A ∈ 𝓝 x := by\n  constructor\n  · intro hDense x\n    -- Since `A` is dense, its closure is the whole space.\n    have h_cl : (closure A : Set X) = Set.univ := hDense.closure_eq\n    -- `univ` is a neighbourhood of every point.\n    have h_nhds_univ : (Set.univ : Set X) ∈ 𝓝 x := by\n      exact (isOpen_univ.mem_nhds trivial)\n    simpa [h_cl] using h_nhds_univ\n  · intro h\n    -- Show that `closure A = univ`, whence density of `A`.\n    have h_sub : (Set.univ : Set X) ⊆ closure A := by\n      intro x _\n      have h_nhds : closure A ∈ 𝓝 x := h x\n      have h_int : x ∈ interior (closure A) :=\n        (mem_interior_iff_mem_nhds).2 h_nhds\n      exact interior_subset h_int\n    have h_closure_eq : (closure A : Set X) = Set.univ := by\n      apply Set.Subset.antisymm\n      · intro x _; trivial\n      · exact h_sub\n    exact ((dense_iff_closure_eq (s := A)).2 h_closure_eq)"
+  ],
+  "success": true
+}

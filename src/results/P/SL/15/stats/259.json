@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.7984688282013
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5615,
+      "prompt_tokens": 55199,
+      "total_tokens": 60814,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_prod_left_of_nonempty\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hBne : B.Nonempty) :\n    Dense (A ×ˢ B) → Dense A := by\n  intro hDense\n  -- `closure (A ×ˢ B)` is the whole space.\n  have h_closure_prod :\n      (closure (A ×ˢ B : Set (X × Y))) = (Set.univ : Set (X × Y)) := by\n    simpa using hDense.closure_eq\n  -- We show `closure A = univ`, which is equivalent to `Dense A`.\n  have h_closureA_univ : (closure (A : Set X)) = (Set.univ : Set X) := by\n    -- First, the easy inclusion `closure A ⊆ univ`.\n    apply Set.Subset.antisymm\n    · intro _ _; trivial\n    · -- For the reverse inclusion, fix an arbitrary `x : X`.\n      intro x _\n      -- Pick some `y ∈ B`.\n      rcases hBne with ⟨y, hyB⟩\n      -- The point `(x, y)` lies in `univ`, hence in `closure (A ×ˢ B)`.\n      have h_mem_closure_prod :\n          ((x, y) : X × Y) ∈ closure (A ×ˢ B) := by\n        have : ((x, y) : X × Y) ∈ (Set.univ : Set (X × Y)) := by\n          trivial\n        simpa [h_closure_prod] using this\n      -- Rewrite `closure (A ×ˢ B)` as a product of closures.\n      have h_prod_eq :\n          (closure (A ×ˢ B) : Set (X × Y)) =\n            closure (A : Set X) ×ˢ closure (B : Set Y) := by\n        simpa using closure_prod_eq (s := A) (t := B)\n      -- Extract the first coordinate.\n      have : ((x, y) : X × Y) ∈ closure A ×ˢ closure B := by\n        simpa [h_prod_eq] using h_mem_closure_prod\n      exact (Set.mem_prod.1 this).1\n  -- Conclude density from the characterisation via closures.\n  exact (dense_iff_closure_eq (s := A)).2 h_closureA_univ"
+  ],
+  "success": true
+}

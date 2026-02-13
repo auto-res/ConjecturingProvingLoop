@@ -1,0 +1,60 @@
+{
+  "times": [
+    50.856956005096436,
+    92.32284688949585,
+    117.7496132850647
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3488,
+      "prompt_tokens": 3667,
+      "total_tokens": 7155,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    },
+    {
+      "completion_tokens": 8498,
+      "prompt_tokens": 3880,
+      "total_tokens": 12378,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1920
+      }
+    },
+    {
+      "completion_tokens": 8012,
+      "prompt_tokens": 3999,
+      "total_tokens": 12011,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closureInterior_eq_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → closure (interior A) = closure A := by\n  intro hP1\n  -- `closure A` is contained in `closure (interior A)` by monotonicity of `closure`\n  have h₁ : (closure A : Set X) ⊆ closure (interior A) :=\n    closure_mono (by\n      dsimp [Topology.P1] at hP1\n      exact hP1)\n  -- `closure (interior A)` is contained in `closure A` since `interior A ⊆ A`\n  have h₂ : (closure (interior A) : Set X) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem Topology.P1_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Topology.P1 A) : Topology.P1 (closure A) := by\n  dsimp [Topology.P1] at hA ⊢\n  -- First, enlarge the target set using `closure_mono`.\n  have h1 : (closure A : Set X) ⊆ closure (interior A) :=\n    closure_mono hA\n  -- Next, upgrade the right‐hand side using monotonicity of `interior` and `closure`.\n  have h2 : closure (interior A) ⊆ closure (interior (closure A)) := by\n    have : (interior A : Set X) ⊆ interior (closure A) :=\n      interior_mono (subset_closure : (A : Set X) ⊆ closure A)\n    exact closure_mono this\n  -- Combining the inclusions yields the desired result.\n  exact Set.Subset.trans h1 h2",
+    "theorem Topology.P1_iUnion {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X}\n    (hA : ∀ i, Topology.P1 (A i)) : Topology.P1 (⋃ i, A i) := by\n  dsimp [Topology.P1] at hA ⊢\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxi⟩\n  -- `x` is in `closure (interior (A i))`\n  have hx_closure_int : x ∈ closure (interior (A i)) := (hA i) hxi\n  -- `closure (interior (A i)) ⊆ closure (interior (⋃ j, A j))`\n  have h_mono : closure (interior (A i)) ⊆ closure (interior (⋃ j, A j)) := by\n    have h_int_mono : interior (A i) ⊆ interior (⋃ j, A j) := by\n      have h_subset : (A i : Set X) ⊆ ⋃ j, A j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact interior_mono h_subset\n    exact closure_mono h_int_mono\n  exact h_mono hx_closure_int"
+  ],
+  "success": true
+}

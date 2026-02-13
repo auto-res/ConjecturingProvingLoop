@@ -1,0 +1,26 @@
+{
+  "times": [
+    18.53676128387451
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1545,
+      "prompt_tokens": 47734,
+      "total_tokens": 49279,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_subset_closure_of_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hP2 : Topology.P2 A) (hAB : A ⊆ B) :\n    A ⊆ closure B := by\n  intro x hxA\n  -- Step 1: use `P2` to place `x` in `interior (closure (interior A))`.\n  have hxInt : x ∈ interior (closure (interior A)) := hP2 hxA\n  -- Step 2: enlarge the set step by step, ending in `closure B`.\n  -- `interior (closure (interior A)) ⊆ closure (interior A)`.\n  have hxClIntA : x ∈ closure (interior A) :=\n    (interior_subset : interior (closure (interior A)) ⊆\n        closure (interior A)) hxInt\n  -- `closure (interior A) ⊆ closure (interior B)` because `A ⊆ B`.\n  have h₁ : closure (interior A) ⊆ closure (interior B) := by\n    have hInt : interior A ⊆ interior B := interior_mono hAB\n    exact closure_mono hInt\n  have hxClIntB : x ∈ closure (interior B) := h₁ hxClIntA\n  -- Finally, `closure (interior B) ⊆ closure B`.\n  have h₂ : closure (interior B) ⊆ closure B := by\n    have hIntB : interior B ⊆ B := interior_subset\n    exact closure_mono hIntB\n  exact h₂ hxClIntB"
+  ],
+  "success": true
+}

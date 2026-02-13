@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.56225299835205
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4006,
+      "prompt_tokens": 3416,
+      "total_tokens": 7422,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_idempotent_three {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior A))))) =\n      closure (interior A) := by\n  calc\n    closure (interior (closure (interior (closure (interior A))))) =\n        closure (interior (closure (interior A))) := by\n          simpa using closure_interior_idempotent_iter (X := X) (A := interior A)\n    _ = closure (interior A) := by\n          simpa using closure_interior_idempotent (X := X) (A := A)"
+  ],
+  "success": true
+}

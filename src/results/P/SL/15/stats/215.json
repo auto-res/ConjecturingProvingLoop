@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.778417587280273
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1600,
+      "prompt_tokens": 45253,
+      "total_tokens": 46853,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_iff_dense_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A ↔ Dense (interior (closure A)) := by\n  constructor\n  · intro hDense\n    exact\n      dense_implies_dense_interior_closure (X := X) (A := A) hDense\n  · intro hDenseInt\n    exact\n      denseInterior_closure_implies_dense (X := X) (A := A) hDenseInt"
+  ],
+  "success": true
+}

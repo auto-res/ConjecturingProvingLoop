@@ -1,0 +1,26 @@
+{
+  "times": [
+    20.867483615875244
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1436,
+      "prompt_tokens": 16665,
+      "total_tokens": 18101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_P2_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    Topology.P2 A → Topology.P1 A := by\n  intro hP2\n  -- From `P2` and closedness, we deduce that `A` is open.\n  have hOpen : IsOpen A := Topology.isOpen_of_P2_of_isClosed (A := A) hA hP2\n  -- Every open set satisfies `P1`.\n  exact Topology.P1_of_isOpen (A := A) hOpen"
+  ],
+  "success": true
+}

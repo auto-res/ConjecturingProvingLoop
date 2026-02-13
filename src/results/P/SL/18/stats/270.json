@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.01023435592651
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5650,
+      "prompt_tokens": 42494,
+      "total_tokens": 48144,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_right_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ B : Set X)) ⊆ interior (closure B) := by\n  -- `closure` is monotone, hence `closure (A ∩ B)` is contained in `closure B`.\n  have h : closure (A ∩ B : Set X) ⊆ closure B := by\n    apply closure_mono\n    exact Set.inter_subset_right\n  -- Taking interiors preserves inclusions.\n  exact interior_mono h"
+  ],
+  "success": true
+}

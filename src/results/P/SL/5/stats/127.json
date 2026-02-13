@@ -1,0 +1,60 @@
+{
+  "times": [
+    143.48362231254578,
+    79.29195594787598,
+    58.813148021698
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11498,
+      "prompt_tokens": 20380,
+      "total_tokens": 31878,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 6210,
+      "prompt_tokens": 20577,
+      "total_tokens": 26787,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    },
+    {
+      "completion_tokens": 4432,
+      "prompt_tokens": 20651,
+      "total_tokens": 25083,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_iterate_two {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (Function.iterate (fun S : Set X => closure (interior S)) 2) A =\n      closure (interior A) := by\n  simp [Function.iterate,\n        Topology.closure_interior_idempotent (X := X) (A := A)]",
+    "theorem closure_interior_idempotent_six {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure\n        (interior\n          (closure\n            (interior\n              (closure\n                (interior\n                  (closure\n                    (interior\n                      (closure\n                        (interior\n                          (closure\n                            (interior\n                              (closure A))))))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_idempotent]",
+    "theorem interior_inter_closure_eq_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (A : Set X) ∩ closure A = interior A := by\n  ext x\n  constructor\n  · intro hx\n    exact hx.1\n  · intro hxInt\n    have hxA : x ∈ (A : Set X) := interior_subset hxInt\n    have hxCl : x ∈ closure (A : Set X) := subset_closure hxA\n    exact ⟨hxInt, hxCl⟩"
+  ],
+  "success": true
+}

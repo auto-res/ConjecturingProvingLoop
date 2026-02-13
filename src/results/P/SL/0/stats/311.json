@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.94640922546387
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3219,
+      "prompt_tokens": 54245,
+      "total_tokens": 57464,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_union_three {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    Topology.P2 (closure (A : Set X)) →\n    Topology.P2 (closure (B : Set X)) →\n    Topology.P2 (closure (C : Set X)) →\n    Topology.P2 (closure ((A ∪ B ∪ C) : Set X)) := by\n  intro hA hB hC\n  -- First, unite `closure A` and `closure B`.\n  have hAB : Topology.P2 (closure ((A ∪ B) : Set X)) :=\n    Topology.P2_closure_union (X := X) (A := A) (B := B) hA hB\n  -- Next, unite the result with `closure C`.\n  have hABC : Topology.P2 (closure (((A ∪ B) ∪ C) : Set X)) :=\n    Topology.P2_closure_union (X := X) (A := A ∪ B) (B := C) hAB hC\n  -- Reassociate unions to match the goal.\n  simpa [Set.union_assoc] using hABC"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.72490906715393
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4809,
+      "prompt_tokens": 41195,
+      "total_tokens": 46004,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_diff_closure_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) \\ closure A = (∅ : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hxInt, hxNotCl⟩\n    have hxCl : x ∈ closure A := interior_subset hxInt\n    exact (hxNotCl hxCl).elim\n  · intro hx\n    cases hx"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    107.05557417869568
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7527,
+      "prompt_tokens": 16406,
+      "total_tokens": 23933,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_subset_interior_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure A) ∪ interior (closure B) ⊆\n      interior (closure (A ∪ B)) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- Handle the case `x ∈ interior (closure A)`\n      have hsubset_closure : closure A ⊆ closure (A ∪ B) :=\n        closure_mono (Set.subset_union_left : A ⊆ A ∪ B)\n      have hsubset : interior (closure A) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono hsubset_closure\n      exact hsubset hxA\n  | inr hxB =>\n      -- Handle the case `x ∈ interior (closure B)`\n      have hsubset_closure : closure B ⊆ closure (A ∪ B) :=\n        closure_mono (Set.subset_union_right : B ⊆ A ∪ B)\n      have hsubset : interior (closure B) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono hsubset_closure\n      exact hsubset hxB"
+  ],
+  "success": true
+}

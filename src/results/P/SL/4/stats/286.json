@@ -1,0 +1,43 @@
+{
+  "times": [
+    61.097801208496094,
+    54.95963525772095
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3486,
+      "prompt_tokens": 43621,
+      "total_tokens": 47107,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2241,
+      "prompt_tokens": 43727,
+      "total_tokens": 45968,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43648
+      }
+    }
+  ],
+  "responses": [
+    "theorem compl_frontier_eq_interior_union_interior_compl\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (frontier (A : Set X))ᶜ = interior A ∪ interior (Aᶜ) := by\n  -- Start from the existing characterization of the complement of the frontier.\n  have h₁ :=\n    compl_frontier_eq_compl_closure_union_interior (X := X) (A := A)\n  -- Replace `(closure A)ᶜ` with `interior (Aᶜ)`.\n  have h₂ : (closure A : Set X)ᶜ = interior (Aᶜ) := by\n    simpa using (interior_compl_eq_compl_closure (A := A)).symm\n  -- Put everything together, reordering the union for the desired statement.\n  simpa [h₂, Set.union_comm] using h₁",
+    "theorem interior_closure_inter_eq_inter_interior_of_closed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed A) (hB : IsClosed B) :\n    interior (closure (A ∩ B)) = interior A ∩ interior B := by\n  -- `A ∩ B` is closed because both `A` and `B` are closed.\n  have hABclosed : IsClosed (A ∩ B) := hA.inter hB\n  -- Hence its closure is itself.\n  have h_closure : closure (A ∩ B) = A ∩ B := hABclosed.closure_eq\n  -- Rewrite and use the distributivity of `interior` over intersections.\n  simpa [h_closure, interior_inter]"
+  ],
+  "success": true
+}

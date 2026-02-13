@@ -1,0 +1,26 @@
+{
+  "times": [
+    113.46392583847046
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6432,
+      "prompt_tokens": 49034,
+      "total_tokens": 55466,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_union_eq_interiorClosure\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : (B : Set X) ⊆ interior (closure (A : Set X))) :\n    interior (closure (A ∪ B : Set X)) = interior (closure (A : Set X)) := by\n  apply Set.Subset.antisymm\n  · -- `⊆` : from left to right\n    -- First, show `A ∪ B ⊆ closure A`.\n    have hAB : (A ∪ B : Set X) ⊆ closure (A : Set X) := by\n      intro x hx\n      cases hx with\n      | inl hxA =>\n          exact subset_closure hxA\n      | inr hxB =>\n          have : x ∈ interior (closure (A : Set X)) := hB hxB\n          exact interior_subset this\n    -- Taking closures preserves this inclusion.\n    have hCl : closure (A ∪ B : Set X) ⊆ closure (A : Set X) := by\n      have h := closure_mono hAB\n      simpa [closure_closure] using h\n    -- Applying `interior` yields the desired inclusion.\n    exact interior_mono hCl\n  · -- `⊇` : from right to left\n    -- `A ⊆ A ∪ B`, hence `closure A ⊆ closure (A ∪ B)`.\n    have hCl : closure (A : Set X) ⊆ closure (A ∪ B : Set X) :=\n      closure_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n    -- Monotonicity of `interior` gives the required inclusion.\n    exact interior_mono hCl"
+  ],
+  "success": true
+}

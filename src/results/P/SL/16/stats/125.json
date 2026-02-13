@@ -1,0 +1,43 @@
+{
+  "times": [
+    271.8808228969574,
+    56.45589876174927
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 22016,
+      "prompt_tokens": 22564,
+      "total_tokens": 44580,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 21760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    },
+    {
+      "completion_tokens": 4507,
+      "prompt_tokens": 22638,
+      "total_tokens": 27145,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))))) =\n      closure (interior A) := by\n  -- Collapse the innermost five alternating `closure`/`interior` pairs.\n  have h₁ :=\n    (Topology.closure_interior_closure_interior_closure_interior_closure_interior_closure_interior_eq_closure_interior\n      (X := X) (A := A))\n  -- The basic two-step idempotence lemma.\n  have h₂ :=\n    (Topology.closure_interior_closure_interior_eq_closure_interior\n      (X := X) (A := A))\n  -- Combine the two equalities to collapse the whole expression.\n  simpa [h₁, h₂]",
+    "theorem Topology.isOpen_P1_iff_P2_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hOpen : IsOpen A) :\n    Topology.P1 (X := X) A ↔\n      (Topology.P2 (X := X) A ∧ Topology.P3 (X := X) A) := by\n  -- We already know `P1 ↔ P2` and `P1 ↔ P3` for open sets.\n  have hP1P2 : Topology.P1 (X := X) A ↔ Topology.P2 (X := X) A :=\n    Topology.isOpen_P1_iff_P2 (X := X) (A := A) hOpen\n  have hP1P3 : Topology.P1 (X := X) A ↔ Topology.P3 (X := X) A :=\n    Topology.isOpen_P1_iff_P3 (X := X) (A := A) hOpen\n  constructor\n  · intro hP1\n    have hP2 : Topology.P2 (X := X) A := (hP1P2).1 hP1\n    have hP3 : Topology.P3 (X := X) A := (hP1P3).1 hP1\n    exact And.intro hP2 hP3\n  · rintro ⟨hP2, _⟩\n    exact (hP1P2).2 hP2"
+  ],
+  "success": true
+}

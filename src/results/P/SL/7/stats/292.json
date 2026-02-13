@@ -1,0 +1,26 @@
+{
+  "times": [
+    133.8607804775238
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9050,
+      "prompt_tokens": 45551,
+      "total_tokens": 54601,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iUnionInterior_subset_closureInterior_iUnion\n    {X : Type*} [TopologicalSpace X] {ι : Sort _} {F : ι → Set X} :\n    closure (⋃ i, interior (F i) : Set X) ⊆\n      closure (interior (⋃ i, F i)) := by\n  -- First show that the union of the interiors is contained in the interior of the union.\n  have hSub : (⋃ i, interior (F i) : Set X) ⊆ interior (⋃ i, F i) := by\n    intro x hx\n    rcases Set.mem_iUnion.1 hx with ⟨i, hxFi⟩\n    -- Monotonicity of `interior` for the inclusion `F i ⊆ ⋃ i, F i`.\n    have hIncl : (interior (F i) : Set X) ⊆ interior (⋃ j, F j) := by\n      apply interior_mono\n      intro y hy\n      exact Set.mem_iUnion_of_mem i hy\n    exact hIncl hxFi\n  -- Taking closures preserves inclusions.\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    279.9352009296417,
+    79.48566842079163
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 18657,
+      "prompt_tokens": 48488,
+      "total_tokens": 67145,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 5047,
+      "prompt_tokens": 48561,
+      "total_tokens": 53608,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_prod_subset_closure\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    closure (interior A) ×ˢ closure B ⊆ closure (A ×ˢ B) := by\n  -- `closure (interior A)` is contained in `closure A`\n  have h_left : (closure (interior A) : Set X) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  -- hence the product is contained in the product of the closures\n  have h_prod : closure (interior A) ×ˢ closure B ⊆ closure A ×ˢ closure B :=\n    Set.prod_mono h_left Subset.rfl\n  -- rewrite the target using `closure_prod_eq`\n  simpa [closure_prod_eq (s := A) (t := B)] using h_prod",
+    "theorem interior_inter_left_isOpen {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) : interior (A ∩ B) = A ∩ interior B := by\n  calc\n    interior (A ∩ B) = interior A ∩ interior B := by\n      simpa using interior_inter\n    _ = A ∩ interior B := by\n      simpa [hA.interior_eq]"
+  ],
+  "success": true
+}

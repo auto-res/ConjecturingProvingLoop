@@ -1,0 +1,26 @@
+{
+  "times": [
+    55.465697288513184
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4326,
+      "prompt_tokens": 53911,
+      "total_tokens": 58237,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_frontier_subset_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    IsClosed A → closure (frontier (A : Set X)) ⊆ A := by\n  intro hClosed\n  -- We already have `closure (frontier A) ⊆ closure A`.\n  have h : closure (frontier (A : Set X)) ⊆ closure (A : Set X) :=\n    Topology.closure_frontier_subset_closure (A := A)\n  -- Since `A` is closed, `closure A = A`; rewrite and conclude.\n  simpa [hClosed.closure_eq] using h"
+  ],
+  "success": true
+}

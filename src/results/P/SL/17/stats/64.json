@@ -1,0 +1,26 @@
+{
+  "times": [
+    118.48856735229492
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5956,
+      "prompt_tokens": 9295,
+      "total_tokens": 15251,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_subset_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) ⊆ interior (closure A) := by\n  -- Since `interior A ⊆ A`, applying `closure` preserves the inclusion,\n  -- and then `interior_mono` yields the desired result.\n  apply interior_mono\n  exact closure_mono (interior_subset : interior A ⊆ A)"
+  ],
+  "success": true
+}

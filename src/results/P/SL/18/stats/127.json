@@ -1,0 +1,43 @@
+{
+  "times": [
+    90.49726891517639,
+    200.87082958221436
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6993,
+      "prompt_tokens": 18081,
+      "total_tokens": 25074,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    },
+    {
+      "completion_tokens": 15230,
+      "prompt_tokens": 18203,
+      "total_tokens": 33433,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_idempotent {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (A : Set X)))) =\n      interior (closure (A : Set X)) := by\n  -- First, show the left-hand side is contained in the right-hand side.\n  have h₁ :\n      interior (closure (interior (closure (A : Set X))))\n        ⊆ interior (closure (A : Set X)) := by\n    -- `closure` is monotone, and taking `interior` preserves inclusions.\n    have hSub :\n        closure (interior (closure (A : Set X)))\n          ⊆ closure (A : Set X) := by\n      exact closure_mono\n        (interior_subset : interior (closure (A : Set X)) ⊆ closure (A : Set X))\n    exact interior_mono hSub\n  -- Next, show the reverse inclusion.\n  have h₂ :\n      interior (closure (A : Set X))\n        ⊆ interior (closure (interior (closure (A : Set X)))) := by\n    -- `interior (closure A)` is open and lies inside its own closure.\n    have hOpen : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n    have hIncl :\n        (interior (closure (A : Set X)) : Set X) ⊆\n          closure (interior (closure (A : Set X))) := by\n      exact subset_closure\n    -- The maximality property of `interior` upgrades the inclusion.\n    exact interior_maximal hIncl hOpen\n  -- Combine the two inclusions to obtain equality.\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem closure_interior_eq_self_of_closed_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hP1 : Topology.P1 (A : Set X)) :\n    closure (interior (A : Set X)) = A := by\n  simpa using\n    ((Topology.P1_closed_iff_closure_interior_eq (A := A) hClosed).1 hP1)"
+  ],
+  "success": true
+}

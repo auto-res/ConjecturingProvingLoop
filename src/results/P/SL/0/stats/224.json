@@ -1,0 +1,43 @@
+{
+  "times": [
+    72.44206714630127,
+    221.97880268096924
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6137,
+      "prompt_tokens": 37718,
+      "total_tokens": 43855,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    },
+    {
+      "completion_tokens": 11475,
+      "prompt_tokens": 37851,
+      "total_tokens": 49326,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_closure_interior_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A →\n      closure (A : Set X) =\n        closure (interior (closure (interior A))) := by\n  intro hP2\n  apply subset_antisymm\n  · -- `closure A ⊆ closure (interior (closure (interior A)))`\n    exact\n      (Topology.P2_implies_closure_subset_closure_interior_closure_interior\n        (X := X) (A := A)) hP2\n  · -- `closure (interior (closure (interior A))) ⊆ closure A`\n    -- First, relate to `closure (interior A)`.\n    have h₁ :\n        closure (interior (closure (interior (A : Set X)))) ⊆\n          closure (interior (A : Set X)) := by\n      have hInt :\n          interior (closure (interior (A : Set X))) ⊆\n            closure (interior (A : Set X)) :=\n        Topology.interior_closure_interior_subset_closure_interior\n          (X := X) (A := A)\n      exact closure_mono hInt\n    -- Second, use the basic inclusion `closure (interior A) ⊆ closure A`.\n    have h₂ :\n        closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n      Topology.closure_interior_subset_closure_self (X := X) (A := A)\n    exact h₁.trans h₂",
+    ""
+  ],
+  "success": true
+}

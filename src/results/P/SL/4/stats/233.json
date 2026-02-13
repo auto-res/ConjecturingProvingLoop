@@ -1,0 +1,43 @@
+{
+  "times": [
+    71.66961169242859,
+    31.048468351364136
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3009,
+      "prompt_tokens": 33821,
+      "total_tokens": 36830,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 1897,
+      "prompt_tokens": 34020,
+      "total_tokens": 35917,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem compl_frontier_eq_union_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (frontier A)ᶜ = interior A ∪ interior (Aᶜ) := by\n  calc\n    (frontier A)ᶜ\n        = ((closure A) \\ interior A)ᶜ := by\n          simp [frontier_eq_closure_diff_interior]\n    _ = (closure A)ᶜ ∪ interior A := by\n          simpa [Set.compl_diff]\n    _ = interior (Aᶜ) ∪ interior A := by\n          simpa [interior_compl_eq_compl_closure]\n    _ = interior A ∪ interior (Aᶜ) := by\n          simpa [Set.union_comm]",
+    "theorem compl_frontier_eq_compl_closure_union_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    (frontier A)ᶜ = (closure A)ᶜ ∪ interior A := by\n  -- First, rewrite the frontier as an intersection.\n  have h₁ : (frontier A : Set X) = closure A ∩ (interior A)ᶜ := by\n    have h := frontier_eq_closure_diff_interior (X := X) (A := A)\n    simpa [Set.diff_eq] using h\n  -- Take complements of both sides.\n  have h₂ : (frontier A)ᶜ = (closure A ∩ (interior A)ᶜ)ᶜ := by\n    simpa [h₁]\n  -- Use De Morgan's laws to simplify the right-hand side.\n  simpa [Set.compl_inter, Set.compl_compl] using h₂"
+  ],
+  "success": true
+}

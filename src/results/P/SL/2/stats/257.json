@@ -1,0 +1,26 @@
+{
+  "times": [
+    70.766521692276
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4713,
+      "prompt_tokens": 42939,
+      "total_tokens": 47652,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_interior_implies_closure_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → closure (interior A) = closure A := by\n  intro hDense\n  -- `closure (interior A)` is the whole space.\n  have hUniv : closure (interior (A : Set X)) = (Set.univ : Set X) :=\n    hDense.closure_eq\n  -- One inclusion is monotonicity of `closure`.\n  have h₁ :\n      (closure (interior (A : Set X)) : Set X) ⊆ closure A :=\n    closure_mono (interior_subset : (interior (A : Set X) : Set X) ⊆ A)\n  -- The other inclusion is trivial after rewriting with `hUniv`.\n  have h₂ :\n      (closure (A : Set X)) ⊆ closure (interior (A : Set X)) := by\n    intro x hx\n    have : (x : X) ∈ (Set.univ : Set X) := by\n      simp\n    simpa [hUniv] using this\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

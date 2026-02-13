@@ -1,0 +1,43 @@
+{
+  "times": [
+    58.372374534606934,
+    230.92011547088623
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4314,
+      "prompt_tokens": 12229,
+      "total_tokens": 16543,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 16563,
+      "prompt_tokens": 12370,
+      "total_tokens": 28933,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_interior_closure_interior_mem_nhds\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A ↔ ∀ x ∈ A, interior (closure (interior A)) ∈ 𝓝 x := by\n  constructor\n  · intro hP2 x hx\n    have hx_int : x ∈ interior (closure (interior A)) := hP2 hx\n    have h_open : IsOpen (interior (closure (interior A))) := isOpen_interior\n    exact h_open.mem_nhds hx_int\n  · intro h\n    dsimp [Topology.P2]\n    intro x hx\n    have h_nhds : interior (closure (interior A)) ∈ 𝓝 x := h x hx\n    exact (mem_interior_iff_mem_nhds).2 h_nhds",
+    "theorem interior_closure_eq_univ_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense A) : interior (closure A) = (Set.univ : Set X) := by\n  have h_closure : closure A = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  simpa [h_closure, interior_univ]"
+  ],
+  "success": true
+}

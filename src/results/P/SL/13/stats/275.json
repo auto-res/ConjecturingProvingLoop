@@ -1,0 +1,60 @@
+{
+  "times": [
+    20.019994020462036,
+    124.40496802330017,
+    19.070717096328735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1236,
+      "prompt_tokens": 48569,
+      "total_tokens": 49805,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 5714,
+      "prompt_tokens": 48680,
+      "total_tokens": 54394,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 1315,
+      "prompt_tokens": 48753,
+      "total_tokens": 50068,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_closure_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔ closure (A : Set X) = (Set.univ : Set X) := by\n  simp [Dense]",
+    "theorem Dense.closure_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Dense (A : Set X)) :\n    closure (A : Set X) = (Set.univ : Set X) := by\n  simpa [Dense] using h",
+    "theorem Topology.closure_eq_univ_iff_forall_mem {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = (Set.univ : Set X) ↔ ∀ x : X, x ∈ closure (A : Set X) := by\n  constructor\n  · intro h x\n    have : (x : X) ∈ (Set.univ : Set X) := by\n      simp\n    simpa [h] using this\n  · intro h\n    apply Set.Subset.antisymm\n    · exact Set.subset_univ _\n    · intro x _\n      exact h x"
+  ],
+  "success": true
+}

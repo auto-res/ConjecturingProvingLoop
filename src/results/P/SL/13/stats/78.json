@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.064162969589233
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2061,
+      "prompt_tokens": 12308,
+      "total_tokens": 14369,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_closure_implies_P1_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h_open : IsOpen (closure (A : Set X))) :\n    Topology.P1 (X := X) (closure (A : Set X)) := by\n  -- Apply the generic P1 result for open sets to `closure A`.\n  have hP1 :=\n    isOpen_subset_closureInterior (X := X) (A := closure (A : Set X)) h_open\n  simpa using hP1"
+  ],
+  "success": true
+}

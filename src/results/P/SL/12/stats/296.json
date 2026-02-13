@@ -1,0 +1,43 @@
+{
+  "times": [
+    161.97976851463318,
+    236.92788290977478
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7391,
+      "prompt_tokens": 57669,
+      "total_tokens": 65060,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    },
+    {
+      "completion_tokens": 10932,
+      "prompt_tokens": 57797,
+      "total_tokens": 68729,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_image_eq_closure_image_interior_of_P1\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}\n    (hf : Continuous f) {A : Set X} (hA : Topology.P1 (X := X) A) :\n    closure (f '' (A : Set X)) = closure (f '' interior A) := by\n  -- `f '' A ⊆ closure (f '' interior A)` thanks to `P1`.\n  have h₁ : f '' (A : Set X) ⊆ closure (f '' interior A) :=\n    Topology.image_subset_closure_image_interior_of_P1\n      (X := X) (Y := Y) (f := f) hf (A := A) hA\n  -- Hence the corresponding inclusion of closures.\n  have h₁' : closure (f '' (A : Set X)) ⊆ closure (f '' interior A) :=\n    closure_mono h₁\n  -- Conversely, `interior A ⊆ A`, so the images satisfy the reverse inclusion.\n  have h₂ : f '' interior A ⊆ f '' (A : Set X) := by\n    intro y hy\n    rcases hy with ⟨x, hx_int, rfl⟩\n    exact ⟨x, (interior_subset : interior (A : Set X) ⊆ A) hx_int, rfl⟩\n  -- Taking closures yields the opposite inclusion.\n  have h₂' : closure (f '' interior A) ⊆ closure (f '' (A : Set X)) :=\n    closure_mono h₂\n  -- Conclude by antisymmetry of set inclusion.\n  exact Set.Subset.antisymm h₁' h₂'",
+    "theorem Topology.closure_image_subset_closure_image_interior_of_P1\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}\n    (hf : Continuous f) {A : Set X} (hA : Topology.P1 (X := X) A) :\n    closure (f '' A) ⊆ closure (f '' interior A) := by\n  -- First, show that every point of `f '' A` already lies in\n  -- `closure (f '' interior A)`.\n  have h_subset : f '' A ⊆ closure (f '' interior A) := by\n    intro y hy\n    rcases hy with ⟨x, hxA, rfl⟩\n    -- From `P1`, `x` is in the closure of `interior A`.\n    have hx_cl : (x : X) ∈ closure (interior A) := hA hxA\n    -- Hence `f x` is in `f '' closure (interior A)`.\n    have h_fx : f x ∈ f '' closure (interior A) := ⟨x, hx_cl, rfl⟩\n    -- Use continuity to pass from `f '' closure _` to `closure (f '' _)`.\n    have h_image :\n        f '' closure (interior A) ⊆ closure (f '' interior A) :=\n      Topology.image_closure_subset_closure_image\n        (X := X) (Y := Y) (f := f) hf (A := interior A)\n    exact h_image h_fx\n  -- Taking closures of both sides gives the required inclusion.\n  -- We use a small rewriting step to avoid the double‐closure on the right.\n  have : closure (f '' A) ⊆ closure (closure (f '' interior A)) :=\n    closure_mono h_subset\n  simpa [closure_closure] using this"
+  ],
+  "success": true
+}

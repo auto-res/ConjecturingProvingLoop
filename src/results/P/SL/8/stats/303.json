@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.07131242752075
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5847,
+      "prompt_tokens": 46977,
+      "total_tokens": 52824,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_eq_of_isClosed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed A) (hB : IsClosed B) :\n    closure (A ∪ B) = A ∪ B := by\n  calc\n    closure (A ∪ B) = closure A ∪ closure B := by\n      simpa using\n        (closure_union : closure (A ∪ B) = closure A ∪ closure B)\n    _ = A ∪ B := by\n      simpa [hA.closure_eq, hB.closure_eq]"
+  ],
+  "success": true
+}

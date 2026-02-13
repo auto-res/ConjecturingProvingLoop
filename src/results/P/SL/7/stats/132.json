@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.32188749313354
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6195,
+      "prompt_tokens": 19538,
+      "total_tokens": 25733,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_eq_univ_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (interior A) = (Set.univ : Set X)) :\n    interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  -- First, prove `closure A = univ`.\n  have hClosureA : closure (A : Set X) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · exact Set.Subset_univ _\n    · intro x _\n      -- Since `closure (interior A) = univ`, every point belongs to it.\n      have hx_clInt : x ∈ closure (interior A) := by\n        have : x ∈ (Set.univ : Set X) := by trivial\n        simpa [h] using this\n      -- And `closure (interior A) ⊆ closure A`.\n      have hIncl : closure (interior A) ⊆ closure (A : Set X) :=\n        closure_mono (interior_subset : interior A ⊆ (A : Set X))\n      exact hIncl hx_clInt\n  -- Taking interiors yields the desired equality.\n  simpa [hClosureA, interior_univ]"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    60.444226026535034,
+    94.20484828948975,
+    25.755812406539917
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4910,
+      "prompt_tokens": 30320,
+      "total_tokens": 35230,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    },
+    {
+      "completion_tokens": 6717,
+      "prompt_tokens": 30442,
+      "total_tokens": 37159,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    },
+    {
+      "completion_tokens": 2163,
+      "prompt_tokens": 30569,
+      "total_tokens": 32732,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_exists_open_subset_closure_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (A : Set X) ↔\n      ∃ U : Set X, IsOpen U ∧ (A : Set X) ⊆ U ∧ closure U = closure A := by\n  classical\n  constructor\n  · intro hP3\n    -- Choose `U = interior (closure A)`.\n    refine\n      ⟨interior (closure (A : Set X)), isOpen_interior, ?_, ?_⟩\n    · -- `A ⊆ U`\n      simpa using hP3\n    · -- `closure U = closure A`\n      have h₁ :\n          closure (interior (closure (A : Set X))) ⊆ closure A :=\n        closure_mono\n          (interior_subset :\n            interior (closure (A : Set X)) ⊆ closure A)\n      have h₂ :\n          closure A ⊆ closure (interior (closure (A : Set X))) := by\n        -- Since `A ⊆ interior (closure A)`, taking closures yields the inclusion.\n        have : (A : Set X) ⊆ interior (closure (A : Set X)) := hP3\n        exact closure_mono this\n      exact Set.Subset.antisymm h₁ h₂\n  · rintro ⟨U, hOpenU, hASubU, hClosureEq⟩\n    -- From the hypotheses, show `A ⊆ interior (closure A)`.\n    dsimp [Topology.P3]\n    have hU_to_int :\n        U ⊆ interior (closure U) :=\n      interior_maximal subset_closure hOpenU\n    have hIntEq :\n        interior (closure U) = interior (closure (A : Set X)) := by\n      simpa [hClosureEq] using rfl\n    intro x hxA\n    have : x ∈ U := hASubU hxA\n    have : x ∈ interior (closure U) := hU_to_int this\n    simpa [hIntEq] using this",
+    "```lean\nimport Mathlib\nimport Aesop\n\nnamespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\n/-- Property `P₁`: every point of `A` is adherent to `interior A`. -/\ndef P1 (A : Set X) : Prop :=\n  A ⊆ closure (interior A)\n\n/-- Property `P₂`: every point of `A` belongs to the interior of the closure of\n`interior A`. -/\ndef P2 (A : Set X) : Prop :=\n  A ⊆ interior (closure (interior A))\n\n/-- Property `P₃`: every point of `A` belongs to the interior of `closure A`. -/\ndef P3 (A : Set X) : Prop :=\n  A ⊆ interior (closure A)\n\n/-- `P₂ A` implies `P₁ A`. -/\ntheorem P2_implies_P1 {A : Set X} : P2 (A : Set X) → P1 A := by\n  intro hA\n  dsimp [P2] at hA\n  dsimp [P1] at *\n  exact hA.trans interior_subset\n\n/-- **Corrected**: `P₂ A` implies `P₃ A`. -/\ntheorem P2_implies_P3 {A : Set X} : P2 (A : Set X) → P3 A := by\n  intro hA\n  dsimp [P2, P3] at *\n  -- We need `interior (closure (interior A)) ⊆ interior (closure A)`.\n  have hIncl :\n      interior (closure (interior (A : Set X))) ⊆\n        interior (closure A) :=\n    interior_mono\n      (closure_mono\n        (interior_subset : interior (A : Set X) ⊆ A))\n  exact hA.trans hIncl\n\nend Topology\n```",
+    "theorem P1_implies_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A : Set X) → (A ⊆ closure (interior (closure A))) := by\n  intro hP1\n  dsimp [Topology.P1] at hP1\n  intro x hxA\n  -- From `P1`, we have `x ∈ closure (interior A)`.\n  have hx_cl : x ∈ closure (interior (A : Set X)) := hP1 hxA\n  -- Monotonicity of `interior` lifts `A ⊆ closure A`.\n  have hIncl :\n      closure (interior (A : Set X)) ⊆\n        closure (interior (closure (A : Set X))) := by\n    apply closure_mono\n    apply interior_mono\n    exact (subset_closure : (A : Set X) ⊆ closure A)\n  exact hIncl hx_cl"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.48399877548218
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3280,
+      "prompt_tokens": 59995,
+      "total_tokens": 63275,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 59264
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_diff_subset_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) \\ (A : Set X) ⊆ frontier (A : Set X) := by\n  intro x hx\n  -- `hx` gives the facts that `x ∈ closure (interior A)` and `x ∉ A`.\n  have hx_cl_int : x ∈ closure (interior A) := hx.1\n  have hx_not_A  : x ∉ (A : Set X)     := hx.2\n  -- Since `interior A ⊆ A ⊆ closure A`, we have\n  -- `closure (interior A) ⊆ closure A`; hence `x ∈ closure A`.\n  have hsubset : (closure (interior A) : Set X) ⊆ closure (A : Set X) :=\n    Topology.closure_interior_subset_closure (A := A)\n  have hx_cl_A : x ∈ closure (A : Set X) := hsubset hx_cl_int\n  -- To be in the frontier of `A`, we also need `x ∉ interior A`.\n  have hx_not_int : x ∉ interior (A : Set X) := by\n    intro hx_int\n    exact hx_not_A (interior_subset hx_int)\n  -- Assemble the two conditions defining the frontier.\n  exact And.intro hx_cl_A hx_not_int"
+  ],
+  "success": true
+}

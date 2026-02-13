@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.66910719871521
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7178,
+      "prompt_tokens": 33213,
+      "total_tokens": 40391,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_eq_self_diff_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) :\n    interior (A \\ B) = A \\ closure B := by\n  classical\n  -- First inclusion: `interior (A \\ B) ⊆ A \\ closure B`.\n  have h₁ : interior (A \\ B) ⊆ A \\ closure B := by\n    -- We already have a more precise inclusion into `interior A \\ closure B`;\n    -- for an open set `A`, `interior A = A`.\n    have h := interior_diff_subset (X := X) (A := A) (B := B)\n    simpa [hA.interior_eq] using h\n  -- Second inclusion: `A \\ closure B ⊆ interior (A \\ B)`.\n  have h₂ : A \\ closure B ⊆ interior (A \\ B) := by\n    -- The set `A \\ closure B` is open.\n    have hOpenDiff : IsOpen (A \\ closure B) := by\n      -- `closure B` is closed, hence its complement is open.\n      have hOpenCompl : IsOpen ((closure B)ᶜ) := by\n        have hClosed : IsClosed (closure B) := isClosed_closure\n        simpa using (isOpen_compl_iff).2 hClosed\n      -- `A \\ closure B` is the intersection of two open sets.\n      simpa [Set.diff_eq] using hA.inter hOpenCompl\n    -- Moreover, `A \\ closure B ⊆ A \\ B` because `B ⊆ closure B`.\n    have hSubset : A \\ closure B ⊆ A \\ B := by\n      intro x hx\n      rcases hx with ⟨hxA, hxNotCl⟩\n      have hxNotB : x ∉ B := by\n        intro hxB\n        have : (x : X) ∈ closure B := subset_closure hxB\n        exact hxNotCl this\n      exact And.intro hxA hxNotB\n    -- Use the maximality property of the interior.\n    exact interior_maximal hSubset hOpenDiff\n  -- Combine the two inclusions for equality.\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

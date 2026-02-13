@@ -1,0 +1,26 @@
+{
+  "times": [
+    139.76922488212585
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9452,
+      "prompt_tokens": 35759,
+      "total_tokens": 45211,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34688
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_prod_subset_closureInterior_prod\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    closure (interior A) ×ˢ closure (interior B) ⊆\n      closure (interior (A ×ˢ B)) := by\n  intro z hz\n  have h_eq :\n      closure (interior (A ×ˢ B)) =\n        closure (interior A) ×ˢ closure (interior B) :=\n    closure_interior_prod (X := X) (Y := Y) (A := A) (B := B)\n  simpa [h_eq] using hz"
+  ],
+  "success": true
+}

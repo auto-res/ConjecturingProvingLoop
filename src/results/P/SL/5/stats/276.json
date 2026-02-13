@@ -1,0 +1,43 @@
+{
+  "times": [
+    40.51005554199219,
+    144.84246349334717
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4176,
+      "prompt_tokens": 52554,
+      "total_tokens": 56730,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 13460,
+      "prompt_tokens": 52668,
+      "total_tokens": 66128,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_interior_compl_eq_univ {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) ∪ interior ((A : Set X)ᶜ) = (Set.univ : Set X) := by\n  classical\n  ext x\n  constructor\n  · intro _\n    trivial\n  · intro _\n    by_cases hx : x ∈ closure (A : Set X)\n    · exact Or.inl hx\n    · -- Show `x ∈ interior (Aᶜ)`\n      -- `x` lies in the open set `(closure A)ᶜ`, which is contained in `Aᶜ`.\n      have hxCompl : x ∈ ((closure (A : Set X))ᶜ) := hx\n      have hOpen : IsOpen ((closure (A : Set X))ᶜ) :=\n        isClosed_closure.isOpen_compl\n      have hSub : (closure (A : Set X) : Set X)ᶜ ⊆ (A : Set X)ᶜ := by\n        intro y hy\n        by_contra hyA\n        exact hy (subset_closure hyA)\n      have : x ∈ interior ((A : Set X)ᶜ) :=\n        mem_interior.2 ⟨(closure (A : Set X))ᶜ, hSub, hOpen, hxCompl⟩\n      exact Or.inr this",
+    ""
+  ],
+  "success": true
+}

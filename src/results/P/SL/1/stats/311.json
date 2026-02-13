@@ -1,0 +1,26 @@
+{
+  "times": [
+    124.15252876281738
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7744,
+      "prompt_tokens": 48300,
+      "total_tokens": 56044,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interior_subset_closure_interiors\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A ∩ interior B : Set X) ⊆\n      closure (interior A) ∩ closure (interior B) := by\n  intro x hx\n  -- `interior A ∩ interior B` is contained in each individual interior.\n  have hA : (interior A ∩ interior B : Set X) ⊆ interior A := by\n    intro y hy; exact hy.1\n  have hB : (interior A ∩ interior B : Set X) ⊆ interior B := by\n    intro y hy; exact hy.2\n  -- Apply monotonicity of `closure` to obtain the desired memberships.\n  have hxA : x ∈ closure (interior A) := (closure_mono hA) hx\n  have hxB : x ∈ closure (interior B) := (closure_mono hB) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

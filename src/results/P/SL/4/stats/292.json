@@ -1,0 +1,43 @@
+{
+  "times": [
+    247.5619616508484,
+    161.62858748435974
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10172,
+      "prompt_tokens": 44361,
+      "total_tokens": 54533,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 9456,
+      "prompt_tokens": 44450,
+      "total_tokens": 53906,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_frontier_eq_empty_of_open\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    interior (frontier (A : Set X)) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    -- Obtain an open neighbourhood `U` of `x` contained in the frontier.\n    rcases (mem_interior_iff_mem_nhds).1 hx with ⟨U, hUopen, hxU, hUsub⟩\n    -- Every point of `U` lies in `closure A`.\n    have hU_closure : (U : Set X) ⊆ closure A := by\n      intro y hyU\n      exact\n        (frontier_subset_closure (X := X) (A := A)) (hUsub hyU)\n    -- Hence `x` itself belongs to `closure A`.\n    have hx_closure : x ∈ closure A := hU_closure hxU\n    -- The neighbourhood `U` must intersect `A`.\n    have h_nonempty : ((U : Set X) ∩ A).Nonempty := by\n      have h := (mem_closure_iff).1 hx_closure\n      exact h U hUopen hxU\n    rcases h_nonempty with ⟨y, hyU, hyA⟩\n    -- But `U ⊆ frontier A`, so `y ∉ A` since `A` is open.\n    have hy_notA : y ∉ A := by\n      have hFront : y ∈ frontier A := hUsub hyU\n      have hNotInt : y ∉ interior A := hFront.2\n      simpa [hA.interior_eq] using hNotInt\n    -- Contradiction, hence the interior is empty.\n    simpa using (hy_notA hyA)\n  · exact Set.empty_subset _",
+    "theorem frontier_inter_subset_closure_pair\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∩ B : Set X) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- From `hx` we obtain membership in `closure (A ∩ B)`.\n  have hx_cl : x ∈ closure (A ∩ B) := hx.1\n  -- `closure (A ∩ B)` is contained in each of `closure A` and `closure B`.\n  have hA : closure (A ∩ B) ⊆ closure A :=\n    closure_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)\n  have hB : closure (A ∩ B) ⊆ closure B :=\n    closure_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)\n  exact And.intro (hA hx_cl) (hB hx_cl)"
+  ],
+  "success": true
+}

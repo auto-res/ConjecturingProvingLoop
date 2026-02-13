@@ -1,0 +1,43 @@
+{
+  "times": [
+    114.3692524433136,
+    134.1834418773651
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8604,
+      "prompt_tokens": 25815,
+      "total_tokens": 34419,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    },
+    {
+      "completion_tokens": 10313,
+      "prompt_tokens": 25903,
+      "total_tokens": 36216,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_iUnion_eq_interior_iUnion_closure\n    {X ι : Type*} [TopologicalSpace X] (A : ι → Set X) :\n    interior (closure (⋃ i, A i : Set X)) =\n      interior (⋃ i, closure (A i) : Set X) := by\n  -- `closure` distributes over (indexed) unions.\n  have h : closure (⋃ i, (A i : Set X)) = ⋃ i, closure (A i : Set X) := by\n    simpa using closure_iUnion\n  simpa [h]",
+    "theorem Topology.interior_closure_empty {X : Type*} [TopologicalSpace X] :\n    interior (closure (∅ : Set X)) = (∅ : Set X) := by\n  simpa [closure_empty, interior_empty]"
+  ],
+  "success": true
+}

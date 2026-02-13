@@ -1,0 +1,43 @@
+{
+  "times": [
+    317.376912355423,
+    117.19913983345032
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 17426,
+      "prompt_tokens": 52089,
+      "total_tokens": 69515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    },
+    {
+      "completion_tokens": 7827,
+      "prompt_tokens": 52163,
+      "total_tokens": 59990,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter8_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure (interior\n        (closure A)))))))))))) =\n      interior (closure A) := by\n  -- Start with the seven-fold idempotence lemma.\n  have h₁ :=\n    Topology.interiorClosure_iter7_idempotent (A := A)\n  -- Apply one more `interior ∘ closure` to both sides.\n  have h₂ :\n      interior (closure (interior (closure\n        (interior (closure (interior (closure (interior (closure\n          (interior (closure (interior (closure A)))))))))))) =\n        interior (closure (interior (closure A))) := by\n    simpa using congrArg (fun S : Set X => interior (closure S)) h₁\n  -- Simplify the right–hand side with the basic idempotence lemma.\n  simpa [Topology.interiorClosure_idempotent (A := A)] using h₂",
+    "theorem Topology.subset_closure_union_closure {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) ∪ closure (B : Set X) ⊆ closure (A ∪ B : Set X) := by\n  intro x hx\n  rcases hx with hxA | hxB\n  ·\n    have : (x : X) ∈ closure (A ∪ B : Set X) :=\n      (closure_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)) hxA\n    exact this\n  ·\n    have : (x : X) ∈ closure (A ∪ B : Set X) :=\n      (closure_mono (Set.subset_union_right : (B : Set X) ⊆ A ∪ B)) hxB\n    exact this"
+  ],
+  "success": true
+}

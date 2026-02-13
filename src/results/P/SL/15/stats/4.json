@@ -1,0 +1,43 @@
+{
+  "times": [
+    33.505542278289795,
+    21.3984215259552
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2411,
+      "prompt_tokens": 776,
+      "total_tokens": 3187,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1253,
+      "prompt_tokens": 848,
+      "total_tokens": 2101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x hx\n  have h_subset : A ⊆ interior (closure A) :=\n    Set.interior_maximal hA subset_closure\n  exact h_subset hx",
+    "theorem isOpen_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P3 A := by\n  exact (P2_implies_P3 (X := X) (A := A)) (isOpen_implies_P2 (X := X) (A := A) hA)"
+  ],
+  "success": true
+}

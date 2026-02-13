@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.67201280593872
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2018,
+      "prompt_tokens": 47137,
+      "total_tokens": 49155,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_subset_closure_interior_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) :\n    interior A ⊆ closure (interior B) := by\n  intro x hx\n  -- Step 1: use monotonicity of `interior` under `hAB`\n  have hx_intB : x ∈ interior B := (interior_mono hAB) hx\n  -- Step 2: every set is contained in the closure of itself\n  exact (subset_closure : interior B ⊆ closure (interior B)) hx_intB"
+  ],
+  "success": true
+}

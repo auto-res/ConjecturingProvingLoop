@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.610925674438477
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2826,
+      "prompt_tokens": 3336,
+      "total_tokens": 6162,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2816
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_satisfies_P1_P2_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (X := X) (interior (closure (interior A))) ∧\n    Topology.P2 (X := X) (interior (closure (interior A))) ∧\n    Topology.P3 (X := X) (interior (closure (interior A))) := by\n  have hOpen : IsOpen (interior (closure (interior A))) := isOpen_interior\n  have hP1 : Topology.P1 (X := X) (interior (closure (interior A))) :=\n    Topology.isOpen_implies_P1 (X := X) (A := interior (closure (interior A))) hOpen\n  have hP2 : Topology.P2 (X := X) (interior (closure (interior A))) :=\n    Topology.isOpen_implies_P2 (X := X) (A := interior (closure (interior A))) hOpen\n  have hP3 : Topology.P3 (X := X) (interior (closure (interior A))) :=\n    Topology.isOpen_implies_P3 (X := X) (A := interior (closure (interior A))) hOpen\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

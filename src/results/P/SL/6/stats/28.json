@@ -1,0 +1,26 @@
+{
+  "times": [
+    16.773208618164062
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1359,
+      "prompt_tokens": 3219,
+      "total_tokens": 4578,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_satisfies_P1 {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (closure (interior (A : Set X))) := by\n  have hP1 : Topology.P1 (interior A) := Topology.interior_satisfies_P1 (A := A)\n  have hP1' : Topology.P1 (closure (interior A)) :=\n    Topology.P1_closure_of_P1 (A := interior A) hP1\n  simpa using hP1'"
+  ],
+  "success": true
+}

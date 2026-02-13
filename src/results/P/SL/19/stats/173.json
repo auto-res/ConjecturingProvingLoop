@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.57611441612244
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4975,
+      "prompt_tokens": 26439,
+      "total_tokens": 31414,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_eq_closure_interior_union_of_P1\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (A := A) → Topology.P1 (A := B) →\n      closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  intro hP1A hP1B\n  -- Equalities coming from `P1` for `A` and `B`.\n  have hA_eq : closure A = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 (A := A) hP1A\n  have hB_eq : closure B = closure (interior B) :=\n    Topology.closure_eq_closure_interior_of_P1 (A := B) hP1B\n  -- Equality for the union obtained from `P1` on both sets.\n  have hUnion_eq :\n      closure (A ∪ B) = closure (interior (A ∪ B)) :=\n    Topology.closure_eq_closure_interior_union_of_P1\n      (A := A) (B := B) hP1A hP1B\n  -- Prove both inclusions to establish set equality.\n  apply Set.Subset.antisymm\n  · intro x hx\n    -- Convert membership using `hUnion_eq`.\n    have hx_closure_union : x ∈ closure (A ∪ B) := by\n      simpa [hUnion_eq] using hx\n    -- Rewrite `closure (A ∪ B)` via `closure_union`.\n    have hx_union : x ∈ closure A ∪ closure B := by\n      simpa [closure_union] using hx_closure_union\n    -- Use `hA_eq` and `hB_eq` to land in the desired union.\n    cases hx_union with\n    | inl hA_mem =>\n        have : x ∈ closure (interior A) := by\n          simpa [hA_eq] using hA_mem\n        exact Or.inl this\n    | inr hB_mem =>\n        have : x ∈ closure (interior B) := by\n          simpa [hB_eq] using hB_mem\n        exact Or.inr this\n  · -- The reverse inclusion is an existing lemma.\n    exact\n      Topology.closure_interior_union_subset_closure_interior_union\n        (A := A) (B := B)"
+  ],
+  "success": true
+}

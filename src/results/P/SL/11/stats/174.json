@@ -1,0 +1,26 @@
+{
+  "times": [
+    132.6354739665985
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10841,
+      "prompt_tokens": 26964,
+      "total_tokens": 37805,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_P3_prod_left {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hB : B.Nonempty)\n    (h : Topology.P3 (A ×ˢ B)) :\n    Topology.P3 A := by\n  dsimp [Topology.P3] at h ⊢\n  intro x hxA\n  rcases hB with ⟨y, hyB⟩\n  have hxy_prod : (x, y) ∈ A ×ˢ B := by\n    exact And.intro hxA hyB\n  have hxy_int : (x, y) ∈ interior (closure (A ×ˢ B)) := h hxy_prod\n  have hxy_int' : (x, y) ∈ interior (closure A ×ˢ closure B) := by\n    simpa [closure_prod_eq] using hxy_int\n  have hxy_int'' :\n      (x, y) ∈ interior (closure A) ×ˢ interior (closure B) := by\n    simpa [interior_prod_eq] using hxy_int'\n  exact hxy_int''.1"
+  ],
+  "success": true
+}

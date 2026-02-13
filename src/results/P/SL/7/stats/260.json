@@ -1,0 +1,43 @@
+{
+  "times": [
+    244.94202136993408,
+    148.9229724407196
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 15473,
+      "prompt_tokens": 40784,
+      "total_tokens": 56257,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    },
+    {
+      "completion_tokens": 8195,
+      "prompt_tokens": 41218,
+      "total_tokens": 49413,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8128,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_compl_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) : interior ((A : Set X)ᶜ) = (closure (A : Set X))ᶜ := by\n  ext x\n  constructor\n  · intro hx\n    -- `x` lies in an open neighbourhood contained in `Aᶜ`\n    have hnhds : (interior (Aᶜ) : Set X) ∈ 𝓝 x :=\n      (isOpen_interior.mem_nhds hx)\n    -- If `x` were also in `closure A`, every neighbourhood of `x` would meet `A`,\n    -- contradicting the fact that `interior (Aᶜ)` is disjoint from `A`.\n    have hcontra : x ∈ closure (A : Set X) → False := by\n      intro hxcl\n      have h := (mem_closure_iff).1 hxcl _ isOpen_interior hnhds\n      simpa [interior_subset] using h\n    exact by\n      -- `x` cannot be in `closure A`\n      simpa [Set.mem_compl] using not_exists.mpr hcontra\n  · intro hx\n    -- Work with the open set `U = (closure A)ᶜ` containing `x`.\n    set U : Set X := (closure (A : Set X))ᶜ with hUdef\n    have hU_open : IsOpen U := isClosed_closure.isOpen_compl\n    have hxU : x ∈ U := by\n      simpa [hUdef, Set.mem_compl] using hx\n    -- Since `A ⊆ closure A`, we have `U ⊆ Aᶜ`.\n    have hU_subset : (U : Set X) ⊆ (A : Set X)ᶜ := by\n      intro y hy\n      by_contra hAy\n      have : (y : X) ∈ closure (A : Set X) := subset_closure hAy\n      have : y ∈ U := hy\n      simpa [hUdef, Set.mem_compl] using And.intro this this\n    -- `U` is an open subset of `Aᶜ`, hence contained in its interior.\n    have hU_interior : (U : Set X) ⊆ interior (Aᶜ) :=\n      interior_maximal hU_subset hU_open\n    exact hU_interior hxU",
+    "theorem Topology.interiorClosureInterior_empty {X : Type*} [TopologicalSpace X] :\n    interior (closure (interior (∅ : Set X))) = (∅ : Set X) := by\n  simp"
+  ],
+  "success": true
+}

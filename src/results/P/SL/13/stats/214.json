@@ -1,0 +1,60 @@
+{
+  "times": [
+    37.40028524398804,
+    162.2361228466034,
+    52.62050652503967
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2534,
+      "prompt_tokens": 38106,
+      "total_tokens": 40640,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    },
+    {
+      "completion_tokens": 10018,
+      "prompt_tokens": 38226,
+      "total_tokens": 48244,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    },
+    {
+      "completion_tokens": 3120,
+      "prompt_tokens": 38308,
+      "total_tokens": 41428,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_and_P1_implies_denseInterior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense (A : Set X) → Topology.P1 (X := X) A → Dense (interior (A : Set X)) := by\n  intro hDense hP1\n  -- From `P1`, obtain the equality of closures.\n  have h_cl_eq : closure (A : Set X) = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closureInterior (X := X) (A := A)).1 hP1\n  -- The density of `A` turns the left‐hand side into `univ`.\n  have h_univ : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Combine the two equalities to conclude.\n  dsimp [Dense]\n  simpa [h_cl_eq] using h_univ",
+    "theorem Topology.dense_iff_interior_closure_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense (A : Set X) ↔ interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    -- For a dense set, the closure is the whole space; taking the interior yields `univ`.\n    simpa [hDense.closure_eq, interior_univ]\n  · intro hInt\n    -- From `interior (closure A) = univ`, deduce `closure A = univ`,\n    -- then unfold the definition of `Dense`.\n    have hSubset : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      have : interior (closure (A : Set X)) ⊆ closure (A : Set X) :=\n        interior_subset\n      simpa [hInt] using this\n    have hClosure : closure (A : Set X) = (Set.univ : Set X) :=\n      Set.Subset.antisymm (Set.subset_univ _) hSubset\n    -- Conclude that `A` is dense.\n    simpa [Dense, hClosure]",
+    "theorem Topology.P1_interiorClosureInteriorClosure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (X := X) (interior (closure (interior (closure (A : Set X))))) := by\n  -- The set under consideration is an interior, hence it is open.\n  have h_open :\n      IsOpen (interior (closure (interior (closure (A : Set X))))) :=\n    isOpen_interior\n  -- Every open set satisfies `P1`.\n  exact\n    Topology.isOpen_subset_closureInterior\n      (X := X)\n      (A := interior (closure (interior (closure (A : Set X))))) h_open"
+  ],
+  "success": true
+}

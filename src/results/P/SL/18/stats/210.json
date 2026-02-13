@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.95764112472534
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6370,
+      "prompt_tokens": 31953,
+      "total_tokens": 38323,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closure_of_P1_and_open_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 A)\n    (hOpen : IsOpen (closure (interior (closure (A : Set X))))) :\n    Topology.P2 (closure (A : Set X)) := by\n  -- First, obtain `P1` for `closure A`.\n  have hP1Clos : Topology.P1 (closure (A : Set X)) :=\n    Topology.P1_closure (A := A) hP1\n  -- Apply the existing lemma to turn `P1` into `P2`\n  -- using the provided openness assumption.\n  have hP2Clos :=\n    Topology.P2_of_P1_and_open_closure_interior\n      (A := closure (A : Set X)) hP1Clos hOpen\n  simpa using hP2Clos"
+  ],
+  "success": true
+}

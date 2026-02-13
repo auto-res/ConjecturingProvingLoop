@@ -1,0 +1,26 @@
+{
+  "times": [
+    227.3725883960724
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10556,
+      "prompt_tokens": 52070,
+      "total_tokens": 62626,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_inter_of_P2_and_open\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP2A : Topology.P2 (A : Set X)) (hOpenB : IsOpen (B : Set X)) :\n    Topology.P2 (A ∩ B) := by\n  -- Unfold `P2` for the given set and for the goal.\n  dsimp [Topology.P2] at hP2A ⊢\n  intro x hxAB\n  rcases hxAB with ⟨hxA, hxB⟩\n  -- From `P2` for `A`, place `x` in the required interior.\n  have hxIntA : x ∈ interior (closure (interior A)) := hP2A hxA\n  -- Define an auxiliary open neighbourhood of `x`.\n  let V : Set X := interior (closure (interior A)) ∩ B\n  have hV_open : IsOpen V := isOpen_interior.inter hOpenB\n  have hxV    : x ∈ V := by\n    dsimp [V]\n    exact And.intro hxIntA hxB\n  -- Show that this neighbourhood is contained in the desired closure.\n  have hV_sub : (V : Set X) ⊆ closure (interior (A ∩ B)) := by\n    intro y hyV\n    rcases hyV with ⟨hyIntA, hyB⟩\n    -- We prove `y ∈ closure (interior (A ∩ B))` via the neighbourhood\n    -- characterisation of the closure.\n    have hyClA : y ∈ closure (interior A) := by\n      -- `interior S ⊆ S`\n      exact (interior_subset : interior (closure (interior A)) ⊆\n        closure (interior A)) hyIntA\n    -- Reformulate the goal using `mem_closure_iff`.\n    have : y ∈ closure (interior (A ∩ B)) := by\n      -- Use `mem_closure_iff`.\n      apply (mem_closure_iff).2\n      intro U hU hyU\n      -- Intersect the neighbourhood with `B`, which is open and contains `y`.\n      have hU' : IsOpen (U ∩ B) := hU.inter hOpenB\n      have hyU' : y ∈ U ∩ B := And.intro hyU hyB\n      -- Since `y ∈ closure (interior A)`, this new neighbourhood meets `interior A`.\n      have hNon : ((U ∩ B) ∩ interior (A : Set X)).Nonempty :=\n        (mem_closure_iff).1 hyClA (U ∩ B) hU' hyU'\n      rcases hNon with ⟨z, ⟨hzU, hzB⟩, hzIntA⟩\n      -- `z` lies in `interior A ∩ B`, hence in `interior (A ∩ B)`\n      -- because `B` is open.\n      have hzIntAB : z ∈ interior (A ∩ B) := by\n        -- `interior (A ∩ B) = interior A ∩ B` for an open `B`.\n        have hEq :=\n          interior_inter_of_isOpen_right (A := A) (B := B) hOpenB\n        have hz : z ∈ interior A ∩ B := And.intro hzIntA hzB\n        simpa [hEq] using hz\n      -- Provide the witness required by `mem_closure_iff`.\n      exact ⟨z, And.intro hzU hzIntAB⟩\n    exact this\n  -- Apply `interior_maximal` to conclude that `x` lies in the required interior.\n  have hxGoal :\n      x ∈ interior (closure (interior (A ∩ B))) :=\n    (interior_maximal hV_sub hV_open) hxV\n  exact hxGoal"
+  ],
+  "success": true
+}

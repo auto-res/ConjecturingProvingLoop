@@ -1,0 +1,60 @@
+{
+  "times": [
+    198.08380937576294,
+    106.10148024559021,
+    41.0006422996521
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10181,
+      "prompt_tokens": 54971,
+      "total_tokens": 65152,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 6735,
+      "prompt_tokens": 55045,
+      "total_tokens": 61780,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 1705,
+      "prompt_tokens": 55167,
+      "total_tokens": 56872,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter8_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure A)))))))))))) =\n      interior (closure A) := by\n  -- Reduce the innermost seven-fold nest using the existing lemma.\n  have h₁ :=\n    Topology.interiorClosure_iter7_idempotent (A := A)\n  -- Apply one more `interior ∘ closure` pair to both sides of `h₁`.\n  have h₂ :\n      interior (closure (interior (closure\n        (interior (closure (interior (closure (interior (closure (interior\n          (closure (interior (closure (interior (closure A)))))))))))))) =\n        interior (closure (interior (closure A))) := by\n    simpa using\n      congrArg (fun S : Set X =>\n        interior (closure (interior (closure S)))) h₁\n  -- Simplify the right-hand side with the basic idempotence lemma.\n  have h₃ :\n      interior (closure (interior (closure A))) = interior (closure A) :=\n    Topology.interiorClosure_idempotent (A := A)\n  simpa [h₃] using h₂",
+    "theorem Topology.closureInteriorClosure_eq_closure_of_isOpen_set\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen (A : Set X)) :\n    closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  apply Set.Subset.antisymm\n  ·\n    have hSub : (interior (closure (A : Set X)) : Set X) ⊆ closure (A : Set X) :=\n      interior_subset\n    exact closure_mono hSub\n  ·\n    have hIncl : (A : Set X) ⊆ interior (closure (A : Set X)) :=\n      interior_maximal (subset_closure : (A : Set X) ⊆ closure (A : Set X)) hA\n    exact closure_mono hIncl",
+    "theorem Topology.interiorClosure_mono_of_closure_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (h : closure (A : Set X) ⊆ closure (B : Set X)) :\n    interior (closure (A : Set X)) ⊆ interior (closure (B : Set X)) := by\n  exact interior_mono h"
+  ],
+  "success": true
+}

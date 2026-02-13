@@ -1,0 +1,43 @@
+{
+  "times": [
+    63.029343605041504,
+    304.04287552833557
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4235,
+      "prompt_tokens": 8326,
+      "total_tokens": 12561,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8064
+      }
+    },
+    {
+      "completion_tokens": 19613,
+      "prompt_tokens": 8457,
+      "total_tokens": 28070,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8064
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_subset_closure_interior {X : Type*}\n    [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) ⊆ closure (interior A) := by\n  -- `interior (closure (interior A))` is contained in `closure (interior A)`\n  have h : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset\n  -- Taking closures preserves inclusions\n  exact closure_mono h",
+    "theorem interior_closure_subset_closure_interior_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (closure A) ⊆ closure (interior (closure A)) := by\n  intro x hx\n  -- The closure of a set contains the set itself.\n  exact subset_closure hx"
+  ],
+  "success": true
+}

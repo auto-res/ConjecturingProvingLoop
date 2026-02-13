@@ -1,0 +1,26 @@
+{
+  "times": [
+    70.09521055221558
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5964,
+      "prompt_tokens": 21553,
+      "total_tokens": 27517,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_closure_eq_closure_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior A) ∩ closure A = closure (interior A) := by\n  ext x\n  constructor\n  · intro h\n    exact h.1\n  · intro hx\n    have h_subset : closure (interior A) ⊆ closure A :=\n      closure_interior_subset_closure (X := X) (A := A)\n    exact And.intro hx (h_subset hx)"
+  ],
+  "success": true
+}

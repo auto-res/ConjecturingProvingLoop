@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.79993796348572
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1836,
+      "prompt_tokens": 45113,
+      "total_tokens": 46949,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_closureCompl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (A : Set X) ⊆ closure (Aᶜ) := by\n  intro x hx\n  -- Re-express `frontier A` as `closure A ∩ closure Aᶜ`.\n  have h_inter : x ∈ closure (A : Set X) ∩ closure (Aᶜ) := by\n    have h_eq := Topology.frontier_eq_inter_closure_closureCompl (A := A)\n    simpa [h_eq] using hx\n  -- Extract the membership in `closure Aᶜ`.\n  exact h_inter.2"
+  ],
+  "success": true
+}

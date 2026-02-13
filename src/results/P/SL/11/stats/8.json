@@ -1,0 +1,26 @@
+{
+  "times": [
+    70.58078479766846
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4087,
+      "prompt_tokens": 929,
+      "total_tokens": 5016,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_open {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    Topology.P2 A := by\n  dsimp [Topology.P2]\n  have hsubset : interior A ⊆ interior (closure A) :=\n    interior_mono (subset_closure : (A : Set X) ⊆ closure A)\n  simpa [hA.interior_eq] using hsubset"
+  ],
+  "success": true
+}

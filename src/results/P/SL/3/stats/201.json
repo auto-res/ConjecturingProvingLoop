@@ -1,0 +1,26 @@
+{
+  "times": [
+    116.98209643363953
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8308,
+      "prompt_tokens": 31267,
+      "total_tokens": 39575,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_compl_eq_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) ∩ interior (Aᶜ) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxCl, hxInt⟩\n    -- We derive a contradiction, showing that the intersection is empty.\n    have hContr : False := by\n      -- Since `x` is in the closure of `A`, every open neighborhood of `x`\n      -- meets `A`. In particular, this holds for `interior (Aᶜ)`.\n      have hNonempty :\n          ((interior (Aᶜ : Set X)) ∩ (A : Set X)).Nonempty := by\n        have h :=\n          (mem_closure_iff.1 hxCl) (interior (Aᶜ : Set X)) isOpen_interior hxInt\n        -- Reorder the intersection to match the desired form.\n        simpa [Set.inter_comm] using h\n      rcases hNonempty with ⟨y, ⟨hyIntCompl, hyA⟩⟩\n      -- But `y ∈ interior (Aᶜ)` implies `y ∈ Aᶜ`, contradicting `y ∈ A`.\n      have : (y : X) ∈ (Aᶜ : Set X) := interior_subset hyIntCompl\n      exact (this hyA).elim\n    cases hContr\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.543396472930908
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1287,
+      "prompt_tokens": 15221,
+      "total_tokens": 16508,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_eq_interior_of_closed_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosedInt : IsClosed (interior (A : Set X))) :\n    interior (closure (interior (A : Set X))) = interior (A : Set X) := by\n  have h : closure (interior (A : Set X)) = interior (A : Set X) :=\n    hClosedInt.closure_eq\n  simpa [h, interior_interior]"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    81.00474643707275,
+    141.98759818077087,
+    34.63062620162964
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5165,
+      "prompt_tokens": 37534,
+      "total_tokens": 42699,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 8461,
+      "prompt_tokens": 37640,
+      "total_tokens": 46101,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 2295,
+      "prompt_tokens": 37719,
+      "total_tokens": 40014,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_eq_empty_iff_open_and_closed {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier A = (∅ : Set X) ↔ (IsOpen A ∧ IsClosed A) := by\n  constructor\n  · intro hFrontier\n    -- Rewrite the frontier via the `closure \\ interior` characterization.\n    have hDiff : closure A \\ interior A = (∅ : Set X) := by\n      simpa [frontier_eq_closure_diff_interior (X := X) (A := A)] using hFrontier\n    -- From `closure A \\ interior A = ∅`, deduce `closure A ⊆ interior A`.\n    have hSub : closure A ⊆ interior A := by\n      intro x hxCl\n      by_contra hNotInt\n      have : x ∈ closure A \\ interior A := And.intro hxCl hNotInt\n      simpa [hDiff] using this\n    -- Now, `interior A ⊆ A` and `A ⊆ closure A`, so all three sets coincide.\n    have hIntSubset : interior A ⊆ A := interior_subset\n    have hAinClosure : A ⊆ closure A := subset_closure\n    have hA_sub_int : A ⊆ interior A := by\n      intro x hxA\n      exact hSub (hAinClosure hxA)\n    have hInt_eq : interior A = A :=\n      Set.Subset.antisymm hIntSubset hA_sub_int\n    have hCl_eq : closure A = A := by\n      apply Set.Subset.antisymm\n      ·\n        intro x hxCl\n        have : x ∈ interior A := hSub hxCl\n        simpa [hInt_eq] using this\n      · exact hAinClosure\n    -- Conclude that `A` is both open and closed.\n    have hOpen : IsOpen A := by\n      have : IsOpen (interior A) := isOpen_interior\n      simpa [hInt_eq] using this\n    have hClosed : IsClosed A := by\n      have : IsClosed (closure A) := isClosed_closure\n      simpa [hCl_eq] using this\n    exact And.intro hOpen hClosed\n  · rintro ⟨hOpen, hClosed⟩\n    -- Use the open/closed equalities of interior and closure.\n    have hInt_eq : interior A = A := hOpen.interior_eq\n    have hCl_eq  : closure A = A := hClosed.closure_eq\n    -- Compute the frontier.\n    simpa [frontier_eq_closure_diff_interior (X := X) (A := A),\n           hInt_eq, hCl_eq, Set.diff_self]",
+    "import Mathlib\nimport Aesop\n\ntheorem frontier_eq_empty_iff_open_and_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) ↔ (IsOpen A ∧ IsClosed A) := by\n  -- A convenient characterisation of the frontier.\n  have hFront : frontier A = closure A \\ interior A :=\n    frontier_eq_closure_diff_interior (A := A)\n  constructor\n  · intro hFrontierEmpty\n    -- From `frontier A = ∅` deduce `closure A ⊆ interior A`.\n    have hEmpty : (closure A \\ interior A : Set X) = ∅ := by\n      simpa [hFront] using hFrontierEmpty\n    have hSub : closure A ⊆ interior A := by\n      intro x hxCl\n      by_contra hxInt\n      have hx : x ∈ closure A \\ interior A := by\n        exact And.intro hxCl hxInt\n      have : x ∈ (∅ : Set X) := by\n        simpa [hEmpty] using hx\n      exact this.elim\n    -- The reverse inclusion always holds.\n    have hSub' : interior A ⊆ closure A := by\n      intro x hxInt\n      exact subset_closure (interior_subset hxInt)\n    -- Hence `closure A = interior A`.\n    have hEqIntCl : closure A = interior A :=\n      subset_antisymm hSub' hSub\n    -- Show `A` is squeezed between equal sets, so they are all equal.\n    have hIntSubA : interior A ⊆ A := interior_subset\n    have hASubCl  : A ⊆ closure A := subset_closure\n    have hEqInt : interior A = A :=\n      subset_antisymm hIntSubA (by\n        intro x hxA\n        have : x ∈ closure A := hASubCl hxA\n        simpa [hEqIntCl] using (show x ∈ interior A from hSub this))\n    have hEqCl : closure A = A := by\n      simpa [hEqInt] using hEqIntCl\n    -- Conclude that `A` is both open and closed.\n    have hOpen   : IsOpen A   := by\n      simpa [hEqInt] using isOpen_interior\n    have hClosed : IsClosed A := by\n      simpa [hEqCl] using isClosed_closure\n    exact And.intro hOpen hClosed\n  · rintro ⟨hOpen, hClosed⟩\n    -- Use the open/closed assumptions to evaluate the frontier.\n    have : frontier A = closure A \\ interior A := hFront\n    have : frontier A = A \\ A := by\n      simpa [hOpen.interior_eq, hClosed.closure_eq] using this\n    simpa using this",
+    "theorem frontier_interior_subset_frontier {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (interior A) ⊆ frontier A := by\n  intro x hx\n  -- Unpack the definition of membership in the frontier of `interior A`.\n  rcases hx with ⟨hx_cl_int, hx_not_int_int⟩\n  -- `interior A ⊆ A`, so taking closures yields the corresponding inclusion.\n  have hx_closureA : x ∈ closure A := by\n    have h_subset : (interior A : Set X) ⊆ A := interior_subset\n    exact (closure_mono h_subset) hx_cl_int\n  -- `x` is not in `interior (interior A) = interior A`.\n  have hx_not_intA : x ∉ interior A := by\n    simpa [interior_interior] using hx_not_int_int\n  -- Combine the facts to conclude `x ∈ frontier A`.\n  exact And.intro hx_closureA hx_not_intA"
+  ],
+  "success": true
+}

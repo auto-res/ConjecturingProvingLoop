@@ -1,0 +1,26 @@
+{
+  "times": [
+    224.09461331367493
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 16108,
+      "prompt_tokens": 25873,
+      "total_tokens": 41981,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter5_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure A))))))))) =\n      interior (closure A) := by\n  -- Apply the 4-fold idempotence lemma to `interior (closure A)`.\n  have h :=\n    Topology.interiorClosure_iter4_idempotent (A := interior (closure A))\n  -- Simplify the right‐hand side using the basic idempotence lemma.\n  simpa [Topology.interiorClosure_idempotent (A := A)] using h"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    102.06820678710938,
+    263.69579672813416
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6549,
+      "prompt_tokens": 51906,
+      "total_tokens": 58455,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    },
+    {
+      "completion_tokens": 12370,
+      "prompt_tokens": 51998,
+      "total_tokens": 64368,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iInter_closed_finite\n    {X : Type*} [TopologicalSpace X] {ι : Type _} [Fintype ι]\n    {F : ι → Set X} (hClosed : ∀ i, IsClosed (F i))\n    (hP3 : ∀ i, Topology.P3 (F i)) :\n    Topology.P3 (⋂ i, F i) := by\n  -- Each closed set satisfying `P3` is open.\n  have hOpenF : ∀ i, IsOpen (F i) := by\n    intro i\n    have : IsOpen (F i) :=\n      (Topology.P3_closed_iff_isOpen (A := F i) (hClosed i)).1 (hP3 i)\n    exact this\n  -- The finite intersection of the open sets `F i` is open.\n  have hOpenInter : IsOpen (⋂ i, F i) := by\n    simpa using isOpen_iInter hOpenF\n  -- Every open set satisfies `P3`.\n  exact (Topology.IsOpen_P1_and_P3 (A := ⋂ i, F i) hOpenInter).2",
+    ""
+  ],
+  "success": true
+}

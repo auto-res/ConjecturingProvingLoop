@@ -1,0 +1,43 @@
+{
+  "times": [
+    107.94421339035034,
+    141.68240356445312
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8033,
+      "prompt_tokens": 35170,
+      "total_tokens": 43203,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    },
+    {
+      "completion_tokens": 10286,
+      "prompt_tokens": 35627,
+      "total_tokens": 45913,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_inter_subset_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (closure (A ∩ B : Set X))) ⊆\n      closure (interior A) ∩ closure (interior B) := by\n  intro x hx\n  -- First, prove membership in `closure (interior A)`.\n  have hxA : x ∈ closure (interior A) := by\n    -- Establish an inclusion of sets:\n    have h_subA :\n        interior (closure (A ∩ B : Set X)) ⊆ closure (interior A) := by\n      -- Step 1: `interior (closure (A ∩ B)) ⊆ interior (closure A)`.\n      have h₁ :\n          interior (closure (A ∩ B : Set X)) ⊆ interior (closure A) := by\n        intro y hy\n        have h_pair :=\n          (Topology.interior_closure_inter_subset_inter\n            (X := X) (A := A) (B := B)) hy\n        exact h_pair.1\n      -- Step 2: `interior (closure A) ⊆ closure (interior A)`.\n      have h₂ :\n          interior (closure A) ⊆ closure (interior A) :=\n        Topology.interior_closure_subset_closure_interior\n          (X := X) (A := A)\n      exact Set.Subset.trans h₁ h₂\n    -- Apply `closure_mono` to transport membership.\n    have h_closureA :\n        closure (interior (closure (A ∩ B : Set X))) ⊆\n          closure (interior A) :=\n      closure_mono h_subA\n    exact h_closureA hx\n  -- Next, prove membership in `closure (interior B)`.\n  have hxB : x ∈ closure (interior B) := by\n    -- Establish an inclusion of sets:\n    have h_subB :\n        interior (closure (A ∩ B : Set X)) ⊆ closure (interior B) := by\n      -- Step 1: `interior (closure (A ∩ B)) ⊆ interior (closure B)`.\n      have h₁ :\n          interior (closure (A ∩ B : Set X)) ⊆ interior (closure B) := by\n        intro y hy\n        have h_pair :=\n          (Topology.interior_closure_inter_subset_inter\n            (X := X) (A := A) (B := B)) hy\n        exact h_pair.2\n      -- Step 2: `interior (closure B) ⊆ closure (interior B)`.\n      have h₂ :\n          interior (closure B) ⊆ closure (interior B) :=\n        Topology.interior_closure_subset_closure_interior\n          (X := X) (A := B)\n      exact Set.Subset.trans h₁ h₂\n    -- Apply `closure_mono` to transport membership.\n    have h_closureB :\n        closure (interior (closure (A ∩ B : Set X))) ⊆\n          closure (interior B) :=\n      closure_mono h_subB\n    exact h_closureB hx\n  exact And.intro hxA hxB",
+    "theorem Topology.interior_closure_eq_closure_of_isOpen_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_open : IsOpen (closure (A : Set X))) :\n    interior (closure (A : Set X)) = closure A := by\n  -- `closure A` is always closed.\n  have h_closed : IsClosed (closure (A : Set X)) := isClosed_closure\n  -- Apply the existing lemma for sets that are both closed and open.\n  simpa [closure_closure] using\n    Topology.interior_closure_eq_self_of_isClosed_isOpen\n      (X := X) (A := closure A) h_closed h_open"
+  ],
+  "success": true
+}

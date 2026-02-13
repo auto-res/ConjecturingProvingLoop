@@ -1,0 +1,43 @@
+{
+  "times": [
+    183.0553617477417,
+    46.12168765068054
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11964,
+      "prompt_tokens": 13233,
+      "total_tokens": 25197,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 3153,
+      "prompt_tokens": 13408,
+      "total_tokens": 16561,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_inter_of_isOpen_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) (hP1B : Topology.P1 B) :\n    Topology.P1 (A ∩ B) := by\n  unfold Topology.P1 at *\n  intro x hxAB\n  -- Decompose the membership information\n  have hxA : x ∈ A := hxAB.1\n  have hxB : x ∈ B := hxAB.2\n  -- From `P1` for `B`, obtain `x ∈ closure (interior B)`\n  have hx_closureB : x ∈ closure (interior B) := hP1B hxB\n  -- We will show that `x ∈ closure (A ∩ interior B)`\n  have hx_closureAIntB : x ∈ closure (A ∩ interior B) := by\n    -- Characterize closure via neighbourhood intersections\n    have h_mem_closureB := (mem_closure).1 hx_closureB\n    -- Use the neighbourhood criterion to build the desired membership\n    refine (mem_closure).2 ?_\n    intro U hU hxU\n    -- Consider the open neighbourhood `U ∩ A` of `x`\n    have hUA_open : IsOpen (U ∩ A) := hU.inter hA\n    have hxUA : x ∈ U ∩ A := And.intro hxU hxA\n    -- Apply the closure property of `interior B`\n    rcases h_mem_closureB (U ∩ A) hUA_open hxUA with ⟨y, hy⟩\n    -- Split the obtained membership information\n    have hyU : y ∈ U := hy.1.1\n    have hyA : y ∈ A := hy.1.2\n    have hyIntB : y ∈ interior B := hy.2\n    -- Assemble a point in `U ∩ (A ∩ interior B)`\n    exact ⟨y, And.intro hyU (And.intro hyA hyIntB)⟩\n  -- For an open set `A`, `interior (A ∩ B) = A ∩ interior B`\n  have hInt_eq : interior (A ∩ B) = A ∩ interior B := by\n    have h := interior_inter A B\n    simpa [hA.interior_eq] using h\n  -- Rewrite and conclude\n  simpa [hInt_eq] using hx_closureAIntB",
+    "theorem Topology.closure_interior_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (interior A) ⊆ closure A := by\n  exact closure_mono (interior_subset : interior A ⊆ A)"
+  ],
+  "success": true
+}

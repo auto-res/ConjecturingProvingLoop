@@ -1,0 +1,26 @@
+{
+  "times": [
+    90.66273379325867
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7142,
+      "prompt_tokens": 22209,
+      "total_tokens": 29351,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union_interior {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 A → Topology.P1 (A ∪ interior B) := by\n  intro hP1A\n  -- `interior B` automatically satisfies `P1`.\n  have hP1IntB : Topology.P1 (interior B) :=\n    Topology.P1_interior (X := X) (A := B)\n  -- Combine the two `P1` sets using the existing union lemma.\n  exact\n    (Topology.P1_union (A := A) (B := interior B) hP1A hP1IntB)"
+  ],
+  "success": true
+}

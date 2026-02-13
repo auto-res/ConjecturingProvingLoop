@@ -1,0 +1,26 @@
+{
+  "times": [
+    98.21565079689026
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6263,
+      "prompt_tokens": 46744,
+      "total_tokens": 53007,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_iInter_subset_iInter_closure {X ι : Type*} [TopologicalSpace X]\n    (A : ι → Set X) :\n    closure (⋂ i, A i) ⊆ ⋂ i, closure (A i) := by\n  intro x hx\n  apply Set.mem_iInter.2\n  intro i\n  -- `⋂ i, A i` is contained in `A i`.\n  have h_subset : (⋂ i, A i) ⊆ A i := Set.iInter_subset _ i\n  -- Taking closures preserves inclusions.\n  have h_closure : closure (⋂ i, A i) ⊆ closure (A i) := closure_mono h_subset\n  exact h_closure hx"
+  ],
+  "success": true
+}

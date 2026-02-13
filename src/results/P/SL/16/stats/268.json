@@ -1,0 +1,43 @@
+{
+  "times": [
+    324.3219747543335,
+    242.6264591217041
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 18201,
+      "prompt_tokens": 47078,
+      "total_tokens": 65279,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    },
+    {
+      "completion_tokens": 15314,
+      "prompt_tokens": 47232,
+      "total_tokens": 62546,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iterate_closure_interior_converges {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    ∀ n : ℕ,\n      ((fun S : Set X => closure (interior S))^[n.succ]) A =\n        closure (interior A) := by\n  intro n\n  induction n with\n  | zero =>\n      simp\n  | succ n ih =>\n      simpa [Function.iterate_succ_apply', ih,\n        Topology.closure_interior_closure_interior_eq_closure_interior\n          (X := X) (A := A)]",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.53130960464478
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9765,
+      "prompt_tokens": 5791,
+      "total_tokens": 15556,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3968
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_nonempty_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (X := X) A) (hA : A.Nonempty) :\n    (interior A).Nonempty := by\n  classical\n  by_contra hInt\n  -- If `interior A` were empty, its closure would also be empty.\n  have hInt_empty : interior A = (∅ : Set X) := by\n    simpa using (Set.not_nonempty_iff_eq_empty).1 hInt\n  have hClIntEmpty : closure (interior A) = (∅ : Set X) := by\n    simpa [hInt_empty] using closure_empty\n  -- Pick any point of `A`.\n  obtain ⟨x, hxA⟩ := hA\n  -- `P1` says this point lies in the closure of `interior A`.\n  have hx_cl : x ∈ closure (interior A) := hP1 hxA\n  -- But that closure is empty: contradiction.\n  have : x ∈ (∅ : Set X) := by\n    simpa [hClIntEmpty] using hx_cl\n  simpa using this"
+  ],
+  "success": true
+}

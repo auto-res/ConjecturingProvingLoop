@@ -1,0 +1,77 @@
+{
+  "times": [
+    84.68726658821106,
+    150.9815535545349,
+    44.34255409240723,
+    94.51848006248474
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6343,
+      "prompt_tokens": 51195,
+      "total_tokens": 57538,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    },
+    {
+      "completion_tokens": 11486,
+      "prompt_tokens": 51645,
+      "total_tokens": 63131,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 2768,
+      "prompt_tokens": 51724,
+      "total_tokens": 54492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    },
+    {
+      "completion_tokens": 6018,
+      "prompt_tokens": 51830,
+      "total_tokens": 57848,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_iff_clopen {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) ↔ (IsOpen A ∧ IsClosed A) := by\n  constructor\n  · intro hfront\n    -- Step 1: show `closure A ⊆ interior A`\n    have h_closure_subset : closure A ⊆ interior A := by\n      intro x hx_cl\n      by_cases hx_int : x ∈ interior A\n      · exact hx_int\n      ·\n        have hx_front : x ∈ frontier A := by\n          have : x ∈ closure A \\ interior A := ⟨hx_cl, hx_int⟩\n          simpa [frontier] using this\n        have : x ∈ (∅ : Set X) := by\n          simpa [hfront] using hx_front\n        cases this\n    -- Step 2: deduce `interior A = closure A`\n    have h_int_cl_eq : interior A = closure A := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      · simpa using h_closure_subset\n    -- Step 3: establish `A = interior A` (and hence `A = closure A`)\n    have hA_eq_int : A = interior A := by\n      apply Set.Subset.antisymm\n      ·\n        intro x hxA\n        have : x ∈ closure A := subset_closure hxA\n        exact h_closure_subset this\n      · exact interior_subset\n    have hA_eq_cl : A = closure A := by\n      simpa [hA_eq_int] using h_int_cl_eq.symm\n    -- Step 4: obtain openness and closedness of `A`\n    have h_open : IsOpen A := by\n      simpa [hA_eq_int] using (isOpen_interior : IsOpen (interior A))\n    have h_closed : IsClosed A := by\n      simpa [hA_eq_cl] using (isClosed_closure : IsClosed (closure A))\n    exact And.intro h_open h_closed\n  · rintro ⟨hOpen, hClosed⟩\n    exact Topology.frontier_eq_empty_of_clopen (A := A) hClosed hOpen",
+    "import Mathlib\n\nnamespace Topology\n\nvariable {X : Type*} [TopologicalSpace X]\n\ntheorem frontier_eq_closure_inter_closure_compl {A : Set X} :\n    frontier A = closure A ∩ closure (Aᶜ) := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨h_clA, h_not_intA⟩\n    have hx_clAc : x ∈ closure (Aᶜ) := by\n      have : x ∈ (interior A)ᶜ := by\n        simpa using h_not_intA\n      simpa [closure_compl] using this\n    exact And.intro h_clA hx_clAc\n  · rintro ⟨hx_clA, hx_clAc⟩\n    have h_not_intA : x ∉ interior A := by\n      have : x ∈ (interior A)ᶜ := by\n        simpa [closure_compl] using hx_clAc\n      exact this\n    exact And.intro hx_clA h_not_intA\n\ntheorem frontier_isClosed {A : Set X} : IsClosed (frontier A) := by\n  have hClosed : IsClosed (closure A ∩ closure (Aᶜ)) :=\n    (isClosed_closure : IsClosed (closure A)).inter\n      (isClosed_closure : IsClosed (closure (Aᶜ)))\n  simpa [frontier_eq_closure_inter_closure_compl (A := A)] using hClosed\n\ntheorem closure_frontier_eq_frontier {A : Set X} :\n    closure (frontier A) = frontier A := by\n  have hClosed : IsClosed (frontier A) := frontier_isClosed (A := A)\n  simpa using hClosed.closure_eq\n\nend Topology",
+    "theorem Topology.isClosed_closure_diff_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (closure A \\ interior A) := by\n  simpa [frontier] using (Topology.frontier_isClosed (A := A))",
+    "theorem Topology.frontier_univ {X : Type*} [TopologicalSpace X] :\n    frontier (Set.univ : Set X) = (∅ : Set X) := by\n  simp [frontier]"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.01346278190613
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6425,
+      "prompt_tokens": 14277,
+      "total_tokens": 20702,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_univ_iff_interiorClosure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = (Set.univ : Set X) ↔\n      interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  constructor\n  · intro h\n    simpa [h] using (isOpen_univ.interior_eq)\n  · intro h\n    -- `interior (closure A)` is contained in `closure A`.\n    have hSub : (interior (closure (A : Set X)) : Set X) ⊆ closure (A : Set X) :=\n      interior_subset\n    -- Using `h`, this becomes `univ ⊆ closure A`.\n    have h' : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n      simpa [h] using hSub\n    -- The reverse inclusion is trivial.\n    have h'' : closure (A : Set X) ⊆ (Set.univ : Set X) := Set.Subset_univ _\n    exact Set.Subset.antisymm h'' h'"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.233078002929688
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2180,
+      "prompt_tokens": 20124,
+      "total_tokens": 22304,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem isClosed_of_closure_interior_eq_self {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h : closure (interior (A : Set X)) = A) : IsClosed (A : Set X) := by\n  -- The set `closure (interior A)` is always closed.\n  have hClosed : IsClosed (closure (interior (A : Set X))) := isClosed_closure\n  -- Rewrite using the given equality.\n  simpa [h] using hClosed"
+  ],
+  "success": true
+}

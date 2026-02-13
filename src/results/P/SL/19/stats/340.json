@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.888152837753296
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1131,
+      "prompt_tokens": 54836,
+      "total_tokens": 55967,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_compl_eq_empty_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    frontier (A : Set X) ∩ Aᶜ = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxFront, hxCompl⟩\n    have hxA : x ∈ A :=\n      (Topology.frontier_subset_of_isClosed (A := A) hA) hxFront\n    exact ((hxCompl : x ∉ A) hxA).elim\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

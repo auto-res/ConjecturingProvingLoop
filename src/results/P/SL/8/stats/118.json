@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.85577654838562
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4651,
+      "prompt_tokens": 15952,
+      "total_tokens": 20603,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_subset_interiorClosureInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ⊆ interior (closure (interior A)) := by\n  -- First, `interior A` is contained in `closure (interior A)`.\n  have h₁ : interior A ⊆ closure (interior A) := subset_closure\n  -- Applying `interior` to both sides (and using monotonicity) yields the result.\n  have h₂ : interior (interior A) ⊆ interior (closure (interior A)) :=\n    interior_mono h₁\n  simpa [interior_interior] using h₂"
+  ],
+  "success": true
+}

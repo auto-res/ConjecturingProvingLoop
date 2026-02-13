@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.66290092468262
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3915,
+      "prompt_tokens": 23699,
+      "total_tokens": 27614,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_of_subset_interior_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    Topology.P3 A → (B ⊆ interior (closure (A : Set X))) → Topology.P3 (A ∪ B) := by\n  intro hP3A hBsub\n  intro x hxUnion\n  -- First, note that `interior (closure A)` is contained in\n  -- `interior (closure (A ∪ B))`; this inclusion will be reused.\n  have hsubset : interior (closure (A : Set X)) ⊆\n      interior (closure (A ∪ B : Set X)) := by\n    -- Since `A ⊆ A ∪ B`, the same holds after taking closures,\n    -- and then interiors.\n    have hcl : closure (A : Set X) ⊆ closure (A ∪ B : Set X) := by\n      have hIncl : (A : Set X) ⊆ A ∪ B := by\n        intro y hy\n        exact Or.inl hy\n      exact closure_mono hIncl\n    exact interior_mono hcl\n  -- Now distinguish whether `x` comes from `A` or from `B`.\n  cases hxUnion with\n  | inl hxA =>\n      -- Case `x ∈ A`\n      have hx_int : x ∈ interior (closure (A : Set X)) := hP3A hxA\n      exact hsubset hx_int\n  | inr hxB =>\n      -- Case `x ∈ B`\n      have hx_int : x ∈ interior (closure (A : Set X)) := hBsub hxB\n      exact hsubset hx_int"
+  ],
+  "success": true
+}

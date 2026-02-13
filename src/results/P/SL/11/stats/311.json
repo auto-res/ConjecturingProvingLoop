@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.04360318183899
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2673,
+      "prompt_tokens": 50984,
+      "total_tokens": 53657,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_nonempty_iff_nonempty_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A) :\n    (closure (interior A)).Nonempty ↔ A.Nonempty := by\n  have h₁ :\n      (closure (interior A)).Nonempty ↔ (interior A).Nonempty :=\n    (closure_interior_nonempty_iff_interior_nonempty (A := A))\n  have h₂ : (interior A).Nonempty ↔ A.Nonempty :=\n    (interior_nonempty_iff_nonempty_of_P2 (A := A) hP2)\n  simpa using h₁.trans h₂"
+  ],
+  "success": true
+}

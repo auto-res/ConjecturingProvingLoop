@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.0670166015625
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3015,
+      "prompt_tokens": 10394,
+      "total_tokens": 13409,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closure_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) (closure (A : Set X)) → Topology.P3 (X := X) A := by\n  intro hP2cl\n  -- From P2 for `closure A`, we obtain P3 for `closure A`.\n  have hP3cl : Topology.P3 (X := X) (closure (A : Set X)) :=\n    Topology.P2_implies_P3 (X := X) (A := closure A) hP2cl\n  -- P3 for `closure A` implies P3 for `A`.\n  exact Topology.P3_closure_implies_P3 (X := X) (A := A) hP3cl"
+  ],
+  "success": true
+}

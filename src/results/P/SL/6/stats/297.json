@@ -1,0 +1,60 @@
+{
+  "times": [
+    206.62557220458984,
+    69.98609757423401,
+    38.67901802062988
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13005,
+      "prompt_tokens": 47357,
+      "total_tokens": 60362,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 5212,
+      "prompt_tokens": 47510,
+      "total_tokens": 52722,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 2653,
+      "prompt_tokens": 47615,
+      "total_tokens": 50268,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_eq_diff_of_open\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsOpen (B : Set X)) :\n    interior ((A \\ B) : Set X) = interior A \\ closure (B : Set X) := by\n  classical\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    intro x hx\n    -- `x` lies in `interior A` since `A \\ B ⊆ A`.\n    have hx_intA : x ∈ interior A := by\n      have hSub : (A \\ B : Set X) ⊆ A := by\n        intro y hy; exact hy.1\n      exact (interior_mono hSub) hx\n    -- Use the neighborhood supplied by `hx` to show `x ∉ closure B`.\n    have hx_not_clB : x ∉ closure (B : Set X) := by\n      -- Unpack the interior membership.\n      rcases (mem_interior_iff_mem_nhds).1 hx with\n        ⟨U, hUopen, hxU, hUsub⟩\n      -- If `x ∈ closure B`, every neighborhood meets `B`, contradicting\n      -- `U ⊆ A \\ B`.\n      intro hx_cl\n      have hNon : (U ∩ B).Nonempty :=\n        (mem_closure_iff.1 hx_cl) U hUopen hxU\n      rcases hNon with ⟨y, hyU, hyB⟩\n      have hNotB : y ∉ B := (hUsub hyU).2\n      exact hNotB hyB\n    exact And.intro hx_intA hx_not_clB\n  · -- `⊇` direction\n    intro x hx\n    rcases hx with ⟨hxIntA, hx_not_clB⟩\n    -- Obtain an open neighborhood of `x` contained in `A`.\n    rcases (mem_interior_iff_mem_nhds).1 hxIntA with\n      ⟨U, hUopen, hxU, hUsubA⟩\n    -- Remove the (closed) `closure B` to avoid `B`.\n    let W : Set X := U \\ closure (B : Set X)\n    have hWopen : IsOpen W := hUopen.diff isClosed_closure\n    have hxW : x ∈ W := by\n      have : x ∈ U := hxU\n      have : x ∉ closure (B : Set X) := hx_not_clB\n      simp [W, *]\n    -- Everything in `W` lies in `A \\ B`.\n    have hWsub : (W : Set X) ⊆ A \\ B := by\n      intro y hyW\n      have hyU : y ∈ U := hyW.1\n      have hyNotCl : y ∉ closure (B : Set X) := hyW.2\n      have hyA : y ∈ A := hUsubA hyU\n      have hyNotB : y ∉ B := by\n        intro hyB\n        exact hyNotCl (subset_closure hyB)\n      exact And.intro hyA hyNotB\n    -- `x` therefore belongs to the interior of `A \\ B`.\n    have hxInt : x ∈ interior (A \\ B) :=\n      (interior_maximal hWsub hWopen) hxW\n    exact hxInt",
+    "theorem interior_inter_interior_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior ((A ∩ interior B) : Set X) ⊆ interior A ∩ interior B := by\n  intro x hx\n  -- First, show `x ∈ interior A`.\n  have hA : x ∈ interior A := by\n    -- `A ∩ interior B ⊆ A`\n    have hSub : (A ∩ interior B : Set X) ⊆ A := by\n      intro y hy\n      exact hy.1\n    -- Apply monotonicity of `interior`.\n    exact (interior_mono hSub) hx\n  -- Next, show `x ∈ interior B`.\n  have hB : x ∈ interior B := by\n    -- `A ∩ interior B ⊆ interior B`\n    have hSub : (A ∩ interior B : Set X) ⊆ interior B := by\n      intro y hy\n      exact hy.2\n    -- Apply monotonicity of `interior`.\n    exact (interior_mono hSub) hx\n  -- Combine the two inclusions.\n  exact And.intro hA hB",
+    "theorem isClosed_of_closure_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (A : Set X) = A) : IsClosed (A : Set X) := by\n  simpa [h] using (isClosed_closure : IsClosed (closure (A : Set X)))"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.52440023422241
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6649,
+      "prompt_tokens": 64082,
+      "total_tokens": 70731,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 63232
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_prod_closure_eq\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    closure ((closure A) ×ˢ (closure B) : Set (X × Y)) =\n      (closure A) ×ˢ (closure B) := by\n  calc\n    closure ((closure A) ×ˢ (closure B) : Set (X × Y))\n        = closure (closure A) ×ˢ closure (closure B) := by\n          simpa using\n            (closure_prod_eq (s := closure A) (t := closure B))\n    _ = (closure A) ×ˢ (closure B) := by\n          simpa [closure_closure]"
+  ],
+  "success": true
+}

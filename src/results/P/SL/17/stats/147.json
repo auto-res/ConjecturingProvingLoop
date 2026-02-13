@@ -1,0 +1,26 @@
+{
+  "times": [
+    20.078933238983154
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1741,
+      "prompt_tokens": 23545,
+      "total_tokens": 25286,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iUnion_isOpen {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X}\n    (hOpen : ∀ i, IsOpen (A i)) : Topology.P3 (Set.iUnion A) := by\n  have hP3 : ∀ i, Topology.P3 (A i) := fun i =>\n    Topology.P3_of_isOpen (A := A i) (hOpen i)\n  exact Topology.P3_iUnion (A := A) hP3"
+  ],
+  "success": true
+}

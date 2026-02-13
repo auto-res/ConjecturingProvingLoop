@@ -1,0 +1,43 @@
+{
+  "times": [
+    81.4408667087555,
+    220.47632503509521
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5633,
+      "prompt_tokens": 37148,
+      "total_tokens": 42781,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    },
+    {
+      "completion_tokens": 15145,
+      "prompt_tokens": 37225,
+      "total_tokens": 52370,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_P3_and_open_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP3 : Topology.P3 A) (hOpenCl : IsOpen (closure (A : Set X))) :\n    Topology.P2 A := by\n  -- First obtain `P1` from the given `P3` hypothesis and the openness of `closure A`.\n  have hP1 : Topology.P1 A :=\n    Topology.P1_of_P3_and_open_closure (A := A) hP3 hOpenCl\n  -- Combine `P1` and `P3` to deduce `P2`.\n  exact Topology.P2_of_P1_and_P3 (A := A) ⟨hP1, hP3⟩",
+    "theorem P1_of_P3_and_open_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP3 : Topology.P3 A) (hOpenCl : IsOpen (closure (A : Set X))) :\n    Topology.P1 (closure A) := by\n  exact Topology.P1_of_open_closure (A := A) hOpenCl"
+  ],
+  "success": true
+}

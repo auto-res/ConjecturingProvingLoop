@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.73199152946472
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3623,
+      "prompt_tokens": 60091,
+      "total_tokens": 63714,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 59264
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_nonempty_iff_nonempty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    (closure (interior (A : Set X))).Nonempty ↔ (interior (A : Set X)).Nonempty := by\n  classical\n  constructor\n  · intro hCl\n    by_contra hInt\n    -- If `interior A` is empty, its closure is also empty,\n    -- contradicting the assumed non‐emptiness.\n    have hIntEmpty : interior (A : Set X) = (∅ : Set X) :=\n      (Set.not_nonempty_iff_eq_empty).1 hInt\n    have hClEmpty : closure (interior (A : Set X)) = (∅ : Set X) := by\n      simpa [hIntEmpty, closure_empty] using rfl\n    have hNonemptyEmpty : (∅ : Set X).Nonempty := by\n      simpa [hClEmpty] using hCl\n    rcases hNonemptyEmpty with ⟨x, hx⟩\n    cases hx\n  · intro hInt\n    exact\n      Topology.closure_interior_nonempty_of_interior_nonempty\n        (X := X) (A := A) hInt"
+  ],
+  "success": true
+}

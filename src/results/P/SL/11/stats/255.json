@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.71615791320801
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5972,
+      "prompt_tokens": 41401,
+      "total_tokens": 47373,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_diff_subset_closure_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (closure (A \\ B)) ⊆ interior (closure (A ∪ B)) := by\n  intro x hx\n  -- Step 1:  `A \\ B` is contained in `A ∪ B`.\n  have hSub : (A \\ B : Set X) ⊆ A ∪ B := by\n    intro y hy\n    exact Or.inl hy.1\n  -- Step 2:  Taking closures preserves the inclusion.\n  have hClSub : closure (A \\ B) ⊆ closure (A ∪ B) :=\n    closure_mono hSub\n  -- Step 3:  Monotonicity of `interior` yields the desired result.\n  exact (interior_mono hClSub) hx"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.85272145271301
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6652,
+      "prompt_tokens": 52668,
+      "total_tokens": 59320,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_union_three_subset\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    interior (closure A) ∪ interior (closure B) ∪ interior (closure C) ⊆\n      interior (closure (A ∪ B ∪ C)) := by\n  intro x hx\n  -- Break the membership in the three‐fold union into cases.\n  rcases hx with hxAB | hxC\n  · -- `x ∈ interior (closure A) ∪ interior (closure B)`\n    rcases hxAB with hxA | hxB\n    · -- Subcase: `x ∈ interior (closure A)`\n      -- First enlarge to `A ∪ B`.\n      have hxAB : (x : X) ∈ interior (closure (A ∪ B)) := by\n        have h :=\n          Topology.interiorClosure_subset_interiorClosure_union_left\n            (X := X) (A := A) (B := B)\n        exact h hxA\n      -- Then enlarge to `A ∪ B ∪ C`.\n      have hABsubset :\n          interior (closure (A ∪ B)) ⊆ interior (closure (A ∪ B ∪ C)) := by\n        have hSubset : (A ∪ B : Set X) ⊆ A ∪ B ∪ C := by\n          intro y hy\n          exact Or.inl hy\n        exact\n          Topology.interiorClosure_mono\n            (X := X) (A := A ∪ B) (B := A ∪ B ∪ C) hSubset\n      exact hABsubset hxAB\n    · -- Subcase: `x ∈ interior (closure B)`\n      have hxAB : (x : X) ∈ interior (closure (A ∪ B)) := by\n        have h :=\n          Topology.interiorClosure_subset_interiorClosure_union_right\n            (X := X) (A := A) (B := B)\n        exact h hxB\n      have hABsubset :\n          interior (closure (A ∪ B)) ⊆ interior (closure (A ∪ B ∪ C)) := by\n        have hSubset : (A ∪ B : Set X) ⊆ A ∪ B ∪ C := by\n          intro y hy\n          exact Or.inl hy\n        exact\n          Topology.interiorClosure_mono\n            (X := X) (A := A ∪ B) (B := A ∪ B ∪ C) hSubset\n      exact hABsubset hxAB\n  · -- Case: `x ∈ interior (closure C)`\n    have hCsubset :\n        interior (closure C) ⊆ interior (closure (A ∪ B ∪ C)) := by\n      have hSubset : (C : Set X) ⊆ A ∪ B ∪ C := by\n        intro y hy\n        exact Or.inr hy\n      exact\n        Topology.interiorClosure_mono\n          (X := X) (A := C) (B := A ∪ B ∪ C) hSubset\n    exact hCsubset hxC"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    65.44864773750305
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4778,
+      "prompt_tokens": 19462,
+      "total_tokens": 24240,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_satisfies_P1_P2_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (X := X) (interior (closure A)) ∧\n      Topology.P2 (X := X) (interior (closure A)) ∧\n      Topology.P3 (X := X) (interior (closure A)) := by\n  have hOpen : IsOpen (interior (closure A)) := isOpen_interior\n  exact\n    Topology.isOpen_satisfies_P1_P2_P3\n      (X := X) (A := interior (closure A)) hOpen"
+  ],
+  "success": true
+}

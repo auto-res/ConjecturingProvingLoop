@@ -1,0 +1,26 @@
+{
+  "times": [
+    168.41879725456238
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5505,
+      "prompt_tokens": 55606,
+      "total_tokens": 61111,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55168
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_of_dense_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (closure (A : Set X))) → Dense (A : Set X) := by\n  intro hDenseIntClos\n  -- Translate density into a closure equality.\n  have hEq :\n      closure (interior (closure (A : Set X))) = (Set.univ : Set X) :=\n    (Topology.dense_iff_closure_eq_univ\n        (A := interior (closure (A : Set X)))).1 hDenseIntClos\n  -- Apply the existing lemma that derives density of `A` from this equality.\n  exact\n    Topology.dense_of_closure_interior_closure_eq_univ\n      (A := A) hEq"
+  ],
+  "success": true
+}

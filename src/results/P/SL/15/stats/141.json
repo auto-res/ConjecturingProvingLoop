@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.3104236125946
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4925,
+      "prompt_tokens": 28222,
+      "total_tokens": 33147,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27520
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_implies_P2_iff_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → (Topology.P2 A ↔ Topology.P3 A) := by\n  intro hP1\n  -- Thanks to `P1`, the two closures coincide.\n  have h_closure_eq : closure A = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closure_interior (X := X) (A := A)).1 hP1\n  constructor\n  · -- `P2 A → P3 A` is always true.\n    intro hP2\n    exact Topology.P2_implies_P3 (X := X) (A := A) hP2\n  · -- Under `P1`, `P3 A` implies `P2 A`.\n    intro hP3\n    dsimp [Topology.P2]\n    intro x hxA\n    -- From `P3`, the point lies in `interior (closure A)`.\n    have hx_int_clA : x ∈ interior (closure A) := hP3 hxA\n    -- Rewrite via the closure equality supplied by `P1`.\n    have hx_int : x ∈ interior (closure (interior A)) := by\n      simpa [h_closure_eq] using hx_int_clA\n    exact hx_int"
+  ],
+  "success": true
+}

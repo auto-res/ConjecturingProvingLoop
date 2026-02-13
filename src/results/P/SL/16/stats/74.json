@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.867870807647705
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3974,
+      "prompt_tokens": 13061,
+      "total_tokens": 17035,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_mono\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) :\n    interior (closure (interior A)) ⊆ interior (closure (interior B)) := by\n  -- `interior` is monotone, so the inclusion `A ⊆ B` gives\n  -- `interior A ⊆ interior B`.\n  have hInt : interior A ⊆ interior B := interior_mono hAB\n  -- Applying `closure` preserves inclusions.\n  have hCl : closure (interior A) ⊆ closure (interior B) := closure_mono hInt\n  -- Finally, use monotonicity of `interior` once more.\n  exact interior_mono hCl"
+  ],
+  "success": true
+}

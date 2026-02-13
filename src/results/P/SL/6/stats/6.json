@@ -1,0 +1,43 @@
+{
+  "times": [
+    28.78702211380005,
+    32.17008638381958
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2073,
+      "prompt_tokens": 725,
+      "total_tokens": 2798,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1488,
+      "prompt_tokens": 941,
+      "total_tokens": 2429,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_closure_interior_eq_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A : Set X) ↔ closure (interior A) = closure A := by\n  constructor\n  · intro hP1\n    apply le_antisymm\n    · exact closure_mono hP1\n    · exact closure_mono interior_subset\n  · intro hEq\n    dsimp [Topology.P1]\n    have : (A : Set X) ⊆ closure A := subset_closure\n    simpa [hEq] using this",
+    "theorem open_satisfies_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P3 A := by\n  dsimp [Topology.P3]\n  exact interior_maximal subset_closure hA"
+  ],
+  "success": true
+}

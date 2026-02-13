@@ -1,0 +1,26 @@
+{
+  "times": [
+    113.96116352081299
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8549,
+      "prompt_tokens": 22689,
+      "total_tokens": 31238,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_three_eq {X : Type*} [TopologicalSpace X]\n    (A B C : Set X) :\n    closure (A ∪ B ∪ C) = closure A ∪ closure B ∪ closure C := by\n  classical\n  -- Apply the binary union lemma to `(A ∪ B)` and `C`.\n  have h₁ : closure ((A ∪ B) ∪ C) =\n      closure (A ∪ B) ∪ closure C :=\n    Topology.closure_union_eq (A := A ∪ B) (B := C)\n  -- Rewrite `closure (A ∪ B)` using the same lemma.\n  have h₂ : closure (A ∪ B) = closure A ∪ closure B :=\n    Topology.closure_union_eq (A := A) (B := B)\n  -- Assemble the pieces and tidy up associativity of `∪`.\n  simpa [h₂, Set.union_assoc] using h₁"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    66.3478057384491,
+    35.54300403594971
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5928,
+      "prompt_tokens": 27829,
+      "total_tokens": 33757,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    },
+    {
+      "completion_tokens": 2808,
+      "prompt_tokens": 27903,
+      "total_tokens": 30711,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_idempotent_six {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))))) =\n      closure (interior A) := by\n  simp [Topology.closure_interior_idempotent]",
+    "theorem P1_union_six {X : Type*} [TopologicalSpace X] {A B C D E F : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : Topology.P1 (X := X) B)\n    (hC : Topology.P1 (X := X) C) (hD : Topology.P1 (X := X) D)\n    (hE : Topology.P1 (X := X) E) (hF : Topology.P1 (X := X) F) :\n    Topology.P1 (X := X) (A ∪ B ∪ C ∪ D ∪ E ∪ F) := by\n  -- Combine the properties for the first five sets.\n  have hABCDE :\n      Topology.P1 (X := X) (A ∪ B ∪ C ∪ D ∪ E) :=\n    Topology.P1_union_five (X := X)\n      (A := A) (B := B) (C := C) (D := D) (E := E)\n      hA hB hC hD hE\n  -- Unite the result with `F`.\n  have hABCDEF :\n      Topology.P1 (X := X) ((A ∪ B ∪ C ∪ D ∪ E) ∪ F) :=\n    Topology.P1_union (X := X)\n      (A := A ∪ B ∪ C ∪ D ∪ E) (B := F)\n      hABCDE hF\n  -- Re-associate the unions to match the desired shape.\n  simpa [Set.union_assoc] using hABCDEF"
+  ],
+  "success": true
+}

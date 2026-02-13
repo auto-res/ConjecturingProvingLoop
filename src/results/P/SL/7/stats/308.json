@@ -1,0 +1,26 @@
+{
+  "times": [
+    239.30328369140625
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13462,
+      "prompt_tokens": 48631,
+      "total_tokens": 62093,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_iter3_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior A))))) =\n      closure (interior A) := by\n  -- Apply the basic two-step idempotence lemma with `A := interior A`.\n  have h :=\n    Topology.closureInteriorClosureInterior_eq_closureInterior\n      (A := interior A)\n  -- Simplify the right-hand side using `interior_interior`.\n  simpa [interior_interior] using h"
+  ],
+  "success": true
+}

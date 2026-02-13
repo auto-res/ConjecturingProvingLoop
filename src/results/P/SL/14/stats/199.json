@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.689537525177
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3496,
+      "prompt_tokens": 37295,
+      "total_tokens": 40791,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_three_of_closed\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA_closed : IsClosed A) (hB_closed : IsClosed B) (hC_closed : IsClosed C)\n    (hA_P2 : Topology.P2 A) (hB_P2 : Topology.P2 B) (hC_P2 : Topology.P2 C) :\n    Topology.P2 (A ∩ B ∩ C) := by\n  -- First, obtain `P2` for the intersection `A ∩ B`.\n  have hAB_P2 : Topology.P2 (A ∩ B) :=\n    Topology.P2_inter_of_closed (X := X) (A := A) (B := B)\n      hA_closed hB_closed hA_P2 hB_P2\n  -- `A ∩ B` is closed, being the intersection of two closed sets.\n  have hAB_closed : IsClosed (A ∩ B) := IsClosed.inter hA_closed hB_closed\n  -- Intersect the result with `C`, using the two–set lemma once more.\n  have hABC_P2 : Topology.P2 ((A ∩ B) ∩ C) :=\n    Topology.P2_inter_of_closed (X := X) (A := A ∩ B) (B := C)\n      hAB_closed hC_closed hAB_P2 hC_P2\n  -- Rewrite the associative intersection to match the desired statement.\n  simpa [Set.inter_assoc] using hABC_P2"
+  ],
+  "success": true
+}

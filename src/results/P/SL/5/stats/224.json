@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.632014989852905
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3679,
+      "prompt_tokens": 39126,
+      "total_tokens": 42805,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_and_P3_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (X := X) A) (hP3 : Topology.P3 (X := X) A) :\n    Topology.P2 (X := X) A := by\n  dsimp [Topology.P2] at *\n  intro x hxA\n  -- From `P3` we know that `x ∈ interior (closure A)`.\n  have hx_int_clA : x ∈ interior (closure (A : Set X)) := hP3 hxA\n  -- `P1` yields `closure A ⊆ closure (interior A)`.\n  have h_closure_subset :\n      closure (A : Set X) ⊆ closure (interior A) :=\n    Topology.P1_closure_subset (X := X) (A := A) hP1\n  -- Monotonicity of `interior` then gives the required inclusion.\n  have h_int_subset :\n      interior (closure (A : Set X)) ⊆ interior (closure (interior A)) :=\n    interior_mono h_closure_subset\n  exact h_int_subset hx_int_clA"
+  ],
+  "success": true
+}

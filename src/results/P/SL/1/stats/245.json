@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.15768885612488
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3744,
+      "prompt_tokens": 37416,
+      "total_tokens": 41160,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_closure {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 (closure A) → Topology.P3 (closure B) → Topology.P3 (closure A ∩ closure B) := by\n  intro hA hB\n  have hA_closed : IsClosed (closure A) := isClosed_closure\n  have hB_closed : IsClosed (closure B) := isClosed_closure\n  exact\n    Topology.P3_inter\n      (A := closure A) (B := closure B)\n      hA_closed hB_closed\n      hA hB"
+  ],
+  "success": true
+}

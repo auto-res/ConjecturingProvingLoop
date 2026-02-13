@@ -1,0 +1,26 @@
+{
+  "times": [
+    190.89363765716553
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10563,
+      "prompt_tokens": 39826,
+      "total_tokens": 50389,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem boundary_union_subset_boundary {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure ((A ∪ B) : Set X) \\ interior ((A ∪ B) : Set X) ⊆\n      (closure (A : Set X) \\ interior (A : Set X)) ∪\n        (closure (B : Set X) \\ interior (B : Set X)) := by\n  intro x hx\n  rcases hx with ⟨hxClUnion, hxNotIntUnion⟩\n  -- Use the description of `closure (A ∪ B)` as the union of the closures.\n  have hClEq : closure ((A ∪ B) : Set X) =\n      closure (A : Set X) ∪ closure (B : Set X) :=\n    closure_union_eq_union_closure (A := A) (B := B)\n  have hxCl : (x : X) ∈ closure (A : Set X) ∪ closure (B : Set X) := by\n    simpa [hClEq] using hxClUnion\n  -- Show that `x` is not in the interior of `A` nor in that of `B`.\n  have hxNotIntA : (x : X) ∉ interior (A : Set X) := by\n    intro hxIntA\n    have hSubset : (A : Set X) ⊆ (A ∪ B) := by\n      intro y hy; exact Or.inl hy\n    have hxIntUnion :\n        (x : X) ∈ interior ((A ∪ B) : Set X) :=\n      (interior_mono hSubset) hxIntA\n    exact hxNotIntUnion hxIntUnion\n  have hxNotIntB : (x : X) ∉ interior (B : Set X) := by\n    intro hxIntB\n    have hSubset : (B : Set X) ⊆ (A ∪ B) := by\n      intro y hy; exact Or.inr hy\n    have hxIntUnion :\n        (x : X) ∈ interior ((A ∪ B) : Set X) :=\n      (interior_mono hSubset) hxIntB\n    exact hxNotIntUnion hxIntUnion\n  -- Finally, place `x` in the appropriate boundary.\n  cases hxCl with\n  | inl hxClA =>\n      exact Or.inl ⟨hxClA, hxNotIntA⟩\n  | inr hxClB =>\n      exact Or.inr ⟨hxClB, hxNotIntB⟩"
+  ],
+  "success": true
+}

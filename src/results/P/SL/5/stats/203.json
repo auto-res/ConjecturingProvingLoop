@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.76553201675415
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6385,
+      "prompt_tokens": 35410,
+      "total_tokens": 41795,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_diff_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsClosed (B : Set X)) :\n    Topology.P3 (X := X) (A \\ B) := by\n  -- The difference of an open set and a closed set is open.\n  have hOpen : IsOpen ((A \\ B) : Set X) :=\n    IsOpen.diff (X := X) (A := A) (B := B) hA hB\n  -- Every open set satisfies `P3`.\n  exact Topology.isOpen_implies_P3 (X := X) (A := A \\ B) hOpen"
+  ],
+  "success": true
+}

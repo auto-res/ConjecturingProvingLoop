@@ -1,0 +1,26 @@
+{
+  "times": [
+    200.93641757965088
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13718,
+      "prompt_tokens": 46444,
+      "total_tokens": 60162,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_inter_closure_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ : Set X) ∩ closure (A : Set X) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hx_int, hx_cl⟩\n    -- Use the neighbourhood formulation of `closure` with the open set\n    -- `interior (Aᶜ)`, which contains `x`.\n    have h_false : False := by\n      rcases (mem_closure_iff).1 hx_cl\n          (interior (Aᶜ : Set X)) isOpen_interior hx_int with\n        ⟨y, hy_int, hyA⟩\n      -- But `y ∈ interior (Aᶜ)` implies `y ∉ A`, contradicting `hyA`.\n      have : y ∈ (Aᶜ : Set X) := interior_subset hy_int\n      exact this hyA\n    exact False.elim h_false\n  · intro x hx\n    cases hx"
+  ],
+  "success": true
+}

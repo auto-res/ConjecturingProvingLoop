@@ -1,0 +1,26 @@
+{
+  "times": [
+    57.6158185005188
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3873,
+      "prompt_tokens": 27227,
+      "total_tokens": 31100,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_P1_prod_left\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hB : B.Nonempty)\n    (h : Topology.P1 (A ×ˢ B)) :\n    Topology.P1 A := by\n  dsimp [Topology.P1] at h ⊢\n  intro x hxA\n  rcases hB with ⟨y, hyB⟩\n  -- Form the point in the product set.\n  have hxy : (x, y) ∈ A ×ˢ B := ⟨hxA, hyB⟩\n  -- Use `P1` for the product to obtain closure membership.\n  have hcl₁ : (x, y) ∈ closure (interior (A ×ˢ B)) := h hxy\n  -- Rewrite the interior of a product as the product of interiors.\n  have hcl₂ :\n      (x, y) ∈ closure ((interior A) ×ˢ (interior B)) := by\n    simpa [interior_prod_eq] using hcl₁\n  -- Rewrite the closure of a product as the product of closures.\n  have hcl₃ :\n      (x, y) ∈ closure (interior A) ×ˢ closure (interior B) := by\n    simpa [closure_prod_eq] using hcl₂\n  -- Extract the first coordinate to conclude.\n  exact hcl₃.1"
+  ],
+  "success": true
+}

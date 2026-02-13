@@ -1,0 +1,26 @@
+{
+  "times": [
+    27.958295583724976
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2275,
+      "prompt_tokens": 11454,
+      "total_tokens": 13729,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_self_of_isClosed_and_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsClosed A) :\n    Topology.P3 (A := A) → interior A = A := by\n  intro hP3\n  -- `P3` together with the closedness of `A` implies that `A` is open\n  have hOpen : IsOpen A :=\n    (Topology.P3_iff_isOpen_of_isClosed (A := A) hA).1 hP3\n  -- The interior of an open set is the set itself\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

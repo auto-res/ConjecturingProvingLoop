@@ -1,0 +1,26 @@
+{
+  "times": [
+    114.91146206855774
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6669,
+      "prompt_tokens": 25398,
+      "total_tokens": 32067,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_inter_isOpen_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_open : IsOpen A) (hB : Topology.P1 B) :\n    Topology.P1 (A ∩ B) := by\n  -- Apply the existing lemma with swapped roles and rewrite the intersection.\n  have h := Topology.P1_inter_isOpen_right (X := X) (A := B) (B := A) hB hA_open\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

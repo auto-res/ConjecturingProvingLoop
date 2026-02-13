@@ -1,0 +1,26 @@
+{
+  "times": [
+    18.796011924743652
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1680,
+      "prompt_tokens": 32861,
+      "total_tokens": 34541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32640
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closureInterior_union_boundary\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = closure (interior A) ∪ (closure A \\ interior A) := by\n  ext x\n  constructor\n  · intro hx_clA\n    by_cases hx_intA : x ∈ interior (A : Set X)\n    · -- `x` is in the interior, hence in `closure (interior A)`.\n      have : x ∈ closure (interior A) := by\n        exact subset_closure hx_intA\n      exact Or.inl this\n    · -- `x` is not in the interior, so it belongs to the boundary part.\n      exact Or.inr ⟨hx_clA, hx_intA⟩\n  · intro hx_union\n    cases hx_union with\n    | inl hx_cl_int =>\n        -- `closure (interior A)` is contained in `closure A`.\n        have h_subset := Topology.closureInterior_subset_closure (A := A)\n        exact h_subset hx_cl_int\n    | inr hx_boundary =>\n        exact hx_boundary.1"
+  ],
+  "success": true
+}

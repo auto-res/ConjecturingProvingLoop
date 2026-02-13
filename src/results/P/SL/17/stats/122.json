@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.79559803009033
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4837,
+      "prompt_tokens": 18387,
+      "total_tokens": 23224,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_empty_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) = (∅ : Set X) ↔ interior A = (∅ : Set X) := by\n  constructor\n  · intro h\n    -- First, show `interior A ⊆ ∅`.\n    have h_sub : interior A ⊆ (∅ : Set X) := by\n      intro x hx\n      have : (x : X) ∈ closure (interior A) := subset_closure hx\n      simpa [h] using this\n    -- From the subset relation, obtain the desired equality.\n    have h_eq : interior A = (∅ : Set X) := by\n      apply Set.Subset.antisymm\n      · exact h_sub\n      · exact Set.empty_subset _\n    exact h_eq\n  · intro h\n    simpa [h, closure_empty]"
+  ],
+  "success": true
+}

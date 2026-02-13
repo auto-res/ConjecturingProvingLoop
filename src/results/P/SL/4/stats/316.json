@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.83302712440491
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5864,
+      "prompt_tokens": 48845,
+      "total_tokens": 54709,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_closure_subset_inter_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A ∩ closure B) ⊆ closure A ∩ closure B := by\n  have h :=\n    closure_inter_subset_inter_closure\n      (A := A) (B := closure B)\n  simpa [closure_closure] using h"
+  ],
+  "success": true
+}

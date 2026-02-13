@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.02945280075073
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3331,
+      "prompt_tokens": 30155,
+      "total_tokens": 33486,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_subset_closure_inter_closureCompl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) \\ interior A ⊆ closure A ∩ closure (Aᶜ) := by\n  intro x hx\n  -- `x` lies in `closure A`.\n  have hx_closureA : x ∈ closure A := hx.1\n  -- By a previously proven lemma, `x` also lies in `closure (Aᶜ)`.\n  have hx_closureAc : x ∈ closure (Aᶜ) :=\n    (Topology.boundary_subset_closure_compl (A := A)) hx\n  -- Combine the two facts.\n  exact ⟨hx_closureA, hx_closureAc⟩"
+  ],
+  "success": true
+}

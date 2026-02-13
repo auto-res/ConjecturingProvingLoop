@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.60209655761719
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3981,
+      "prompt_tokens": 52997,
+      "total_tokens": 56978,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_eq_compl_interior_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_dense : closure A = (Set.univ : Set X)) :\n    closure A \\ interior A = (interior A)ᶜ := by\n  calc\n    closure A \\ interior A\n        = (Set.univ : Set X) \\ interior A := by\n          simpa [h_dense]\n    _ = (interior A)ᶜ := by\n          simpa [Set.diff_eq]"
+  ],
+  "success": true
+}

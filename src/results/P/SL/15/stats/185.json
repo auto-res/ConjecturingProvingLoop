@@ -1,0 +1,26 @@
+{
+  "times": [
+    132.01962685585022
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8921,
+      "prompt_tokens": 37005,
+      "total_tokens": 45926,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_left_and_P3_right_implies_P3_prod\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y}\n    (hDense : Dense A) (hP3B : Topology.P3 B) :\n    Topology.P3 (A ×ˢ B) := by\n  dsimp [Topology.P3] at hP3B ⊢\n  intro p hp\n  rcases hp with ⟨hpA, hpB⟩\n  -- `interior (closure A)` is the whole space, thanks to the density of `A`.\n  have h_closureA : closure A = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  have h_int_closureA : interior (closure A) = (Set.univ : Set X) := by\n    have : interior (closure A) = interior ((Set.univ : Set X)) := by\n      simpa [h_closureA]\n    simpa [interior_univ] using this\n  -- Coordinates belong to the corresponding interiors.\n  have hx : p.1 ∈ interior (closure A) := by\n    have : p.1 ∈ (Set.univ : Set X) := by\n      trivial\n    simpa [h_int_closureA] using this\n  have hy : p.2 ∈ interior (closure B) := hP3B hpB\n  -- Relate `interior (closure (A ×ˢ B))` to a product of interiors.\n  have h_closure_prod :\n      closure (A ×ˢ B) = (closure A) ×ˢ (closure B) := by\n    simpa using closure_prod_eq (s := A) (t := B)\n  have h_int_prod :\n      interior (closure (A ×ˢ B)) =\n        interior (closure A) ×ˢ interior (closure B) := by\n    have h := interior_prod_eq (s := closure A) (t := closure B)\n    simpa [h_closure_prod] using h\n  -- Assemble the conclusion.\n  have h_mem : (p : X × Y) ∈\n      interior (closure A) ×ˢ interior (closure B) := by\n    exact And.intro hx hy\n  simpa [h_int_prod] using h_mem"
+  ],
+  "success": true
+}

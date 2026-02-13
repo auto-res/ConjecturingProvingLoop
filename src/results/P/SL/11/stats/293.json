@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.42654871940613
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2014,
+      "prompt_tokens": 48420,
+      "total_tokens": 50434,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_univ_prod_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    [Nonempty X] {B : Set Y} (hB : B.Nonempty) :\n    Topology.P1 ((Set.univ : Set X) ×ˢ B) ↔ Topology.P1 B := by\n  -- A witness that `Set.univ : Set X` is nonempty.\n  have hA : (Set.univ : Set X).Nonempty := Set.nonempty_univ\n  -- Apply the existing product equivalence for `P1`.\n  have hEquiv :=\n    (Topology.P1_prod_iff (A := (Set.univ : Set X)) (B := B) hA hB)\n  -- `P1` holds for the universal set.\n  have hP1_univ : Topology.P1 (Set.univ : Set X) := Topology.P1_univ (X := X)\n  -- Split the equivalence into the desired two implications.\n  constructor\n  · intro hProd\n    exact (hEquiv.mp hProd).2\n  · intro hPB\n    exact hEquiv.mpr ⟨hP1_univ, hPB⟩"
+  ],
+  "success": true
+}

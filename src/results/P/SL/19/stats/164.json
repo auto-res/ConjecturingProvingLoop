@@ -1,0 +1,43 @@
+{
+  "times": [
+    62.41967964172363,
+    128.80161833763123
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5387,
+      "prompt_tokens": 24683,
+      "total_tokens": 30070,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    },
+    {
+      "completion_tokens": 9035,
+      "prompt_tokens": 24789,
+      "total_tokens": 33824,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24448
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_self_of_frontier_disjoint {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h : frontier A ∩ A = (∅ : Set X)) :\n    interior A = A := by\n  apply Set.Subset.antisymm\n  · exact interior_subset\n  · intro x hxA\n    classical\n    by_cases hxInt : x ∈ interior A\n    · exact hxInt\n    · -- If `x ∉ interior A`, then `x` lies in the frontier of `A`\n      have hxFrontier : x ∈ frontier A := by\n        have : x ∈ closure A ∧ x ∉ interior A :=\n          And.intro (subset_closure hxA) hxInt\n        simpa [frontier] using this\n      -- Hence `x ∈ frontier A ∩ A`, contradicting the hypothesis `h`\n      have hxIn : x ∈ frontier A ∩ A := And.intro hxFrontier hxA\n      have : x ∈ (∅ : Set X) := by\n        simpa [h] using hxIn\n      cases this",
+    "set_option maxRecDepth 10000\n\ntheorem Topology.closure_idempotent {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (closure A) = closure A := by\n  simpa [closure_closure]"
+  ],
+  "success": true
+}

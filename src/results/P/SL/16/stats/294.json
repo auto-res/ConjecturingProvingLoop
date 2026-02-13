@@ -1,0 +1,26 @@
+{
+  "times": [
+    119.38365507125854
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9539,
+      "prompt_tokens": 51367,
+      "total_tokens": 60906,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_compl_eq_empty_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_dense : closure A = (Set.univ : Set X)) :\n    interior (Aᶜ) = (∅ : Set X) := by\n  classical\n  -- We prove that `interior (Aᶜ)` contains no points.\n  apply Set.eq_empty_iff_forall_not_mem.2\n  intro x hxInt\n  -- Since `closure A = univ`, every point is in `closure A`.\n  have hxCl : (x : X) ∈ closure A := by\n    simpa [h_dense] using (by\n      have : (x : X) ∈ (Set.univ : Set X) := by simp\n      exact this)\n  -- `interior (Aᶜ)` is an open neighbourhood of `x`.\n  have hOpen : IsOpen (interior (Aᶜ)) := isOpen_interior\n  -- By density, this neighbourhood meets `A`.\n  have hNonempty : ((interior (Aᶜ) : Set X) ∩ A).Nonempty :=\n    (mem_closure_iff.1 hxCl) (interior (Aᶜ)) hOpen hxInt\n  rcases hNonempty with ⟨y, hyInt, hyA⟩\n  -- But `interior (Aᶜ)` is contained in `Aᶜ`, so `y ∉ A`, contradiction.\n  have hNotA : (y : X) ∈ (Aᶜ : Set X) := interior_subset hyInt\n  exact hNotA hyA"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    44.08252501487732
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3570,
+      "prompt_tokens": 2872,
+      "total_tokens": 6442,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_closure_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A : Set X) → Topology.P1 (closure (A : Set X)) := by\n  intro hA\n  dsimp [Topology.P1] at hA ⊢\n  -- First, lift the inclusion to the closures\n  have h₁ : closure (A : Set X) ⊆ closure (interior A) := by\n    simpa [closure_closure] using (closure_mono hA)\n  -- Next, use monotonicity of interior and closure\n  have h₂ : closure (interior A) ⊆ closure (interior (closure (A : Set X))) := by\n    have h : interior A ⊆ interior (closure (A : Set X)) :=\n      interior_mono (subset_closure : (A : Set X) ⊆ closure A)\n    exact closure_mono h\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

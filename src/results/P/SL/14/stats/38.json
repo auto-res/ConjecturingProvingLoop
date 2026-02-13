@@ -1,0 +1,26 @@
+{
+  "times": [
+    96.77097654342651
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5571,
+      "prompt_tokens": 6803,
+      "total_tokens": 12374,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hx\n  -- Since `A` is dense, its closure is the whole space.\n  have hclosure : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Hence the interior of this closure is also the whole space.\n  have : (x : X) ∈ interior (closure A) := by\n    simpa [hclosure] using (by\n      have : (x : X) ∈ (Set.univ : Set X) := by\n        simp\n      exact this)\n  exact this"
+  ],
+  "success": true
+}

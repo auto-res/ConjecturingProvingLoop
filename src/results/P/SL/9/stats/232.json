@@ -1,0 +1,43 @@
+{
+  "times": [
+    94.34812068939209,
+    39.48003029823303
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6778,
+      "prompt_tokens": 38258,
+      "total_tokens": 45036,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37760
+      }
+    },
+    {
+      "completion_tokens": 3256,
+      "prompt_tokens": 38364,
+      "total_tokens": 41620,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closure_subset_frontier {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    frontier (closure (A : Set X)) ⊆ frontier A := by\n  intro x hx\n  -- Unpack the definition of `frontier`.\n  dsimp [frontier] at hx ⊢\n  -- `hx.1 : x ∈ closure (closure A)`\n  -- `hx.2 : x ∉ interior (closure A)`\n  have hx_clA : x ∈ closure A := by\n    -- `closure (closure A) = closure A`\n    simpa [closure_closure] using hx.1\n  -- Show that `x ∉ interior A`.\n  have hx_not_intA : x ∉ interior (A : Set X) := by\n    intro hx_intA\n    -- `interior A ⊆ interior (closure A)`\n    have h_subset :\n        interior (A : Set X) ⊆ interior (closure (A : Set X)) :=\n      Topology.interior_subset_interiorClosure (A := A)\n    -- Hence `x ∈ interior (closure A)`, contradicting `hx.2`.\n    exact hx.2 (h_subset hx_intA)\n  -- Assemble the membership in the desired set.\n  exact ⟨hx_clA, hx_not_intA⟩",
+    "theorem Topology.interior_union_interior_eq_self {X : Type*} [TopologicalSpace X]\n    (A : Set X) : interior (A ∪ interior A) = interior A := by\n  -- First, observe that `A ∪ interior A` is just `A`,\n  -- since `interior A ⊆ A`.\n  have h_union : (A ∪ interior A : Set X) = A := by\n    ext x\n    constructor\n    · intro hx\n      cases hx with\n      | inl hA      => exact hA\n      | inr hIntA   => exact interior_subset hIntA\n    · intro hx\n      exact Or.inl hx\n  -- Rewrite using this equality.\n  simpa [h_union]"
+  ],
+  "success": true
+}

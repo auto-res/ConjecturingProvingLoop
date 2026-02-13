@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.26345348358154
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3969,
+      "prompt_tokens": 47735,
+      "total_tokens": 51704,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.all_P_closed_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hA_dense : Dense (A : Set X)) :\n    Topology.P1 (X := X) A ∧ Topology.P2 (X := X) A ∧ Topology.P3 (X := X) A := by\n  have hP1 : Topology.P1 (X := X) A :=\n    Topology.closed_dense_implies_P1 (X := X) (A := A) hA_closed hA_dense\n  have hP2 : Topology.P2 (X := X) A :=\n    Topology.closed_dense_implies_P2 (X := X) (A := A) hA_closed hA_dense\n  have hP3 : Topology.P3 (X := X) A :=\n    Topology.closed_dense_implies_P3 (X := X) (A := A) hA_closed hA_dense\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

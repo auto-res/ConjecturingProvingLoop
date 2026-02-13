@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.190571784973145
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2055,
+      "prompt_tokens": 47740,
+      "total_tokens": 49795,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_eq_union_interiors_of_open\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) :\n    interior (A ∪ B : Set X) = interior A ∪ interior B := by\n  have hUnionOpen : IsOpen (A ∪ B : Set X) := hA.union hB\n  have hIntUnion : interior (A ∪ B : Set X) = A ∪ B := hUnionOpen.interior_eq\n  have hIntA : interior A = A := hA.interior_eq\n  have hIntB : interior B = B := hB.interior_eq\n  simpa [hIntUnion, hIntA, hIntB]"
+  ],
+  "success": true
+}

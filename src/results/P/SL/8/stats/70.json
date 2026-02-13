@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.18152832984924
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2112,
+      "prompt_tokens": 9914,
+      "total_tokens": 12026,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9088
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_subset_interior_of_closure_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hP3 : Topology.P3 A) (hcl : closure A ⊆ B) :\n    A ⊆ interior B := by\n  dsimp [Topology.P3] at hP3\n  have hInt : interior (closure A) ⊆ interior B := interior_mono hcl\n  exact Set.Subset.trans hP3 hInt"
+  ],
+  "success": true
+}

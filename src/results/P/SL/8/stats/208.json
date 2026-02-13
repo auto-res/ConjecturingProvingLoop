@@ -1,0 +1,26 @@
+{
+  "times": [
+    159.7056405544281
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10333,
+      "prompt_tokens": 31246,
+      "total_tokens": 41579,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_subset_closure_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B) ⊆ closure A := by\n  intro x hx\n  -- From `x ∈ interior (A \\ B)` we obtain `x ∈ A \\ B`.\n  have h_mem : x ∈ A \\ B := interior_subset hx\n  -- Hence `x ∈ A`.\n  have hxA : x ∈ A := h_mem.1\n  -- Since `A ⊆ closure A`, we conclude `x ∈ closure A`.\n  exact subset_closure hxA"
+  ],
+  "success": true
+}

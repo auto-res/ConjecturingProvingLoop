@@ -1,0 +1,26 @@
+{
+  "times": [
+    84.74801063537598
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5680,
+      "prompt_tokens": 35810,
+      "total_tokens": 41490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_frontier_subset_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (A : Set X) ⊆ closure (interior A) → Topology.P1 A := by\n  intro hFrontier\n  intro x hxA\n  by_cases hx_int : x ∈ interior A\n  · exact subset_closure hx_int\n  ·\n    have hx_closure : x ∈ closure (A : Set X) := subset_closure hxA\n    have hx_frontier : x ∈ frontier (A : Set X) := by\n      exact And.intro hx_closure hx_int\n    exact hFrontier hx_frontier"
+  ],
+  "success": true
+}

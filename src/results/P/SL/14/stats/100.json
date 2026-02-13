@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.93605065345764
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3164,
+      "prompt_tokens": 16834,
+      "total_tokens": 19998,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.compl_satisfies_P1_P2_P3_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed A) :\n    Topology.P1 (Aᶜ) ∧ Topology.P2 (Aᶜ) ∧ Topology.P3 (Aᶜ) := by\n  have hOpen : IsOpen (Aᶜ) := hA_closed.isOpen_compl\n  exact Topology.isOpen_satisfies_P1_P2_P3 (X := X) (A := Aᶜ) hOpen"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    17.71862292289734
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1155,
+      "prompt_tokens": 43068,
+      "total_tokens": 44223,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_closureInterior_iff_P3_closureInterior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) (closure (interior (A : Set X))) ↔\n      Topology.P3 (X := X) (closure (interior (A : Set X))) := by\n  -- Both sides are equivalent to the openness of `closure (interior A)`.\n  have hP2 :=\n    Topology.P2_closureInterior_iff_isOpen_closureInterior (X := X) (A := A)\n  have hP3 :=\n    Topology.P3_closureInterior_iff_isOpen_closureInterior (X := X) (A := A)\n  simpa using hP2.trans hP3.symm"
+  ],
+  "success": true
+}

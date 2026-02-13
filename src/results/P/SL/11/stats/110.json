@@ -1,0 +1,26 @@
+{
+  "times": [
+    182.18996810913086
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11372,
+      "prompt_tokens": 15739,
+      "total_tokens": 27111,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_inter_right_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 A) (hB_open : IsOpen B) :\n    Topology.P1 (A ∩ B) := by\n  dsimp [Topology.P1] at hA ⊢\n  intro x hxAB\n  rcases hxAB with ⟨hxA, hxB⟩\n  -- `x` lies in the closure of `interior A`.\n  have hx_clA : x ∈ closure (interior A) := hA hxA\n  -- We show `x ∈ closure (interior (A ∩ B))`.\n  have hx_cl : x ∈ closure (interior (A ∩ B)) := by\n    -- Use the neighbourhood characterisation of closures.\n    apply (mem_closure_iff).2\n    intro s hs_open hxs\n    -- `s ∩ B` is an open neighbourhood of `x`.\n    have h_open' : IsOpen (s ∩ B) := hs_open.inter hB_open\n    have hx_in' : x ∈ s ∩ B := ⟨hxs, hxB⟩\n    -- Since `x ∈ closure (interior A)`, this neighbourhood meets `interior A`.\n    have h_nonempty : ((s ∩ B) ∩ interior A).Nonempty :=\n      ((mem_closure_iff).1 hx_clA) (s ∩ B) h_open' hx_in'\n    -- Extract a witness `y`.\n    rcases h_nonempty with ⟨y, ⟨hy_sB, hy_intA⟩⟩\n    have hy_s : y ∈ s := hy_sB.1\n    have hy_B : y ∈ B := hy_sB.2\n    -- `y` lies in `interior A` and in `B`.\n    -- Show that `y ∈ interior (A ∩ B)`.\n    have hy_intAB : y ∈ interior (A ∩ B) := by\n      -- `interior A ∩ B` is an open subset of `A ∩ B` containing `y`.\n      have hSub : (interior A ∩ B : Set X) ⊆ A ∩ B := by\n        intro z hz\n        exact ⟨(interior_subset : interior A ⊆ A) hz.1, hz.2⟩\n      have hOpen : IsOpen (interior A ∩ B) := isOpen_interior.inter hB_open\n      have hSubInt : (interior A ∩ B : Set X) ⊆ interior (A ∩ B) :=\n        interior_maximal hSub hOpen\n      exact hSubInt ⟨hy_intA, hy_B⟩\n    -- Provide the witness in `s ∩ interior (A ∩ B)`.\n    exact ⟨y, ⟨hy_s, hy_intAB⟩⟩\n  exact hx_cl"
+  ],
+  "success": true
+}

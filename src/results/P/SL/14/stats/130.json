@@ -1,0 +1,26 @@
+{
+  "times": [
+    141.32347965240479
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10658,
+      "prompt_tokens": 22616,
+      "total_tokens": 33274,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_isOpen_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P3 A) (hB_open : IsOpen B) :\n    Topology.P3 (A ∩ B) := by\n  dsimp [Topology.P3] at hA ⊢\n  intro x hx\n  rcases hx with ⟨hxA, hxB⟩\n  have hxA_int : (x : X) ∈ interior (closure A) := hA hxA\n  -- Define an auxiliary open set around `x`.\n  have h_open_aux : IsOpen (B ∩ interior (closure A)) :=\n    IsOpen.inter hB_open isOpen_interior\n  -- This open set is contained in `closure (A ∩ B)`.\n  have h_subset_aux :\n      (B ∩ interior (closure A) : Set X) ⊆ closure (A ∩ B) := by\n    intro y hy\n    rcases hy with ⟨hyB, hyIntA⟩\n    -- `y` lies in `B` and in `interior (closure A)`, hence in `closure A`.\n    have hy_closureA : (y : X) ∈ closure A :=\n      (interior_subset : interior (closure A) ⊆ closure A) hyIntA\n    -- Show that every neighbourhood of `y` meets `A ∩ B`.\n    have : (y : X) ∈ closure (A ∩ B) := by\n      refine (mem_closure_iff).2 ?_\n      intro U hU hyU\n      -- `U ∩ B` is an open neighbourhood of `y`.\n      have hUB_open : IsOpen (U ∩ B) := IsOpen.inter hU hB_open\n      have hyUB : (y : X) ∈ U ∩ B := And.intro hyU hyB\n      -- Since `y ∈ closure A`, `U ∩ B` meets `A`.\n      have h_nonempty : ((U ∩ B) ∩ A).Nonempty :=\n        (mem_closure_iff).1 hy_closureA (U ∩ B) hUB_open hyUB\n      -- Rewriting gives a point in `U ∩ (A ∩ B)`.\n      simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm] using h_nonempty\n    exact this\n  -- The auxiliary open set lies inside the interior of the target closure.\n  have h_aux_incl :\n      (B ∩ interior (closure A) : Set X) ⊆ interior (closure (A ∩ B)) :=\n    interior_maximal h_subset_aux h_open_aux\n  -- Since `x` belongs to this auxiliary open set, it belongs to the target interior.\n  have hx_aux : (x : X) ∈ B ∩ interior (closure A) :=\n    And.intro hxB hxA_int\n  exact h_aux_incl hx_aux"
+  ],
+  "success": true
+}

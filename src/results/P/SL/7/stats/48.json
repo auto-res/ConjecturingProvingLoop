@@ -1,0 +1,43 @@
+{
+  "times": [
+    70.91490483283997,
+    80.03546237945557
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5661,
+      "prompt_tokens": 6841,
+      "total_tokens": 12502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4050,
+      "prompt_tokens": 7063,
+      "total_tokens": 11113,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosureInterior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    have h : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    exact closure_mono h\n  ·\n    have h : interior A ⊆ interior (closure (interior A)) := by\n      apply interior_mono\n      exact subset_closure\n    exact closure_mono h",
+    "theorem Topology.interiorClosureInterior_interior_eq {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (closure (interior (interior A))) = interior (closure (interior A)) := by\n  simpa [interior_interior]"
+  ],
+  "success": true
+}

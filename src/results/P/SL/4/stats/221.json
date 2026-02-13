@@ -1,0 +1,43 @@
+{
+  "times": [
+    142.1220805644989,
+    53.321512937545776
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11912,
+      "prompt_tokens": 32404,
+      "total_tokens": 44316,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    },
+    {
+      "completion_tokens": 3621,
+      "prompt_tokens": 32637,
+      "total_tokens": 36258,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_compl_eq_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure A ∩ interior (Aᶜ) = (∅ : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    -- `x` lies both in `closure A` and in `interior (Aᶜ)`.\n    have hx_cl : x ∈ closure A := hx.1\n    have hx_int : x ∈ interior (Aᶜ) := hx.2\n    -- Any neighbourhood of `x` meets `A`; in particular `interior (Aᶜ)`.\n    have h_nonempty :\n        ((interior (Aᶜ)) ∩ A : Set X).Nonempty :=\n      ((mem_closure_iff).1 hx_cl) isOpen_interior hx_int\n    -- But `interior (Aᶜ)` is contained in `Aᶜ`, so the intersection is empty.\n    rcases h_nonempty with ⟨y, hy⟩\n    have hYnAᶜ : y ∈ Aᶜ := interior_subset hy.1\n    have : False := hYnAᶜ hy.2\n    exact this.elim\n  · intro hx\n    -- `x ∈ ∅` is impossible, so from it we can derive anything.\n    cases hx",
+    "theorem interior_subset_interior_closure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) :\n    interior A ⊆ interior (closure B) := by\n  -- First, upgrade the inclusion `A ⊆ B` to `A ⊆ closure B`.\n  have h₁ : (A : Set X) ⊆ closure B := by\n    intro x hx\n    have : x ∈ B := hAB hx\n    exact subset_closure this\n  -- Monotonicity of `interior` yields the desired result.\n  exact interior_mono h₁"
+  ],
+  "success": true
+}

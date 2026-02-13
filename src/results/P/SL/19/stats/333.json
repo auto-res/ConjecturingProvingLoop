@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.81327557563782
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2907,
+      "prompt_tokens": 53650,
+      "total_tokens": 56557,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_union_frontier_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A \\ (A ∪ frontier A) = (∅ : Set X) := by\n  have hUnion : (A : Set X) ∪ frontier A = closure A :=\n    (Topology.closure_eq_self_union_frontier (A := A)).symm\n  calc\n    closure A \\ (A ∪ frontier A)\n        = closure A \\ closure A := by\n          simpa [hUnion]\n    _ = (∅ : Set X) := by\n          simp"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    82.4091100692749
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4052,
+      "prompt_tokens": 58338,
+      "total_tokens": 62390,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_image_eq_closure_image_interior_of_P1\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}\n    (hf : Continuous f) {A : Set X} (hA : Topology.P1 (X := X) A) :\n    closure (f '' A) = closure (f '' interior A) := by\n  -- One inclusion is provided by an existing lemma.\n  have h₁ :\n      closure (f '' A) ⊆ closure (f '' interior A) :=\n    Topology.closure_image_subset_closure_image_interior_of_P1\n      (X := X) (Y := Y) (f := f) hf (A := A) hA\n  -- The reverse inclusion follows from `interior A ⊆ A`.\n  have h₂ :\n      closure (f '' interior A) ⊆ closure (f '' A) := by\n    -- First, relate the underlying images.\n    have h_sub : (f '' interior A : Set Y) ⊆ f '' A := by\n      intro y hy\n      rcases hy with ⟨x, hx_int, rfl⟩\n      exact ⟨x, interior_subset hx_int, rfl⟩\n    -- Taking closures preserves inclusions.\n    exact closure_mono h_sub\n  -- Combine the two inclusions to obtain equality.\n  exact Set.Subset.antisymm h₁ h₂"
+  ],
+  "success": true
+}

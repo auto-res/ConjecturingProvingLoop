@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.87320256233215
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4199,
+      "prompt_tokens": 54383,
+      "total_tokens": 58582,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_inter_interior_subset_interior_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ interior B)) ⊆ interior (closure (A ∩ B)) := by\n  intro x hx\n  -- Step 1:  `(A ∩ interior B) ⊆ (A ∩ B)`\n  have hSub : (A ∩ interior B : Set X) ⊆ A ∩ B := by\n    intro y hy\n    exact And.intro hy.1 (interior_subset hy.2)\n  -- Step 2:  Take closures on both sides of the inclusion.\n  have hClos : closure (A ∩ interior B) ⊆ closure (A ∩ B) :=\n    closure_mono hSub\n  -- Step 3:  Apply monotonicity of `interior`.\n  exact (interior_mono hClos) hx"
+  ],
+  "success": true
+}

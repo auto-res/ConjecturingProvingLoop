@@ -1,0 +1,43 @@
+{
+  "times": [
+    46.65109658241272,
+    98.61711478233337
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2664,
+      "prompt_tokens": 764,
+      "total_tokens": 3428,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5642,
+      "prompt_tokens": 874,
+      "total_tokens": 6516,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P1 (X := X) A) :\n    closure (A : Set X) = closure (interior A) := by\n  have h₁ : closure (A : Set X) ⊆ closure (interior A) := closure_mono h\n  have h₂ : closure (interior A) ⊆ closure (A : Set X) :=\n    closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n  exact Set.Subset.antisymm h₁ h₂",
+    "theorem Topology.isOpen_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) :\n    Topology.P2 (X := X) A := by\n  -- Using `P3` for open sets\n  have h : A ⊆ interior (closure A) := Topology.isOpen_P3 (X := X) hA\n  -- Rewrite the goal via `interior` of an open set\n  simpa [Topology.P2, hA.interior_eq] using h"
+  ],
+  "success": true
+}

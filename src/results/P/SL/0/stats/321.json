@@ -1,0 +1,26 @@
+{
+  "times": [
+    116.54864239692688
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7149,
+      "prompt_tokens": 56055,
+      "total_tokens": 63204,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_three_subset_interiors {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} :\n    interior ((A ∩ B ∩ C) : Set X) ⊆\n      interior (A : Set X) ∩ interior (B : Set X) ∩ interior (C : Set X) := by\n  intro x hx\n  -- `A ∩ B ∩ C` is contained in each of `A`, `B`, and `C`.\n  have hSubA : (A ∩ B ∩ C : Set X) ⊆ (A : Set X) := by\n    intro y hy; exact hy.1.1\n  have hSubB : (A ∩ B ∩ C : Set X) ⊆ (B : Set X) := by\n    intro y hy; exact (hy.1).2\n  have hSubC : (A ∩ B ∩ C : Set X) ⊆ (C : Set X) := by\n    intro y hy; exact hy.2\n  -- Apply monotonicity of `interior` to transfer the membership.\n  have hxA : x ∈ interior (A : Set X) := (interior_mono hSubA) hx\n  have hxB : x ∈ interior (B : Set X) := (interior_mono hSubB) hx\n  have hxC : x ∈ interior (C : Set X) := (interior_mono hSubC) hx\n  exact And.intro (And.intro hxA hxB) hxC"
+  ],
+  "success": true
+}

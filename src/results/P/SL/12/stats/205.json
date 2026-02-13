@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.28590512275696
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4280,
+      "prompt_tokens": 39069,
+      "total_tokens": 43349,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_interior_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : Topology.P3 (X := X) A) :\n    Topology.P3 (X := X) (A ∪ interior B) := by\n  -- `P3` holds for `interior B` because it is an open set.\n  have hB : Topology.P3 (X := X) (interior B) :=\n    Topology.P3_interior (X := X) (A := B)\n  -- Combine the two `P3` properties via the existing union lemma.\n  exact Topology.P3_union (X := X) (A := A) (B := interior B) hA hB"
+  ],
+  "success": true
+}

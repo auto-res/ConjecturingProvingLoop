@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.358710765838623
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2471,
+      "prompt_tokens": 44536,
+      "total_tokens": 47007,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_closure_subset_inter_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ closure (B : Set X) : Set X) ⊆\n      interior A ∩ interior (closure B) := by\n  intro x hx\n  -- `x` lies in `interior A`\n  have hxA : x ∈ interior A := by\n    -- `A ∩ closure B ⊆ A`\n    have h₁ : (A ∩ closure (B : Set X) : Set X) ⊆ A :=\n      Set.inter_subset_left\n    -- Monotonicity of `interior`\n    have h₂ :\n        interior (A ∩ closure (B : Set X) : Set X) ⊆ interior A :=\n      interior_mono h₁\n    exact h₂ hx\n  -- `x` lies in `interior (closure B)`\n  have hxB : x ∈ interior (closure B) := by\n    -- `A ∩ closure B ⊆ closure B`\n    have h₁ : (A ∩ closure (B : Set X) : Set X) ⊆ closure B :=\n      Set.inter_subset_right\n    -- Monotonicity of `interior`\n    have h₂ :\n        interior (A ∩ closure (B : Set X) : Set X) ⊆\n          interior (closure B) :=\n      interior_mono h₁\n    exact h₂ hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    175.32555174827576
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13933,
+      "prompt_tokens": 20914,
+      "total_tokens": 34847,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_nonempty_iff_interiorClosureInterior_nonempty {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    (interior A).Nonempty ↔ (interior (closure (interior A))).Nonempty := by\n  classical\n  constructor\n  · intro hIntA\n    rcases hIntA with ⟨x, hx⟩\n    have hSub : interior A ⊆ interior (closure (interior A)) := by\n      have h₁ : interior A ⊆ closure (interior A) := subset_closure\n      have h₂ := interior_mono h₁\n      simpa [interior_interior] using h₂\n    exact ⟨x, hSub hx⟩\n  · intro hIntCl\n    by_cases hIntA : (interior A).Nonempty\n    · exact hIntA\n    ·\n      have hIntAEq : interior A = (∅ : Set X) :=\n        (Set.not_nonempty_iff_eq_empty).1 hIntA\n      have hIntClEq : interior (closure (interior A)) = (∅ : Set X) := by\n        simpa [hIntAEq, closure_empty, interior_empty]\n      rcases hIntCl with ⟨x, hx⟩\n      have hFalse : False := by\n        have : (x : X) ∈ (∅ : Set X) := by\n          simpa [hIntClEq] using hx\n        exact this\n      exact (False.elim hFalse)"
+  ],
+  "success": true
+}

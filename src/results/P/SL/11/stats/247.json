@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.15998601913452
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2875,
+      "prompt_tokens": 39512,
+      "total_tokens": 42387,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_closure_interior_of_P1_iUnion\n    {X ι : Type*} [TopologicalSpace X] {A : ι → Set X}\n    (hA : ∀ i, Topology.P1 (A i)) :\n    closure (⋃ i, A i) = closure (interior (⋃ i, A i)) := by\n  -- First, obtain `P1` for the union using the existing lemma.\n  have hUnion : Topology.P1 (⋃ i, A i) := Topology.P1_iUnion hA\n  -- Apply the characterisation of `P1` to relate the two closures.\n  exact Topology.closure_eq_closure_interior_of_P1 (A := ⋃ i, A i) hUnion"
+  ],
+  "success": true
+}

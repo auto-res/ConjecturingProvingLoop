@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.56319284439087
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2317,
+      "prompt_tokens": 50177,
+      "total_tokens": 52494,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_implies_closure_frontier_subset_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A →\n      closure (frontier (A : Set X)) ⊆ closure (interior A) := by\n  intro hP1\n  -- Step 1: `frontier A` is contained in `closure A`, and `closure A`\n  -- is contained in `closure (interior A)` thanks to `P1`.\n  have hFrontSub :\n      (frontier (A : Set X) : Set X) ⊆ closure (interior A) := by\n    have h₁ :\n        (frontier (A : Set X) : Set X) ⊆ closure (A : Set X) :=\n      Topology.frontier_subset_closure (A := A)\n    have h₂ :\n        closure (A : Set X) ⊆ closure (interior A) :=\n      Topology.P1_implies_closure_subset_closure_interior (A := A) hP1\n    exact h₁.trans h₂\n  -- Step 2: taking closures preserves inclusions; simplify the right‐hand side.\n  have hCl :\n      closure (frontier (A : Set X)) ⊆ closure (closure (interior A)) :=\n    closure_mono hFrontSub\n  simpa [closure_closure] using hCl"
+  ],
+  "success": true
+}

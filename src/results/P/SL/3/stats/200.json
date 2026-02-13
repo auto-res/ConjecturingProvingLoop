@@ -1,0 +1,26 @@
+{
+  "times": [
+    216.35402417182922
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 15757,
+      "prompt_tokens": 30953,
+      "total_tokens": 46710,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_closure_compl_eq_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (A : Set X) ∩ closure (Aᶜ) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxInt, hxCl⟩\n    have hContr : False := by\n      -- From `x ∈ closure (Aᶜ)` we obtain that every open neighbourhood of `x`\n      -- meets `Aᶜ`. In particular, this holds for `interior A`, which is an\n      -- open neighbourhood of `x`.\n      have hNonempty :\n          ((interior (A : Set X)) ∩ (Aᶜ : Set X)).Nonempty :=\n        (mem_closure_iff.1 hxCl) (interior (A : Set X)) isOpen_interior hxInt\n      rcases hNonempty with ⟨y, ⟨hyInt, hyCompl⟩⟩\n      -- But `y ∈ interior A` implies `y ∈ A`, contradicting `y ∈ Aᶜ`.\n      have hInA : (y : X) ∈ (A : Set X) := interior_subset hyInt\n      exact (hyCompl hInA)\n    cases hContr\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

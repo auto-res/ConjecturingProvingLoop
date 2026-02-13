@@ -1,0 +1,26 @@
+{
+  "times": [
+    110.07598233222961
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6562,
+      "prompt_tokens": 34989,
+      "total_tokens": 41551,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_complement_eq_complement_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior ((Aᶜ) : Set X) = (closure (A : Set X))ᶜ := by\n  -- Apply the existing lemma to the complement of `A`\n  have h : closure (A : Set X) = (interior ((Aᶜ) : Set X))ᶜ := by\n    simpa [Set.compl_compl] using\n      (closure_compl_eq_complement_interior (A := (Aᶜ : Set X)))\n  -- Take complements of both sides to obtain the desired equality\n  have h' : interior ((Aᶜ) : Set X) = (closure (A : Set X))ᶜ := by\n    have := congrArg Set.compl h\n    simpa [Set.compl_compl] using this.symm\n  exact h'"
+  ],
+  "success": true
+}

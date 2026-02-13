@@ -1,0 +1,26 @@
+{
+  "times": [
+    81.69125008583069
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7191,
+      "prompt_tokens": 32767,
+      "total_tokens": 39958,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_interior_closure_of_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (interior (A : Set X))) :\n    Dense (interior (closure (A : Set X))) := by\n  -- From the density of `interior A`, obtain a closure equality.\n  have hClIntA : closure (interior (A : Set X)) = (Set.univ : Set X) :=\n    (Topology.dense_iff_closure_eq_univ\n        (A := interior (A : Set X))).1 hDense\n  -- `interior A` is contained in `interior (closure A)`.\n  have hSubInt :\n      interior (A : Set X) ⊆ interior (closure (A : Set X)) :=\n    Topology.interior_subset_interior_closure (A := A)\n  -- Taking closures preserves inclusions.\n  have hSubClos :\n      closure (interior (A : Set X)) ⊆\n        closure (interior (closure (A : Set X))) :=\n    closure_mono hSubInt\n  -- Combine the two facts to get the desired closure equality.\n  have hClIntClos :\n      closure (interior (closure (A : Set X))) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    · intro _ _; trivial\n    · -- `closure (interior A)` is `univ`, and it sits inside the target closure.\n      simpa [hClIntA] using hSubClos\n  -- Translate the closure equality back into density.\n  exact\n    ((Topology.dense_iff_closure_eq_univ\n        (A := interior (closure (A : Set X)))).2 hClIntClos)"
+  ],
+  "success": true
+}

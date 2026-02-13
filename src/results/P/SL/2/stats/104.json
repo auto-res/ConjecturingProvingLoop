@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.738463163375854
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4349,
+      "prompt_tokens": 16250,
+      "total_tokens": 20599,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P3_of_interior_closure_eq_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hEq : interior (closure (A : Set X)) = closure (interior A)) :\n    Topology.P1 A ↔ Topology.P3 A := by\n  constructor\n  · intro hP1\n    intro x hxA\n    have hx : x ∈ closure (interior A) := hP1 hxA\n    simpa [hEq.symm] using hx\n  · intro hP3\n    intro x hxA\n    have hx : x ∈ interior (closure (A : Set X)) := hP3 hxA\n    simpa [hEq] using hx"
+  ],
+  "success": true
+}

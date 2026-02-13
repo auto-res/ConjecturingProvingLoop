@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.2616868019104
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2527,
+      "prompt_tokens": 56587,
+      "total_tokens": 59114,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_union_three_subset_union_frontier\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    frontier (A ∪ B ∪ C : Set X) ⊆ frontier A ∪ frontier B ∪ frontier C := by\n  intro x hx\n  -- Reassociate the union to use the two–set lemma twice.\n  have hx₁ : x ∈ frontier ((A ∪ B) ∪ C : Set X) := by\n    simpa [Set.union_assoc] using hx\n  -- First application: break the frontier of `(A ∪ B) ∪ C`.\n  have h₁ : x ∈ frontier (A ∪ B) ∪ frontier C :=\n    (frontier_union_subset (A := A ∪ B) (B := C)) hx₁\n  cases h₁ with\n  | inl hAB =>\n      -- Second application: break the frontier of `A ∪ B`.\n      have h₂ : x ∈ frontier A ∪ frontier B :=\n        (frontier_union_subset (A := A) (B := B)) hAB\n      cases h₂ with\n      | inl hA =>\n          -- `x ∈ frontier A`\n          exact Or.inl (Or.inl hA)\n      | inr hB =>\n          -- `x ∈ frontier B`\n          exact Or.inl (Or.inr hB)\n  | inr hC =>\n      -- `x ∈ frontier C`\n      exact Or.inr hC"
+  ],
+  "success": true
+}

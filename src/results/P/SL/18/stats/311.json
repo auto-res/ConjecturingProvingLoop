@@ -1,0 +1,26 @@
+{
+  "times": [
+    107.34542512893677
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5988,
+      "prompt_tokens": 51379,
+      "total_tokens": 57367,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_open_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsOpen (B : Set X)) :\n    closure (interior (A ∩ B : Set X)) = closure (interior A ∩ B) := by\n  -- Use the general formula for the interior of an intersection.\n  have hInt : interior (A ∩ B : Set X) = interior A ∩ interior B :=\n    interior_inter\n  -- Since `B` is open, its interior coincides with itself.\n  have hIntB : interior (B : Set X) = B := hB.interior_eq\n  -- Rewrite the interior of the intersection accordingly.\n  have hEq : interior (A ∩ B : Set X) = interior A ∩ B := by\n    simpa [hIntB] using hInt\n  -- Take closures on both sides of the equality.\n  simpa [hEq]"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.87897706031799
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5331,
+      "prompt_tokens": 1192,
+      "total_tokens": 6523,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 A) (hB : Topology.P1 B) : Topology.P1 (A ∪ B) := by\n  dsimp [Topology.P1] at *\n  -- `A` is contained in `closure (interior (A ∪ B))`\n  have hA' : (A : Set X) ⊆ closure (interior (A ∪ B)) := by\n    have hA_to_closure : (A : Set X) ⊆ closure (interior A) := hA\n    have h_closure_mono : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n      have h_int_mono : interior A ⊆ interior (A ∪ B) :=\n        interior_mono (by\n          intro x hx\n          exact Or.inl hx)\n      exact closure_mono h_int_mono\n    exact Set.Subset.trans hA_to_closure h_closure_mono\n  -- `B` is contained in `closure (interior (A ∪ B))`\n  have hB' : (B : Set X) ⊆ closure (interior (A ∪ B)) := by\n    have hB_to_closure : (B : Set X) ⊆ closure (interior B) := hB\n    have h_closure_mono : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n      have h_int_mono : interior B ⊆ interior (A ∪ B) :=\n        interior_mono (by\n          intro x hx\n          exact Or.inr hx)\n      exact closure_mono h_int_mono\n    exact Set.Subset.trans hB_to_closure h_closure_mono\n  -- Hence `A ∪ B` is contained in `closure (interior (A ∪ B))`\n  exact Set.union_subset hA' hB'"
+  ],
+  "success": true
+}

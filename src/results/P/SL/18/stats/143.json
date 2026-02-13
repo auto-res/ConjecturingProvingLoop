@@ -1,0 +1,26 @@
+{
+  "times": [
+    13.902480840682983
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1358,
+      "prompt_tokens": 20581,
+      "total_tokens": 21939,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_closure_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (A : Set X) = Set.univ) :\n    Topology.P3 A := by\n  -- From the closure equality, deduce density of `A`.\n  have hDense : Dense (A : Set X) :=\n    (Topology.dense_iff_closure_eq_univ (A := A)).2 h\n  -- Density implies `P3`.\n  exact Topology.P3_of_dense (X := X) hDense"
+  ],
+  "success": true
+}

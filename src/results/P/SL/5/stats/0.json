@@ -1,0 +1,43 @@
+{
+  "times": [
+    43.50625467300415,
+    37.067659854888916
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2629,
+      "prompt_tokens": 270,
+      "total_tokens": 2899,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2259,
+      "prompt_tokens": 341,
+      "total_tokens": 2600,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {A : Set X} : P2 A → P1 A := by\n  intro hA\n  dsimp [P1, P2] at *\n  exact hA.trans Set.interior_subset",
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P2 A) : P1 A := by\n  dsimp [P1, P2] at *\n  intro x hx\n  exact interior_subset (h hx)"
+  ],
+  "success": true
+}

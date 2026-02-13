@@ -1,0 +1,60 @@
+{
+  "times": [
+    99.26416206359863,
+    31.18317699432373,
+    21.66865634918213
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6532,
+      "prompt_tokens": 19811,
+      "total_tokens": 26343,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    },
+    {
+      "completion_tokens": 2488,
+      "prompt_tokens": 20098,
+      "total_tokens": 22586,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    },
+    {
+      "completion_tokens": 1738,
+      "prompt_tokens": 20904,
+      "total_tokens": 22642,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_union_of_P3\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 (A := A) → Topology.P3 (A := B) →\n      closure (A ∪ B) = closure (interior (A ∪ B)) := by\n  intro hA hB\n  -- `P3` is stable under unions\n  have hUnion : Topology.P3 (A := A ∪ B) :=\n    Topology.P3_union (A := A) (B := B) hA hB\n  apply Set.Subset.antisymm\n  · -- First inclusion: `closure (A ∪ B) ⊆ closure (interior (A ∪ B))`\n    have hSub : (A ∪ B : Set X) ⊆ interior (closure (A ∪ B)) := hUnion\n    have hClosSub :\n        closure (A ∪ B) ⊆ closure (interior (closure (A ∪ B))) :=\n      closure_mono hSub\n    -- Rewrite the right‐hand side using a previously proved equality\n    have hEq :\n        closure (interior (closure (A ∪ B))) =\n          closure (interior (A ∪ B)) :=\n      Topology.closure_interior_closure_interior_eq_closure_interior\n        (X := X) (A := A ∪ B)\n    simpa [hEq] using hClosSub\n  · -- Second inclusion: monotonicity of `closure`\n    exact closure_mono\n      (interior_subset : interior (A ∪ B) ⊆ A ∪ B)",
+    "theorem Topology.interior_inter_of_isOpen_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsOpen B) :\n    interior (A ∩ B) = interior A ∩ B := by\n  ext x\n  constructor\n  · intro hx\n    rcases mem_interior.mp hx with ⟨U, hU_open, hxU, hU_sub⟩\n    have hU_subA : U ⊆ A := fun y hyU => (hU_sub hyU).1\n    have hx_intA : x ∈ interior A :=\n      mem_interior.mpr ⟨U, hU_open, hxU, hU_subA⟩\n    have hx_B : x ∈ B := (hU_sub hxU).2\n    exact And.intro hx_intA hx_B\n  · rintro ⟨hx_intA, hxB⟩\n    rcases mem_interior.mp hx_intA with ⟨U, hU_open, hxU, hU_subA⟩\n    have hxU' : x ∈ U ∩ B := And.intro hxU hxB\n    have hUV_open : IsOpen (U ∩ B) := isOpen_inter hU_open hB\n    have hUV_sub : (U ∩ B : Set X) ⊆ A ∩ B := fun y hy =>\n      And.intro (hU_subA hy.1) hy.2\n    exact mem_interior.mpr ⟨U ∩ B, hUV_open, hxU', hUV_sub⟩",
+    "theorem Topology.isClosed_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (closure (interior A)) := by\n  simpa using isClosed_closure (s := interior A)"
+  ],
+  "success": true
+}

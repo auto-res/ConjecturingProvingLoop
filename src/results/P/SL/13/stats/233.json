@@ -1,0 +1,60 @@
+{
+  "times": [
+    105.79293274879456,
+    12.036269664764404,
+    43.97255301475525
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7343,
+      "prompt_tokens": 40988,
+      "total_tokens": 48331,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 874,
+      "prompt_tokens": 41060,
+      "total_tokens": 41934,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 3070,
+      "prompt_tokens": 41140,
+      "total_tokens": 44210,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_compl_interior_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = (interior (Aᶜ) : Set X)ᶜ := by\n  -- First, relate the interior of the complement to the complement of the closure.\n  have h :\n      interior (Aᶜ : Set X) = (closure (A : Set X))ᶜ := by\n    simpa [compl_compl] using\n      (Topology.interior_eq_compl_closure_compl (X := X)\n        (A := (Aᶜ : Set X)))\n  -- Taking complements of both sides yields the desired equality.\n  have h' : (interior (Aᶜ : Set X))ᶜ = closure (A : Set X) := by\n    have := congrArg Set.compl h\n    simpa [Set.compl_compl] using this\n  simpa using h'.symm",
+    "theorem Topology.interior_eq_compl_closure_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A : Set X) = (closure (Aᶜ) : Set X)ᶜ := by\n  simpa [compl_compl] using\n    (interior_compl (s := (Aᶜ : Set X)))",
+    "theorem Topology.P1_and_dense_implies_denseInterior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (X := X) A → Dense (A : Set X) → Dense (interior (A : Set X)) := by\n  intro hP1 hDenseA\n  dsimp [Dense] at hDenseA ⊢\n  -- `P1` gives equality of closures.\n  have h_cl_eq : closure (A : Set X) = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closureInterior (X := X) (A := A)).1 hP1\n  -- Rewrite the density statement using `h_cl_eq`.\n  simpa [h_cl_eq] using hDenseA"
+  ],
+  "success": true
+}

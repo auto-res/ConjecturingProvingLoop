@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.98305869102478
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3718,
+      "prompt_tokens": 48400,
+      "total_tokens": 52118,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A \\ B : Set X) ⊆ closure A := by\n  -- The set `A \\ B` is contained in `A`.\n  have h_subset : (A \\ B : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  -- Monotonicity of `closure` yields the desired inclusion.\n  exact closure_mono h_subset"
+  ],
+  "success": true
+}

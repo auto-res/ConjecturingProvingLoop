@@ -1,0 +1,26 @@
+{
+  "times": [
+    238.85385537147522
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 17259,
+      "prompt_tokens": 34532,
+      "total_tokens": 51791,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_compl_eq_univ {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) ∪ closure ((A : Set X)ᶜ) = (Set.univ : Set X) := by\n  classical\n  ext x\n  constructor\n  · intro _; trivial\n  · intro _\n    by_cases hA : x ∈ (A : Set X)\n    · exact Or.inl (subset_closure hA)\n    · have hAc : x ∈ ((A : Set X)ᶜ) := by\n        simpa using hA\n      exact Or.inr (subset_closure hAc)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    126.37996220588684
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7677,
+      "prompt_tokens": 11949,
+      "total_tokens": 19626,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_of_P3_and_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP3 : Topology.P3 A) (hClosed : IsClosed A) :\n    interior A = A := by\n  apply Set.Subset.antisymm\n  · exact interior_subset\n  ·\n    have : A ⊆ interior (closure A) := hP3\n    simpa [hClosed.closure_eq] using this"
+  ],
+  "success": true
+}

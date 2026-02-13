@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.53891515731812
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5246,
+      "prompt_tokens": 34369,
+      "total_tokens": 39615,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_exists_open_between {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A ↔\n      ∃ U : Set X, IsOpen U ∧ (A : Set X) ⊆ U ∧ U ⊆ closure (A : Set X) := by\n  dsimp [Topology.P3]\n  constructor\n  · intro hP3\n    refine ⟨interior (closure (A : Set X)), isOpen_interior, ?_, interior_subset⟩\n    exact hP3\n  · rintro ⟨U, hU_open, hA_sub_U, hU_sub_cl⟩\n    -- Any open set contained in `closure A` is contained in its interior.\n    have hU_sub_int : (U : Set X) ⊆ interior (closure (A : Set X)) :=\n      interior_maximal hU_sub_cl hU_open\n    -- Assemble the desired inclusion.\n    intro x hxA\n    exact hU_sub_int (hA_sub_U hxA)"
+  ],
+  "success": true
+}

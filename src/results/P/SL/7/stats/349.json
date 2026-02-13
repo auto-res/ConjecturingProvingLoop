@@ -1,0 +1,26 @@
+{
+  "times": [
+    191.31448769569397
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7131,
+      "prompt_tokens": 55059,
+      "total_tokens": 62190,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (A : Set X) = A) : Topology.P3 A := by\n  -- The hypothesis yields the openness of `A`.\n  have hOpen : IsOpen (A : Set X) := by\n    have : IsOpen (interior (A : Set X)) := isOpen_interior\n    simpa [h] using this\n  -- Every open set satisfies `P3`.\n  exact (Topology.IsOpen_P1_and_P3 (A := A) hOpen).2"
+  ],
+  "success": true
+}

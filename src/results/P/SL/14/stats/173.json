@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.127398014068604
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3345,
+      "prompt_tokens": 32322,
+      "total_tokens": 35667,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_has_P3_of_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Topology.P3 (closure A) := by\n  intro hDense\n  -- The closure of `interior A` is the whole space.\n  have h_closureInt : closure (interior A) = (Set.univ : Set X) :=\n    hDense.closure_eq\n  -- Hence `closure A` is also the whole space.\n  have h_closureA_univ : closure (A : Set X) = (Set.univ : Set X) := by\n    -- `closure (interior A)` is contained in `closure A`.\n    have h_sub : closure (interior A) ⊆ closure A :=\n      closure_mono (interior_subset : interior A ⊆ A)\n    -- Using `h_closureInt`, this means `univ ⊆ closure A`.\n    have h_subset : (Set.univ : Set X) ⊆ closure A := by\n      simpa [h_closureInt] using h_sub\n    -- The reverse inclusion is trivial.\n    have h_superset : closure A ⊆ (Set.univ : Set X) := by\n      intro x hx; simp\n    exact Set.Subset.antisymm h_superset h_subset\n  -- Since `closure A = univ`, it is open, so it satisfies `P3`.\n  have h_open : IsOpen (closure A) := by\n    simpa [h_closureA_univ] using (isOpen_univ : IsOpen (Set.univ : Set X))\n  exact Topology.isOpen_implies_P3 (X := X) (A := closure A) h_open"
+  ],
+  "success": true
+}

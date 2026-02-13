@@ -1,0 +1,60 @@
+{
+  "times": [
+    149.82016324996948,
+    34.02535343170166,
+    107.11232304573059
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7920,
+      "prompt_tokens": 49416,
+      "total_tokens": 57336,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    },
+    {
+      "completion_tokens": 2140,
+      "prompt_tokens": 49522,
+      "total_tokens": 51662,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 4896,
+      "prompt_tokens": 49602,
+      "total_tokens": 54498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_compl_eq_compl_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure ((Aᶜ) : Set X) = (interior (A : Set X))ᶜ := by\n  -- First, apply the complement lemma to `Aᶜ`.\n  have h : interior (A : Set X) = (closure ((Aᶜ) : Set X))ᶜ := by\n    have h' :=\n      (Topology.interior_compl_eq_compl_closure (X := X) (A := Aᶜ))\n    simpa [compl_compl] using h'\n  -- Rearrange to obtain the desired equality.\n  calc\n    closure ((Aᶜ) : Set X)\n        = ((closure ((Aᶜ) : Set X))ᶜ)ᶜ := by\n          simp\n    _ = (interior (A : Set X))ᶜ := by\n          simpa [h]",
+    "theorem Topology.interior_compl_eq_compl_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (Aᶜ : Set X) = (closure (A : Set X))ᶜ := by\n  exact interior_compl (s := (A : Set X))",
+    "theorem Topology.interior_eq_closure_inter_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A : Set X) = closure A ∩ interior A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    -- `x` lies in `A`, hence in `closure A`\n    have hxA : x ∈ (A : Set X) := interior_subset hx\n    have hx_cl : x ∈ closure (A : Set X) := subset_closure hxA\n    exact And.intro hx_cl hx\n  · intro x hx\n    exact hx.2"
+  ],
+  "success": true
+}

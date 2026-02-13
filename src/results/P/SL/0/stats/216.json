@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.97697186470032
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6510,
+      "prompt_tokens": 36408,
+      "total_tokens": 42918,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_exists_open_between {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A ↔\n      ∃ U : Set X, IsOpen U ∧ (A : Set X) ⊆ U ∧\n        U ⊆ closure (interior (A : Set X)) := by\n  dsimp [Topology.P2]\n  constructor\n  · intro hP2\n    refine\n      ⟨interior (closure (interior (A : Set X))), isOpen_interior, hP2, ?_⟩\n    exact interior_subset\n  · rintro ⟨U, hU_open, hA_sub_U, hU_sub_cl⟩\n    have hU_sub_int :\n        (U : Set X) ⊆ interior (closure (interior (A : Set X))) :=\n      interior_maximal hU_sub_cl hU_open\n    exact hA_sub_U.trans hU_sub_int"
+  ],
+  "success": true
+}

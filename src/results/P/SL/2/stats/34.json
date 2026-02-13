@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.86636471748352
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2249,
+      "prompt_tokens": 5105,
+      "total_tokens": 7354,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → Topology.P1 (closure A) := by\n  intro hP3\n  intro x hx_closureA\n  have hsubset : (closure A : Set X) ⊆ closure (interior (closure A)) :=\n    Topology.P3_implies_closure_subset_closure_interior_closure (A := A) hP3\n  exact hsubset hx_closureA"
+  ],
+  "success": true
+}

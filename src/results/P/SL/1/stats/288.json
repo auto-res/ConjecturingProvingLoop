@@ -1,0 +1,26 @@
+{
+  "times": [
+    87.77012228965759
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5752,
+      "prompt_tokens": 43506,
+      "total_tokens": 49258,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_eq_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    closure (interior (A ∪ B)) = closure A ∪ closure B := by\n  -- The union of two open sets is open.\n  have hOpen : IsOpen (A ∪ B) := hA.union hB\n  -- For an open set `S`, `interior S = S`.\n  have hInt : interior (A ∪ B) = A ∪ B := hOpen.interior_eq\n  -- Rewrite and use the `closure_union` lemma.\n  simpa [hInt, closure_union]"
+  ],
+  "success": true
+}

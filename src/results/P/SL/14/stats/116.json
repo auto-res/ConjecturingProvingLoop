@@ -1,0 +1,26 @@
+{
+  "times": [
+    99.22039937973022
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8035,
+      "prompt_tokens": 20071,
+      "total_tokens": 28106,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_of_closureInterior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) = (Set.univ : Set X) → Dense (A : Set X) := by\n  intro hClosureInt\n  -- First, show that `closure A = univ`.\n  have hSubset : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n    -- Since `interior A ⊆ A`, taking closures yields\n    -- `closure (interior A) ⊆ closure A`.\n    have hIncl : closure (interior A) ⊆ closure (A : Set X) :=\n      closure_mono (interior_subset : interior A ⊆ A)\n    simpa [hClosureInt] using hIncl\n  have hSuperset : closure (A : Set X) ⊆ (Set.univ : Set X) := by\n    intro x _hx\n    simp\n  have hClosureA : closure (A : Set X) = (Set.univ : Set X) :=\n    Set.Subset.antisymm hSuperset hSubset\n  exact (dense_iff_closure_eq).2 hClosureA"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.42534160614014
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5570,
+      "prompt_tokens": 19113,
+      "total_tokens": 24683,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_eq_union_closure {X : Type*} [TopologicalSpace X]\n    (A B : Set X) :\n    closure ((A ∪ B) : Set X) = closure (A : Set X) ∪ closure (B : Set X) := by\n  apply Set.Subset.antisymm\n  · -- `closure (A ∪ B) ⊆ closure A ∪ closure B`\n    have h_subset : (A ∪ B : Set X) ⊆ closure (A : Set X) ∪ closure (B : Set X) := by\n      intro x hx\n      cases hx with\n      | inl hA => exact Or.inl (subset_closure hA)\n      | inr hB => exact Or.inr (subset_closure hB)\n    have h_closed : IsClosed (closure (A : Set X) ∪ closure (B : Set X)) :=\n      (isClosed_closure).union isClosed_closure\n    exact closure_minimal h_subset h_closed\n  · -- `closure A ∪ closure B ⊆ closure (A ∪ B)`\n    intro x hx\n    cases hx with\n    | inl hA =>\n        have h : closure (A : Set X) ⊆ closure ((A ∪ B) : Set X) := by\n          apply closure_mono\n          intro y hy\n          exact Or.inl hy\n        exact h hA\n    | inr hB =>\n        have h : closure (B : Set X) ⊆ closure ((A ∪ B) : Set X) := by\n          apply closure_mono\n          intro y hy\n          exact Or.inr hy\n        exact h hB"
+  ],
+  "success": true
+}

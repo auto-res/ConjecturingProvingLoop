@@ -1,0 +1,43 @@
+{
+  "times": [
+    185.9903757572174,
+    184.2634983062744
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9084,
+      "prompt_tokens": 51037,
+      "total_tokens": 60121,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 8466,
+      "prompt_tokens": 51212,
+      "total_tokens": 59678,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iterate_closure_interior_succ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    ∀ n : ℕ,\n      ((fun S : Set X => closure (interior S))^[n.succ]) A =\n        closure (interior A) := by\n  intro n\n  induction n with\n  | zero =>\n      simp\n  | succ n ih =>\n      have h_fix :\n          closure (interior (closure (interior A))) = closure (interior A) := by\n        simpa using\n          Topology.closure_interior_closure_interior_eq_closure_interior\n            (X := X) (A := A)\n      simpa [Function.iterate_succ_apply', ih, h_fix]",
+    ""
+  ],
+  "success": true
+}

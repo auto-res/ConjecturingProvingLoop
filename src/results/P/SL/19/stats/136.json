@@ -1,0 +1,26 @@
+{
+  "times": [
+    92.03416872024536
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5949,
+      "prompt_tokens": 19932,
+      "total_tokens": 25881,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_boundary {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (closure A \\ interior A) := by\n  have h₁ : IsClosed (closure A) := isClosed_closure\n  have h₂ : IsClosed ((interior A)ᶜ) := (isOpen_interior : IsOpen (interior A)).isClosed_compl\n  simpa [Set.diff_eq] using h₁.inter h₂"
+  ],
+  "success": true
+}

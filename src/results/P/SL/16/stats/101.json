@@ -1,0 +1,60 @@
+{
+  "times": [
+    85.27527284622192,
+    76.84858798980713,
+    27.116745710372925
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5549,
+      "prompt_tokens": 18208,
+      "total_tokens": 23757,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 4892,
+      "prompt_tokens": 18286,
+      "total_tokens": 23178,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 1789,
+      "prompt_tokens": 18402,
+      "total_tokens": 20191,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P3_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hP3 : Topology.P3 (X := X) A) :\n    Topology.P2 (X := X) A := by\n  -- From `hClosed` and `hP3`, the set `A` is open.\n  have hOpen : IsOpen A :=\n    Topology.closed_P3_isOpen (X := X) (A := A) hClosed hP3\n  -- Every open set satisfies `P2`.\n  exact Topology.isOpen_implies_P2 (X := X) (A := A) hOpen",
+    "Lean code with duplicate theorem name removed is needed.",
+    "theorem Topology.P3_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (X := X) (interior (closure (interior A))) := by\n  have hOpen : IsOpen (interior (closure (interior A))) := isOpen_interior\n  exact Topology.isOpen_implies_P3 (X := X) (A := interior (closure (interior A))) hOpen"
+  ],
+  "success": true
+}

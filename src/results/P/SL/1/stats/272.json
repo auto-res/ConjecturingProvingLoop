@@ -1,0 +1,43 @@
+{
+  "times": [
+    157.7029550075531,
+    268.2291898727417
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11615,
+      "prompt_tokens": 41362,
+      "total_tokens": 52977,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 16720,
+      "prompt_tokens": 41524,
+      "total_tokens": 58244,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iUnion {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    (∀ i, Dense (A i)) → Dense (⋃ i, A i) := by\n  intro hDense\n  -- For each index, the closure of `A i` is the whole space.\n  have hClosUniv : ∀ i, closure (A i) = (Set.univ : Set X) := by\n    intro i\n    simpa using (dense_iff_closure_eq).1 (hDense i)\n  -- Show that the closure of the union is the whole space.\n  have hClosure : closure (⋃ i, A i) = (Set.univ : Set X) := by\n    apply Set.Subset.antisymm\n    ·\n      intro _ _\n      simp\n    ·\n      intro x _\n      -- The point `x` belongs to the union of the closures.\n      have hxUnion : x ∈ ⋃ i, closure (A i) := by\n        simpa [hClosUniv]\n      -- Use the inclusion provided by `closure_iUnion_subset`.\n      have hSubset :\n          (⋃ i, closure (A i) : Set X) ⊆ closure (⋃ i, A i) :=\n        Topology.closure_iUnion_subset (A := A)\n      exact hSubset hxUnion\n  -- Translate the equality of closures into density.\n  simpa using (dense_iff_closure_eq).2 hClosure",
+    "theorem Topology.dense_iUnion_of_nonempty\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X}\n    (hA : ∀ i, Dense (A i)) (hNE : Nonempty ι) :\n    Dense (⋃ i, A i) := by\n  classical\n  -- We will show that `closure (⋃ i, A i) = univ`.\n  have h_closure_eq_univ : closure (⋃ i, A i) = (Set.univ : Set X) := by\n    -- Prove the two inclusions separately.\n    apply Set.Subset.antisymm\n    · -- The closure is always contained in `univ`.\n      intro x _\n      simp\n    · -- For the reverse inclusion we use a fixed index coming from `hNE`.\n      intro x _\n      rcases hNE with ⟨i₀⟩\n      -- `x` is in the closure of `A i₀` because that closure is `univ`.\n      have hx_closure_i₀ : x ∈ closure (A i₀) := by\n        have : closure (A i₀) = (Set.univ : Set X) := (hA i₀).closure_eq\n        simpa [this] using (by simp : x ∈ (Set.univ : Set X))\n      -- Monotonicity of `closure` upgrades the membership.\n      have h_subset : closure (A i₀) ⊆ closure (⋃ i, A i) := by\n        have h_incl : (A i₀ : Set X) ⊆ ⋃ i, A i := by\n          intro y hy\n          exact Set.mem_iUnion.2 ⟨i₀, hy⟩\n        exact closure_mono h_incl\n      exact h_subset hx_closure_i₀\n  -- Translate the closure equality into a density statement.\n  exact (dense_iff_closure_eq).2 h_closure_eq_univ"
+  ],
+  "success": true
+}

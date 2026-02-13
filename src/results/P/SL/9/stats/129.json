@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.29919171333313
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3407,
+      "prompt_tokens": 19878,
+      "total_tokens": 23285,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.disjoint_closureDiff_interior {X : Type*} [TopologicalSpace X]\n    {s t : Set X} :\n    Disjoint (closure (s \\ t)) (interior t) := by\n  -- `closure (s \\ t)` is contained in the complement of `interior t`.\n  have hsubset : closure (s \\ t) ⊆ (interior t)ᶜ := by\n    intro x hx\n    have hx' : x ∈ closure s \\ interior t := (closure_diff_subset s t) hx\n    exact hx'.2\n  -- Turn this containment into the desired disjointness.\n  exact\n    (Set.disjoint_left).2 (by\n      intro x hx_cl hx_int\n      have : x ∈ (interior t)ᶜ := hsubset hx_cl\n      exact this hx_int)"
+  ],
+  "success": true
+}

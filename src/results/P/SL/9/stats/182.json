@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.77183961868286
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5639,
+      "prompt_tokens": 29845,
+      "total_tokens": 35484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosureCompl_inter_interior_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (Aᶜ)) ∩ interior A = (∅ : Set X) := by\n  classical\n  -- We show that no point can belong to the intersection.\n  apply (Set.eq_empty_iff_forall_not_mem).2\n  intro x hx\n  rcases hx with ⟨hx_int_cl_compl, hx_intA⟩\n  -- From `x ∈ interior (closure (Aᶜ))`, deduce `x ∈ closure (Aᶜ)`.\n  have hx_cl_compl : x ∈ closure (Aᶜ) := interior_subset hx_int_cl_compl\n  -- `closure (Aᶜ)` is contained in the complement of `interior A`.\n  have h_subset : closure (Aᶜ : Set X) ⊆ (interior A)ᶜ :=\n    Topology.closure_compl_subset_compl_interior (A := A)\n  -- Hence `x ∉ interior A`, contradicting `hx_intA`.\n  have hx_not_intA : x ∉ interior A := by\n    have hx' : x ∈ (interior A)ᶜ := h_subset hx_cl_compl\n    simpa using hx'\n  exact hx_not_intA hx_intA"
+  ],
+  "success": true
+}

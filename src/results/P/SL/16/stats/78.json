@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.809191942214966
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4444,
+      "prompt_tokens": 13759,
+      "total_tokens": 18203,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13184
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) ⊆ closure (interior (closure A)) := by\n  -- We have the obvious inclusion `A ⊆ closure A`.\n  have h_subset : A ⊆ closure A := subset_closure\n  -- Apply the monotonicity of the `closure ∘ interior` operator.\n  simpa using\n    (Topology.closure_interior_mono (X := X) (A := A) (B := closure A) h_subset)"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    164.7162687778473,
+    45.29641652107239
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10144,
+      "prompt_tokens": 33002,
+      "total_tokens": 43146,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 2709,
+      "prompt_tokens": 33074,
+      "total_tokens": 35783,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_prod_univ {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} :\n    Topology.P3 (A ×ˢ (Set.univ : Set Y)) ↔ Topology.P3 A := by\n  have hUnivNonempty : (Set.univ : Set Y).Nonempty := Set.nonempty_univ\n  constructor\n  · intro hProd\n    -- Extract `P3` for the first factor using the existing projection lemma.\n    exact\n      Topology.P3_of_P3_prod_left\n        (A := A) (B := (Set.univ : Set Y)) hUnivNonempty hProd\n  · intro hA\n    -- Combine with `P3` for `Set.univ` to obtain `P3` for the product.\n    exact\n      Topology.P3_prod\n        hA (Topology.P3_univ (X := Y))",
+    "theorem Set.nonempty_univ {α : Type*} [Nonempty α] :\n    (Set.univ : Set α).Nonempty := by\n  classical\n  rcases ‹Nonempty α› with ⟨a⟩\n  exact ⟨a, by simp⟩"
+  ],
+  "success": true
+}

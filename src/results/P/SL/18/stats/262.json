@@ -1,0 +1,26 @@
+{
+  "times": [
+    145.2640516757965
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10773,
+      "prompt_tokens": 41490,
+      "total_tokens": 52263,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40832
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_inter_left_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ B : Set X)) ⊆ interior (closure A) := by\n  -- `closure` is monotone, hence the closure of an intersection\n  -- is contained in the closure of the left factor.\n  have h : closure (A ∩ B : Set X) ⊆ closure A := by\n    apply closure_mono\n    exact Set.inter_subset_left\n  -- Taking interiors preserves inclusions.\n  exact interior_mono h"
+  ],
+  "success": true
+}

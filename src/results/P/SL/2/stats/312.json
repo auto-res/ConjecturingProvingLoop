@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.02231216430664
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3150,
+      "prompt_tokens": 53438,
+      "total_tokens": 56588,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_compl_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen A → frontier (A : Set X) ⊆ (Aᶜ : Set X) := by\n  intro hOpen x hxFront\n  -- Rewrite the frontier of an open set.\n  have hEq := Topology.frontier_eq_closure_diff_self_of_isOpen (A := A) hOpen\n  have hxDiff : x ∈ closure (A : Set X) \\ (A : Set X) := by\n    simpa [hEq] using hxFront\n  -- Extract the fact `x ∉ A`, hence `x ∈ Aᶜ`.\n  rcases hxDiff with ⟨_, hxNotA⟩\n  simpa [Set.mem_compl] using hxNotA"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    30.351541996002197,
+    120.9974844455719
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2192,
+      "prompt_tokens": 56351,
+      "total_tokens": 58543,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    },
+    {
+      "completion_tokens": 7000,
+      "prompt_tokens": 56420,
+      "total_tokens": 63420,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_iUnion_eq_univ_of_dense\n    {ι : Sort _} {X : Type _} [TopologicalSpace X] (A : ι → Set X) (i₀ : ι)\n    (hDense : Dense (A i₀ : Set X)) :\n    closure (⋃ i, A i : Set X) = (Set.univ : Set X) := by\n  -- From the density of `A i₀`, deduce the density of the union.\n  have hDenseUnion : Dense (⋃ i, A i : Set X) :=\n    Topology.dense_iUnion_of_dense (A := A) i₀ hDense\n  -- Translate density into a closure equality.\n  exact\n    (Topology.dense_iff_closure_eq_univ\n        (A := ⋃ i, A i : Set X)).1 hDenseUnion",
+    "theorem closure_interior_closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior A))))) =\n      closure (interior A) := by\n  have h₁ :\n      closure (interior (closure (interior (closure (interior A))))) =\n        closure (interior (closure (interior A))) := by\n    simpa using\n      (Topology.closure_interior_closure_interior_closure\n        (A := interior A))\n  have h₂ :\n      closure (interior (closure (interior A))) =\n        closure (interior A) := by\n    simpa using\n      (Topology.closure_interior_closure_interior_eq_closure_interior\n        (A := A))\n  simpa [h₁, h₂]"
+  ],
+  "success": true
+}

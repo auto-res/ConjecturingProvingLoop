@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.078160285949707
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2004,
+      "prompt_tokens": 5443,
+      "total_tokens": 7447,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P3 (X:=X) A) (hB : Topology.P3 (X:=X) B) :\n    Topology.P3 (X:=X) (A ∪ B) := by\n  dsimp [Topology.P3] at *\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hx_intA : x ∈ interior (closure A) := hA hxA\n      have h_subset : closure A ⊆ closure (A ∪ B) :=\n        closure_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n      have h_interior_subset :\n          interior (closure A) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono h_subset\n      exact h_interior_subset hx_intA\n  | inr hxB =>\n      have hx_intB : x ∈ interior (closure B) := hB hxB\n      have h_subset : closure B ⊆ closure (A ∪ B) :=\n        closure_mono (Set.subset_union_right : (B : Set X) ⊆ A ∪ B)\n      have h_interior_subset :\n          interior (closure B) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono h_subset\n      exact h_interior_subset hx_intB"
+  ],
+  "success": true
+}

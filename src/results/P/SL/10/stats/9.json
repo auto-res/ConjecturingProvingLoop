@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.838770627975464
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3201,
+      "prompt_tokens": 1202,
+      "total_tokens": 4403,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 A → Topology.P3 B → Topology.P3 (A ∪ B) := by\n  intro hA hB\n  dsimp [Topology.P3] at *\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hx_int : x ∈ interior (closure A) := hA hxA\n      have h_subset : interior (closure A) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono (closure_mono (Set.subset_union_left : A ⊆ A ∪ B))\n      exact h_subset hx_int\n  | inr hxB =>\n      have hx_int : x ∈ interior (closure B) := hB hxB\n      have h_subset : interior (closure B) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono (closure_mono (Set.subset_union_right : B ⊆ A ∪ B))\n      exact h_subset hx_int"
+  ],
+  "success": true
+}

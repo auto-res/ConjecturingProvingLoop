@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.94897770881653
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3886,
+      "prompt_tokens": 36137,
+      "total_tokens": 40023,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_union_subset_union_boundary {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A ∪ B) \\ interior (A ∪ B) ⊆\n      (closure A \\ interior A) ∪ (closure B \\ interior B) := by\n  intro x hx\n  rcases hx with ⟨hxClUnion, hxNotIntUnion⟩\n  -- Express `x ∈ closure (A ∪ B)` in terms of the closures of the summands.\n  have hCl : x ∈ closure A ∪ closure B := by\n    have h_eq : closure (A ∪ B) = closure A ∪ closure B := by\n      simpa using closure_union A B\n    simpa [h_eq] using hxClUnion\n  -- Distinguish the two cases of the union.\n  cases hCl with\n  | inl hxClA =>\n      -- Show that `x ∉ interior A`, otherwise we contradict `hxNotIntUnion`.\n      have hxNotIntA : x ∉ interior A := by\n        intro hxIntA\n        have hxIntUnion : x ∈ interior (A ∪ B) := by\n          have h_subset : interior A ⊆ interior (A ∪ B) :=\n            interior_mono (Set.subset_union_left : A ⊆ A ∪ B)\n          exact h_subset hxIntA\n        exact hxNotIntUnion hxIntUnion\n      exact Or.inl ⟨hxClA, hxNotIntA⟩\n  | inr hxClB =>\n      -- Analogous argument for the second summand.\n      have hxNotIntB : x ∉ interior B := by\n        intro hxIntB\n        have hxIntUnion : x ∈ interior (A ∪ B) := by\n          have h_subset : interior B ⊆ interior (A ∪ B) :=\n            interior_mono (Set.subset_union_right : B ⊆ A ∪ B)\n          exact h_subset hxIntB\n        exact hxNotIntUnion hxIntUnion\n      exact Or.inr ⟨hxClB, hxNotIntB⟩"
+  ],
+  "success": true
+}

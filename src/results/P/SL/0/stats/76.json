@@ -1,0 +1,26 @@
+{
+  "times": [
+    169.43397545814514
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12336,
+      "prompt_tokens": 12879,
+      "total_tokens": 25215,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) =\n      interior (closure (interior (closure (A : Set X)))) := by\n  -- First inclusion: `interior (closure A) ⊆ interior (closure (interior (closure A)))`.\n  have h₁ :\n      (interior (closure (A : Set X)) : Set X) ⊆\n        closure (interior (closure (A : Set X))) := subset_closure\n  have hOpen : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n  have h_left :\n      (interior (closure (A : Set X)) : Set X) ⊆\n        interior (closure (interior (closure (A : Set X)))) :=\n    interior_maximal h₁ hOpen\n  -- Second inclusion: `interior (closure (interior (closure A))) ⊆ interior (closure A)`.\n  have h_right :\n      (interior (closure (interior (closure (A : Set X)))) : Set X) ⊆\n        interior (closure (A : Set X)) := by\n    -- This is an instance of the monotonicity lemma with `A := closure A`.\n    simpa [closure_closure] using\n      (Topology.interior_closure_interior_subset_interior_closure\n        (X := X) (A := closure (A : Set X)))\n  exact Set.Subset.antisymm h_left h_right"
+  ],
+  "success": true
+}

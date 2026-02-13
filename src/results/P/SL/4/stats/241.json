@@ -1,0 +1,26 @@
+{
+  "times": [
+    26.690791130065918
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1753,
+      "prompt_tokens": 35326,
+      "total_tokens": 37079,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_closed_iff_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) :\n    Topology.P2 A ↔ interior A = A := by\n  have h₁ : Topology.P2 A ↔ Topology.P3 A :=\n    Topology.P2_iff_P3_of_closed (A := A) hA\n  have h₂ : Topology.P3 A ↔ interior A = A :=\n    Topology.P3_closed_iff_interior_eq (A := A) hA\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    177.93346285820007
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8843,
+      "prompt_tokens": 51834,
+      "total_tokens": 60677,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_subset_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure ((A \\ B) : Set X) ⊆ closure (A : Set X) := by\n  -- Since `A \\ B ⊆ A`, the monotonicity of `closure` yields the desired inclusion.\n  have hSub : ((A \\ B) : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

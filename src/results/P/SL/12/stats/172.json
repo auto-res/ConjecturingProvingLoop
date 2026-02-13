@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.28689289093018
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5023,
+      "prompt_tokens": 32203,
+      "total_tokens": 37226,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_P3_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P2 (X := X) (interior A) ↔ Topology.P3 (X := X) (interior A) := by\n  -- `interior A` is an open set.\n  have h_open : IsOpen (interior (A : Set X)) := isOpen_interior\n  -- Apply the general equivalence for open sets.\n  simpa using\n    (Topology.P2_iff_P3_of_isOpen (X := X) (A := interior A) h_open)"
+  ],
+  "success": true
+}

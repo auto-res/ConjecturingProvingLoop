@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.46132731437683
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2101,
+      "prompt_tokens": 35704,
+      "total_tokens": 37805,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_and_P3_iff_subset_inter {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (Topology.P1 (X := X) A ∧ Topology.P3 (X := X) A) ↔\n      (A ⊆ closure (interior A) ∩ interior (closure A)) := by\n  constructor\n  · intro h\n    exact\n      subset_inter_of_P1_and_P3 (X := X) (A := A) h.1 h.2\n  · intro hSub\n    have hP1 : Topology.P1 (X := X) A := by\n      dsimp [Topology.P1] at *\n      intro x hxA\n      exact (hSub hxA).1\n    have hP3 : Topology.P3 (X := X) A := by\n      dsimp [Topology.P3] at *\n      intro x hxA\n      exact (hSub hxA).2\n    exact ⟨hP1, hP3⟩"
+  ],
+  "success": true
+}

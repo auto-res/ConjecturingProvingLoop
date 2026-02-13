@@ -1,0 +1,94 @@
+{
+  "times": [
+    131.20160603523254,
+    113.70900774002075,
+    185.44101762771606,
+    47.89838004112244,
+    80.55268502235413
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8644,
+      "prompt_tokens": 17256,
+      "total_tokens": 25900,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    },
+    {
+      "completion_tokens": 7203,
+      "prompt_tokens": 17419,
+      "total_tokens": 24622,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 11985,
+      "prompt_tokens": 17487,
+      "total_tokens": 29472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 3917,
+      "prompt_tokens": 17688,
+      "total_tokens": 21605,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    },
+    {
+      "completion_tokens": 6089,
+      "prompt_tokens": 17762,
+      "total_tokens": 23851,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17152
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) ⊆\n      closure (interior A) ∪ closure (interior B) := by\n  -- The target set on the right-hand side is closed.\n  have h_closed :\n      IsClosed (closure (interior A) ∪ closure (interior B)) :=\n    IsClosed.union isClosed_closure isClosed_closure\n  -- We show that `interior (A ∪ B)` is already contained in the target set.\n  have h_subset :\n      (interior (A ∪ B) : Set X) ⊆\n        closure (interior A) ∪ closure (interior B) := by\n    intro x hx\n    -- Use the equality `interior (A ∪ B) = interior A ∪ interior B`.\n    have hx_union : (x : X) ∈ interior A ∪ interior B := by\n      simpa [interior_union] using hx\n    cases hx_union with\n    | inl hA =>\n        exact Or.inl (subset_closure hA)\n    | inr hB =>\n        exact Or.inr (subset_closure hB)\n  -- Apply `closure_minimal` to upgrade the inclusion to closures.\n  exact closure_minimal h_subset h_closed",
+    "Lean 4 code only appears when it begins with `theorem`, as required.",
+    "theorem Topology.closureInterior_union_subset_closureInteriorUnion\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X)) ∪ closure (interior B) ⊆\n      closure (interior (A ∪ B)) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have h_subset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        have h_int : (interior A : Set X) ⊆ interior (A ∪ B) := by\n          intro y hy\n          exact Or.inl hy\n        exact closure_mono h_int\n      exact h_subset hA\n  | inr hB =>\n      have h_subset : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n        have h_int : (interior B : Set X) ⊆ interior (A ∪ B) := by\n          intro y hy\n          exact Or.inr hy\n        exact closure_mono h_int\n      exact h_subset hB",
+    "theorem Topology.P1_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 A) (hB : Topology.P1 B) : Topology.P1 (A ∪ B) := by\n  dsimp [Topology.P1] at hA hB ⊢\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hx_closure : (x : X) ∈ closure (interior A) := hA hxA\n      have hsubset : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n        have hinner : (interior A : Set X) ⊆ interior (A ∪ B) := by\n          have hsubA : (A : Set X) ⊆ (A ∪ B) := by\n            intro y hy\n            exact Or.inl hy\n          exact interior_mono hsubA\n        exact closure_mono hinner\n      exact hsubset hx_closure\n  | inr hxB =>\n      have hx_closure : (x : X) ∈ closure (interior B) := hB hxB\n      have hsubset : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n        have hinner : (interior B : Set X) ⊆ interior (A ∪ B) := by\n          have hsubB : (B : Set X) ⊆ (A ∪ B) := by\n            intro y hy\n            exact Or.inr hy\n          exact interior_mono hsubB\n        exact closure_mono hinner\n      exact hsubset hx_closure",
+    "theorem Topology.dense_of_denseInteriorClosure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (closure (A : Set X))) → Dense (A : Set X) := by\n  intro hDense\n  -- The closure of `interior (closure A)` is the whole space.\n  have h_univ : closure (interior (closure (A : Set X))) = (Set.univ : Set X) :=\n    hDense.closure_eq\n  -- `closure (interior (closure A))` is contained in `closure A`.\n  have h_subset : closure (interior (closure (A : Set X))) ⊆ closure A := by\n    have h₀ : (interior (closure (A : Set X)) : Set X) ⊆ closure A :=\n      interior_subset\n    have h₁ :\n        closure (interior (closure (A : Set X))) ⊆ closure (closure A) :=\n      closure_mono h₀\n    simpa [closure_closure] using h₁\n  -- Hence `closure A` is the whole space.\n  have h_closureA : closure (A : Set X) = (Set.univ : Set X) := by\n    have h2 : (Set.univ : Set X) ⊆ closure A := by\n      simpa [h_univ] using h_subset\n    have h3 : closure A ⊆ (Set.univ : Set X) := by\n      intro x hx\n      simp\n    exact Set.Subset.antisymm h3 h2\n  -- Conclude that `A` is dense.\n  exact (dense_iff_closure_eq).2 h_closureA"
+  ],
+  "success": true
+}

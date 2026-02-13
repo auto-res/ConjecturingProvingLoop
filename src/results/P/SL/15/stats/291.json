@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.280160427093506
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5584,
+      "prompt_tokens": 62361,
+      "total_tokens": 67945,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_prod_left_iff_of_nonempty\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty Y]\n    {A : Set X} {B : Set Y} (hBne : B.Nonempty) (hP2B : Topology.P2 B) :\n    Topology.P2 (A ×ˢ B) ↔ Topology.P2 A := by\n  constructor\n  · intro hProd\n    exact\n      (Topology.P2_prod_left_of_nonempty\n          (X := X) (Y := Y) (A := A) (B := B) hBne) hProd\n  · intro hP2A\n    exact\n      Topology.P2_prod (X := X) (Y := Y) (A := A) (B := B) hP2A hP2B"
+  ],
+  "success": true
+}

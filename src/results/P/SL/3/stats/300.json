@@ -1,0 +1,43 @@
+{
+  "times": [
+    211.45121049880981,
+    146.92322969436646
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13284,
+      "prompt_tokens": 51199,
+      "total_tokens": 64483,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 6737,
+      "prompt_tokens": 51289,
+      "total_tokens": 58026,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_diff_self_empty {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior (closure (A : Set X) \\ A) = (∅ : Set X) := by\n  classical\n  apply Set.Subset.antisymm\n  · intro x hxInt\n    rcases mem_interior_iff_mem_nhds.1 hxInt with\n      ⟨U, hU_open, hxU, hU_subset⟩\n    -- `x` lies in `closure A` because `U ⊆ closure A \\ A`.\n    have hx_closure : (x : X) ∈ closure (A : Set X) := by\n      have : (x : X) ∈ closure (A : Set X) \\ A := hU_subset hxU\n      exact this.1\n    -- Since `A` is dense in its closure, `U` meets `A`.\n    have h_nonempty : ((U : Set X) ∩ (A : Set X)).Nonempty :=\n      (mem_closure_iff.1 hx_closure) U hU_open hxU\n    -- But `U ⊆ closure A \\ A`, hence `U ∩ A = ∅`, contradiction.\n    rcases h_nonempty with ⟨y, hyU, hyA⟩\n    have : (y : X) ∈ closure (A : Set X) \\ A := hU_subset hyU\n    exact (this.2 hyA).elim\n  · exact Set.empty_subset _",
+    "theorem closure_diff_eq_self_inter_compl {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) \\ A = closure (A : Set X) ∩ (A : Set X)ᶜ := by\n  rfl"
+  ],
+  "success": true
+}

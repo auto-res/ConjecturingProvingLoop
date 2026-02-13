@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.215341091156
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4605,
+      "prompt_tokens": 46123,
+      "total_tokens": 50728,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_interiors_subset_inter_closure_interiors\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A ∩ interior B) ⊆\n      closure (interior A) ∩ closure (interior B) := by\n  intro x hx\n  -- Show `x ∈ closure (interior A)`\n  have hxA : x ∈ closure (interior A) := by\n    have h_subset : (interior A ∩ interior B : Set X) ⊆ interior A := by\n      intro y hy; exact hy.1\n    exact (closure_mono h_subset) hx\n  -- Show `x ∈ closure (interior B)`\n  have hxB : x ∈ closure (interior B) := by\n    have h_subset : (interior A ∩ interior B : Set X) ⊆ interior B := by\n      intro y hy; exact hy.2\n    exact (closure_mono h_subset) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

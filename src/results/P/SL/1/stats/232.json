@@ -1,0 +1,26 @@
+{
+  "times": [
+    84.01408886909485
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5284,
+      "prompt_tokens": 36017,
+      "total_tokens": 41301,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_iInter_subset\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {A : ι → Set X} :\n    closure (⋂ i, A i) ⊆ ⋂ i, closure (A i) := by\n  intro x hx\n  -- For each `i`, `(⋂ j, A j) ⊆ A i`, so their closures satisfy the same inclusion.\n  have h : ∀ i, x ∈ closure (A i) := by\n    intro i\n    have hsubset : (⋂ j, A j : Set X) ⊆ A i := by\n      exact Set.iInter_subset _ i\n    have : closure (⋂ j, A j) ⊆ closure (A i) := closure_mono hsubset\n    exact this hx\n  -- Combine the individual memberships into one for the intersection of closures.\n  exact Set.mem_iInter.2 h"
+  ],
+  "success": true
+}

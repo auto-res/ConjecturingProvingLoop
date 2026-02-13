@@ -1,0 +1,26 @@
+{
+  "times": [
+    133.50439858436584
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9005,
+      "prompt_tokens": 35310,
+      "total_tokens": 44315,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34688
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_union_subset_interiorUnion {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior A ∪ interior B ⊆ interior (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- `interior A` is monotone with respect to inclusion.\n      have h_subset : A ⊆ A ∪ B := by\n        intro y hy; exact Or.inl hy\n      have h_incl : interior A ⊆ interior (A ∪ B) := interior_mono h_subset\n      exact h_incl hxA\n  | inr hxB =>\n      -- Symmetric argument for `interior B`.\n      have h_subset : B ⊆ A ∪ B := by\n        intro y hy; exact Or.inr hy\n      have h_incl : interior B ⊆ interior (A ∪ B) := interior_mono h_subset\n      exact h_incl hxB"
+  ],
+  "success": true
+}

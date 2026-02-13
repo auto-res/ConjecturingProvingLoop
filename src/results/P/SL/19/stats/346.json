@@ -1,0 +1,43 @@
+{
+  "times": [
+    134.0482532978058,
+    114.3724114894867
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10157,
+      "prompt_tokens": 55388,
+      "total_tokens": 65545,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 6291,
+      "prompt_tokens": 55468,
+      "total_tokens": 61759,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_frontier_eq_empty_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (A := A) → interior (frontier A) = (∅ : Set X) := by\n  intro hP1\n  apply Set.Subset.antisymm\n  · -- `interior (frontier A) ⊆ ∅`\n    intro x hxInt\n    -- `x` is also in `frontier A`\n    have hxFront : x ∈ frontier A := interior_subset hxInt\n    -- From `P1`, we know `closure A ⊆ closure (interior A)`\n    have hClosSub :=\n      Topology.closure_subset_closure_interior_of_P1 (A := A) hP1\n    -- Hence `frontier A ⊆ closure (interior A)`\n    have hFrontSub : frontier A ⊆ closure (interior A) := by\n      intro y hy\n      exact hClosSub hy.1\n    have hxClosInt : x ∈ closure (interior A) := hFrontSub hxFront\n    -- Choose an open neighbourhood `U` of `x` contained in `frontier A`\n    rcases hxInt with ⟨U, hUopen, hxU, hUSub⟩\n    -- Density of `interior A` in its closure yields a point of `interior A` in `U`\n    have hNon : ((U ∩ interior A) : Set X).Nonempty :=\n      (mem_closure_iff).1 hxClosInt U hUopen hxU\n    rcases hNon with ⟨y, ⟨hyU, hyIntA⟩⟩\n    -- But `U ⊆ frontier A`, contradicting `frontier A` ∩ `interior A` = ∅\n    have hyFront : y ∈ frontier A := hUSub hyU\n    have hFalse : False := hyFront.2 hyIntA\n    exact (hFalse.elim)\n  · -- `∅ ⊆ interior (frontier A)`\n    exact Set.empty_subset _",
+    ""
+  ],
+  "success": true
+}

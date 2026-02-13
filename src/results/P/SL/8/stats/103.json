@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.5391480922699
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6142,
+      "prompt_tokens": 14205,
+      "total_tokens": 20347,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem denseInterior_imp_P1_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_dense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P1 (closure A) := by\n  dsimp [Topology.P1]\n  -- From the density of `interior A`, we have `closure A = univ`.\n  have h_closure_univ : closure A = (Set.univ : Set X) :=\n    closure_eq_univ_of_denseInterior (X := X) (A := A) h_dense\n  -- Consequently, `closure (interior (closure A))` is also `univ`.\n  have h_target : closure (interior (closure A)) = (Set.univ : Set X) := by\n    have h_int : interior (closure A) = (Set.univ : Set X) := by\n      simpa [h_closure_univ, interior_univ]\n    have h' : closure (interior (closure A)) = closure (Set.univ : Set X) := by\n      simpa [h_int]\n    simpa [closure_univ] using h'\n  -- Establish the required inclusion.\n  intro x _hx\n  have : (x : X) ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_target] using this"
+  ],
+  "success": true
+}

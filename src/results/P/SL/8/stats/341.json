@@ -1,0 +1,26 @@
+{
+  "times": [
+    17.92194390296936
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1590,
+      "prompt_tokens": 53279,
+      "total_tokens": 54869,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_closure_eq_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior A ∩ closure A = interior A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    exact hx.1\n  · intro x hxInt\n    have hxCl : x ∈ closure A := subset_closure (interior_subset hxInt)\n    exact And.intro hxInt hxCl"
+  ],
+  "success": true
+}

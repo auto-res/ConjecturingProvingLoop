@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.76542901992798
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4462,
+      "prompt_tokens": 22936,
+      "total_tokens": 27398,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_interior_eq {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (A ∪ interior A)) = closure (interior A) := by\n  -- Since `interior A ⊆ A`, we have `A ∪ interior A = A`.\n  have h_union : (A ∪ interior A : Set X) = A := by\n    ext x\n    constructor\n    · intro hx\n      cases hx with\n      | inl hA => exact hA\n      | inr hIntA => exact interior_subset hIntA\n    · intro hx\n      exact Or.inl hx\n  simpa [h_union]"
+  ],
+  "success": true
+}

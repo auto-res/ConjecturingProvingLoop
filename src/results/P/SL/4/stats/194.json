@@ -1,0 +1,26 @@
+{
+  "times": [
+    107.3347704410553
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7439,
+      "prompt_tokens": 27777,
+      "total_tokens": 35216,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27520
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_closure_compl_eq_frontier {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure A ∩ closure (Aᶜ) = frontier A := by\n  -- First, rewrite `closure (Aᶜ)` using a standard complement formula.\n  have h : (closure (Aᶜ) : Set X) = (interior A)ᶜ :=\n    closure_compl_eq_compl_interior (A := A)\n  -- Prove the desired equality by set extensionality.\n  ext x\n  constructor\n  · intro hx\n    -- `hx` gives `x ∈ closure A` and `x ∈ closure (Aᶜ)`.\n    have hx₁ : x ∈ closure A := hx.1\n    have hx₂ : x ∈ (interior A)ᶜ := by\n      -- Replace `closure (Aᶜ)` with `(interior A)ᶜ` using `h`.\n      simpa [h] using hx.2\n    -- Combine the two facts to obtain membership in `frontier A`.\n    exact And.intro hx₁ hx₂\n  · intro hx\n    -- `hx` gives `x ∈ closure A` and `x ∈ (interior A)ᶜ`.\n    have hx₁ : x ∈ closure A := hx.1\n    have hx₂ : x ∈ closure (Aᶜ) := by\n      -- Replace `(interior A)ᶜ` with `closure (Aᶜ)` using `h`.\n      simpa [h] using hx.2\n    -- Combine the two facts to obtain membership in the intersection.\n    exact And.intro hx₁ hx₂"
+  ],
+  "success": true
+}

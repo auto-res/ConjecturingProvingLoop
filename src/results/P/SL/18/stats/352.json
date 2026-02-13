@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.05118894577026
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8023,
+      "prompt_tokens": 57688,
+      "total_tokens": 65711,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7872,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_P3_of_clopen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClopen : IsClopen (A : Set X)) :\n    Topology.P2 A ↔ Topology.P3 A := by\n  -- A clopen set is, in particular, open.\n  have hOpen : IsOpen (A : Set X) := hClopen.2\n  -- For open sets, `P2` and `P3` are equivalent.\n  simpa using Topology.P2_iff_P3_of_open (A := A) hOpen"
+  ],
+  "success": true
+}

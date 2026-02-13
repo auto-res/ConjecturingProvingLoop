@@ -1,0 +1,43 @@
+{
+  "times": [
+    38.80887484550476,
+    13.160372257232666
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3004,
+      "prompt_tokens": 36537,
+      "total_tokens": 39541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    },
+    {
+      "completion_tokens": 1055,
+      "prompt_tokens": 36612,
+      "total_tokens": 37667,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInteriorClosureInterior_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (interior (closure (interior A)))) := by\n  have h_open : IsOpen (interior (closure (interior A))) := isOpen_interior\n  simpa using\n    Topology.isOpen_imp_P2_closure (X := X)\n      (A := interior (closure (interior A))) h_open",
+    "theorem isOpen_imp_P2_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_open : IsOpen (closure A)) :\n    Topology.P2 (closure A) := by\n  simpa using\n    Topology.isOpen_imp_P2 (X := X) (A := closure A) h_open"
+  ],
+  "success": true
+}

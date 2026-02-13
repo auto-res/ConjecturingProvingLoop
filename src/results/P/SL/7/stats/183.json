@@ -1,0 +1,26 @@
+{
+  "times": [
+    136.73810386657715
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7320,
+      "prompt_tokens": 28731,
+      "total_tokens": 36051,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_closureInterior_iff_isOpen_closure_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A) :\n    IsOpen (closure (interior A)) ↔ IsOpen (closure (A : Set X)) := by\n  -- From `P2` we know the closures coincide.\n  have hEq : closure (interior A) = closure (A : Set X) :=\n    Topology.closureInterior_eq_closure_of_P2 (A := A) hP2\n  -- Rewriting one side of the equivalence with this equality\n  -- turns both sides into the same statement, giving a trivial equivalence.\n  simpa [hEq] using\n    (Iff.rfl :\n      IsOpen (closure (interior A)) ↔ IsOpen (closure (interior A)))"
+  ],
+  "success": true
+}

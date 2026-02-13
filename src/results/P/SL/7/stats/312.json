@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.40155100822449
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4965,
+      "prompt_tokens": 49433,
+      "total_tokens": 54398,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_inter_three_closed\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsClosed A) (hB : IsClosed B) (hC : IsClosed C) :\n    Topology.P3 A → Topology.P3 B → Topology.P3 C →\n    Topology.P3 (A ∩ B ∩ C) := by\n  intro hP3A hP3B hP3C\n  -- Convert `P3` on closed sets to openness.\n  have hOpenA : IsOpen A :=\n    (Topology.P3_closed_iff_isOpen (A := A) hA).1 hP3A\n  have hOpenB : IsOpen B :=\n    (Topology.P3_closed_iff_isOpen (A := B) hB).1 hP3B\n  have hOpenC : IsOpen C :=\n    (Topology.P3_closed_iff_isOpen (A := C) hC).1 hP3C\n  -- The intersection of the three open sets is open.\n  have hOpenABC : IsOpen (A ∩ B ∩ C) := by\n    have hAB : IsOpen (A ∩ B) := hOpenA.inter hOpenB\n    exact hAB.inter hOpenC\n  -- The same intersection is closed as an intersection of closed sets.\n  have hClosedABC : IsClosed (A ∩ B ∩ C) := by\n    have hAB : IsClosed (A ∩ B) := hA.inter hB\n    exact hAB.inter hC\n  -- Use the closed-set characterisation `P3 ↔ IsOpen` to obtain `P3`.\n  exact\n    (Topology.P3_closed_iff_isOpen (A := A ∩ B ∩ C) hClosedABC).2 hOpenABC"
+  ],
+  "success": true
+}

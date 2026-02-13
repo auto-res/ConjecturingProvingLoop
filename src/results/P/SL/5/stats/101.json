@@ -1,0 +1,26 @@
+{
+  "times": [
+    74.17590284347534
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5798,
+      "prompt_tokens": 15732,
+      "total_tokens": 21530,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_interiors_subset_interior_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A : Set X) ∩ interior B ⊆ interior (A ∩ B) := by\n  intro x hx\n  -- `interior A ∩ interior B` is an open set …\n  have h_open :\n      IsOpen (interior (A : Set X) ∩ interior B) :=\n    (isOpen_interior : IsOpen (interior (A : Set X))).inter\n      (isOpen_interior : IsOpen (interior B))\n  -- … contained in `A ∩ B`.\n  have h_subset :\n      (interior (A : Set X) ∩ interior B : Set X) ⊆ A ∩ B := by\n    intro y hy\n    exact ⟨interior_subset hy.1, interior_subset hy.2⟩\n  -- By maximality of the interior, it is contained in `interior (A ∩ B)`.\n  have h_contained :\n      (interior (A : Set X) ∩ interior B : Set X) ⊆ interior (A ∩ B) :=\n    interior_maximal h_subset h_open\n  exact h_contained hx"
+  ],
+  "success": true
+}

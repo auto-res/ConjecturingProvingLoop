@@ -1,0 +1,43 @@
+{
+  "times": [
+    31.554491996765137,
+    28.321083545684814
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2354,
+      "prompt_tokens": 37006,
+      "total_tokens": 39360,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    },
+    {
+      "completion_tokens": 1945,
+      "prompt_tokens": 37122,
+      "total_tokens": 39067,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_boundary_eq_boundary {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (closure (A : Set X) \\ interior A) = closure A \\ interior A := by\n  have h_closed : IsClosed (closure (A : Set X) \\ interior A) :=\n    Topology.isClosed_closure_diff_interior (A := A)\n  simpa [h_closed.closure_eq]",
+    "theorem Topology.closureFrontier_eq_self\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (frontier A) = frontier A := by\n  have h_closed : IsClosed (frontier A) := isClosed_frontier\n  simpa using h_closed.closure_eq"
+  ],
+  "success": true
+}

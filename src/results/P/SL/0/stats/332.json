@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.14347505569458
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3464,
+      "prompt_tokens": 58959,
+      "total_tokens": 62423,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58240
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_four {X : Type*} [TopologicalSpace X] {A B C D : Set X} :\n    Topology.P2 A → Topology.P2 B → Topology.P2 C → Topology.P2 D →\n      Topology.P2 (A ∪ B ∪ C ∪ D) := by\n  intro hA hB hC hD\n  have hAB : Topology.P2 (A ∪ B) :=\n    Topology.P2_union (X := X) (A := A) (B := B) hA hB\n  have hABC : Topology.P2 ((A ∪ B) ∪ C) :=\n    Topology.P2_union (X := X) (A := A ∪ B) (B := C) hAB hC\n  have hABCD : Topology.P2 (((A ∪ B) ∪ C) ∪ D) :=\n    Topology.P2_union (X := X) (A := (A ∪ B) ∪ C) (B := D) hABC hD\n  simpa [Set.union_assoc] using hABCD"
+  ],
+  "success": true
+}

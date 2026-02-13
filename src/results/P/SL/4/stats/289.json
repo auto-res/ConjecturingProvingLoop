@@ -1,0 +1,43 @@
+{
+  "times": [
+    77.22840881347656,
+    103.25878190994263
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4846,
+      "prompt_tokens": 44003,
+      "total_tokens": 48849,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 6475,
+      "prompt_tokens": 44092,
+      "total_tokens": 50567,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6336,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_empty_iff_closure_eq_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    frontier (A : Set X) = (∅ : Set X) ↔ (closure A : Set X) = interior A := by\n  constructor\n  · intro hFrontEmpty\n    apply Set.Subset.antisymm\n    · intro x hxCl\n      by_cases hxInt : x ∈ interior A\n      · exact hxInt\n      · have hFront : x ∈ frontier (A : Set X) := And.intro hxCl hxInt\n        have : x ∈ (∅ : Set X) := by\n          simpa [hFrontEmpty] using hFront\n        cases this\n    · exact interior_subset\n  · intro hEq\n    have hFrontDef :\n        frontier (A : Set X) = closure A \\ interior A := by\n      simpa using\n        (frontier_eq_closure_diff_interior (X := X) (A := A))\n    calc\n      frontier (A : Set X)\n          = closure A \\ interior A := hFrontDef\n      _ = interior A \\ interior A := by\n          simpa [hEq]\n      _ = (∅ : Set X) := by\n          simp [Set.diff_self]",
+    "theorem P1_P2_P3_univ {X : Type*} [TopologicalSpace X] :\n    Topology.P1 (Set.univ : Set X) ∧\n      Topology.P2 (Set.univ : Set X) ∧\n        Topology.P3 (Set.univ : Set X) := by\n  exact\n    And.intro\n      (Topology.P1_univ (X := X))\n      (And.intro\n        (Topology.P2_univ (X := X))\n        (Topology.P3_univ (X := X)))"
+  ],
+  "success": true
+}

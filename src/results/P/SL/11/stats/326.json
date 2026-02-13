@@ -1,0 +1,26 @@
+{
+  "times": [
+    118.240070104599
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5440,
+      "prompt_tokens": 52996,
+      "total_tokens": 58436,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_closure_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ closure B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- Membership in `closure A` comes from the left inclusion.\n  have hA : x ∈ closure A := by\n    have hsubset : (A ∩ closure B : Set X) ⊆ A := Set.inter_subset_left\n    exact (closure_mono hsubset) hx\n  -- Membership in `closure B` comes from the right inclusion.\n  have hB : x ∈ closure B := by\n    have hsubset : (A ∩ closure B : Set X) ⊆ closure B := Set.inter_subset_right\n    have hcl : closure (A ∩ closure B) ⊆ closure (closure B) :=\n      closure_mono hsubset\n    have : x ∈ closure (closure B) := hcl hx\n    simpa [closure_closure] using this\n  exact ⟨hA, hB⟩"
+  ],
+  "success": true
+}

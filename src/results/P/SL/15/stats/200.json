@@ -1,0 +1,43 @@
+{
+  "times": [
+    80.00864505767822,
+    92.30836915969849
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6047,
+      "prompt_tokens": 41583,
+      "total_tokens": 47630,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 6069,
+      "prompt_tokens": 41727,
+      "total_tokens": 47796,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_prod_univ_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty Y] {A : Set X} :\n    Dense (A ×ˢ (Set.univ : Set Y)) ↔ Dense A := by\n  classical\n  constructor\n  · intro hDenseProd\n    -- The closure of `A ×ˢ univ` is the whole space.\n    have hClosureProd :\n        closure (A ×ˢ (Set.univ : Set Y) : Set (X × Y)) =\n          (Set.univ : Set (X × Y)) := by\n      simpa using hDenseProd.closure_eq\n    -- Express this closure as a product of closures.\n    have hProdEq :\n        closure (A ×ˢ (Set.univ : Set Y)) =\n          closure A ×ˢ closure (Set.univ : Set Y) := by\n      simpa using closure_prod_eq (s := A) (t := (Set.univ : Set Y))\n    -- Using `closure_univ`, rewrite the right‐hand side.\n    have hProdUniv :\n        closure A ×ˢ (Set.univ : Set Y) = (Set.univ : Set (X × Y)) := by\n      simpa [closure_univ] using hClosureProd.trans hProdEq.symm\n    -- Deduce `closure A = univ`.\n    have hClosureA : closure (A : Set X) = (Set.univ : Set X) := by\n      apply Set.Subset.antisymm\n      · intro x _; exact Set.mem_univ x\n      · intro x _\n        -- Choose an arbitrary `y : Y`.\n        let y : Y := Classical.arbitrary Y\n        -- The point `(x, y)` lies in `univ`, hence in the product on the left.\n        have : ((x, y) : X × Y) ∈\n            closure A ×ˢ (Set.univ : Set Y) := by\n          simpa [hProdUniv] using (by trivial)\n        exact (Set.mem_prod.1 this).1\n    exact (dense_iff_closure_eq).2 hClosureA\n  · intro hDenseA\n    -- `univ` is always dense.\n    have hDenseUniv : Dense (Set.univ : Set Y) := by\n      simpa using dense_univ\n    -- The product of dense sets is dense.\n    have hDenseProd :=\n      dense_prod_of_dense_left_and_dense_right\n        (X := X) (Y := Y)\n        (A := A) (B := (Set.univ : Set Y))\n        hDenseA hDenseUniv\n    simpa using hDenseProd",
+    "theorem closure_prod_univ_left {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    (A : Set X) :\n    closure (A ×ˢ (Set.univ : Set Y)) = (closure A) ×ˢ (Set.univ : Set Y) := by\n  simpa [closure_univ] using\n    (closure_prod_eq (s := A) (t := (Set.univ : Set Y)))"
+  ],
+  "success": true
+}

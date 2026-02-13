@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.295835971832275
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2330,
+      "prompt_tokens": 46024,
+      "total_tokens": 48354,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiors_disjoint {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ∩ interior (Aᶜ) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hIntA, hIntAc⟩\n    have hA : x ∈ A := interior_subset hIntA\n    have hAc : x ∈ Aᶜ := interior_subset hIntAc\n    exact (hAc hA).elim\n  · exact Set.empty_subset _"
+  ],
+  "success": true
+}

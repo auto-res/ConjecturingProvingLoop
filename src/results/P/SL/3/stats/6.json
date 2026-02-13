@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.11580181121826
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2554,
+      "prompt_tokens": 838,
+      "total_tokens": 3392,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen (A : Set X)) :\n    Topology.P2 A := by\n  dsimp [Topology.P2]\n  have h : A ⊆ interior (closure A) := by\n    apply interior_maximal\n    · exact subset_closure\n    · exact hA\n  simpa [hA.interior_eq] using h"
+  ],
+  "success": true
+}

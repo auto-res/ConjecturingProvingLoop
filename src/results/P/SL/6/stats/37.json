@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.62648344039917
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3405,
+      "prompt_tokens": 4659,
+      "total_tokens": 8064,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 3840
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_union_of_P3 {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P3 (A : Set X)) (hB : Topology.P3 (B : Set X)) :\n    Topology.P3 (A ∪ B) := by\n  dsimp [Topology.P3] at hA hB ⊢\n  intro x hx\n  cases hx with\n  | inl hAx =>\n      have hxA : x ∈ interior (closure A) := hA hAx\n      have hIncl : interior (closure A) ⊆ interior (closure (A ∪ B)) := by\n        apply interior_mono\n        have : closure (A : Set X) ⊆ closure (A ∪ B) := by\n          apply closure_mono\n          intro y hy\n          exact Or.inl hy\n        exact this\n      exact hIncl hxA\n  | inr hBx =>\n      have hxB : x ∈ interior (closure B) := hB hBx\n      have hIncl : interior (closure B) ⊆ interior (closure (A ∪ B)) := by\n        apply interior_mono\n        have : closure (B : Set X) ⊆ closure (A ∪ B) := by\n          apply closure_mono\n          intro y hy\n          exact Or.inr hy\n        exact this\n      exact hIncl hxB"
+  ],
+  "success": true
+}

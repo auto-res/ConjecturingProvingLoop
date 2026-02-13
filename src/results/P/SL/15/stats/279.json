@@ -1,0 +1,43 @@
+{
+  "times": [
+    31.400829553604126,
+    40.20820188522339
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1491,
+      "prompt_tokens": 60168,
+      "total_tokens": 61659,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 59136
+      }
+    },
+    {
+      "completion_tokens": 2194,
+      "prompt_tokens": 60243,
+      "total_tokens": 62437,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 59136
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hxA\n  -- Since `A` is dense, its closure is the whole space.\n  have h_closure : (closure A : Set X) = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  -- Hence the interior of its closure is also the whole space.\n  have h_int : interior (closure A) = (Set.univ : Set X) := by\n    simpa [h_closure, interior_univ]\n  -- Conclude the desired membership.\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_int] using this",
+    "theorem P1_prod_left_iff_of_nonempty\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty Y]\n    {A : Set X} {B : Set Y} (hBne : B.Nonempty) (hP1B : Topology.P1 B) :\n    Topology.P1 (A ×ˢ B) ↔ Topology.P1 A := by\n  constructor\n  · intro hProd\n    exact\n      (Topology.P1_prod_left_of_nonempty\n        (X := X) (Y := Y) (A := A) (B := B) hBne) hProd\n  · intro hP1A\n    exact\n      Topology.P1_prod\n        (X := X) (Y := Y) (A := A) (B := B) hP1A hP1B"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    107.57837414741516
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6273,
+      "prompt_tokens": 41690,
+      "total_tokens": 47963,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_closure_compl_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A ∪ closure (Aᶜ) = (Set.univ : Set X) := by\n  classical\n  ext x\n  constructor\n  · intro _; trivial\n  · intro _\n    by_cases h : x ∈ closure A\n    · exact Or.inl h\n    · -- If `x ∉ closure A`, then `x` lies in the interior of `Aᶜ`,\n      -- hence in `closure (Aᶜ)`.\n      have hIntAcompl : x ∈ interior (Aᶜ) := by\n        -- `interior (Aᶜ) = (closure A)ᶜ`.\n        have h_eq :=\n          Topology.interior_compl_eq_compl_closure (X := X) (A := A)\n        have : x ∈ (closure A)ᶜ := by\n          simpa using h\n        simpa [h_eq] using this\n      -- The interior is contained in the closure.\n      have hClAcompl : x ∈ closure (Aᶜ) := by\n        have : x ∈ (Aᶜ) := interior_subset hIntAcompl\n        exact subset_closure this\n      exact Or.inr hClAcompl"
+  ],
+  "success": true
+}

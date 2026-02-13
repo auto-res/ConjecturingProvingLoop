@@ -1,0 +1,26 @@
+{
+  "times": [
+    24.107856035232544
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1868,
+      "prompt_tokens": 37745,
+      "total_tokens": 39613,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_interior {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    Topology.P1 (X := X) (interior A ∪ interior B) := by\n  -- `P1` holds for the interior of any set.\n  have hA : Topology.P1 (X := X) (interior A) :=\n    Topology.P1_interior (X := X) (A := A)\n  have hB : Topology.P1 (X := X) (interior B) :=\n    Topology.P1_interior (X := X) (A := B)\n  -- Combine the two `P1` properties using the union lemma.\n  simpa using\n    Topology.P1_union (X := X) (A := interior A) (B := interior B) hA hB"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    79.87361574172974,
+    51.35273361206055
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5279,
+      "prompt_tokens": 12600,
+      "total_tokens": 17879,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 3234,
+      "prompt_tokens": 12675,
+      "total_tokens": 15909,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense A) : Topology.P3 A := by\n  unfold Topology.P3\n  intro x _hxA\n  -- Since `A` is dense, its closure is the entire space.\n  have hClosure : closure A = (Set.univ : Set X) := hDense.closure_eq\n  -- Hence the interior of its closure is also the entire space.\n  have hInterior : interior (closure A) = (Set.univ : Set X) := by\n    simpa [hClosure] using (interior_univ : interior (Set.univ : Set X) = Set.univ)\n  -- Any point is contained in the whole space.\n  have hx_univ : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hInterior] using hx_univ",
+    "theorem Topology.P2_closure_iff_isOpen_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure A) ↔ IsOpen (closure A) := by\n  have h₁ : Topology.P2 (closure A) ↔ Topology.P3 (closure A) :=\n    Topology.P2_closure_iff_P3_closure (A := A)\n  have h₂ : Topology.P3 (closure A) ↔ IsOpen (closure A) :=\n    Topology.P3_closure_iff_isOpen_closure (A := A)\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

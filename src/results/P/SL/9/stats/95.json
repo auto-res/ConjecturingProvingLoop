@@ -1,0 +1,26 @@
+{
+  "times": [
+    69.90635848045349
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5420,
+      "prompt_tokens": 14386,
+      "total_tokens": 19806,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iInter_subset {X : Type*} [TopologicalSpace X]\n    {ι : Sort*} {𝒜 : ι → Set X} :\n    interior (closure (⋂ i, 𝒜 i)) ⊆ ⋂ i, interior (closure (𝒜 i)) := by\n  intro x hx\n  -- Show that `x` lies in every `interior (closure (𝒜 i))`.\n  have h_forall : ∀ i, x ∈ interior (closure (𝒜 i)) := by\n    intro i\n    -- Since `⋂ j, 𝒜 j ⊆ 𝒜 i`, the same holds for their closures.\n    have h_subset : closure (⋂ j, 𝒜 j) ⊆ closure (𝒜 i) := by\n      have h_inter_subset : (⋂ j, 𝒜 j : Set X) ⊆ 𝒜 i := by\n        intro y hy\n        exact (Set.mem_iInter.1 hy) i\n      exact closure_mono h_inter_subset\n    -- Apply monotonicity of `interior`.\n    exact (interior_mono h_subset) hx\n  exact Set.mem_iInter.2 h_forall"
+  ],
+  "success": true
+}

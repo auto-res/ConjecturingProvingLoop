@@ -1,0 +1,26 @@
+{
+  "times": [
+    133.7945704460144
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10126,
+      "prompt_tokens": 21364,
+      "total_tokens": 31490,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_subset_inter_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior ((A ∩ B) : Set X)) ⊆\n      closure (interior (A : Set X)) ∩ closure (interior (B : Set X)) := by\n  intro x hx\n  -- Membership in the left component\n  have hxA : x ∈ closure (interior (A : Set X)) := by\n    -- `interior (A ∩ B)` is contained in `interior A`\n    have hIntSub : (interior ((A ∩ B) : Set X) : Set X) ⊆ interior (A : Set X) := by\n      have : ((A ∩ B) : Set X) ⊆ A := by\n        intro y hy\n        exact hy.1\n      exact interior_mono this\n    -- Taking closures preserves inclusions\n    exact (closure_mono hIntSub) hx\n  -- Membership in the right component\n  have hxB : x ∈ closure (interior (B : Set X)) := by\n    -- `interior (A ∩ B)` is contained in `interior B`\n    have hIntSub : (interior ((A ∩ B) : Set X) : Set X) ⊆ interior (B : Set X) := by\n      have : ((A ∩ B) : Set X) ⊆ B := by\n        intro y hy\n        exact hy.2\n      exact interior_mono this\n    -- Taking closures preserves inclusions\n    exact (closure_mono hIntSub) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

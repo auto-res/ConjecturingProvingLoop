@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.02043390274048
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4932,
+      "prompt_tokens": 47801,
+      "total_tokens": 52733,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46976
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_eq_of_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_open : IsOpen A) (hA_closed : IsClosed A) :\n    closure (interior A) = (A : Set X) := by\n  calc\n    closure (interior A) = closure A := by\n      simpa [hA_open.interior_eq]\n    _ = A := by\n      simpa [hA_closed.closure_eq]"
+  ],
+  "success": true
+}

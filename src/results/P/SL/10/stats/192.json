@@ -1,0 +1,26 @@
+{
+  "times": [
+    139.78382849693298
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10183,
+      "prompt_tokens": 31377,
+      "total_tokens": 41560,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9856,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_subset_closure_diff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (A \\ B) ⊆ closure A \\ interior B := by\n  intro x hx\n  -- First, `x` lies in the closure of `A`.\n  have hxClA : x ∈ closure A :=\n    (closure_mono (Set.diff_subset : A \\ B ⊆ A)) hx\n  -- Next, show that `x ∉ interior B`.\n  have hxNotIntB : x ∉ interior B := by\n    intro hxIntB\n    -- Since `x ∈ closure (A \\ B)`, every neighbourhood of `x` meets `A \\ B`.\n    have h_nonempty :\n        (interior B ∩ (A \\ B)).Nonempty := by\n      have h_open : IsOpen (interior B) := isOpen_interior\n      exact (mem_closure_iff).1 hx (interior B) h_open hxIntB\n    rcases h_nonempty with ⟨y, hyIntB, hyDiff⟩\n    -- But `y ∈ interior B` implies `y ∈ B`, contradicting `y ∉ B`.\n    have : y ∈ B := interior_subset hyIntB\n    exact (hyDiff.2 this).elim\n  exact And.intro hxClA hxNotIntB"
+  ],
+  "success": true
+}

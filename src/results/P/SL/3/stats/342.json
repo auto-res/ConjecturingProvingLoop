@@ -1,0 +1,26 @@
+{
+  "times": [
+    186.7283537387848
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10288,
+      "prompt_tokens": 58085,
+      "total_tokens": 68373,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 57088
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_P2_P3_of_boundary_empty {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) \\ interior (A : Set X) = (∅ : Set X) →\n      Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A := by\n  intro hBoundary\n  -- An empty boundary implies that `A` is both open and closed.\n  have hClopen : IsOpen (A : Set X) ∧ IsClosed (A : Set X) :=\n    (boundary_eq_empty_iff_isClopen (A := A)).1 hBoundary\n  -- Any open set satisfies `P1`, `P2`, and `P3`.\n  have hP1 : Topology.P1 (A : Set X) := Topology.P1_of_isOpen (A := A) hClopen.1\n  have hP2 : Topology.P2 (A : Set X) := Topology.P2_of_isOpen (A := A) hClopen.1\n  have hP3 : Topology.P3 (A : Set X) := Topology.P3_of_isOpen (A := A) hClopen.1\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

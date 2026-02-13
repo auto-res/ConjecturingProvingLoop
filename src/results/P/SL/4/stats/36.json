@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.01114344596863
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3158,
+      "prompt_tokens": 5274,
+      "total_tokens": 8432,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_imp_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hxA\n  have h_closure : closure A = (Set.univ : Set X) := hDense.closure_eq\n  have h_int : interior (closure A) = (Set.univ : Set X) := by\n    have h : interior ((Set.univ : Set X)) = (Set.univ : Set X) := by\n      simpa using (isOpen_univ : IsOpen (Set.univ : Set X)).interior_eq\n    simpa [h_closure] using h\n  have hx_univ : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_int] using hx_univ"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.684734344482422
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2239,
+      "prompt_tokens": 11611,
+      "total_tokens": 13850,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 11008
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_compl_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    Topology.P1 (Aᶜ) := by\n  have hOpen : IsOpen ((Aᶜ) : Set X) := hA.isOpen_compl\n  exact (Topology.isOpen_implies_P1 (X := X) (A := (Aᶜ : Set X))) hOpen"
+  ],
+  "success": true
+}

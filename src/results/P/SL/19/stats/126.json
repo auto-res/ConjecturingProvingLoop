@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.38666582107544
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3239,
+      "prompt_tokens": 18861,
+      "total_tokens": 22100,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_closure_subset_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (A := A) ↔ closure A ⊆ closure (interior A) := by\n  constructor\n  · intro hP1\n    have : closure A ⊆ closure (closure (interior A)) := closure_mono hP1\n    simpa [closure_closure] using this\n  · intro hSub\n    dsimp [Topology.P1]\n    intro x hxA\n    have hxClos : x ∈ closure A := subset_closure hxA\n    exact hSub hxClos"
+  ],
+  "success": true
+}

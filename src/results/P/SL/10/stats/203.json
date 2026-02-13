@@ -1,0 +1,26 @@
+{
+  "times": [
+    130.99924159049988
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9320,
+      "prompt_tokens": 33146,
+      "total_tokens": 42466,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_interior_eq_self_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    closure (A \\ interior A) = A \\ interior A := by\n  -- First, prove the set `A \\ interior A` is closed.\n  have hClosed : IsClosed (A \\ interior A) := by\n    -- `A` is closed by hypothesis, and `(interior A)ᶜ` is closed as the complement of an open set.\n    have hIntCompl : IsClosed ((interior A)ᶜ) :=\n      (isOpen_interior : IsOpen (interior A)).isClosed_compl\n    -- The intersection of two closed sets is closed; rewrite the set difference as such an intersection.\n    simpa [Set.diff_eq] using hA.inter hIntCompl\n  -- The closure of a closed set is itself.\n  simpa using hClosed.closure_eq"
+  ],
+  "success": true
+}

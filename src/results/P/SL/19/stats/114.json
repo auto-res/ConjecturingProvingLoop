@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.454633474349976
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4511,
+      "prompt_tokens": 16987,
+      "total_tokens": 21498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_subset_of_subset_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) (hBClA : B ⊆ closure A)\n    (hP1A : Topology.P1 (A := A)) : Topology.P1 (A := B) := by\n  dsimp [Topology.P1] at hP1A ⊢\n  intro x hxB\n  -- `x ∈ closure A` since `B ⊆ closure A`\n  have hx_closureA : x ∈ closure A := hBClA hxB\n  -- `closure A = closure (interior A)` by `P1` for `A`\n  have hClosEq : closure A = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P1 (A := A) hP1A\n  -- Rewrite membership using this equality\n  have hx_closureIntA : x ∈ closure (interior A) := by\n    simpa [hClosEq] using hx_closureA\n  -- Monotonicity from `interior A ⊆ interior B`\n  have hIntAB : interior A ⊆ interior B := interior_mono hAB\n  have hClosIntAB : closure (interior A) ⊆ closure (interior B) :=\n    closure_mono hIntAB\n  -- Conclude the goal\n  exact hClosIntAB hx_closureIntA"
+  ],
+  "success": true
+}

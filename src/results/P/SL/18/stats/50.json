@@ -1,0 +1,26 @@
+{
+  "times": [
+    60.21157193183899
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3150,
+      "prompt_tokens": 7455,
+      "total_tokens": 10605,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) ⊆ closure (interior (closure A)) := by\n  -- `interior A` is contained in `interior (closure A)` since `A ⊆ closure A`.\n  have h : interior A ⊆ interior (closure A) := by\n    apply interior_mono\n    exact subset_closure\n  -- Taking closures preserves inclusions.\n  exact closure_mono h"
+  ],
+  "success": true
+}

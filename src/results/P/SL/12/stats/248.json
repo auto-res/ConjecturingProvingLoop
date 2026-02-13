@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.462441205978394
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1361,
+      "prompt_tokens": 47558,
+      "total_tokens": 48919,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : Topology.P1 (X := X) B) :\n    Topology.P1 (X := X) (closure (A ∪ B : Set X)) := by\n  -- First, `P1` holds for the union `A ∪ B`.\n  have hUnion : Topology.P1 (X := X) (A ∪ B) :=\n    Topology.P1_union (X := X) (A := A) (B := B) hA hB\n  -- Then, upgrade the property to the closure of the union.\n  exact\n    Topology.P1_closure_of_P1 (X := X) (A := A ∪ B) hUnion"
+  ],
+  "success": true
+}

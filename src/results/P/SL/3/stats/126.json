@@ -1,0 +1,43 @@
+{
+  "times": [
+    24.939732789993286,
+    223.88465404510498
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2478,
+      "prompt_tokens": 19482,
+      "total_tokens": 21960,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 16594,
+      "prompt_tokens": 19605,
+      "total_tokens": 36199,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P2_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    Topology.P1 A ↔ Topology.P2 A := by\n  constructor\n  · intro hP1\n    -- From `P1` and closedness we obtain `closure (interior A) = A`.\n    have hEq :=\n      (Topology.P1_iff_closure_interior_eq_of_isClosed (A := A) hA_closed).mp hP1\n    -- Hence `A` is open.\n    have hOpen : IsOpen (A : Set X) :=\n      isOpen_of_closure_interior_eq (A := A) hEq\n    -- Open sets satisfy `P2`.\n    exact Topology.P2_of_isOpen (A := A) hOpen\n  · intro hP2\n    -- `P2` implies `P3`.\n    have hP3 : Topology.P3 (A : Set X) :=\n      Topology.P2_implies_P3 (A := A) hP2\n    -- For closed sets, `P3` implies `P1`.\n    exact P3_of_isClosed_implies_P1 (A := A) hA_closed hP3",
+    ""
+  ],
+  "success": true
+}

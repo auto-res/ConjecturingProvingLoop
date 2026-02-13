@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.643487215042114
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3535,
+      "prompt_tokens": 2574,
+      "total_tokens": 6109,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iUnion {ι : Sort _} {X : Type _} [TopologicalSpace X]\n    (A : ι → Set X) (h : ∀ i, Topology.P1 (A i)) :\n    Topology.P1 (⋃ i, A i) := by\n  dsimp [Topology.P1] at *\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxAi⟩\n  have hPi : (A i : Set X) ⊆ closure (interior (A i)) := h i\n  have hx_cl : x ∈ closure (interior (A i)) := hPi hxAi\n  have h_mono : closure (interior (A i)) ⊆ closure (interior (⋃ j, A j)) := by\n    apply closure_mono\n    have : interior (A i) ⊆ interior (⋃ j, A j) := by\n      apply interior_mono\n      intro y hy\n      exact Set.mem_iUnion.2 ⟨i, hy⟩\n    exact this\n  exact h_mono hx_cl"
+  ],
+  "success": true
+}

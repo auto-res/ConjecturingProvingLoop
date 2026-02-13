@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.912673473358154
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3619,
+      "prompt_tokens": 46359,
+      "total_tokens": 49978,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_subset_union_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure ((A ∪ B) : Set X)) ⊆\n      closure (A : Set X) ∪ closure (B : Set X) := by\n  intro x hx\n  -- From membership in the interior, obtain membership in the closure.\n  have hx_cl : (x : X) ∈ closure ((A ∪ B) : Set X) := interior_subset hx\n  -- Rewrite the closure of the union as the union of the closures.\n  simpa [closure_union] using hx_cl"
+  ],
+  "success": true
+}

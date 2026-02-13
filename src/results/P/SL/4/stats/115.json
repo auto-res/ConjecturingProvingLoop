@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.926891565322876
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3372,
+      "prompt_tokens": 16268,
+      "total_tokens": 19640,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_closure_eq_univ_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → interior (closure (interior (closure A))) = (Set.univ : Set X) := by\n  intro hDense\n  -- First, use the existing result about the closure being all of `univ`.\n  have h_closure :\n      closure (interior (closure A)) = (Set.univ : Set X) :=\n    closure_interior_closure_eq_univ_of_dense (X := X) (A := A) hDense\n  -- Taking interiors on both sides yields the desired equality.\n  calc\n    interior (closure (interior (closure A)))\n        = interior (Set.univ : Set X) := by\n          simpa [h_closure]\n    _ = (Set.univ : Set X) := by\n          simpa using (isOpen_univ : IsOpen (Set.univ : Set X)).interior_eq"
+  ],
+  "success": true
+}

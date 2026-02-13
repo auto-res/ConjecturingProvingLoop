@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.93392539024353
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3571,
+      "prompt_tokens": 15019,
+      "total_tokens": 18590,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_inter_three_of_closed {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsClosed (A : Set X)) (hB : IsClosed (B : Set X)) (hC : IsClosed (C : Set X)) :\n    Topology.P3 A → Topology.P3 B → Topology.P3 C → Topology.P3 (A ∩ B ∩ C) := by\n  intro hPA hPB hPC\n  -- Convert each `P3` on a closed set into openness.\n  have hOpenA : IsOpen (A : Set X) :=\n    (Topology.P3_iff_isOpen_of_isClosed (X := X) (A := A) hA).1 hPA\n  have hOpenB : IsOpen (B : Set X) :=\n    (Topology.P3_iff_isOpen_of_isClosed (X := X) (A := B) hB).1 hPB\n  have hOpenC : IsOpen (C : Set X) :=\n    (Topology.P3_iff_isOpen_of_isClosed (X := X) (A := C) hC).1 hPC\n  -- The triple intersection of open sets is open.\n  have hOpenInter : IsOpen ((A ∩ B ∩ C) : Set X) := (hOpenA.inter hOpenB).inter hOpenC\n  -- Every open set satisfies `P3`.\n  exact\n    (Topology.isOpen_has_all_Ps (X := X) (A := (A ∩ B ∩ C : Set X)) hOpenInter).2.2"
+  ],
+  "success": true
+}

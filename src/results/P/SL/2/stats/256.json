@@ -1,0 +1,26 @@
+{
+  "times": [
+    193.53843808174133
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11162,
+      "prompt_tokens": 42291,
+      "total_tokens": 53453,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier ((A ∪ B) : Set X) ⊆ frontier (A : Set X) ∪ frontier (B : Set X) := by\n  intro x hx\n  rcases hx with ⟨hx_closureUnion, hx_not_intUnion⟩\n  -- `x` is in the closure of `A` or of `B` (since `closure (A ∪ B) = closure A ∪ closure B`)\n  have hClosure : x ∈ closure (A : Set X) ∨ x ∈ closure (B : Set X) := by\n    have h : x ∈ closure (A : Set X) ∪ closure (B : Set X) := by\n      simpa [closure_union] using hx_closureUnion\n    simpa [Set.mem_union] using h\n  -- Analyse the two cases.\n  cases hClosure with\n  | inl hx_closureA =>\n      -- Case: `x ∈ closure A`\n      by_cases hx_intA : x ∈ interior (A : Set X)\n      · -- If `x` were in `interior A`, it would be in `interior (A ∪ B)`, contradiction.\n        have hsubset :\n            interior (A : Set X) ∪ interior (B : Set X) ⊆\n              interior ((A ∪ B) : Set X) :=\n          interior_union (A := A) (B := B)\n        have hx_intUnion : x ∈ interior ((A ∪ B) : Set X) :=\n          hsubset (Or.inl hx_intA)\n        have hFalse : False := hx_not_intUnion hx_intUnion\n        exact False.elim hFalse\n      · -- Otherwise, `x` is not in `interior A`; hence `x ∈ frontier A`.\n        exact Or.inl (And.intro hx_closureA hx_intA)\n  | inr hx_closureB =>\n      -- Case: `x ∈ closure B`\n      by_cases hx_intB : x ∈ interior (B : Set X)\n      · -- If `x` were in `interior B`, it would be in `interior (A ∪ B)`, contradiction.\n        have hsubset :\n            interior (A : Set X) ∪ interior (B : Set X) ⊆\n              interior ((A ∪ B) : Set X) :=\n          interior_union (A := A) (B := B)\n        have hx_intUnion : x ∈ interior ((A ∪ B) : Set X) :=\n          hsubset (Or.inr hx_intB)\n        have hFalse : False := hx_not_intUnion hx_intUnion\n        exact False.elim hFalse\n      · -- Otherwise, `x` is not in `interior B`; hence `x ∈ frontier B`.\n        exact Or.inr (And.intro hx_closureB hx_intB)"
+  ],
+  "success": true
+}

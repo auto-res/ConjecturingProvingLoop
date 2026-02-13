@@ -1,0 +1,94 @@
+{
+  "times": [
+    35.69586730003357,
+    191.78316640853882,
+    36.428996086120605,
+    53.577680587768555,
+    81.56899547576904
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1894,
+      "prompt_tokens": 42704,
+      "total_tokens": 44598,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 10704,
+      "prompt_tokens": 42810,
+      "total_tokens": 53514,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 2232,
+      "prompt_tokens": 42884,
+      "total_tokens": 45116,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 1766,
+      "prompt_tokens": 43000,
+      "total_tokens": 44766,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    },
+    {
+      "completion_tokens": 5542,
+      "prompt_tokens": 43106,
+      "total_tokens": 48648,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_union_subset_union_frontier {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    frontier ((A ∪ B) : Set X) ⊆ frontier A ∪ frontier B := by\n  simpa [frontier] using\n    (Topology.boundary_union_subset_union_boundary (A := A) (B := B))",
+    "@[simp] theorem Set.compl_compl {α : Type*} (s : Set α) : (sᶜ)ᶜ = s := by\n  ext x\n  by_cases hx : x ∈ s\n  · simp [hx]\n  · simp [hx]",
+    "theorem Topology.closure_frontier_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (frontier A) ⊆ closure A := by\n  -- The frontier is, by definition, contained in the closure.\n  have h_subset : frontier A ⊆ closure A := by\n    intro x hx\n    exact hx.1\n  -- Taking closures preserves inclusions.\n  exact closure_mono h_subset",
+    "theorem Topology.frontier_union_subset_union_frontier\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∪ B : Set X) ⊆ frontier A ∪ frontier B := by\n  simpa [frontier] using\n    (Topology.boundary_union_subset_union_boundary (A := A) (B := B))",
+    "theorem Topology.frontier_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A ∪ B : Set X) ⊆ frontier A ∪ frontier B := by\n  intro x hx\n  -- `hx` gives membership in the closure of `A ∪ B`\n  -- and non-membership in its interior.\n  have hx_cl_union : x ∈ closure (A ∪ B : Set X) := hx.1\n  have hx_not_int_union : x ∉ interior (A ∪ B : Set X) := hx.2\n  -- From `hx_not_int_union`, deduce non-membership in the interiors of `A` and `B`.\n  have h_not_intA : x ∉ interior A := by\n    intro hx_intA\n    have h_subset : interior A ⊆ interior (A ∪ B) :=\n      interior_mono (by\n        intro y hy\n        exact Or.inl hy)\n    exact hx_not_int_union (h_subset hx_intA)\n  have h_not_intB : x ∉ interior B := by\n    intro hx_intB\n    have h_subset : interior B ⊆ interior (A ∪ B) :=\n      interior_mono (by\n        intro y hy\n        exact Or.inr hy)\n    exact hx_not_int_union (h_subset hx_intB)\n  -- Rewrite `closure (A ∪ B)` as the union of the closures.\n  have h_eq : closure (A ∪ B : Set X) = closure A ∪ closure B :=\n    (Topology.closure_union_eq (A := A) (B := B))\n  have hx_cl_AB : x ∈ closure A ∪ closure B := by\n    simpa [h_eq] using hx_cl_union\n  -- Conclude that `x` lies in at least one of the desired frontiers.\n  cases hx_cl_AB with\n  | inl hx_clA =>\n      exact Or.inl ⟨hx_clA, h_not_intA⟩\n  | inr hx_clB =>\n      exact Or.inr ⟨hx_clB, h_not_intB⟩"
+  ],
+  "success": true
+}

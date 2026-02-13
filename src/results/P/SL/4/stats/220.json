@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.545119524002075
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3668,
+      "prompt_tokens": 32017,
+      "total_tokens": 35685,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interInterior_subset_inter_interior_closure_interior\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior A ∩ interior B)) ⊆\n      interior (closure (interior A)) ∩ interior (closure (interior B)) := by\n  intro x hx\n  -- `interior A ∩ interior B` is contained in `interior A`\n  have hSubA : (interior A ∩ interior B : Set X) ⊆ interior A := by\n    intro y hy\n    exact hy.1\n  -- and also contained in `interior B`\n  have hSubB : (interior A ∩ interior B : Set X) ⊆ interior B := by\n    intro y hy\n    exact hy.2\n  -- Taking closures preserves these inclusions\n  have hClA :\n      closure (interior A ∩ interior B) ⊆ closure (interior A) :=\n    closure_mono hSubA\n  have hClB :\n      closure (interior A ∩ interior B) ⊆ closure (interior B) :=\n    closure_mono hSubB\n  -- Taking interiors again preserves the inclusions\n  have hIntA :\n      interior (closure (interior A ∩ interior B)) ⊆\n        interior (closure (interior A)) :=\n    interior_mono hClA\n  have hIntB :\n      interior (closure (interior A ∩ interior B)) ⊆\n        interior (closure (interior B)) :=\n    interior_mono hClB\n  -- Apply the inclusions to the given point `x`\n  exact And.intro (hIntA hx) (hIntB hx)"
+  ],
+  "success": true
+}

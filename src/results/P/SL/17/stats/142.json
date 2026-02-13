@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.09837317466736
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1443,
+      "prompt_tokens": 22842,
+      "total_tokens": 24285,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_isOpen {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP3A : Topology.P3 A) (hOpenB : IsOpen B) :\n    Topology.P3 (A ∪ B) := by\n  -- `B` is open, hence satisfies `P3`.\n  have hP3B : Topology.P3 B := Topology.P3_of_isOpen (A := B) hOpenB\n  -- Apply the existing union lemma for `P3`.\n  exact Topology.P3_union (A := A) (B := B) hP3A hP3B"
+  ],
+  "success": true
+}

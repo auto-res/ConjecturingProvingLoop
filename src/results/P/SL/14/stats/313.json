@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.33108139038086
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3143,
+      "prompt_tokens": 59161,
+      "total_tokens": 62304,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58112
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_isClosed_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P2 A) (hB_closed : IsClosed B) (hB_P2 : Topology.P2 B) :\n    Topology.P2 (A ∪ B) := by\n  -- From `P2 B` and closedness we know that `B` is open.\n  have hB_open : IsOpen B :=\n    Topology.isOpen_of_isClosed_and_P2 (X := X) (A := B) hB_closed hB_P2\n  -- Apply the existing lemma for the union with an open set.\n  exact Topology.P2_union_isOpen_right (X := X) (A := A) (B := B) hA hB_open"
+  ],
+  "success": true
+}

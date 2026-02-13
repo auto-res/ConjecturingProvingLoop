@@ -1,0 +1,60 @@
+{
+  "times": [
+    43.72116184234619,
+    101.60928058624268,
+    183.9404981136322
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2987,
+      "prompt_tokens": 31710,
+      "total_tokens": 34697,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    },
+    {
+      "completion_tokens": 7588,
+      "prompt_tokens": 32035,
+      "total_tokens": 39623,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7360,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    },
+    {
+      "completion_tokens": 13966,
+      "prompt_tokens": 32157,
+      "total_tokens": 46123,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 13952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem frontier_closure_subset_frontier {X : Type*} [TopologicalSpace X] (A : Set X) :\n    frontier (closure A) ⊆ frontier A := by\n  intro x hx\n  -- `hx` gives `x ∈ closure (closure A)` and `x ∈ closure ((closure A)ᶜ)`.\n  rcases hx with ⟨hx_cl_cl, hx_cl_compl⟩\n  -- Simplify the first membership.\n  have hx_clA : x ∈ closure A := by\n    simpa [closure_closure] using hx_cl_cl\n  -- Show that `x` also lies in `closure (Aᶜ)`.\n  have h_subset : (closure A)ᶜ ⊆ (Aᶜ : Set X) := by\n    intro y hy\n    by_contra hAy\n    -- If `y ∈ A`, then `y ∈ closure A`, contradicting `hy`.\n    have : y ∈ closure A := subset_closure hAy\n    exact hy this\n  have hx_clAc : x ∈ closure (Aᶜ) :=\n    (closure_mono h_subset) hx_cl_compl\n  -- Combine the two facts to conclude.\n  exact And.intro hx_clA hx_clAc",
+    "theorem closure_union_interior_eq_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A ∪ interior A) = closure A := by\n  apply subset_antisymm\n  · -- First, prove `closure (A ∪ interior A) ⊆ closure A`.\n    have h_subset : (A ∪ interior A : Set X) ⊆ closure A := by\n      intro x hx\n      cases hx with\n      | inl hA      => exact subset_closure hA\n      | inr hIntA   => exact subset_closure (interior_subset hIntA)\n    exact closure_mono h_subset\n  · -- Second, prove `closure A ⊆ closure (A ∪ interior A)`.\n    have h_subset : (A : Set X) ⊆ A ∪ interior A := by\n      intro x hx\n      exact Or.inl hx\n    exact closure_mono h_subset",
+    ""
+  ],
+  "success": true
+}

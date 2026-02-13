@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.413625717163086
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2056,
+      "prompt_tokens": 52014,
+      "total_tokens": 54070,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_eq_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed A) (hB : IsClosed B) :\n    closure (A ∩ B) = A ∩ B := by\n  -- The intersection of two closed sets is closed.\n  have hClosed : IsClosed (A ∩ B) := hA.inter hB\n  -- A closed set is equal to its closure.\n  simpa [hClosed.closure_eq]"
+  ],
+  "success": true
+}

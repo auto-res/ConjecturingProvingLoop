@@ -1,0 +1,26 @@
+{
+  "times": [
+    52.8885931968689
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5150,
+      "prompt_tokens": 11498,
+      "total_tokens": 16648,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_iff_P3_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) :\n    Topology.P2 (X := X) A ↔ Topology.P3 (X := X) A := by\n  constructor\n  · intro hP2\n    dsimp [Topology.P3] at *\n    intro x hxA\n    have hx_int_cl : x ∈ interior (closure (interior (A : Set X))) := hP2 hxA\n    have h_subset_cl : closure (interior (A : Set X)) ⊆ A := by\n      have h_sub : (interior (A : Set X)) ⊆ A := interior_subset\n      have h_cl : closure (interior (A : Set X)) ⊆ closure A := closure_mono h_sub\n      simpa [hA_closed.closure_eq] using h_cl\n    have h_subset_int :\n        interior (closure (interior (A : Set X))) ⊆ interior A :=\n      interior_mono h_subset_cl\n    have hx_intA : x ∈ interior A := h_subset_int hx_int_cl\n    simpa [hA_closed.closure_eq] using hx_intA\n  · intro hP3\n    dsimp [Topology.P2] at *\n    intro x hxA\n    have hx_int_clA : x ∈ interior (closure (A : Set X)) := hP3 hxA\n    have hx_intA : x ∈ interior A := by\n      simpa [hA_closed.closure_eq] using hx_int_clA\n    have h_subset :\n        interior (A : Set X) ⊆ interior (closure (interior (A : Set X))) := by\n      have h_open : IsOpen (interior (A : Set X)) := isOpen_interior\n      have h_sub : interior (A : Set X) ⊆ closure (interior (A : Set X)) :=\n        subset_closure\n      exact interior_maximal h_sub h_open\n    exact h_subset hx_intA"
+  ],
+  "success": true
+}

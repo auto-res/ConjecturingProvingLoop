@@ -1,0 +1,26 @@
+{
+  "times": [
+    22.673112869262695
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1206,
+      "prompt_tokens": 39710,
+      "total_tokens": 40916,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_of_dense_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hB : Dense B) :\n    Topology.P3 (A ∪ B) := by\n  have h : Topology.P3 (B ∪ A) :=\n    Topology.P3_union_of_dense_left (A := B) (B := A) hB\n  simpa [Set.union_comm] using h"
+  ],
+  "success": true
+}

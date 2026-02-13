@@ -1,0 +1,26 @@
+{
+  "times": [
+    16.490660667419434
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1112,
+      "prompt_tokens": 24403,
+      "total_tokens": 25515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_eq_self_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_int : interior A = A) :\n    Topology.P1 A := by\n  -- The equality `interior A = A` shows that `A` is open.\n  have hOpen : IsOpen A := by\n    simpa [h_int] using (isOpen_interior : IsOpen (interior A))\n  -- Openness of `A` implies `P1 A`.\n  simpa using Topology.isOpen_imp_P1 (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

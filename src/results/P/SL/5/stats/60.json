@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.06933808326721
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2887,
+      "prompt_tokens": 9118,
+      "total_tokens": 12005,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : P2 (X := X) A) :\n    P1 (X := X) (closure (A : Set X)) := by\n  dsimp [P1] at *\n  intro x hx\n  -- Step 1: `closure A ⊆ closure (interior A)` via `P2`.\n  have h₁ : closure (A : Set X) ⊆ closure (interior A) :=\n    P2_closure_subset (X := X) (A := A) hA\n  -- Step 2: `closure (interior A) ⊆ closure (interior (closure A))`.\n  have h₂ : closure (interior A) ⊆ closure (interior (closure (A : Set X))) :=\n    closure_interior_subset_closure_interior_closure (X := X) A\n  -- Combine the two inclusions.\n  have hx' : x ∈ closure (interior A) := h₁ hx\n  exact h₂ hx'"
+  ],
+  "success": true
+}

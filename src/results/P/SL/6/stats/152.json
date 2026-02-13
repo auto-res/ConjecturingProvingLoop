@@ -1,0 +1,26 @@
+{
+  "times": [
+    98.43725037574768
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7738,
+      "prompt_tokens": 23093,
+      "total_tokens": 30831,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7552,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_satisfies_P1\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (closure (interior (closure (interior (A : Set X))))) := by\n  -- `P1` holds for `interior (closure (interior A))`.\n  have hP1 : Topology.P1 (interior (closure (interior (A : Set X)))) :=\n    Topology.interior_closure_interior_satisfies_P1 (A := A)\n  -- `P1` is stable under taking closures.\n  exact\n    Topology.P1_closure_of_P1\n      (A := interior (closure (interior (A : Set X)))) hP1"
+  ],
+  "success": true
+}

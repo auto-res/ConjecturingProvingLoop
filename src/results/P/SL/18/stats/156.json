@@ -1,0 +1,26 @@
+{
+  "times": [
+    168.75501441955566
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 15236,
+      "prompt_tokens": 22680,
+      "total_tokens": 37916,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_inter_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hOpenB : IsOpen (B : Set X)) :\n    Topology.P1 A → Topology.P1 (A ∩ B) := by\n  intro hP1\n  -- Unfold the definition of `P1`.\n  dsimp [Topology.P1] at hP1 ⊢\n  intro x hx\n  rcases hx with ⟨hxA, hxB⟩\n  -- `x` lies in the closure of `interior A`.\n  have hxClA : x ∈ closure (interior A) := hP1 hxA\n  -- We show that `x` belongs to the closure of `interior (A ∩ B)`.\n  -- To this end, we establish a more general inclusion.\n  have hIncl :\n      (closure (interior A) ∩ B) ⊆ closure (interior (A ∩ B)) := by\n    intro y hy\n    rcases hy with ⟨hyClA, hyB⟩\n    -- Characterize membership in a closure via neighbourhoods.\n    have : y ∈ closure (interior (A ∩ B)) := by\n      -- Use the neighbourhood formulation of `closure`.\n      apply (mem_closure_iff).2\n      intro U hU_open hyU\n      -- Intersect the neighbourhood with `B`, which is open.\n      have hU_B_open : IsOpen (U ∩ B) := hU_open.inter hOpenB\n      have hyU_B : y ∈ U ∩ B := ⟨hyU, hyB⟩\n      -- From `y ∈ closure (interior A)` we obtain a point of `interior A`\n      -- meeting `U ∩ B`.\n      have hNonempty :\n          ((U ∩ B) ∩ interior A).Nonempty :=\n        (mem_closure_iff).1 hyClA (U ∩ B) hU_B_open hyU_B\n      rcases hNonempty with ⟨z, ⟨⟨hzU, hzB⟩, hzIntA⟩⟩\n      -- Identify the interior of the intersection using openness of `B`.\n      have hIntEq :\n          interior (A ∩ B : Set X) = interior A ∩ B := by\n        simpa [hOpenB.interior_eq] using interior_inter\n      -- The point `z` lies in `U ∩ interior (A ∩ B)`.\n      have hzIntAB : z ∈ interior (A ∩ B) := by\n        have : z ∈ interior A ∩ B := ⟨hzIntA, hzB⟩\n        simpa [hIntEq] using this\n      exact ⟨z, ⟨hzU, hzIntAB⟩⟩\n    exact this\n  -- Apply the inclusion to our point `x`.\n  have : x ∈ closure (interior (A ∩ B)) :=\n    hIncl ⟨hxClA, hxB⟩\n  exact this"
+  ],
+  "success": true
+}

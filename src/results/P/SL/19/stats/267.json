@@ -1,0 +1,43 @@
+{
+  "times": [
+    66.63743090629578,
+    115.97426915168762
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4371,
+      "prompt_tokens": 42515,
+      "total_tokens": 46886,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    },
+    {
+      "completion_tokens": 7250,
+      "prompt_tokens": 42625,
+      "total_tokens": 49875,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_iff_closure_eq_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    frontier A = (∅ : Set X) ↔ closure A = interior A := by\n  constructor\n  · intro hFrontier\n    -- First, show `closure A ⊆ interior A`.\n    have hSub : closure A ⊆ interior A := by\n      intro x hxClos\n      by_cases hxInt : x ∈ interior A\n      · exact hxInt\n      ·\n        -- Otherwise `x` would lie in the (empty) frontier, a contradiction.\n        have hxFront : x ∈ frontier A := And.intro hxClos hxInt\n        have : (x : X) ∈ (∅ : Set X) := by\n          simpa [hFrontier] using hxFront\n        cases this\n    -- Combine the inclusions to obtain the desired equality.\n    exact Set.Subset.antisymm hSub (interior_subset : interior A ⊆ closure A)\n  · intro hEq\n    exact Topology.frontier_eq_empty_of_closure_eq_interior (A := A) hEq",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.139997482299805
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3103,
+      "prompt_tokens": 20851,
+      "total_tokens": 23954,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_diff_subset_closure_interior {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    closure (interior ((A \\ B) : Set X)) ⊆ closure (interior A) := by\n  intro x hx\n  -- `A \\ B` is contained in `A`\n  have h_subset : ((A \\ B) : Set X) ⊆ A := by\n    intro y hy\n    exact hy.1\n  -- Monotonicity of `interior`\n  have h_interior : interior ((A \\ B) : Set X) ⊆ interior A :=\n    interior_mono h_subset\n  -- Monotonicity of `closure`\n  have h_closure :\n      closure (interior ((A \\ B) : Set X)) ⊆ closure (interior A) :=\n    closure_mono h_interior\n  exact h_closure hx"
+  ],
+  "success": true
+}

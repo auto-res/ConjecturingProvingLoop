@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.2342848777771
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2795,
+      "prompt_tokens": 56437,
+      "total_tokens": 59232,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closure_interior_subset_frontier\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (closure (interior A)) ⊆ frontier A := by\n  intro x hx\n  -- `hx.1` gives `x ∈ closure (closure (interior A))`; simplify the double closure.\n  have hClCI : x ∈ closure (interior A) := by\n    simpa [closure_closure] using hx.1\n  -- Monotonicity of `closure` under `interior A ⊆ A`.\n  have hClA : x ∈ closure A :=\n    (Topology.closure_interior_subset_closure (A := A)) hClCI\n  -- Show that `x ∉ interior A`; otherwise we contradict `hx.2`.\n  have hNotIntA : x ∉ interior A := by\n    intro hIntA\n    have hSubset :\n        interior A ⊆ interior (closure (interior A)) :=\n      Topology.interior_subset_interior_closure_interior (A := A)\n    have : x ∈ interior (closure (interior A)) := hSubset hIntA\n    exact hx.2 this\n  exact And.intro hClA hNotIntA"
+  ],
+  "success": true
+}

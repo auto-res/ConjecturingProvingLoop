@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.98688864707947
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5172,
+      "prompt_tokens": 46372,
+      "total_tokens": 51544,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem boundary_subset_closure_complement {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (A : Set X) \\ interior (A : Set X) ⊆\n      closure ((Aᶜ) : Set X) := by\n  intro x hx\n  -- Identify the boundary with the intersection of the two closures.\n  have hEq := boundary_eq_closure_inter_closure_compl (A := A)\n  -- Reinterpret `hx` via this equality.\n  have hx' :\n      (x : X) ∈ closure (A : Set X) ∩ closure ((Aᶜ) : Set X) := by\n    simpa [hEq] using hx\n  exact hx'.2"
+  ],
+  "success": true
+}

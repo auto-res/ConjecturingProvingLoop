@@ -1,0 +1,43 @@
+{
+  "times": [
+    122.90596294403076,
+    119.04726338386536
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9037,
+      "prompt_tokens": 18943,
+      "total_tokens": 27980,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 8763,
+      "prompt_tokens": 19113,
+      "total_tokens": 27876,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_union_eq_union_closure_interiors {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (A ∪ B : Set X)) =\n      closure (interior (A : Set X)) ∪ closure (interior (B : Set X)) := by\n  -- Rewrite the interior of a union as the union of the interiors.\n  calc\n    closure (interior (A ∪ B : Set X))\n        = closure ((interior (A : Set X)) ∪ interior B) := by\n          simpa [Set.interior_union]\n    _ = closure (interior (A : Set X)) ∪ closure (interior B) := by\n          simpa using\n            closure_union_interiors_eq_union_closure_interiors\n              (A := A) (B := B)",
+    "theorem Set.interior_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) ∪ interior B ⊆ interior (A ∪ B) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have h_sub : interior (A : Set X) ⊆ interior (A ∪ B) := by\n        apply interior_mono\n        intro y hy\n        exact Or.inl hy\n      exact h_sub hA\n  | inr hB =>\n      have h_sub : interior B ⊆ interior (A ∪ B) := by\n        apply interior_mono\n        intro y hy\n        exact Or.inr hy\n      exact h_sub hB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    135.07767915725708
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11107,
+      "prompt_tokens": 29516,
+      "total_tokens": 40623,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_diff_closed_imp_P2 {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsClosed B) :\n    Topology.P2 (A \\ B) := by\n  -- `A \\ B` is the intersection of two open sets: `A` and `Bᶜ`.\n  have hOpenDiff : IsOpen (A \\ B) := by\n    -- The complement of a closed set is open.\n    have hOpenCompl : IsOpen (Bᶜ) := by\n      simpa using (isOpen_compl_iff).2 hB\n    -- The intersection of two open sets is open.\n    simpa [Set.diff_eq] using hA.inter hOpenCompl\n  -- Any open set satisfies `P2`.\n  simpa using\n    Topology.isOpen_imp_P2 (X := X) (A := A \\ B) hOpenDiff"
+  ],
+  "success": true
+}

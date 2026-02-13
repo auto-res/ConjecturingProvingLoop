@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.166624307632446
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1344,
+      "prompt_tokens": 50249,
+      "total_tokens": 51593,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_closure_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) →\n      Topology.P1 (closure (A : Set X)) ∧\n        Topology.P2 (closure (A : Set X)) ∧\n        Topology.P3 (closure (A : Set X)) := by\n  intro hDense\n  have hP1 := Topology.P1_closure_of_dense (A := A) hDense\n  have hP2 := Topology.P2_closure_of_dense (A := A) hDense\n  have hP3 := Topology.P3_closure_of_dense (A := A) hDense\n  exact ⟨hP1, hP2, hP3⟩"
+  ],
+  "success": true
+}

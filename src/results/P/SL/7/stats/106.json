@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.10936975479126
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2951,
+      "prompt_tokens": 15037,
+      "total_tokens": 17988,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosure_subset_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (closure (A : Set X))) ⊆ closure (A : Set X) := by\n  -- `interior (closure A)` is contained in `closure A`.\n  have hSub : (interior (closure (A : Set X)) : Set X) ⊆ closure (A : Set X) :=\n    interior_subset\n  -- Taking closures preserves the inclusion.\n  have hClosure :\n      closure (interior (closure (A : Set X))) ⊆ closure (closure (A : Set X)) :=\n    closure_mono hSub\n  -- Simplify the right-hand side using idempotency of `closure`.\n  simpa [closure_closure] using hClosure"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    80.44344472885132
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5949,
+      "prompt_tokens": 36882,
+      "total_tokens": 42831,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_iInter_subset\n    {ι : Sort _} {X : Type _} [TopologicalSpace X] (A : ι → Set X) :\n    closure (⋂ i, A i : Set X) ⊆ ⋂ i, closure (A i) := by\n  intro x hx\n  -- For each index `i`, show that `x ∈ closure (A i)`.\n  have hxi : ∀ i, x ∈ closure (A i) := by\n    intro i\n    -- The intersection is contained in each component.\n    have hSub : (⋂ j, A j : Set X) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Taking closures preserves inclusions.\n    have hClos : closure (⋂ j, A j : Set X) ⊆ closure (A i) :=\n      closure_mono hSub\n    exact hClos hx\n  -- Assemble the pointwise condition into membership in the intersection.\n  exact Set.mem_iInter.2 hxi"
+  ],
+  "success": true
+}

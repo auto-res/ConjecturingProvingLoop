@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.57620668411255
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2186,
+      "prompt_tokens": 30269,
+      "total_tokens": 32455,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_eq_self_satisfies_P1_P2_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hInt : interior A = A) :\n    Topology.P1 (X := X) A ∧\n      Topology.P2 (X := X) A ∧\n      Topology.P3 (X := X) A := by\n  -- From `interior A = A`, deduce that `A` is open.\n  have hOpen : IsOpen A := by\n    have : IsOpen (interior A) := isOpen_interior\n    simpa [hInt] using this\n  -- Any open set satisfies all three properties.\n  exact Topology.isOpen_satisfies_P1_P2_P3 (X := X) (A := A) hOpen"
+  ],
+  "success": true
+}

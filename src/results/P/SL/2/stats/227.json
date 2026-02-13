@@ -1,0 +1,26 @@
+{
+  "times": [
+    136.6476333141327
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9482,
+      "prompt_tokens": 37173,
+      "total_tokens": 46655,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36608
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_isClosed_implies_frontier_eq_empty {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Dense A → IsClosed A → frontier (A : Set X) = (∅ : Set X) := by\n  intro hDense hClosed\n  have hA : (A : Set X) = (Set.univ : Set X) :=\n    Topology.dense_isClosed_implies_univ (A := A) hDense hClosed\n  simpa [hA, frontier_univ]"
+  ],
+  "success": true
+}

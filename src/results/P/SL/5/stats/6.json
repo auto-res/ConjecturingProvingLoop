@@ -1,0 +1,26 @@
+{
+  "times": [
+    119.33997106552124
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8124,
+      "prompt_tokens": 1012,
+      "total_tokens": 9136,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7872,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    P2 A := by\n  dsimp [P2]\n  intro x hx\n  -- `closure A` is a neighborhood of `x`\n  have h_closure_nhds : closure A ∈ 𝓝 x := by\n    have hA_nhds : (A : Set X) ∈ 𝓝 x := hA.mem_nhds hx\n    exact Filter.mem_of_superset hA_nhds (subset_closure : A ⊆ closure A)\n  -- hence `x ∈ interior (closure A)`\n  have h_mem : x ∈ interior (closure A) :=\n    (mem_interior_iff_mem_nhds).mpr h_closure_nhds\n  -- rewrite using `interior A = A` because `A` is open\n  have h_intA : interior A = A := hA.interior_eq\n  simpa [h_intA] using h_mem"
+  ],
+  "success": true
+}

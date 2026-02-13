@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.54629564285278
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3669,
+      "prompt_tokens": 66643,
+      "total_tokens": 70312,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 65408
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union_twelve {X : Type*} [TopologicalSpace X]\n    {A B C D E F G H I J K L : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : Topology.P1 (X := X) B)\n    (hC : Topology.P1 (X := X) C) (hD : Topology.P1 (X := X) D)\n    (hE : Topology.P1 (X := X) E) (hF : Topology.P1 (X := X) F)\n    (hG : Topology.P1 (X := X) G) (hH : Topology.P1 (X := X) H)\n    (hI : Topology.P1 (X := X) I) (hJ : Topology.P1 (X := X) J)\n    (hK : Topology.P1 (X := X) K) (hL : Topology.P1 (X := X) L) :\n    Topology.P1 (X := X)\n      (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J ∪ K ∪ L) := by\n  -- Combine the first eleven sets using the existing lemma.\n  have hEleven :\n      Topology.P1 (X := X)\n        (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J ∪ K) :=\n    Topology.P1_union_eleven (X := X)\n      (A := A) (B := B) (C := C) (D := D) (E := E) (F := F)\n      (G := G) (H := H) (I := I) (J := J) (K := K)\n      hA hB hC hD hE hF hG hH hI hJ hK\n  -- Unite the result with `L`.\n  have hTwelve :\n      Topology.P1 (X := X)\n        ((A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J ∪ K) ∪ L) :=\n    Topology.P1_union (X := X)\n      (A := A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J ∪ K) (B := L)\n      hEleven hL\n  -- Reassociating unions to match the desired shape.\n  simpa [Set.union_assoc] using hTwelve"
+  ],
+  "success": true
+}

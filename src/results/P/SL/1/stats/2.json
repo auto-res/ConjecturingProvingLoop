@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.61869382858276
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6427,
+      "prompt_tokens": 462,
+      "total_tokens": 6889,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (interior A) := by\n  dsimp [Topology.P2]\n  simpa [interior_interior] using\n    (by\n      have hsubset : interior A ⊆ closure (interior A) := by\n        intro x hx\n        exact subset_closure hx\n      have hmono : interior (interior A) ⊆ interior (closure (interior A)) :=\n        interior_mono hsubset\n      simpa [interior_interior] using hmono)"
+  ],
+  "success": true
+}

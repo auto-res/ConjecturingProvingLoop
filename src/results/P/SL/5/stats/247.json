@@ -1,0 +1,26 @@
+{
+  "times": [
+    119.19203352928162
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6258,
+      "prompt_tokens": 44616,
+      "total_tokens": 50874,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_inter_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (A : Set X))) ∩ interior (closure (A : Set X)) =\n      interior (closure (interior (A : Set X))) := by\n  -- First, note that `interior (closure (interior A)) ⊆ interior (closure A)`.\n  have hsubset :\n      interior (closure (interior (A : Set X))) ⊆ interior (closure (A : Set X)) :=\n    interior_closure_interior_subset_interior_closure (X := X) (A := A)\n  -- Now prove the desired set equality by double inclusion.\n  ext x\n  constructor\n  · -- The left‐to‐right inclusion is immediate.\n    intro hx\n    exact hx.1\n  · -- For the converse, use the inclusion `hsubset`.\n    intro hx\n    exact ⟨hx, hsubset hx⟩"
+  ],
+  "success": true
+}

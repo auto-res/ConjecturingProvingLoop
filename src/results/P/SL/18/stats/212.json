@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.545398473739624
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2445,
+      "prompt_tokens": 32293,
+      "total_tokens": 34738,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_subset_interiors\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B : Set X) ⊆ interior A ∩ interior B := by\n  intro x hx\n  -- `interior` is monotone with respect to set inclusion on the left factor.\n  have hA :\n      interior (A ∩ B : Set X) ⊆ interior A := by\n    apply interior_mono\n    exact Set.inter_subset_left\n  -- And similarly for the right factor.\n  have hB :\n      interior (A ∩ B : Set X) ⊆ interior B := by\n    apply interior_mono\n    exact Set.inter_subset_right\n  -- Combine the two inclusions to obtain the desired membership.\n  exact ⟨hA hx, hB hx⟩"
+  ],
+  "success": true
+}

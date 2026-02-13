@@ -1,0 +1,26 @@
+{
+  "times": [
+    109.56435632705688
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6147,
+      "prompt_tokens": 43904,
+      "total_tokens": 50051,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem open_iff_all_Ps_of_closed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) :\n    IsOpen (A : Set X) ↔\n      (Topology.P1 (A : Set X) ∧ Topology.P2 A ∧ Topology.P3 A) := by\n  calc\n    IsOpen (A : Set X) ↔ Topology.P2 A :=\n      (Topology.P2_iff_open_of_closed (A := A) hClosed).symm\n    _ ↔ (Topology.P1 (A : Set X) ∧ Topology.P2 A ∧ Topology.P3 A) :=\n      (Topology.all_Ps_iff_P2_of_closed (A := A) hClosed).symm"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.83944630622864
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4670,
+      "prompt_tokens": 23822,
+      "total_tokens": 28492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iff_subset_and_closure_subset {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P2 (A := A) ↔\n      (A ⊆ interior (closure A) ∧ closure A ⊆ closure (interior A)) := by\n  constructor\n  · intro hP2\n    -- The inclusion `A ⊆ interior (closure A)` follows from `P2 → P3`.\n    have hP3 : Topology.P3 (A := A) := Topology.P2_implies_P3 (A := A) hP2\n    -- From `P2 → P1` we obtain the equality of the two closures.\n    have hP1 : Topology.P1 (A := A) := Topology.P2_implies_P1 (A := A) hP2\n    have hEq : closure A = closure (interior A) :=\n      Topology.closure_eq_closure_interior_of_P1 (A := A) hP1\n    -- Rewrite `subset_rfl` using this equality to get the desired inclusion.\n    have hClosIncl : closure A ⊆ closure (interior A) := by\n      simpa [hEq] using (subset_rfl : closure A ⊆ closure A)\n    exact And.intro hP3 hClosIncl\n  · rintro ⟨hSubA, hClosIncl⟩\n    -- To establish `P2`, start from `A ⊆ interior (closure A)`.\n    dsimp [Topology.P2]\n    intro x hxA\n    have hxInt : x ∈ interior (closure A) := hSubA hxA\n    -- Use monotonicity of `interior` with the inclusion of the closures.\n    have hIntMono :\n        interior (closure A) ⊆ interior (closure (interior A)) :=\n      interior_mono hClosIncl\n    exact hIntMono hxInt"
+  ],
+  "success": true
+}

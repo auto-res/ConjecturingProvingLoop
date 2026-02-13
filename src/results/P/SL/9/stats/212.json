@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.66442346572876
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5601,
+      "prompt_tokens": 35198,
+      "total_tokens": 40799,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.inter_interiorCompl_eq_empty {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (A : Set X) ∩ interior (Aᶜ) = (∅ : Set X) := by\n  classical\n  -- We prove the intersection is empty by showing no element belongs to it.\n  apply (Set.eq_empty_iff_forall_not_mem).2\n  intro x hx\n  rcases hx with ⟨hxA, hxIntCompl⟩\n  have hxAc : x ∈ (Aᶜ : Set X) := interior_subset hxIntCompl\n  exact hxAc hxA"
+  ],
+  "success": true
+}

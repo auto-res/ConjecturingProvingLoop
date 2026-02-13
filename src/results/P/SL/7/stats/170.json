@@ -1,0 +1,26 @@
+{
+  "times": [
+    81.0176649093628
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6049,
+      "prompt_tokens": 26305,
+      "total_tokens": 32354,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosureInterior_eq_empty_iff\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) = (∅ : Set X) ↔\n      interior A = (∅ : Set X) := by\n  constructor\n  · intro h\n    -- `interior A` is contained in `interior (closure (interior A))`,\n    -- hence it must also be empty.\n    have hSub : interior A ⊆ (∅ : Set X) := by\n      intro x hx\n      have : x ∈ interior (closure (interior A)) :=\n        (Topology.interior_subset_interiorClosureInterior (A := A)) hx\n      simpa [h] using this\n    -- Use `Subset.antisymm` to obtain the desired equality.\n    apply Set.Subset.antisymm\n    · exact hSub\n    · intro x hx\n      cases hx\n  · intro hInt\n    -- From `interior A = ∅` we derive\n    -- `closure (interior A) = ∅` and hence its interior is also `∅`.\n    have hClosure : closure (interior A) = (∅ : Set X) := by\n      simpa [hInt] using (closure_empty : closure (∅ : Set X) = (∅ : Set X))\n    simpa [hClosure] using\n      (interior_empty : interior (∅ : Set X) = (∅ : Set X))"
+  ],
+  "success": true
+}

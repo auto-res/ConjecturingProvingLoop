@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.31117534637451
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4289,
+      "prompt_tokens": 34791,
+      "total_tokens": 39080,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_subset_diff_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B) ⊆ A \\ closure B := by\n  intro x hxInt\n  -- `x` lies in `A \\ B`.\n  have hAB : x ∈ A \\ B := interior_subset hxInt\n  have hA : x ∈ A := hAB.1\n  -- We show `x ∉ closure B`.\n  have hNotClB : x ∉ closure B := by\n    intro hxClB\n    -- The open neighbourhood `U := interior (A \\ B)` of `x`\n    -- must intersect `B` because `x ∈ closure B`.\n    have hNon :\n        ((interior (A \\ B) : Set X) ∩ B).Nonempty :=\n      (mem_closure_iff).1 hxClB (interior (A \\ B)) isOpen_interior hxInt\n    rcases hNon with ⟨y, ⟨hyInt, hyB⟩⟩\n    -- But `y ∈ interior (A \\ B)` implies `y ∉ B`, contradiction.\n    have hNotB : y ∉ B := (interior_subset hyInt).2\n    exact hNotB hyB\n  exact And.intro hA hNotClB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.527172803878784
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4080,
+      "prompt_tokens": 56335,
+      "total_tokens": 60415,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closure_subset_frontier {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (closure (A : Set X)) ⊆ frontier (A : Set X) := by\n  intro x hx\n  rcases hx with ⟨hx_closure_cl, hx_not_int_cl⟩\n  -- `x` is in `closure A`\n  have hx_closure : (x : X) ∈ closure (A : Set X) := by\n    simpa [closure_closure] using hx_closure_cl\n  -- If `x` were in `interior A`, it would lie in `interior (closure A)`,\n  -- contradicting `hx_not_int_cl`.\n  have hx_not_intA : x ∉ interior (A : Set X) := by\n    intro hx_intA\n    have hIntMono :\n        (interior (A : Set X) : Set X) ⊆ interior (closure (A : Set X)) :=\n      interior_mono (subset_closure : (A : Set X) ⊆ closure A)\n    have : x ∈ interior (closure (A : Set X)) := hIntMono hx_intA\n    exact hx_not_int_cl this\n  exact And.intro hx_closure hx_not_intA"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.131279945373535
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2780,
+      "prompt_tokens": 46902,
+      "total_tokens": 49682,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_prod_right_open_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hB_open : IsOpen B) (hB_nonempty : B.Nonempty) :\n    (Topology.P1 (A ×ˢ B) ∧ Topology.P2 (A ×ˢ B) ∧ Topology.P3 (A ×ˢ B)) ↔\n      (Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A) := by\n  -- Individual equivalences for each property with an open, nonempty right factor.\n  have hP1Equiv :=\n    Topology.P1_prod_right_open_iff (A := A) (B := B) hB_open hB_nonempty\n  have hP2Equiv :=\n    Topology.P2_prod_right_open_iff (A := A) (B := B) hB_open hB_nonempty\n  have hP3Equiv :=\n    Topology.P3_prod_right_open_iff (A := A) (B := B) hB_open hB_nonempty\n  constructor\n  · rintro ⟨hP1Prod, hP2Prod, hP3Prod⟩\n    exact\n      ⟨hP1Equiv.mp hP1Prod, hP2Equiv.mp hP2Prod, hP3Equiv.mp hP3Prod⟩\n  · rintro ⟨hP1A, hP2A, hP3A⟩\n    exact\n      ⟨hP1Equiv.mpr hP1A, hP2Equiv.mpr hP2A, hP3Equiv.mpr hP3A⟩"
+  ],
+  "success": true
+}

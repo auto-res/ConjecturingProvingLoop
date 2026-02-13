@@ -1,0 +1,26 @@
+{
+  "times": [
+    49.19797086715698
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3826,
+      "prompt_tokens": 34582,
+      "total_tokens": 38408,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33664
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_prod_left_of_nonempty\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hBne : B.Nonempty) :\n    Topology.P2 (A ×ˢ B) → Topology.P2 A := by\n  intro hProd\n  dsimp [Topology.P2] at hProd ⊢\n  intro x hxA\n  classical\n  obtain ⟨y, hyB⟩ := hBne\n  -- Form the point `(x, y)` in the product.\n  have h_mem_prod : ((x, y) : X × Y) ∈ A ×ˢ B := by\n    exact And.intro hxA hyB\n  -- Apply the `P2` property of the product.\n  have h_int_prod :\n      ((x, y) : X × Y) ∈ interior (closure (interior (A ×ˢ B))) :=\n    hProd h_mem_prod\n  -- Identify `interior (A ×ˢ B)` with a product of interiors.\n  have h_int_eq :\n      interior (A ×ˢ B) = interior A ×ˢ interior B := by\n    simpa using interior_prod_eq (s := A) (t := B)\n  -- Identify the closure of this interior with a product of closures.\n  have h_closure_eq :\n      closure (interior (A ×ˢ B)) =\n        closure (interior A) ×ˢ closure (interior B) := by\n    calc\n      closure (interior (A ×ˢ B))\n          = closure (interior A ×ˢ interior B) := by\n              simpa [h_int_eq]\n      _ = closure (interior A) ×ˢ closure (interior B) := by\n              simpa using\n                closure_prod_eq (s := interior A) (t := interior B)\n  -- Rewrite the relevant interior once more.\n  have h_interior_closure_eq :\n      interior (closure (interior (A ×ˢ B))) =\n        interior (closure (interior A)) ×ˢ\n          interior (closure (interior B)) := by\n    calc\n      interior (closure (interior (A ×ˢ B)))\n          = interior ((closure (interior A)) ×ˢ (closure (interior B))) := by\n              simpa [h_closure_eq]\n      _ = interior (closure (interior A)) ×ˢ\n          interior (closure (interior B)) := by\n              simpa using\n                interior_prod_eq\n                  (s := closure (interior A))\n                  (t := closure (interior B))\n  -- Transport membership through these identifications and extract the `X`–coordinate.\n  have h_mem :\n      ((x, y) : X × Y) ∈\n        interior (closure (interior A)) ×ˢ\n          interior (closure (interior B)) := by\n    simpa [h_interior_closure_eq] using h_int_prod\n  exact (Set.mem_prod.1 h_mem).1"
+  ],
+  "success": true
+}

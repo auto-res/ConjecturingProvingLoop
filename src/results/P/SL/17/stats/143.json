@@ -1,0 +1,26 @@
+{
+  "times": [
+    126.41331553459167
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8940,
+      "prompt_tokens": 22988,
+      "total_tokens": 31928,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (interior A)) : Topology.P3 (closure A) := by\n  unfold Topology.P3\n  intro x hx\n  -- `interior (closure A)` is the whole space because `interior A` is dense.\n  have hInt : interior (closure A) = (Set.univ : Set X) :=\n    Topology.interior_closure_eq_univ_of_dense_interior (A := A) hDense\n  -- Therefore every point belongs to `interior (closure A)`.\n  have hxInt : x ∈ interior (closure A) := by\n    have : x ∈ (Set.univ : Set X) := by\n      simp\n    simpa [hInt] using this\n  -- Rewrite to obtain membership in `interior (closure (closure A))`.\n  simpa [closure_closure] using hxInt"
+  ],
+  "success": true
+}

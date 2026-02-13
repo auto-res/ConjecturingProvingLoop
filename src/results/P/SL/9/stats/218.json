@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.50981044769287
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3521,
+      "prompt_tokens": 36567,
+      "total_tokens": 40088,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_interior_closure_interior_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior A)))))) =\n      interior (closure (interior A)) := by\n  -- First, compress the innermost five-step pattern.\n  have h₁ :\n      interior (closure (interior (closure (interior A)))) =\n        interior (closure (interior A)) :=\n    interior_closure_interior_idempotent (A := A)\n  -- Substitute the reduction and apply the two-step idempotency lemma.\n  simpa [h₁] using\n    (interior_closure_idempotent (A := interior A))"
+  ],
+  "success": true
+}

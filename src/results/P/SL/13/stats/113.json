@@ -1,0 +1,26 @@
+{
+  "times": [
+    97.84261322021484
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5401,
+      "prompt_tokens": 18832,
+      "total_tokens": 24233,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_closure_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : Topology.P1 (X := X) B) :\n    Topology.P1 (X := X) (closure ((A ∪ B) : Set X)) := by\n  -- First, `P1` holds for the union `A ∪ B`.\n  have h_union : Topology.P1 (X := X) (A ∪ B) :=\n    Topology.P1_union (X := X) (A := A) (B := B) hA hB\n  -- Then, `P1` is inherited by the closure of any set that satisfies `P1`.\n  exact Topology.P1_implies_P1_closure (X := X) (A := A ∪ B) h_union"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.37549901008606
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6305,
+      "prompt_tokens": 29497,
+      "total_tokens": 35802,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem open_union_has_all_Ps {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) (hB : IsOpen (B : Set X)) :\n    Topology.P1 (A ∪ B) ∧ Topology.P2 (A ∪ B) ∧ Topology.P3 (A ∪ B) := by\n  have hOpen : IsOpen (A ∪ B : Set X) := hA.union hB\n  exact Topology.isOpen_has_all_Ps (X := X) (A := (A ∪ B : Set X)) hOpen"
+  ],
+  "success": true
+}

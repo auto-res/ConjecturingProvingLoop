@@ -1,0 +1,26 @@
+{
+  "times": [
+    44.074379205703735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3160,
+      "prompt_tokens": 44830,
+      "total_tokens": 47990,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3008,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_inter_eq_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed A) (hB : IsClosed B) :\n    interior (closure (A ∩ B : Set X)) = interior (A ∩ B) := by\n  -- Since `A ∩ B` is closed, its closure is itself.\n  have hClosure : closure (A ∩ B : Set X) = A ∩ B :=\n    (IsClosed.inter hA hB).closure_eq\n  simpa [hClosure]"
+  ],
+  "success": true
+}

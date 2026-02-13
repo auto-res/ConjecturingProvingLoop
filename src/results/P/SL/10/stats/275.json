@@ -1,0 +1,43 @@
+{
+  "times": [
+    33.52397584915161,
+    264.32272958755493
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2235,
+      "prompt_tokens": 44784,
+      "total_tokens": 47019,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    },
+    {
+      "completion_tokens": 12853,
+      "prompt_tokens": 44899,
+      "total_tokens": 57752,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A = (Set.univ : Set X) ↔ interior (closure A) = Set.univ := by\n  constructor\n  · intro h\n    simpa [h, interior_univ]\n  · intro hInt\n    apply Set.Subset.antisymm\n    · exact Set.Subset_univ _\n    · intro x _\n      have hxInt : (x : X) ∈ interior (closure A) := by\n        have : (x : X) ∈ (Set.univ : Set X) := by\n          simp\n        simpa [hInt] using this\n      exact interior_subset hxInt",
+    "theorem Topology.closure_eq_univ_of_closure_interior_eq_univ'\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (interior A) = (Set.univ : Set X)) :\n    closure A = (Set.univ : Set X) := by\n  apply Set.Subset.antisymm\n  · -- `closure A` is certainly contained in `univ`.\n    intro _ _\n    trivial\n  · -- Use the hypothesis together with monotonicity of `closure`.\n    have h_sub : closure (interior A) ⊆ closure A :=\n      Topology.closure_interior_subset_closure (X := X) (A := A)\n    simpa [h] using h_sub"
+  ],
+  "success": true
+}

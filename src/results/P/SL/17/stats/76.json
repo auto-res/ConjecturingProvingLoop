@@ -1,0 +1,43 @@
+{
+  "times": [
+    62.03326177597046,
+    168.09242796897888
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5068,
+      "prompt_tokens": 10981,
+      "total_tokens": 16049,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8064
+      }
+    },
+    {
+      "completion_tokens": 11113,
+      "prompt_tokens": 11100,
+      "total_tokens": 22213,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_interior_iff_interior_closure_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Dense (interior A) ↔ interior (closure (interior A)) = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    have hClosure : closure (interior A) = (Set.univ : Set X) := hDense.closure_eq\n    simpa [hClosure] using\n      (interior_univ : interior (Set.univ : Set X) = Set.univ)\n  · intro hInt\n    have hClosure : closure (interior A) = (Set.univ : Set X) := by\n      apply subset_antisymm\n      · intro x _hx; trivial\n      · intro x hx\n        have hx_int : x ∈ interior (closure (interior A)) := by\n          simpa [hInt] using hx\n        exact\n          (interior_subset :\n              interior (closure (interior A)) ⊆ closure (interior A)) hx_int\n    simpa [Dense] using hClosure",
+    "theorem Topology.closed_dense_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed A) (hDense : Dense A) :\n    A = (Set.univ : Set X) := by\n  -- Since `A` is closed, its closure is itself.\n  have h₁ : closure A = A := hClosed.closure_eq\n  -- Since `A` is dense, its closure is the whole space.\n  have h₂ : closure A = (Set.univ : Set X) := hDense.closure_eq\n  -- Combining the two equalities yields the desired result.\n  simpa [h₁] using h₂"
+  ],
+  "success": true
+}

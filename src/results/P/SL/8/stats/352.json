@@ -1,0 +1,43 @@
+{
+  "times": [
+    76.68039321899414,
+    78.8285403251648
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6123,
+      "prompt_tokens": 55500,
+      "total_tokens": 61623,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 6611,
+      "prompt_tokens": 56097,
+      "total_tokens": 62708,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6592,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_closure_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A ∪ closure (Aᶜ) = (Set.univ : Set X) := by\n  -- We prove the two inclusions separately.\n  refine Set.Subset.antisymm ?_ ?_\n  · -- `⊆` direction is immediate.\n    intro x _; trivial\n  · -- For the `⊇` direction, take an arbitrary point `x`.\n    intro x _hx\n    by_cases hCl : x ∈ closure A\n    · -- If `x ∈ closure A`, we're done.\n      exact Or.inl hCl\n    · -- Otherwise, we show `x ∈ closure (Aᶜ)`.\n      -- First, note that `x ∉ A`, for otherwise `x ∈ closure A`.\n      have hNotA : x ∉ A := by\n        intro hxA\n        exact hCl (subset_closure hxA)\n      -- To prove `x ∈ closure (Aᶜ)`, use the neighbourhood\n      -- characterization of the closure.\n      have hClCompl : x ∈ closure (Aᶜ) := by\n        -- `mem_closure_iff` gives a criterion involving all neighbourhoods.\n        refine (mem_closure_iff).2 ?_\n        intro U hU_open hxU\n        -- Since `x ∉ closure A`, the open set\n        -- `U' = U ∩ (closure A)ᶜ` is a neighbourhood of `x`\n        -- (because `x ∉ closure A`) and is contained in `Aᶜ`.\n        have hOpenCompl : IsOpen ((closure A)ᶜ) := by\n          have : IsClosed (closure A) := isClosed_closure\n          simpa using (isOpen_compl_iff).2 this\n        have hU'Open : IsOpen (U ∩ (closure A)ᶜ) :=\n          hU_open.inter hOpenCompl\n        have hxU' : x ∈ U ∩ (closure A)ᶜ := by\n          exact And.intro hxU hCl\n        -- `U'` is contained in `Aᶜ`, because `(closure A)ᶜ ⊆ Aᶜ`.\n        have hU'Sub : U ∩ (closure A)ᶜ ⊆ Aᶜ := by\n          intro y hy\n          have : y ∈ (closure A)ᶜ := hy.2\n          -- If `y ∈ A`, then `y ∈ closure A`; contradiction.\n          by_cases hAy : y ∈ A\n          · have : (y : X) ∈ closure A := subset_closure hAy\n            exact False.elim (this.not_mem ?_)\n              -- We know `y ∉ closure A` from `this` and `hy.2`; contradiction.\n          · exact hAy\n        -- Choose `x` itself as a witness that\n        -- the neighbourhood meets `Aᶜ`.\n        have : (U ∩ (Aᶜ)).Nonempty := by\n          refine ⟨x, ?_⟩\n          have hxU'InAcompl : x ∈ Aᶜ := hU'Sub hxU'\n          exact And.intro hxU hxU'InAcompl\n        -- Since `U ∩ Aᶜ ⊆ U ∩ (Aᶜ)`, we have the required non-emptiness.\n        simpa [Set.inter_assoc, Set.inter_right_comm] using this\n      exact Or.inr hClCompl",
+    ""
+  ],
+  "success": true
+}

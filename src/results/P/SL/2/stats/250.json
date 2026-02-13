@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.50365662574768
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3610,
+      "prompt_tokens": 40706,
+      "total_tokens": 44316,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39680
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iUnion_interior_closure_subset_interior_closure_iUnion\n    {X : Type*} [TopologicalSpace X] {ι : Type*} {s : ι → Set X} :\n    (⋃ i, interior (closure (s i))) ⊆ interior (closure (⋃ i, s i)) := by\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n  -- `closure (s i)` is contained in `closure (⋃ j, s j)`.\n  have hcl : closure (s i) ⊆ closure (⋃ j, s j) := by\n    have hSub : (s i : Set X) ⊆ ⋃ j, s j := by\n      intro y hy\n      exact Set.mem_iUnion.2 ⟨i, hy⟩\n    exact closure_mono hSub\n  -- Applying monotonicity of `interior` to the inclusion of closures.\n  have hInt :\n      interior (closure (s i)) ⊆ interior (closure (⋃ j, s j)) :=\n    interior_mono hcl\n  exact hInt hx_i"
+  ],
+  "success": true
+}

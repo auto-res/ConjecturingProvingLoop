@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.017207860946655
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3195,
+      "prompt_tokens": 22032,
+      "total_tokens": 25227,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_interior {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (interior A ∪ interior B) := by\n  have h_open : IsOpen (interior A ∪ interior B) :=\n    (isOpen_interior).union isOpen_interior\n  exact\n    Topology.isOpen_implies_P1 (X := X) (A := interior A ∪ interior B) h_open"
+  ],
+  "success": true
+}

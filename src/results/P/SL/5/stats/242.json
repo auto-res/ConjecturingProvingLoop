@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.71495532989502
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3754,
+      "prompt_tokens": 43357,
+      "total_tokens": 47111,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    }
+  ],
+  "responses": [
+    "theorem subset_interior_of_closed_superset_of_P3 {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hP3 : Topology.P3 (X := X) A)\n    (hAB : (A : Set X) ⊆ B) (hB : IsClosed (B : Set X)) :\n    (A : Set X) ⊆ interior B := by\n  intro x hxA\n  -- From `P3`, the point lies in `interior (closure A)`.\n  have hxIntClA : x ∈ interior (closure (A : Set X)) := hP3 hxA\n  -- Since `B` is closed and contains `A`, its closure is itself,\n  -- hence `closure A ⊆ B`.\n  have hsubset : closure (A : Set X) ⊆ B := by\n    have h : closure (A : Set X) ⊆ closure B := closure_mono hAB\n    simpa [hB.closure_eq] using h\n  -- Monotonicity of `interior` gives the desired inclusion.\n  have hIntSubset : interior (closure (A : Set X)) ⊆ interior B :=\n    interior_mono hsubset\n  exact hIntSubset hxIntClA"
+  ],
+  "success": true
+}

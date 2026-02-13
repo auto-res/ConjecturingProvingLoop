@@ -1,0 +1,60 @@
+{
+  "times": [
+    41.83559036254883,
+    86.03669691085815,
+    45.07315397262573
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3591,
+      "prompt_tokens": 20705,
+      "total_tokens": 24296,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    },
+    {
+      "completion_tokens": 5892,
+      "prompt_tokens": 20788,
+      "total_tokens": 26680,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    },
+    {
+      "completion_tokens": 2876,
+      "prompt_tokens": 20865,
+      "total_tokens": 23741,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_interior_closure_of_dense\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) → Dense (interior (closure (A : Set X))) := by\n  intro hDense\n  -- `closure (interior (closure A))` is all of `univ` because `A` is dense.\n  have hEq :\n      closure (interior (closure (A : Set X))) = (Set.univ : Set X) :=\n    Topology.closure_interior_closure_eq_univ_of_dense (A := A) hDense\n  -- Translating the closure equality into density yields the result.\n  exact\n    ((Topology.dense_iff_closure_eq_univ)\n        (A := interior (closure (A : Set X)))).2 hEq",
+    "theorem P3_of_closure_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : closure (A : Set X) = Set.univ) :\n    Topology.P3 A := by\n  -- Translate the closure equality into density of `A`.\n  have hDense : Dense (A : Set X) :=\n    (Topology.dense_iff_closure_eq_univ).2 h\n  -- Density yields property `P3`.\n  exact Topology.P3_of_dense hDense",
+    "theorem P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) → Topology.P3 A := by\n  intro hDenseInt\n  have hDenseA : Dense (A : Set X) :=\n    Topology.dense_of_dense_interior (A := A) hDenseInt\n  exact Topology.P3_of_dense (X := X) (A := A) hDenseA"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.68082594871521
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6275,
+      "prompt_tokens": 19911,
+      "total_tokens": 26186,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem inter_interiors_subset_interior_inter {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    (interior (A : Set X)) ∩ interior B ⊆ interior ((A ∩ B) : Set X) := by\n  have hSubset : (interior (A : Set X)) ∩ interior B ⊆ (A : Set X) ∩ B := by\n    intro x hx\n    rcases hx with ⟨hA, hB⟩\n    exact And.intro (interior_subset hA) (interior_subset hB)\n  have hOpen : IsOpen ((interior (A : Set X)) ∩ interior B) :=\n    isOpen_interior.inter isOpen_interior\n  exact interior_maximal hSubset hOpen"
+  ],
+  "success": true
+}

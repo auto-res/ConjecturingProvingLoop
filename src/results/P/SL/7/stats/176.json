@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.77808713912964
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5291,
+      "prompt_tokens": 27581,
+      "total_tokens": 32872,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_union_eq_closure_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) (hB : IsOpen B) :\n    closure (interior (A ∪ B)) = closure A ∪ closure B := by\n  -- The set `A ∪ B` is open, so its interior is itself.\n  have hOpen : IsOpen (A ∪ B) := hA.union hB\n  have hInt : interior (A ∪ B) = A ∪ B := hOpen.interior_eq\n  -- Distribute `closure` over the union.\n  simpa [hInt, closure_union]"
+  ],
+  "success": true
+}

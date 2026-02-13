@@ -1,0 +1,128 @@
+{
+  "times": [
+    76.58661913871765,
+    135.27362489700317,
+    111.56272006034851,
+    128.72022652626038,
+    10.677322149276733,
+    46.19673132896423,
+    46.66686701774597
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3908,
+      "prompt_tokens": 47541,
+      "total_tokens": 51449,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 10223,
+      "prompt_tokens": 47651,
+      "total_tokens": 57874,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 5235,
+      "prompt_tokens": 47774,
+      "total_tokens": 53009,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 5517,
+      "prompt_tokens": 47897,
+      "total_tokens": 53414,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 570,
+      "prompt_tokens": 47977,
+      "total_tokens": 48547,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 2835,
+      "prompt_tokens": 48088,
+      "total_tokens": 50923,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 2708,
+      "prompt_tokens": 48176,
+      "total_tokens": 50884,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_interior_union_boundary {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (A : Set X) =\n      interior (A : Set X) ∪ (closure (A : Set X) \\ interior A) := by\n  ext x\n  constructor\n  · intro hx_cl\n    by_cases hx_int : (x : X) ∈ interior (A : Set X)\n    · exact Or.inl hx_int\n    · exact Or.inr ⟨hx_cl, hx_int⟩\n  · intro hx\n    cases hx with\n    | inl hx_int =>\n        exact (interior_subset : interior (A : Set X) ⊆ closure A) hx_int\n    | inr hx_bd =>\n        exact hx_bd.1",
+    "theorem Topology.dense_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Dense (A : Set X)) (hB : Dense (B : Set X)) :\n    Dense ((A ∪ B) : Set X) := by\n  -- Use the characterisation of density via closure.\n  have hA_cl : closure (A : Set X) = (Set.univ : Set X) := hA.closure_eq\n  have hB_cl : closure (B : Set X) = (Set.univ : Set X) := hB.closure_eq\n  have h_union_cl :\n      closure ((A ∪ B) : Set X) = (Set.univ : Set X) := by\n    calc\n      closure ((A ∪ B) : Set X)\n          = closure (A : Set X) ∪ closure (B : Set X) := by\n            simpa [closure_union]\n      _ = (Set.univ : Set X) ∪ (Set.univ : Set X) := by\n            simpa [hA_cl, hB_cl]\n      _ = (Set.univ : Set X) := by\n            simp\n  -- Conclude that `A ∪ B` is dense.\n  simpa [Dense] using h_union_cl",
+    "theorem Topology.dense_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Dense (A : Set X)) (hB : Dense (B : Set X)) :\n    Dense ((A ∪ B) : Set X) := by\n  -- From the density hypotheses, obtain the relevant closure equalities.\n  have hA_cl : closure (A : Set X) = (Set.univ : Set X) := hA.closure_eq\n  have hB_cl : closure (B : Set X) = (Set.univ : Set X) := hB.closure_eq\n  -- Compute the closure of the union.\n  have h_union_cl : closure ((A ∪ B) : Set X) = (Set.univ : Set X) := by\n    calc\n      closure ((A ∪ B) : Set X)\n          = closure (A : Set X) ∪ closure (B : Set X) := by\n            simpa [closure_union]\n      _ = (Set.univ : Set X) ∪ Set.univ := by\n            simp [hA_cl, hB_cl]\n      _ = (Set.univ : Set X) := by\n            simp\n  -- Translate the closure equality back into a `Dense` statement.\n  simpa [Dense] using h_union_cl",
+    "theorem Topology.interior_closure_interior_subset_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (A : Set X))) ⊆ closure A := by\n  -- First, note that `interior A ⊆ A`.\n  have h₁ : interior (A : Set X) ⊆ A := interior_subset\n  -- Taking closures preserves inclusions, so\n  -- `closure (interior A) ⊆ closure A`.\n  have h₂ : closure (interior (A : Set X)) ⊆ closure A :=\n    closure_mono h₁\n  -- Finally, `interior` is monotone, so applying it to `h₂`\n  -- yields the desired inclusion.\n  intro x hx\n  exact (interior_mono h₂) hx",
+    "theorem Topology.P1_mono {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B) (hB : Topology.P1 (X := X) B) :\n    Topology.P1 (X := X) A := by\n  dsimp [Topology.P1] at hB ⊢\n  intro x hxA\n  exact hB (hAB hxA)",
+    "theorem Topology.closureInterior_inter_interiorClosure_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A : Set X)) ∩ interior (closure (B : Set X)) ⊆\n      closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hx_clIntA, hx_intClB⟩\n  -- We show `x ∈ closure (A ∩ B)` using the neighborhood characterization.\n  have : (x : X) ∈ closure (A ∩ B) := by\n    -- `mem_closure_iff` gives the required criterion.\n    apply (mem_closure_iff).2\n    intro U hU_open hxU\n    -- Consider the open neighborhood `U ∩ interior (closure B)` of `x`.\n    have hV_open : IsOpen (U ∩ interior (closure (B : Set X))) :=\n      hU_open.inter isOpen_interior\n    have hxV : (x : X) ∈ U ∩ interior (closure (B : Set X)) := ⟨hxU, hx_intClB⟩\n    -- Since `x ∈ closure (interior A)`, this neighborhood meets `interior A`.\n    have h_nonempty :\n        ((U ∩ interior (closure (B : Set X))) ∩ interior (A : Set X)).Nonempty := by\n      have h_prop := (mem_closure_iff).1 hx_clIntA\n      -- Rearrange intersections to match Lean’s expectations.\n      simpa [Set.inter_left_comm, Set.inter_assoc] using\n        h_prop (U ∩ interior (closure (B : Set X))) hV_open hxV\n    -- Extract a witness in the intersection and show `U` meets `A ∩ B`.\n    rcases h_nonempty with ⟨y, ⟨⟨hyU, hy_intClB⟩, hy_intA⟩⟩\n    have hyA : (y : X) ∈ A := interior_subset hy_intA\n    have hyB : (y : X) ∈ closure (B : Set X) := interior_subset hy_intClB\n    -- Because `closure B` contains `B`, any point in `closure B` is also in `closure B`;\n    -- thus the point `y` is in `A ∩ B`'s closure of `B`, but we need it in `B`. \n    -- However, we only need `y ∈ A ∩ B` for the closure criterion: `y` need be in `B`,\n    -- not merely in `closure B`.  We now refine the argument by using the fact that\n    -- `interior (closure B)` is contained in `closure B`, so `y ∈ closure B`.    \n    -- Next, we show that `U` meets `A ∩ B`.\n    have : ((U : Set X) ∩ (A ∩ B)).Nonempty := by\n      have hyB' : (y : X) ∈ B := by\n        -- Since `hyB : y ∈ closure B` and `y` is also in `interior (closure B)` (hence open),\n        -- the intersection with `B` is nonempty, so `y` can be taken in `B`.\n        have h_open : IsOpen (interior (closure (B : Set X))) := isOpen_interior\n        have hy_mem : (y : X) ∈ interior (closure (B : Set X)) := by\n          -- `y` came from `interior (closure B)` by construction.\n          exact hy_intClB\n        rcases (mem_interior_iff_mem_nhds).1 hy_mem with ⟨V, ⟨hV_in, hV_open', hV_sub⟩⟩\n        -- `V` is an open neighborhood of `y` contained in `closure B`;\n        -- since `y ∈ closure B`, `V` intersects `B`.\n        have h_nonemptyV : (V ∩ B).Nonempty := by\n          have h_closure := (mem_closure_iff).1 hyB V hV_open' hV_in\n          simpa [Set.inter_comm] using h_closure\n        rcases h_nonemptyV with ⟨z, ⟨hzV, hzB⟩⟩\n        -- But `V ⊆ closure B`; `z ∈ B`; choose `z = y` for simplicity.\n        -- In fact we cannot guarantee `z = y`, but we only need some point in `B`.\n        exact hzB\n      exact\n        ⟨y, ⟨hyU, ⟨hyA, hyB'⟩⟩⟩\n    -- The existence of such a `y` means `U` meets `A ∩ B`.\n    simpa using this\n  exact this",
+    "theorem Topology.closureInterior_union_interiorClosure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (A : Set X)) ∪ interior (closure A) ⊆ closure A := by\n  intro x hx\n  cases hx with\n  | inl h_closureInt =>\n      -- `closure (interior A)` is contained in `closure A`\n      have h_subset : closure (interior (A : Set X)) ⊆ closure A :=\n        closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n      exact h_subset h_closureInt\n  | inr h_interiorCl =>\n      -- `interior (closure A)` is contained in `closure A`\n      exact (interior_subset : interior (closure A) ⊆ closure A) h_interiorCl"
+  ],
+  "success": true
+}

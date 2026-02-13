@@ -1,0 +1,43 @@
+{
+  "times": [
+    117.8129210472107,
+    227.1793646812439
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7702,
+      "prompt_tokens": 41154,
+      "total_tokens": 48856,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7488,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    },
+    {
+      "completion_tokens": 14803,
+      "prompt_tokens": 41268,
+      "total_tokens": 56071,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14784,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureSubsetClosure_of_subset_interiorClosure\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (h : (A : Set X) ⊆ interior (closure (B : Set X))) :\n    closure (A : Set X) ⊆ closure (B : Set X) := by\n  -- First, upgrade the given inclusion to one into `closure B`.\n  have hAB : (A : Set X) ⊆ closure (B : Set X) := by\n    intro x hxA\n    have hxInt : x ∈ interior (closure (B : Set X)) := h hxA\n    exact (interior_subset : interior (closure (B : Set X)) ⊆ closure (B : Set X)) hxInt\n  -- Monotonicity of `closure` gives the desired inclusion.\n  exact closure_mono hAB",
+    ""
+  ],
+  "success": true
+}

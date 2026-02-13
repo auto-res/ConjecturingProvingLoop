@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.281840801239014
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3953,
+      "prompt_tokens": 53019,
+      "total_tokens": 56972,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundaryInterior_subset_boundary {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    (closure (interior (A : Set X)) \\ interior A) ⊆\n      closure (A : Set X) \\ interior A := by\n  intro x hx\n  rcases hx with ⟨hx_cl, hx_not_int⟩\n  -- Since `interior A ⊆ A`, taking closures yields\n  -- `closure (interior A) ⊆ closure A`.\n  have h_subset :\n      closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n    closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n  -- Transport `x ∈ closure (interior A)` along this inclusion.\n  have hx_clA : (x : X) ∈ closure (A : Set X) := h_subset hx_cl\n  exact ⟨hx_clA, hx_not_int⟩"
+  ],
+  "success": true
+}

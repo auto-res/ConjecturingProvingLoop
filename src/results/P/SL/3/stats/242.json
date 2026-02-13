@@ -1,0 +1,60 @@
+{
+  "times": [
+    44.09886407852173,
+    144.72396206855774,
+    30.68509030342102
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2662,
+      "prompt_tokens": 40388,
+      "total_tokens": 43050,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 11885,
+      "prompt_tokens": 40511,
+      "total_tokens": 52396,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    },
+    {
+      "completion_tokens": 2825,
+      "prompt_tokens": 40588,
+      "total_tokens": 43413,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 39808
+      }
+    }
+  ],
+  "responses": [
+    "theorem isOpen_of_isClosed_and_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hP1 : Topology.P1 (A : Set X)) :\n    IsOpen (A : Set X) := by\n  -- From `P1` and closedness we have `closure (interior A) = A`.\n  have hEq := closure_interior_eq_of_isClosed_and_P1 (A := A) hA_closed hP1\n  -- This equality implies that `A` is open.\n  exact isOpen_of_closure_interior_eq (A := A) hEq",
+    "theorem isOpen_of_closure_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) = A → IsOpen (A : Set X) := by\n  intro h\n  have hOpen : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n  simpa [h] using hOpen",
+    "theorem boundary_inter_subset_boundary {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure ((A ∩ B) : Set X) \\ interior ((A ∩ B) : Set X) ⊆\n      (closure (A : Set X) \\ interior (A : Set X)) ∪\n        (closure (B : Set X) \\ interior (B : Set X)) := by\n  classical\n  intro x hx\n  rcases hx with ⟨hClAB, hNotIntAB⟩\n  -- `x` is in the closures of both `A` and `B`\n  have hClA : (x : X) ∈ closure (A : Set X) := by\n    have hSub : closure ((A ∩ B) : Set X) ⊆ closure (A : Set X) := by\n      apply closure_mono; exact Set.inter_subset_left\n    exact hSub hClAB\n  have hClB : (x : X) ∈ closure (B : Set X) := by\n    have hSub : closure ((A ∩ B) : Set X) ⊆ closure (B : Set X) := by\n      apply closure_mono; exact Set.inter_subset_right\n    exact hSub hClAB\n  -- Case distinction on membership in the interiors of `A` and `B`\n  by_cases hIntA : (x : X) ∈ interior (A : Set X)\n  · by_cases hIntB : (x : X) ∈ interior (B : Set X)\n    · -- If `x` is in both interiors, then it lies in the interior of `A ∩ B`,\n      -- contradicting `hNotIntAB`.\n      have hOpen : IsOpen (interior (A : Set X) ∩ interior (B : Set X)) :=\n        isOpen_interior.inter isOpen_interior\n      have hxIn : (x : X) ∈ interior (A : Set X) ∩ interior (B : Set X) :=\n        And.intro hIntA hIntB\n      have hxIntOpen : (x : X) ∈ interior (interior (A : Set X) ∩ interior (B : Set X)) := by\n        simpa [hOpen.interior_eq] using hxIn\n      have hSubset :\n          interior (A : Set X) ∩ interior (B : Set X) ⊆ (A ∩ B : Set X) := by\n        intro y hy; exact And.intro (interior_subset hy.1) (interior_subset hy.2)\n      have : (x : X) ∈ interior ((A ∩ B) : Set X) :=\n        (interior_mono hSubset) hxIntOpen\n      exact (hNotIntAB this).elim\n    · -- `x ∉ interior B` ⇒ `x` is on the boundary of `B`\n      exact Or.inr ⟨hClB, hIntB⟩\n  · -- `x ∉ interior A` ⇒ `x` is on the boundary of `A`\n    exact Or.inl ⟨hClA, hIntA⟩"
+  ],
+  "success": true
+}

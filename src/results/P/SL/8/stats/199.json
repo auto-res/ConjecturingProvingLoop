@@ -1,0 +1,26 @@
+{
+  "times": [
+    14.173514366149902
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1141,
+      "prompt_tokens": 29288,
+      "total_tokens": 30429,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_subset_closureInterior_of_closure_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP1 : Topology.P1 A) (hcl : closure A ⊆ B) :\n    A ⊆ closure (interior B) := by\n  -- First derive the simpler inclusion `A ⊆ B`.\n  have hAB : A ⊆ B := by\n    intro x hxA\n    exact hcl (subset_closure hxA)\n  -- Apply the existing lemma that works with a direct subset.\n  exact\n    Topology.P1_subset_closureInterior_of_subset (X := X)\n      (A := A) (B := B) hP1 hAB"
+  ],
+  "success": true
+}

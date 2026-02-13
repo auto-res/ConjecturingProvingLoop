@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.242594718933105
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4538,
+      "prompt_tokens": 33011,
+      "total_tokens": 37549,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_of_between\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B)\n    (hBsubset : B ⊆ interior (closure (interior A))) :\n    Topology.P2 B := by\n  dsimp [Topology.P2] at *\n  intro x hxB\n  -- Step 1: upgrade `x ∈ B` to `x ∈ interior (closure (interior A))`.\n  have hxIntA : x ∈ interior (closure (interior A)) := hBsubset hxB\n  -- Step 2: use monotonicity of `interior ∘ closure ∘ interior`\n  -- with the inclusion `A ⊆ B`.\n  have hmono :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior B)) :=\n    Topology.interior_closure_interior_mono (A := A) (B := B) hAB\n  exact hmono hxIntA"
+  ],
+  "success": true
+}

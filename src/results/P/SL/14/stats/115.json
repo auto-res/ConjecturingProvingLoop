@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.53922724723816
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1409,
+      "prompt_tokens": 19831,
+      "total_tokens": 21240,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19328
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_subset_interiorClosure\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : (A : Set X) ⊆ B)\n    (hBsubset : (B : Set X) ⊆ interior (closure A)) :\n    Topology.P3 B := by\n  dsimp [Topology.P3] at *\n  intro x hxB\n  -- From the assumption, `x` lies in `interior (closure A)`.\n  have hx_intA : (x : X) ∈ interior (closure A) := hBsubset hxB\n  -- Since `A ⊆ B`, we have `closure A ⊆ closure B`.\n  have h_closure_mono : closure A ⊆ closure B := closure_mono hAB\n  -- Taking interiors preserves this inclusion.\n  have h_int_mono : interior (closure A) ⊆ interior (closure B) :=\n    interior_mono h_closure_mono\n  -- Combining the facts gives the desired result.\n  exact h_int_mono hx_intA"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.47575569152832
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7082,
+      "prompt_tokens": 27053,
+      "total_tokens": 34135,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_dense_interior_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hDense : Dense (interior A)) (hAB : interior A ⊆ B) :\n    Topology.P1 B := by\n  -- We prove `closure (interior B) = univ`, from which `P1 B` is immediate.\n  have hIntSubset : interior A ⊆ interior B :=\n    interior_maximal hAB isOpen_interior\n  -- `interior A` is dense, hence its closure is `univ`.\n  have hClosureIntA : closure (interior A) = (Set.univ : Set X) :=\n    hDense.closure_eq\n  -- Monotonicity of `closure` gives `closure (interior A) ⊆ closure (interior B)`.\n  have hUnivSubset : (Set.univ : Set X) ⊆ closure (interior B) := by\n    simpa [hClosureIntA] using (closure_mono hIntSubset)\n  -- Trivially, `closure (interior B) ⊆ univ`.\n  have hSubsetUniv : closure (interior B) ⊆ (Set.univ : Set X) := by\n    intro _ _; simp\n  -- Combine the inclusions to obtain the desired equality.\n  have hClosureIntB : closure (interior B) = (Set.univ : Set X) :=\n    Set.Subset.antisymm hSubsetUniv hUnivSubset\n  -- Establish `P1 B`.\n  unfold Topology.P1\n  intro x hxB\n  -- Every point belongs to `univ`, hence to `closure (interior B)`.\n  have : x ∈ (Set.univ : Set X) := by simp\n  simpa [hClosureIntB] using this"
+  ],
+  "success": true
+}

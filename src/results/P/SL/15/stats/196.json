@@ -1,0 +1,43 @@
+{
+  "times": [
+    169.11623406410217,
+    66.82862663269043
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10823,
+      "prompt_tokens": 39994,
+      "total_tokens": 50817,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    },
+    {
+      "completion_tokens": 4892,
+      "prompt_tokens": 40068,
+      "total_tokens": 44960,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_iterate_five\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure\n        (interior\n          (closure\n            (interior\n              (closure\n                (interior\n                  (closure\n                    (interior\n                      (closure\n                        (interior A)))))))) =\n      closure (interior A) := by\n  -- Repeatedly apply the idempotency lemma\n  simp [closure_interior_closure_interior_closure_eq (X := X)]",
+    "theorem dense_prod_of_dense_left_and_dense_right\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : Dense A) (hB : Dense B) :\n    Dense (A ×ˢ B) := by\n  -- We show that the closure of `A ×ˢ B` is the whole space.\n  have hClosure :\n      closure (A ×ˢ B : Set (X × Y)) = (Set.univ : Set (X × Y)) := by\n    calc\n      closure (A ×ˢ B : Set (X × Y))\n          = closure A ×ˢ closure B := by\n            simpa using closure_prod_eq (s := A) (t := B)\n      _ = (Set.univ : Set X) ×ˢ (Set.univ : Set Y) := by\n        simpa [hA.closure_eq, hB.closure_eq]\n      _ = (Set.univ : Set (X × Y)) := by\n        simpa [Set.univ_prod_univ]\n  -- Conclude density from the characterization via closures.\n  exact (dense_iff_closure_eq).2 hClosure"
+  ],
+  "success": true
+}

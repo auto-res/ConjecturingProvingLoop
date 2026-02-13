@@ -1,0 +1,43 @@
+{
+  "times": [
+    19.829927921295166,
+    56.77338528633118
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2056,
+      "prompt_tokens": 1695,
+      "total_tokens": 3751,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4254,
+      "prompt_tokens": 1815,
+      "total_tokens": 6069,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_interior_closure {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (interior (closure A)) := by\n  intro x hx\n  exact subset_closure hx",
+    "theorem Topology.P3_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P3 (interior A) := by\n  have hOpen : IsOpen (interior A) := isOpen_interior\n  exact Topology.isOpen_implies_P3 (A := interior A) hOpen"
+  ],
+  "success": true
+}

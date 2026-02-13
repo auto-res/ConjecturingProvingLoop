@@ -1,0 +1,43 @@
+{
+  "times": [
+    80.60636949539185,
+    174.8762924671173
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6661,
+      "prompt_tokens": 570,
+      "total_tokens": 7231,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6528,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 11039,
+      "prompt_tokens": 716,
+      "total_tokens": 11755,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (interior A) := by\n  open Set\n  dsimp [Topology.P2]\n  intro x hx\n  have : x ∈ interior (closure (interior A)) := by\n    apply mem_interior.mpr\n    exact ⟨interior A, subset_closure, isOpen_interior, hx⟩\n  simpa [interior_interior] using this",
+    "theorem isOpen_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) : Topology.P2 A := by\n  dsimp [Topology.P2]\n  intro x hx\n  -- `closure A` is a neighborhood of `x`\n  have h_nhds_closure : closure A ∈ 𝓝 x := by\n    have h_nhdsA : A ∈ 𝓝 x := hA.mem_nhds hx\n    exact Filter.mem_of_superset h_nhdsA subset_closure\n  -- hence `x` belongs to the interior of `closure A`\n  have h_mem_closure : x ∈ interior (closure A) :=\n    (mem_interior_iff_mem_nhds).2 h_nhds_closure\n  -- rewrite to obtain the desired membership\n  simpa [hA.interior_eq] using h_mem_closure"
+  ],
+  "success": true
+}

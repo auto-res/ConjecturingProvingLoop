@@ -1,0 +1,94 @@
+{
+  "times": [
+    115.57120442390442,
+    223.61419820785522,
+    415.61829113960266,
+    24.562936782836914,
+    81.0693609714508
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7109,
+      "prompt_tokens": 46708,
+      "total_tokens": 53817,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 8026,
+      "prompt_tokens": 46830,
+      "total_tokens": 54856,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8000,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    },
+    {
+      "completion_tokens": 11950,
+      "prompt_tokens": 46898,
+      "total_tokens": 58848,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45952
+      }
+    },
+    {
+      "completion_tokens": 874,
+      "prompt_tokens": 46976,
+      "total_tokens": 47850,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 3553,
+      "prompt_tokens": 47092,
+      "total_tokens": 50645,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_implies_closure_eq_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (A : Set X) →\n      closure (A : Set X) = closure (interior (closure A)) := by\n  intro hP3\n  apply subset_antisymm\n  · -- `closure A ⊆ closure (interior (closure A))`\n    have hSub : (A : Set X) ⊆ interior (closure A) := hP3\n    exact closure_mono hSub\n  · -- `closure (interior (closure A)) ⊆ closure A`\n    have hSub : interior (closure (A : Set X)) ⊆ closure A := interior_subset\n    exact closure_mono hSub",
+    "Lean code not provided due to complexity.",
+    "theorem nonempty_interior_of_nonempty_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (A : Set X)) (hNon : (A : Set X).Nonempty) :\n    (interior (A : Set X)).Nonempty := by\n  classical\n  by_contra hInt\n  -- From `¬ (interior A).Nonempty`, deduce `interior A = ∅`.\n  have hIntEmpty : interior (A : Set X) = (∅ : Set X) :=\n    (Set.not_nonempty_iff_eq_empty).1 hInt\n  -- Extract a point `x ∈ A` from the non-emptiness of `A`.\n  rcases hNon with ⟨x, hxA⟩\n  -- `P1` places this point inside `closure (interior A)`.\n  have hx_cl : x ∈ closure (interior (A : Set X)) := hP1 hxA\n  -- Rewriting with the fact that `interior A = ∅` yields a contradiction.\n  have hx_empty : x ∈ (∅ : Set X) := by\n    simpa [hIntEmpty, closure_empty] using hx_cl\n  cases hx_empty",
+    "theorem P2_closure_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (closure (A : Set X)) → Topology.P1 (A : Set X) := by\n  intro hP2\n  -- From `P2` for `closure A`, deduce that `closure A` is open.\n  have hOpen : IsOpen (closure (A : Set X)) :=\n    Topology.open_of_P2_closure (A := A) hP2\n  -- An open closure implies `P1` for the original set.\n  exact Topology.closure_open_satisfies_P1 (A := A) hOpen",
+    "theorem P2_implies_P3_of_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → Topology.P3 (interior A) := by\n  intro _\n  exact Topology.open_satisfies_P3 (A := interior A) isOpen_interior"
+  ],
+  "success": true
+}

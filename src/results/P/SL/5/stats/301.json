@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.247397661209106
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1803,
+      "prompt_tokens": 60369,
+      "total_tokens": 62172,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 59136
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union_ten {X : Type*} [TopologicalSpace X]\n    {A B C D E F G H I J : Set X}\n    (hA : Topology.P1 (X := X) A) (hB : Topology.P1 (X := X) B)\n    (hC : Topology.P1 (X := X) C) (hD : Topology.P1 (X := X) D)\n    (hE : Topology.P1 (X := X) E) (hF : Topology.P1 (X := X) F)\n    (hG : Topology.P1 (X := X) G) (hH : Topology.P1 (X := X) H)\n    (hI : Topology.P1 (X := X) I) (hJ : Topology.P1 (X := X) J) :\n    Topology.P1 (X := X)\n      (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I ∪ J) := by\n  -- First, combine the properties for the first nine sets.\n  have hNine :\n      Topology.P1 (X := X)\n        (A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I) :=\n    Topology.P1_union_nine (X := X)\n      (A := A) (B := B) (C := C) (D := D) (E := E) (F := F)\n      (G := G) (H := H) (I := I)\n      hA hB hC hD hE hF hG hH hI\n  -- Unite the result with `J`.\n  have hTen :\n      Topology.P1 (X := X)\n        ((A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I) ∪ J) :=\n    Topology.P1_union (X := X)\n      (A := A ∪ B ∪ C ∪ D ∪ E ∪ F ∪ G ∪ H ∪ I) (B := J)\n      hNine hJ\n  -- Re-associate the unions to match the required expression.\n  simpa [Set.union_assoc] using hTen"
+  ],
+  "success": true
+}

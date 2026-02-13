@@ -1,0 +1,26 @@
+{
+  "times": [
+    441.59553027153015
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 31151,
+      "prompt_tokens": 36330,
+      "total_tokens": 67481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 30912,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_subset_closure_interior_union_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A : Set X) ⊆ closure (interior (A ∪ B)) := by\n  intro x hx\n  -- Step 1: enlarge `interior A` to `interior (A ∪ B)` using monotonicity of `interior`.\n  have hx_union : x ∈ interior (A ∪ B) :=\n    (interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)) hx\n  -- Step 2: every set is contained in the closure of itself.\n  have h_closure :\n      (interior (A ∪ B) : Set X) ⊆ closure (interior (A ∪ B)) :=\n    subset_closure\n  -- Step 3: assemble the two inclusions.\n  exact h_closure hx_union"
+  ],
+  "success": true
+}

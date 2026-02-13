@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.02955293655396
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5863,
+      "prompt_tokens": 28901,
+      "total_tokens": 34764,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_eq_univ_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed A) :\n    Dense (A : Set X) ↔ (A : Set X) = Set.univ := by\n  have h_closure : closure (A : Set X) = A := hA_closed.closure_eq\n  have h_dense :\n      Dense (A : Set X) ↔ closure (A : Set X) = (Set.univ : Set X) :=\n    dense_iff_closure_eq (s := (A : Set X))\n  simpa [h_closure] using h_dense"
+  ],
+  "success": true
+}

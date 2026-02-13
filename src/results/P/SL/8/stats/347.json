@@ -1,0 +1,26 @@
+{
+  "times": [
+    202.92663502693176
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 16338,
+      "prompt_tokens": 54091,
+      "total_tokens": 70429,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_closure_subset_closureDiff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure A \\ closure B ⊆ closure (A \\ B) := by\n  intro x hx\n  rcases hx with ⟨hxA, hxNotB⟩\n  -- To show that `x` is in `closure (A \\ B)`, we use the neighborhood\n  -- characterization of the closure.\n  have h :\n      ∀ U : Set X, IsOpen U → x ∈ U → (U ∩ (A \\ B)).Nonempty := by\n    intro U hU_open hxU\n    -- Consider the open set `V = U ∩ (closure B)ᶜ`, which avoids `closure B`.\n    have hOpenCompl : IsOpen ((closure B)ᶜ) := by\n      have hClosed : IsClosed (closure B) := isClosed_closure\n      simpa using (isOpen_compl_iff).2 hClosed\n    have hV_open : IsOpen (U ∩ (closure B)ᶜ) := hU_open.inter hOpenCompl\n    have hxV : x ∈ U ∩ (closure B)ᶜ := And.intro hxU hxNotB\n    -- Because `x ∈ closure A`, the set `V` meets `A`.\n    have hNon : ((U ∩ (closure B)ᶜ) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hxA (U ∩ (closure B)ᶜ) hV_open hxV\n    -- Any such point of intersection lies in `U ∩ (A \\ B)`.\n    rcases hNon with ⟨y, ⟨hyU, hyNotClB⟩, hyA⟩\n    -- Show that `y ∉ B`.\n    have hyNotB : y ∉ B := by\n      intro hyB\n      have : (y : X) ∈ closure B := subset_closure hyB\n      exact hyNotClB this\n    exact ⟨y, And.intro hyU (And.intro hyA hyNotB)⟩\n  -- Conclude that `x ∈ closure (A \\ B)`.\n  exact (mem_closure_iff).2 h"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    146.54864263534546,
+    65.31682229042053
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9373,
+      "prompt_tokens": 54337,
+      "total_tokens": 63710,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    },
+    {
+      "completion_tokens": 4475,
+      "prompt_tokens": 54493,
+      "total_tokens": 58968,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_compl_closed_eq_empty_iff_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed (A : Set X)) :\n    interior (Aᶜ : Set X) = (∅ : Set X) ↔ (A : Set X) = Set.univ := by\n  have hOpen : IsOpen (Aᶜ : Set X) := hA_closed.isOpen_compl\n  have hIntEq : interior (Aᶜ : Set X) = (Aᶜ : Set X) := hOpen.interior_eq\n  constructor\n  · intro hIntEmpty\n    -- `Aᶜ` itself is empty.\n    have hComplEmpty : (Aᶜ : Set X) = (∅ : Set X) := by\n      simpa [hIntEq] using hIntEmpty\n    -- Taking complements yields the desired equality.\n    have h := congrArg Set.compl hComplEmpty\n    simpa [compl_empty, compl_compl] using h\n  · intro hA_univ\n    -- From `A = univ` we get `Aᶜ = ∅`.\n    have hComplEmpty : (Aᶜ : Set X) = (∅ : Set X) := by\n      simpa [hA_univ, Set.compl_univ]\n    -- Rewrite using `hComplEmpty`.\n    simpa [hComplEmpty, hIntEq] using hIntEq",
+    "theorem compl_empty {α : Type*} :\n    ((∅ : Set α)ᶜ) = (Set.univ : Set α) := by\n  ext x\n  simp"
+  ],
+  "success": true
+}

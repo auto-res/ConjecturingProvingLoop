@@ -1,0 +1,26 @@
+{
+  "times": [
+    122.06026840209961
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7829,
+      "prompt_tokens": 47110,
+      "total_tokens": 54939,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_compl_eq_compl_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_open : IsOpen (A : Set X)) :\n    closure ((A : Set X)ᶜ) = (A : Set X)ᶜ := by\n  -- The complement of an open set is closed.\n  have h_closed : IsClosed ((A : Set X)ᶜ) := hA_open.isClosed_compl\n  -- The closure of a closed set is the set itself.\n  simpa using h_closed.closure_eq"
+  ],
+  "success": true
+}

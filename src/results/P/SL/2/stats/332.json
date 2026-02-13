@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.79339075088501
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5991,
+      "prompt_tokens": 57444,
+      "total_tokens": 63435,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_implies_subset_interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A →\n      (A : Set X) ⊆\n        interior (closure (interior (closure (A : Set X)))) := by\n  intro hP3 x hxA\n  -- Step 1: from `P3` obtain that `x` is in `interior (closure A)`.\n  have hx_int_cl : x ∈ interior (closure (A : Set X)) := hP3 hxA\n  -- Step 2: establish the inclusion\n  --   `interior (closure A) ⊆ interior (closure (interior (closure A)))`.\n  have hIncl :\n      (interior (closure (A : Set X)) : Set X) ⊆\n        interior (closure (interior (closure (A : Set X)))) := by\n    -- `P3` gives `closure A ⊆ closure (interior (closure A))`.\n    have hClSub :\n        (closure (A : Set X)) ⊆\n          closure (interior (closure (A : Set X))) :=\n      Topology.P3_implies_closure_subset_closure_interior_closure\n        (A := A) hP3\n    -- Apply monotonicity of `interior` to the inclusion of closures.\n    exact interior_mono hClSub\n  -- Step 3: combine the facts to obtain the desired membership.\n  exact hIncl hx_int_cl"
+  ],
+  "success": true
+}

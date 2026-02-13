@@ -1,0 +1,26 @@
+{
+  "times": [
+    21.015626430511475
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2163,
+      "prompt_tokens": 3803,
+      "total_tokens": 5966,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 A → Topology.P2 B → Topology.P2 (A ∪ B) := by\n  intro hP2A hP2B\n  intro x hxAB\n  cases hxAB with\n  | inl hxA =>\n      -- `x` belongs to `A`\n      have hx_int : x ∈ interior (closure (interior A)) := hP2A hxA\n      -- relate the targets\n      have hsubset : interior (closure (interior A)) ⊆\n          interior (closure (interior (A ∪ B))) := by\n        -- first on closures\n        have hcl : closure (interior A) ⊆ closure (interior (A ∪ B)) := by\n          -- first on interiors\n          have hsub : interior A ⊆ interior (A ∪ B) := by\n            have hAB : (A : Set X) ⊆ A ∪ B := by\n              intro y hy\n              exact Or.inl hy\n            exact interior_mono hAB\n          exact closure_mono hsub\n        exact interior_mono hcl\n      exact hsubset hx_int\n  | inr hxB =>\n      -- `x` belongs to `B`\n      have hx_int : x ∈ interior (closure (interior B)) := hP2B hxB\n      -- relate the targets\n      have hsubset : interior (closure (interior B)) ⊆\n          interior (closure (interior (A ∪ B))) := by\n        -- first on closures\n        have hcl : closure (interior B) ⊆ closure (interior (A ∪ B)) := by\n          -- first on interiors\n          have hsub : interior B ⊆ interior (A ∪ B) := by\n            have hBB : (B : Set X) ⊆ A ∪ B := by\n              intro y hy\n              exact Or.inr hy\n            exact interior_mono hBB\n          exact closure_mono hsub\n        exact interior_mono hcl\n      exact hsubset hx_int"
+  ],
+  "success": true
+}

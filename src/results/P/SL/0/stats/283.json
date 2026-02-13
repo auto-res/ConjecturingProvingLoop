@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.06562685966492
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6358,
+      "prompt_tokens": 48222,
+      "total_tokens": 54580,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_of_subset_between {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    (A : Set X) ⊆ B →\n    B ⊆ closure (interior (A : Set X)) →\n    Topology.P1 B := by\n  intro hAB hBcl\n  dsimp [Topology.P1] at *\n  intro x hxB\n  -- First, use the hypothesis `hBcl` to place `x` inside `closure (interior A)`.\n  have hx_clA : x ∈ closure (interior (A : Set X)) := hBcl hxB\n  -- Monotonicity: `interior A ⊆ interior B` because `A ⊆ B`.\n  have hInt : interior (A : Set X) ⊆ interior (B : Set X) :=\n    interior_mono hAB\n  -- Taking closures preserves inclusions.\n  have hCl : closure (interior (A : Set X)) ⊆\n      closure (interior (B : Set X)) := closure_mono hInt\n  -- Combine the facts to land in the desired target set.\n  exact hCl hx_clA"
+  ],
+  "success": true
+}

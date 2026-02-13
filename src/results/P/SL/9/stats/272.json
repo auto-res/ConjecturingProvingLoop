@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.7575900554657
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4503,
+      "prompt_tokens": 47062,
+      "total_tokens": 51565,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_inter_frontier_eq_closureInterior_diff_interior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior A) ∩ frontier A = closure (interior A) \\ interior A := by\n  ext x\n  constructor\n  · intro hx\n    -- `hx.1 : x ∈ closure (interior A)`\n    -- `hx.2 : x ∈ frontier A = closure A \\ interior A`\n    exact ⟨hx.1, hx.2.2⟩\n  · intro hx\n    -- From `x ∈ closure (interior A)`,\n    -- obtain `x ∈ closure A` via monotonicity of `closure`.\n    have hx_closureA : x ∈ closure (A : Set X) := by\n      have h_subset : closure (interior A) ⊆ closure A :=\n        closure_mono (interior_subset : interior A ⊆ A)\n      exact h_subset hx.1\n    -- Assemble the required membership in the intersection.\n    exact ⟨hx.1, ⟨hx_closureA, hx.2⟩⟩"
+  ],
+  "success": true
+}

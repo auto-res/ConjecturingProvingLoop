@@ -1,0 +1,26 @@
+{
+  "times": [
+    83.63569760322571
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6386,
+      "prompt_tokens": 15289,
+      "total_tokens": 21675,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_inter_satisfies_P1_P2_P3 {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hA : IsOpen A) (hB : IsOpen B) :\n    Topology.P1 (X := X) (A ∩ B) ∧\n    Topology.P2 (X := X) (A ∩ B) ∧\n    Topology.P3 (X := X) (A ∩ B) := by\n  have hOpen : IsOpen (A ∩ B) := hA.inter hB\n  exact Topology.isOpen_satisfies_P1_P2_P3 (X := X) (A := A ∩ B) hOpen"
+  ],
+  "success": true
+}

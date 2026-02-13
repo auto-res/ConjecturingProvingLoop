@@ -1,0 +1,26 @@
+{
+  "times": [
+    166.10647463798523
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6326,
+      "prompt_tokens": 49656,
+      "total_tokens": 55982,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_and_P3_of_isClosed_and_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) (hP2 : Topology.P2 A) :\n    Topology.P1 A ∧ Topology.P3 A := by\n  have hP1 : Topology.P1 A :=\n    Topology.P1_of_isClosed_and_P2 (X := X) (A := A) hA_closed hP2\n  have hP3 : Topology.P3 A :=\n    Topology.P3_of_isClosed_and_P2 (X := X) (A := A) hA_closed hP2\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

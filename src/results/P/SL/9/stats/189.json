@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.17171502113342
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3744,
+      "prompt_tokens": 30763,
+      "total_tokens": 34507,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_complement {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) \\ interior A = closure (Aᶜ) \\ interior (Aᶜ) := by\n  classical\n  calc\n    closure (A : Set X) \\ interior A\n        = closure (A : Set X) ∩ closure (Aᶜ) := by\n          simpa using\n            (Topology.closure_inter_closureCompl_eq_closure_diff_interior\n              (A := A)).symm\n    _ = closure (Aᶜ) ∩ closure (A : Set X) := by\n          simp [Set.inter_comm]\n    _ = closure (Aᶜ) \\ interior (Aᶜ) := by\n          simpa using\n            (Topology.closure_inter_closureCompl_eq_closure_diff_interior\n              (A := Aᶜ))"
+  ],
+  "success": true
+}

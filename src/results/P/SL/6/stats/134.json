@@ -1,0 +1,43 @@
+{
+  "times": [
+    53.364705085754395,
+    197.11111330986023
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4586,
+      "prompt_tokens": 20571,
+      "total_tokens": 25157,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    },
+    {
+      "completion_tokens": 15076,
+      "prompt_tokens": 20680,
+      "total_tokens": 35756,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14976,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_sUnion_of_P1\n    {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)}\n    (h𝒜 : ∀ A, A ∈ 𝒜 → Topology.P1 (A : Set X)) :\n    Topology.P1 (⋃₀ 𝒜) := by\n  dsimp [Topology.P1] at h𝒜 ⊢\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨A, hA_in, hxA⟩\n  have hP1A : Topology.P1 (A : Set X) := h𝒜 A hA_in\n  have hx_cl : x ∈ closure (interior A) := hP1A hxA\n  have hIncl : closure (interior A) ⊆ closure (interior (⋃₀ 𝒜)) := by\n    apply closure_mono\n    apply interior_mono\n    intro y hy\n    have hyA : y ∈ A :=\n      (interior_subset : interior A ⊆ A) hy\n    exact Set.mem_sUnion.2 ⟨A, hA_in, hyA⟩\n  exact hIncl hx_cl",
+    "theorem subset_interior_closure_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (A : Set X) → (A : Set X) ⊆ interior (closure A) := by\n  intro hP3\n  dsimp [Topology.P3] at hP3\n  exact hP3"
+  ],
+  "success": true
+}

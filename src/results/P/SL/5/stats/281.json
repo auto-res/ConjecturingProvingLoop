@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.85169506072998
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4456,
+      "prompt_tokens": 54306,
+      "total_tokens": 58762,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (A : Set X)) ∩ interior ((A : Set X)ᶜ) = (∅ : Set X) := by\n  classical\n  -- We show that the intersection contains no points.\n  apply Set.eq_empty_iff_forall_not_mem.2\n  intro x hx\n  rcases hx with ⟨hxCl, hxIntCompl⟩\n  -- Choose an open neighbourhood `U` of `x` contained in `Aᶜ`.\n  rcases mem_interior.1 hxIntCompl with ⟨U, hUsub, hUopen, hxU⟩\n  -- Because `x ∈ closure (interior A)`, the neighbourhood `U` meets `interior A`.\n  have hNon : ((U : Set X) ∩ interior (A : Set X)).Nonempty := by\n    have hClosure := (mem_closure_iff).1 hxCl\n    -- Rearrange intersections to match Lean’s expectations.\n    simpa [Set.inter_assoc, Set.inter_left_comm, Set.inter_comm]\n      using hClosure U hUopen hxU\n  -- Extract a witness `y`.\n  rcases hNon with ⟨y, ⟨hyU, hyIntA⟩⟩\n  -- `y ∈ A` because it lies in `interior A`.\n  have hyA : y ∈ (A : Set X) := interior_subset hyIntA\n  -- But `U ⊆ Aᶜ`, so `y ∈ Aᶜ`, a contradiction.\n  have hyCompl : y ∈ ((A : Set X)ᶜ) := hUsub hyU\n  exact hyCompl hyA"
+  ],
+  "success": true
+}

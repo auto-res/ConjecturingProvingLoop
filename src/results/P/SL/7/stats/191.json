@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.46593832969666
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5243,
+      "prompt_tokens": 29821,
+      "total_tokens": 35064,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_univ_of_P2_dense_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A)\n    (hDense : closure (interior A) = (Set.univ : Set X)) :\n    closure (A : Set X) = (Set.univ : Set X) := by\n  -- First, derive `P1 A` from `P2 A`.\n  have hP1 : Topology.P1 A := Topology.P2_implies_P1 (A := A) hP2\n  -- Apply the existing result for `P1`.\n  exact Topology.closure_eq_univ_of_P1_dense_interior (A := A) hP1 hDense"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    33.83373165130615,
+    32.0170783996582
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2757,
+      "prompt_tokens": 58916,
+      "total_tokens": 61673,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 58112
+      }
+    },
+    {
+      "completion_tokens": 2343,
+      "prompt_tokens": 58993,
+      "total_tokens": 61336,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_P3_of_denseInterior\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (interior A)) :\n    Topology.P1 A ↔ Topology.P3 A := by\n  -- Under the density assumption we have an equivalence between `P3` and `P2`.\n  have hP3P2 : Topology.P3 A ↔ Topology.P2 A :=\n    Topology.P3_iff_P2_of_denseInterior (X := X) (A := A) hDense\n  -- `P1` together with the density of `interior A` yields `P2`.\n  have hP1_to_P2 : Topology.P1 A → Topology.P2 A := fun hP1 =>\n    Topology.P1_and_denseInterior_implies_P2 (X := X) (A := A) hP1 hDense\n  -- `P2` always implies `P1`.\n  have hP2_to_P1 : Topology.P2 A → Topology.P1 A :=\n    Topology.P2_implies_P1 (X := X) (A := A)\n  -- Assemble the forward implication `P1 → P3`.\n  have forward : Topology.P1 A → Topology.P3 A := fun hP1 =>\n    (hP3P2).2 (hP1_to_P2 hP1)\n  -- Assemble the reverse implication `P3 → P1`.\n  have backward : Topology.P3 A → Topology.P1 A := fun hP3 =>\n    hP2_to_P1 ((hP3P2).1 hP3)\n  exact ⟨forward, backward⟩",
+    "theorem P1_and_denseInterior_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → Dense (interior A) → Topology.P2 A := by\n  intro _ hDenseInt\n  exact\n    Topology.denseInterior_implies_P2 (X := X) (A := A) hDenseInt"
+  ],
+  "success": true
+}

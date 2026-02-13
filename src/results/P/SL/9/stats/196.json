@@ -1,0 +1,26 @@
+{
+  "times": [
+    257.9389719963074
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 17344,
+      "prompt_tokens": 31884,
+      "total_tokens": 49228,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.union_interiors_eq_compl_boundary {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (A : Set X) ∪ interior (Aᶜ) = (closure A \\ interior A)ᶜ := by\n  classical\n  -- Express `interior (Aᶜ)` in terms of `closure A`.\n  have hIntComp : interior (Aᶜ : Set X) = (closure A)ᶜ :=\n    Topology.interior_compl_eq_compl_closure (A := A)\n  -- Rewrite the complement of the boundary and simplify.\n  simpa [hIntComp, Set.diff_eq, Set.compl_inter, Set.compl_compl,\n        Set.union_comm, Set.union_left_comm, Set.union_assoc]"
+  ],
+  "success": true
+}

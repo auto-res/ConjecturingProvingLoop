@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.69494700431824
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2610,
+      "prompt_tokens": 19663,
+      "total_tokens": 22273,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_union_right_of_open {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P2 A → IsOpen (B : Set X) → Topology.P2 (A ∪ B) := by\n  intro hP2A hOpenB\n  -- An open set automatically satisfies `P2`.\n  have hP2B : Topology.P2 B :=\n    Topology.isOpen_implies_P2 (X := X) (A := B) hOpenB\n  -- Combine the two sets using the existing union lemma for `P2`.\n  exact Topology.P2_union (X := X) (A := A) (B := B) hP2A hP2B"
+  ],
+  "success": true
+}

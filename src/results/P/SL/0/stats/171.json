@@ -1,0 +1,26 @@
+{
+  "times": [
+    68.47905039787292
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5794,
+      "prompt_tokens": 28859,
+      "total_tokens": 34653,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem sUnion_open_has_all_Ps {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)}\n    (h𝒜 : ∀ A, A ∈ 𝒜 → IsOpen (A : Set X)) :\n    Topology.P1 (⋃₀ 𝒜) ∧ Topology.P2 (⋃₀ 𝒜) ∧ Topology.P3 (⋃₀ 𝒜) := by\n  -- The union of an arbitrary family of open sets is open.\n  have hOpen : IsOpen (⋃₀ 𝒜 : Set X) := isOpen_sUnion h𝒜\n  -- Every open set satisfies `P1`, `P2`, and `P3`.\n  simpa using\n    (Topology.isOpen_has_all_Ps (X := X) (A := (⋃₀ 𝒜 : Set X)) hOpen)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    132.05125856399536
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8679,
+      "prompt_tokens": 5495,
+      "total_tokens": 14174,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4992
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_idempotent {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior A)))) =\n      interior (closure (interior A)) := by\n  -- Let `S = interior (closure (interior A))`.\n  set S : Set X := interior (closure (interior A)) with hS_def\n  -- We first show that `closure S ⊆ closure (interior A)`.\n  have h_closure_subset : closure S ⊆ closure (interior A) := by\n    -- Since `S ⊆ closure (interior A)`, taking closures yields the claim.\n    have h_S_subset : S ⊆ closure (interior A) := by\n      dsimp [S] at *\n      exact interior_subset\n    simpa [closure_closure] using closure_mono h_S_subset\n  -- From the previous inclusion we get `interior (closure S) ⊆ S`.\n  have h_int_subset : interior (closure S) ⊆ S := by\n    have h := interior_mono h_closure_subset\n    simpa [hS_def] using h\n  -- Because `S` is open and `S ⊆ closure S`, we have `S ⊆ interior (closure S)`.\n  have h_subset_int : S ⊆ interior (closure S) := by\n    have h_open : IsOpen S := by\n      dsimp [S]; exact isOpen_interior\n    have h_sub : S ⊆ closure S := subset_closure\n    exact interior_maximal h_sub h_open\n  -- Combine the two inclusions to obtain equality.\n  have h_eq : interior (closure S) = S := subset_antisymm h_int_subset h_subset_int\n  simpa [hS_def] using h_eq"
+  ],
+  "success": true
+}

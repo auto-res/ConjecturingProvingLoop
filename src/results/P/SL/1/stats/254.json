@@ -1,0 +1,60 @@
+{
+  "times": [
+    170.9966471195221,
+    132.55944776535034,
+    118.35772943496704
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13321,
+      "prompt_tokens": 38954,
+      "total_tokens": 52275,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 9652,
+      "prompt_tokens": 39117,
+      "total_tokens": 48769,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    },
+    {
+      "completion_tokens": 9349,
+      "prompt_tokens": 39202,
+      "total_tokens": 48551,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_iff_interior_compl_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A ↔ interior (Aᶜ) = (∅ : Set X) := by\n  -- A handy rewriting lemma.\n  have hIntCompl : interior (Aᶜ : Set X) = (closure A)ᶜ := by\n    simpa using interior_compl\n  constructor\n  · intro hDense\n    -- `closure A = univ` because `A` is dense.\n    have hClosure : closure A = (Set.univ : Set X) := hDense.closure_eq\n    -- Rewrite `interior (Aᶜ)` via `hIntCompl` and `hClosure`.\n    have : interior (Aᶜ) = (Set.univ : Set X)ᶜ := by\n      simpa [hClosure] using hIntCompl\n    -- Complement of `univ` is `∅`.\n    simpa [Set.compl_univ] using this\n  · intro hIntEmpty\n    -- Translate the hypothesis into an equality for complements of closures.\n    have hComplEmpty : (closure A)ᶜ = (∅ : Set X) := by\n      simpa [hIntCompl] using hIntEmpty\n    -- Taking complements yields `closure A = univ`.\n    have hClosure : closure A = (Set.univ : Set X) := by\n      have := congrArg Set.compl hComplEmpty\n      simpa [Set.compl_compl, Set.compl_empty] using this\n    -- Conclude density from the closure equality.\n    exact (dense_iff_closure_eq).2 hClosure",
+    "theorem Topology.closure_inter_interior_eq_empty_of_disjoint\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (h : Disjoint A B) :\n    closure A ∩ interior B = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · -- Show `closure A ∩ interior B ⊆ ∅`.\n    intro x hx\n    rcases hx with ⟨hx_closure, hx_intB⟩\n    -- Obtain an open set `U` with `x ∈ U ⊆ B`.\n    rcases mem_interior_iff_mem_nhds.1 hx_intB with ⟨U, hU_open, hxU, hU_subB⟩\n    -- Because `x ∈ closure A`, every neighborhood of `x` meets `A`.\n    have hU_nonempty : (U ∩ A : Set X).Nonempty := by\n      -- `U` is a neighborhood of `x`.\n      have hU_nhds : (U : Set X) ∈ 𝓝 x := IsOpen.mem_nhds hU_open hxU\n      -- Apply the characterization of closure points.\n      exact (mem_closure_iff.1 hx_closure) hU_nhds\n    -- Pick a point `y` witnessing the non-emptiness.\n    rcases hU_nonempty with ⟨y, hyU, hyA⟩\n    -- This point lies in `B`, since `U ⊆ B`.\n    have hyB : y ∈ B := hU_subB hyU\n    -- Contradict the disjointness of `A` and `B`.\n    exact\n      ((Set.disjoint_left).1 h hyA hyB).elim\n  · -- Trivial inclusion `∅ ⊆ closure A ∩ interior B`.\n    exact Set.empty_subset _",
+    "theorem Topology.dense_union {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : Dense A) (hB : Dense B) : Dense (A ∪ B) := by\n  -- Compute the closure of the union using `closure_union`.\n  have hclosure : closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n    calc\n      closure (A ∪ B : Set X)\n          = closure A ∪ closure B := by\n            simpa [closure_union]\n      _ = (Set.univ : Set X) := by\n            simp [hA.closure_eq, hB.closure_eq]\n  -- Translate the closure equality back into a density statement.\n  exact (dense_iff_closure_eq).2 hclosure"
+  ],
+  "success": true
+}

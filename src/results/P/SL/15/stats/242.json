@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.51077103614807
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2586,
+      "prompt_tokens": 51938,
+      "total_tokens": 54524,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50944
+      }
+    }
+  ],
+  "responses": [
+    "theorem denseInterior_implies_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (interior A) → Dense A := by\n  intro hDenseInt\n  -- From the density of `interior A` we know `closure A = univ`.\n  have h_closure_eq : closure A = (Set.univ : Set X) :=\n    denseInterior_implies_closure_eq_univ (X := X) (A := A) hDenseInt\n  -- Translate the closure equality into density.\n  exact (dense_iff_closure_eq (s := A)).2 h_closure_eq"
+  ],
+  "success": true
+}

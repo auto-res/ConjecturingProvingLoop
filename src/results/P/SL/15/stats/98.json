@@ -1,0 +1,26 @@
+{
+  "times": [
+    150.11217331886292
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9802,
+      "prompt_tokens": 15137,
+      "total_tokens": 24939,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) ⊆ closure (interior (closure A)) := by\n  intro x hx\n  -- First, move from `interior (closure (interior A))` to `interior (closure A)`.\n  have hx' : x ∈ interior (closure A) :=\n    interior_closure_interior_subset_interior_closure (X := X) (A := A) hx\n  -- Any point of `interior (closure A)` belongs to the closure of `interior (closure A)`.\n  have h_subset : interior (closure A) ⊆ closure (interior (closure A)) :=\n    subset_closure\n  exact h_subset hx'"
+  ],
+  "success": true
+}

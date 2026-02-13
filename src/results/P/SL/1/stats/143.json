@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.51943039894104
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3025,
+      "prompt_tokens": 22095,
+      "total_tokens": 25120,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_compl_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    Topology.P3 (Aᶜ) := by\n  -- The complement of a closed set is open.\n  have hOpen : IsOpen (Aᶜ) := by\n    simpa using (isOpen_compl_iff).2 hA\n  -- Every open set satisfies `P3`.\n  exact Topology.P3_of_isOpen (A := Aᶜ) hOpen"
+  ],
+  "success": true
+}

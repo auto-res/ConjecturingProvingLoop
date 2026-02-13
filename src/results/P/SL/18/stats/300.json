@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.71842670440674
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1922,
+      "prompt_tokens": 48877,
+      "total_tokens": 50799,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48000
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_diff_closed {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP3A : Topology.P3 A) (hB_closed : IsClosed B) :\n    Topology.P3 (A \\ B) := by\n  -- The complement of a closed set is open.\n  have hOpenCompl : IsOpen (Bᶜ : Set X) := hB_closed.isOpen_compl\n  -- Apply the intersection lemma with the open complement.\n  have hP3_inter :\n      Topology.P3 (A ∩ Bᶜ : Set X) :=\n    Topology.P3_inter_open_right (A := A) (B := Bᶜ) hP3A hOpenCompl\n  simpa [Set.diff_eq] using hP3_inter"
+  ],
+  "success": true
+}

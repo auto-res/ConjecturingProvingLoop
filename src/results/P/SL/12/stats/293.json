@@ -1,0 +1,26 @@
+{
+  "times": [
+    64.07753682136536
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4728,
+      "prompt_tokens": 56673,
+      "total_tokens": 61401,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_three_eq {X : Type*} [TopologicalSpace X]\n    {A B C : Set X} :\n    interior (A ∩ B ∩ C : Set X) =\n      interior A ∩ interior B ∩ interior C := by\n  -- We prove the two inclusions separately and finish with antisymmetry.\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    intro x hx\n    -- `x ∈ interior A`\n    have hxA : x ∈ interior A := by\n      have h_sub : (A ∩ B ∩ C : Set X) ⊆ A := by\n        intro y hy; exact hy.1.1\n      exact (interior_mono h_sub) hx\n    -- `x ∈ interior B`\n    have hxB : x ∈ interior B := by\n      have h_sub : (A ∩ B ∩ C : Set X) ⊆ B := by\n        intro y hy; exact hy.1.2\n      exact (interior_mono h_sub) hx\n    -- `x ∈ interior C`\n    have hxC : x ∈ interior C := by\n      have h_sub : (A ∩ B ∩ C : Set X) ⊆ C := by\n        intro y hy; exact hy.2\n      exact (interior_mono h_sub) hx\n    exact And.intro (And.intro hxA hxB) hxC\n  · -- `⊇` direction\n    intro x hx\n    rcases hx with ⟨⟨hxA, hxB⟩, hxC⟩\n    -- The open set `interior A ∩ interior B ∩ interior C`\n    -- will witness that `x` is in the interior of `A ∩ B ∩ C`.\n    have h_open :\n        IsOpen (interior A ∩ interior B ∩ interior C : Set X) := by\n      have hAB :\n          IsOpen (interior A ∩ interior B : Set X) :=\n        (isOpen_interior : IsOpen (interior A)).inter\n          (isOpen_interior : IsOpen (interior B))\n      exact hAB.inter (isOpen_interior : IsOpen (interior C))\n    -- This open set is contained in `A ∩ B ∩ C`.\n    have h_subset :\n        (interior A ∩ interior B ∩ interior C : Set X) ⊆\n          A ∩ B ∩ C := by\n      intro y hy\n      have hyA : y ∈ A := interior_subset hy.1.1\n      have hyB : y ∈ B := interior_subset hy.1.2\n      have hyC : y ∈ C := interior_subset hy.2\n      exact And.intro (And.intro hyA hyB) hyC\n    -- `x` belongs to the open set.\n    have hx_open :\n        x ∈ (interior A ∩ interior B ∩ interior C : Set X) :=\n      And.intro (And.intro hxA hxB) hxC\n    -- Hence `x` belongs to the interior of `A ∩ B ∩ C`.\n    have h_mem :\n        x ∈ interior (A ∩ B ∩ C : Set X) :=\n      (interior_maximal h_subset h_open) hx_open\n    exact h_mem"
+  ],
+  "success": true
+}

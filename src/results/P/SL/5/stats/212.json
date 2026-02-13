@@ -1,0 +1,26 @@
+{
+  "times": [
+    92.33136034011841
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8139,
+      "prompt_tokens": 36978,
+      "total_tokens": 45117,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7872,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_inter_interior_compl_eq_empty {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) ∩ interior ((A : Set X)ᶜ) = (∅ : Set X) := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hxCl, hxInt⟩\n    rcases mem_interior.1 hxInt with ⟨U, hUsub, hUopen, hxU⟩\n    have hNon : ((U : Set X) ∩ (A : Set X)).Nonempty := by\n      have hClosure := (mem_closure_iff).1 hxCl\n      exact hClosure U hUopen hxU\n    rcases hNon with ⟨y, ⟨hyU, hyA⟩⟩\n    have hyCompl : y ∈ ((A : Set X)ᶜ) := hUsub hyU\n    have : False := hyCompl hyA\n    exact this.elim\n  · intro hx\n    cases hx"
+  ],
+  "success": true
+}

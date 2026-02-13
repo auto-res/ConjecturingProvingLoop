@@ -1,0 +1,43 @@
+{
+  "times": [
+    130.10834884643555,
+    187.73199224472046
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8525,
+      "prompt_tokens": 49559,
+      "total_tokens": 58084,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 12562,
+      "prompt_tokens": 49681,
+      "total_tokens": 62243,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.preimage_interior_subset_interior_preimage\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}\n    (hf : Continuous f) {S : Set Y} :\n    f ⁻¹' interior (S : Set Y) ⊆ interior (f ⁻¹' S) := by\n  intro x hx\n  -- The set `V := f ⁻¹' interior S` is an open neighbourhood of `x`.\n  have hV_open : IsOpen (f ⁻¹' interior (S : Set Y)) :=\n    (isOpen_interior : IsOpen (interior (S : Set Y))).preimage hf\n  -- Moreover, `V` is contained in `f ⁻¹' S`.\n  have hV_subset : (f ⁻¹' interior (S : Set Y) : Set X) ⊆ f ⁻¹' S := by\n    intro y hy\n    exact interior_subset hy\n  -- Apply the maximality property of the interior with the open neighbourhood `V`.\n  exact (interior_maximal hV_subset hV_open) hx",
+    ""
+  ],
+  "success": true
+}

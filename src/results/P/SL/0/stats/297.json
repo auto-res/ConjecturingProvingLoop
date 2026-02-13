@@ -1,0 +1,43 @@
+{
+  "times": [
+    179.95005178451538,
+    141.88095355033875
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10031,
+      "prompt_tokens": 51132,
+      "total_tokens": 61163,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    },
+    {
+      "completion_tokens": 7922,
+      "prompt_tokens": 51224,
+      "total_tokens": 59146,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iInter_of_closed {X ι : Type*} [TopologicalSpace X] [Fintype ι]\n    {F : ι → Set X} (hClosed : ∀ i, IsClosed (F i : Set X)) :\n    (∀ i, Topology.P3 (F i)) → Topology.P3 (⋂ i, F i) := by\n  classical\n  intro hP3\n  -- Each `F i` is open because it is closed and satisfies `P3`.\n  have hOpen_i : ∀ i, IsOpen (F i : Set X) := by\n    intro i\n    have hEquiv :=\n      (Topology.P3_iff_isOpen_of_isClosed (X := X) (A := F i) (hClosed i))\n    exact (hEquiv).1 (hP3 i)\n  -- A finite intersection of open sets is open.\n  have hOpenInter : IsOpen (⋂ i, F i : Set X) :=\n    isOpen_iInter (by\n      intro i; exact hOpen_i i)\n  -- Every open set satisfies `P3`.\n  exact\n    (Topology.isOpen_has_all_Ps (X := X) (A := (⋂ i, F i : Set X)) hOpenInter).2.2",
+    "theorem interior_closure_interior_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior (closure (interior (A : Set X))) ⊆ closure (A : Set X) := by\n  intro x hx\n  -- First, `x` also belongs to `closure (interior A)` because\n  -- `interior S ⊆ S` for every set `S`.\n  have hx_cl : x ∈ closure (interior (A : Set X)) := interior_subset hx\n  -- Next, `closure (interior A)` is contained in `closure A` by monotonicity\n  -- of `closure`, using the inclusion `interior A ⊆ A`.\n  have h_subset :\n      closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n    closure_mono (interior_subset : interior (A : Set X) ⊆ A)\n  -- Combining the two facts yields the claim.\n  exact h_subset hx_cl"
+  ],
+  "success": true
+}

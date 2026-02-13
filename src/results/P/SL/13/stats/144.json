@@ -1,0 +1,43 @@
+{
+  "times": [
+    83.71215677261353,
+    120.48335242271423
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6473,
+      "prompt_tokens": 23435,
+      "total_tokens": 29908,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    },
+    {
+      "completion_tokens": 8081,
+      "prompt_tokens": 24412,
+      "total_tokens": 32493,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_eq_left_open {X : Type*} [TopologicalSpace X]\n    {U B : Set X} (hU_open : IsOpen (U : Set X)) :\n    interior ((U ∩ B) : Set X) = U ∩ interior B := by\n  apply Set.Subset.antisymm\n  · -- `⊆` direction\n    intro x hx\n    rcases mem_interior.1 hx with ⟨s, hs_open, hx_s, hs_subset⟩\n    -- `x ∈ U`\n    have hxU : x ∈ U := (hs_subset hx_s).1\n    -- `x ∈ interior B`\n    have hx_intB : x ∈ interior B := by\n      have h_sub_B : (s : Set X) ⊆ B := by\n        intro y hy\n        exact (hs_subset hy).2\n      exact mem_interior.2 ⟨s, hs_open, hx_s, h_sub_B⟩\n    exact And.intro hxU hx_intB\n  · -- `⊇` direction\n    intro x hx\n    rcases hx with ⟨hxU, hx_intB⟩\n    rcases mem_interior.1 hx_intB with ⟨t, ht_open, hx_t, ht_subset⟩\n    -- Use `t ∩ U` as the witnessing open set\n    have hx_mem : x ∈ interior ((U ∩ B) : Set X) := by\n      have h_open : IsOpen (t ∩ U : Set X) := ht_open.inter hU_open\n      have h_subset : (t ∩ U : Set X) ⊆ U ∩ B := by\n        intro y hy\n        exact\n          And.intro hy.2 (ht_subset hy.1)\n      exact\n        mem_interior.2 ⟨t ∩ U, h_open, And.intro hx_t hxU, h_subset⟩\n    exact hx_mem",
+    "theorem Topology.all_P_univ {X : Type*} [TopologicalSpace X] :\n    Topology.P1 (X := X) (Set.univ : Set X) ∧\n      Topology.P2 (X := X) (Set.univ : Set X) ∧\n        Topology.P3 (X := X) (Set.univ : Set X) := by\n  exact\n    ⟨Topology.P1_univ (X := X), Topology.P2_univ (X := X),\n      Topology.P3_univ (X := X)⟩"
+  ],
+  "success": true
+}

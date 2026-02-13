@@ -1,0 +1,43 @@
+{
+  "times": [
+    40.218714475631714,
+    59.841089487075806
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3264,
+      "prompt_tokens": 19681,
+      "total_tokens": 22945,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3136,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 3749,
+      "prompt_tokens": 19867,
+      "total_tokens": 23616,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_eq_union_interior_closure {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    interior (closure ((A ∪ B) : Set X)) =\n      interior (closure A) ∪ interior (closure B) := by\n  have h_closure_union :\n      closure ((A ∪ B) : Set X) = closure A ∪ closure B :=\n    closure_union\n  simpa [h_closure_union, interior_union]",
+    "theorem Topology.dense_of_P1_and_denseInterior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (X := X) A) (hDenseInt : Dense (interior (A : Set X))) :\n    Dense (A : Set X) := by\n  dsimp [Dense] at hDenseInt ⊢\n  have h_eq : closure (A : Set X) = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closureInterior (X := X) (A := A)).1 hP1\n  simpa [h_eq] using hDenseInt"
+  ],
+  "success": true
+}

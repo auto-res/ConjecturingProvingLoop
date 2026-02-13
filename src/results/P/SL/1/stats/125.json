@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.85101556777954
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4255,
+      "prompt_tokens": 19102,
+      "total_tokens": 23357,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_inter_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∩ B)) ⊆\n      closure (interior A) ∩ closure (interior B) := by\n  intro x hx\n  -- First inclusion: `closure (interior (A ∩ B)) ⊆ closure (interior A)`\n  have hA : closure (interior (A ∩ B)) ⊆ closure (interior A) := by\n    -- Since `A ∩ B ⊆ A`, we get `interior (A ∩ B) ⊆ interior A`.\n    have hinner : interior (A ∩ B) ⊆ interior A := by\n      have hsubset : (A ∩ B : Set X) ⊆ A := by\n        intro y hy; exact hy.1\n      exact interior_mono hsubset\n    -- Taking closures preserves inclusion.\n    exact closure_mono hinner\n  -- Second inclusion: `closure (interior (A ∩ B)) ⊆ closure (interior B)`\n  have hB : closure (interior (A ∩ B)) ⊆ closure (interior B) := by\n    -- Since `A ∩ B ⊆ B`, we get `interior (A ∩ B) ⊆ interior B`.\n    have hinner : interior (A ∩ B) ⊆ interior B := by\n      have hsubset : (A ∩ B : Set X) ⊆ B := by\n        intro y hy; exact hy.2\n      exact interior_mono hsubset\n    -- Taking closures preserves inclusion.\n    exact closure_mono hinner\n  exact And.intro (hA hx) (hB hx)"
+  ],
+  "success": true
+}

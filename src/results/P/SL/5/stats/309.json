@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.933624029159546
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3722,
+      "prompt_tokens": 61904,
+      "total_tokens": 65626,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 61184
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_inter_interiorClosure_subset_closure_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A) ∩ interior (closure B) ⊆ closure (A ∩ closure B) := by\n  intro x hx\n  rcases hx with ⟨hxClIntA, hxIntClB⟩\n  -- We prove `x ∈ closure (A ∩ closure B)` via the neighbourhood criterion.\n  refine (mem_closure_iff).2 ?_\n  intro U hUopen hxU\n  -- Consider the open neighbourhood `V = U ∩ interior (closure B)` of `x`.\n  let V : Set X := U ∩ interior (closure B)\n  have hVopen : IsOpen V := hUopen.inter isOpen_interior\n  have hxV : x ∈ V := ⟨hxU, hxIntClB⟩\n  -- Since `x ∈ closure (interior A)`, the neighbourhood `V` meets `interior A`.\n  have hNon : (V ∩ interior A).Nonempty := by\n    have h := (mem_closure_iff).1 hxClIntA\n    simpa [V] using h V hVopen hxV\n  -- Extract a witness `y`.\n  rcases hNon with ⟨y, ⟨⟨hyU, _hyIntClB⟩, hyIntA⟩⟩\n  -- `y ∈ A` and `y ∈ closure B`.\n  have hyA : y ∈ A := interior_subset hyIntA\n  have hyClB : y ∈ closure B := interior_subset _hyIntClB\n  -- `y` lies in `U ∩ (A ∩ closure B)`, hence the required non‐emptiness.\n  exact ⟨y, ⟨hyU, ⟨hyA, hyClB⟩⟩⟩"
+  ],
+  "success": true
+}

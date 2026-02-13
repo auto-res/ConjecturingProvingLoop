@@ -1,0 +1,26 @@
+{
+  "times": [
+    120.86335849761963
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8098,
+      "prompt_tokens": 31621,
+      "total_tokens": 39719,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7936,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30464
+      }
+    }
+  ],
+  "responses": [
+    "theorem closureInterior_diff_interior_subset_boundary {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (A : Set X)) \\ interior (A : Set X) ⊆\n      closure (A : Set X) \\ interior (A : Set X) := by\n  intro x hx\n  rcases hx with ⟨hx_clInt, hx_notInt⟩\n  have hx_clA : (x : X) ∈ closure (A : Set X) :=\n    (closure_interior_subset_closure (A := A)) hx_clInt\n  exact And.intro hx_clA hx_notInt"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    13.51290249824524
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1003,
+      "prompt_tokens": 53938,
+      "total_tokens": 54941,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 832,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInterior_inter_frontier_eq_frontierInterior\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior A) ∩ frontier A = frontier (interior A) := by\n  calc\n    closure (interior A) ∩ frontier A\n        = closure (interior A) \\ interior A := by\n          simpa using\n            (Topology.closureInterior_inter_frontier_eq_closureInterior_diff_interior\n                (A := A))\n    _ = frontier (interior A) := by\n          simpa using\n            (Topology.frontier_interior_eq_closureInterior_diff_interior\n                (A := A)).symm"
+  ],
+  "success": true
+}

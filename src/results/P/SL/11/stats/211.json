@@ -1,0 +1,77 @@
+{
+  "times": [
+    159.52058219909668,
+    160.55650639533997,
+    82.13336110115051,
+    98.70598077774048
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11965,
+      "prompt_tokens": 34279,
+      "total_tokens": 46244,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 10051,
+      "prompt_tokens": 34374,
+      "total_tokens": 44425,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 5304,
+      "prompt_tokens": 34450,
+      "total_tokens": 39754,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 6561,
+      "prompt_tokens": 34529,
+      "total_tokens": 41090,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_nonempty_iff_nonempty_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hP1 : Topology.P1 A) :\n    (closure (interior A)).Nonempty ↔ A.Nonempty := by\n  classical\n  constructor\n  · intro hClInt\n    -- First, show that `interior A` is nonempty, otherwise derive a contradiction.\n    by_cases hInt : (interior A).Nonempty\n    ·\n      rcases hInt with ⟨x, hxInt⟩\n      exact ⟨x, (interior_subset : interior A ⊆ A) hxInt⟩\n    ·\n      -- If `interior A` is empty, then so is its closure, contradicting `hClInt`.\n      have hIntEq : interior A = (∅ : Set X) := by\n        apply Set.eq_empty_iff_forall_not_mem.mpr\n        intro x hx\n        exact (hInt ⟨x, hx⟩).elim\n      have hClEq : closure (interior A) = (∅ : Set X) := by\n        simpa [hIntEq, closure_empty]\n      rcases hClInt with ⟨x, hx⟩\n      have : x ∈ (∅ : Set X) := by\n        simpa [hClEq] using hx\n      exact (Set.not_mem_empty x) this\n  · intro hA\n    -- Obtain a point in `interior A` via an existing lemma.\n    have hInt : (interior A).Nonempty :=\n      Topology.interior_nonempty_of_P1 (A := A) hP1 hA\n    rcases hInt with ⟨x, hxInt⟩\n    -- The closure of a nonempty set is nonempty.\n    exact ⟨x, subset_closure hxInt⟩",
+    "theorem interior_nonempty_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 A) (hne : A.Nonempty) : (interior A).Nonempty := by\n  classical\n  -- Suppose, for a contradiction, that `interior A` is empty.\n  by_contra hInt\n  -- This gives the equality `interior A = ∅`.\n  have hIntEq : interior A = (∅ : Set X) := by\n    apply Set.eq_empty_iff_forall_not_mem.2\n    intro x hx\n    exact (hInt ⟨x, hx⟩).elim\n  -- Pick an element of `A`.\n  rcases hne with ⟨x, hxA⟩\n  -- Use `P2` to map it into `interior (closure (interior A))`.\n  have hxInner : x ∈ interior (closure (interior A)) := hP2 hxA\n  -- But `interior A` was assumed empty, so the target set is also empty.\n  have hFalse : False := by\n    have : x ∈ (∅ : Set X) := by\n      simpa [hIntEq] using hxInner\n    exact (Set.not_mem_empty x) this\n  -- Derive a contradiction.\n  exact hFalse.elim",
+    "import Mathlib\n\ntheorem closure_inter_subset_inter_closure {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  have hxA : x ∈ closure A := by\n    have hsubset : (A ∩ B : Set X) ⊆ A := Set.inter_subset_left\n    exact (closure_mono hsubset) hx\n  have hxB : x ∈ closure B := by\n    have hsubset : (A ∩ B : Set X) ⊆ B := Set.inter_subset_right\n    exact (closure_mono hsubset) hx\n  exact ⟨hxA, hxB⟩",
+    "theorem closure_inter_subset_closure_inter {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  have hA : x ∈ closure A :=\n    (closure_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)) hx\n  have hB : x ∈ closure B :=\n    (closure_mono (Set.inter_subset_right : (A ∩ B : Set X) ⊆ B)) hx\n  exact ⟨hA, hB⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    39.8310387134552
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2718,
+      "prompt_tokens": 10110,
+      "total_tokens": 12828,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_iff_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (A : Set X)) ↔\n      interior (closure (A : Set X)) = closure (A : Set X) := by\n  have hEquiv := (Topology.P3_closure_iff_isOpen (A := A))\n  constructor\n  · intro hP3\n    have hOpen : IsOpen (closure (A : Set X)) := (hEquiv).1 hP3\n    simpa using hOpen.interior_eq\n  · intro hIntEq\n    have hOpen : IsOpen (closure (A : Set X)) := by\n      have : IsOpen (interior (closure (A : Set X))) := isOpen_interior\n      simpa [hIntEq] using this\n    exact (hEquiv).2 hOpen"
+  ],
+  "success": true
+}

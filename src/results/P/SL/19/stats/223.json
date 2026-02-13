@@ -1,0 +1,43 @@
+{
+  "times": [
+    92.16020631790161,
+    85.60031414031982
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4981,
+      "prompt_tokens": 34620,
+      "total_tokens": 39601,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 5378,
+      "prompt_tokens": 34811,
+      "total_tokens": 40189,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_iff_open_and_closed {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier A = (∅ : Set X) ↔ (IsOpen A ∧ IsClosed A) := by\n  constructor\n  · intro hFront\n    -- From `frontier A = ∅` we obtain `closure A \\ interior A = ∅`.\n    have hDiffEmpty : closure A \\ interior A = (∅ : Set X) := by\n      simpa [frontier] using hFront\n    -- Hence every point of `closure A` lies in `interior A`.\n    have hClosSubInt : closure A ⊆ interior A := by\n      intro x hxClos\n      by_cases hxInt : x ∈ interior A\n      · exact hxInt\n      · have : x ∈ closure A \\ interior A := ⟨hxClos, hxInt⟩\n        simpa [hDiffEmpty] using this\n    -- The reverse inclusion is always true.\n    have hIntSubClos : interior A ⊆ closure A :=\n      Topology.interior_subset_closure (A := A)\n    -- Therefore `closure A = interior A`.\n    have hEqIntClos : closure A = interior A :=\n      Set.Subset.antisymm hClosSubInt hIntSubClos\n    -- Next, show `A = interior A`, hence `A` is open.\n    have hEqInt : interior A = A := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      · intro x hxA\n        have : (x : X) ∈ closure A := subset_closure hxA\n        have : x ∈ interior A := hClosSubInt this\n        exact this\n    have hOpen : IsOpen A := by\n      simpa [hEqInt] using (isOpen_interior : IsOpen (interior A))\n    -- Similarly, `A = closure A`, hence `A` is closed.\n    have hEqClos : closure A = A := by\n      simpa [hEqInt] using hEqIntClos.symm\n    have hClosed : IsClosed A := by\n      simpa [hEqClos] using (isClosed_closure (s := A))\n    exact And.intro hOpen hClosed\n  · rintro ⟨hOpen, hClosed⟩\n    exact\n      Topology.frontier_eq_empty_of_isOpen_and_isClosed\n        (A := A) hOpen hClosed",
+    "theorem Topology.frontier_eq_closure_diff_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier A = closure A \\ interior A := by\n  rfl"
+  ],
+  "success": true
+}

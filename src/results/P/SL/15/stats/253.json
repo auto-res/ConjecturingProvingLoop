@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.900797605514526
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4270,
+      "prompt_tokens": 54023,
+      "total_tokens": 58293,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem denseInterior_left_and_P2_right_implies_P2_prod\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    Dense (interior A) → Topology.P2 B → Topology.P2 (A ×ˢ B) := by\n  intro hDenseInt hP2B\n  dsimp [Topology.P2] at hP2B ⊢\n  intro p hp\n  -- Coordinates of the point `p`\n  have hxA : p.1 ∈ A := hp.1\n  have hyB : p.2 ∈ B := hp.2\n  -- Thanks to the density of `interior A`, its closure's interior is the whole space\n  have hIntA_univ :\n      interior (closure (interior A : Set X)) = (Set.univ : Set X) :=\n    interior_closure_interior_eq_univ_of_dense (X := X) (A := A) hDenseInt\n  -- Hence `p.1` lies in `interior (closure (interior A))`\n  have hx_int :\n      p.1 ∈ interior (closure (interior A)) := by\n    have : p.1 ∈ (Set.univ : Set X) := by\n      trivial\n    simpa [hIntA_univ] using this\n  -- Apply the `P2` property of `B` to the second coordinate\n  have hy_int :\n      p.2 ∈ interior (closure (interior B)) := hP2B hyB\n  -- Combine the two interior memberships\n  have h_mem_prod :\n      (p : X × Y) ∈\n        interior (closure (interior A)) ×ˢ\n          interior (closure (interior B)) :=\n    And.intro hx_int hy_int\n  -- Identify `interior (closure (interior (A ×ˢ B)))`\n  have h_eq :=\n    interior_closure_interior_prod (X := X) (Y := Y) (A := A) (B := B)\n  -- Conclude the desired membership\n  simpa [h_eq] using h_mem_prod"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    161.835440158844
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9387,
+      "prompt_tokens": 20775,
+      "total_tokens": 30162,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_subset_interior_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) ⊆\n      interior (closure (interior (closure A))) := by\n  -- The required inclusion follows from monotonicity with\n  -- respect to the evident inclusion `A ⊆ closure A`.\n  have h_mono :=\n    Topology.interior_closure_interior_mono\n      (X := X) (A := A) (B := closure A) (subset_closure : (A : Set X) ⊆ closure A)\n  simpa using h_mono"
+  ],
+  "success": true
+}

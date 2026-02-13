@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.30871272087097
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4263,
+      "prompt_tokens": 35815,
+      "total_tokens": 40078,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_empty_iff\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A = (∅ : Set X) ↔ A = (∅ : Set X) := by\n  constructor\n  · intro h\n    have h₁ : A ⊆ (∅ : Set X) := by\n      intro x hx\n      have : (x : X) ∈ closure A := subset_closure hx\n      simpa [h] using this\n    exact Set.Subset.antisymm h₁ (Set.empty_subset _)\n  · intro hA\n    simpa [hA, closure_empty]"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    73.07968664169312,
+    208.2156364917755
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4671,
+      "prompt_tokens": 43335,
+      "total_tokens": 48006,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    },
+    {
+      "completion_tokens": 10578,
+      "prompt_tokens": 43432,
+      "total_tokens": 54010,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42880
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_subset_closure_interior_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A → interior (closure A) ⊆ closure (interior A) := by\n  intro hP1\n  -- `interior (closure A)` is contained in `closure A`.\n  have h₁ : interior (closure A) ⊆ closure A := interior_subset\n  -- `closure A` is contained in `closure (interior A)` thanks to `P1`.\n  have h₂ : closure A ⊆ closure (interior A) := by\n    apply closure_mono\n    exact hP1\n  -- Combine the two inclusions.\n  exact Set.Subset.trans h₁ h₂",
+    ""
+  ],
+  "success": true
+}

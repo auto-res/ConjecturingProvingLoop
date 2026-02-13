@@ -1,0 +1,43 @@
+{
+  "times": [
+    38.63235068321228,
+    89.11284112930298
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2820,
+      "prompt_tokens": 5654,
+      "total_tokens": 8474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    },
+    {
+      "completion_tokens": 5671,
+      "prompt_tokens": 5776,
+      "total_tokens": 11447,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_eq {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply Set.Subset.antisymm\n  ·\n    have hsubset : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    have hclosure :\n        closure (interior (closure (interior A))) ⊆ closure (closure (interior A)) :=\n      closure_mono hsubset\n    simpa [closure_closure] using hclosure\n  ·\n    have hsubset : interior A ⊆ interior (closure (interior A)) := by\n      have h : (interior A : Set X) ⊆ closure (interior A) := by\n        intro x hx\n        exact subset_closure hx\n      exact interior_mono h\n    have hclosure : closure (interior A) ⊆ closure (interior (closure (interior A))) :=\n      closure_mono hsubset\n    exact hclosure",
+    "theorem Topology.P1_iUnion_interior {X : Type*} [TopologicalSpace X] {ι : Sort*}\n    (A : ι → Set X) : Topology.P1 (⋃ i, interior (A i)) := by\n  -- First, show that the union of the interiors is an open set.\n  have hOpen : IsOpen (⋃ i, interior (A i)) := by\n    apply isOpen_iUnion\n    intro i\n    exact isOpen_interior\n  -- Apply `P1_of_isOpen` to conclude the desired result.\n  exact Topology.P1_of_isOpen (A := ⋃ i, interior (A i)) hOpen"
+  ],
+  "success": true
+}

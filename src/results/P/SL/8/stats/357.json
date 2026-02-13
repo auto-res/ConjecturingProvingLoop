@@ -1,0 +1,26 @@
+{
+  "times": [
+    36.87888956069946
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3477,
+      "prompt_tokens": 55991,
+      "total_tokens": 59468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55168
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_subset_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA_closed : IsClosed A) :\n    interior (closure (interior A)) ⊆ A := by\n  -- First, `interior (closure (interior A))` is contained in `closure (interior A)`.\n  have h₁ : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset\n  -- Next, because `A` is closed, `closure (interior A)` is contained in `A`.\n  have h₂ : closure (interior A) ⊆ A :=\n    closure_interior_subset_of_isClosed (X := X) (A := A) hA_closed\n  -- Combining the two inclusions yields the result.\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

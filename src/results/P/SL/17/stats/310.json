@@ -1,0 +1,26 @@
+{
+  "times": [
+    38.90347194671631
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2545,
+      "prompt_tokens": 53279,
+      "total_tokens": 55824,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_diff_subset_union_frontier {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    frontier (A \\ B) ⊆ frontier A ∪ frontier B := by\n  intro x hx\n  -- Rewrite the frontier of the difference as the frontier of an intersection.\n  have h_eq : frontier (A \\ B) = frontier (A ∩ Bᶜ) := by\n    simp [Set.diff_eq]\n  -- Transport the membership along the equality.\n  have hx' : x ∈ frontier (A ∩ Bᶜ) := by\n    simpa [h_eq] using hx\n  -- Apply the existing inclusion for frontiers of intersections.\n  have hx'' :\n      x ∈ frontier A ∪ frontier (Bᶜ) :=\n    (Topology.frontier_inter_subset_union_frontier\n      (A := A) (B := Bᶜ)) hx'\n  -- Replace `frontier (Bᶜ)` with `frontier B`.\n  cases hx'' with\n  | inl hA =>\n      exact Or.inl hA\n  | inr hBc =>\n      have hB : x ∈ frontier B := by\n        simpa [Topology.frontier_compl (A := B)] using hBc\n      exact Or.inr hB"
+  ],
+  "success": true
+}

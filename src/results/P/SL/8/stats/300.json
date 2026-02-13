@@ -1,0 +1,26 @@
+{
+  "times": [
+    85.94246459007263
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5655,
+      "prompt_tokens": 46546,
+      "total_tokens": 52201,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_iInter_subset_iInter_interior\n    {X ι : Type*} [TopologicalSpace X] (A : ι → Set X) :\n    interior (Set.iInter A) ⊆ Set.iInter (fun i => interior (A i)) := by\n  classical\n  intro x hx\n  rcases (Set.mem_interior).1 hx with ⟨U, hU_open, hU_sub, hxU⟩\n  apply Set.mem_iInter.2\n  intro i\n  have hU_sub_i : U ⊆ A i := by\n    intro y hy\n    have h_mem : y ∈ Set.iInter A := hU_sub hy\n    exact (Set.mem_iInter.1 h_mem) i\n  exact\n    (Set.mem_interior).2 ⟨U, hU_open, hU_sub_i, hxU⟩"
+  ],
+  "success": true
+}

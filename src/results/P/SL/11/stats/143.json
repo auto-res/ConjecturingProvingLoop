@@ -1,0 +1,26 @@
+{
+  "times": [
+    56.974642515182495
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4655,
+      "prompt_tokens": 21102,
+      "total_tokens": 25757,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4416,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_iInter_subset {X ι : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    closure (interior (⋂ i, A i)) ⊆ ⋂ i, closure (interior (A i)) := by\n  intro x hx\n  -- For every `i`, show `x ∈ closure (interior (A i))`.\n  have hxAll : ∀ i, x ∈ closure (interior (A i)) := by\n    intro i\n    -- Use monotonicity of `interior` and `closure` together with the basic set inclusion.\n    have hsubset : closure (interior (⋂ j, A j)) ⊆ closure (interior (A i)) := by\n      apply closure_mono\n      apply interior_mono\n      exact Set.iInter_subset (fun j => A j) i\n    exact hsubset hx\n  -- Assemble the witnesses into the intersection.\n  exact Set.mem_iInter.2 hxAll"
+  ],
+  "success": true
+}

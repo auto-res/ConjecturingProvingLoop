@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.21742916107178
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2532,
+      "prompt_tokens": 21282,
+      "total_tokens": 23814,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_nonempty_of_P3_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hP3 : Topology.P3 (X := X) A) (hA : A.Nonempty) :\n    (interior (A : Set X)).Nonempty := by\n  -- From closedness and `P3`, we know that `A` is open.\n  have hOpen : IsOpen (A : Set X) :=\n    (Topology.P3_iff_isOpen_of_isClosed (X := X) (A := A) hClosed).1 hP3\n  -- For an open set, its interior is itself.\n  have hInt_eq : interior (A : Set X) = A := hOpen.interior_eq\n  -- The non‐emptiness of `A` now yields the non‐emptiness of its interior.\n  simpa [hInt_eq] using hA"
+  ],
+  "success": true
+}

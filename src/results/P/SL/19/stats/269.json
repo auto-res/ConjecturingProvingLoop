@@ -1,0 +1,26 @@
+{
+  "times": [
+    167.39781141281128
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7708,
+      "prompt_tokens": 42780,
+      "total_tokens": 50488,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_closure_subset_closure_inter {X : Type*}\n    [TopologicalSpace X] {A B : Set X} :\n    interior A ∩ closure B ⊆ closure (A ∩ B) := by\n  intro x hx\n  rcases hx with ⟨hxIntA, hxClosB⟩\n  -- Prove the membership in the closure via the neighbourhood characterization.\n  have h : ∀ U, IsOpen U → x ∈ U → (U ∩ (A ∩ B)).Nonempty := by\n    intro U hU hxU\n    -- The open set `U ∩ interior A` still contains `x`.\n    have hV_open : IsOpen (U ∩ interior A) := hU.inter isOpen_interior\n    have hxV : x ∈ U ∩ interior A := ⟨hxU, hxIntA⟩\n    -- Since `x ∈ closure B`, this open set meets `B`.\n    have hNon : ((U ∩ interior A) ∩ B).Nonempty :=\n      (mem_closure_iff.1 hxClosB) (U ∩ interior A) hV_open hxV\n    rcases hNon with ⟨y, ⟨⟨hyU, hyIntA⟩, hyB⟩⟩\n    -- The point `y` lies in `A` because it lies in `interior A`.\n    have hyA : y ∈ A := interior_subset hyIntA\n    -- Hence `y ∈ U ∩ (A ∩ B)`.\n    exact ⟨y, ⟨hyU, ⟨hyA, hyB⟩⟩⟩\n  exact (mem_closure_iff).2 h"
+  ],
+  "success": true
+}

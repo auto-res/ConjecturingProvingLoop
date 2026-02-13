@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.29318237304688
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6626,
+      "prompt_tokens": 43462,
+      "total_tokens": 50088,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_iUnion_of_isOpen {X : Type*} [TopologicalSpace X] {ι : Type*}\n    {s : ι → Set X} :\n    (∀ i, IsOpen (s i)) →\n      interior (⋃ i, s i : Set X) = ⋃ i, interior (s i) := by\n  intro hOpen\n  -- The union of the open sets is open.\n  have hOpenUnion : IsOpen (⋃ i, s i : Set X) :=\n    isOpen_iUnion (fun i => hOpen i)\n  -- Hence its interior is itself.\n  have h₁ : interior (⋃ i, s i : Set X) = (⋃ i, s i : Set X) :=\n    hOpenUnion.interior_eq\n  -- Rewrite each `s i` by `interior (s i)` (they coincide because `s i` is open).\n  have h₂ : (⋃ i, s i : Set X) = ⋃ i, interior (s i) := by\n    classical\n    ext x\n    constructor\n    · intro hx\n      rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n      have : x ∈ interior (s i) := by\n        simpa [(hOpen i).interior_eq] using hx_i\n      exact Set.mem_iUnion.2 ⟨i, this⟩\n    · intro hx\n      rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n      have : x ∈ s i :=\n        (interior_subset : interior (s i) ⊆ s i) hx_i\n      exact Set.mem_iUnion.2 ⟨i, this⟩\n  simpa [h₂] using h₁"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    131.24610376358032
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11590,
+      "prompt_tokens": 36308,
+      "total_tokens": 47898,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_iterate_fixed {X : Type*} [TopologicalSpace X]\n    (A : Set X) (n : ℕ) :\n    Nat.iterate (fun S : Set X => interior (closure S)) n (interior (closure A)) =\n      interior (closure A) := by\n  induction n with\n  | zero =>\n      simp\n  | succ n ih =>\n      simpa [Nat.iterate, ih,\n        Topology.interior_closure_idempotent (X := X) (A := A)]"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    144.7132523059845
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10684,
+      "prompt_tokens": 38357,
+      "total_tokens": 49041,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_closure_compl_eq_empty {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (A : Set X) ∩ closure ((A : Set X)ᶜ) = (∅ : Set X) := by\n  classical\n  -- We show that the intersection contains no points.\n  apply (Set.eq_empty_iff_forall_not_mem).2\n  intro x hx\n  rcases hx with ⟨hxInt, hxCl⟩\n  -- Pick an open neighborhood `U` of `x` contained in `A`.\n  rcases mem_interior.1 hxInt with ⟨U, hUsubA, hUopen, hxU⟩\n  -- Because `x ∈ closure (Aᶜ)`, the neighborhood `U` meets `Aᶜ`.\n  have hNon : ((U : Set X) ∩ ((A : Set X)ᶜ)).Nonempty :=\n    (mem_closure_iff).1 hxCl U hUopen hxU\n  rcases hNon with ⟨y, ⟨hyU, hyCompl⟩⟩\n  -- But `U ⊆ A`, so `y ∈ A`, contradicting `y ∈ Aᶜ`.\n  exact hyCompl (hUsubA hyU)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.55762887001038
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5122,
+      "prompt_tokens": 23195,
+      "total_tokens": 28317,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22400
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_inter_subset_closure_left_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hB : IsClosed B) :\n    closure (A ∩ B) ⊆ closure A ∩ B := by\n  intro x hx\n  -- First, use the general inclusion into the product of closures.\n  have hx' : x ∈ closure A ∩ closure B :=\n    (Topology.closure_inter_subset (A := A) (B := B)) hx\n  -- Reduce membership in `closure B` to membership in `B` via closedness.\n  have hxB : x ∈ B := by\n    simpa [hB.closure_eq] using hx'.2\n  exact ⟨hx'.1, hxB⟩"
+  ],
+  "success": true
+}

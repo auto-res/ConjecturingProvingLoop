@@ -1,0 +1,26 @@
+{
+  "times": [
+    78.8904595375061
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7730,
+      "prompt_tokens": 19395,
+      "total_tokens": 27125,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7232,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 17280
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.dense_interior_closure_iff_closure_eq_univ {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Dense (interior (closure A)) ↔ closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hDense\n    -- `Dense` gives the closure of `interior (closure A)` is the whole space.\n    have h_closure_int : closure (interior (closure A)) = (Set.univ : Set X) :=\n      hDense.closure_eq\n    -- This closure is contained in `closure A`.\n    have h_subset : closure (interior (closure A)) ⊆ closure A :=\n      Topology.closure_interior_closure_subset_closure (A := A)\n    -- Hence `closure A` contains `Set.univ`, so the two sets coincide.\n    have h_univ_subset : (Set.univ : Set X) ⊆ closure A := by\n      simpa [h_closure_int] using h_subset\n    have h_closure_subset : closure A ⊆ (Set.univ : Set X) := by\n      intro x _; simp\n    exact Set.Subset.antisymm h_closure_subset h_univ_subset\n  · intro hClosure\n    -- From `closure A = Set.univ`, it follows that `interior (closure A)` is `Set.univ`.\n    have h_int_univ : interior (closure A) = (Set.univ : Set X) := by\n      simpa [hClosure] using (interior_univ : interior (Set.univ : Set X) = Set.univ)\n    -- Consequently, its closure is also `Set.univ`.\n    have h_closure_int : closure (interior (closure A)) = (Set.univ : Set X) := by\n      simpa [h_int_univ] using\n        (closure_univ : closure (Set.univ : Set X) = Set.univ)\n    -- Reformulate this equality as the `Dense` property.\n    intro x\n    have : (x : X) ∈ (Set.univ : Set X) := by\n      simp\n    simpa [h_closure_int] using this"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    154.20460271835327
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9649,
+      "prompt_tokens": 55721,
+      "total_tokens": 65370,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_eq_univ_of_dense_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (A : Set X)) = (Set.univ : Set X) →\n      interior (closure (A : Set X)) = (Set.univ : Set X) := by\n  intro hDenseInt\n  -- First, rewrite `interior (closure (interior A))` using the density assumption.\n  have hIntUniv :\n      interior (closure (interior (A : Set X))) = (Set.univ : Set X) := by\n    have :\n        interior (closure (interior (A : Set X))) =\n          interior ((Set.univ : Set X)) := by\n      simpa [hDenseInt]\n    simpa [interior_univ] using this\n  -- Monotonicity of `interior` with respect to set inclusion.\n  have hSubset :\n      interior (closure (interior (A : Set X))) ⊆\n        interior (closure (A : Set X)) := by\n    apply interior_mono\n    exact closure_interior_subset_closure (A := A)\n  -- Since the left‐hand side is `univ`, the right‐hand side is also `univ`.\n  have hUniv :\n      (Set.univ : Set X) ⊆ interior (closure (A : Set X)) := by\n    simpa [hIntUniv] using hSubset\n  -- Conclude the desired equality.\n  exact Set.Subset.antisymm (Set.subset_univ _) hUniv"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    218.87044310569763,
+    78.9307427406311,
+    256.3777828216553
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 14727,
+      "prompt_tokens": 50219,
+      "total_tokens": 64946,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 6588,
+      "prompt_tokens": 50355,
+      "total_tokens": 56943,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 11603,
+      "prompt_tokens": 50474,
+      "total_tokens": 62077,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_subset_closureDiff {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure A \\ closure B ⊆ closure (A \\ B) := by\n  intro x hx\n  rcases hx with ⟨hxClA, hxNotClB⟩\n  -- Obtain an open neighbourhood of `x` that avoids `B`.\n  rcases (not_mem_closure_iff).1 hxNotClB with\n    ⟨V, hV_open, hxV, hVDisj⟩\n  -- Use the neighbourhood characterization of the closure.\n  have h :\n      ∀ U : Set X, IsOpen U → x ∈ U → (U ∩ (A \\ B)).Nonempty := by\n    intro U hU_open hxU\n    -- Intersect the given neighbourhood with `V` to stay clear of `B`.\n    have hW_open : IsOpen (U ∩ V) := hU_open.inter hV_open\n    have hxW : x ∈ U ∩ V := And.intro hxU hxV\n    -- Since `x ∈ closure A`, the set `(U ∩ V)` meets `A`.\n    have hNon : ((U ∩ V) ∩ A).Nonempty :=\n      (mem_closure_iff).1 hxClA (U ∩ V) hW_open hxW\n    rcases hNon with ⟨y, hyUV, hyA⟩\n    have hyU : y ∈ U := hyUV.1\n    have hyV : y ∈ V := hyUV.2\n    -- The disjointness of `V` and `B` gives `y ∉ B`.\n    have hyNotB : y ∉ B := by\n      have hDisj := (Set.disjoint_left).1 hVDisj\n      exact fun hB : y ∈ B => hDisj hyV hB\n    -- Provide the required witness in `U ∩ (A \\ B)`.\n    exact\n      ⟨y, And.intro hyU (And.intro hyA hyNotB)⟩\n  -- Conclude that `x` lies in the closure of `A \\ B`.\n  exact (mem_closure_iff).2 h",
+    "theorem not_mem_closure_iff {X : Type*} [TopologicalSpace X] {A : Set X} {x : X} :\n    x ∉ closure A ↔ ∃ U : Set X, IsOpen U ∧ x ∈ U ∧ Set.Disjoint U A := by\n  classical\n  constructor\n  · -- `→` direction\n    intro hx\n    have hU_open : IsOpen ((closure A)ᶜ) := by\n      simpa using (isOpen_compl_iff).2 (isClosed_closure (A := A))\n    have hxU : x ∈ (closure A)ᶜ := by\n      simpa using hx\n    have h_dis : Set.Disjoint ((closure A)ᶜ) A := by\n      refine (Set.disjoint_left).2 ?_\n      intro y hyCompl hyA\n      have : (y : X) ∈ closure A := subset_closure hyA\n      exact hyCompl this\n    exact ⟨(closure A)ᶜ, hU_open, hxU, h_dis⟩\n  · -- `←` direction\n    rintro ⟨U, hU_open, hxU, h_dis⟩\n    intro hxCl\n    -- From `x ∈ closure A`, every open neighbourhood of `x` meets `A`.\n    have h_non : (U ∩ A).Nonempty := (mem_closure_iff).1 hxCl U hU_open hxU\n    rcases h_non with ⟨y, hyU, hyA⟩\n    exact (Set.disjoint_left.1 h_dis) hyU hyA",
+    "theorem interior_compl_eq_compl_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (Aᶜ) = (closure A)ᶜ := by\n  classical\n  ext x\n  constructor\n  · -- `x ∈ interior (Aᶜ) → x ∉ closure A`\n    intro hx\n    -- Assume, for contradiction, that `x ∈ closure A`\n    have h : x ∉ closure A := by\n      intro hxCl\n      -- Obtain an open neighbourhood `U` of `x` contained in `Aᶜ`\n      rcases (Set.mem_interior).1 hx with ⟨U, hU_open, hU_sub, hxU⟩\n      -- Since `x ∈ closure A`, `U` meets `A`\n      have hNon : (U ∩ A).Nonempty :=\n        (mem_closure_iff).1 hxCl U hU_open hxU\n      rcases hNon with ⟨y, hyU, hyA⟩\n      -- But `U ⊆ Aᶜ`, contradiction\n      have : y ∈ Aᶜ := hU_sub hyU\n      exact this hyA\n    exact h\n  · -- `x ∉ closure A → x ∈ interior (Aᶜ)`\n    intro hx\n    -- The set `V = (closure A)ᶜ` is open and contains `x`\n    have hV_open : IsOpen ((closure A)ᶜ) := (isOpen_compl_iff).2 isClosed_closure\n    have hxV : x ∈ (closure A)ᶜ := hx\n    -- Show `V ⊆ Aᶜ`\n    have hV_sub : (closure A)ᶜ ⊆ Aᶜ := by\n      intro y hy\n      by_cases hA : y ∈ A\n      · have : (y : X) ∈ closure A := subset_closure hA\n        exact (hy this).elim\n      · exact hA\n    -- Conclude that `x` lies in the interior of `Aᶜ`\n    exact\n      (Set.mem_interior).2 ⟨(closure A)ᶜ, hV_open, hV_sub, hxV⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    62.43283677101135
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4771,
+      "prompt_tokens": 20457,
+      "total_tokens": 25228,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_prod_left {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty Y]\n    {A : Set X} :\n    Topology.P1 (A ×ˢ (Set.univ : Set Y)) → Topology.P1 A := by\n  intro hProd\n  dsimp [Topology.P1] at hProd\n  dsimp [Topology.P1]\n  intro x hxA\n  classical\n  have y : Y := Classical.arbitrary Y\n  have h_mem_prod : (x, y) ∈ A ×ˢ (Set.univ : Set Y) := by\n    exact And.intro hxA (Set.mem_univ y)\n  have h_closure_mem : (x, y) ∈ closure (interior (A ×ˢ (Set.univ : Set Y))) :=\n    hProd h_mem_prod\n  have h_int_prod :\n      interior (A ×ˢ (Set.univ : Set Y)) =\n        interior A ×ˢ (Set.univ : Set Y) := by\n    simpa using\n      interior_prod_eq (s := A) (t := (Set.univ : Set Y))\n  have h_closure_prod :\n      closure (interior (A ×ˢ (Set.univ : Set Y))) =\n        closure (interior A) ×ˢ (Set.univ : Set Y) := by\n    calc\n      closure (interior (A ×ˢ (Set.univ : Set Y)))\n          = closure (interior A ×ˢ (Set.univ : Set Y)) := by\n              simpa [h_int_prod]\n      _ = closure (interior A) ×ˢ (Set.univ : Set Y) := by\n              simpa using\n                closure_prod_eq\n                  (s := interior A) (t := (Set.univ : Set Y))\n  have h_in_prod :\n      (x, y) ∈ closure (interior A) ×ˢ (Set.univ : Set Y) := by\n    simpa [h_closure_prod] using h_closure_mem\n  exact (Set.mem_prod.1 h_in_prod).1"
+  ],
+  "success": true
+}

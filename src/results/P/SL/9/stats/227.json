@@ -1,0 +1,43 @@
+{
+  "times": [
+    21.318100452423096,
+    44.255314350128174
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1609,
+      "prompt_tokens": 37584,
+      "total_tokens": 39193,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1472,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    },
+    {
+      "completion_tokens": 3149,
+      "prompt_tokens": 37690,
+      "total_tokens": 40839,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_closure_inter_closureCompl {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    frontier (A : Set X) = closure A ∩ closure (Aᶜ) := by\n  classical\n  -- Use the established equality between the two right–hand expressions.\n  have h :=\n    (Topology.closure_inter_closureCompl_eq_closure_diff_interior (A := A)).symm\n  -- Rewrite `frontier` and conclude.\n  simpa [frontier] using h",
+    "theorem Topology.frontier_univ {X : Type*} [TopologicalSpace X] :\n    frontier (Set.univ : Set X) = (∅ : Set X) := by\n  classical\n  simp [frontier, closure_univ, interior_univ]"
+  ],
+  "success": true
+}

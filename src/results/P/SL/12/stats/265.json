@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.686172008514404
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1208,
+      "prompt_tokens": 50260,
+      "total_tokens": 51468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_inter_eq_interior_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed (A : Set X)) (hB : IsClosed (B : Set X)) :\n    interior (closure (A ∩ B : Set X)) = interior (A ∩ B) := by\n  -- The intersection of two closed sets is closed.\n  have h_closed : IsClosed (A ∩ B : Set X) := hA.inter hB\n  -- Apply the existing lemma for closed sets.\n  simpa using\n    Topology.interior_closure_eq_interior_of_isClosed\n      (X := X) (A := (A ∩ B)) h_closed"
+  ],
+  "success": true
+}

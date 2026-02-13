@@ -1,0 +1,26 @@
+{
+  "times": [
+    123.7421247959137
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9375,
+      "prompt_tokens": 30439,
+      "total_tokens": 39814,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29440
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_iff_open_inter_nonempty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (A : Set X) ↔\n      ∀ U : Set X, IsOpen U → U.Nonempty → (A ∩ U : Set X).Nonempty := by\n  classical\n  constructor\n  · intro hDense U hU_open hU_nonempty\n    -- Use the forward implication supplied by `dense_inter_open_nonempty`.\n    simpa using\n      (dense_inter_open_nonempty (A := A) (U := U)\n        hDense hU_open hU_nonempty)\n  · intro hProp x\n    -- Establish `x ∈ closure A` via the neighbourhood criterion.\n    have hx_closure :\n        (∀ V : Set X, IsOpen V → x ∈ V → (V ∩ A : Set X).Nonempty) := by\n      intro V hV_open hxV\n      -- `V` is nonempty because it contains `x`.\n      have hV_nonempty : (V : Set X).Nonempty := ⟨x, hxV⟩\n      -- Apply the assumed property to obtain a point of `A` in `V`.\n      have hInter : (A ∩ V : Set X).Nonempty :=\n        hProp V hV_open hV_nonempty\n      -- Reorder the intersection to match the required form.\n      simpa [Set.inter_comm] using hInter\n    exact (mem_closure_iff).2 hx_closure"
+  ],
+  "success": true
+}

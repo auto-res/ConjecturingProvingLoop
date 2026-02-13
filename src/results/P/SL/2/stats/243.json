@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.74437856674194
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3253,
+      "prompt_tokens": 39418,
+      "total_tokens": 42671,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_interior_eq_univ {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) = (Set.univ : Set X) → Topology.P1 A := by\n  intro hIntEq\n  intro x hxA\n  -- Any point lies in `interior A` because `interior A = univ`.\n  have hxInt : (x : X) ∈ interior (A : Set X) := by\n    have : x ∈ (Set.univ : Set X) := by\n      simp\n    simpa [hIntEq] using this\n  -- Hence it lies in `closure (interior A)`.\n  exact subset_closure hxInt"
+  ],
+  "success": true
+}

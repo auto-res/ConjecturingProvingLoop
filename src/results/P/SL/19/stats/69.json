@@ -1,0 +1,26 @@
+{
+  "times": [
+    61.81244397163391
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4618,
+      "prompt_tokens": 11076,
+      "total_tokens": 15694,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 10112
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_of_subset_of_subset_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) (hBClA : B ⊆ closure A) :\n    closure A = closure B := by\n  apply Set.Subset.antisymm\n  · exact closure_mono hAB\n  ·\n    have h : closure B ⊆ closure (closure A) := closure_mono hBClA\n    simpa [closure_closure] using h"
+  ],
+  "success": true
+}

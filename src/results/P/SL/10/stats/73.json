@@ -1,0 +1,26 @@
+{
+  "times": [
+    130.7294430732727
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7905,
+      "prompt_tokens": 11019,
+      "total_tokens": 18924,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9984
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iInter_subset {X : Type*} [TopologicalSpace X]\n    {ι : Sort*} {A : ι → Set X} :\n    closure (interior (⋂ i, A i)) ⊆ ⋂ i, closure (interior (A i)) := by\n  intro x hx\n  -- We will show `x` lies in each `closure (interior (A i))`.\n  have hxi : ∀ i, x ∈ closure (interior (A i)) := by\n    intro i\n    -- First observe the basic inclusion `(⋂ j, A j) ⊆ A i`.\n    have h_subset₁ : (⋂ j, A j) ⊆ A i := by\n      intro y hy\n      exact (Set.mem_iInter.1 hy) i\n    -- Pass to interiors using monotonicity.\n    have h_subset₂ : interior (⋂ j, A j) ⊆ interior (A i) :=\n      interior_mono h_subset₁\n    -- Finally, pass to closures.\n    exact (closure_mono h_subset₂) hx\n  -- Package the pointwise memberships into an intersection.\n  exact Set.mem_iInter.2 hxi"
+  ],
+  "success": true
+}

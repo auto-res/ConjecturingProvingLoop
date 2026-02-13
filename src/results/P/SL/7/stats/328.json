@@ -1,0 +1,26 @@
+{
+  "times": [
+    243.00558257102966
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12040,
+      "prompt_tokens": 51907,
+      "total_tokens": 63947,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A : Set X) ∪ closure (B : Set X) ⊆ closure (A ∪ B : Set X) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      have hSub : closure (A : Set X) ⊆ closure (A ∪ B : Set X) := by\n        apply closure_mono\n        exact Set.subset_union_left\n      exact hSub hxA\n  | inr hxB =>\n      have hSub : closure (B : Set X) ⊆ closure (A ∪ B : Set X) := by\n        apply closure_mono\n        exact Set.subset_union_right\n      exact hSub hxB"
+  ],
+  "success": true
+}

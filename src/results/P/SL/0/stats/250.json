@@ -1,0 +1,26 @@
+{
+  "times": [
+    136.92967319488525
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8907,
+      "prompt_tokens": 42830,
+      "total_tokens": 51737,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8704,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40832
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_interiors_subset_closure_interior_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure ((interior (A : Set X)) ∪ interior (B : Set X)) ⊆\n      closure (interior (A ∪ B : Set X)) := by\n  -- `interior A ∪ interior B` is contained in `interior (A ∪ B)` by a previously proved lemma.\n  have hSub :\n      ((interior (A : Set X)) ∪ interior (B : Set X) : Set X) ⊆\n        interior (A ∪ B : Set X) :=\n    union_interiors_subset_interior_union (X := X) (A := A) (B := B)\n  -- Taking closures preserves inclusions.\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

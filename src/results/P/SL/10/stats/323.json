@@ -1,0 +1,26 @@
+{
+  "times": [
+    322.2840256690979
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 19147,
+      "prompt_tokens": 51976,
+      "total_tokens": 71123,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51072
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_iterate_five_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (closure (interior (closure A))))))) =\n      interior (closure A) := by\n  -- First, collapse the innermost three iterations using the idempotence lemma.\n  have h₁ :=\n    Topology.interior_closure_interior_closure_eq\n      (X := X) (A := interior (closure A))\n  -- Next, collapse the remaining two iterations in exactly the same way.\n  have h₂ :=\n    Topology.interior_closure_interior_closure_eq\n      (X := X) (A := A)\n  -- Chain the two equalities to obtain the desired result.\n  simpa using h₁.trans h₂"
+  ],
+  "success": true
+}

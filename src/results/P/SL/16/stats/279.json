@@ -1,0 +1,60 @@
+{
+  "times": [
+    73.9707727432251,
+    146.76263070106506,
+    23.603453874588013
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4643,
+      "prompt_tokens": 48837,
+      "total_tokens": 53480,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 9425,
+      "prompt_tokens": 48966,
+      "total_tokens": 58391,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    },
+    {
+      "completion_tokens": 522,
+      "prompt_tokens": 49045,
+      "total_tokens": 49567,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.iterate_closure_interior_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} (n : ℕ) :\n    ((fun S : Set X => closure (interior S))^[n]) A ⊆ closure A := by\n  induction n with\n  | zero =>\n      -- For `n = 0`, the `0`-th iterate is the identity function.\n      simpa using (subset_closure : A ⊆ closure A)\n  | succ n ih =>\n      -- Abbreviate the `n`-th iterate applied to `A`.\n      set T := ((fun S : Set X => closure (interior S))^[n]) A with hT\n      -- An arbitrary point `x` in the `(n.succ)`-th iterate.\n      intro x hx\n      -- Step 1:  `x ∈ closure (interior T)` by unfolding the iterate.\n      have hx₁ : x ∈ closure (interior T) := by\n        simpa [Function.iterate_succ_apply', hT] using hx\n      -- Step 2:  `closure (interior T) ⊆ closure T`\n      have h₁ : closure (interior T) ⊆ closure T :=\n        Topology.closure_interior_subset_closure (X := X) (A := T)\n      -- Hence `x ∈ closure T`.\n      have hx₂ : x ∈ closure T := h₁ hx₁\n      -- Step 3:  From the induction hypothesis `T ⊆ closure A`,\n      --           get `closure T ⊆ closure A`.\n      have h₂ : closure T ⊆ closure A :=\n        closure_mono (ih.trans subset_rfl)\n      -- Conclude that `x ∈ closure A`.\n      exact h₂ hx₂",
+    "theorem Topology.isClosed_iff_closure_subset_self {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    IsClosed A ↔ closure A ⊆ A := by\n  constructor\n  · intro hA_closed\n    -- For a closed set we have `closure A = A`, so the desired inclusion follows.\n    have h_eq : closure A = A := hA_closed.closure_eq\n    simpa [h_eq] using (subset_rfl : closure A ⊆ closure A)\n  · intro h_subset\n    -- If `closure A ⊆ A`, then equality holds, hence `A` is closed.\n    have h_eq : closure A = A := by\n      apply subset_antisymm h_subset\n      exact subset_closure\n    simpa [h_eq] using (isClosed_closure : IsClosed (closure A))",
+    "theorem Topology.closure_interior_empty {X : Type*} [TopologicalSpace X] :\n    closure (interior (∅ : Set X)) = (∅ : Set X) := by\n  simpa [interior_empty, closure_empty]"
+  ],
+  "success": true
+}

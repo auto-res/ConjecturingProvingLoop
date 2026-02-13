@@ -1,0 +1,26 @@
+{
+  "times": [
+    66.81225728988647
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4592,
+      "prompt_tokens": 44988,
+      "total_tokens": 49580,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iff_P1_and_P2_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed (A : Set X)) :\n    Topology.P3 (X := X) A ↔\n      (Topology.P1 (X := X) A ∧ Topology.P2 (X := X) A) := by\n  constructor\n  · intro hP3\n    -- `P1` follows from `P3` for a closed set.\n    have hP1 : Topology.P1 (X := X) A :=\n      Topology.P3_implies_P1_of_isClosed (X := X) (A := A) hA hP3\n    -- `P2` also follows from `P3` for a closed set.\n    have hP2 : Topology.P2 (X := X) A :=\n      Topology.P3_implies_P2_of_isClosed (X := X) (A := A) hA hP3\n    exact And.intro hP1 hP2\n  · rintro ⟨_, hP2⟩\n    -- `P2` always implies `P3`.\n    exact Topology.P2_implies_P3 (X := X) (A := A) hP2"
+  ],
+  "success": true
+}

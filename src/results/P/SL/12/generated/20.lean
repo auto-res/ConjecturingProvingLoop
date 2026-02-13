@@ -1,0 +1,10 @@
+
+
+theorem Topology.P2_iff_P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}
+    (hA : IsOpen A) :
+    Topology.P2 (X := X) A ↔ Topology.P3 (X := X) A := by
+  constructor
+  · intro hP2
+    exact Topology.P2_implies_P3 (X := X) (A := A) hP2
+  · intro hP3
+    simpa [Topology.P2, Topology.P3, hA.interior_eq] using hP3

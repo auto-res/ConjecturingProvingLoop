@@ -1,0 +1,43 @@
+{
+  "times": [
+    42.1317503452301,
+    211.2716829776764
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2732,
+      "prompt_tokens": 16752,
+      "total_tokens": 19484,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 16466,
+      "prompt_tokens": 16890,
+      "total_tokens": 33356,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16128
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior A))) ⊆\n      closure (interior (closure A)) := by\n  -- First, use the previously proven inclusion on the interiors.\n  have hSub :\n      interior (closure (interior A)) ⊆\n        closure (interior (closure A)) :=\n    Topology.interior_closure_interior_subset_closure_interior_closure (A := A)\n  -- Then, apply monotonicity of `closure` to lift the inclusion.\n  exact closure_mono hSub",
+    ""
+  ],
+  "success": true
+}

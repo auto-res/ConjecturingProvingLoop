@@ -1,0 +1,26 @@
+{
+  "times": [
+    16.916975498199463
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1776,
+      "prompt_tokens": 15857,
+      "total_tokens": 17633,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_and_interior_empty_implies_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → interior (A : Set X) = ∅ → A = ∅ := by\n  intro hP2 hIntEmpty\n  -- Derive `P1` from `P2`.\n  have hP1 : Topology.P1 (A : Set X) :=\n    Topology.P2_implies_P1 (A := A) hP2\n  -- Apply the existing lemma for `P1`.\n  exact\n    Topology.P1_and_interior_empty_implies_empty\n      (A := A) hP1 hIntEmpty"
+  ],
+  "success": true
+}

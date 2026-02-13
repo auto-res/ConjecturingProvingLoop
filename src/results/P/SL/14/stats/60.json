@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.821118116378784
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3571,
+      "prompt_tokens": 10871,
+      "total_tokens": 14442,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_P2_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) :\n    Topology.P1 A ↔ Topology.P2 A := by\n  constructor\n  · intro _\n    dsimp [Topology.P2]\n    have h_subset : (A : Set X) ⊆ interior (closure A) :=\n      interior_maximal (subset_closure : (A : Set X) ⊆ closure A) hA\n    simpa [hA.interior_eq] using h_subset\n  · intro hP2\n    exact Topology.P2_implies_P1 (X := X) (A := A) hP2"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.54383111000061
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3921,
+      "prompt_tokens": 41994,
+      "total_tokens": 45915,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interior_nonempty_iff_nonempty_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 (X := X) A) :\n    (interior (closure (interior (A : Set X)))).Nonempty ↔ A.Nonempty := by\n  constructor\n  · intro hInt\n    -- From a point in the interior we obtain one in the closure.\n    have hCl : (closure (interior (A : Set X))).Nonempty := by\n      rcases hInt with ⟨x, hx⟩\n      exact ⟨x, interior_subset hx⟩\n    -- Use an existing lemma to deduce non‐emptiness of `A`.\n    exact\n      Topology.nonempty_of_closure_interior_nonempty\n        (X := X) (A := A) hCl\n  · intro hA\n    -- Apply the forward implication already available for `P2`.\n    exact\n      Topology.interior_closure_interior_nonempty_of_P2\n        (X := X) (A := A) hP2 hA"
+  ],
+  "success": true
+}

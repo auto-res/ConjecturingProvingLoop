@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.00096297264099
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3874,
+      "prompt_tokens": 1373,
+      "total_tokens": 5247,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_P2_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsOpen A) :\n    Topology.P1 A ↔ Topology.P2 A := by\n  -- `P2` holds for every open set.\n  have hP2_open : Topology.P2 A := by\n    dsimp [Topology.P2]\n    have hsubset : (A : Set X) ⊆ interior (closure A) := by\n      have hcl : (A : Set X) ⊆ closure A := subset_closure\n      exact interior_maximal hcl hA\n    simpa [hA.interior_eq] using hsubset\n  -- Construct the equivalence.\n  constructor\n  · intro _\n    exact hP2_open\n  · intro hP2\n    exact (Topology.P2_implies_P1 (X := X) (A := A)) hP2"
+  ],
+  "success": true
+}

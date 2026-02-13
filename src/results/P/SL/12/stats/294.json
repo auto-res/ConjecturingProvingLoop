@@ -1,0 +1,43 @@
+{
+  "times": [
+    124.34351801872253,
+    46.46547508239746
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8506,
+      "prompt_tokens": 57415,
+      "total_tokens": 65921,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    },
+    {
+      "completion_tokens": 2268,
+      "prompt_tokens": 57489,
+      "total_tokens": 59757,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iter_six_eq {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior\n      (closure (interior (closure (interior\n        (closure (interior (closure (interior (A : Set X))))))))))) =\n      closure (interior A) := by\n  -- Collapse the five‐fold iteration using the existing lemma.\n  have h₅ :=\n    Topology.closure_interior_iter_five_eq (X := X) (A := A)\n  -- Rewrite and finish with the idempotence lemma.\n  simpa [h₅,\n        (Topology.closure_interior_closure_interior_eq (X := X) (A := A))]",
+    "theorem Topology.interior_inter_subset_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A ∩ B : Set X) ⊆ interior A := by\n  exact interior_mono (Set.inter_subset_left : (A ∩ B : Set X) ⊆ A)"
+  ],
+  "success": true
+}

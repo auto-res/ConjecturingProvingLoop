@@ -1,0 +1,26 @@
+{
+  "times": [
+    84.10507273674011
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5956,
+      "prompt_tokens": 31727,
+      "total_tokens": 37683,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_eq_inter_right_of_isOpen_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : IsOpen A) :\n    interior (A ∩ B) = A ∩ interior B := by\n  -- Apply the existing lemma with the factors swapped.\n  have h :=\n    Topology.interior_inter_eq_inter_left_of_isOpen_right\n      (A := B) (B := A) hA\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

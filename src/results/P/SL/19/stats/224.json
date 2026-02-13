@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.76459217071533
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1867,
+      "prompt_tokens": 34668,
+      "total_tokens": 36535,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_closure_interior_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) = (Set.univ : Set X) → Topology.P1 (A := A) := by\n  intro hDense\n  dsimp [Topology.P1]\n  intro x hxA\n  have : (x : X) ∈ (Set.univ : Set X) := by\n    exact Set.mem_univ x\n  simpa [hDense] using this"
+  ],
+  "success": true
+}

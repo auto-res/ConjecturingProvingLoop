@@ -1,0 +1,26 @@
+{
+  "times": [
+    99.57081460952759
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5308,
+      "prompt_tokens": 49791,
+      "total_tokens": 55099,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4864,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem union_three_interiors_subset_interior_union_three\n    {X : Type*} [TopologicalSpace X] {A B C : Set X} :\n    (interior (A : Set X) ∪ interior (B : Set X) ∪ interior (C : Set X)) ⊆\n      interior (A ∪ B ∪ C : Set X) := by\n  intro x hx\n  -- Split the triple union into cases.\n  cases hx with\n  | inl hAB =>\n      -- `x ∈ interior A ∪ interior B`\n      cases hAB with\n      | inl hxA =>\n          -- Case `x ∈ interior A`\n          have hSub : (A : Set X) ⊆ A ∪ B ∪ C := by\n            intro y hy\n            exact Or.inl (Or.inl hy)\n          have hMono : interior (A : Set X) ⊆\n              interior (A ∪ B ∪ C : Set X) := interior_mono hSub\n          exact hMono hxA\n      | inr hxB =>\n          -- Case `x ∈ interior B`\n          have hSub : (B : Set X) ⊆ A ∪ B ∪ C := by\n            intro y hy\n            exact Or.inl (Or.inr hy)\n          have hMono : interior (B : Set X) ⊆\n              interior (A ∪ B ∪ C : Set X) := interior_mono hSub\n          exact hMono hxB\n  | inr hxC =>\n      -- Case `x ∈ interior C`\n      have hSub : (C : Set X) ⊆ A ∪ B ∪ C := by\n        intro y hy\n        exact Or.inr hy\n      have hMono : interior (C : Set X) ⊆\n          interior (A ∪ B ∪ C : Set X) := interior_mono hSub\n      exact hMono hxC"
+  ],
+  "success": true
+}

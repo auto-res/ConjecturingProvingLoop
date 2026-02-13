@@ -1,0 +1,26 @@
+{
+  "times": [
+    104.06929731369019
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8324,
+      "prompt_tokens": 34210,
+      "total_tokens": 42534,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8128,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem nonempty_of_closure_interior_nonempty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    (closure (interior (A : Set X))).Nonempty → (A : Set X).Nonempty := by\n  intro h_closure\n  -- First, obtain non‐emptiness of `interior A` from that of its closure.\n  have h_int : (interior (A : Set X)).Nonempty :=\n    (closure_interior_nonempty_iff_interior_nonempty (A := A)).1 h_closure\n  -- Any point of `interior A` is, a fortiori, a point of `A`.\n  rcases h_int with ⟨x, hx_int⟩\n  exact ⟨x, interior_subset hx_int⟩"
+  ],
+  "success": true
+}

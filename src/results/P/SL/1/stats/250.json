@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.141698122024536
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3244,
+      "prompt_tokens": 38327,
+      "total_tokens": 41571,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 37632
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_diff_of_isOpen_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hB : IsOpen B) (hA : IsClosed A) :\n    Topology.P3 (B \\ A) := by\n  -- The set `B \\ A = B ∩ Aᶜ` is the intersection of two open sets,\n  -- hence it is open.\n  have hOpen : IsOpen (B \\ A) :=\n    hB.inter ((isOpen_compl_iff).2 hA)\n  -- Every open set satisfies `P3`.\n  exact Topology.P3_of_isOpen (A := B \\ A) hOpen"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    76.1134717464447,
+    27.225656032562256
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7483,
+      "prompt_tokens": 21676,
+      "total_tokens": 29159,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7296,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 19200
+      }
+    },
+    {
+      "completion_tokens": 2447,
+      "prompt_tokens": 21748,
+      "total_tokens": 24195,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21376
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_compl_eq_compl_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (Aᶜ) = (interior A)ᶜ := by\n  -- Apply `interior_compl` to the complement of `A` and simplify.\n  have h : interior A = (closure (Aᶜ))ᶜ := by\n    simpa [compl_compl] using (interior_compl (s := Aᶜ))\n  -- Take complements of both sides.\n  have h' : (interior A)ᶜ = closure (Aᶜ) := by\n    simpa [Set.compl_compl] using congrArg Set.compl h\n  simpa using h'.symm",
+    "theorem interior_closure_interclosure_subset_inter_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure A ∩ closure B) ⊆\n      interior (closure A) ∩ interior (closure B) := by\n  intro x hx\n  -- `closure A ∩ closure B` is contained in each of its factors.\n  have hSubA : closure A ∩ closure B ⊆ closure A := by\n    intro y hy\n    exact hy.1\n  have hSubB : closure A ∩ closure B ⊆ closure B := by\n    intro y hy\n    exact hy.2\n  -- Taking interiors preserves these inclusions.\n  have hIntA : interior (closure A ∩ closure B) ⊆ interior (closure A) :=\n    interior_mono hSubA\n  have hIntB : interior (closure A ∩ closure B) ⊆ interior (closure B) :=\n    interior_mono hSubB\n  -- Apply the inclusions to the given point `x`.\n  exact And.intro (hIntA hx) (hIntB hx)"
+  ],
+  "success": true
+}

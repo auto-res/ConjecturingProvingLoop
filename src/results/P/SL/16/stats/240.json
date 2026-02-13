@@ -1,0 +1,43 @@
+{
+  "times": [
+    111.52575135231018,
+    68.60846829414368
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8079,
+      "prompt_tokens": 41623,
+      "total_tokens": 49702,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7872,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40832
+      }
+    },
+    {
+      "completion_tokens": 4482,
+      "prompt_tokens": 41702,
+      "total_tokens": 46184,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_eq_empty_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior A) = (∅ : Set X) ↔ interior A = (∅ : Set X) := by\n  constructor\n  · intro h\n    -- Show that `interior A` is empty by contradiction with the given equality.\n    have hsubset : interior A ⊆ (∅ : Set X) := by\n      intro x hxInt\n      have : (x : X) ∈ closure (interior A) := subset_closure hxInt\n      simpa [h] using this\n    -- Establish the desired equality of sets.\n    apply Set.Subset.antisymm hsubset\n    intro x hx; cases hx\n  · intro hInt\n    simpa [hInt, closure_empty]",
+    "theorem Topology.interior_closure_interior_eq_empty_iff\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) = (∅ : Set X) ↔\n      interior A = (∅ : Set X) := by\n  constructor\n  · intro h\n    -- `interior A` is contained in `interior (closure (interior A))`\n    have hsubset :\n        interior A ⊆ interior (closure (interior A)) :=\n      Topology.interior_subset_interior_closure_interior (X := X) (A := A)\n    -- Show that `interior A` has no elements.\n    refine Set.eq_empty_iff_forall_not_mem.2 ?_\n    intro x hxIntA\n    have : (x : X) ∈ interior (closure (interior A)) := hsubset hxIntA\n    simpa [h] using this\n  · intro hIntEmpty\n    -- From `interior A = ∅` we get `closure (interior A) = ∅`.\n    have hClIntEmpty : closure (interior A) = (∅ : Set X) := by\n      simpa [hIntEmpty, closure_empty]\n    -- Hence its interior is also empty.\n    simpa [hClIntEmpty] using by\n      simp [hClIntEmpty]"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    240.0911741256714
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8342,
+      "prompt_tokens": 40327,
+      "total_tokens": 48669,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closure_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (closure (A : Set X)) ⊆ closure (A : Set X) := by\n  -- Apply the general inclusion `frontier S ⊆ closure S` to `S = closure A`.\n  have h :\n      frontier (closure (A : Set X)) ⊆ closure (closure (A : Set X)) :=\n    Topology.frontier_subset_closure (A := closure (A : Set X))\n  simpa [closure_closure] using h"
+  ],
+  "success": true
+}

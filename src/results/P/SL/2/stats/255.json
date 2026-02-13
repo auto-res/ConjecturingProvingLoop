@@ -1,0 +1,26 @@
+{
+  "times": [
+    139.16080784797668
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9007,
+      "prompt_tokens": 41621,
+      "total_tokens": 50628,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8320,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier ((A ∩ B) : Set X) ⊆ frontier (A : Set X) ∪ frontier (B : Set X) := by\n  classical\n  intro x hx\n  -- `hx` states that `x` is in the frontier of `A ∩ B`.\n  rcases hx with ⟨hClAB, hNotIntAB⟩\n  -- A point in the closure of `A ∩ B` lies in the closures of both `A` and `B`.\n  have hClSubset :\n      closure ((A ∩ B) : Set X) ⊆\n        closure (A : Set X) ∩ closure (B : Set X) :=\n    Topology.closure_inter_subset_inter_closure (A := A) (B := B)\n  have hClA : x ∈ closure (A : Set X) := (hClSubset hClAB).1\n  have hClB : x ∈ closure (B : Set X) := (hClSubset hClAB).2\n  -- Case distinction on membership of `x` in the interiors of `A` and `B`.\n  by_cases hIntA : x ∈ interior (A : Set X)\n  · by_cases hIntB : x ∈ interior (B : Set X)\n    · -- If `x` is in both interiors, it is in the interior of `A ∩ B`,\n      -- contradicting `hNotIntAB`.\n      have hInInter :\n          x ∈ interior (A : Set X) ∩ interior (B : Set X) :=\n        And.intro hIntA hIntB\n      have hIntAB : x ∈ interior ((A ∩ B) : Set X) :=\n        (interior_inter_subset (A := A) (B := B)) hInInter\n      exact (hNotIntAB hIntAB).elim\n    · -- `x` is not in `interior B`, hence in the frontier of `B`.\n      have hFrontB : x ∈ frontier (B : Set X) := And.intro hClB hIntB\n      exact Or.inr hFrontB\n  · -- `x` is not in `interior A`; similar reasoning yields membership\n    -- in the frontier of `A` or `B`.\n    by_cases hIntB : x ∈ interior (B : Set X)\n    · -- `x` is not in `interior A` but is in `interior B`, so it belongs\n      -- to the frontier of `A`.\n      have hFrontA : x ∈ frontier (A : Set X) := And.intro hClA hIntA\n      exact Or.inl hFrontA\n    · -- `x` is in neither interior; choose either frontier (here, of `A`).\n      have hFrontA : x ∈ frontier (A : Set X) := And.intro hClA hIntA\n      exact Or.inl hFrontA"
+  ],
+  "success": true
+}

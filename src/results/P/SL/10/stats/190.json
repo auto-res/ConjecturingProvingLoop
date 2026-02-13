@@ -1,0 +1,43 @@
+{
+  "times": [
+    48.682647466659546,
+    237.0279622077942
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3445,
+      "prompt_tokens": 31214,
+      "total_tokens": 34659,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    },
+    {
+      "completion_tokens": 16978,
+      "prompt_tokens": 31329,
+      "total_tokens": 48307,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16960,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_eq_univ_iff_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) = (Set.univ : Set X) ↔ closure A = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    apply Set.Subset.antisymm\n    · exact Set.Subset_univ _\n    · intro x _\n      have hx : x ∈ interior (closure A) := by\n        simpa [hInt] using (by simp : x ∈ (Set.univ : Set X))\n      exact interior_subset hx\n  · intro hCl\n    simpa [hCl, interior_univ]",
+    ""
+  ],
+  "success": true
+}

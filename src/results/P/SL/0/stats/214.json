@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.412243604660034
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2627,
+      "prompt_tokens": 36172,
+      "total_tokens": 38799,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_eq_empty_iff_interior_eq_empty {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    closure (interior (A : Set X)) = (∅ : Set X) ↔\n      interior (A : Set X) = (∅ : Set X) := by\n  constructor\n  · intro h\n    have hSub : interior (A : Set X) ⊆ (∅ : Set X) := by\n      intro x hx\n      have : (x : X) ∈ closure (interior (A : Set X)) := subset_closure hx\n      simpa [h] using this\n    exact Set.Subset.antisymm hSub (Set.empty_subset _)\n  · intro h\n    simpa [h, closure_empty]"
+  ],
+  "success": true
+}

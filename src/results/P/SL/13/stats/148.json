@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.06156730651855
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5618,
+      "prompt_tokens": 24518,
+      "total_tokens": 30136,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_closure_subset_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure (interior (closure (A : Set X))))) ⊆\n      closure A := by\n  -- First, reduce to `closure (interior (closure A))`.\n  have h₁ :\n      closure (interior (closure (interior (closure (A : Set X))))) ⊆\n        closure (interior (closure (A : Set X))) :=\n    Topology.closure_interior_closure_subset_closure\n      (X := X) (A := interior (closure (A : Set X)))\n  -- Then, relate this to `closure A`.\n  have h₂ :\n      closure (interior (closure (A : Set X))) ⊆ closure A :=\n    Topology.closure_interior_closure_subset_closure (X := X) (A := A)\n  exact Set.Subset.trans h₁ h₂"
+  ],
+  "success": true
+}

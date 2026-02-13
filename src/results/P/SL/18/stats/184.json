@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.56676244735718
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2433,
+      "prompt_tokens": 27751,
+      "total_tokens": 30184,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_diff_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A \\ B : Set X) ⊆ closure (A : Set X) := by\n  -- The set difference `A \\ B` is contained in `A`.\n  have hSub : (A \\ B : Set X) ⊆ A := Set.diff_subset\n  -- Use the monotonicity of `closure` to lift the inclusion.\n  exact closure_mono hSub"
+  ],
+  "success": true
+}

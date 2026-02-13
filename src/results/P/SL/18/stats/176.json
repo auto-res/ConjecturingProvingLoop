@@ -1,0 +1,26 @@
+{
+  "times": [
+    50.70100498199463
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4288,
+      "prompt_tokens": 26517,
+      "total_tokens": 30805,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25472
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_eq_univ_of_dense_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hDense : Dense (A : Set X)) :\n    closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n  classical\n  -- From density we know `closure A = univ`.\n  have hClA : closure (A : Set X) = (Set.univ : Set X) :=\n    (Topology.dense_iff_closure_eq_univ (A := A)).1 hDense\n  -- Compute the closure of the union using distributivity over `closure`.\n  calc\n    closure (A ∪ B : Set X)\n        = closure (A : Set X) ∪ closure (B : Set X) := by\n          simpa [closure_union]\n    _ = (Set.univ : Set X) ∪ closure (B : Set X) := by\n          simpa [hClA]\n    _ = (Set.univ : Set X) := by\n          simpa [Set.univ_union]"
+  ],
+  "success": true
+}

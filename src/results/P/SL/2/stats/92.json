@@ -1,0 +1,26 @@
+{
+  "times": [
+    124.5346188545227
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8721,
+      "prompt_tokens": 14117,
+      "total_tokens": 22838,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_subset_closure_implies_subset_interior_closure {X : Type*}\n    [TopologicalSpace X] {A U : Set X} :\n    IsOpen U → closure U ⊆ closure (A : Set X) →\n      U ⊆ interior (closure (A : Set X)) := by\n  intro hOpen hClosureSub\n  -- First, note that every point of `U` lies in `closure U`, hence in `closure A`.\n  have hU_sub_closureA : (U : Set X) ⊆ closure (A : Set X) := by\n    intro x hxU\n    have : x ∈ closure U := subset_closure hxU\n    exact hClosureSub this\n  -- Apply the maximality of `interior` with the open set `U`.\n  exact interior_maximal hU_sub_closureA hOpen"
+  ],
+  "success": true
+}

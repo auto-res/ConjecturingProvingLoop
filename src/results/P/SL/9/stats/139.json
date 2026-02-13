@@ -1,0 +1,26 @@
+{
+  "times": [
+    87.23479533195496
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5186,
+      "prompt_tokens": 21664,
+      "total_tokens": 26850,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20352
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) ⊆ closure A := by\n  intro x hx_int\n  -- From `x ∈ interior A`, we know `x ∈ A`.\n  have hxA : x ∈ A := interior_subset hx_int\n  -- Since `A ⊆ closure A`, we conclude `x ∈ closure A`.\n  exact subset_closure hxA"
+  ],
+  "success": true
+}

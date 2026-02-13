@@ -1,0 +1,43 @@
+{
+  "times": [
+    187.19782662391663,
+    105.10801982879639
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11009,
+      "prompt_tokens": 50780,
+      "total_tokens": 61789,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 6675,
+      "prompt_tokens": 51089,
+      "total_tokens": 57764,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6656,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_frontier_interior_compl_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior A ∪ frontier A ∪ interior (Aᶜ) = (Set.univ : Set X) := by\n  classical\n  -- It is enough to show that every point belongs to the left-hand side.\n  apply Set.Subset.antisymm\n  · intro x hx\n    simp at hx\n  · intro x _hx\n    by_cases hIntA : x ∈ interior A\n    · -- `x ∈ interior A`\n      exact Or.inl (Or.inl hIntA)\n    · by_cases hIntAc : x ∈ interior (Aᶜ)\n      · -- `x ∈ interior (Aᶜ)`\n        exact Or.inr hIntAc\n      · -- `x` belongs to neither interior; it must be in the frontier.\n        -- First, show `x ∈ closure A`.\n        have hx_closureA : x ∈ closure A := by\n          -- If `x ∉ closure A`, then `x ∈ (closure A)ᶜ`, an open set\n          -- contained in `Aᶜ`, contradicting `hIntAc`.\n          by_contra h\n          have hx_open : x ∈ (closure A)ᶜ := by\n            simpa using h\n          have h_open : IsOpen ((closure A)ᶜ) := isClosed_closure.isOpen_compl\n          have h_subset : (closure A)ᶜ ⊆ Aᶜ := by\n            intro y hy\n            by_contra hyA\n            have : y ∈ closure A := subset_closure hyA\n            have : y ∈ (closure A)ᶜ := hy\n            exact this.elim\n          have : x ∈ interior (Aᶜ) :=\n            interior_maximal h_subset h_open hx_open\n          exact hIntAc this\n        -- Assemble frontier membership.\n        have hx_frontier : x ∈ frontier A := by\n          -- `frontier A = closure A \\ interior A`\n          exact And.intro hx_closureA hIntA\n        exact Or.inl (Or.inr hx_frontier)",
+    ""
+  ],
+  "success": true
+}

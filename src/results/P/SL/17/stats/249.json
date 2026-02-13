@@ -1,0 +1,43 @@
+{
+  "times": [
+    46.45332312583923,
+    81.53463339805603
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2563,
+      "prompt_tokens": 44639,
+      "total_tokens": 47202,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    },
+    {
+      "completion_tokens": 5876,
+      "prompt_tokens": 44714,
+      "total_tokens": 50590,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense A) : Topology.P3 A := by\n  -- First, rewrite `interior (closure A)` using density.\n  have hInt : interior (closure A) = (Set.univ : Set X) :=\n    Topology.interior_closure_eq_univ_of_dense (A := A) hDense\n  -- Unfold the definition of `P3` and prove the required inclusion.\n  unfold Topology.P3\n  intro x hxA\n  -- Every point belongs to `univ`, hence to `interior (closure A)`.\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  simpa [hInt] using this",
+    "theorem Topology.P1_of_closure_interior_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P1 A := by\n  -- Unfold the definition of `P1`.\n  unfold Topology.P1\n  -- Take an arbitrary point `x ∈ A`.\n  intro x hxA\n  -- Since `closure (interior A) = univ`, every point lies in it.\n  have : (x : X) ∈ (Set.univ : Set X) := by\n    simp\n  -- Rewrite using the provided equality to get the desired membership.\n  simpa [h] using this"
+  ],
+  "success": true
+}

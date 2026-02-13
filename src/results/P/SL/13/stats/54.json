@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.15913915634155
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3853,
+      "prompt_tokens": 8462,
+      "total_tokens": 12315,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closed_P1_implies_closureInterior_eq_self {X : Type*}\n    [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed (A : Set X)) (hP1 : Topology.P1 (X:=X) A) :\n    closure (interior A) = (A : Set X) := by\n  -- From `P1` we have equality of closures of `A` and `interior A`\n  have h_eq : closure (A : Set X) = closure (interior A) :=\n    (Topology.P1_iff_closure_eq_closureInterior (X:=X) (A:=A)).1 hP1\n  -- Use the closedness of `A` to rewrite `closure A` as `A`\n  simpa [hA_closed.closure_eq] using h_eq.symm"
+  ],
+  "success": true
+}

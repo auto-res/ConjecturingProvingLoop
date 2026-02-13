@@ -1,0 +1,43 @@
+{
+  "times": [
+    109.07004714012146,
+    137.60228276252747
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4448,
+      "prompt_tokens": 47742,
+      "total_tokens": 52190,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4032,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 5411,
+      "prompt_tokens": 47971,
+      "total_tokens": 53382,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem P123_prod_left_open_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA_open : IsOpen A) (hA_nonempty : A.Nonempty) :\n    (Topology.P1 (A ×ˢ B) ∧ Topology.P2 (A ×ˢ B) ∧ Topology.P3 (A ×ˢ B)) ↔\n      (Topology.P1 B ∧ Topology.P2 B ∧ Topology.P3 B) := by\n  -- Individual equivalences for each `P` property with an open, nonempty left factor.\n  have hP1Equiv :=\n    Topology.P1_prod_left_open_iff (A := A) (B := B) hA_open hA_nonempty\n  have hP2Equiv :=\n    Topology.P2_prod_left_open_iff (A := A) (B := B) hA_open hA_nonempty\n  have hP3Equiv :=\n    Topology.P3_prod_left_open_iff (A := A) (B := B) hA_open hA_nonempty\n  constructor\n  · rintro ⟨hP1Prod, hP2Prod, hP3Prod⟩\n    exact\n      ⟨hP1Equiv.mp hP1Prod, hP2Equiv.mp hP2Prod, hP3Equiv.mp hP3Prod⟩\n  · rintro ⟨hP1B, hP2B, hP3B⟩\n    exact\n      ⟨hP1Equiv.mpr hP1B, hP2Equiv.mpr hP2B, hP3Equiv.mpr hP3B⟩",
+    "theorem P1_prod_left_open_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA_open : IsOpen A) (hA_nonempty : A.Nonempty) :\n    Topology.P1 (A ×ˢ B) ↔ Topology.P1 B := by\n  constructor\n  · intro hProd\n    -- Extract `P1` for `B` from the product using the projection lemma.\n    exact\n      Topology.P1_of_P1_prod_right (A := A) (B := B) hA_nonempty hProd\n  · intro hPB\n    -- Build `P1` for the product from `P1 B` and the openness of `A`.\n    exact\n      Topology.P1_prod_left_open (A := A) (B := B) hA_open hPB\n\ntheorem P123_prod_left_open_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA_open : IsOpen A) (hA_nonempty : A.Nonempty) :\n    (Topology.P1 (A ×ˢ B) ∧ Topology.P2 (A ×ˢ B) ∧ Topology.P3 (A ×ˢ B)) ↔\n      (Topology.P1 B ∧ Topology.P2 B ∧ Topology.P3 B) := by\n  -- Equivalences for each property with an open, nonempty left factor.\n  have hP1Equiv :=\n    Topology.P1_prod_left_open_iff (A := A) (B := B) hA_open hA_nonempty\n  have hP2Equiv :=\n    Topology.P2_prod_left_open_iff (A := A) (B := B) hA_open hA_nonempty\n  have hP3Equiv :=\n    Topology.P3_prod_left_open_iff (A := A) (B := B) hA_open hA_nonempty\n  constructor\n  · rintro ⟨hP1Prod, hP2Prod, hP3Prod⟩\n    exact\n      ⟨hP1Equiv.mp hP1Prod, hP2Equiv.mp hP2Prod, hP3Equiv.mp hP3Prod⟩\n  · rintro ⟨hP1B, hP2B, hP3B⟩\n    exact\n      ⟨hP1Equiv.mpr hP1B, hP2Equiv.mpr hP2B, hP3Equiv.mpr hP3B⟩"
+  ],
+  "success": true
+}

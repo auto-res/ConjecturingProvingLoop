@@ -1,0 +1,26 @@
+{
+  "times": [
+    43.966065883636475
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2833,
+      "prompt_tokens": 56859,
+      "total_tokens": 59692,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_subset_compl_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen A) :\n    frontier A ⊆ Aᶜ := by\n  intro x hx\n  -- From `hx : x ∈ frontier A`, we have `x ∉ interior A`.\n  have h_not_int : x ∉ interior A := hx.2\n  -- Since `A` is open, `interior A = A`.\n  have hIntEq : interior A = A := hA.interior_eq\n  -- Therefore `x ∉ A`.\n  have h_notA : x ∉ A := by\n    simpa [hIntEq] using h_not_int\n  -- Hence `x` belongs to the complement of `A`.\n  simpa [Set.mem_compl] using h_notA"
+  ],
+  "success": true
+}

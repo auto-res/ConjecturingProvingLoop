@@ -1,0 +1,43 @@
+{
+  "times": [
+    64.63469195365906,
+    72.58774638175964
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6285,
+      "prompt_tokens": 55501,
+      "total_tokens": 61786,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55168
+      }
+    },
+    {
+      "completion_tokens": 6166,
+      "prompt_tokens": 55603,
+      "total_tokens": 61769,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55168
+      }
+    }
+  ],
+  "responses": [
+    "theorem clopen_of_closure_eq_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h : closure A = interior A) :\n    IsOpen A ∧ IsClosed A := by\n  have hIntEq : interior A = A := by\n    apply Set.Subset.antisymm\n    · exact interior_subset\n    ·\n      have : A ⊆ closure A := subset_closure\n      simpa [h] using this\n  have hOpen : IsOpen A := by\n    have : IsOpen (interior A) := isOpen_interior\n    simpa [hIntEq] using this\n  have hClosed : IsClosed A := by\n    have : IsClosed (closure A) := isClosed_closure\n    simpa [h] using this\n  exact And.intro hOpen hClosed",
+    "theorem closure_eq_self_iff_isClosed_set {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = A ↔ IsClosed A := by\n  constructor\n  · intro h_eq\n    -- `closure A` is always closed, and it coincides with `A`.\n    have h_closed : IsClosed (closure (A : Set X)) := isClosed_closure\n    simpa [h_eq] using h_closed\n  · intro h_closed\n    -- A closed set is equal to its closure.\n    simpa using h_closed.closure_eq"
+  ],
+  "success": true
+}

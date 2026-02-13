@@ -1,0 +1,26 @@
+{
+  "times": [
+    273.5153560638428
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 20904,
+      "prompt_tokens": 33449,
+      "total_tokens": 54353,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 20736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_iterate_seven_eq_interior_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    interior (closure\n      (interior (closure\n        (interior (closure\n          (interior (closure\n            (interior (closure\n              (interior (closure\n                (interior (closure (A : Set X))))\n              ))\n            ))\n          ))\n        ))\n      )) =\n      interior (closure A) := by\n  -- Repeatedly simplify using the idempotency of `interior ∘ closure`.\n  simp [Topology.interior_closure_interior_closure_eq_interior_closure (X := X)]"
+  ],
+  "success": true
+}

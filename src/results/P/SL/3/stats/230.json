@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.45982050895691
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1800,
+      "prompt_tokens": 36951,
+      "total_tokens": 38751,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_closure_subset_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P1 (A : Set X) ↔\n      closure (A : Set X) ⊆ closure (interior (A : Set X)) := by\n  constructor\n  · intro hP1\n    exact closure_subset_closure_interior_of_P1 (A := A) hP1\n  · intro hSub\n    -- The reverse inclusion is always true.\n    have hSup : closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n      closure_mono (interior_subset (s := A))\n    -- Hence we have equality of the two closures.\n    have hEq : closure (A : Set X) = closure (interior (A : Set X)) :=\n      Set.Subset.antisymm hSub hSup\n    -- Use the existing equivalence with this equality.\n    have hP1 :=\n      (P1_iff_closure_eq_closure_interior (A := A)).mpr hEq\n    exact hP1"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.81406354904175
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2520,
+      "prompt_tokens": 54549,
+      "total_tokens": 57069,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closureInterior_union_frontier\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (A : Set X) = closure (interior A) ∪ frontier A := by\n  classical\n  ext x\n  constructor\n  · intro hx_cl\n    by_cases hx_clInt : x ∈ closure (interior A)\n    · exact Or.inl hx_clInt\n    ·\n      -- Since `x ∉ interior A` and `x ∈ closure A`, it lies in the frontier.\n      have hx_not_int : x ∉ interior A := by\n        intro hx_int\n        have : x ∈ closure (interior A) := subset_closure hx_int\n        exact hx_clInt this\n      exact Or.inr ⟨hx_cl, hx_not_int⟩\n  · intro hx_union\n    cases hx_union with\n    | inl hx_clInt =>\n        have h_subset : closure (interior A) ⊆ closure A :=\n          closure_mono (interior_subset : interior A ⊆ A)\n        exact h_subset hx_clInt\n    | inr hx_front =>\n        exact hx_front.1"
+  ],
+  "success": true
+}

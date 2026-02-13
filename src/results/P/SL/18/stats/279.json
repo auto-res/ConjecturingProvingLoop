@@ -1,0 +1,26 @@
+{
+  "times": [
+    19.951075077056885
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1354,
+      "prompt_tokens": 45411,
+      "total_tokens": 46765,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1216,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43776
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_inter_open_left {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hOpenA : IsOpen (A : Set X)) (hP3B : Topology.P3 B) :\n    Topology.P3 (A ∩ B) := by\n  -- Swap the factors and reuse the existing right‐hand variant.\n  have h := Topology.P3_inter_open_right (A := B) (B := A) hP3B hOpenA\n  simpa [Set.inter_comm] using h"
+  ],
+  "success": true
+}

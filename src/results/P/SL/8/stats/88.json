@@ -1,0 +1,60 @@
+{
+  "times": [
+    81.9141697883606,
+    312.31643629074097,
+    111.02893018722534
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5978,
+      "prompt_tokens": 12234,
+      "total_tokens": 18212,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5888,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 9088
+      }
+    },
+    {
+      "completion_tokens": 18883,
+      "prompt_tokens": 12354,
+      "total_tokens": 31237,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 8507,
+      "prompt_tokens": 12469,
+      "total_tokens": 20976,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (closure A)) ⊆ closure A := by\n  have h : interior (closure A) ⊆ closure A := interior_subset\n  exact closure_mono h",
+    "theorem closure_interior_closure_subset_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA_closed : IsClosed A) :\n    closure (interior (closure A)) ⊆ A := by\n  -- Since `A` is closed, its closure is itself.\n  have h_cl : closure A = A := hA_closed.closure_eq\n  -- We start from the basic inclusion `interior (closure A) ⊆ closure A`\n  -- and rewrite `closure A` using `h_cl`.\n  have h_int : interior (closure A) ⊆ A := by\n    simpa [h_cl] using (interior_subset : interior (closure A) ⊆ closure A)\n  -- Taking closures preserves set inclusion.\n  exact closure_mono h_int",
+    "theorem interior_closure_interior_closure_interior_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure (interior (closure (interior A)))))) =\n      interior (closure (interior A)) := by\n  simpa using\n    (interior_closure_interior_closure_interior_closure_eq\n      (X := X) (A := interior A))"
+  ],
+  "success": true
+}

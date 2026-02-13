@@ -1,0 +1,26 @@
+{
+  "times": [
+    63.31640434265137
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4324,
+      "prompt_tokens": 50336,
+      "total_tokens": 54660,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4096,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_iUnion_eq_closure_iUnion_of_isOpen\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} (A : ι → Set X)\n    (hA : ∀ i, IsOpen (A i)) :\n    closure (interior (⋃ i, A i)) = closure (⋃ i, A i) := by\n  -- The union of the `A i` is open because each `A i` is open.\n  have hOpen : IsOpen (⋃ i, A i) := by\n    apply isOpen_iUnion\n    intro i\n    exact hA i\n  -- For an open set `S`, its interior is itself.\n  have hInt : interior (⋃ i, A i) = (⋃ i, A i) := hOpen.interior_eq\n  -- Rewriting with `hInt` gives the desired equality.\n  simpa [hInt]"
+  ],
+  "success": true
+}

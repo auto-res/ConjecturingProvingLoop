@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.951820611953735
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2327,
+      "prompt_tokens": 52961,
+      "total_tokens": 55288,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_union_of_dense_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Dense (interior A) → Topology.P1 (A ∪ B) := by\n  intro hDense\n  -- `A` itself satisfies `P1`.\n  have hP1A : Topology.P1 A :=\n    Topology.P1_of_dense_interior (A := A) hDense\n  -- Since `interior A` is dense, its closure is the whole space.\n  have hClosure : closure (interior A) = (Set.univ : Set X) :=\n    hDense.closure_eq\n  -- Hence every element of `B` lies in `closure (interior A)`.\n  have hSubset : (B : Set X) ⊆ closure (interior A) := by\n    intro x hxB\n    have : x ∈ (Set.univ : Set X) := by\n      simp\n    simpa [hClosure] using this\n  -- Apply the existing lemma to conclude the result.\n  exact\n    Topology.P1_union_of_subset (A := A) (B := B) hP1A hSubset"
+  ],
+  "success": true
+}

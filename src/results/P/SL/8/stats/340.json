@@ -1,0 +1,77 @@
+{
+  "times": [
+    53.18869709968567,
+    107.04194569587708,
+    66.21150183677673,
+    57.70820069313049
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4526,
+      "prompt_tokens": 53054,
+      "total_tokens": 57580,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    },
+    {
+      "completion_tokens": 10923,
+      "prompt_tokens": 53174,
+      "total_tokens": 64097,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    },
+    {
+      "completion_tokens": 5295,
+      "prompt_tokens": 53253,
+      "total_tokens": 58548,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5120,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    },
+    {
+      "completion_tokens": 5619,
+      "prompt_tokens": 53377,
+      "total_tokens": 58996,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_interClosure_subset_interior_closure_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ closure B)) ⊆ interior (closure B) := by\n  -- `A ∩ closure B` is contained in `closure B`.\n  have h : A ∩ closure B ⊆ closure B := by\n    intro x hx\n    exact hx.2\n  -- Taking closures preserves inclusions.\n  have h_closure : closure (A ∩ closure B) ⊆ closure B := closure_mono h\n  -- Applying `interior_mono` yields the desired inclusion.\n  exact interior_mono h_closure",
+    "import Mathlib\n\ntheorem closure_inter_closure_subset_of_isClosed {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsClosed B) :\n    closure (A ∩ closure B) ⊆ B := by\n  -- Since `B` is closed, its closure is itself.\n  have h_closure_eq : closure B = B := hB.closure_eq\n  -- First, establish the inclusion before taking closures.\n  have h_subset : A ∩ closure B ⊆ B := by\n    intro x hx\n    -- `hx.2 : x ∈ closure B`, rewrite using `h_closure_eq`.\n    simpa [h_closure_eq] using hx.2\n  -- Apply `closure_mono` and rewrite once more with `h_closure_eq`.\n  have h_closure : closure (A ∩ closure B) ⊆ closure B := closure_mono h_subset\n  simpa [h_closure_eq] using h_closure",
+    "theorem interior_closure_interClosure_subset_interior_closure_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ closure B)) ⊆ interior (closure B) := by\n  -- First, observe the basic set-inclusion.\n  have h₁ : A ∩ closure B ⊆ closure B := by\n    intro x hx\n    exact hx.2\n  -- Taking closures preserves inclusions.\n  have h₂ : closure (A ∩ closure B) ⊆ closure B := closure_mono h₁\n  -- Finally, monotonicity of `interior` gives the desired result.\n  exact interior_mono h₂",
+    "theorem closure_interInterior_subset_inter_closure'\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (A ∩ interior B) ⊆ closure A ∩ closure B := by\n  intro x hx\n  -- `A ∩ interior B` is contained in `A`.\n  have hxA : x ∈ closure A := by\n    have hSub : A ∩ interior B ⊆ A := by\n      intro y hy\n      exact hy.1\n    exact (closure_mono hSub) hx\n  -- `A ∩ interior B` is also contained in `B` (because `interior B ⊆ B`).\n  have hxB : x ∈ closure B := by\n    have hSub : A ∩ interior B ⊆ B := by\n      intro y hy\n      exact (interior_subset : interior B ⊆ B) hy.2\n    exact (closure_mono hSub) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    46.850285053253174
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3658,
+      "prompt_tokens": 15898,
+      "total_tokens": 19556,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_sUnion {X : Type*} [TopologicalSpace X] {𝒜 : Set (Set X)} :\n    (∀ A, A ∈ 𝒜 → Topology.P2 A) → Topology.P2 (⋃₀ 𝒜) := by\n  intro hA\n  dsimp [Topology.P2] at hA ⊢\n  intro x hx\n  rcases Set.mem_sUnion.1 hx with ⟨A, hA_mem, hxA⟩\n  have hxInt : x ∈ interior (closure (interior A)) := (hA A hA_mem) hxA\n  -- We show that this interior is contained in the desired one.\n  have hsubset :\n      interior (closure (interior A)) ⊆\n        interior (closure (interior (⋃₀ 𝒜))) := by\n    -- Step 1: `interior A ⊆ interior (⋃₀ 𝒜)`\n    have h₁ : (A : Set X) ⊆ ⋃₀ 𝒜 := by\n      intro y hy\n      exact Set.mem_sUnion.2 ⟨A, hA_mem, hy⟩\n    have h₂ : interior A ⊆ interior (⋃₀ 𝒜) := interior_mono h₁\n    -- Step 2: take closures\n    have h₃ : closure (interior A) ⊆ closure (interior (⋃₀ 𝒜)) :=\n      closure_mono h₂\n    -- Step 3: take interiors again\n    exact interior_mono h₃\n  exact hsubset hxInt"
+  ],
+  "success": true
+}

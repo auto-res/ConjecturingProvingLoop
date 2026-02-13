@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.50831270217896
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5867,
+      "prompt_tokens": 2152,
+      "total_tokens": 8019,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 1792
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 A → Topology.P1 B → Topology.P1 (A ∪ B) := by\n  intro hPA hPB\n  -- `A` is contained in the desired set\n  have hA : (A : Set X) ⊆ closure (interior (A ∪ B)) := by\n    have hA₁ : (A : Set X) ⊆ closure (interior A) := hPA\n    have hA₂ : interior A ⊆ interior (A ∪ B) := by\n      apply interior_mono\n      intro x hx\n      exact Or.inl hx\n    exact Set.Subset.trans hA₁ (closure_mono hA₂)\n  -- `B` is contained in the desired set\n  have hB : (B : Set X) ⊆ closure (interior (A ∪ B)) := by\n    have hB₁ : (B : Set X) ⊆ closure (interior B) := hPB\n    have hB₂ : interior B ⊆ interior (A ∪ B) := by\n      apply interior_mono\n      intro x hx\n      exact Or.inr hx\n    exact Set.Subset.trans hB₁ (closure_mono hB₂)\n  -- combine the two inclusions\n  intro x hx\n  cases hx with\n  | inl hxA => exact hA hxA\n  | inr hxB => exact hB hxB"
+  ],
+  "success": true
+}

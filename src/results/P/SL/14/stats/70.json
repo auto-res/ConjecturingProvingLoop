@@ -1,0 +1,43 @@
+{
+  "times": [
+    123.80135774612427,
+    82.31994915008545
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9928,
+      "prompt_tokens": 12335,
+      "total_tokens": 22263,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9408,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    },
+    {
+      "completion_tokens": 5767,
+      "prompt_tokens": 12440,
+      "total_tokens": 18207,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5696,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_union_left_of_dense\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hDense : Dense (A : Set X)) : Topology.P3 (A ∪ B) := by\n  dsimp [Topology.P3]\n  intro x hx\n  -- `closure A` is the whole space.\n  have h_closureA : closure (A : Set X) = (Set.univ : Set X) := hDense.closure_eq\n  -- Therefore, `closure (A ∪ B)` is also the whole space.\n  have h_closure_union : closure (A ∪ B : Set X) = (Set.univ : Set X) := by\n    -- One inclusion is obvious.\n    have h_subset_univ : closure (A ∪ B : Set X) ⊆ (Set.univ : Set X) := by\n      intro y hy; simp\n    -- For the other inclusion, note that `closure A ⊆ closure (A ∪ B)`.\n    have h_univ_subset : (Set.univ : Set X) ⊆ closure (A ∪ B : Set X) := by\n      intro y hy\n      have hy_closureA : (y : X) ∈ closure A := by\n        -- Using `closure A = univ`.\n        simpa [h_closureA] using (by\n          have : (y : X) ∈ (Set.univ : Set X) := by\n            simp\n          exact this)\n      -- Monotonicity of `closure`.\n      have h_incl : closure A ⊆ closure (A ∪ B) := by\n        apply closure_mono\n        intro z hz; exact Or.inl hz\n      exact h_incl hy_closureA\n    exact Set.Subset.antisymm h_subset_univ h_univ_subset\n  -- Consequently, the interior is also the whole space.\n  have h_interior : interior (closure (A ∪ B : Set X)) = (Set.univ : Set X) := by\n    simpa [h_closure_union, interior_univ]\n  -- Finish the proof.\n  have : (x : X) ∈ (Set.univ : Set X) := by\n    simp\n  simpa [h_interior] using this",
+    "theorem Topology.interiorClosureClosure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (closure A)) = interior (closure A) := by\n  simpa [closure_closure]"
+  ],
+  "success": true
+}

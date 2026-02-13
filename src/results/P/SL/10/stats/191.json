@@ -1,0 +1,26 @@
+{
+  "times": [
+    142.4948718547821
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11060,
+      "prompt_tokens": 31215,
+      "total_tokens": 42275,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_diff_interior_eq_closure_inter_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A \\ interior A = closure A ∩ closure (Aᶜ) := by\n  classical\n  have h : closure (Aᶜ) = (interior A)ᶜ :=\n    Topology.closure_compl_eq_compl_interior (X := X) (A := A)\n  calc\n    closure A \\ interior A\n        = closure A ∩ (interior A)ᶜ := by\n          simp [Set.diff_eq]\n    _ = closure A ∩ closure (Aᶜ) := by\n          simpa [h]"
+  ],
+  "success": true
+}

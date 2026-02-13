@@ -1,0 +1,26 @@
+{
+  "times": [
+    126.80175518989563
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8451,
+      "prompt_tokens": 33112,
+      "total_tokens": 41563,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8256,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_has_all_Ps {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P1 (interior ((A ∩ B) : Set X)) ∧\n    Topology.P2 (interior ((A ∩ B) : Set X)) ∧\n    Topology.P3 (interior ((A ∩ B) : Set X)) := by\n  -- The set `interior (A ∩ B)` is open.\n  have hOpen : IsOpen (interior ((A ∩ B) : Set X)) := isOpen_interior\n  -- Every open set satisfies all three properties.\n  exact\n    Topology.isOpen_has_all_Ps\n      (X := X) (A := interior (A ∩ B : Set X)) hOpen"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    85.16554808616638,
+    127.19714903831482,
+    46.37601375579834
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6176,
+      "prompt_tokens": 53132,
+      "total_tokens": 59308,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    },
+    {
+      "completion_tokens": 8913,
+      "prompt_tokens": 53317,
+      "total_tokens": 62230,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52992
+      }
+    },
+    {
+      "completion_tokens": 1995,
+      "prompt_tokens": 53393,
+      "total_tokens": 55388,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_prod_eq_empty_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    interior (A ×ˢ B) = (∅ : Set (X × Y)) ↔\n      interior A = (∅ : Set X) ∨ interior B = (∅ : Set Y) := by\n  classical\n  -- A handy characterisation of non-emptiness for the interior of a product.\n  have hNon :\n      (interior (A ×ˢ B)).Nonempty ↔\n        ((interior A).Nonempty ∧ (interior B).Nonempty) :=\n    interior_prod_nonempty_iff (A := A) (B := B)\n  -- Turn the desired equivalence into one about (non)-emptiness.\n  have h₁ :\n      interior (A ×ˢ B) = (∅ : Set (X × Y)) ↔\n        ¬ (interior (A ×ˢ B)).Nonempty := by\n    simpa [Set.not_nonempty_iff_eq_empty] using\n      (not_congr (by rfl : ¬((interior (A ×ˢ B)).Nonempty) ↔\n                              ¬((interior (A ×ˢ B)).Nonempty)))\n  have h₂ :\n      interior A = (∅ : Set X) ∨ interior B = (∅ : Set Y) ↔\n        ¬ ((interior A).Nonempty ∧ (interior B).Nonempty) := by\n    -- De Morgan for `Nonempty`.\n    constructor\n    · intro h\n      cases h with\n      | inl hA =>\n          intro hBoth\n          exact (Set.not_nonempty_iff_eq_empty).2 hA ▸ hBoth.1.elim\n      | inr hB =>\n          intro hBoth\n          exact (Set.not_nonempty_iff_eq_empty).2 hB ▸ hBoth.2.elim\n    · intro h\n      by_cases hA : (interior A).Nonempty\n      · -- then `interior B` must be empty\n        have : ¬ (interior B).Nonempty := by\n          intro hB\n          exact h ⟨hA, hB⟩\n        exact Or.inr ((Set.not_nonempty_iff_eq_empty).1 this)\n      · -- `interior A` is empty\n        exact Or.inl ((Set.not_nonempty_iff_eq_empty).1 hA)\n  -- Assemble the result using `hNon`, `h₁`, and `h₂`.\n  simpa [h₁, h₂, hNon]",
+    "theorem interior_prod_nonempty_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    (interior (A ×ˢ B)).Nonempty ↔\n      ((interior A).Nonempty ∧ (interior B).Nonempty) := by\n  -- First, identify the interior of the product.\n  have h : interior (A ×ˢ B) = interior A ×ˢ interior B := by\n    simpa using interior_prod_eq (s := A) (t := B)\n  constructor\n  · intro hNonempty\n    rcases hNonempty with ⟨p, hp⟩\n    have hp' : (p : X × Y) ∈ interior A ×ˢ interior B := by\n      simpa [h] using hp\n    rcases Set.mem_prod.1 hp' with ⟨hpA, hpB⟩\n    exact ⟨⟨p.1, hpA⟩, ⟨p.2, hpB⟩⟩\n  · rintro ⟨hIntA, hIntB⟩\n    rcases hIntA with ⟨x, hx⟩\n    rcases hIntB with ⟨y, hy⟩\n    have hp : ((x, y) : X × Y) ∈ interior A ×ˢ interior B :=\n      And.intro hx hy\n    have hp_prod : ((x, y) : X × Y) ∈ interior (A ×ˢ B) := by\n      simpa [h] using hp\n    exact ⟨(x, y), hp_prod⟩",
+    "theorem interior_closure_union_eq {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ B)) = interior (closure A ∪ closure B) := by\n  simpa [closure_union]"
+  ],
+  "success": true
+}

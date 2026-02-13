@@ -1,0 +1,60 @@
+{
+  "times": [
+    77.61831569671631,
+    167.81557178497314,
+    44.78662848472595
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4572,
+      "prompt_tokens": 54021,
+      "total_tokens": 58593,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 10137,
+      "prompt_tokens": 54098,
+      "total_tokens": 64235,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 3126,
+      "prompt_tokens": 54177,
+      "total_tokens": 57303,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_closure_union_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    IsClosed (closure (A : Set X) ∪ closure B) := by\n  exact (isClosed_closure (A := A)).union (isClosed_closure (A := B))",
+    "theorem Topology.interior_diff_subset_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ interior (closure A) := by\n  -- First, use monotonicity of `interior` with `A \\ B ⊆ A`.\n  have h₁ :\n      interior (A \\ B : Set X) ⊆ interior A :=\n    interior_mono (Set.diff_subset : (A \\ B : Set X) ⊆ A)\n  -- Then, apply the general inclusion `interior A ⊆ interior (closure A)`.\n  have h₂ :\n      interior A ⊆ interior (closure A) :=\n    Topology.interior_subset_interior_closure (X := X) (A := A)\n  -- Combine the two inclusions.\n  exact Set.Subset.trans h₁ h₂",
+    "theorem Topology.P1_P2_P3_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    Topology.P1 (X := X) (interior A) ∧\n      Topology.P2 (X := X) (interior A) ∧\n      Topology.P3 (X := X) (interior A) := by\n  -- `interior A` is an open set.\n  have h_open : IsOpen (interior (A : Set X)) := isOpen_interior\n  -- Hence all three properties hold by the existing lemma for open sets.\n  simpa using\n    Topology.P1_P2_P3_of_isOpen (X := X) (A := interior A) h_open"
+  ],
+  "success": true
+}

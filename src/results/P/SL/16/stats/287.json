@@ -1,0 +1,60 @@
+{
+  "times": [
+    345.74811363220215,
+    16.32876706123352,
+    98.9763617515564
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 18688,
+      "prompt_tokens": 50307,
+      "total_tokens": 68995,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 943,
+      "prompt_tokens": 50379,
+      "total_tokens": 51322,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 5521,
+      "prompt_tokens": 50446,
+      "total_tokens": 55967,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_nonempty_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h_dense : closure (interior A) = (Set.univ : Set X)) :\n    (interior A).Nonempty := by\n  classical\n  by_cases hInt : (interior A).Nonempty\n  · exact hInt\n  · -- If `interior A` were empty, its closure would also be empty,\n    -- contradicting the density hypothesis.\n    have hIntEmpty : interior A = (∅ : Set X) :=\n      (Set.not_nonempty_iff_eq_empty).1 hInt\n    have hClEmpty : closure (interior A) = (∅ : Set X) := by\n      simpa [hIntEmpty, closure_empty]\n    have h_univ_empty : (Set.univ : Set X) = (∅ : Set X) := by\n      simpa using (Eq.trans h_dense.symm hClEmpty)\n    -- But `Set.univ` is certainly nonempty.\n    have h_nonempty_empty : (∅ : Set X).Nonempty := by\n      simpa [h_univ_empty] using (Set.nonempty_univ : (Set.univ : Set X).Nonempty)\n    rcases h_nonempty_empty with ⟨x, hx⟩\n    exact hx.elim",
+    "theorem Set.nonempty_univ {α : Type*} : (Set.univ : Set α).Nonempty := by\n  simp",
+    "theorem Set.nonempty_univ {α : Type*} [h : Nonempty α] :\n    (Set.univ : Set α).Nonempty := by\n  classical\n  rcases h with ⟨x⟩\n  exact ⟨x, by simp⟩"
+  ],
+  "success": true
+}

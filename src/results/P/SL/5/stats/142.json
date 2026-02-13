@@ -1,0 +1,60 @@
+{
+  "times": [
+    299.5981168746948,
+    16.001758098602295,
+    33.41326904296875
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 19670,
+      "prompt_tokens": 22778,
+      "total_tokens": 42448,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 1205,
+      "prompt_tokens": 22852,
+      "total_tokens": 24057,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    },
+    {
+      "completion_tokens": 2325,
+      "prompt_tokens": 22932,
+      "total_tokens": 25257,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1984,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_idempotent_six {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))))) =\n      closure (interior A) := by\n  -- The five-step idempotency.\n  have h5 :=\n    Topology.closure_interior_idempotent_five (X := X) (A := A)\n  -- Apply `closure ∘ interior` once more to both sides.\n  have h6 :\n      closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))))) =\n        closure (interior (closure (interior A))) := by\n    simpa using (congrArg (fun S : Set X => closure (interior S)) h5)\n  -- The basic idempotency.\n  have h1 :=\n    Topology.closure_interior_idempotent (X := X) (A := A)\n  -- Assemble the equalities.\n  calc\n    closure (interior (closure (interior (closure (interior (closure (interior (closure (interior (closure (interior A)))))))))) =\n        closure (interior (closure (interior A))) := by\n          simpa using h6\n    _ = closure (interior A) := by\n          simpa using h1",
+    "theorem interior_closure_interior_subset_interior_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hAB : A ⊆ B) :\n    interior (closure (interior A)) ⊆ interior (closure B) := by\n  have hsubset : closure (interior A) ⊆ closure B :=\n    closure_mono (interior_mono hAB)\n  exact interior_mono hsubset",
+    "theorem P2_union_five {X : Type*} [TopologicalSpace X] {A B C D E : Set X}\n    (hA : Topology.P2 (X := X) A) (hB : Topology.P2 (X := X) B)\n    (hC : Topology.P2 (X := X) C) (hD : Topology.P2 (X := X) D)\n    (hE : Topology.P2 (X := X) E) :\n    Topology.P2 (X := X) (A ∪ B ∪ C ∪ D ∪ E) := by\n  -- First, combine `A`, `B`, `C`, and `D`.\n  have hABCD : Topology.P2 (X := X) (A ∪ B ∪ C ∪ D) :=\n    Topology.P2_union_four (X := X) (A := A) (B := B) (C := C) (D := D)\n      hA hB hC hD\n  -- Unite the result with `E`.\n  have hABCDE : Topology.P2 (X := X) ((A ∪ B ∪ C ∪ D) ∪ E) :=\n    Topology.P2_union (X := X) (A := A ∪ B ∪ C ∪ D) (B := E) hABCD hE\n  -- Re-associate unions to match the required shape.\n  simpa [Set.union_assoc] using hABCDE"
+  ],
+  "success": true
+}

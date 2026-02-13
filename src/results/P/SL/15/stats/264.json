@@ -1,0 +1,43 @@
+{
+  "times": [
+    18.045528411865234,
+    24.585984230041504
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1167,
+      "prompt_tokens": 56881,
+      "total_tokens": 58048,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    },
+    {
+      "completion_tokens": 1586,
+      "prompt_tokens": 56956,
+      "total_tokens": 58542,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 56064
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hDense\n  dsimp [Topology.P3]\n  intro x hx\n  have h_closure : (closure A : Set X) = (Set.univ : Set X) := by\n    simpa using hDense.closure_eq\n  have : x ∈ (Set.univ : Set X) := by\n    trivial\n  simpa [h_closure, interior_univ] using this",
+    "theorem dense_closure_iff_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense (closure A) ↔ Dense A := by\n  constructor\n  · intro hDenseClosure\n    -- From the density of `closure A`, we get `closure (closure A) = univ`.\n    have h₁ : closure (closure A : Set X) = (Set.univ : Set X) := by\n      simpa using hDenseClosure.closure_eq\n    -- Using `closure_closure`, deduce `closure A = univ`, hence `Dense A`.\n    have h₂ : closure (A : Set X) = (Set.univ : Set X) := by\n      simpa [closure_closure] using h₁\n    exact (dense_iff_closure_eq (s := A)).2 h₂\n  · intro hDenseA\n    -- The closure of a dense set is dense.\n    exact dense_closure_of_dense (X := X) (A := A) hDenseA"
+  ],
+  "success": true
+}

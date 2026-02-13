@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.01155591011047
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7983,
+      "prompt_tokens": 28044,
+      "total_tokens": 36027,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7744,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.nonempty_interior_iff_nonempty_closure_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    (interior A).Nonempty ↔ (closure (interior A)).Nonempty := by\n  constructor\n  · intro hInt\n    exact hInt.closure\n  · intro hCl\n    classical\n    by_cases hInt : (interior A).Nonempty\n    · exact hInt\n    ·\n      have hIntEmpty : interior A = (∅ : Set X) := by\n        simpa [Set.not_nonempty_iff_eq_empty] using hInt\n      have hContrad : False := by\n        -- `hCl` gives a point in `closure (interior A)`, but this set is empty.\n        have : (∅ : Set X).Nonempty := by\n          simpa [hIntEmpty, closure_empty] using hCl\n        simpa using this\n      exact False.elim hContrad"
+  ],
+  "success": true
+}

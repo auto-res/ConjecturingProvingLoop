@@ -1,0 +1,26 @@
+{
+  "times": [
+    309.12125515937805
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 16533,
+      "prompt_tokens": 50337,
+      "total_tokens": 66870,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 16384,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 50048
+      }
+    }
+  ],
+  "responses": [
+    "theorem iUnion_closure_subset_closure_iUnion {X ι : Type*} [TopologicalSpace X]\n    {A : ι → Set X} :\n    (⋃ i, closure (A i)) ⊆ closure (⋃ i, A i) := by\n  intro x hx\n  rcases Set.mem_iUnion.1 hx with ⟨i, hx_i⟩\n  have hsubset : closure (A i) ⊆ closure (⋃ j, A j) :=\n    closure_mono (Set.subset_iUnion _ _)\n  exact hsubset hx_i"
+  ],
+  "success": true
+}

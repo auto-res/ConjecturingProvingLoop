@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.445340394973755
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4172,
+      "prompt_tokens": 52832,
+      "total_tokens": 57004,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_closure_subset_boundary {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    (closure (A : Set X) \\ interior (closure (A : Set X))) ⊆\n      (closure (A : Set X) \\ interior A) := by\n  intro x hx\n  rcases hx with ⟨hx_cl, hx_not_int_cl⟩\n  have hx_not_intA : (x : X) ∉ interior (A : Set X) := by\n    intro hx_intA\n    have : (x : X) ∈ interior (closure (A : Set X)) :=\n      (Topology.interior_subset_interior_closure (X := X) (A := A)) hx_intA\n    exact hx_not_int_cl this\n  exact And.intro hx_cl hx_not_intA"
+  ],
+  "success": true
+}

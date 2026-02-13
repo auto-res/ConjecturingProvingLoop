@@ -1,0 +1,60 @@
+{
+  "times": [
+    43.87671899795532,
+    107.2975754737854,
+    15.669691324234009
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2832,
+      "prompt_tokens": 33716,
+      "total_tokens": 36548,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 8047,
+      "prompt_tokens": 33822,
+      "total_tokens": 41869,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7808,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    },
+    {
+      "completion_tokens": 1255,
+      "prompt_tokens": 33905,
+      "total_tokens": 35160,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_closed {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsClosed (frontier A) := by\n  simpa [frontier] using\n    (Topology.isClosed_boundary (X := X) (A := A))",
+    "theorem Topology.frontier_closure_eq_closure_diff_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (closure A) = closure A \\ interior (closure A) := by\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hxClos, hxNotInt⟩\n    -- `closure (closure A)` simplifies to `closure A`\n    have hxClos' : x ∈ closure A := by\n      simpa [closure_closure] using hxClos\n    exact And.intro hxClos' hxNotInt\n  · intro hx\n    rcases hx with ⟨hxClos, hxNotInt⟩\n    -- From `x ∈ closure A`, we obtain `x ∈ closure (closure A)`\n    have hxClos' : x ∈ closure (closure A) := by\n      simpa [closure_closure] using hxClos\n    exact And.intro hxClos' hxNotInt",
+    "theorem Topology.interior_closure_subset_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure A) ⊆ closure (interior (closure A)) := by\n  intro x hx\n  exact (subset_closure : interior (closure A) ⊆ closure (interior (closure A))) hx"
+  ],
+  "success": true
+}

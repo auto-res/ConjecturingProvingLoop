@@ -1,0 +1,26 @@
+{
+  "times": [
+    75.2070300579071
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6326,
+      "prompt_tokens": 42875,
+      "total_tokens": 49201,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6080,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41856
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isOpen_union_three_satisfies_P1_P2_P3\n    {X : Type*} [TopologicalSpace X] {A B C : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) (hC : IsOpen C) :\n    Topology.P1 (A ∪ B ∪ C) ∧ Topology.P2 (A ∪ B ∪ C) ∧ Topology.P3 (A ∪ B ∪ C) := by\n  -- Establish that the union `A ∪ B ∪ C` is open.\n  have hOpen : IsOpen (A ∪ B ∪ C) := by\n    have hAB : IsOpen (A ∪ B) := IsOpen.union hA hB\n    exact IsOpen.union hAB hC\n  -- Invoke the generic result for open sets.\n  simpa using\n    Topology.isOpen_satisfies_P1_P2_P3 (X := X) (A := A ∪ B ∪ C) hOpen"
+  ],
+  "success": true
+}

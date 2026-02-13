@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.82468581199646
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2622,
+      "prompt_tokens": 45596,
+      "total_tokens": 48218,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44800
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_union_left_of_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_open : IsOpen (A : Set X)) (hPB : Topology.P2 (X := X) B) :\n    Topology.P2 (X := X) (A ∪ B) := by\n  -- `A` is open, hence it satisfies `P2`.\n  have hPA : Topology.P2 (X := X) A :=\n    isOpen_implies_P2 (X := X) (A := A) hA_open\n  -- Combine the two `P2` hypotheses using the existing union lemma.\n  exact Topology.P2_union (X := X) (A := A) (B := B) hPA hPB"
+  ],
+  "success": true
+}

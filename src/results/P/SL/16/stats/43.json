@@ -1,0 +1,43 @@
+{
+  "times": [
+    117.07950854301453,
+    53.06679844856262
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7699,
+      "prompt_tokens": 7433,
+      "total_tokens": 15132,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    },
+    {
+      "completion_tokens": 3405,
+      "prompt_tokens": 7650,
+      "total_tokens": 11055,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_closure_eq_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior (closure A))) = interior (closure A) := by\n  apply subset_antisymm\n  · -- `interior (closure (interior (closure A))) ⊆ interior (closure A)`\n    have h₁ : closure (interior (closure A)) ⊆ closure A := by\n      have : interior (closure A) ⊆ closure A := interior_subset\n      exact closure_mono this\n    exact interior_mono h₁\n  · -- `interior (closure A) ⊆ interior (closure (interior (closure A)))`\n    have hOpen : IsOpen (interior (closure A)) := isOpen_interior\n    have hP2 : Topology.P2 (X := X) (interior (closure A)) :=\n      Topology.isOpen_implies_P2 (X := X) (A := interior (closure A)) hOpen\n    dsimp [Topology.P2] at hP2\n    intro x hx\n    exact hP2 hx",
+    "theorem Topology.interior_closure_interior_eq_interior_closure_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP1 : Topology.P1 (X := X) A) :\n    interior (closure (interior A)) = interior (closure A) := by\n  have h_eq : closure (interior A) = closure A :=\n    Topology.closure_interior_eq_closure_of_P1 (X := X) (A := A) hP1\n  simpa [h_eq]"
+  ],
+  "success": true
+}

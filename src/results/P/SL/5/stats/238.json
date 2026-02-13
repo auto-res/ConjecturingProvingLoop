@@ -1,0 +1,26 @@
+{
+  "times": [
+    54.000757455825806
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2401,
+      "prompt_tokens": 42772,
+      "total_tokens": 45173,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 41728
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_closure_interior_closure_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior A) ∩ closure (interior (closure A)) =\n      closure (interior A) := by\n  ext x\n  constructor\n  · intro hx\n    exact hx.1\n  · intro hx\n    have hsubset :\n        closure (interior A) ⊆ closure (interior (closure A)) :=\n      Topology.closure_interior_subset_closure_interior_closure (X := X) A\n    exact ⟨hx, hsubset hx⟩"
+  ],
+  "success": true
+}

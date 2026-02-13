@@ -1,0 +1,43 @@
+{
+  "times": [
+    42.55739378929138,
+    83.63326144218445
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2805,
+      "prompt_tokens": 14572,
+      "total_tokens": 17377,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14080
+      }
+    },
+    {
+      "completion_tokens": 5583,
+      "prompt_tokens": 14694,
+      "total_tokens": 20277,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_implies_closure_eq_closure_interior_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → closure A = closure (interior (closure A)) := by\n  intro hP3\n  apply Set.Subset.antisymm\n  · -- `closure A` is contained in `closure (interior (closure A))`\n    have h₁ : A ⊆ interior (closure A) := hP3\n    exact closure_mono h₁\n  · -- The reverse inclusion is given by monotonicity of `closure`\n    have h₂ : interior (closure A) ⊆ closure A := interior_subset\n    exact closure_mono h₂",
+    "theorem P1_closure_closure_iff {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (closure (closure A)) ↔ Topology.P1 (closure A) := by\n  simpa [closure_closure]"
+  ],
+  "success": true
+}

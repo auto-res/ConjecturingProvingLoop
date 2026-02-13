@@ -1,0 +1,60 @@
+{
+  "times": [
+    91.41791796684265,
+    349.85454082489014,
+    59.3433563709259
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9420,
+      "prompt_tokens": 28947,
+      "total_tokens": 38367,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9152,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 25393,
+      "prompt_tokens": 29039,
+      "total_tokens": 54432,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 25280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    },
+    {
+      "completion_tokens": 4274,
+      "prompt_tokens": 29114,
+      "total_tokens": 33388,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28544
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_iInter_closed {X : Type*} [TopologicalSpace X] {ι : Sort*}\n    {A : ι → Set X} :\n    (∀ i, IsClosed (A i)) →\n    (∀ i, Topology.P3 (A i)) →\n    Topology.P3 (⋂ i, A i) := by\n  intro hClosed hP3\n  -- From `P3` and closedness we infer that each `A i` is open.\n  have hOpen : ∀ i, IsOpen (A i) := by\n    intro i\n    exact\n      (Topology.P3_iff_isOpen_of_isClosed (A := A i) (hClosed i)).1 (hP3 i)\n  -- The intersection of (arbitrarily many) open sets is open.\n  have hOpen_iInter : IsOpen (⋂ i, A i) := by\n    apply isOpen_iInter\n    intro i\n    exact hOpen i\n  -- Any open set satisfies `P3`.\n  exact Topology.P3_of_isOpen (A := ⋂ i, A i) hOpen_iInter",
+    "theorem Topology.P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Dense A → Topology.P3 A := by\n  intro hA\n  have hclosure : closure A = (Set.univ : Set X) := by\n    simpa using hA.closure_eq\n  exact Topology.P3_of_closure_eq_univ (A := A) hclosure",
+    "theorem Topology.interior_union_eq_self_of_isOpen\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen A) (hB : IsOpen B) :\n    interior (A ∪ B) = A ∪ B := by\n  have hOpen : IsOpen (A ∪ B) := hA.union hB\n  simpa using hOpen.interior_eq"
+  ],
+  "success": true
+}

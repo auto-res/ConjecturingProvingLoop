@@ -1,0 +1,43 @@
+{
+  "times": [
+    165.46891617774963,
+    171.0544557571411
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11050,
+      "prompt_tokens": 46775,
+      "total_tokens": 57825,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 10604,
+      "prompt_tokens": 46905,
+      "total_tokens": 57509,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_univ_iff_interior_complement_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (A : Set X) = (Set.univ : Set X) ↔\n      interior ((Aᶜ) : Set X) = (∅ : Set X) := by\n  classical\n  constructor\n  · intro hDense\n    exact interior_complement_eq_empty_of_dense (A := A) hDense\n  · intro hIntEmpty\n    -- First, rewrite the assumption using the identity\n    -- `interior (Aᶜ) = (closure A)ᶜ`.\n    have hEq := interior_complement_eq_complement_closure (A := A)\n    have hComplEmpty : (closure (A : Set X))ᶜ = (∅ : Set X) := by\n      simpa [hEq, hIntEmpty]\n    -- Show `closure A = univ` via mutual inclusion.\n    apply Set.Subset.antisymm\n    · exact Set.subset_univ _\n    · intro x _\n      by_cases hxCl : (x : X) ∈ closure (A : Set X)\n      · exact hxCl\n      · -- Derive a contradiction with `hComplEmpty`.\n        have hxCompl : (x : X) ∈ (closure (A : Set X))ᶜ := by\n          simp [hxCl]\n        have : (x : X) ∈ (∅ : Set X) := by\n          simpa [hComplEmpty] using hxCompl\n        cases this\n",
+    "theorem closure_eq_univ_of_empty_interior_complement\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hIntEmpty : interior ((Aᶜ) : Set X) = (∅ : Set X)) :\n    closure (A : Set X) = (Set.univ : Set X) := by\n  classical\n  -- Relate the complement of `closure A` to `interior (Aᶜ)`.\n  have hEq : (closure (A : Set X))ᶜ = interior ((Aᶜ) : Set X) :=\n    (interior_complement_eq_complement_closure (A := A)).symm\n  -- Deduce that the complement of `closure A` is empty.\n  have hCompl : (closure (A : Set X))ᶜ = (∅ : Set X) := by\n    simpa [hIntEmpty] using hEq\n  -- Show that `closure A` contains every point of the space.\n  have hSub : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n    intro x _\n    by_contra hx\n    have hxInCompl : (x : X) ∈ (closure (A : Set X))ᶜ := hx\n    have : (x : X) ∈ (∅ : Set X) := by\n      simpa [hCompl] using hxInCompl\n    exact this.elim\n  -- Conclude the desired equality.\n  exact Set.Subset.antisymm (Set.subset_univ _) hSub"
+  ],
+  "success": true
+}

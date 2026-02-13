@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.491811752319336
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3468,
+      "prompt_tokens": 49440,
+      "total_tokens": 52908,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem union_interior_closure_and_closure_interior_subset_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) ∪ closure (interior A) ⊆ closure A := by\n  intro x hx\n  cases hx with\n  | inl hxInt =>\n      exact (interior_subset : interior (closure (A : Set X)) ⊆ closure A) hxInt\n  | inr hxCl =>\n      -- `interior A ⊆ A`, so their closures satisfy the same inclusion.\n      have hSub : interior (A : Set X) ⊆ A := interior_subset\n      have hClSub : closure (interior (A : Set X)) ⊆ closure A :=\n        closure_mono hSub\n      exact hClSub hxCl"
+  ],
+  "success": true
+}

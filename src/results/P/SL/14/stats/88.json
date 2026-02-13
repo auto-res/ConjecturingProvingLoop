@@ -1,0 +1,43 @@
+{
+  "times": [
+    60.55576944351196,
+    100.08436822891235
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4097,
+      "prompt_tokens": 15235,
+      "total_tokens": 19332,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 14208
+      }
+    },
+    {
+      "completion_tokens": 6163,
+      "prompt_tokens": 15357,
+      "total_tokens": 21520,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6016,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosure_eq_closure_of_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 A → closure (interior (closure A)) = closure A := by\n  intro hP3\n  dsimp [Topology.P3] at hP3\n  apply Set.Subset.antisymm\n  ·\n    -- `closure (interior (closure A)) ⊆ closure A`\n    exact\n      closure_mono\n        (interior_subset :\n          (interior (closure A) : Set X) ⊆ closure A)\n  ·\n    -- `closure A ⊆ closure (interior (closure A))`, since `A ⊆ interior (closure A)`\n    exact closure_mono hP3",
+    "theorem Topology.P3_compl_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA_closed : IsClosed A) : Topology.P3 (Aᶜ) := by\n  -- The complement of a closed set is open.\n  have h_open : IsOpen (Aᶜ) := by\n    simpa using hA_closed.isOpen_compl\n  -- Any open set satisfies `P3`.\n  exact Topology.isOpen_implies_P3 (X := X) (A := Aᶜ) h_open"
+  ],
+  "success": true
+}

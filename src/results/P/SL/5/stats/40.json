@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.39847707748413
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1914,
+      "prompt_tokens": 6064,
+      "total_tokens": 7978,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_closure_eq_closure_interior {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P1 (X := X) A ↔ closure (A : Set X) = closure (interior A) := by\n  constructor\n  · intro hP1\n    -- From `P1` we already have one inclusion of the closures.\n    have h₁ : closure (A : Set X) ⊆ closure (interior A) :=\n      Topology.P1_closure_subset (X := X) (A := A) hP1\n    -- The reverse inclusion is always true.\n    have h₂ : (closure (interior A) : Set X) ⊆ closure A :=\n      closure_mono (interior_subset : (interior A : Set X) ⊆ A)\n    -- Hence the closures coincide.\n    exact le_antisymm h₁ h₂\n  · intro hEq\n    -- To obtain `P1`, we show `A ⊆ closure (interior A)`.\n    dsimp [Topology.P1]\n    intro x hxA\n    -- Every point of `A` lies in `closure A`, which equals the desired set.\n    have : x ∈ closure (A : Set X) := subset_closure hxA\n    simpa [hEq] using this"
+  ],
+  "success": true
+}

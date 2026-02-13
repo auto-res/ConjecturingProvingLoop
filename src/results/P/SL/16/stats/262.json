@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.209513664245605
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4044,
+      "prompt_tokens": 45882,
+      "total_tokens": 49926,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_eq_univ_iff\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (interior A)) = (Set.univ : Set X) ↔\n      closure (interior A) = (Set.univ : Set X) := by\n  constructor\n  · intro hInt\n    -- `closure (interior A) ⊆ univ` is obvious.\n    have h₁ : closure (interior A) ⊆ (Set.univ : Set X) := by\n      intro _ _; simp\n    -- `univ ⊆ closure (interior A)` follows from the hypothesis.\n    have h₂ : (Set.univ : Set X) ⊆ closure (interior A) := by\n      intro x _\n      have hxInt : (x : X) ∈ interior (closure (interior A)) := by\n        simpa [hInt] using (by simp : (x : X) ∈ (Set.univ : Set X))\n      exact (interior_subset : interior (closure (interior A)) ⊆\n          closure (interior A)) hxInt\n    exact subset_antisymm h₁ h₂\n  · intro hCl\n    exact\n      Topology.interior_closure_interior_eq_univ_of_dense_interior\n        (X := X) (A := A) hCl"
+  ],
+  "success": true
+}

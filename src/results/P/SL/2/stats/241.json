@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.95634460449219
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3028,
+      "prompt_tokens": 39042,
+      "total_tokens": 42070,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38656
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.isClosed_P3_implies_frontier_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    IsClosed A → Topology.P3 A → frontier (A : Set X) = (∅ : Set X) := by\n  intro hClosed hP3\n  have hOpen : IsOpen (A : Set X) :=\n    Topology.isClosed_P3_implies_isOpen (A := A) hClosed hP3\n  exact Topology.isClosed_isOpen_implies_frontier_eq_empty (A := A) hClosed hOpen"
+  ],
+  "success": true
+}

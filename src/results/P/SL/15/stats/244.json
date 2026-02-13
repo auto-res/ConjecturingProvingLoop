@@ -1,0 +1,26 @@
+{
+  "times": [
+    71.80609488487244
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4167,
+      "prompt_tokens": 52388,
+      "total_tokens": 56555,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 51968
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_iff_P2_of_denseInterior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense (interior A)) :\n    Topology.P3 A ↔ Topology.P2 A := by\n  -- From the density of `interior A` we immediately obtain `P1 A`.\n  have hP1 : Topology.P1 A :=\n    Topology.denseInterior_implies_P1 (X := X) (A := A) hDense\n  constructor\n  · intro hP3\n    exact Topology.P3_and_P1_implies_P2 (X := X) (A := A) hP3 hP1\n  · intro hP2\n    exact Topology.P2_implies_P3 (X := X) (A := A) hP2"
+  ],
+  "success": true
+}

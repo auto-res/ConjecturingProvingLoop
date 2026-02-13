@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.437222957611084
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3125,
+      "prompt_tokens": 36438,
+      "total_tokens": 39563,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_isOpen_right {X : Type*} [TopologicalSpace X]\n    {A U : Set X} (hU : IsOpen U) :\n    interior (A ∩ U) = interior A ∩ U := by\n  -- First inclusion: `⊆`\n  apply Set.Subset.antisymm\n  · intro x hx\n    have hA : x ∈ interior A := by\n      have h_subset : (A ∩ U) ⊆ A := Set.inter_subset_left\n      exact (interior_mono h_subset) hx\n    have hUx : x ∈ U := by\n      have : x ∈ A ∩ U := interior_subset hx\n      exact this.2\n    exact And.intro hA hUx\n  · intro x hx\n    rcases hx with ⟨hIntA, hUx⟩\n    -- The set `interior A ∩ U` is open\n    have h_open : IsOpen (interior A ∩ U) := isOpen_interior.inter hU\n    -- and contained in `A ∩ U`\n    have h_subset : (interior A ∩ U) ⊆ (A ∩ U) := by\n      intro y hy\n      exact And.intro (interior_subset hy.1) hy.2\n    -- Hence it is contained in the interior of `A ∩ U`\n    have h_interior :\n        interior A ∩ U ⊆ interior (A ∩ U) :=\n      interior_maximal h_subset h_open\n    exact h_interior ⟨hIntA, hUx⟩"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    151.42461943626404
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8018,
+      "prompt_tokens": 42462,
+      "total_tokens": 50480,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_prod_nonempty_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} :\n    (interior (closure (A ×ˢ B))).Nonempty ↔\n      ((interior (closure A)).Nonempty ∧ (interior (closure B)).Nonempty) := by\n  have hEq :=\n    interior_closure_prod (X := X) (Y := Y) (A := A) (B := B)\n  constructor\n  · intro hProd\n    rcases hProd with ⟨p, hp⟩\n    have hp' :\n        (p : X × Y) ∈ interior (closure A) ×ˢ interior (closure B) := by\n      simpa [hEq] using hp\n    rcases hp' with ⟨hpA, hpB⟩\n    exact ⟨⟨p.1, hpA⟩, ⟨p.2, hpB⟩⟩\n  · rintro ⟨hIntA, hIntB⟩\n    rcases hIntA with ⟨x, hx⟩\n    rcases hIntB with ⟨y, hy⟩\n    have hp :\n        ((x, y) : X × Y) ∈\n          interior (closure A) ×ˢ interior (closure B) :=\n      And.intro hx hy\n    have hpProd :\n        ((x, y) : X × Y) ∈ interior (closure (A ×ˢ B)) := by\n      simpa [hEq] using hp\n    exact ⟨(x, y), hpProd⟩"
+  ],
+  "success": true
+}

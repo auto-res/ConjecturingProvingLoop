@@ -1,0 +1,26 @@
+{
+  "times": [
+    160.8553705215454
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7760,
+      "prompt_tokens": 50559,
+      "total_tokens": 58319,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hInt : interior A = (A : Set X)) : Topology.P1 A := by\n  -- The given equality shows that `A` is open.\n  have hOpen : IsOpen A := by\n    have : IsOpen (interior A) := isOpen_interior\n    simpa [hInt] using this\n  -- Every open set satisfies `P1`.\n  exact Topology.IsOpen_P1 (A := A) hOpen"
+  ],
+  "success": true
+}

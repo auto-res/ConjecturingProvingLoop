@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.21674346923828
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2362,
+      "prompt_tokens": 5898,
+      "total_tokens": 8260,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4864
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_iUnion {X ι : Type*} [TopologicalSpace X] (A : ι → Set X)\n    (hA : ∀ i, Topology.P2 (X := X) (A i)) :\n    Topology.P2 (X := X) (⋃ i, A i) := by\n  dsimp [Topology.P2] at hA ⊢\n  intro x hx\n  -- Choose an index `i` such that `x ∈ A i`.\n  rcases Set.mem_iUnion.1 hx with ⟨i, hxAi⟩\n  -- Apply `P2` for the chosen `i`.\n  have hx_int : x ∈ interior (closure (interior (A i))) := hA i hxAi\n  -- Show that the relevant neighbourhood for `A i`\n  -- is contained in the corresponding one for the union.\n  have h_sub : interior (closure (interior (A i))) ⊆\n      interior (closure (interior (⋃ j, A j))) := by\n    -- Step 1: `interior (A i) ⊆ interior (⋃ j, A j)`.\n    have h1 : (interior (A i) : Set X) ⊆ interior (⋃ j, A j) := by\n      have h_union : (A i : Set X) ⊆ ⋃ j, A j := by\n        intro y hy\n        exact Set.mem_iUnion.2 ⟨i, hy⟩\n      exact interior_mono h_union\n    -- Step 2: take closures.\n    have h2 : closure (interior (A i) : Set X) ⊆ closure (interior (⋃ j, A j)) :=\n      closure_mono h1\n    -- Step 3: take interiors again.\n    exact interior_mono h2\n  -- Finish the proof.\n  exact h_sub hx_int"
+  ],
+  "success": true
+}

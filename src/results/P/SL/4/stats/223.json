@@ -1,0 +1,43 @@
+{
+  "times": [
+    82.505446434021,
+    144.84240818023682
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4572,
+      "prompt_tokens": 32626,
+      "total_tokens": 37198,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    },
+    {
+      "completion_tokens": 10272,
+      "prompt_tokens": 32732,
+      "total_tokens": 43004,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_frontier_eq_empty {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior A ∩ frontier A = (∅ : Set X) := by\n  simpa [frontier_eq_closure_diff_interior]\n    using (Set.inter_diff_self (interior A) (closure A))",
+    "theorem interior_subset_of_subset_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hB : IsOpen B) :\n    interior A ⊆ B := by\n  intro x hxIntA\n  exact hAB (interior_subset hxIntA)"
+  ],
+  "success": true
+}

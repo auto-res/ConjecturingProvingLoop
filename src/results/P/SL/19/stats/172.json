@@ -1,0 +1,26 @@
+{
+  "times": [
+    94.46001291275024
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5885,
+      "prompt_tokens": 26331,
+      "total_tokens": 32216,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5760,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_interior_subset_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier (interior A) ⊆ closure A := by\n  intro x hx\n  rcases hx with ⟨hx_clos, _⟩\n  have hsubset : closure (interior A) ⊆ closure A :=\n    Topology.closure_interior_subset_closure (A := A)\n  exact hsubset hx_clos"
+  ],
+  "success": true
+}

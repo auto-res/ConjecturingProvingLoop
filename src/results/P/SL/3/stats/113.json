@@ -1,0 +1,26 @@
+{
+  "times": [
+    152.45959544181824
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10063,
+      "prompt_tokens": 17288,
+      "total_tokens": 27351,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 16256
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_interior_closure_interior_closure {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    Topology.P2 (interior (closure (interior (closure (A : Set X))))) := by\n  have hOpen :\n      IsOpen (interior (closure (interior (closure (A : Set X))))) :=\n    isOpen_interior\n  simpa using\n    (Topology.P2_of_isOpen\n      (A := interior (closure (interior (closure (A : Set X))))) hOpen)"
+  ],
+  "success": true
+}

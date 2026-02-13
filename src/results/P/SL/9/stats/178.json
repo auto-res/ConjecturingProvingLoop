@@ -1,0 +1,26 @@
+{
+  "times": [
+    151.04368996620178
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 12189,
+      "prompt_tokens": 28551,
+      "total_tokens": 40740,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 27392
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_subset_closure_compl\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) \\ interior A ⊆ closure (Aᶜ) := by\n  classical\n  intro x hx\n  -- `x` lies in the closure of `A` but not in its interior.\n  have hx_not_int : x ∉ interior (A : Set X) := hx.2\n  -- We prove by contradiction that `x ∈ closure (Aᶜ)`.\n  by_contra h_not\n  -- The complement of `closure (Aᶜ)` is an open neighbourhood of `x`.\n  set U : Set X := ((closure (Aᶜ) : Set X)ᶜ) with hU_def\n  have hU_open : IsOpen U := by\n    simpa [hU_def] using (isClosed_closure : IsClosed (closure (Aᶜ))).isOpen_compl\n  have hxU : x ∈ U := by\n    have : x ∉ closure (Aᶜ) := by\n      simpa using h_not\n    simpa [hU_def] using this\n  -- Show that `U ⊆ A`.  Indeed, if `y ∈ U` but `y ∉ A`, then `y ∈ Aᶜ`\n  -- whence `y ∈ closure (Aᶜ)`, contradicting `y ∈ U = (closure (Aᶜ))ᶜ`.\n  have hU_subset_A : U ⊆ (A : Set X) := by\n    intro y hyU\n    have hy_not_closure : y ∉ closure (Aᶜ) := by\n      simpa [hU_def] using hyU\n    by_cases hAy : y ∈ (A : Set X)\n    · exact hAy\n    · have hyAc : y ∈ (Aᶜ : Set X) := hAy\n      have : y ∈ closure (Aᶜ) := subset_closure hyAc\n      exact (hy_not_closure this).elim\n  -- Hence `x` belongs to an open set `U` contained in `A`, so `x ∈ interior A`,\n  -- contradicting `hx_not_int`.\n  have hx_intA : x ∈ interior (A : Set X) := by\n    -- `interior_maximal` supplies the required inclusion.\n    have h_incl : U ⊆ interior (A : Set X) :=\n      interior_maximal hU_subset_A hU_open\n    exact h_incl hxU\n  exact hx_not_int hx_intA"
+  ],
+  "success": true
+}

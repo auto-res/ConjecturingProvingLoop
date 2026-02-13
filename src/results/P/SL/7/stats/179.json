@@ -1,0 +1,26 @@
+{
+  "times": [
+    79.3865225315094
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6753,
+      "prompt_tokens": 27892,
+      "total_tokens": 34645,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6464,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosure_eq_closure_of_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hP1 : Topology.P1 A) :\n    closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  -- We prove the two inclusions separately.\n  apply Set.Subset.antisymm\n  ·\n    exact Topology.closureInteriorClosure_subset_closure (A := A)\n  ·\n    -- From `P1` we have `closure A = closure (interior A)`.\n    have hEq : closure (A : Set X) = closure (interior A) :=\n      (Topology.P1_iff_closure_eq_closureInterior (A := A)).1 hP1\n    -- `interior A ⊆ interior (closure A)` by monotonicity of `interior`.\n    have hIncl : closure (interior A) ⊆\n        closure (interior (closure (A : Set X))) := by\n      apply closure_mono\n      exact Topology.interior_subset_interiorClosure (A := A)\n    -- Rewrite using the equality obtained from `P1`.\n    simpa [hEq] using hIncl"
+  ],
+  "success": true
+}

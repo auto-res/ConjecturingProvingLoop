@@ -1,0 +1,43 @@
+{
+  "times": [
+    46.09178566932678,
+    141.8870882987976
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2615,
+      "prompt_tokens": 56455,
+      "total_tokens": 59070,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    },
+    {
+      "completion_tokens": 8210,
+      "prompt_tokens": 56590,
+      "total_tokens": 64800,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8192,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_P2_closure {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P2 (X := X) (closure A)) :\n    Topology.P1 (X := X) A := by\n  -- Unfold definitions of `P2` and `P1`.\n  dsimp [Topology.P2] at h\n  dsimp [Topology.P1]\n  intro x hxA\n  -- From `A ⊆ closure A`, we have `x ∈ closure A`.\n  have hx_closureA : (x : X) ∈ closure (A : Set X) := subset_closure hxA\n  -- Apply `P2` for `closure A`.\n  have hx_interior :\n      x ∈ interior (closure (interior (closure (A : Set X)))) := h hx_closureA\n  -- Relate the two interiors via the monotonicity lemma.\n  have h_subset :\n      interior (closure (interior (closure (A : Set X)))) ⊆\n        closure (interior (A : Set X)) :=\n    Topology.interior_closure_interior_subset_closure_interior_closure\n      (X := X) (A := A)\n  -- Conclude that `x ∈ closure (interior A)`.\n  exact h_subset hx_interior",
+    ""
+  ],
+  "success": true
+}

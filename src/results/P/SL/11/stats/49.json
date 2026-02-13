@@ -1,0 +1,43 @@
+{
+  "times": [
+    50.21440863609314,
+    70.270432472229
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3485,
+      "prompt_tokens": 7030,
+      "total_tokens": 10515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6016
+      }
+    },
+    {
+      "completion_tokens": 4286,
+      "prompt_tokens": 7159,
+      "total_tokens": 11445,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4160,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 6912
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : Dense A) : Topology.P3 A := by\n  dsimp [Dense] at hA\n  dsimp [Topology.P3]\n  intro x hx\n  simpa [hA, interior_univ]",
+    "theorem interior_eq_self_of_closed_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hA : IsClosed A) (hP3 : Topology.P3 A) :\n    interior A = A := by\n  apply subset_antisymm\n  · exact interior_subset\n  ·\n    have h : (A : Set X) ⊆ interior (closure A) := hP3\n    simpa [hA.closure_eq] using h"
+  ],
+  "success": true
+}

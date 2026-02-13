@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.34890174865723
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2504,
+      "prompt_tokens": 48714,
+      "total_tokens": 51218,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2240,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 47872
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_of_subset_within_closureInterior {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hP1 : Topology.P1 (X := X) A) (hAB : (A : Set X) ⊆ B)\n    (hBsubset : B ⊆ closure (interior A)) :\n    Topology.P1 (X := X) B := by\n  dsimp [Topology.P1] at hP1 ⊢\n  intro x hxB\n  -- Step 1: place `x` in `closure (interior A)` using `hBsubset`.\n  have hx_clA : (x : X) ∈ closure (interior A) := hBsubset hxB\n  -- Step 2: upgrade to `closure (interior B)` via monotonicity.\n  have h_int_subset : interior A ⊆ interior B :=\n    interior_mono hAB\n  have h_cl_subset : closure (interior A) ⊆ closure (interior B) :=\n    closure_mono h_int_subset\n  exact h_cl_subset hx_clA"
+  ],
+  "success": true
+}

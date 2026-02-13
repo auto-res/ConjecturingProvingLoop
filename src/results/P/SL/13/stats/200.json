@@ -1,0 +1,26 @@
+{
+  "times": [
+    81.731693983078
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5231,
+      "prompt_tokens": 36002,
+      "total_tokens": 41233,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4992,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35584
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_and_emptyInteriorClosureInterior_implies_empty {X : Type*}\n    [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 (X := X) A)\n    (h_int : interior (closure (interior (A : Set X))) = (∅ : Set X)) :\n    (A : Set X) = (∅ : Set X) := by\n  -- From `P2`, every point of `A` lies in `interior (closure (interior A))`,\n  -- which is empty by assumption, hence `A` itself must be empty.\n  have h_subset : (A : Set X) ⊆ (∅ : Set X) := by\n    intro x hxA\n    have : (x : X) ∈ interior (closure (interior (A : Set X))) := hP2 hxA\n    simpa [h_int] using this\n  exact Set.Subset.antisymm h_subset (Set.empty_subset _)"
+  ],
+  "success": true
+}

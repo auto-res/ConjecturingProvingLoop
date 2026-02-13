@@ -1,0 +1,43 @@
+{
+  "times": [
+    246.26060318946838,
+    352.0333390235901
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11767,
+      "prompt_tokens": 54990,
+      "total_tokens": 66757,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 54016
+      }
+    },
+    {
+      "completion_tokens": 15442,
+      "prompt_tokens": 55110,
+      "total_tokens": 70552,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_inter_eq_frontier_inter_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsClosed (A : Set X)) (hB : IsClosed (B : Set X)) :\n    frontier (A ∩ B) = (frontier A ∩ B) ∪ (frontier B ∩ A) := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    -- `x` lies in the frontier of `A ∩ B`\n    have hClosedAB : IsClosed (A ∩ B) := hA.inter hB\n    have hAB : x ∈ A ∩ B := by\n      -- Because `A ∩ B` is closed, its closure equals itself\n      have : x ∈ closure (A ∩ B) := hx.1\n      simpa [hClosedAB.closure_eq] using this\n    have hA_mem : x ∈ A := hAB.1\n    have hB_mem : x ∈ B := hAB.2\n    by_cases hIntA : x ∈ interior A\n    · -- Case `x ∈ interior A`\n      -- Then `x ∉ interior B`, otherwise `x ∈ interior (A ∩ B)`\n      have hNotIntB : x ∉ interior B := by\n        intro hIntB\n        have hIntAB : x ∈ interior (A ∩ B) := by\n          have hSub :\n              (interior A ∩ interior B : Set X) ⊆ interior (A ∩ B) :=\n            Topology.interior_inter_subset (A := A) (B := B)\n          exact hSub ⟨hIntA, hIntB⟩\n        exact hx.2 hIntAB\n      have hClosB : x ∈ closure B := by\n        -- `B` is closed and `x ∈ B`\n        simpa [hB.closure_eq] using hB_mem\n      have hFrontB : x ∈ frontier B := And.intro hClosB hNotIntB\n      exact Or.inr ⟨hFrontB, hA_mem⟩\n    · -- Case `x ∉ interior A` ⇒ `x ∈ frontier A`\n      have hNotIntA : x ∉ interior A := hIntA\n      have hClosA : x ∈ closure A := by\n        simpa [hA.closure_eq] using hA_mem\n      have hFrontA : x ∈ frontier A := And.intro hClosA hNotIntA\n      exact Or.inl ⟨hFrontA, hB_mem⟩\n  · intro hx\n    -- Goal: `x ∈ frontier (A ∩ B)`\n    have hClosedAB : IsClosed (A ∩ B) := hA.inter hB\n    cases hx with\n    | inl hLeft =>\n        -- `x ∈ frontier A ∩ B`\n        rcases hLeft with ⟨hFrontA, hB_mem⟩\n        -- `frontier A ⊆ A` since `A` is closed\n        have hA_mem : x ∈ A :=\n          (Topology.frontier_subset_of_isClosed (A := A) hA) hFrontA\n        have hClosAB : x ∈ closure (A ∩ B) := by\n          have : x ∈ A ∩ B := ⟨hA_mem, hB_mem⟩\n          simpa [hClosedAB.closure_eq] using this\n        have hNotIntAB : x ∉ interior (A ∩ B) := by\n          intro hIntAB\n          have hIntA : x ∈ interior A := by\n            have hSub : (A ∩ B : Set X) ⊆ A := fun y hy => hy.1\n            exact (interior_mono hSub) hIntAB\n          exact (hFrontA.2) hIntA\n        exact And.intro hClosAB hNotIntAB\n    | inr hRight =>\n        -- `x ∈ frontier B ∩ A`\n        rcases hRight with ⟨hFrontB, hA_mem⟩\n        have hB_mem : x ∈ B :=\n          (Topology.frontier_subset_of_isClosed (A := B) hB) hFrontB\n        have hClosAB : x ∈ closure (A ∩ B) := by\n          have : x ∈ A ∩ B := ⟨hA_mem, hB_mem⟩\n          simpa [hClosedAB.closure_eq] using this\n        have hNotIntAB : x ∉ interior (A ∩ B) := by\n          intro hIntAB\n          have hIntB : x ∈ interior B := by\n            have hSub : (A ∩ B : Set X) ⊆ B := fun y hy => hy.2\n            exact (interior_mono hSub) hIntAB\n          exact (hFrontB.2) hIntB\n        exact And.intro hClosAB hNotIntAB",
+    ""
+  ],
+  "success": true
+}

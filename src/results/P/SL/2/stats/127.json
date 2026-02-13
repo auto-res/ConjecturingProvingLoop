@@ -1,0 +1,26 @@
+{
+  "times": [
+    86.3946692943573
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4844,
+      "prompt_tokens": 19219,
+      "total_tokens": 24063,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4480,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (closure (A : Set X)) ∪ interior (closure (B : Set X)) ⊆\n      interior (closure ((A ∪ B) : Set X)) := by\n  intro x hx\n  cases hx with\n  | inl hxA =>\n      -- `x` lies in `interior (closure A)`\n      -- We expand this to `interior (closure (A ∪ B))` using monotonicity.\n      have hsub : (A : Set X) ⊆ A ∪ B := by\n        intro y hy\n        exact Or.inl hy\n      have hcl : closure (A : Set X) ⊆ closure (A ∪ B) :=\n        closure_mono hsub\n      have hint : interior (closure (A : Set X)) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono hcl\n      exact hint hxA\n  | inr hxB =>\n      -- Symmetric argument for `B`.\n      have hsub : (B : Set X) ⊆ A ∪ B := by\n        intro y hy\n        exact Or.inr hy\n      have hcl : closure (B : Set X) ⊆ closure (A ∪ B) :=\n        closure_mono hsub\n      have hint : interior (closure (B : Set X)) ⊆ interior (closure (A ∪ B)) :=\n        interior_mono hcl\n      exact hint hxB"
+  ],
+  "success": true
+}

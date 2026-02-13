@@ -1,0 +1,43 @@
+{
+  "times": [
+    79.0142273902893,
+    105.19834017753601
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6173,
+      "prompt_tokens": 3411,
+      "total_tokens": 9584,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5952,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    },
+    {
+      "completion_tokens": 7577,
+      "prompt_tokens": 3649,
+      "total_tokens": 11226,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 2944
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_closure_interior_eq {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    closure (interior (closure (interior A))) = closure (interior A) := by\n  apply subset_antisymm\n  ·\n    have h₁ : interior (closure (interior A)) ⊆ closure (interior A) := by\n      simpa using (interior_subset : interior (closure (interior A)) ⊆\n        (closure (interior A)))\n    exact closure_mono h₁\n  ·\n    have h₁ : (interior A : Set X) ⊆ interior (closure (interior A)) := by\n      have hsubset : (interior A : Set X) ⊆ closure (interior A) := subset_closure\n      exact interior_mono hsubset\n    exact closure_mono h₁",
+    "theorem Topology.P3_union {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    Topology.P3 A → Topology.P3 B → Topology.P3 (A ∪ B) := by\n  intro hP3A hP3B\n  intro x hxAB\n  cases hxAB with\n  | inl hxA =>\n      -- `x` belongs to `A`\n      have hx_int : x ∈ interior (closure A) := hP3A hxA\n      -- `closure A` is contained in `closure (A ∪ B)`\n      have hsubset : interior (closure A) ⊆ interior (closure (A ∪ B)) := by\n        have hcl : closure A ⊆ closure (A ∪ B) := by\n          have hAUB : (A : Set X) ⊆ A ∪ B := by\n            intro y hy\n            exact Or.inl hy\n          exact closure_mono hAUB\n        exact interior_mono hcl\n      exact hsubset hx_int\n  | inr hxB =>\n      -- `x` belongs to `B`\n      have hx_int : x ∈ interior (closure B) := hP3B hxB\n      -- `closure B` is contained in `closure (A ∪ B)`\n      have hsubset : interior (closure B) ⊆ interior (closure (A ∪ B)) := by\n        have hcl : closure B ⊆ closure (A ∪ B) := by\n          have hBUB : (B : Set X) ⊆ A ∪ B := by\n            intro y hy\n            exact Or.inr hy\n          exact closure_mono hBUB\n        exact interior_mono hcl\n      exact hsubset hx_int"
+  ],
+  "success": true
+}

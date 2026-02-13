@@ -1,0 +1,26 @@
+{
+  "times": [
+    41.05408453941345
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2896,
+      "prompt_tokens": 37416,
+      "total_tokens": 40312,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 36736
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_subset_of_subset_interior_closure\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (h : (A : Set X) ⊆ interior (closure (B : Set X))) :\n    closure (A : Set X) ⊆ closure (B : Set X) := by\n  -- First, upgrade the inclusion to one into `closure B`.\n  have h₁ : (A : Set X) ⊆ closure (B : Set X) :=\n    Set.Subset.trans h interior_subset\n  -- Taking closures preserves inclusions.\n  have h₂ :\n      closure (A : Set X) ⊆ closure (closure (B : Set X)) :=\n    closure_mono h₁\n  -- Simplify `closure (closure B)` to `closure B`.\n  simpa [closure_closure] using h₂"
+  ],
+  "success": true
+}

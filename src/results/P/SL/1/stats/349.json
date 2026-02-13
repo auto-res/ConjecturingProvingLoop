@@ -1,0 +1,77 @@
+{
+  "times": [
+    142.41653895378113,
+    180.8900179862976,
+    81.98653554916382,
+    99.49115800857544
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7812,
+      "prompt_tokens": 53507,
+      "total_tokens": 61319,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7616,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 11626,
+      "prompt_tokens": 53805,
+      "total_tokens": 65431,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 4958,
+      "prompt_tokens": 53936,
+      "total_tokens": 58894,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    },
+    {
+      "completion_tokens": 7253,
+      "prompt_tokens": 54032,
+      "total_tokens": 61285,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 53120
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_interior_eq_closure\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A ∪ interior A = closure A := by\n  apply Set.Subset.antisymm\n  · -- `closure A` is contained in the union by definition, and\n    -- `interior A` is trivially contained in the union.\n    intro x hx\n    exact Or.inl hx\n  · -- The union is contained in `closure A` because `interior A ⊆ closure A`.\n    intro x hx\n    cases hx with\n    | inl hCl => exact hCl\n    | inr hInt =>\n        have : x ∈ closure A :=\n          (Topology.interior_subset_closure (A := A)) hInt\n        exact this",
+    "theorem Topology.interior_inter_open_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : IsOpen A) :\n    interior (A ∩ B) = A ∩ interior B := by\n  -- We prove the two inclusions separately and finish with `Set.Subset.antisymm`.\n  apply Set.Subset.antisymm\n  · intro x hx\n    -- `x` lies in `A ∩ B`.\n    have hAB : x ∈ A ∩ B := interior_subset hx\n    have hxA : x ∈ A := hAB.1\n    -- Since `A ∩ B ⊆ B`, `x` is also in `interior B`.\n    have hxIntB : x ∈ interior B := by\n      have hsub : (A ∩ B : Set X) ⊆ B := by\n        intro y hy\n        exact hy.2\n      exact (interior_mono hsub) hx\n    exact And.intro hxA hxIntB\n  · intro x hx\n    rcases hx with ⟨hxA, hxIntB⟩\n    -- The set `A ∩ interior B` is open.\n    have hOpen : IsOpen (A ∩ interior B) := hA.inter isOpen_interior\n    -- It is contained in `A ∩ B`.\n    have hsub : (A ∩ interior B : Set X) ⊆ A ∩ B := by\n      intro y hy\n      have hyA : y ∈ A := hy.1\n      have hyB : y ∈ B := interior_subset hy.2\n      exact And.intro hyA hyB\n    -- Therefore, using `interior_maximal`, it is contained in the interior of `A ∩ B`.\n    have hxInt : x ∈ interior (A ∩ B) :=\n      (interior_maximal hsub hOpen) ⟨hxA, hxIntB⟩\n    exact hxInt\n\ntheorem Topology.interior_inter_open_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} (hB : IsOpen B) :\n    interior (A ∩ B) = interior A ∩ B := by\n  -- As before, prove both inclusions separately.\n  apply Set.Subset.antisymm\n  · intro x hx\n    -- `x` lies in `A ∩ B`.\n    have hAB : x ∈ A ∩ B := interior_subset hx\n    have hxB : x ∈ B := hAB.2\n    -- Since `A ∩ B ⊆ A`, `x` is also in `interior A`.\n    have hxIntA : x ∈ interior A := by\n      have hsub : (A ∩ B : Set X) ⊆ A := by\n        intro y hy; exact hy.1\n      exact (interior_mono hsub) hx\n    exact And.intro hxIntA hxB\n  · intro x hx\n    rcases hx with ⟨hxIntA, hxB⟩\n    -- The set `interior A ∩ B` is open.\n    have hOpen : IsOpen (interior A ∩ B) := isOpen_interior.inter hB\n    -- It is contained in `A ∩ B`.\n    have hsub : (interior A ∩ B : Set X) ⊆ A ∩ B := by\n      intro y hy\n      have hyA : y ∈ A := interior_subset hy.1\n      exact And.intro hyA hy.2\n    -- Conclude that `x` is in the interior of `A ∩ B`.\n    have hxInt : x ∈ interior (A ∩ B) :=\n      (interior_maximal hsub hOpen) ⟨hxIntA, hxB⟩\n    exact hxInt",
+    "theorem Topology.isOpen_iff_interior_closure_eq_of_isClosed\n    {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) :\n    IsOpen A ↔ interior (closure A) = (A : Set X) := by\n  constructor\n  · intro hOpen\n    simpa using\n      Topology.interior_closure_eq_of_isClosed_of_isOpen\n        (A := A) hA hOpen\n  · intro hEq\n    have : IsOpen (interior (closure A)) := isOpen_interior\n    simpa [hEq] using this",
+    "theorem Topology.interior_eq_empty_of_interior_closure_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (closure A) = (∅ : Set X)) :\n    interior A = (∅ : Set X) := by\n  -- `interior A` is always contained in `interior (closure A)`.\n  have hsubset : interior A ⊆ interior (closure A) :=\n    Topology.interior_subset_interior_closure (A := A)\n  -- Rewrite with the assumption `h` to obtain the desired inclusion.\n  have hsubset' : interior A ⊆ (∅ : Set X) := by\n    simpa [h] using hsubset\n  -- The reverse inclusion `∅ ⊆ interior A` is automatic.\n  exact Set.Subset.antisymm hsubset' (Set.empty_subset _)"
+  ],
+  "success": true
+}

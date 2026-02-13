@@ -1,0 +1,26 @@
+{
+  "times": [
+    121.79889941215515
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9664,
+      "prompt_tokens": 24949,
+      "total_tokens": 34613,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 24320
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorCompl_inter_interior_eq_empty\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (interior (Aᶜ)) ∩ interior A = (∅ : Set X) := by\n  classical\n  -- We show that no point can belong to the intersection.\n  apply (Set.eq_empty_iff_forall_not_mem).2\n  intro x hx\n  rcases hx with ⟨hx_cl, hx_intA⟩\n  -- Because `x` is in the closure of `interior (Aᶜ)` and\n  -- `interior A` is an open neighbourhood of `x`,\n  -- these two sets must meet.\n  have h_nonempty : ((interior A) ∩ interior (Aᶜ)).Nonempty := by\n    have h := (mem_closure_iff).1 hx_cl\n    exact h _ isOpen_interior hx_intA\n  -- But a point cannot lie in both `A` and `Aᶜ`.\n  rcases h_nonempty with ⟨y, ⟨hy_intA, hy_intAc⟩⟩\n  have hyA  : y ∈ A   := interior_subset hy_intA\n  have hyAc : y ∈ Aᶜ := interior_subset hy_intAc\n  exact hyAc hyA"
+  ],
+  "success": true
+}

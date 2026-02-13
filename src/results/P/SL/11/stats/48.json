@@ -1,0 +1,26 @@
+{
+  "times": [
+    82.91443824768066
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5579,
+      "prompt_tokens": 6780,
+      "total_tokens": 12359,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 5888
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_iInter_subset {X ι : Type*} [TopologicalSpace X] {A : ι → Set X} :\n    interior (closure (⋂ i, A i)) ⊆ ⋂ i, interior (closure (A i)) := by\n  intro x hx\n  -- For each `i`, we show `x ∈ interior (closure (A i))`.\n  have hxAll : ∀ i, x ∈ interior (closure (A i)) := by\n    intro i\n    -- Establish `closure (⋂ i, A i) ⊆ closure (A i)`.\n    have hsubset : closure (⋂ j, A j) ⊆ closure (A i) := by\n      apply closure_mono\n      intro y hy\n      have hmem : (∀ j, y ∈ A j) := (Set.mem_iInter.1 hy)\n      exact hmem i\n    -- Transfer membership via `interior_mono`.\n    exact (interior_mono hsubset) hx\n  -- Collect the witnesses for every `i` into the intersection.\n  exact Set.mem_iInter.2 hxAll"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    67.04519295692444
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5700,
+      "prompt_tokens": 23827,
+      "total_tokens": 29527,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5440,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_interior_closure_interior_closure_interior_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n      closure (interior A) := by\n  -- First, compress the innermost five-step sequence using the existing lemma\n  -- with `A := closure (interior A)`.\n  have h₁ :=\n    closure_interior_closure_interior_closure_interior_idempotent\n      (A := closure (interior A))\n  -- Next, compress the remaining three-step sequence.\n  have h₂ := closure_interior_closure_idempotent (A := A)\n  -- Combine the two equalities.\n  calc\n    closure (interior (closure (interior (closure (interior (closure (interior A))))))) =\n        closure (interior (closure (interior A))) := by\n          simpa using h₁\n    _ = closure (interior A) := by\n          simpa using h₂"
+  ],
+  "success": true
+}

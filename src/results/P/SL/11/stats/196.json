@@ -1,0 +1,26 @@
+{
+  "times": [
+    42.68761324882507
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3847,
+      "prompt_tokens": 32213,
+      "total_tokens": 36060,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31616
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_P2_prod_right\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {A : Set X} {B : Set Y} (hA : A.Nonempty)\n    (hP2 : Topology.P2 (A ×ˢ B)) :\n    Topology.P3 B := by\n  -- First, upgrade the product assumption from `P2` to `P3`.\n  have hP3Prod : Topology.P3 (A ×ˢ B) :=\n    Topology.P2_implies_P3 (A := A ×ˢ B) hP2\n  -- Use the existing projection lemma for `P3` to obtain the result.\n  exact Topology.P3_of_P3_prod_right (A := A) (B := B) hA hP3Prod"
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    88.71615362167358,
+    252.93318033218384,
+    66.52189779281616
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6151,
+      "prompt_tokens": 26735,
+      "total_tokens": 32886,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5824,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    },
+    {
+      "completion_tokens": 15944,
+      "prompt_tokens": 26857,
+      "total_tokens": 42801,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15680,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    },
+    {
+      "completion_tokens": 5472,
+      "prompt_tokens": 26979,
+      "total_tokens": 32451,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 26368
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_closure_interior_closure_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → closure A = closure (interior (closure A)) := by\n  intro hP2\n  -- From `P2` we already have `closure A = closure (interior A)`.\n  have h₁ : closure A = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P2 (A := A) hP2\n  -- Prove the desired equality by double inclusion.\n  apply Set.Subset.antisymm\n  · -- First inclusion: `closure A ⊆ closure (interior (closure A))`.\n    have : closure (interior A) ⊆ closure (interior (closure A)) := by\n      -- Use monotonicity of `closure` applied to\n      -- `interior A ⊆ interior (closure A)`.\n      have hsubset : interior A ⊆ interior (closure A) :=\n        interior_subset_interior_closure (A := A)\n      exact closure_mono hsubset\n    simpa [h₁] using this\n  · -- Second inclusion: `closure (interior (closure A)) ⊆ closure A`.\n    have hsubset : interior (closure A) ⊆ closure A := interior_subset\n    exact closure_mono hsubset",
+    "replace theorem P2_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P3 A := by\n  intro hA\n  dsimp [Topology.P2, Topology.P3] at hA ⊢\n  -- We strengthen the intermediate inclusion step by making the use of `interior_subset`\n  -- explicit, ensuring types align without relying on further rewriting.\n  have hsubset : interior (closure (interior A)) ⊆ interior (closure A) := by\n    -- First, upgrade `closure (interior A)` to `closure A`.\n    have hclosure : closure (interior A) ⊆ closure A := by\n      -- This follows from the monotonicity of `closure` applied to\n      -- `interior_subset : interior A ⊆ A`.\n      have hinner : interior A ⊆ (A : Set X) := interior_subset\n      exact closure_mono hinner\n    -- Then apply monotonicity of `interior`.\n    exact interior_mono hclosure\n  exact Set.Subset.trans hA hsubset",
+    "theorem Topology.interior_closure_subset_interior_closure_union_right\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure B) ⊆ interior (closure (A ∪ B)) := by\n  intro x hx\n  -- `closure B` is contained in `closure (A ∪ B)`.\n  have hsubset : closure B ⊆ closure (A ∪ B) := by\n    apply closure_mono\n    exact Set.subset_union_right\n  -- Monotonicity of `interior` gives the desired inclusion.\n  exact (interior_mono hsubset) hx"
+  ],
+  "success": true
+}

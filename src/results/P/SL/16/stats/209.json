@@ -1,0 +1,26 @@
+{
+  "times": [
+    95.56833076477051
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9265,
+      "prompt_tokens": 36375,
+      "total_tokens": 45640,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_subset_diff_closure {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A \\ B : Set X) ⊆ A \\ closure B := by\n  intro x hx\n  -- A point in the interior of `A \\ B` certainly lies in `A \\ B`.\n  have hx_diff : x ∈ A \\ B := interior_subset hx\n  have hxA : x ∈ A := hx_diff.1\n  -- We show that such a point cannot be in `closure B`.\n  have hx_not_clB : x ∉ closure B := by\n    intro hx_clB\n    -- `interior (A \\ B)` is an open neighbourhood of `x` contained in the complement of `B`.\n    have h_open : IsOpen (interior (A \\ B : Set X)) := isOpen_interior\n    -- If `x ∈ closure B`, every open neighbourhood of `x` meets `B`.\n    have h_nonempty : ((interior (A \\ B : Set X)) ∩ B).Nonempty :=\n      (mem_closure_iff.1 hx_clB) (interior (A \\ B : Set X)) h_open hx\n    rcases h_nonempty with ⟨y, hyInt, hyB⟩\n    -- But `interior (A \\ B)` is contained in `A \\ B`, hence disjoint from `B`.\n    have : y ∈ A \\ B := interior_subset hyInt\n    exact (this.2) hyB\n  exact And.intro hxA hx_not_clB"
+  ],
+  "success": true
+}

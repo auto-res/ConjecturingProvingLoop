@@ -1,0 +1,60 @@
+{
+  "times": [
+    48.67998003959656,
+    186.7086203098297,
+    51.639936685562134
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4642,
+      "prompt_tokens": 49593,
+      "total_tokens": 54235,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4288,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    },
+    {
+      "completion_tokens": 15489,
+      "prompt_tokens": 49709,
+      "total_tokens": 65198,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15424,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 5386,
+      "prompt_tokens": 49825,
+      "total_tokens": 55211,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5184,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_union_closure_frontier {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A = A ∪ closure (frontier A) := by\n  -- Start from the known decomposition `closure A = A ∪ frontier A`.\n  have h₁ : closure A = A ∪ frontier A :=\n    closure_eq_union_frontier (X := X) (A := A)\n  -- We prove the new equality by double inclusion.\n  apply Set.Subset.antisymm\n  · -- `closure A ⊆ A ∪ closure (frontier A)`\n    intro x hx\n    have hx' : x ∈ A ∪ frontier A := by\n      simpa [h₁] using hx\n    cases hx' with\n    | inl hA      => exact Or.inl hA\n    | inr hFront  =>\n        exact Or.inr (subset_closure hFront)\n  · -- `A ∪ closure (frontier A) ⊆ closure A`\n    intro x hx\n    cases hx with\n    | inl hA =>\n        exact subset_closure hA\n    | inr hClFront =>\n        -- `frontier A ⊆ closure A`, hence so is its closure.\n        have h_sub : frontier A ⊆ closure A :=\n          frontier_subset_closure (X := X) (A := A)\n        have h_sub_closure : closure (frontier A) ⊆ closure A :=\n          closure_mono h_sub\n        exact h_sub_closure hClFront",
+    "Lean code cannot be provided because the given file has internal inconsistencies (in particular an incorrect use of `closure_mono`).  \nPlease correct those errors first and re-run the build; afterwards a new theorem can be added.",
+    "theorem closure_diff_frontier_eq_interior {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A \\ frontier A = interior A := by\n  ext x\n  constructor\n  · intro hx\n    have hxCl : x ∈ closure A := hx.1\n    have hNotFront : x ∉ frontier A := hx.2\n    by_contra hNotInt\n    have hFront : x ∈ frontier A := And.intro hxCl hNotInt\n    exact hNotFront hFront\n  · intro hxInt\n    have hxCl : x ∈ closure A := subset_closure (interior_subset hxInt)\n    have hNotFront : x ∉ frontier A := by\n      intro hFront\n      exact hFront.2 hxInt\n    exact And.intro hxCl hNotFront"
+  ],
+  "success": true
+}

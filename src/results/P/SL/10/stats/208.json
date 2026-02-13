@@ -1,0 +1,26 @@
+{
+  "times": [
+    123.92326021194458
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8637,
+      "prompt_tokens": 33665,
+      "total_tokens": 42302,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8512,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_union_interior_eq_closure {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure A ∪ interior A = closure A := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    cases hx with\n    | inl hCl => exact hCl\n    | inr hInt =>\n        exact subset_closure (interior_subset hInt)\n  · intro x hx\n    exact Or.inl hx"
+  ],
+  "success": true
+}

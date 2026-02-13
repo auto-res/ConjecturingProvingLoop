@@ -1,0 +1,26 @@
+{
+  "times": [
+    88.12328577041626
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5631,
+      "prompt_tokens": 45695,
+      "total_tokens": 51326,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5376,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 44928
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_prod_univ_right_iff\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [Nonempty X]\n    {B : Set Y} :\n    Dense ((Set.univ : Set X) ×ˢ B) ↔ Dense B := by\n  constructor\n  · intro hDenseProd\n    exact\n      dense_prod_univ_right_of_dense\n        (X := X) (Y := Y) (B := B) hDenseProd\n  · intro hDenseB\n    -- `univ` is trivially dense.\n    have hDenseUniv : Dense (Set.univ : Set X) := by\n      simpa [closure_univ] using\n        (dense_iff_closure_eq (s := (Set.univ : Set X))).2 rfl\n    -- Combine the densities of the two factors.\n    simpa using\n      dense_prod_of_dense_left_and_dense_right\n        (X := X) (Y := Y)\n        (A := (Set.univ : Set X)) (B := B) hDenseUniv hDenseB"
+  ],
+  "success": true
+}

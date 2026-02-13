@@ -1,0 +1,43 @@
+{
+  "times": [
+    139.6030125617981,
+    111.16701054573059
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 10365,
+      "prompt_tokens": 29719,
+      "total_tokens": 40084,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    },
+    {
+      "completion_tokens": 8644,
+      "prompt_tokens": 29910,
+      "total_tokens": 38554,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8576,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 29568
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_eq_closure_iff_clopen {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (A : Set X) = closure (A : Set X) ↔ (IsOpen A ∧ IsClosed (A : Set X)) := by\n  constructor\n  · intro h\n    -- First, show `A = interior A`.\n    have hA_eq_int : (A : Set X) = interior (A : Set X) := by\n      apply le_antisymm\n      ·\n        have hA_subset : (A : Set X) ⊆ closure (A : Set X) := subset_closure\n        simpa [h] using hA_subset\n      ·\n        exact interior_subset\n    -- Hence `A` is open.\n    have hOpen : IsOpen A := by\n      simpa [hA_eq_int] using (isOpen_interior : IsOpen (interior (A : Set X)))\n    -- Next, show `A = closure A`.\n    have hA_eq_cl : (A : Set X) = closure (A : Set X) := by\n      calc\n        (A : Set X) = interior (A : Set X) := hA_eq_int\n        _ = closure (A : Set X) := h\n    -- Hence `A` is closed.\n    have hClosed : IsClosed (A : Set X) := by\n      have h_closed_closure : IsClosed (closure (A : Set X)) := isClosed_closure\n      simpa [hA_eq_cl] using h_closed_closure\n    exact ⟨hOpen, hClosed⟩\n  · rintro ⟨hOpen, hClosed⟩\n    have hInt : interior (A : Set X) = A := hOpen.interior_eq\n    have hCl  : closure  (A : Set X) = A := hClosed.closure_eq\n    simpa [hInt, hCl]",
+    "theorem interior_diff_self_eq_empty {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior ((A : Set X) \\ A) = (∅ : Set X) := by\n  simp"
+  ],
+  "success": true
+}

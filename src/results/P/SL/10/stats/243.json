@@ -1,0 +1,26 @@
+{
+  "times": [
+    37.9862596988678
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2179,
+      "prompt_tokens": 39319,
+      "total_tokens": 41498,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_closure_right_eq_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∪ closure B)) = interior (closure (A ∪ B)) := by\n  have h :=\n    Topology.closure_union_closure_right_eq_closure_union\n      (X := X) (A := A) (B := B)\n  simpa using congrArg (fun s : Set X => interior s) h"
+  ],
+  "success": true
+}

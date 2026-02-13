@@ -1,0 +1,26 @@
+{
+  "times": [
+    73.72569465637207
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4054,
+      "prompt_tokens": 56620,
+      "total_tokens": 60674,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3776,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 55040
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_closure_nonempty_iff_of_P3 {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    Topology.P3 A →\n      ((interior (closure A)).Nonempty ↔ A.Nonempty) := by\n  intro hP3\n  constructor\n  · intro hInt\n    -- From the non‐emptiness of `interior (closure A)` we deduce that `closure A`\n    -- is nonempty, and hence (by a standard lemma) so is `A`.\n    have hClos : (closure (A : Set X)).Nonempty := by\n      rcases hInt with ⟨x, hx⟩\n      exact ⟨x, (interior_subset : interior (closure A) ⊆ closure A) hx⟩\n    exact (closure_nonempty_iff (X := X) (A := A)).1 hClos\n  · intro hA\n    -- Thanks to `P3`, any point of `A` lies in `interior (closure A)`.\n    rcases hA with ⟨x, hx⟩\n    exact ⟨x, hP3 hx⟩"
+  ],
+  "success": true
+}

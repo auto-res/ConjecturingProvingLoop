@@ -1,0 +1,26 @@
+{
+  "times": [
+    20.054595947265625
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2136,
+      "prompt_tokens": 14774,
+      "total_tokens": 16910,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_interior_union_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (interior A)) ∪ interior (closure (interior B)) ⊆\n      interior (closure (interior (A ∪ B))) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      -- `x ∈ interior (closure (interior A))`\n      -- We show that this set is contained in the right-hand side via monotonicity.\n      have hSubInt : interior A ⊆ interior (A ∪ B) := interior_mono (by\n        intro z hz; exact Or.inl hz)\n      have hSubClos : closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono hSubInt\n      have hSubInter :\n          interior (closure (interior A)) ⊆\n            interior (closure (interior (A ∪ B))) :=\n        interior_mono hSubClos\n      exact hSubInter hA\n  | inr hB =>\n      -- Symmetric argument for the case `x ∈ interior (closure (interior B))`.\n      have hSubInt : interior B ⊆ interior (A ∪ B) := interior_mono (by\n        intro z hz; exact Or.inr hz)\n      have hSubClos : closure (interior B) ⊆ closure (interior (A ∪ B)) :=\n        closure_mono hSubInt\n      have hSubInter :\n          interior (closure (interior B)) ⊆\n            interior (closure (interior (A ∪ B))) :=\n        interior_mono hSubClos\n      exact hSubInter hB"
+  ],
+  "success": true
+}

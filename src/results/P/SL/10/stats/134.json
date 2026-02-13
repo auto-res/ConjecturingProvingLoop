@@ -1,0 +1,43 @@
+{
+  "times": [
+    298.88003969192505,
+    38.42386531829834
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 19673,
+      "prompt_tokens": 22138,
+      "total_tokens": 41811,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 19328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 3032,
+      "prompt_tokens": 22349,
+      "total_tokens": 25381,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2880,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_closure_union_closure_compl_eq_univ\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure A) ∪ closure (Aᶜ) = (Set.univ : Set X) := by\n  classical\n  -- We prove that every point `x : X` belongs to the left-hand side.\n  ext x\n  constructor\n  · intro _; simp\n  · intro _\n    by_cases h_cl : x ∈ closure (Aᶜ)\n    · exact Or.inr h_cl\n    · -- If `x ∉ closure (Aᶜ)`, then `x ∈ interior A`, hence in `interior (closure A)`.\n      have h_mem_compl : x ∈ (closure (Aᶜ) : Set X)ᶜ := by\n        simpa [Set.mem_compl, h_cl]\n      have h_intA : x ∈ interior A := by\n        -- `interior A = (closure (Aᶜ))ᶜ`\n        have h_eq :=\n          Topology.interior_eq_compl_closure_compl (X := X) (A := A)\n        simpa [h_eq] using h_mem_compl\n      have h_intClA : x ∈ interior (closure A) :=\n        (Topology.interior_subset_interior_closure (X := X) (A := A)) h_intA\n      exact Or.inl h_intClA",
+    "theorem Topology.interior_inter_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (A ∩ B) ⊆ interior A ∩ interior B := by\n  intro x hx\n  have hxA : x ∈ interior A :=\n    (interior_mono (Set.inter_subset_left : (A ∩ B) ⊆ A)) hx\n  have hxB : x ∈ interior B :=\n    (interior_mono (Set.inter_subset_right : (A ∩ B) ⊆ B)) hx\n  exact And.intro hxA hxB"
+  ],
+  "success": true
+}

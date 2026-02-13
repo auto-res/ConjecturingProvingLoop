@@ -1,0 +1,60 @@
+{
+  "times": [
+    52.60195827484131,
+    72.76763391494751,
+    23.847687005996704
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3496,
+      "prompt_tokens": 39128,
+      "total_tokens": 42624,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 5780,
+      "prompt_tokens": 39319,
+      "total_tokens": 45099,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    },
+    {
+      "completion_tokens": 2001,
+      "prompt_tokens": 39458,
+      "total_tokens": 41459,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.open_and_closed_of_closure_eq_interior\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure A = interior A → IsOpen A ∧ IsClosed A := by\n  intro h_eq\n  -- First, show that `A = interior A`.\n  have hA_int : A = interior A := by\n    apply Set.Subset.antisymm\n    · intro x hx\n      have hx_cl : x ∈ closure A := subset_closure hx\n      simpa [h_eq] using hx_cl\n    · exact interior_subset\n  -- `IsOpen A` follows from `IsOpen (interior A)`.\n  have hOpen : IsOpen A := by\n    simpa [hA_int] using (isOpen_interior : IsOpen (interior A))\n  -- Next, rewrite `closure A` using the given hypothesis.\n  have hA_cl : closure A = A := by\n    simpa [hA_int] using h_eq\n  -- `IsClosed A` follows from `IsClosed (closure A)`.\n  have hClosed : IsClosed A := by\n    simpa [hA_cl] using (isClosed_closure : IsClosed (closure A))\n  exact And.intro hOpen hClosed",
+    "theorem Topology.closure_compl_eq_self_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen A) :\n    closure (Aᶜ : Set X) = Aᶜ := by\n  -- The complement of an open set is closed, and a closed set coincides with its closure.\n  have hClosed : IsClosed (Aᶜ : Set X) := hA.isClosed_compl\n  simpa using hClosed.closure_eq\n\ntheorem Topology.boundary_eq_closure_diff_of_isOpen {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hA : IsOpen A) :\n    closure A \\ interior A = closure A \\ A := by\n  -- Since `A` is open, its interior is itself.\n  simpa [hA.interior_eq]",
+    "theorem Topology.closure_union_closures_eq_closure_union\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (closure A ∪ closure B) = closure (A ∪ B) := by\n  have h₁ :\n      closure (closure A ∪ closure B) = closure (A ∪ closure B) := by\n    simpa using\n      Topology.closure_union_closure_left_eq_closure_union\n        (X := X) (A := A) (B := closure B)\n  have h₂ : closure (A ∪ closure B) = closure (A ∪ B) := by\n    simpa using\n      Topology.closure_union_closure_right_eq_closure_union\n        (X := X) (A := A) (B := B)\n  simpa [h₁] using h₂"
+  ],
+  "success": true
+}

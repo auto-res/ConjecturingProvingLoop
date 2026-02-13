@@ -1,0 +1,26 @@
+{
+  "times": [
+    234.25313878059387
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 13423,
+      "prompt_tokens": 31261,
+      "total_tokens": 44684,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 12928,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 30592
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_diff_closure_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A : Set X) \\ closure (B : Set X) ⊆ interior (A \\ B) := by\n  rintro x ⟨hx_intA, hx_notClB⟩\n  -- `interior A` is open.\n  have h_open_intA : IsOpen (interior (A : Set X)) := isOpen_interior\n  -- The complement of `closure B` is open as well.\n  have h_open_compl : IsOpen ((closure (B : Set X))ᶜ) :=\n    (isClosed_closure : IsClosed (closure (B : Set X))).isOpen_compl\n  ------------------------------------------------------------------\n  --  Construct an open neighbourhood of `x` contained in `A \\ B`.\n  ------------------------------------------------------------------\n  let U := interior (A : Set X) ∩ (closure (B : Set X))ᶜ\n  have hU_open : IsOpen U := h_open_intA.inter h_open_compl\n  have hxU : (x : X) ∈ U := ⟨hx_intA, by\n    -- `x ∉ closure B` gives membership in the complement.\n    simpa using hx_notClB⟩\n  -- Show that `U ⊆ A \\ B`.\n  have hU_subset : (U : Set X) ⊆ A \\ B := by\n    intro y hy\n    have hA : (y : X) ∈ A :=\n      (interior_subset : interior (A : Set X) ⊆ A) hy.1\n    have h_notB : (y : X) ∉ B := by\n      intro hyB\n      have : (y : X) ∈ closure (B : Set X) := subset_closure hyB\n      exact hy.2 this\n    exact ⟨hA, h_notB⟩\n  ------------------------------------------------------------------\n  --  Conclude that `x` is in `interior (A \\ B)`.\n  ------------------------------------------------------------------\n  exact\n    (interior_maximal hU_subset hU_open) hxU"
+  ],
+  "success": true
+}

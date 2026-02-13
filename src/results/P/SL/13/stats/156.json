@@ -1,0 +1,26 @@
+{
+  "times": [
+    224.11988806724548
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 18751,
+      "prompt_tokens": 25976,
+      "total_tokens": 44727,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 17600,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_inter_left_of_open {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA_open : IsOpen (A : Set X)) (hPB : Topology.P2 (X := X) B) :\n    Topology.P2 (X := X) (A ∩ B) := by\n  -- Unfold the definition of `P2`.\n  dsimp [Topology.P2] at hPB ⊢\n  intro x hxAB\n  -- Split the membership in the intersection.\n  have hxA : (x : X) ∈ A := hxAB.1\n  have hxB : (x : X) ∈ B := hxAB.2\n  -- Use `P2` for `B` to place `x` in an appropriate interior.\n  have hx_int : (x : X) ∈ interior (closure (interior B)) := hPB hxB\n  -- Define the auxiliary open neighbourhood\n  --   U = A ∩ interior (closure (interior B)).\n  have hU_open : IsOpen (A ∩ interior (closure (interior B))) :=\n    hA_open.inter isOpen_interior\n  have hxU : (x : X) ∈ (A ∩ interior (closure (interior B))) :=\n    ⟨hxA, hx_int⟩\n  ------------------------------------------------------------------\n  --  Step 1:  Show `U ⊆ closure (interior (A ∩ B))`.\n  ------------------------------------------------------------------\n  -- First enlarge `U` to `A ∩ closure (interior B)`.\n  have h_step1 :\n      (A ∩ interior (closure (interior B)) : Set X) ⊆\n        A ∩ closure (interior B) := by\n    intro y hy\n    exact ⟨hy.1, interior_subset hy.2⟩\n  -- Next show `A ∩ closure (interior B) ⊆ closure (interior (A ∩ B))`.\n  have h_step2 :\n      (A ∩ closure (interior B) : Set X) ⊆\n        closure (interior (A ∩ B)) := by\n    intro y hy\n    have hyA  : (y : X) ∈ A := hy.1\n    have hyCl : (y : X) ∈ closure (interior B) := hy.2\n    ----------------------------------------------------------------\n    --  Use the neighbourhood characterisation of closure.\n    ----------------------------------------------------------------\n    have hy_in_cl : (y : X) ∈ closure (A ∩ interior B) := by\n      -- Characterisation of closure.\n      apply (mem_closure_iff).2\n      intro U hUopen hyU\n      -- Consider `U ∩ A`, an open neighbourhood of `y`.\n      have hUA_open : IsOpen (U ∩ A) := hUopen.inter hA_open\n      have hyUA     : (y : X) ∈ U ∩ A := ⟨hyU, hyA⟩\n      -- Since `y ∈ closure (interior B)`, the set `U ∩ A` meets `interior B`.\n      have h_nonempty :\n          ((U ∩ A) ∩ interior B : Set X).Nonempty := by\n        have h_prop := (mem_closure_iff).1 hyCl\n        have := h_prop (U ∩ A) hUA_open hyUA\n        simpa [Set.inter_left_comm, Set.inter_assoc] using this\n      rcases h_nonempty with ⟨z, ⟨⟨hzU, hzA⟩, hz_intB⟩⟩\n      -- Exhibit the required point in `U ∩ (A ∩ interior B)`.\n      exact ⟨z, ⟨hzU, hzA, hz_intB⟩⟩\n    -- Rewrite using `interior (A ∩ B) = A ∩ interior B`\n    -- (valid because `A` is open).\n    have h_int_eq :\n        interior (A ∩ B : Set X) = A ∩ interior B :=\n      (Topology.interior_inter_open_left (X := X) (A := A) (B := B) hA_open)\n    -- Convert `hy_in_cl` to the desired form.\n    have : (y : X) ∈ closure (interior (A ∩ B)) := by\n      simpa [h_int_eq] using hy_in_cl\n    exact this\n  -- Combine the two inclusions obtained so far.\n  have h_subset :\n      (A ∩ interior (closure (interior B)) : Set X) ⊆\n        closure (interior (A ∩ B)) :=\n    Set.Subset.trans h_step1 h_step2\n  ------------------------------------------------------------------\n  --  Step 2: Use `interior_maximal` to place `x` in the required interior.\n  ------------------------------------------------------------------\n  have h_into_interior :\n      (A ∩ interior (closure (interior B)) : Set X) ⊆\n        interior (closure (interior (A ∩ B))) :=\n    interior_maximal h_subset hU_open\n  exact h_into_interior hxU"
+  ],
+  "success": true
+}

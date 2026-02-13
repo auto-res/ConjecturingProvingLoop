@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.04614353179932
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5043,
+      "prompt_tokens": 15761,
+      "total_tokens": 20804,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4800,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 15104
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closureInteriorClosure_union_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    closure (interior (closure A)) ∪ closure (interior (closure B)) ⊆\n      closure (interior (closure (A ∪ B))) := by\n  intro x hx\n  cases hx with\n  | inl hA =>\n      have hSub : closure (interior (closure A)) ⊆\n          closure (interior (closure (A ∪ B))) := by\n        apply closure_mono\n        apply interior_mono\n        apply closure_mono\n        exact Set.subset_union_left\n      exact hSub hA\n  | inr hB =>\n      have hSub : closure (interior (closure B)) ⊆\n          closure (interior (closure (A ∪ B))) := by\n        apply closure_mono\n        apply interior_mono\n        apply closure_mono\n        exact Set.subset_union_right\n      exact hSub hB"
+  ],
+  "success": true
+}

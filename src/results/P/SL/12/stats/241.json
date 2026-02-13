@@ -1,0 +1,26 @@
+{
+  "times": [
+    58.554192781448364
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3963,
+      "prompt_tokens": 45656,
+      "total_tokens": 49619,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_of_P1_and_isOpen_closure_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} (hP1 : Topology.P1 (X := X) A)\n    (h_open : IsOpen (closure (interior (A : Set X)))) :\n    Topology.P2 (X := X) A := by\n  -- Unfold `P2` to obtain the required subset relation.\n  dsimp [Topology.P2] at *\n  intro x hxA\n  -- From `P1`, `x` lies in the closure of the interior of `A`.\n  have hx_cl : x ∈ closure (interior (A : Set X)) := hP1 hxA\n  -- Since this closure is open, its interior is itself.\n  have h_eq : interior (closure (interior (A : Set X))) =\n      closure (interior A) := by\n    simpa [h_open.interior_eq]\n  -- Reinterpret the membership via the set equality.\n  simpa [h_eq] using hx_cl"
+  ],
+  "success": true
+}

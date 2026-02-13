@@ -1,0 +1,26 @@
+{
+  "times": [
+    57.431124448776245
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3930,
+      "prompt_tokens": 39613,
+      "total_tokens": 43543,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3520,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 38784
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_of_dense_subset {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hDense : Dense A) (hAB : A ⊆ B) : Topology.P3 B := by\n  -- Unfold the definition of `P3`.\n  unfold Topology.P3\n  intro x hxB\n  -- Since `A` is dense, its closure is the whole space.\n  have hClosureA : closure A = (Set.univ : Set X) := hDense.closure_eq\n  -- Using monotonicity of `closure`, deduce that `closure B` is also the whole space.\n  have hSubset : closure A ⊆ closure B := closure_mono hAB\n  have hClosureB : closure B = (Set.univ : Set X) := by\n    -- Show the two inclusions needed for set equality.\n    apply Set.Subset.antisymm\n    ·\n      -- `closure B ⊆ univ` is trivial.\n      intro _ _; simp\n    ·\n      -- `univ ⊆ closure B` follows from `closure A = univ` and `closure A ⊆ closure B`.\n      simpa [hClosureA] using hSubset\n  -- Consequently, the interior of `closure B` is also the whole space.\n  have hInteriorB : interior (closure B) = (Set.univ : Set X) := by\n    simpa [hClosureB] using (interior_univ : interior (Set.univ : Set X) = Set.univ)\n  -- Any point of `B` lies in `univ`, hence in `interior (closure B)`.\n  have : x ∈ (Set.univ : Set X) := by simp\n  simpa [hInteriorB] using this"
+  ],
+  "success": true
+}

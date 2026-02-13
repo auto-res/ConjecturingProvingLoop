@@ -1,0 +1,26 @@
+{
+  "times": [
+    93.06148958206177
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5840,
+      "prompt_tokens": 35325,
+      "total_tokens": 41165,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5632,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 34560
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.self_diff_frontier_eq_interior {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    A \\ frontier A = interior A := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    rcases hx with ⟨hxA, hNotFront⟩\n    by_cases hInt : x ∈ interior A\n    · exact hInt\n    ·\n      have hFront : x ∈ frontier A := And.intro (subset_closure hxA) hInt\n      exact (hNotFront hFront).elim\n  · intro hxInt\n    have hxA : x ∈ A := interior_subset hxInt\n    have hNotFront : x ∉ frontier A := by\n      intro hFront\n      exact hFront.2 hxInt\n    exact And.intro hxA hNotFront"
+  ],
+  "success": true
+}

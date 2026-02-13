@@ -1,0 +1,26 @@
+{
+  "times": [
+    12.227044820785522
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1185,
+      "prompt_tokens": 45720,
+      "total_tokens": 46905,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1024,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_iff_P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : interior (A : Set X) = Set.univ) :\n    Topology.P1 (X := X) A ↔ Topology.P3 (X := X) A := by\n  have h₁ := Topology.P1_iff_P2_of_dense_interior (X := X) (A := A) h\n  have h₂ := (Topology.P3_iff_P2_of_dense_interior (X := X) (A := A) h).symm\n  exact h₁.trans h₂"
+  ],
+  "success": true
+}

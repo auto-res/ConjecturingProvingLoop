@@ -1,0 +1,26 @@
+{
+  "times": [
+    45.982319831848145
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3084,
+      "prompt_tokens": 49988,
+      "total_tokens": 53072,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49024
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_eq_self_of_open_closed\n    {X : Type*} [TopologicalSpace X] {U V : Set X}\n    (hU_open : IsOpen (U : Set X)) (hV_closed : IsClosed (V : Set X)) :\n    interior (U \\ V : Set X) = U \\ V := by\n  have h :=\n    interior_diff_eq_diff_closure_of_open\n      (X := X) (U := U) (V := V) hU_open\n  simpa [hV_closed.closure_eq] using h"
+  ],
+  "success": true
+}

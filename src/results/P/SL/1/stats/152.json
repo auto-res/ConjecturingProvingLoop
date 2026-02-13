@@ -1,0 +1,43 @@
+{
+  "times": [
+    65.05251216888428,
+    98.83993768692017
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5674,
+      "prompt_tokens": 23570,
+      "total_tokens": 29244,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    },
+    {
+      "completion_tokens": 7172,
+      "prompt_tokens": 23640,
+      "total_tokens": 30812,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7104,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23424
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_interior_union_eq\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior (A ∪ B)) = closure (interior A) ∪ closure (interior B) := by\n  -- First, rewrite the interior of the union as the union of interiors.\n  have h₁ : interior (A ∪ B) = interior A ∪ interior B := by\n    simpa using interior_union (A := A) (B := B)\n  -- Then use the fact that `closure` distributes over finite unions.\n  simpa [h₁] using closure_union (interior A) (interior B)",
+    "theorem interior_union\n    {X : Type*} [TopologicalSpace X] (A B : Set X) :\n    interior (A ∪ B : Set X) = interior (A ∪ B) :=\n  rfl"
+  ],
+  "success": true
+}

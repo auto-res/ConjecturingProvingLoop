@@ -1,0 +1,43 @@
+{
+  "times": [
+    90.52161955833435,
+    127.33146739006042
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7246,
+      "prompt_tokens": 33651,
+      "total_tokens": 40897,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6272,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 32512
+      }
+    },
+    {
+      "completion_tokens": 9874,
+      "prompt_tokens": 34093,
+      "total_tokens": 43967,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 9792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 33536
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_diff_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    frontier (A \\ B) ⊆ frontier A ∪ frontier B := by\n  intro x hx\n  -- Decompose the membership in the frontier of `A \\ B`.\n  rcases hx with ⟨hxClosDiff, hxNotIntDiff⟩\n  -- Since `A \\ B ⊆ A`, we already have `x ∈ closure A`.\n  have hxClosA : x ∈ closure A := by\n    have hSub : (A \\ B : Set X) ⊆ A := fun y hy => hy.1\n    exact (closure_mono hSub) hxClosDiff\n  classical\n  by_cases hIntA : x ∈ interior A\n  · -- Case 1: `x ∈ interior A`\n    -- We shall prove that `x ∈ frontier B`.\n    -- First, show `x ∈ closure B`.\n    have hxClosB : x ∈ closure B := by\n      -- Use the neighbourhood characterization of the closure.\n      refine (mem_closure_iff).2 ?_\n      intro U hU hxU\n      by_contra hDisjoint\n      -- If `U ∩ B = ∅`, then the open set `U ∩ interior A`\n      -- is contained in `A \\ B`, contradicting `hxNotIntDiff`.\n      have hUIA : IsOpen (U ∩ interior A) := hU.inter isOpen_interior\n      have hxUIA : x ∈ U ∩ interior A := by\n        exact ⟨hxU, hIntA⟩\n      have hSub : (U ∩ interior A : Set X) ⊆ A \\ B := by\n        intro y hy\n        have hAy : y ∈ A := interior_subset hy.2\n        have hBy : y ∈ B := by\n          have : y ∈ U ∩ B := by\n            have : y ∈ U := hy.1\n            have : y ∈ B := by\n              have hContr : (U ∩ B : Set X).Nonempty := by\n                by_contra h\n                exact hDisjoint h\n              rcases hContr with ⟨z, hz⟩\n              exact (by\n                have : z ∈ B := hz.2\n                have : y = z := by\n                  have : y ∈ U := hy.1\n                  have : z ∈ U := hz.1\n                  have : y = z := rfl\n                  exact this\n                simpa [this] using hz.2)\n            exact this\n          exact this.2\n        exact ⟨hAy, by\n          have : y ∈ B := hBy\n          exact this⟩\n      have hxIntDiff : x ∈ interior (A \\ B) := by\n        -- `U ∩ interior A` is an open neighbourhood of `x`\n        -- contained in `A \\ B`.\n        refine (interior_maximal hSub hUIA) hxUIA\n      exact hxNotIntDiff hxIntDiff\n      -- Contradiction obtained, so `(U ∩ B).Nonempty`.\n    -- Next, show `x ∉ interior B`.\n    have hxNotIntB : x ∉ interior B := by\n      intro hxIntB\n      -- The open set `interior B` is disjoint from `A \\ B`,\n      -- contradicting the fact that `x ∈ closure (A \\ B)`.\n      have hNon :\n          ((interior B : Set X) ∩ (A \\ B)).Nonempty :=\n        (mem_closure_iff).1 hxClosDiff (interior B) isOpen_interior hxIntB\n      rcases hNon with ⟨y, hy⟩\n      exact (hy.2.2 hy.2.2).elim\n    -- Assemble the information to conclude `x ∈ frontier B`.\n    have hxFrontB : x ∈ frontier B := And.intro hxClosB hxNotIntB\n    exact Or.inr hxFrontB\n  · -- Case 2: `x ∉ interior A`, hence `x ∈ frontier A`.\n    have hxFrontA : x ∈ frontier A := And.intro hxClosA hIntA\n    exact Or.inl hxFrontA",
+    "theorem Topology.frontier_closure_eq_closure_diff_interior_closure {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    frontier (closure A) = closure A \\ interior (closure A) := by\n  simp [frontier, closure_closure]"
+  ],
+  "success": true
+}

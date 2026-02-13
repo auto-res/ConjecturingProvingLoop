@@ -1,0 +1,26 @@
+{
+  "times": [
+    125.20350575447083
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 8527,
+      "prompt_tokens": 32021,
+      "total_tokens": 40548,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8128,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem P1_union_of_subset {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hP1A : Topology.P1 A) (hBsubset : B ⊆ closure (interior A)) :\n    Topology.P1 (A ∪ B) := by\n  dsimp [Topology.P1] at hP1A ⊢\n  intro x hx_union\n  -- We need to show that `x` belongs to `closure (interior (A ∪ B))`.\n  -- First, note that `interior A ⊆ interior (A ∪ B)`.\n  have hIntSubset : interior A ⊆ interior (A ∪ B) := by\n    have h_sub : (A : Set X) ⊆ A ∪ B := Set.subset_union_left\n    exact interior_mono h_sub\n  -- Consequently, taking closures preserves the inclusion.\n  have hClosMono : closure (interior A) ⊆ closure (interior (A ∪ B)) :=\n    closure_mono hIntSubset\n  -- Now treat the two possible ways in which `x` can lie in `A ∪ B`.\n  cases hx_union with\n  | inl hxA =>\n      -- Case `x ∈ A`: use `P1` for `A`.\n      have hx_clA : x ∈ closure (interior A) := hP1A hxA\n      exact hClosMono hx_clA\n  | inr hxB =>\n      -- Case `x ∈ B`: use the assumption `B ⊆ closure (interior A)`.\n      have hx_clA : x ∈ closure (interior A) := hBsubset hxB\n      exact hClosMono hx_clA"
+  ],
+  "success": true
+}

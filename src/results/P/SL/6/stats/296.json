@@ -1,0 +1,60 @@
+{
+  "times": [
+    221.05124497413635,
+    145.18113160133362,
+    257.65279364585876
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11802,
+      "prompt_tokens": 47128,
+      "total_tokens": 58930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 45824
+      }
+    },
+    {
+      "completion_tokens": 6990,
+      "prompt_tokens": 47217,
+      "total_tokens": 54207,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    },
+    {
+      "completion_tokens": 15285,
+      "prompt_tokens": 47334,
+      "total_tokens": 62619,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 15040,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_diff_eq_diff_closure_of_open\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hA : IsOpen (A : Set X)) :\n    interior ((A \\ B) : Set X) = (A \\ closure (B : Set X)) := by\n  classical\n  ext x\n  constructor\n  · intro hx\n    -- `x` lies in `A \\ B`.\n    have hxAB : x ∈ (A \\ B : Set X) :=\n      (interior_subset : interior (A \\ B) ⊆ A \\ B) hx\n    have hxA : x ∈ (A : Set X) := hxAB.1\n    -- Show that `x ∉ closure B`.\n    have hxNotCl : x ∉ closure (B : Set X) := by\n      -- Suppose, for contradiction, that `x ∈ closure B`.\n      by_contra hCl\n      -- Choose an open neighborhood `U` of `x` contained in `A \\ B`.\n      rcases (mem_interior_iff_mem_nhds).1 hx with ⟨U, hU_open, hxU, hUSub⟩\n      -- The intersection `U ∩ B` is empty, contradicting closeness.\n      have hNon : ((U ∩ B) : Set X).Nonempty :=\n        (mem_closure_iff).1 hCl U hU_open hxU\n      rcases hNon with ⟨y, hyU, hyB⟩\n      have hIn : y ∈ (A \\ B : Set X) := hUSub hyU\n      exact (hIn.2) hyB\n    exact And.intro hxA hxNotCl\n  · intro hx\n    rcases hx with ⟨hxA, hxNotCl⟩\n    -- The complement of `closure B` is open.\n    have hOpenComp : IsOpen ((closure (B : Set X))ᶜ) :=\n      (isClosed_closure (s := B)).isOpen_compl\n    -- Construct an open neighborhood of `x` contained in `A \\ B`.\n    have hxInt : x ∈\n        interior ((A \\ B) : Set X) := by\n      -- Define the neighborhood `U`.\n      let U := (A : Set X) ∩ (closure (B : Set X))ᶜ\n      have hU_open : IsOpen U := hA.inter hOpenComp\n      have hxU    : x ∈ U       := And.intro hxA hxNotCl\n      have hUSub  : U ⊆ (A \\ B : Set X) := by\n        intro y hy\n        have hyA : y ∈ (A : Set X) := hy.1\n        have hyNotCl : y ∈ (closure (B : Set X))ᶜ := hy.2\n        have hyNotB : y ∉ B := by\n          intro hyB\n          have : y ∈ closure (B : Set X) := subset_closure hyB\n          exact hyNotCl this\n        exact And.intro hyA hyNotB\n      exact (interior_maximal hUSub hU_open) hxU\n    exact hxInt",
+    "```lean\ntheorem interior_diff_subset_left\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior ((A \\ B) : Set X) ⊆ interior A := by\n  -- The set‐difference `A \\ B` is contained in `A`.\n  have hSub : (A \\ B : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  -- Monotonicity of `interior` immediately yields the desired inclusion.\n  exact interior_mono hSub\n```",
+    "theorem interior_closure_interior_closure_interior_closure_interior_closure_interior_eq\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior (closure (A : Set X)))))))) =\n      interior (closure A) := by\n  calc\n    interior (closure (interior (closure (interior (closure (interior (closure A)))))))\n        = interior (closure (interior (closure (interior (closure A))))) := by\n          simpa using\n            (interior_closure_interior_closure_eq\n              (A := interior (closure (interior (closure A)))))\n    _ = interior (closure (interior (closure A))) := by\n          simpa using\n            (interior_closure_interior_closure_eq\n              (A := interior (closure A)))\n    _ = interior (closure A) := by\n          simpa using\n            (interior_closure_interior_closure_eq (A := A))"
+  ],
+  "success": true
+}

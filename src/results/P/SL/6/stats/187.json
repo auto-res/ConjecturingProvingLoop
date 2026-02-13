@@ -1,0 +1,26 @@
+{
+  "times": [
+    44.460721492767334
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2994,
+      "prompt_tokens": 29039,
+      "total_tokens": 32033,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2816,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 28416
+      }
+    }
+  ],
+  "responses": [
+    "theorem iUnion_open_satisfies_all_Ps\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {S : ι → Set X}\n    (hS : ∀ i, IsOpen (S i)) :\n    Topology.P1 (⋃ i, S i) ∧ Topology.P2 (⋃ i, S i) ∧ Topology.P3 (⋃ i, S i) := by\n  have hOpen : IsOpen (⋃ i, S i : Set X) := by\n    simpa using isOpen_iUnion (fun i => hS i)\n  exact Topology.open_satisfies_all_Ps (A := ⋃ i, S i) hOpen"
+  ],
+  "success": true
+}

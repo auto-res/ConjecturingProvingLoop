@@ -1,0 +1,26 @@
+{
+  "times": [
+    76.34988641738892
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4467,
+      "prompt_tokens": 9596,
+      "total_tokens": 14063,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 8960
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_dense_interior {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : closure (interior A) = (Set.univ : Set X)) :\n    Topology.P3 A := by\n  dsimp [Topology.P3]\n  intro x hxA\n  -- `x` certainly belongs to the interior of `closure (interior A)` because that set is `⊤`.\n  have hxInt : x ∈ interior (closure (interior A)) := by\n    have : x ∈ (Set.univ : Set X) := Set.mem_univ x\n    simpa [hDense, interior_univ] using this\n  -- Monotonicity of `interior` and `closure` lets us upgrade the membership.\n  have hsubset : interior (closure (interior A)) ⊆ interior (closure A) := by\n    apply interior_mono\n    exact closure_mono (interior_subset : interior A ⊆ A)\n  exact hsubset hxInt"
+  ],
+  "success": true
+}

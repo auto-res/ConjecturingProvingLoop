@@ -1,0 +1,26 @@
+{
+  "times": [
+    72.91954946517944
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7194,
+      "prompt_tokens": 23858,
+      "total_tokens": 31052,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 20224
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_eq_univ_of_closure_interior_eq_univ {X : Type*} [TopologicalSpace X]\n    {A : Set X} (h : closure (interior (A : Set X)) = (Set.univ : Set X)) :\n    closure (A : Set X) = (Set.univ : Set X) := by\n  -- Prove the inclusion `closure A ⊆ univ`, which is trivial.\n  have h₁ : closure (A : Set X) ⊆ (Set.univ : Set X) := by\n    intro _ _\n    trivial\n  -- Prove the reverse inclusion `univ ⊆ closure A`.\n  have h₂ : (Set.univ : Set X) ⊆ closure (A : Set X) := by\n    intro x _\n    -- Since `closure (interior A) = univ`, every `x` belongs to it.\n    have hxInt : x ∈ closure (interior (A : Set X)) := by\n      have : x ∈ (Set.univ : Set X) := by\n        trivial\n      simpa [h] using this\n    -- Use monotonicity of `closure` to deduce `x ∈ closure A`.\n    have hsubset : closure (interior (A : Set X)) ⊆ closure (A : Set X) :=\n      Topology.closure_interior_subset_closure (X := X) A\n    exact hsubset hxInt\n  exact le_antisymm h₁ h₂"
+  ],
+  "success": true
+}

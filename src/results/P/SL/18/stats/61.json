@@ -1,0 +1,26 @@
+{
+  "times": [
+    89.3156247138977
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4767,
+      "prompt_tokens": 9024,
+      "total_tokens": 13791,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 7936
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_P3_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (A : Set X)) → Topology.P3 A := by\n  intro hP3Clos\n  dsimp [Topology.P3] at hP3Clos ⊢\n  intro x hxA\n  have hxClosure : x ∈ closure A :=\n    (subset_closure : A ⊆ closure A) hxA\n  have hxInt : x ∈ interior (closure (closure A)) := hP3Clos hxClosure\n  simpa [closure_closure] using hxInt"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    32.42239809036255
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2123,
+      "prompt_tokens": 14060,
+      "total_tokens": 16183,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1920,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 13056
+      }
+    }
+  ],
+  "responses": [
+    "theorem dense_of_interior_closure_eq_univ\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    interior (closure (A : Set X)) = Set.univ → Dense (A : Set X) := by\n  intro hInt x\n  -- Since `interior (closure A) = univ`, every point lies in this interior.\n  have hx_int : (x : X) ∈ interior (closure (A : Set X)) := by\n    have : (x : X) ∈ (Set.univ : Set X) := by\n      trivial\n    simpa [hInt] using this\n  -- The interior is contained in the closure, yielding the desired density.\n  exact (interior_subset : interior (closure (A : Set X)) ⊆ closure (A : Set X)) hx_int"
+  ],
+  "success": true
+}

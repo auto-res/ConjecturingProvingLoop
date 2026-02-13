@@ -1,0 +1,43 @@
+{
+  "times": [
+    80.79903554916382,
+    128.8642933368683
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 7884,
+      "prompt_tokens": 50580,
+      "total_tokens": 58464,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 7168,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 8679,
+      "prompt_tokens": 50686,
+      "total_tokens": 59365,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8448,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.boundary_eq_closure_inter_closure_compl {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    closure (A : Set X) \\ interior A =\n      closure (A : Set X) ∩ closure (Aᶜ : Set X) := by\n  ext x\n  constructor\n  · intro hx\n    -- `x` is in the closure of `A`.\n    have hx_cl : (x : X) ∈ closure (A : Set X) := hx.1\n    -- `x` is *not* in the interior of `A`.\n    have hx_not_int : (x : X) ∉ interior A := hx.2\n    -- Using `interior A = (closure (Aᶜ))ᶜ`, deduce `x ∈ closure (Aᶜ)`.\n    have hx_cl_compl : (x : X) ∈ closure (Aᶜ : Set X) := by\n      have h_eq :\n          interior (A : Set X) = (closure (Aᶜ : Set X))ᶜ :=\n        Topology.interior_eq_compl_closure_compl (X := X) (A := A)\n      have : (x : X) ∈ (interior (A : Set X))ᶜ := hx_not_int\n      simpa [h_eq] using this\n    exact And.intro hx_cl hx_cl_compl\n  · intro hx\n    -- `x` lies in both closures.\n    have hx_cl     : (x : X) ∈ closure (A : Set X) := hx.1\n    have hx_cl_compl : (x : X) ∈ closure (Aᶜ : Set X) := hx.2\n    -- Show that `x` cannot be in `interior A`.\n    have hx_not_int : (x : X) ∉ interior A := by\n      intro hx_int\n      -- Use the neighbourhood characterization of closure with the\n      -- open set `interior A`, which contains `x` but is disjoint from `Aᶜ`.\n      have h_open : IsOpen (interior (A : Set X)) := isOpen_interior\n      have h_nonempty :=\n        (mem_closure_iff).1 hx_cl_compl (interior (A : Set X)) h_open hx_int\n      -- Yet `interior A ⊆ A`, so the intersection with `Aᶜ` is empty.\n      have h_empty :\n          ((interior (A : Set X)) ∩ (Aᶜ) : Set X) = (∅ : Set X) := by\n        apply Set.eq_empty_iff_forall_not_mem.2\n        intro y hy\n        have hyA  : (y : X) ∈ A :=\n          (interior_subset : interior (A : Set X) ⊆ A) hy.1\n        exact hy.2 hyA\n      -- Derive the contradiction.\n      have : ((interior (A : Set X)) ∩ (Aᶜ) : Set X).Nonempty := h_nonempty\n      simpa [h_empty] using this\n    exact And.intro hx_cl hx_not_int",
+    "set_option maxRecDepth 10000\n\ntheorem Topology.interior_subset_closure_interior_union {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A : Set X) ⊆ closure (interior (A ∪ B)) := by\n  intro x hx\n  -- `interior A` is contained in `interior (A ∪ B)` because `A ⊆ A ∪ B`.\n  have h_int_subset : interior (A : Set X) ⊆ interior (A ∪ B) :=\n    interior_mono (Set.subset_union_left : (A : Set X) ⊆ A ∪ B)\n  -- Therefore, `x` belongs to `interior (A ∪ B)`.\n  have hx' : (x : X) ∈ interior (A ∪ B) := h_int_subset hx\n  -- Every point of a set lies in its closure.\n  exact subset_closure hx'"
+  ],
+  "success": true
+}

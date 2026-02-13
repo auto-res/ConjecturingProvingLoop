@@ -1,0 +1,26 @@
+{
+  "times": [
+    59.46978425979614
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5223,
+      "prompt_tokens": 23552,
+      "total_tokens": 28775,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 23296
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_inter_eq_of_isOpen_right {X : Type*} [TopologicalSpace X]\n    {A B : Set X} (hB : IsOpen (B : Set X)) :\n    interior (A ∩ B : Set X) = interior (A : Set X) ∩ B := by\n  apply Set.Subset.antisymm\n  · -- `interior (A ∩ B) ⊆ interior A ∩ B`\n    intro x hx\n    have hAB : (x : X) ∈ (A ∩ B : Set X) := interior_subset hx\n    -- `x` belongs to `interior A`\n    have hIntA : (x : X) ∈ interior (A : Set X) := by\n      have h_subset : (A ∩ B : Set X) ⊆ (A : Set X) := Set.inter_subset_left\n      exact (interior_mono h_subset) hx\n    exact And.intro hIntA hAB.2\n  · -- `interior A ∩ B ⊆ interior (A ∩ B)`\n    intro x hx\n    rcases hx with ⟨hIntA, hBx⟩\n    -- The open set `interior A ∩ B` contains `x`\n    have hOpen : IsOpen (interior (A : Set X) ∩ B) :=\n      isOpen_interior.inter hB\n    have hxOpen : (x : X) ∈ interior (A : Set X) ∩ B :=\n      And.intro hIntA hBx\n    have hxIntOpen : (x : X) ∈ interior (interior (A : Set X) ∩ B) := by\n      simpa [hOpen.interior_eq] using hxOpen\n    -- `interior A ∩ B ⊆ A ∩ B`\n    have h_subset : (interior (A : Set X) ∩ B) ⊆ (A ∩ B : Set X) := by\n      intro y hy\n      exact And.intro (interior_subset hy.1) hy.2\n    exact (interior_mono h_subset) hxIntOpen"
+  ],
+  "success": true
+}

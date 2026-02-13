@@ -1,0 +1,43 @@
+{
+  "times": [
+    63.51240372657776,
+    153.65587425231934
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5007,
+      "prompt_tokens": 32409,
+      "total_tokens": 37416,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    },
+    {
+      "completion_tokens": 10707,
+      "prompt_tokens": 32508,
+      "total_tokens": 43215,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_interior_iff_isClopen\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    closure (A : Set X) = interior A ↔ IsClosed A ∧ IsOpen A := by\n  classical\n  constructor\n  · intro h_eq\n    -- `A` is closed because `closure A ⊆ A` and `A ⊆ closure A`.\n    have h_closure_subset : closure A ⊆ (A : Set X) := by\n      have : interior A ⊆ (A : Set X) := interior_subset\n      simpa [h_eq] using this\n    have h_subset_closure : (A : Set X) ⊆ closure A := subset_closure\n    have h_closure_eq : closure A = (A : Set X) :=\n      subset_antisymm h_closure_subset h_subset_closure\n    have h_closed : IsClosed A := by\n      have : IsClosed (closure A) := isClosed_closure\n      simpa [h_closure_eq] using this\n    -- `A` is open because `A ⊆ interior A` and `interior A ⊆ A`.\n    have h_subset_int : (A : Set X) ⊆ interior A := by\n      have : (A : Set X) ⊆ closure A := subset_closure\n      simpa [h_eq] using this\n    have h_int_subset : interior A ⊆ (A : Set X) := interior_subset\n    have h_int_eq : interior A = (A : Set X) :=\n      subset_antisymm h_int_subset h_subset_int\n    have h_open : IsOpen A := by\n      have : IsOpen (interior A) := isOpen_interior\n      simpa [h_int_eq] using this\n    exact ⟨h_closed, h_open⟩\n  · rintro ⟨h_closed, h_open⟩\n    simpa [h_closed.closure_eq, h_open.interior_eq]",
+    "theorem Topology.closure_iInter_eq_iInter_of_isClosed\n    {X : Type*} [TopologicalSpace X] {ι : Sort*} {𝒜 : ι → Set X}\n    (h𝒜 : ∀ i, IsClosed (𝒜 i)) :\n    closure (⋂ i, 𝒜 i) = ⋂ i, 𝒜 i := by\n  have hClosed : IsClosed (⋂ i, 𝒜 i) := isClosed_iInter h𝒜\n  simpa [hClosed.closure_eq]"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    55.51301717758179,
+    147.4573097229004
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4689,
+      "prompt_tokens": 32309,
+      "total_tokens": 36998,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4352,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    },
+    {
+      "completion_tokens": 11884,
+      "prompt_tokens": 32415,
+      "total_tokens": 44299,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 11648,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P1_iff_frontier_subset_closure_interior {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Topology.P1 A ↔ frontier A ⊆ closure (interior A) := by\n  constructor\n  · intro hP1\n    exact\n      Topology.frontier_subset_closure_interior_of_P1 (A := A) hP1\n  · intro hFront\n    -- We show `P1 A` from the assumed inclusion on the frontier.\n    unfold Topology.P1\n    intro x hxA\n    by_cases hInt : x ∈ interior A\n    ·\n      -- If `x` is in `interior A`, the result is immediate.\n      exact (subset_closure : interior A ⊆ closure (interior A)) hInt\n    ·\n      -- Otherwise, `x` lies on the frontier of `A`.\n      have hxFront : x ∈ frontier A := by\n        -- `x` is in `closure A` because `A ⊆ closure A`.\n        have hxCl : x ∈ closure A := subset_closure hxA\n        -- Combine the facts `x ∈ closure A` and `x ∉ interior A`.\n        have : x ∈ closure A ∧ x ∉ interior A := And.intro hxCl hInt\n        simpa [frontier] using this\n      -- Apply the frontier inclusion to conclude.\n      exact hFront hxFront",
+    "theorem Topology.P1_singleton_of_discrete {X : Type*} [TopologicalSpace X]\n    [DiscreteTopology X] {x : X} :\n    Topology.P1 ({x} : Set X) := by\n  -- Expand the definition of `P1`.\n  unfold Topology.P1\n  intro y hy\n  -- In a discrete space every set is open; in particular `{x}` is open,\n  -- hence its interior is itself.\n  have hInt : interior ({x} : Set X) = {x} :=\n    (isOpen_discrete ({x} : Set X)).interior_eq\n  -- From `y ∈ {x}` we deduce `y ∈ interior {x}` using the equality above.\n  have hMemInt : y ∈ interior ({x} : Set X) := by\n    simpa [hInt] using hy\n  -- Every point of a set is contained in the closure of that set.\n  exact (subset_closure hMemInt)"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.460771560668945
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4254,
+      "prompt_tokens": 53243,
+      "total_tokens": 57497,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 52096
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.denseInterior_iff_interior_closure_interior_eq_univ {X : Type*}\n    [TopologicalSpace X] {A : Set X} :\n    Dense (interior (A : Set X)) ↔\n      interior (closure (interior (A : Set X))) = (Set.univ : Set X) := by\n  constructor\n  ·\n    intro hDense\n    exact\n      Topology.denseInterior_implies_interior_closure_interior_eq_univ\n        (X := X) (A := A) hDense\n  ·\n    intro hIntEq\n    -- Show that `closure (interior A)` equals the whole space.\n    have h_closure :\n        closure (interior (A : Set X)) = (Set.univ : Set X) := by\n      apply Set.Subset.antisymm\n      · exact Set.subset_univ _\n      ·\n        intro x _\n        -- Since `interior (closure (interior A)) = univ`, every `x`\n        -- lies in this interior, hence in the corresponding closure.\n        have hx_int :\n            (x : X) ∈ interior (closure (interior (A : Set X))) := by\n          simpa [hIntEq]\n        exact\n          (interior_subset :\n            interior (closure (interior (A : Set X))) ⊆\n              closure (interior (A : Set X))) hx_int\n    -- Conclude density from the closure equality.\n    simpa [Dense, h_closure]"
+  ],
+  "success": true
+}

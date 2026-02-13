@@ -1,0 +1,26 @@
+{
+  "times": [
+    33.863264322280884
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3697,
+      "prompt_tokens": 40970,
+      "total_tokens": 44667,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3392,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 40704
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_closure_eq_closure_of_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hP2 : Topology.P2 (X := X) A) :\n    closure (interior (closure (A : Set X))) = closure (A : Set X) := by\n  -- `P2` gives `closure A = closure (interior A)`.\n  have h_eq : closure (A : Set X) = closure (interior A) :=\n    Topology.closure_eq_closure_interior_of_P2 (X := X) (A := A) hP2\n  -- We establish the two inclusions separately.\n  apply le_antisymm\n  · -- Always, `closure (interior (closure A)) ⊆ closure A`.\n    exact\n      Topology.closure_interior_closure_subset_closure (X := X) (A := A)\n  · -- `closure A ⊆ closure (interior (closure A))`, using the equality above.\n    have h_subset :\n        closure (interior A) ⊆ closure (interior (closure (A : Set X))) :=\n      Topology.closure_interior_subset_closure_interior_closure (X := X) (A := A)\n    simpa [h_eq] using h_subset"
+  ],
+  "success": true
+}

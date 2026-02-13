@@ -1,0 +1,43 @@
+{
+  "times": [
+    72.5073184967041,
+    48.94835448265076
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5518,
+      "prompt_tokens": 36588,
+      "total_tokens": 42106,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    },
+    {
+      "completion_tokens": 3391,
+      "prompt_tokens": 36694,
+      "total_tokens": 40085,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3200,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 35712
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_interior_inter_eq_closure_interior_inter\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    closure (interior A ∩ interior B : Set X) =\n      closure (interior (A ∩ B : Set X)) := by\n  -- Rewrite `interior A ∩ interior B` using `interior_inter`.\n  have h :\n      (interior A ∩ interior B : Set X) =\n        interior (A ∩ B : Set X) := by\n    simpa using (interior_inter (A := A) (B := B)).symm\n  -- Finish by a straightforward `simp`.\n  simpa [h] using\n    (rfl :\n      closure (interior A ∩ interior B : Set X) =\n        closure (interior A ∩ interior B : Set X))",
+    "theorem P123_of_dense_closed {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hClosed : IsClosed (A : Set X)) (hDense : Dense (A : Set X)) :\n    Topology.P1 A ∧ Topology.P2 A ∧ Topology.P3 A := by\n  -- A closed dense subset of a topological space is the whole space.\n  have hEq : (A : Set X) = Set.univ :=\n    Topology.dense_closed_eq_univ (A := A) hDense hClosed\n  -- All three properties `P1`, `P2`, and `P3` hold for `univ`; rewrite using `hEq`.\n  simpa [hEq] using (Topology.P123_univ (X := X))"
+  ],
+  "success": true
+}

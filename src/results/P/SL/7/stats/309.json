@@ -1,0 +1,26 @@
+{
+  "times": [
+    101.41054892539978
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3361,
+      "prompt_tokens": 48762,
+      "total_tokens": 52123,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 46848
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_subset_interiorClosure_of_subset\n    {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hP2A : Topology.P2 A) :\n    A ⊆ interior (closure B) := by\n  intro x hxA\n  -- From `P2 A` we know `x ∈ interior (closure (interior A))`.\n  have hx₁ : x ∈ interior (closure (interior A)) := hP2A hxA\n  -- Step 1: `interior (closure (interior A)) ⊆ interior (closure A)`.\n  have hStep1 :\n      interior (closure (interior A)) ⊆ interior (closure A) :=\n    Topology.interiorClosureInterior_subset_interiorClosure (A := A)\n  -- Step 2: monotonicity under `A ⊆ B`.\n  have hStep2 :\n      interior (closure A) ⊆ interior (closure B) :=\n    interior_mono (closure_mono hAB)\n  -- Chain the inclusions to place `x` in `interior (closure B)`.\n  exact hStep2 (hStep1 hx₁)"
+  ],
+  "success": true
+}

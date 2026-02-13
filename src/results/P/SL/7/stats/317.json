@@ -1,0 +1,60 @@
+{
+  "times": [
+    215.58067107200623,
+    85.99931573867798,
+    16.851789236068726
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 11055,
+      "prompt_tokens": 50200,
+      "total_tokens": 61255,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 10752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    },
+    {
+      "completion_tokens": 7073,
+      "prompt_tokens": 50274,
+      "total_tokens": 57347,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6848,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 48896
+      }
+    },
+    {
+      "completion_tokens": 969,
+      "prompt_tokens": 50387,
+      "total_tokens": 51356,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 768,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 49920
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interiorClosure_iter8_idempotent\n    {X : Type*} [TopologicalSpace X] (A : Set X) :\n    interior (closure (interior (closure (interior (closure (interior (closure (interior\n      (closure (interior (closure (interior (closure (interior (closure A)))))))))))))) =\n      interior (closure A) := by\n  -- Start with the 7-fold idempotence lemma.\n  have h :=\n    Topology.interiorClosure_iter7_idempotent (A := A)\n  -- Apply one more `interior ∘ closure` to both sides.\n  have h' :\n      interior (closure\n        (interior (closure (interior (closure (interior (closure (interior\n          (closure (interior (closure (interior (closure A)))))))))))) =\n        interior (closure (interior (closure A))) := by\n    simpa using congrArg (fun S : Set X => interior (closure S)) h\n  -- Reduce the right-hand side via the basic idempotence lemma.\n  have h'' :\n      interior (closure (interior (closure A))) = interior (closure A) :=\n    Topology.interiorClosure_idempotent (A := A)\n  simpa [h''] using h'",
+    "theorem Topology.P3_mono {X : Type*} [TopologicalSpace X] {A B : Set X}\n    (hAB : A ⊆ B) (hP3B : Topology.P3 B) : Topology.P3 A := by\n  dsimp [Topology.P3] at hP3B ⊢\n  intro x hxA\n  -- From `A ⊆ B` and `hP3B`, obtain membership in `interior (closure B)`.\n  have hxIntB : x ∈ interior (closure B) := hP3B (hAB hxA)\n  -- Monotonicity of `closure` and `interior` gives\n  -- `interior (closure B) ⊆ interior (closure A)`.\n  have hIncl : interior (closure B) ⊆ interior (closure A) :=\n    interior_mono (closure_mono hAB)\n  exact hIncl hxIntB",
+    "theorem Topology.interiorClosure_inter_interSubset\n    {X : Type*} [TopologicalSpace X] {A B : Set X} :\n    interior (closure (A ∩ interior B)) ⊆ interior (closure A) := by\n  -- We start with the basic inclusion `A ∩ interior B ⊆ A`.\n  have h₀ : (A ∩ interior B : Set X) ⊆ A := by\n    intro x hx\n    exact hx.1\n  -- Taking closures preserves inclusions, giving\n  -- `closure (A ∩ interior B) ⊆ closure A`.\n  have h₁ : closure (A ∩ interior B) ⊆ closure A :=\n    closure_mono h₀\n  -- Finally, apply monotonicity of `interior`.\n  exact interior_mono h₁"
+  ],
+  "success": true
+}

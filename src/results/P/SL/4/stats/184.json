@@ -1,0 +1,26 @@
+{
+  "times": [
+    117.91435074806213
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 6554,
+      "prompt_tokens": 26028,
+      "total_tokens": 32582,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6400,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 25344
+      }
+    }
+  ],
+  "responses": [
+    "theorem closure_union_closure_compl_univ {X : Type*} [TopologicalSpace X] (A : Set X) :\n    closure A ∪ closure (Aᶜ) = (Set.univ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro _x hx\n    trivial\n  · intro x _\n    by_cases hA : x ∈ A\n    · exact Or.inl (subset_closure hA)\n    · have hAc : x ∈ Aᶜ := by\n        simpa using hA\n      exact Or.inr (subset_closure hAc)"
+  ],
+  "success": true
+}

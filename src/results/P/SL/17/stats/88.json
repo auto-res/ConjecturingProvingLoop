@@ -1,0 +1,26 @@
+{
+  "times": [
+    48.605849742889404
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3501,
+      "prompt_tokens": 12849,
+      "total_tokens": 16350,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 12032
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P3_closure_of_dense {X : Type*} [TopologicalSpace X] {A : Set X}\n    (hDense : Dense A) : Topology.P3 (closure A) := by\n  unfold Topology.P3\n  intro x hx\n  -- `A` is dense, so its closure is the whole space.\n  have h_closure : closure A = (Set.univ : Set X) := hDense.closure_eq\n  -- Hence the interior of its closure is also the whole space.\n  have h_int : interior (closure A) = (Set.univ : Set X) := by\n    simpa [h_closure] using (interior_univ : interior (Set.univ : Set X) = Set.univ)\n  -- Trivially, every point lies in `Set.univ`.\n  have : x ∈ (Set.univ : Set X) := by\n    simp\n  -- Conclude using the equality for interiors.\n  simpa [h_int] using this"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    113.45544075965881,
+    42.29686641693115
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5523,
+      "prompt_tokens": 32048,
+      "total_tokens": 37571,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5056,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    },
+    {
+      "completion_tokens": 3276,
+      "prompt_tokens": 32069,
+      "total_tokens": 35345,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 31488
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.frontier_eq_empty_iff_open_and_closed {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    frontier A = (∅ : Set X) ↔ IsOpen A ∧ IsClosed A := by\n  constructor\n  · intro hFront\n    -- From `interior A ∪ frontier A = closure A`\n    have hUnion := Topology.interior_union_frontier_eq_closure (A := A)\n    have hIntClos : interior A = closure A := by\n      have : interior A ∪ (∅ : Set X) = closure A := by\n        simpa [hFront] using hUnion\n      simpa [Set.union_empty] using this\n    -- Deduce `A = interior A = closure A`\n    have hIntEqA : interior A = A := by\n      apply Set.Subset.antisymm\n      · exact interior_subset\n      ·\n        have : (A : Set X) ⊆ closure A := subset_closure\n        simpa [hIntClos] using this\n    have hClosEqA : closure A = A := by\n      simpa [hIntEqA] using hIntClos.symm\n    -- Hence `A` is both open and closed\n    have hOpen : IsOpen A := by\n      simpa [←hIntEqA] using isOpen_interior\n    have hClosed : IsClosed A := by\n      simpa [hClosEqA] using isClosed_closure\n    exact And.intro hOpen hClosed\n  · rintro ⟨hOpen, hClosed⟩\n    have hIntEq : interior A = A := hOpen.interior_eq\n    have hClosEq : closure A = A := hClosed.closure_eq\n    calc\n      frontier A\n          = closure A \\ interior A := rfl\n      _ = A \\ interior A := by simpa [hClosEq]\n      _ = A \\ A := by simpa [hIntEq]\n      _ = (∅ : Set X) := by simp",
+    "theorem Topology.frontier_compl {X : Type*} [TopologicalSpace X] {A : Set X} :\n    frontier (Aᶜ) = frontier A := by\n  calc\n    frontier (Aᶜ)\n        = closure (Aᶜ) ∩ closure ((Aᶜ)ᶜ) := by\n          simpa using\n            (Topology.closure_inter_closure_compl_eq_frontier\n              (X := X) (A := Aᶜ)).symm\n    _ = closure A ∩ closure (Aᶜ) := by\n          simp [compl_compl, Set.inter_comm, Set.inter_left_comm]\n    _ = frontier A := by\n          simpa using\n            (Topology.closure_inter_closure_compl_eq_frontier\n              (X := X) (A := A)).symm"
+  ],
+  "success": true
+}

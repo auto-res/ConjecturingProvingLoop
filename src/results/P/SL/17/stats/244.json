@@ -1,0 +1,60 @@
+{
+  "times": [
+    34.91925573348999,
+    237.43368649482727,
+    152.5132167339325
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2272,
+      "prompt_tokens": 43953,
+      "total_tokens": 46225,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 18453,
+      "prompt_tokens": 44068,
+      "total_tokens": 62521,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 18432,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 42752
+      }
+    },
+    {
+      "completion_tokens": 14225,
+      "prompt_tokens": 44136,
+      "total_tokens": 58361,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 14208,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 43904
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.closure_eq_interior_union_frontier {X : Type*} [TopologicalSpace X]\n    {A : Set X} : closure A = interior A ∪ frontier A := by\n  ext x\n  constructor\n  · intro hx\n    by_cases hInt : x ∈ interior A\n    · exact Or.inl hInt\n    ·\n      have hFront : x ∈ frontier A := And.intro hx hInt\n      exact Or.inr hFront\n  · intro hx\n    cases hx with\n    | inl hInt   => exact interior_subset hInt\n    | inr hFront => exact hFront.1",
+    "0.41",
+    ""
+  ],
+  "success": true
+}

@@ -1,0 +1,60 @@
+{
+  "times": [
+    109.50462007522583,
+    76.2620210647583,
+    16.330697774887085
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 9135,
+      "prompt_tokens": 22040,
+      "total_tokens": 31175,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 8896,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 5943,
+      "prompt_tokens": 22120,
+      "total_tokens": 28063,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5504,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 18176
+      }
+    },
+    {
+      "completion_tokens": 1204,
+      "prompt_tokens": 22225,
+      "total_tokens": 23429,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1088,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.interior_inter_closure_compl_eq_empty {X : Type*} [TopologicalSpace X]\n    {A : Set X} :\n    interior A ∩ closure (Aᶜ) = (∅ : Set X) := by\n  apply Set.Subset.antisymm\n  · intro x hx\n    rcases hx with ⟨hxInt, hxClos⟩\n    rcases hxInt with ⟨U, hUopen, hxU, hUSub⟩\n    have hNon : ((U ∩ Aᶜ) : Set X).Nonempty :=\n      (mem_closure_iff).1 hxClos U hUopen hxU\n    rcases hNon with ⟨y, ⟨hyU, hyComp⟩⟩\n    have hyA : y ∈ A := hUSub hyU\n    have hContr : False := hyComp hyA\n    exact False.elim hContr\n  · exact Set.empty_subset _",
+    "theorem Topology.interior_inter_interior_left {X : Type*} [TopologicalSpace X]\n    {A B : Set X} :\n    interior (A ∩ interior B) = interior A ∩ interior B := by\n  -- First, show the left-hand side is contained in the right-hand side.\n  apply Set.Subset.antisymm\n  · intro x hx\n    have hx₁ : x ∈ interior A := by\n      have hSub : (A ∩ interior B : Set X) ⊆ A := fun y hy => hy.1\n      exact interior_mono hSub hx\n    have hx₂ : x ∈ interior B := by\n      have hSub : (A ∩ interior B : Set X) ⊆ interior B := fun y hy => hy.2\n      exact interior_mono hSub hx\n    exact And.intro hx₁ hx₂\n  · rintro x ⟨hxA, hxB⟩\n    -- Consider the open set `interior A ∩ interior B`.\n    have hOpen : IsOpen (interior A ∩ interior B) :=\n      isOpen_interior.inter isOpen_interior\n    have hSub : (interior A ∩ interior B : Set X) ⊆ A ∩ interior B := by\n      intro y hy\n      exact And.intro (interior_subset hy.1) hy.2\n    -- By maximality of the interior, this open set is contained in\n    -- `interior (A ∩ interior B)`.\n    have hIncl :\n        (interior A ∩ interior B : Set X) ⊆ interior (A ∩ interior B) :=\n      interior_maximal hSub hOpen\n    -- Since `x` belongs to the open set, it also belongs to the interior.\n    have hxIn : x ∈ interior A ∩ interior B := And.intro hxA hxB\n    exact hIncl hxIn",
+    "theorem Topology.P3_of_open_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    IsOpen (closure A) → Topology.P3 (A := A) := by\n  intro hOpen\n  dsimp [Topology.P3]\n  intro x hxA\n  have hxClos : x ∈ closure A := subset_closure hxA\n  simpa [hOpen.interior_eq] using hxClos"
+  ],
+  "success": true
+}

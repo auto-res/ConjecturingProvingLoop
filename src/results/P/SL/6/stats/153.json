@@ -1,0 +1,43 @@
+{
+  "times": [
+    39.1475043296814,
+    70.65364289283752
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3377,
+      "prompt_tokens": 23261,
+      "total_tokens": 26638,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 21248
+      }
+    },
+    {
+      "completion_tokens": 4715,
+      "prompt_tokens": 23373,
+      "total_tokens": 28088,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4608,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 22272
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_closure_interior_implies_P2\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (closure (interior (A : Set X))) → Topology.P2 A := by\n  intro hP3\n  -- `P3` for `closure (interior A)` yields its openness.\n  have hOpen : IsOpen (closure (interior (A : Set X))) :=\n    (Topology.P3_closure_iff_open_closure (A := interior (A : Set X))).1 hP3\n  -- Unfold the definition of `P2`.\n  dsimp [Topology.P2]\n  intro x hxA\n  -- `x` lies in the closure of `interior A`.\n  have hx_cl : x ∈ closure (interior (A : Set X)) := subset_closure hxA\n  -- For an open set, its interior equals the set itself.\n  have hIntEq :\n      interior (closure (interior (A : Set X))) =\n        closure (interior A) := hOpen.interior_eq\n  -- Reinterpret the membership using this equality.\n  have hx_int : x ∈ interior (closure (interior A)) := by\n    simpa [hIntEq] using hx_cl\n  exact hx_int",
+    "theorem P3_implies_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P3 (A : Set X) → (A ⊆ closure A) := by\n  intro hA\n  dsimp [Topology.P3] at hA\n  exact hA.trans (interior_subset : interior (closure A) ⊆ closure A)"
+  ],
+  "success": true
+}
