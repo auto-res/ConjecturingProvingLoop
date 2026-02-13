@@ -61,7 +61,7 @@ uv run python simple_loop.py --seed_file notions/P.lean --save_dir results/P/SL/
 ```
 The generated library in our experiment is stored in `results/P/SL/*`.
 
-The script 'proof_lengths.py' is used for arrangement of results.
+The script `proof_lengths.py` is used for arrangement of results.
 
 ### Evaluation of Prover
 
