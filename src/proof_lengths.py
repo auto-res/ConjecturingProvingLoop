@@ -1,51 +1,50 @@
 import json
 
-with open("results/with_stats/4ogen/eval_result/all_stats.json", "r") as f:
-    results = json.load(f)
-print(len(results))
+import logging, os
 
-proved_with_context = []
-proved_without_context = []
-for result in results:
-    if result["proved_with_context"]:
-        proved_with_context.append(result)
-    if result["proved_without_context"]:
-        proved_without_context.append(result)
+logger = logging.getLogger(__name__)
 
-print(len(proved_with_context), len(proved_with_context) / len(results))
-print(len(proved_without_context), len(proved_without_context) / len(results))
-
-import matplotlib.pyplot as plt
-
-fontsize = 30
-
-fig, ax = plt.subplots(figsize=(10, 6))
-
-files = ["results/with_stats/4ogen/generated_29.lean", "results/simple_loop/o3/final_generated.lean"]
-labels = ["CPL", "Simple loop"]
-for i, file in enumerate(files):
-    with open(file, "r") as f:
-        content = f.read()
-
-    theorems = content.split("theorem")[1:]
-    print(len(theorems))
+def count_proof_lengths(dir_path, max_api_usages = 14000000):
+    api_usages = 0
+    i=0
+    content = ""
+    while os.path.exists(os.path.join(dir_path, f"generated/{i}.lean")):
+        with open(os.path.join(dir_path, f"generated/{i}.lean"), "r") as f, \
+             open(os.path.join(dir_path, f"stats/{i}.json"), "r") as stat:
+            stats = json.load(stat)
+            if "conjecture_stats" in stats:
+                api_usages += sum([usage["api_usage"]["total_tokens"] for usage in stats["conjecture_stats"]])
+                api_usages += sum([sum([d["total_tokens"] for d in s["api_usages"]]) for s in stats["prove_stats"].values()])
+            else:
+                api_usages += sum([usage["total_tokens"] for usage in stats["api_usages"]])
+            if api_usages > max_api_usages:
+                logger.info(f"api usages exceeded: {api_usages}")
+                break
+            content += f.read()
+        i += 1
+    if api_usages <= max_api_usages:
+        logger.info(f"api usages: {api_usages}")
+    count = content.count('\ntheorem ')
+    logger.info(f"total theorems: {count}")
     proof_lengths = []
+    for theorem in content.split("theorem")[1:]:
+        proof = theorem[theorem.find(":="):].strip()
+        proof_lengths.append(len(proof))
+    return proof_lengths
 
-    for theorem in theorems:
-        proof = theorem[theorem.find(":="):].split("\n\n")[0]
-        proof_lengths.append(len(proof.split("\n")))
+CPL_dir = "results/P/CPL/"
+SL_dir = "results/P/SL/"
 
-    ax.hist(proof_lengths, bins=11, density=True, alpha=0.5, range=(0, 110), label=labels[i])
+nseeds = 20
 
-ax = plt.gca()
-ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: '{:.0f}'.format(y * 100)))
+CPL_proof_lengths = []
+SL_proof_lengths = []
+for seed in range(nseeds):
+    CPL_proof_lengths.extend(count_proof_lengths(os.path.join(CPL_dir, str(seed))))
+    SL_proof_lengths.extend(count_proof_lengths(os.path.join(SL_dir, str(seed))))
 
-plt.legend(fontsize=fontsize)
-plt.xlabel("Number of lines in proofs", fontsize=fontsize)
-plt.ylabel("Percentage (%)", fontsize=fontsize)
-plt.title("Proof length distribution", fontsize=fontsize)
-plt.xticks(fontsize=fontsize)
-plt.yticks(fontsize=fontsize)
-plt.tight_layout()
-plt.savefig("proof_lengths.pdf")
-plt.show()
+with open("results/proof_lengths.json", "w") as f:
+    json.dump({"CPL": CPL_proof_lengths, "SL": SL_proof_lengths}, f)
+
+print(f"CPL: {len(CPL_proof_lengths) / nseeds}, SL: {len(SL_proof_lengths) / nseeds}")
+

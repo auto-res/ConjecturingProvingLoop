@@ -13,7 +13,8 @@ import argparse
 from cmd_loop import send_reql, client
 
 def judge_and_prove_loop(content : str, env : int, theorem : str, iterations : int = 100, model : str = "o3-mini") -> list[str]:
-    prompt = "You are a prover of mathlib4 library. Please prove the last theorem in the given content in Lean 4 format. You should write the Lean4 code which directly follows \":=\" in the last theorem. It should begin with 'by' or represent a term directly. You can use the theorems in the given content as lemmas. Do not use sorry in the proof. If you judge that the theorem is false, please return empty string instead of the proof. Do not include any other text."
+    #prompt = "You are a prover of mathlib4 library. Please prove the last theorem in the given content in Lean 4 format. You should write the Lean4 code which directly follows \":=\" in the last theorem. It should begin with 'by' or represent a term directly. You can use the theorems in the given content as lemmas. Do not use sorry in the proof. If you judge that the theorem is false, please return empty string instead of the proof. Do not include any other text."
+    prompt = "You are a contributor to the mathlib4 library. Please prove the final theorem in the given content using Lean 4. Write the Lean 4 code that directly follows ':=' in the final theorem. The code should either begin with 'by' or be a term expression. You may use the theorems in the given content as lemmas. Do not use 'sorry' in the proof. If you determine that the theorem is false, return an empty string instead of a proof. Do not include any additional text."
     ite = 0
     messages=[
         {
@@ -84,9 +85,9 @@ def judge_and_prove_loop(content : str, env : int, theorem : str, iterations : i
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_file", type=str, default = "./results/with_stats/4ogen/generated_29.lean")
+    parser.add_argument("--input_file", type=str, default = "./results/P/CPL/0/upto_14000000.lean")
     parser.add_argument("--target_theorem", type=str, default = "intersection_of_alpha_open_sets_is_alpha_open")
-    parser.add_argument("--output_dir", type=str, default = "./results/with_stats/4ogen/eval_2_result")
+    parser.add_argument("--output_dir", type=str, default = "./results/P/CPL/0/eval_result_2")
     parser.add_argument("--iterations", type=int, default = 16)
     parser.add_argument("--model", type=str, default = "o3")
     args = parser.parse_args()
@@ -97,8 +98,10 @@ if __name__ == "__main__":
     with open(input_file, "r") as f:
         content = f.read()
     header = content.split("theorem")[0]
-    context = content[len(header):].split("theorem " + args.target_theorem)[0]
-    statement = "theorem " + args.target_theorem + content[len(header):].split("theorem " + args.target_theorem)[1].split(":=")[0] + ":="
+    targer_theorem = "theorem " + args.target_theorem + ' '
+    context = content[len(header):].split(targer_theorem)[0]
+    logger.info(f"target theorem: {targer_theorem}")
+    statement = targer_theorem + content[len(header):].split(targer_theorem)[1].split(":=")[0] + ":="
 
     result = send_reql(header)
     assert result is not None
@@ -118,14 +121,10 @@ if __name__ == "__main__":
     for i in range(args.iterations):
         proved_w, stats_w = judge_and_prove_loop(context, context_env, statement, 16, args.model)
         logger.info(f"proved_w: {proved_w}")
-        proved_wo, stats_wo = judge_and_prove_loop(header, head_env, statement, 16, args.model)
-        logger.info(f"proved_wo: {proved_wo}")
         all_stats.append(
             {
                 "proved_w": proved_w,
-                "proved_wo": proved_wo,
                 "stats_w": stats_w,
-                "stats_wo": stats_wo,
             }
         )
 

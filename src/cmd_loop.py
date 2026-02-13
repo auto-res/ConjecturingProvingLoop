@@ -3,12 +3,21 @@ import os
 import json
 import time
 import argparse
+import resource
 
 from loguru import logger
 import subprocess
 from pydantic import BaseModel
 from openai import OpenAI
 import concurrent.futures
+
+def set_stack_size():
+    try:
+        resource.setrlimit(resource.RLIMIT_STACK, (64 * 1024 * 1024, resource.RLIM_INFINITY))
+    except (ValueError, OSError) as e:
+        logger.warning(f"Failed to set stack size limit: {e}")
+    except AttributeError:
+        logger.warning("Stack size limit setting not available on this platform")
 
 WORKDIR = '../mathlib4'
 proc = subprocess.Popen(
@@ -20,6 +29,7 @@ proc = subprocess.Popen(
     encoding="utf-8",
     text=True,
     bufsize=1,
+    preexec_fn=set_stack_size,
 )
 
 def send_reql(s : str, env = None, timeout = 100.):
@@ -51,9 +61,10 @@ def send_reql(s : str, env = None, timeout = 100.):
         except json.JSONDecodeError:
             continue
 
-client = OpenAI()
+client = OpenAI(
+)
 
-def _generate_theorems_by_llm(prompt: str, content: str, model: str = "gpt-4o-2024-08-06") -> list[str]:
+def _generate_theorems_by_llm(prompt: str, content: str, model: str = "o3") -> list[str]:
     class Theorems(BaseModel):
         theorems: list[str]
 
@@ -84,13 +95,14 @@ def _generate_theorems_by_llm(prompt: str, content: str, model: str = "gpt-4o-20
             if attempt < max_retries - 1:
                 logger.info(f"Retrying in {retry_delay} seconds...")
                 time.sleep(retry_delay)
-                retry_delay *= 2  # 指数バックオフ
+                retry_delay *= 2
             else:
                 logger.error(f"All retry attempts failed for theorem generation")
                 raise
 
-def generate_by_notion(content: str, model : str = "o3-mini") -> str:
-    prompt = "Your are a writer of mathlib4 library. Please generate conjectures of new theorems in Lean 4 format, which do not need to be definitely true, following a given library. Do not generate statements that are already on the list. Do not include proofs, annotations, or imports. The new theorems begin with 'theorem', not any annotions. They should end with ':= sorry'. Additionally, please use standard mathematical symbols (e.g., ∀, ∃, √) instead of Unicode escape sequences (e.g., \u2200).\n\n"
+def generate_by_notion(content: str, model : str = "o3") -> str:
+    #prompt = "You are a writer of mathlib4 library. Please generate conjectures of new theorems in Lean 4 format, which do not need to be definitely true, following a given library. Do not generate statements that are already on the list. Do not include proofs, annotations, or imports. The new theorems begin with 'theorem', not any annotions. They should end with ':= sorry'. Additionally, please use standard mathematical symbols (e.g., ∀, ∃, √) instead of Unicode escape sequences (e.g., \u2200)."
+    prompt = "You are a contributor to the mathlib4 library. Based on a given library, please generate conjectural new theorems in Lean 4 format; they do not need to be true. Do not generate statements that already appear in the list. Do not include proofs, annotations, or imports. Each new statement should begin with 'theorem' (with no annotations) and end with ':= sorry'. Additionally, use standard mathematical symbols (e.g., ∀, ∃, √) rather than Unicode escape sequences (e.g., \u2200)."
     theorems, stats = _generate_theorems_by_llm(prompt, content, model)
     return theorems, stats
 
@@ -147,7 +159,8 @@ def conjecture_loop(content : str, env : int, iterations : int = 100, model : st
     return generated_theorems, stats
 
 def prover_loop(content : str, env : int, theorem : str, iterations : int = 100, model : str = "o3-mini") -> list[str]:
-    prompt = "You are a prover of mathlib4 library. Please prove the last theorem in the given content in Lean 4 format. You should write the Lean4 code which directly follows \":=\" in the last theorem. It should begin with 'by' or represent a term directly. You can use the theorems in the given content as lemmas. Do not use sorry in the proof. If you judge that the theorem is not provable, please return empty string instead of the proof. Do not include any other text."
+    #prompt = "You are a prover of mathlib4 library. Please prove the last theorem in the given content in Lean 4 format. You should write the Lean4 code which directly follows \":=\" in the last theorem. It should begin with 'by' or represent a term directly. You can use the theorems in the given content as lemmas. Do not use sorry in the proof. If you judge that the theorem is not provable, please return empty string instead of the proof. Do not include any other text."
+    prompt = "You are a contributor to the mathlib4 library. Please prove the final theorem in the given content using Lean 4. Write the Lean 4 code that directly follows ':=' in the final theorem. The code should either begin with 'by' or be a term expression. You may use the theorems in the given content as lemmas. Do not use 'sorry' in the proof. If you determine that the theorem is not provable, return an empty string instead of a proof. Do not include any additional text."
     ite = 0
     messages=[
         {
@@ -163,7 +176,7 @@ def prover_loop(content : str, env : int, theorem : str, iterations : int = 100,
         ite += 1
         
         # Add retry functionality for API calls
-        max_retries = 3
+        max_retries = 100
         retry_delay = 2
         
         for attempt in range(max_retries):
@@ -183,12 +196,10 @@ def prover_loop(content : str, env : int, theorem : str, iterations : int = 100,
                 if attempt < max_retries - 1:
                     logger.info(f"Retrying in {retry_delay} seconds...")
                     time.sleep(retry_delay)
-                    retry_delay *= 2
+                    retry_delay += 2
                 else:
                     logger.error(f"All retry attempts failed in prover loop")
-                    return False, None, None, {"times": times,
-                                               "api_usages": api_usages,
-                                               }
+                    raise e
         if proof == "":
             logger.info("The theorem is judged to be not provable")
             return False, None, None, {"times": times,
@@ -246,7 +257,7 @@ def conjecture_and_prove_theorems(
     env : int,
     conjecture_iterations : int = 16,
     prove_iterations : int = 16,
-    conjecture_model : str = "gpt-4o",
+    conjecture_model : str = "o3",
     prover_model : str = "o3",
     ) -> tuple[str, int]:
     theorems, conjecture_stats = conjecture_loop(content, env, iterations = conjecture_iterations, model = conjecture_model)
@@ -260,51 +271,87 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='AI Mathematician - Theorem Generation and Proof System')
     parser.add_argument('--seed_file', '-s', required=True, help='Path to the initial file')
     parser.add_argument('--save_dir', '-d', required=True, help='Directory to save results')
-    parser.add_argument('--start_iteration', '-i', type=int, default=0, help='Starting iteration number (default: 0)')
-    parser.add_argument('--conjecture_iterations', '-c', type=int, default=16, help='Number of conjecture generation iterations (default: 16)')
+    parser.add_argument('--conjecture_iterations', '-c', type=int, default=1, help='Number of conjecture generation iterations (default: 16)')
     parser.add_argument('--prove_iterations', '-p', type=int, default=16, help='Number of proof iterations (default: 16)')
-    parser.add_argument('--num_loops', '-n', type=int, default=30, help='Number of main loops (default: 30)')
-    parser.add_argument('--conjecture_model', '-cm', default='gpt-4o', help='Model to use for conjecture generation (default: o3)')
+    parser.add_argument('--conjecture_model', '-cm', default='o3', help='Model to use for conjecture generation (default: o3)')
     parser.add_argument('--prover_model', '-pm', default='o3', help='Model to use for proof (default: o3)')
+    parser.add_argument('--max_api_usages', '-ma', type=int, default=14000000, help='Max API usages (default: 14000000)')
     parser.add_argument('--timeout', '-t', type=float, default=1000.0, help='Timeout for Lean process (default: 1000.0)')
     
     args = parser.parse_args()
     
     # Create save directory
     os.makedirs(args.save_dir, exist_ok=True)
+    os.makedirs(f"{args.save_dir}/conjectures", exist_ok=True)
+    os.makedirs(f"{args.save_dir}/generated", exist_ok=True)
+    os.makedirs(f"{args.save_dir}/stats", exist_ok=True)
     
     # Load initial file
     with open(args.seed_file, "r") as f:
         content = f.read()
     
+    theorem_count = content.count("\ntheorem")
+    # Main loop
+    i=0
+    all_api_usages = 0
+    all_stats = []
+    while os.path.exists(f"{args.save_dir}/stats/{i}.json"):
+        stats = json.load(open(f"{args.save_dir}/stats/{i}.json", "r", encoding="utf-8"))
+        all_api_usages += sum([usage["api_usage"]["total_tokens"] for usage in stats["conjecture_stats"]])
+        all_api_usages += sum([sum([d["total_tokens"] for d in s["api_usages"]]) for s in stats["prove_stats"].values()])
+        theorem_count += sum([stats["prove_stats"][theorem]["proved"] for theorem in stats["prove_stats"]])
+        all_stats.append(json.load(open(f"{args.save_dir}/stats/{i}.json", "r", encoding="utf-8")))
+        with open(f"{args.save_dir}/generated/{i}.lean", "r", encoding="utf-8") as f:
+            generated_content = f.read()
+            content += generated_content
+
+        i += 1
+    logger.info(f"content: {content}")
+    logger.info(f"theorem_count: {theorem_count}")
+    logger.info(f"all_api_usages: {all_api_usages}")
+    logger.info(f"start iteration: {i}")
+    
     # Initialize Lean process
     result = send_reql(content, timeout=args.timeout)
+    logger.info(f"result: {result}")
     assert result is not None
     if "messages" in result:
         for message in result["messages"]:
             assert message["severity"] != "error"
     env = result["env"]
-
-    # Main loop
-    for i in range(args.num_loops):
-        theorems, content, env, stats = conjecture_and_prove_theorems(
+    
+    while all_api_usages < args.max_api_usages:
+        conjectures, new_content, env, stats = conjecture_and_prove_theorems(
             content,
             env,
             conjecture_iterations=args.conjecture_iterations,
             prove_iterations=args.prove_iterations,
             conjecture_model=args.conjecture_model,
             prover_model=args.prover_model
-        )
-        
+        )        
         # Save results
-        with open(f"{args.save_dir}/conjectures_{args.start_iteration+i}.txt", "w", encoding="utf-8") as f:
-            for theorem in theorems:
-                f.write(theorem + "\n")
+        with open(f"{args.save_dir}/conjectures/{i}.txt", "w", encoding="utf-8") as f:
+            for conjecture in conjectures:
+                f.write(conjecture + "\n")
         
-        with open(f"{args.save_dir}/generated_{args.start_iteration+i}.lean", "w", encoding="utf-8") as f:
-            f.write(content)
+        with open(f"{args.save_dir}/generated/{i}.lean", "w", encoding="utf-8") as f:
+            f.write(new_content[len(content):])
+        content = new_content
         
-        with open(f"{args.save_dir}/stats_{args.start_iteration+i}.json", "w", encoding="utf-8") as f:
+        with open(f"{args.save_dir}/stats/{i}.json", "w", encoding="utf-8") as f:
             json.dump(stats, f, indent=2, ensure_ascii=False)
-        
-        logger.info(f"Iteration {args.start_iteration+i} completed")
+        all_stats.append(stats)
+        conjecture_api_usages = sum([usage["api_usage"]["total_tokens"] for usage in stats["conjecture_stats"]])
+        prove_api_usages = sum([sum([d["total_tokens"] for d in s["api_usages"]]) for s in stats["prove_stats"].values()])
+        all_api_usages += conjecture_api_usages + prove_api_usages
+        logger.info(f"All API usages: {all_api_usages}")
+
+        logger.info(f"Iteration {i} completed")
+        theorem_count += sum([stats["prove_stats"][theorem]["proved"] for theorem in stats["prove_stats"]])
+        logger.info(f"Total theorems: {theorem_count}")
+        i += 1
+    
+    with open(f"{args.save_dir}/{args.max_api_usages}_generated.lean", "w", encoding="utf-8") as f:
+        f.write(content)
+    with open(f"{args.save_dir}/{args.max_api_usages}_stats.json", "w", encoding="utf-8") as f:
+        json.dump(all_stats, f, indent=2, ensure_ascii=False)
