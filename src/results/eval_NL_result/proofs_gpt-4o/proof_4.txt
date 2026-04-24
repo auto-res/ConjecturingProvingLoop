@@ -1,0 +1,46 @@
+To prove that the intersection of any two alpha-open sets is alpha-open, we begin with the definition of an alpha-open set in a topological space. 
+
+Let \( X \) be a topological space and \( U \subseteq X \).
+
+A set \( U \) is said to be alpha-open if:
+\[ U \subseteq \text{int}(\overline{\text{int}(U)}) \]
+where \(\text{int}(U)\) denotes the interior of \( U \) and \(\overline{A}\) denotes the closure of a set \( A \).
+
+Now, consider two alpha-open sets \( U \) and \( V \) in \( X \). By definition, we have:
+\[ U \subseteq \text{int}(\overline{\text{int}(U)}) \]
+\[ V \subseteq \text{int}(\overline{\text{int}(V)}) \]
+
+We need to show that \( U \cap V \) is alpha-open, i.e., that:
+\[ U \cap V \subseteq \text{int}(\overline{\text{int}(U \cap V)}) \]
+
+First, consider the interior of the intersection:
+\[ \text{int}(U \cap V) \]
+
+By a property of interiors, we know:
+\[ \text{int}(U \cap V) \subseteq \text{int}(U) \cap \text{int}(V) \]
+
+Taking closures of both sides:
+\[ \overline{\text{int}(U \cap V)} \subseteq \overline{\text{int}(U) \cap \text{int}(V)} \]
+
+Using the closure of intersection property, we have:
+\[ \overline{\text{int}(U) \cap \text{int}(V)} \subseteq \overline{\text{int}(U)} \cap \overline{\text{int}(V)} \]
+
+Consider the interiors:
+\[ \text{int}(\overline{\text{int}(U \cap V)}) \subseteq \text{int}(\overline{\text{int}(U)} \cap \overline{\text{int}(V)}) \]
+
+By another property of interiors:
+\[ \text{int}(\overline{\text{int}(U)} \cap \overline{\text{int}(V)}) \subseteq \text{int}(\overline{\text{int}(U)}) \cap \text{int}(\overline{\text{int}(V)}) \]
+
+Given the alpha-openness of \( U \) and \( V \), it follows:
+\[ U \cap V \subseteq U \subseteq \text{int}(\overline{\text{int}(U)}) \]
+\[ U \cap V \subseteq V \subseteq \text{int}(\overline{\text{int}(V)}) \]
+
+Thus:
+\[ U \cap V \subseteq \text{int}(\overline{\text{int}(U)}) \cap \text{int}(\overline{\text{int}(V)}) \]
+
+Finally:
+\[ U \cap V \subseteq \text{int}(\overline{\text{int}(U \cap V)}) \]
+
+Therefore, the intersection of two alpha-open sets \( U \) and \( V \) is alpha-open. 
+
+Thus, the theorem is true.

@@ -1,0 +1,42 @@
+To prove this theorem, let's start by recalling some definitions in a topological space \( X \):
+
+1. **Interior**: For a set \( A \subseteq X \), the interior of \( A \), denoted by \( \text{int}(A) \), is the largest open set contained in \( A \).
+
+2. **Closure**: For a set \( A \subseteq X \), the closure of \( A \), denoted by \( \overline{A} \), is the smallest closed set containing \( A \).
+
+3. **Alpha-Open Set**: A set \( A \subseteq X \) is defined to be alpha-open if \( A \subseteq \text{int}(\overline{\text{int}(A)}) \).
+
+The theorem states that the intersection of any two alpha-open sets is alpha-open. Let's denote two alpha-open sets by \( A \) and \( B \).
+
+Since \( A \) and \( B \) are alpha-open, we have:
+\[ A \subseteq \text{int}(\overline{\text{int}(A)}) \]
+\[ B \subseteq \text{int}(\overline{\text{int}(B)}) \]
+
+We need to prove that the intersection \( A \cap B \) is also alpha-open. Specifically, we need to show:
+\[ A \cap B \subseteq \text{int}(\overline{\text{int}(A \cap B)}) \]
+
+1. Consider the interior of the intersection \( \text{int}(A \cap B) \):
+   - It holds that \( \text{int}(A \cap B) \subseteq \text{int}(A) \cap \text{int}(B) \).
+
+2. Consider the closure \( \overline{\text{int}(A \cap B)} \):
+   - By the properties of closure and the subset from above, 
+   \[ \overline{\text{int}(A \cap B)} \subseteq \overline{\text{int}(A) \cap \text{int}(B)} \]
+   - However, generally, \( \overline{\text{int}(A) \cap \text{int}(B)} \subseteq \overline{\text{int}(A)} \cap \overline{\text{int}(B)} \).
+
+3. Now consider the interior:
+   - If \( U \subseteq \overline{\text{int}(A)} \cap \overline{\text{int}(B)} \), then \(\text{int}(U) \subseteq \text{int}(\overline{\text{int}(A)}) \cap \text{int}(\overline{\text{int}(B)})\).
+   - Thus, 
+   \[ \text{int}(\overline{\text{int}(A \cap B)}) \subseteq \text{int}(\overline{\text{int}(A)} \cap \overline{\text{int}(B)}) \]
+   - By the intersection property of interiors:
+   \[ \text{int}(\overline{\text{int}(A)}) \cap \text{int}(\overline{\text{int}(B)}) = \text{int}(\overline{\text{int}(A)} \cap \overline{\text{int}(B)}) \]
+
+4. Therefore, for the intersection \( A \cap B \):
+   - \( A \cap B \subseteq A \) and \( A \cap B \subseteq B \), thus \( A \cap B \subseteq \text{int}(\overline{\text{int}(A)}) \cap \text{int}(\overline{\text{int}(B)}) \).
+
+So, \( A \cap B \) is a subset of the intersection of the interiors of the closures of the interiors.
+
+Hence, \( A \cap B \subseteq \text{int}(\overline{\text{int}(A)}) \cap \text{int}(\overline{\text{int}(B)}) = \text{int}(\overline{\text{int}(A \cap B)}) \).
+
+Thus, the intersection of two alpha-open sets is alpha-open.
+
+Therefore, the theorem is true, and the proof is complete.

@@ -1,0 +1,50 @@
+To prove the given theorem, let's first define what it means for a set to be alpha-open in a topological space. 
+
+Let \( (X, \tau) \) be a topological space and let \( A \subseteq X \). The set \( A \) is called alpha-open if 
+
+\[
+A \subseteq \text{int}(\overline{\text{int}(A)}),
+\]
+
+where \( \text{int}(A) \) denotes the interior of \( A \), and \( \overline{\text{int}(A)} \) denotes the closure of \( \text{int}(A) \).
+
+We aim to prove that the intersection of any two alpha-open sets is alpha-open. Let \( A, B \subseteq X \) be two alpha-open sets; hence, by definition, we have:
+
+1. \( A \subseteq \text{int}(\overline{\text{int}(A)}) \)
+2. \( B \subseteq \text{int}(\overline{\text{int}(B)}) \)
+
+We need to show that \( A \cap B \) is also alpha-open, i.e.,
+
+\[
+A \cap B \subseteq \text{int}(\overline{\text{int}(A \cap B)}).
+\]
+
+Firstly, observe that \( \text{int}(A \cap B) \subseteq \text{int}(A) \cap \text{int}(B) \).
+
+Both closure and interior operations are monotonic, so:
+
+\[
+\overline{\text{int}(A \cap B)} \subseteq \overline{\text{int}(A) \cap \text{int}(B)} \subseteq \overline{\text{int}(A)} \cap \overline{\text{int}(B)}.
+\]
+
+Taking interiors again yields:
+
+\[
+\text{int}(\overline{\text{int}(A \cap B)}) \subseteq \text{int}(\overline{\text{int}(A)} \cap \overline{\text{int}(B)}) \subseteq \text{int}(\overline{\text{int}(A)}) \cap \text{int}(\overline{\text{int}(B)}).
+\]
+
+By the assumptions that \( A \subseteq \text{int}(\overline{\text{int}(A)}) \) and \( B \subseteq \text{int}(\overline{\text{int}(B)}) \), it follows that
+
+\[
+A \cap B \subseteq \text{int}(\overline{\text{int}(A)}) \cap \text{int}(\overline{\text{int}(B)}) \supset \text{int}(\overline{\text{int}(A \cap B)}).
+\]
+
+Therefore,
+
+\[
+A \cap B \subseteq \text{int}(\overline{\text{int}(A \cap B)}).
+\]
+
+This shows that \( A \cap B \) is indeed alpha-open. Therefore, the intersection of any two alpha-open sets is alpha-open.
+
+Hence, the theorem is true.

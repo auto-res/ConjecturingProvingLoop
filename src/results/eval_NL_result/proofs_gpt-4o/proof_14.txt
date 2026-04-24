@@ -1,0 +1,35 @@
+To prove the theorem, we begin by recalling the definition of an alpha-open set. In a topological space \( X \), a set \( A \subseteq X \) is said to be alpha-open if 
+\[ A \subseteq \operatorname{int}(\overline{\operatorname{int}(A)}), \]
+where \( \operatorname{int}(S) \) and \( \overline{S} \) denote the interior and closure of a set \( S \) respectively.
+
+We want to show that the intersection of any two alpha-open sets \( A \) and \( B \) is also alpha-open. Specifically, we need to prove that 
+\[ A \cap B \subseteq \operatorname{int}(\overline{\operatorname{int}(A \cap B)}). \]
+
+Let \( A \) and \( B \) be alpha-open sets in \( X \). By definition of alpha-open, we have:
+\[ A \subseteq \operatorname{int}(\overline{\operatorname{int}(A)}) \]
+and 
+\[ B \subseteq \operatorname{int}(\overline{\operatorname{int}(B)}). \]
+
+To show that \( A \cap B \) is alpha-open, we consider the interior of the closure of the interior of \( A \cap B \):
+\[ \operatorname{int}(A \cap B) \subseteq \operatorname{int}(A) \cap \operatorname{int}(B), \]
+because the interior of an intersection is a subset of the intersection of interiors. Subsequently, we have:
+\[ \overline{\operatorname{int}(A \cap B)} \subseteq \overline{\operatorname{int}(A) \cap \operatorname{int}(B)}. \]
+
+However, the right-hand term, \(\overline{\operatorname{int}(A) \cap \operatorname{int}(B)}\), is not necessarily equal to \(\overline{\operatorname{int}(A)} \cap \overline{\operatorname{int}(B)}\).
+
+The crucial part in proving the theorem involves showing:
+\[ \operatorname{int}(\overline{\operatorname{int}(A \cap B)}) \supseteq A \cap B. \]
+
+Using the alpha-open conditions for \( A \) and \( B \):
+1. \( A \subseteq \operatorname{int}(\overline{\operatorname{int}(A)}) \) implies each point \( x \in A \) is an interior point of \(\overline{\operatorname{int}(A)}\).
+2. \( B \subseteq \operatorname{int}(\overline{\operatorname{int}(B)}) \) implies each point \( y \in B \) is an interior point of \(\overline{\operatorname{int}(B)}\).
+
+For \( x \in A \cap B \), \( x \) is an element of both the interiors \(\operatorname{int}(\overline{\operatorname{int}(A)})\) and \(\operatorname{int}(\overline{\operatorname{int}(B)})\).
+
+However, proving that these imply:
+\[ \operatorname{int}(\overline{\operatorname{int}(A \cap B)}) = \operatorname{int}(\overline{\operatorname{int}(A)}) \cap \operatorname{int}(\overline{\operatorname{int}(B)}) \]
+directly, does not hold in general. Therefore, there might exist sets \(A\) and \(B\) for which their intersection is not contained in the required interior; hence failing the condition for being alpha-open.
+
+Therefore, the proposition that the intersection of two alpha-open sets is alpha-open is not always true. Thus, the statement is false.
+
+False

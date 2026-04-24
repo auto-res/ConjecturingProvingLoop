@@ -1,0 +1,41 @@
+To prove the theorem, we need to show that the intersection of any two alpha-open sets in a topological space is alpha-open. 
+
+Firstly, let's recall the definition of an alpha-open set. A subset \( A \) of a topological space \( X \) is said to be alpha-open if \( A \subseteq \text{int}(\overline{\text{int}(A)}) \), where \(\text{int}(A)\) denotes the interior of \( A \), and \(\overline{B}\) denotes the closure of \( B \).
+
+Now, consider two alpha-open sets \( A \) and \( B \) in \( X \). By the definition of alpha-open sets, we have:
+
+\[ A \subseteq \text{int}(\overline{\text{int}(A)}) \]
+\[ B \subseteq \text{int}(\overline{\text{int}(B)}) \]
+
+We need to show that the intersection \( A \cap B \) is alpha-open, i.e.,
+
+\[ A \cap B \subseteq \text{int}(\overline{\text{int}(A \cap B)}) \]
+
+To explore this, let's use the properties of interior and closure operations. Notice the following general facts:
+
+1. \(\text{int}(A \cap B) \subseteq \text{int}(A) \cap \text{int}(B)\)
+
+2. \(\overline{\text{int}(A \cap B)} \subseteq \overline{\text{int}(A) \cap \text{int}(B)}\)
+
+3. \(\text{int}(\overline{\text{int}(A) \cap \text{int}(B)}) \subseteq \text{int}(\overline{\text{int}(A)}) \cap \text{int}(\overline{\text{int}(B)})\)
+
+From these facts, if \( x \in A \cap B \), then:
+
+- Since \( x \in A \), by the alpha-open property of \( A \), \( x \in \text{int}(\overline{\text{int}(A)}) \).
+- Similarly, since \( x \in B \), by the alpha-open property of \( B \), \( x \in \text{int}(\overline{\text{int}(B)}) \).
+
+Thus, \( x \) is in both \(\text{int}(\overline{\text{int}(A)})\) and \(\text{int}(\overline{\text{int}(B)})\), meaning \( x \in \text{int}(\overline{\text{int}(A)}) \cap \text{int}(\overline{\text{int}(B)}) \).
+
+Using the inclusion from above, we have:
+
+\[ x \in \text{int}(\overline{\text{int}(A)}) \cap \text{int}(\overline{\text{int}(B)}) \supseteq \text{int}(\overline{\text{int}(A \cap B)}) \]
+
+Therefore, every element \( x \) of \( A \cap B \) also belongs to \(\text{int}(\overline{\text{int}(A \cap B)})\). Hence:
+
+\[ A \cap B \subseteq \text{int}(\overline{\text{int}(A \cap B)}) \]
+
+which confirms that \( A \cap B \) is an alpha-open set.
+
+Thus, the intersection of any two alpha-open sets is alpha-open. Therefore, the theorem is true.
+
+Hence, we have proved the theorem.
