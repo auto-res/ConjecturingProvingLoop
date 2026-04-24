@@ -1,9 +1,5 @@
 # Conjecturing-Proving Loop
 
-This directory contains the experimental scripts and results for the following paper.
-
-- Kazumi Kasaura, Naoto Onda, Yuta Oriike, Masaya Taniguchi, Akiyoshi Sannai, Sho Sonoda. 2025, "Discovering New Theorems via LLMs with In-Context Proof Learning in Lean."
-
 ## Setup
 
 0. Clone the repository with submodules
