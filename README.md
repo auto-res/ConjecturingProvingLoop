@@ -63,6 +63,12 @@ The generated library in our experiment is stored in `results/P/SL/*`.
 
 The script `proof_lengths.py` is used for arrangement of results.
 
+### Generation without In-Context Learning
+```bash
+uv run python without_context_CPL.py --seed_file notions/P.lean --save_dir results/P_without_context/CPL/tmp
+uv run python without_context_SL.py --seed_file notions/P.lean --save_dir results/P_without_context/SL/tmp
+```
+
 ### Evaluation of Prover
 
 #### Reproving Generated Theorems
@@ -79,4 +85,4 @@ uv run python eval_NL.py --model gpt-4o
 uv run python eval_NL.py --model 3o
 ```
 ### View Results
-Please run `show_proof_lengths.py`.
+Please run `proof_lenghs.py`, `show_proof_lengths.py`, and `proof_length_WC.py`.
