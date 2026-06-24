@@ -4,6 +4,22 @@ import logging, os
 
 logger = logging.getLogger(__name__)
 
+def find_assign_outside_parens(text):
+    depth = 0
+    i = 0
+    while i < len(text):
+        if text[i] == '(':
+            depth += 1
+            i += 1
+        elif text[i] == ')':
+            depth = max(0, depth - 1)
+            i += 1
+        elif depth == 0 and text[i:i+2] == ':=':
+            return i
+        else:
+            i += 1
+    return -1
+
 def count_proof_lengths(dir_path, max_api_usages = 14000000):
     api_usages = 0
     i=0
@@ -28,23 +44,25 @@ def count_proof_lengths(dir_path, max_api_usages = 14000000):
     logger.info(f"total theorems: {count}")
     proof_lengths = []
     for theorem in content.split("theorem")[1:]:
-        proof = theorem[theorem.find(":="):].strip()
+        assign_idx = find_assign_outside_parens(theorem)
+        proof = theorem[assign_idx:].strip() if assign_idx != -1 else ""
         proof_lengths.append(len(proof))
     return proof_lengths
 
-CPL_dir = "results/P/CPL/"
-SL_dir = "results/P/SL/"
+if __name__ == "__main__":
+    CPL_dir = "results/P/CPL/"
+    SL_dir = "results/P/SL/"
 
-nseeds = 20
+    nseeds = 20
 
-CPL_proof_lengths = []
-SL_proof_lengths = []
-for seed in range(nseeds):
-    CPL_proof_lengths.extend(count_proof_lengths(os.path.join(CPL_dir, str(seed))))
-    SL_proof_lengths.extend(count_proof_lengths(os.path.join(SL_dir, str(seed))))
+    CPL_proof_lengths = []
+    SL_proof_lengths = []
+    for seed in range(nseeds):
+        CPL_proof_lengths.extend(count_proof_lengths(os.path.join(CPL_dir, str(seed))))
+        SL_proof_lengths.extend(count_proof_lengths(os.path.join(SL_dir, str(seed))))
 
-with open("results/proof_lengths.json", "w") as f:
-    json.dump({"CPL": CPL_proof_lengths, "SL": SL_proof_lengths}, f)
+    with open("results/proof_lengths.json", "w") as f:
+        json.dump({"CPL": CPL_proof_lengths, "SL": SL_proof_lengths}, f)
 
-print(f"CPL: {len(CPL_proof_lengths) / nseeds}, SL: {len(SL_proof_lengths) / nseeds}")
+    print(f"CPL: {len(CPL_proof_lengths) / nseeds}, SL: {len(SL_proof_lengths) / nseeds}")
 
