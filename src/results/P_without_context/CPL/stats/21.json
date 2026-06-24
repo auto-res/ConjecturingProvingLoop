@@ -1,0 +1,385 @@
+{
+  "conjecture_stats": [
+    {
+      "time": 11.165344715118408,
+      "api_usage": {
+        "completion_tokens": 1607,
+        "prompt_tokens": 265,
+        "total_tokens": 1872,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 896,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0
+        }
+      }
+    }
+  ],
+  "prove_stats": {
+    "theorem P1_empty {X : Type*} [TopologicalSpace X] : P1 (∅ : Set X) :=": {
+      "times": [
+        16.6096932888031
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1313,
+          "prompt_tokens": 242,
+          "total_tokens": 1555,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1280,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": true
+    },
+    "theorem P3_univ {X : Type*} [TopologicalSpace X] : P3 (Set.univ : Set X) :=": {
+      "times": [
+        25.03532385826111
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 3261,
+          "prompt_tokens": 287,
+          "total_tokens": 3548,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 3200,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": true
+    },
+    "theorem P1_Union {X : Type*} [TopologicalSpace X] {ι : Sort _} (s : ι → Set X) : (∀ i, P1 (s i)) → P1 (⋃ i, s i) :=": {
+      "times": [
+        12.677294492721558
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1895,
+          "prompt_tokens": 387,
+          "total_tokens": 2282,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1728,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": true
+    },
+    "theorem P2_subset_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → P1 A :=": {
+      "times": [
+        8.386672973632812
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1036,
+          "prompt_tokens": 571,
+          "total_tokens": 1607,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 960,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": true
+    },
+    "theorem P3_iff_P1_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A ↔ (P1 A ∧ P2 A) :=": {
+      "times": [
+        8.747812747955322
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1042,
+          "prompt_tokens": 675,
+          "total_tokens": 1717,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1024,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem closure_eq_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P1 A) : closure A = closure (interior A) :=": {
+      "times": [
+        14.631962060928345
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1991,
+          "prompt_tokens": 673,
+          "total_tokens": 2664,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1920,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": true
+    },
+    "theorem interior_eq_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P2 A) : interior (closure (interior A)) = interior A :=": {
+      "times": [
+        41.301239013671875
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 4434,
+          "prompt_tokens": 772,
+          "total_tokens": 5206,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 4416,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P2_image_continuous {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {A : Set X} : P2 A → P2 (f '' A) :=": {
+      "times": [
+        20.037817239761353
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1938,
+          "prompt_tokens": 786,
+          "total_tokens": 2724,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1920,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P3_preimage_continuous {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : Y → X} (hf : Continuous f) {B : Set X} : P3 B → P3 (f ⁻¹' B) :=": {
+      "times": [
+        78.58352589607239,
+        219.12664937973022
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 11248,
+          "prompt_tokens": 790,
+          "total_tokens": 12038,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 10880,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        },
+        {
+          "completion_tokens": 23699,
+          "prompt_tokens": 1476,
+          "total_tokens": 25175,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 23680,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P3_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → P3 A :=": {
+      "times": [
+        7.787523508071899
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 884,
+          "prompt_tokens": 761,
+          "total_tokens": 1645,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 768,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": true
+    },
+    "theorem P1_of_closure_subset {X : Type*} [TopologicalSpace X] {A : Set X} (h : closure (interior A) ⊆ closure A) : P1 A :=": {
+      "times": [
+        56.12522506713867
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 5074,
+          "prompt_tokens": 906,
+          "total_tokens": 5980,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 5056,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P2_Inter {X : Type*} [TopologicalSpace X] {ι : Sort _} (s : ι → Set X) : (∀ i, P2 (s i)) → P2 (⋂ i, s i) :=": {
+      "times": [
+        61.336846113204956
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 4690,
+          "prompt_tokens": 916,
+          "total_tokens": 5606,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 4672,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P1_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A → P1 A :=": {
+      "times": [
+        78.95894765853882
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 6994,
+          "prompt_tokens": 894,
+          "total_tokens": 7888,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 6976,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P1_compact {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsCompact A) : P1 A :=": {
+      "times": [
+        18.42388606071472
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 2898,
+          "prompt_tokens": 897,
+          "total_tokens": 3795,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 2880,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": false
+    },
+    "theorem P3_of_compact_closure {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsCompact (closure A)) : P3 A :=": {
+      "times": [
+        7.801436424255371
+      ],
+      "api_usages": [
+        {
+          "completion_tokens": 1234,
+          "prompt_tokens": 902,
+          "total_tokens": 2136,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 1216,
+            "rejected_prediction_tokens": 0
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "proved": false
+    }
+  }
+}

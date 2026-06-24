@@ -1,0 +1,15 @@
+theorem P2_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P1 A) : Topology.P2 A :=
+theorem P3_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P1 A) : Topology.P3 A :=
+theorem P3_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P2 A) : Topology.P3 A :=
+theorem P1_univ {X : Type*} [TopologicalSpace X] : Topology.P1 (Set.univ : Set X) :=
+theorem P2_empty {X : Type*} [TopologicalSpace X] : Topology.P2 (∅ : Set X) :=
+theorem P3_closure {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P3 (closure A) :=
+theorem P1_Union {X : Type*} [TopologicalSpace X] {ι : Sort _} {A : ι → Set X} (hA : ∀ i, Topology.P1 (A i)) : Topology.P1 (⋃ i, A i) :=
+theorem P2_Inter {X : Type*} [TopologicalSpace X] {ι : Sort _} [Finite ι] {A : ι → Set X} (hA : ∀ i, Topology.P2 (A i)) : Topology.P2 (⋂ i, A i) :=
+theorem P1_compl_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P2 A) : Topology.P1 (Aᶜ) :=
+theorem P2_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) : Topology.P2 A :=
+theorem P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) : Topology.P3 A :=
+theorem P3_subset {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) (hB : Topology.P3 B) : Topology.P3 A :=
+theorem P2_iff_P1_and_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P2 A ↔ Topology.P1 A ∧ IsOpen A :=
+theorem P1_iff_denseInteriorClosure {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P1 A ↔ closure (interior A) = closure A :=
+theorem P3_iff_open_contains {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P3 A ↔ ∀ U, IsOpen U → A ⊆ U → U = interior (closure U) :=

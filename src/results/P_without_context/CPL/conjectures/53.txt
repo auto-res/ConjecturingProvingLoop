@@ -1,0 +1,9 @@
+theorem P2_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P2 A → Topology.P1 A :=
+theorem P3_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P3 A → Topology.P1 A :=
+theorem P3_imp_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P3 A → Topology.P2 A :=
+theorem P1_of_isClosed {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) : Topology.P1 A :=
+theorem P1_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) : Topology.P1 A :=
+theorem P2_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) : Topology.P2 A :=
+theorem P3_of_isOpen {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) : Topology.P3 A :=
+theorem P2_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} (hA : closure A = Set.univ) : Topology.P2 A :=
+theorem P1_singleton {X : Type*} [TopologicalSpace X] [T1Space X] {x : X} : Topology.P1 ({x} : Set X) :=

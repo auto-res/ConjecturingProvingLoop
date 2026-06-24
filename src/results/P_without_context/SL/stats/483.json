@@ -1,0 +1,43 @@
+{
+  "times": [
+    28.18589162826538,
+    19.982824087142944
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3836,
+      "prompt_tokens": 270,
+      "total_tokens": 4106,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2143,
+      "prompt_tokens": 426,
+      "total_tokens": 2569,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A := A) → Topology.P1 (A := A) := by\n  intro hA\n  show A ⊆ closure (interior A) from\n    calc\n      A ⊆ interior (closure (interior A)) := hA\n      _ ⊆ closure (interior A) := interior_subset",
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    P2 (X := X) A → P1 (X := X) A := by\n  intro hA\n  dsimp [P2, P1] at hA ⊢\n  exact hA.trans interior_subset"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    53.29942560195923
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5412,
+      "prompt_tokens": 270,
+      "total_tokens": 5682,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5248,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem interior_subset_interior_closure_interior {X : Type*} [TopologicalSpace X]\n    (A : Set X) :\n    interior A ⊆ interior (closure (interior A)) := by\n  -- `interior A` is open\n  have h_open : IsOpen (interior A) := isOpen_interior\n  -- `interior A` is contained in its closure\n  have h_subset : interior A ⊆ closure (interior A) := by\n    intro x hx\n    exact subset_closure hx\n  -- therefore, by maximality of the interior, we obtain the desired inclusion\n  exact interior_maximal h_subset h_open"
+  ],
+  "success": true
+}

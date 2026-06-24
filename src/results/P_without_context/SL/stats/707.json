@@ -1,0 +1,26 @@
+{
+  "times": [
+    11.238527297973633
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1467,
+      "prompt_tokens": 270,
+      "total_tokens": 1737,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {A : Set X} : P2 A → P1 A := by\n  intro hP2\n  dsimp [P2, P1] at *\n  have hSub : interior (closure (interior A)) ⊆ closure (interior A) := by\n    simpa using\n      (interior_subset : interior (closure (interior A)) ⊆ closure (interior A))\n  exact subset_trans hP2 hSub"
+  ],
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.93775177001953
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 5562,
+      "prompt_tokens": 270,
+      "total_tokens": 5832,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5312,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → (Topology.P1 A ∧ Topology.P3 A) := by\n  intro hP2\n  -- Derive P1 : A ⊆ closure (interior A)\n  have hP1 : Topology.P1 A :=\n    subset_trans hP2\n      (interior_subset : interior (closure (interior A)) ⊆ closure (interior A))\n  -- Derive P3 : A ⊆ interior (closure A)\n  have hMono : interior (closure (interior A)) ⊆ interior (closure A) := by\n    have hcl : closure (interior A) ⊆ closure A :=\n      closure_mono (interior_subset : interior A ⊆ A)\n    exact interior_mono hcl\n  have hP3 : Topology.P3 A :=\n    subset_trans hP2 hMono\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    11.82202434539795,
+    14.018299579620361
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2207,
+      "prompt_tokens": 270,
+      "total_tokens": 2477,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2150,
+      "prompt_tokens": 341,
+      "total_tokens": 2491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro h\n  dsimp [Topology.P2, Topology.P1] at *\n  intro x hx\n  exact Set.interior_subset _ (h hx)",
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) A → Topology.P1 (X := X) A := by\n  intro h x hx\n  have hx' : x ∈ interior (closure (interior A)) := h hx\n  exact interior_subset hx'"
+  ],
+  "success": true
+}

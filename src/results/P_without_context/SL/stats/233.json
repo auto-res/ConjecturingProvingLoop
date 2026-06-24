@@ -1,0 +1,26 @@
+{
+  "times": [
+    31.075523614883423
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3076,
+      "prompt_tokens": 270,
+      "total_tokens": 3346,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2944,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P3 {A : Set X} (hA : P2 A) : P3 A := by\n  dsimp [P2] at hA\n  dsimp [P3]\n  intro x hx\n  have hx₁ : x ∈ interior (closure (interior A)) := hA hx\n  have hmono : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono (closure_mono interior_subset)\n  exact hmono hx₁"
+  ],
+  "success": true
+}

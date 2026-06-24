@@ -1,0 +1,26 @@
+{
+  "times": [
+    30.866371870040894
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4821,
+      "prompt_tokens": 270,
+      "total_tokens": 5091,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_imp_P1_and_P3 {A : Set X} :\n    P2 A → (P1 A ∧ P3 A) := by\n  intro hP2\n  -- Rewrite `hP2` into a subset statement\n  have hP2' : A ⊆ interior (closure (interior A)) := by\n    simpa [P2] using hP2\n  -- Proof of `P1 A`\n  have hP1 : P1 A := by\n    have h : A ⊆ closure (interior A) := hP2'.trans interior_subset\n    simpa [P1] using h\n  -- Proof of `P3 A`\n  have hP3 : P3 A := by\n    have hsub : interior (closure (interior A)) ⊆ interior (closure A) := by\n      have h : closure (interior A) ⊆ closure A := closure_mono interior_subset\n      exact interior_mono h\n    have h : A ⊆ interior (closure A) := hP2'.trans hsub\n    simpa [P3] using h\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

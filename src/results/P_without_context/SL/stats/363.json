@@ -1,0 +1,26 @@
+{
+  "times": [
+    12.70970892906189
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2243,
+      "prompt_tokens": 270,
+      "total_tokens": 2513,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {A : Set X} : P2 A → P1 A := by\n  intro hP2\n  unfold P1 P2 at *\n  intro x hxA\n  have hxInt : x ∈ interior (closure (interior A)) := hP2 hxA\n  have hxCl : x ∈ closure (interior A) :=\n    (interior_subset : interior (closure (interior A)) ⊆ closure (interior A)) hxInt\n  exact hxCl"
+  ],
+  "success": true
+}

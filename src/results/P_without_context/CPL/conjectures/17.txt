@@ -1,0 +1,20 @@
+theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :
+    P2 A → P1 A :=
+theorem P3_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :
+    P3 A → P1 A :=
+theorem P3_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :
+    P3 A → P2 A :=
+theorem P1_union_left_or_right {X : Type*} [TopologicalSpace X] {A B : Set X} :
+    P1 (A ∪ B) → P1 A ∨ P1 B :=
+theorem closure_interior_subset_closure {X : Type*} [TopologicalSpace X] {A : Set X} :
+    P1 A → closure (interior A) ⊆ closure A :=
+theorem P1_interior {X : Type*} [TopologicalSpace X] {A : Set X} :
+    P1 (interior A) :=
+theorem P3_closure {X : Type*} [TopologicalSpace X] {A : Set X} :
+    P3 (closure A) :=
+theorem P1_of_subset {X : Type*} [TopologicalSpace X] {A B : Set X} :
+    A ⊆ B → P1 B → P1 A :=
+theorem P2_of_subset_open {X : Type*} [TopologicalSpace X] {A B : Set X} :
+    A ⊆ B → IsOpen B → P2 A :=
+theorem exists_set_not_P1 {X : Type*} [TopologicalSpace X] [Inhabited X] :
+    ∃ A : Set X, ¬ P1 A :=

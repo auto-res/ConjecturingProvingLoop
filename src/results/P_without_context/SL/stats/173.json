@@ -1,0 +1,43 @@
+{
+  "times": [
+    17.692087411880493,
+    16.017580032348633
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2581,
+      "prompt_tokens": 270,
+      "total_tokens": 2851,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2413,
+      "prompt_tokens": 341,
+      "total_tokens": 2754,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2304,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro hP2\n  intro x hx\n  exact (Set.interior_subset) (hP2 hx)",
+    "theorem P1_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P2 A) :\n    Topology.P1 A :=\nby\n  unfold Topology.P2 at h\n  unfold Topology.P1\n  exact Set.Subset.trans h\n    (interior_subset : interior (closure (interior A)) ⊆ closure (interior A))"
+  ],
+  "success": true
+}

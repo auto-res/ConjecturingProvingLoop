@@ -1,0 +1,9 @@
+theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → P1 A :=
+theorem P3_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A → P2 A :=
+theorem P1_closure {X : Type*} [TopologicalSpace X] {A : Set X} : P1 (closure A) :=
+theorem P2_interior {X : Type*} [TopologicalSpace X] {A : Set X} : P2 (interior A) :=
+theorem P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} : P1 A → P1 B → P1 (A ∪ B) :=
+theorem P3_inter {X : Type*} [TopologicalSpace X] {A B : Set X} : P3 A → P3 B → P3 (A ∩ B) :=
+theorem exists_dense_subset_satisfying_P2 {X : Type*} [TopologicalSpace X] : ∃ A : Set X, Dense A ∧ P2 A :=
+theorem closed_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} (hP : P3 A) : IsClosed (interior (closure A)) :=
+theorem open_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (hP : P1 A) : IsOpen (closure (interior A)) :=

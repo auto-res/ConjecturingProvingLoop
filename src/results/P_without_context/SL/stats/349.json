@@ -1,0 +1,26 @@
+{
+  "times": [
+    40.95383381843567
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4849,
+      "prompt_tokens": 270,
+      "total_tokens": 5119,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4544,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_imp_P1_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    P2 A → P1 A ∧ P3 A := by\n  intro hP2\n  have hP1 : P1 A := by\n    dsimp [P1]\n    intro x hxA\n    have hx : x ∈ interior (closure (interior A)) := by\n      dsimp [P2] at hP2\n      exact hP2 hxA\n    exact (interior_subset : interior (closure (interior A)) ⊆ _) hx\n  have hP3 : P3 A := by\n    dsimp [P3]\n    intro x hxA\n    have hx : x ∈ interior (closure (interior A)) := by\n      dsimp [P2] at hP2\n      exact hP2 hxA\n    have hsubset : interior (closure (interior A)) ⊆ interior (closure A) := by\n      apply interior_mono\n      have : closure (interior A) ⊆ closure A := by\n        apply closure_mono\n        exact (interior_subset : interior A ⊆ A)\n      exact this\n    exact hsubset hx\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

@@ -1,0 +1,10 @@
+theorem P2_implies_P1 {A : Set X} : P2 A → P1 A :=
+theorem P3_implies_P1 {A : Set X} : P3 A → P1 A :=
+theorem open_set_P2 {A : Set X} (hA : IsOpen A) : P2 A :=
+theorem open_set_P3 {A : Set X} (hA : IsOpen A) : P3 A :=
+theorem P1_union {A B : Set X} : P1 A → P1 B → P1 (A ∪ B) :=
+theorem P3_inter {A B : Set X} : P3 A → P3 B → P3 (A ∩ B) :=
+theorem P2_empty : P2 (∅ : Set X) :=
+theorem P3_closure_subset {A : Set X} : P3 A → closure A ⊆ interior (closure A) :=
+theorem P1_iff_closure_eq {A : Set X} : P1 A ↔ closure (interior A) = closure A :=
+theorem exists_nonempty_P1_not_P2 : ∃ A : Set X, P1 A ∧ ¬ P2 A :=

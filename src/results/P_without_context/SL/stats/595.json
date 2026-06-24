@@ -1,0 +1,26 @@
+{
+  "times": [
+    28.323847770690918
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4093,
+      "prompt_tokens": 270,
+      "total_tokens": 4363,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro hP2\n  intro x hxA\n  have hx_int : x ∈ interior (closure (interior A)) := hP2 hxA\n  have hx_clo : x ∈ closure (interior A) := interior_subset hx_int\n  exact hx_clo"
+  ],
+  "success": true
+}

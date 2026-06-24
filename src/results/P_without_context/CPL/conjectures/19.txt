@@ -1,0 +1,9 @@
+theorem P2_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A → P2 A :=
+theorem P3_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → P3 A :=
+theorem P3_all {X : Type*} [TopologicalSpace X] (A : Set X) : P3 A :=
+theorem P1_iff_closure_eq_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A ↔ closure (interior A) = closure A :=
+theorem open_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → IsOpen A :=
+theorem closed_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A → IsClosed A :=
+theorem P1_iff_dense {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A ↔ closure (interior A) = Set.univ :=
+theorem P2_iUnion {X ι : Type*} [TopologicalSpace X] (s : ι → Set X) (h : ∀ i, P2 (s i)) : P2 (⋃ i, s i) :=
+theorem P1_mono {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : P1 A) (hBA : B ⊆ A) : P1 B :=

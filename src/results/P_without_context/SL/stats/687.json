@@ -1,0 +1,26 @@
+{
+  "times": [
+    51.19432759284973
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4417,
+      "prompt_tokens": 270,
+      "total_tokens": 4687,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4224,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A := A) → Topology.P3 (A := A) := by\n  intro hP2\n  unfold Topology.P2 at hP2\n  unfold Topology.P3\n  intro x hxA\n  have hx1 : x ∈ interior (closure (interior A)) := hP2 hxA\n  have hsubset : interior (closure (interior A)) ⊆ interior (closure A) := by\n    have hcl : closure (interior A) ⊆ closure A :=\n      closure_mono (interior_subset : interior A ⊆ A)\n    exact interior_mono hcl\n  exact hsubset hx1"
+  ],
+  "success": true
+}

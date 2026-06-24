@@ -1,0 +1,26 @@
+{
+  "times": [
+    20.061095237731934
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2883,
+      "prompt_tokens": 270,
+      "total_tokens": 3153,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2752,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) A → Topology.P3 (X := X) A := by\n  intro h\n  dsimp [Topology.P2, Topology.P3] at *\n  have hSub : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono (closure_mono interior_subset)\n  exact Set.Subset.trans h hSub"
+  ],
+  "success": true
+}

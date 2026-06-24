@@ -1,0 +1,43 @@
+{
+  "times": [
+    20.883976459503174,
+    54.18733310699463
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1638,
+      "prompt_tokens": 270,
+      "total_tokens": 1908,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 5677,
+      "prompt_tokens": 365,
+      "total_tokens": 6042,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 5568,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro hA\n  have h₁ : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset _\n  exact subset_trans hA h₁",
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro hA\n  exact\n    Set.Subset.trans hA\n      (by\n        simpa using\n          (interior_subset :\n            interior (closure (interior A)) ⊆ closure (interior A)))"
+  ],
+  "success": true
+}

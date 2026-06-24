@@ -1,0 +1,43 @@
+{
+  "times": [
+    12.709530353546143,
+    22.44629740715027
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1751,
+      "prompt_tokens": 270,
+      "total_tokens": 2021,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1664,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3171,
+      "prompt_tokens": 385,
+      "total_tokens": 3556,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {A : Set X} : P2 A → P1 A := by\n  intro hP2\n  intro x hxA\n  have hx_int : x ∈ interior (closure (interior A)) := hP2 hxA\n  exact (interior_subset _) hx_int",
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro hA\n  have hsubset : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset\n  exact hA.trans hsubset"
+  ],
+  "success": true
+}

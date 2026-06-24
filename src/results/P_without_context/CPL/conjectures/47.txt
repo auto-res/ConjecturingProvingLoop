@@ -1,0 +1,9 @@
+theorem P2_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A → P2 A :=
+theorem P3_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → P3 A :=
+theorem P3_union {X : Type*} [TopologicalSpace X] {A B : Set X} : P3 A → P3 B → P3 (A ∪ B) :=
+theorem P1_of_subset_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} : A ⊆ interior (closure A) → P1 A :=
+theorem P1_iff_closure_eq {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A ↔ closure (interior A) = closure A :=
+theorem P2_empty (X : Type*) [TopologicalSpace X] : P2 (∅ : Set X) :=
+theorem P2_univ (X : Type*) [TopologicalSpace X] : P2 (Set.univ : Set X) :=
+theorem P1_image_homeomorph {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] (h : Homeomorph X Y) {A : Set X} : P1 A → P1 (h '' A) :=
+theorem P3_anti_monotone {X : Type*} [TopologicalSpace X] {A B : Set X} : A ⊆ B → P3 B → P3 A :=

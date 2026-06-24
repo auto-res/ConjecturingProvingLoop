@@ -1,0 +1,10 @@
+theorem P2_implies_P1 (A : Set X) : P2 A → P1 A :=
+theorem P2_implies_P3 (A : Set X) : P2 A → P3 A :=
+theorem P3_implies_P1 (A : Set X) : P3 A → P1 A :=
+theorem closure_eq_of_P1 (A : Set X) (h : P1 A) : closure (interior A) = closure A :=
+theorem interior_closure_eq_of_P2 (A : Set X) (h : P2 A) : interior (closure (interior A)) = interior A :=
+theorem P1_union {A B : Set X} : P1 A → P1 B → P1 (A ∪ B) :=
+theorem P3_inter {A B : Set X} : P3 A → P3 B → P3 (A ∩ B) :=
+theorem P2_image {Y : Type*} [TopologicalSpace Y] (f : X → Y) (hf : Continuous f) {A : Set X} : P2 A → P2 (f '' A) :=
+theorem P3_preimage {Y : Type*} [TopologicalSpace Y] (f : Y → X) (hf : Continuous f) {B : Set X} : P3 B → P3 (f ⁻¹' B) :=
+theorem P1_iff_dense_interior (A : Set X) : P1 A ↔ closure (interior A) = closure A :=

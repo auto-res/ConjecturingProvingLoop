@@ -1,0 +1,12 @@
+theorem P2_implies_P1 {A : Set X} : P2 A → P1 A :=
+theorem P3_implies_P1 {A : Set X} : P3 A → P1 A :=
+theorem P1_of_isOpen {A : Set X} (hA : IsOpen A) : P1 A :=
+theorem P2_of_isOpen {A : Set X} (hA : IsOpen A) : P2 A :=
+theorem P3_of_isClosed {A : Set X} (hA : IsClosed A) : P3 (interior A) :=
+theorem P1_mono {A B : Set X} (hAB : A ⊆ B) (hB : P1 B) : P1 A :=
+theorem P2_mono {A B : Set X} (hAB : A ⊆ B) (hB : P2 B) : P2 A :=
+theorem P3_mono {A B : Set X} (hAB : A ⊆ B) (hB : P3 B) : P3 A :=
+theorem P2_union {A B : Set X} (hA : P2 A) (hB : P2 B) : P2 (A ∪ B) :=
+theorem P3_inter {A B : Set X} (hA : P3 A) (hB : P3 B) : P3 (A ∩ B) :=
+theorem P1_sUnion {𝒜 : Set (Set X)} (h : ∀ A ∈ 𝒜, P1 A) : P1 (⋃₀ 𝒜) :=
+theorem interior_closure_eq_of_P3 {A : Set X} (h : P3 A) : interior (closure A) = interior A :=

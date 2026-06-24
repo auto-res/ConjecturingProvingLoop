@@ -1,0 +1,43 @@
+{
+  "times": [
+    16.977076768875122,
+    21.2530620098114
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2205,
+      "prompt_tokens": 270,
+      "total_tokens": 2475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1781,
+      "prompt_tokens": 346,
+      "total_tokens": 2127,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1728,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P3_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → Topology.P3 A := by\n  intro hP2\n  unfold Topology.P2 Topology.P3 at *\n  have hsubset : interior (closure (interior A)) ⊆ interior (closure A) := by\n    have h₁ : closure (interior A) ⊆ closure A := by\n      exact closure_mono (interior_subset (A := A))\n    exact interior_mono h₁\n  exact hP2.trans hsubset",
+    "theorem P2_implies_P1 {A : Set X} : P2 A → P1 A := by\n  intro h\n  exact h.trans interior_subset"
+  ],
+  "success": true
+}

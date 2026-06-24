@@ -1,0 +1,43 @@
+{
+  "times": [
+    20.392038822174072,
+    24.443097829818726
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2473,
+      "prompt_tokens": 270,
+      "total_tokens": 2743,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3156,
+      "prompt_tokens": 341,
+      "total_tokens": 3497,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P2 (X:=X) A) :\n    Topology.P1 (X:=X) A := by\n  intro x hxA\n  have : x ∈ interior (closure (interior A)) := h hxA\n  exact Set.interior_subset this",
+    "theorem Topology.P2_implies_P1\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) A → Topology.P1 (X := X) A := by\n  intro h\n  exact h.trans interior_subset"
+  ],
+  "success": true
+}

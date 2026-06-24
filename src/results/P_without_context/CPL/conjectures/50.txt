@@ -1,0 +1,12 @@
+theorem P1_implies_P2 {A : Set X} : P1 A → P2 A :=
+theorem P2_implies_P3 {A : Set X} : P2 A → P3 A :=
+theorem P3_implies_P1 {A : Set X} : P3 A → P1 A :=
+theorem P1_union {A B : Set X} : P1 A → P1 B → P1 (A ∪ B) :=
+theorem P1_inter {A B : Set X} : P1 A → P1 B → P1 (A ∩ B) :=
+theorem P1_empty : P1 (∅ : Set X) :=
+theorem P2_univ : P2 (Set.univ : Set X) :=
+theorem exists_dense_subset_of_P1 {A : Set X} : P1 A → ∃ B : Set X, B ⊆ A ∧ closure B = closure A :=
+theorem P3_closed_implies_open {A : Set X} : IsClosed A → P3 A → IsOpen A :=
+theorem P2_open_implies_closed {A : Set X} : IsOpen A → P2 A → IsClosed A :=
+theorem P1_subsingleton [Subsingleton X] {A : Set X} : P1 A :=
+theorem P2_of_preirreducible {A : Set X} (h : IsPreirreducible A) : P2 A :=

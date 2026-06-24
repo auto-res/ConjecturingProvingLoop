@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.242109298706055
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3991,
+      "prompt_tokens": 270,
+      "total_tokens": 4261,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3712,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_imp_P1_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → (Topology.P1 A ∧ Topology.P3 A) := by\n  intro hP2\n  have hP1 : Topology.P1 A := by\n    dsimp [Topology.P1]\n    have h : A ⊆ interior (closure (interior A)) := by\n      simpa [Topology.P2] using hP2\n    exact Set.Subset.trans h interior_subset\n  have hP3 : Topology.P3 A := by\n    dsimp [Topology.P3]\n    have h : A ⊆ interior (closure (interior A)) := by\n      simpa [Topology.P2] using hP2\n    have h_subset : interior (closure (interior A)) ⊆ interior (closure A) := by\n      have h_closure_subset : closure (interior A) ⊆ closure A :=\n        closure_mono interior_subset\n      exact interior_mono h_closure_subset\n    exact Set.Subset.trans h h_subset\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

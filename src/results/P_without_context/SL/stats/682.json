@@ -1,0 +1,26 @@
+{
+  "times": [
+    18.824119567871094
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2709,
+      "prompt_tokens": 270,
+      "total_tokens": 2979,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → Topology.P1 A := by\n  intro hP2\n  dsimp [Topology.P1, Topology.P2] at hP2 ⊢\n  intro x hxA\n  have hInt : x ∈ interior (closure (interior A)) := hP2 hxA\n  exact\n    (interior_subset : interior (closure (interior A)) ⊆ closure (interior A)) hInt"
+  ],
+  "success": true
+}

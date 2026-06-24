@@ -1,0 +1,15 @@
+theorem P1_empty {X : Type*} [TopologicalSpace X] : P1 (∅ : Set X) :=
+theorem P3_univ {X : Type*} [TopologicalSpace X] : P3 (Set.univ : Set X) :=
+theorem P1_Union {X : Type*} [TopologicalSpace X] {ι : Sort _} (s : ι → Set X) : (∀ i, P1 (s i)) → P1 (⋃ i, s i) :=
+theorem P2_subset_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → P1 A :=
+theorem P3_iff_P1_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A ↔ (P1 A ∧ P2 A) :=
+theorem closure_eq_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P1 A) : closure A = closure (interior A) :=
+theorem interior_eq_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P2 A) : interior (closure (interior A)) = interior A :=
+theorem P2_image_continuous {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {A : Set X} : P2 A → P2 (f '' A) :=
+theorem P3_preimage_continuous {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : Y → X} (hf : Continuous f) {B : Set X} : P3 B → P3 (f ⁻¹' B) :=
+theorem P3_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → P3 A :=
+theorem P1_of_closure_subset {X : Type*} [TopologicalSpace X] {A : Set X} (h : closure (interior A) ⊆ closure A) : P1 A :=
+theorem P2_Inter {X : Type*} [TopologicalSpace X] {ι : Sort _} (s : ι → Set X) : (∀ i, P2 (s i)) → P2 (⋂ i, s i) :=
+theorem P1_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A → P1 A :=
+theorem P1_compact {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsCompact A) : P1 A :=
+theorem P3_of_compact_closure {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsCompact (closure A)) : P3 A :=

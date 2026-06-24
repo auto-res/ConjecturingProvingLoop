@@ -1,0 +1,26 @@
+{
+  "times": [
+    34.555495738983154
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3442,
+      "prompt_tokens": 270,
+      "total_tokens": 3712,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3264,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_imp_P3 {A : Set X} : P2 (A := A) → P3 (A := A) := by\n  intro hP2\n  dsimp [P2] at hP2\n  dsimp [P3]\n  intro x hxA\n  have hx' : x ∈ interior (closure (interior A)) := hP2 hxA\n  have h_closure_subset : closure (interior A) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  have h_inter_subset : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono h_closure_subset\n  exact h_inter_subset hx'"
+  ],
+  "success": true
+}

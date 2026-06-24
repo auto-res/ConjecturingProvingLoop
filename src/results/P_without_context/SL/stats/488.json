@@ -1,0 +1,26 @@
+{
+  "times": [
+    35.77430772781372
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4133,
+      "prompt_tokens": 270,
+      "total_tokens": 4403,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3840,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1_and_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A := A) → (Topology.P1 A ∧ Topology.P3 A) := by\n  intro hP2\n  -- Prove P1\n  have hP1 : Topology.P1 A := by\n    intro x hx\n    have hx₁ : x ∈ interior (closure (interior A)) := hP2 hx\n    have hx₂ : x ∈ closure (interior A) := (interior_subset) hx₁\n    exact hx₂\n  -- Prove P3\n  have hP3 : Topology.P3 A := by\n    intro x hx\n    have hx₁ : x ∈ interior (closure (interior A)) := hP2 hx\n    have hcl_subset : closure (interior A) ⊆ closure A := by\n      apply closure_mono\n      exact interior_subset\n    have h_int_subset : interior (closure (interior A)) ⊆ interior (closure A) :=\n      interior_mono hcl_subset\n    exact h_int_subset hx₁\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

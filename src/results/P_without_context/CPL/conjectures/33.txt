@@ -1,0 +1,10 @@
+theorem P2_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A → P2 A :=
+theorem P3_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A → P3 A :=
+theorem P3_iff_P1_and_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A ↔ P1 A ∧ P2 A :=
+theorem closed_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A → IsClosed A :=
+theorem open_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A → IsOpen A :=
+theorem dense_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → Dense A :=
+theorem P1_univ {X : Type*} [TopologicalSpace X] : P1 (Set.univ : Set X) :=
+theorem exists_P2_subset {X : Type*} [TopologicalSpace X] {A : Set X} : ∃ B : Set X, B ⊆ A ∧ P2 B :=
+theorem P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} : P1 A → P1 B → P1 (A ∪ B) :=
+theorem P3_inter {X : Type*} [TopologicalSpace X] {A B : Set X} : P3 A → P3 B → P3 (A ∩ B) :=

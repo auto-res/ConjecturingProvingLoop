@@ -1,0 +1,12 @@
+theorem P2_of_P1 {X : Type*} [TopologicalSpace X] (A : Set X) : Topology.P1 A → Topology.P2 A :=
+theorem P3_of_P2 {X : Type*} [TopologicalSpace X] (A : Set X) : Topology.P2 A → Topology.P3 A :=
+theorem P1_of_P3 {X : Type*} [TopologicalSpace X] (A : Set X) : Topology.P3 A → Topology.P1 A :=
+theorem P1_iff_P2 {X : Type*} [TopologicalSpace X] (A : Set X) : Topology.P1 A ↔ Topology.P2 A :=
+theorem P2_iff_P3 {X : Type*} [TopologicalSpace X] (A : Set X) : Topology.P2 A ↔ Topology.P3 A :=
+theorem P1_iff_P3 {X : Type*} [TopologicalSpace X] (A : Set X) : Topology.P1 A ↔ Topology.P3 A :=
+theorem isClosed_of_P1 {X : Type*} [TopologicalSpace X] (A : Set X) : Topology.P1 A → IsClosed A :=
+theorem isOpen_of_P2 {X : Type*} [TopologicalSpace X] (A : Set X) : Topology.P2 A → IsOpen A :=
+theorem dense_of_P3 {X : Type*} [TopologicalSpace X] (A : Set X) : Topology.P3 A → closure A = Set.univ :=
+theorem P1_univ {X : Type*} [TopologicalSpace X] : Topology.P1 (Set.univ : Set X) :=
+theorem P3_empty {X : Type*} [TopologicalSpace X] : Topology.P3 (∅ : Set X) :=
+theorem P2_inter {X : Type*} [TopologicalSpace X] {A B : Set X} : Topology.P2 (A ∩ B) → Topology.P2 A ∧ Topology.P2 B :=

@@ -1,0 +1,26 @@
+{
+  "times": [
+    15.894488334655762
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2479,
+      "prompt_tokens": 270,
+      "total_tokens": 2749,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2368,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro hA\n  unfold Topology.P2 Topology.P1 at *\n  have h_sub : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset\n  exact hA.trans h_sub"
+  ],
+  "success": true
+}

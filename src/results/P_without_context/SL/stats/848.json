@@ -1,0 +1,43 @@
+{
+  "times": [
+    39.599924087524414,
+    34.001166105270386
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3196,
+      "prompt_tokens": 270,
+      "total_tokens": 3466,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4078,
+      "prompt_tokens": 393,
+      "total_tokens": 4471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3904,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P3 (A : Set X) : P2 A → P3 A := by\n  intro hP2\n  intro x hxA\n  have hx₁ : x ∈ interior (closure (interior A)) := hP2 hxA\n  have hsubset : closure (interior A : Set X) ⊆ closure A :=\n    Set.closure_mono Set.interior_subset\n  exact (Set.interior_mono hsubset) hx₁",
+    "theorem P2_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    P2 A → P3 A := by\n  intro hP2\n  unfold P3\n  intro x hx\n  have hx₁ : x ∈ interior (closure (interior A)) := hP2 hx\n  have h_closure : closure (interior A) ⊆ closure A := by\n    have : interior A ⊆ A := interior_subset\n    exact closure_mono this\n  have h_interior : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono h_closure\n  exact h_interior hx₁"
+  ],
+  "success": true
+}

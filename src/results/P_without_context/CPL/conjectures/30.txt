@@ -1,0 +1,10 @@
+theorem P2_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P1 A) : Topology.P2 A :=
+theorem P3_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P2 A) : Topology.P3 A :=
+theorem closure_interior_eq_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P1 A) : closure (interior A) = closure A :=
+theorem interior_closure_eq_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P3 A) : interior (closure A) = interior A :=
+theorem P3_closed_of_open {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) (hP3 : Topology.P3 A) : IsClosed A :=
+theorem dense_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P1 A) : closure (interior A) = Set.univ :=
+theorem exists_nontrivial_P2 {X : Type*} [TopologicalSpace X] [Nonempty X] [T0Space X] : ∃ A : Set X, A.Nonempty ∧ A ≠ Set.univ ∧ Topology.P2 A :=
+theorem P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : Topology.P1 A) (hB : Topology.P1 B) : Topology.P1 (A ∪ B) :=
+theorem P3_inter {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : Topology.P3 A) (hB : Topology.P3 B) : Topology.P3 (A ∩ B) :=
+theorem P2_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P2 A) : Topology.P1 A :=

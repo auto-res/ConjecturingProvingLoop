@@ -1,0 +1,26 @@
+{
+  "times": [
+    29.961029529571533
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3807,
+      "prompt_tokens": 270,
+      "total_tokens": 4077,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_imp_P1_and_P3 {A : Set X} (h : P2 (A := A)) :\n    P1 (A := A) ∧ P3 (A := A) := by\n  have hP1 : P1 (A := A) := by\n    dsimp [P1, P2] at h ⊢\n    exact Set.Subset.trans h interior_subset\n  have hP3 : P3 (A := A) := by\n    dsimp [P3, P2] at h ⊢\n    have h_ic_subset : interior (closure (interior A)) ⊆ interior (closure A) := by\n      have h_closure_subset : closure (interior A) ⊆ closure A :=\n        closure_mono interior_subset\n      exact interior_mono h_closure_subset\n    exact Set.Subset.trans h h_ic_subset\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

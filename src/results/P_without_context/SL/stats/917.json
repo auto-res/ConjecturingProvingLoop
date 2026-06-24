@@ -1,0 +1,43 @@
+{
+  "times": [
+    26.22391653060913,
+    15.32659363746643
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3421,
+      "prompt_tokens": 270,
+      "total_tokens": 3691,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3328,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1909,
+      "prompt_tokens": 341,
+      "total_tokens": 2250,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1792,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : P2 (A := A)) : P1 (A := A) :=\nby\n  dsimp [P2, P1] at *\n  intro x hx\n  exact Set.interior_subset (h hx)",
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    P2 A → P1 A := by\n  intro hP2\n  dsimp [P2] at hP2\n  dsimp [P1]\n  have h_int : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset\n  exact subset_trans hP2 h_int"
+  ],
+  "success": true
+}

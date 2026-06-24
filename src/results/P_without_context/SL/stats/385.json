@@ -1,0 +1,43 @@
+{
+  "times": [
+    24.24321746826172,
+    22.908740282058716
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2836,
+      "prompt_tokens": 270,
+      "total_tokens": 3106,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3208,
+      "prompt_tokens": 342,
+      "total_tokens": 3550,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3072,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    P2 A → P3 A := by\n  intro hP2\n  unfold P2 at hP2\n  unfold P3\n  have h1 : closure (interior A) ⊆ closure A :=\n    closure_mono (interior_subset : interior A ⊆ A)\n  have h2 : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono h1\n  exact Subset.trans hP2 h2",
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    P2 A → P1 A := by\n  intro hP2\n  dsimp [P2] at hP2\n  dsimp [P1]\n  intro x hxA\n  have hx_int : x ∈ interior (closure (interior A)) := hP2 hxA\n  exact (interior_subset : interior (closure (interior A)) ⊆ closure (interior A)) hx_int"
+  ],
+  "success": true
+}

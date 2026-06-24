@@ -1,0 +1,13 @@
+theorem P2_of_open {X : Type*} [TopologicalSpace X] (A : Set X) (hA : IsOpen A) : P2 (X:=X) A :=
+theorem P3_of_closed {X : Type*} [TopologicalSpace X] (A : Set X) (hA : IsClosed A) : P3 (X:=X) A :=
+theorem P1_of_P2 {X : Type*} [TopologicalSpace X] (A : Set X) (h : P2 (X:=X) A) : P1 (X:=X) A :=
+theorem P1_of_P3 {X : Type*} [TopologicalSpace X] (A : Set X) (h : P3 (X:=X) A) : P1 (X:=X) A :=
+theorem P3_of_subset {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : A ⊆ B) (hB : P3 (X:=X) B) : P3 (X:=X) A :=
+theorem P2_of_subset {X : Type*} [TopologicalSpace X] {A B : Set X} (hBA : B ⊆ A) (hA : P2 (X:=X) A) : P2 (X:=X) B :=
+theorem P1_iff_closure_eq {X : Type*} [TopologicalSpace X] (A : Set X) : P1 (X:=X) A ↔ closure (interior A) = closure A :=
+theorem exists_P2_not_closed (X : Type*) [TopologicalSpace X] [Nontrivial X] : ∃ A : Set X, P2 (X:=X) A ∧ ¬ IsClosed A :=
+theorem P2_inter {X : Type*} [TopologicalSpace X] (A B : Set X) (hA : P2 (X:=X) A) (hB : P2 (X:=X) B) : P2 (X:=X) (A ∩ B) :=
+theorem P3_union {X : Type*} [TopologicalSpace X] (A B : Set X) (hA : P3 (X:=X) A) (hB : P3 (X:=X) B) : P3 (X:=X) (A ∪ B) :=
+theorem P2_image_continuous {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] (f : X → Y) (hf : Continuous f) (A : Set X) (hA : P2 (X:=X) A) : P2 (X:=Y) (f '' A) :=
+theorem P1_preimage_open {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] (f : X → Y) (hf : IsOpenMap f) (B : Set Y) (hB : P1 (X:=Y) B) : P1 (X:=X) (f ⁻¹' B) :=
+theorem P3_of_compact {X : Type*} [TopologicalSpace X] (A : Set X) (hA : IsCompact A) : P3 (X:=X) A :=

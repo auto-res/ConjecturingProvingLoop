@@ -1,0 +1,9 @@
+theorem P1_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P2 A) : P1 A :=
+theorem P2_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P3 A) : P2 A :=
+theorem P3_of_closed {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) : P3 A :=
+theorem P1_empty {X : Type*} [TopologicalSpace X] : P1 (∅ : Set X) :=
+theorem P3_bInter {X : Type*} [TopologicalSpace X] {ι : Sort*} {s : ι → Set X} (h : ∀ i, P3 (s i)) : P3 (⋂ i, s i) :=
+theorem P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : P1 A) (hB : P1 B) : P1 (A ∪ B) :=
+theorem P2_of_open {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) : P2 A :=
+theorem P3_closure_eq_self {X : Type*} [TopologicalSpace X] {A : Set X} (h : closure A = A) : P3 A :=
+theorem P1_interior_eq_self {X : Type*} [TopologicalSpace X] {A : Set X} (h : interior A = A) : P1 A :=

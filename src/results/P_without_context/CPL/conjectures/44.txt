@@ -1,0 +1,10 @@
+theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P2 A) : Topology.P1 A :=
+theorem P3_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P3 A) : Topology.P1 A :=
+theorem P3_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (h : Topology.P3 A) : Topology.P2 A :=
+theorem P2_of_open {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) : Topology.P2 A :=
+theorem P3_of_closed {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) : Topology.P3 A :=
+theorem P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : Topology.P1 A) (hB : Topology.P1 B) : Topology.P1 (A ∪ B) :=
+theorem P1_inter {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : Topology.P1 A) (hB : Topology.P1 B) : Topology.P1 (A ∩ B) :=
+theorem P2_union {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : Topology.P2 A) (hB : Topology.P2 B) : Topology.P2 (A ∪ B) :=
+theorem P1_iff_closure_interior_eq_closure {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P1 A ↔ closure (interior A) = closure A :=
+theorem P1_iff_IdempotentInteriorClosure {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P1 A ↔ interior (closure (interior A)) = interior A :=

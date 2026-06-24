@@ -1,0 +1,26 @@
+{
+  "times": [
+    27.877634286880493
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4910,
+      "prompt_tokens": 270,
+      "total_tokens": 5180,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4672,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_imp_P1_and_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (A : Set X) → Topology.P1 A ∧ Topology.P3 A := by\n  intro hP2\n  dsimp [Topology.P2] at hP2\n  -- P1 follows since interior ⊆ closure\n  have h1 : Topology.P1 A := by\n    dsimp [Topology.P1]\n    exact Set.Subset.trans hP2 (interior_subset)\n  -- P3 follows by monotonicity of closure and interior\n  have h2 : Topology.P3 A := by\n    dsimp [Topology.P3]\n    have hcl : closure (interior A) ⊆ closure A :=\n      closure_mono (interior_subset : interior A ⊆ A)\n    exact Set.Subset.trans hP2 (interior_mono hcl)\n  exact And.intro h1 h2"
+  ],
+  "success": true
+}

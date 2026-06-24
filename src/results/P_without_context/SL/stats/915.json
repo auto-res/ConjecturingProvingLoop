@@ -1,0 +1,26 @@
+{
+  "times": [
+    27.37590503692627
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2808,
+      "prompt_tokens": 270,
+      "total_tokens": 3078,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2688,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_to_P3 {A : Set X} (h : P2 A) : P3 A := by\n  dsimp [P2, P3] at *\n  have hle1 : closure (interior A) ⊆ closure A :=\n    closure_mono interior_subset\n  have hle2 : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono hle1\n  exact h.trans hle2"
+  ],
+  "success": true
+}

@@ -1,0 +1,43 @@
+{
+  "times": [
+    22.634239435195923,
+    42.7051739692688
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2140,
+      "prompt_tokens": 270,
+      "total_tokens": 2410,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2048,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 4192,
+      "prompt_tokens": 341,
+      "total_tokens": 4533,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3968,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro h\n  dsimp [Topology.P2, Topology.P1] at *\n  exact Set.Subset.trans h Set.interior_subset",
+    "theorem Topology.P2_implies_P1_and_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A ∧ Topology.P3 A := by\n  intro hA\n  dsimp [Topology.P2, Topology.P1, Topology.P3] at hA ⊢\n  have hP1 : A ⊆ closure (interior A) :=\n    Set.Subset.trans hA interior_subset\n  have hClosureMono : closure (interior A) ⊆ closure A :=\n    closure_mono interior_subset\n  have hInteriorMono : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono hClosureMono\n  have hP3 : A ⊆ interior (closure A) :=\n    Set.Subset.trans hA hInteriorMono\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

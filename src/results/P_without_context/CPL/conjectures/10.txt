@@ -1,0 +1,10 @@
+theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P2 A → Topology.P1 A :=
+theorem P3_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P3 A → Topology.P2 A :=
+theorem P1_or_P3_implies_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P1 A ∨ Topology.P3 A → Topology.P2 A :=
+theorem P1_of_compact_closed {X : Type*} [TopologicalSpace X] [CompactSpace X] {A : Set X} (hA : IsClosed A) : Topology.P1 A :=
+theorem P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : Topology.P1 A) (hB : Topology.P1 B) : Topology.P1 (A ∪ B) :=
+theorem closure_eq_closure_interior_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (hA : Topology.P1 A) : closure A = closure (interior A) :=
+theorem P3_of_P1_and_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P1 A → Topology.P2 A → Topology.P3 A :=
+theorem P1_empty {X : Type*} [TopologicalSpace X] : Topology.P1 (∅ : Set X) :=
+theorem P3_univ {X : Type*} [TopologicalSpace X] : Topology.P3 (Set.univ : Set X) :=
+theorem P1_singleton {X : Type*} [TopologicalSpace X] [T1Space X] (x : X) : Topology.P1 ({x} : Set X) :=

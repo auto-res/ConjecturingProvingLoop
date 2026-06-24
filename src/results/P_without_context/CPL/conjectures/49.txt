@@ -1,0 +1,9 @@
+theorem P1_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P2 A) : P1 A :=
+theorem P2_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P3 A) : P2 A :=
+theorem P3_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P1 A) : P3 A :=
+theorem P1_iff_closure_eq {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A ↔ closure (interior A) = closure A :=
+theorem P2_iff_interior_closure_eq {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A ↔ interior (closure (interior A)) = interior A :=
+theorem P3_iff_closure_interior_eq {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A ↔ closure A = closure (interior A) :=
+theorem dense_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P3 A) : closure (interior A) = closure A :=
+theorem P2_implies_open {X : Type*} [TopologicalSpace X] {A : Set X} (h : P2 A) : IsOpen A :=
+theorem P3_implies_clopen {X : Type*} [TopologicalSpace X] {A : Set X} (h : P3 A) : IsClosed A ∧ IsOpen A :=

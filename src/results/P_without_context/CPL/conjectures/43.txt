@@ -1,0 +1,10 @@
+theorem P1_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P2 A) : P1 A :=
+theorem P2_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} (h : P3 A) : P2 A :=
+theorem P1_hereditary {X : Type*} [TopologicalSpace X] {A B : Set X} (hAB : B ⊆ A) (hA : P1 A) : P1 B :=
+theorem P3_closed_of_closed {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) : P3 A :=
+theorem P2_open_of_open {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) : P2 A :=
+theorem P3_of_dense {X : Type*} [TopologicalSpace X] {A : Set X} (hA : closure A = Set.univ) : P3 A :=
+theorem P1_iff_closure_idem {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A ↔ closure (interior A) = interior (closure (interior A)) :=
+theorem exists_nontrivial_P2 {X : Type*} [TopologicalSpace X] [Nonempty X] : ∃ A : Set X, P2 A ∧ ¬ P1 A :=
+theorem P3_union {X : Type*} [TopologicalSpace X] {A B : Set X} (hA : P3 A) (hB : P3 B) : P3 (A ∪ B) :=
+theorem P2_image_embedding {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y} (hf : Embedding f) {A : Set X} (hA : P2 A) : P2 (f '' A) :=

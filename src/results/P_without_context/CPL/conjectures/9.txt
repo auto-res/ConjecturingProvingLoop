@@ -1,0 +1,12 @@
+theorem P2_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → P1 A :=
+theorem P3_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A → P1 A :=
+theorem P1_union {X : Type*} [TopologicalSpace X] {A B : Set X} : P1 A → P1 B → P1 (A ∪ B) :=
+theorem P2_inter {X : Type*} [TopologicalSpace X] {A B : Set X} : P2 A → P2 B → P2 (A ∩ B) :=
+theorem dense_of_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P1 A → closure (interior A) = closure A :=
+theorem interior_eq_of_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : P2 A → interior (closure (interior A)) = interior (closure A) :=
+theorem P1_iff_P2_for_open {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsOpen A) : P1 A ↔ P2 A :=
+theorem P3_complement_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : P3 A → P1 (Aᶜ) :=
+theorem exists_subset_P2_of_nonempty {X : Type*} [TopologicalSpace X] {A : Set X} (hA : A.Nonempty) : ∃ B : Set X, B ⊆ A ∧ P2 B :=
+theorem P2_of_subset {X : Type*} [TopologicalSpace X] {A B : Set X} : A ⊆ B → P2 B → P2 A :=
+theorem P3_closed {X : Type*} [TopologicalSpace X] {A : Set X} (hA : IsClosed A) : P3 A :=
+theorem P1_monotone {X : Type*} [TopologicalSpace X] {A B : Set X} : A ⊆ B → P1 B → P1 A :=

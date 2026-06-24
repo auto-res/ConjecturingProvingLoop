@@ -1,0 +1,43 @@
+{
+  "times": [
+    35.498305320739746,
+    19.098758935928345
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 4889,
+      "prompt_tokens": 270,
+      "total_tokens": 5159,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 4736,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 2736,
+      "prompt_tokens": 423,
+      "total_tokens": 3159,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2496,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1_and_P3 {A : Set X} (h : P2 A) : P1 A ∧ P3 A := by\n  open Set\n  constructor\n  · dsimp [P1] at *\n    exact subset_trans h interior_subset\n  · dsimp [P3] at *\n    have hcl : closure (interior A) ⊆ closure A := by\n      apply closure_mono\n      exact interior_subset\n    have hint : interior (closure (interior A)) ⊆ interior (closure A) :=\n      interior_mono hcl\n    exact subset_trans h hint",
+    "theorem P2_imp_P1_and_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → (Topology.P1 A ∧ Topology.P3 A) := by\n  intro hP2\n  have hP1 : Topology.P1 A := by\n    have hsubset : interior (closure (interior A)) ⊆ closure (interior A) :=\n      interior_subset\n    exact Set.Subset.trans hP2 hsubset\n  have hP3 : Topology.P3 A := by\n    have hclosure_subset : closure (interior A) ⊆ closure A := by\n      apply closure_mono\n      exact interior_subset\n    have hInteriorMono : interior (closure (interior A)) ⊆ interior (closure A) := by\n      apply interior_mono\n      exact hclosure_subset\n    intro x hx\n    exact hInteriorMono (hP2 hx)\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

@@ -1,0 +1,11 @@
+theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P2 A → Topology.P1 A :=
+theorem P2_implies_P3 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P2 A → Topology.P3 A :=
+theorem P3_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P3 A → Topology.P1 A :=
+theorem P1_intersection {X : Type*} [TopologicalSpace X] {A B : Set X} : Topology.P1 A → Topology.P1 B → Topology.P1 (A ∩ B) :=
+theorem P3_union {X : Type*} [TopologicalSpace X] {A B : Set X} : Topology.P3 A → Topology.P3 B → Topology.P3 (A ∪ B) :=
+theorem P1_top {X : Type*} [TopologicalSpace X] : Topology.P1 (Set.univ : Set X) :=
+theorem P2_empty {X : Type*} [TopologicalSpace X] : Topology.P2 (∅ : Set X) :=
+theorem closure_interior_subset_interior_closure {X : Type*} [TopologicalSpace X] {A : Set X} : closure (interior A) ⊆ interior (closure A) :=
+theorem exists_dense_subset_P2 {X : Type*} [TopologicalSpace X] {A : Set X} : ∃ B : Set X, B ⊆ A ∧ Topology.P2 B :=
+theorem P1_iff_closure_eq {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P1 A ↔ closure (interior A) = closure A :=
+theorem interior_of_P3 {X : Type*} [TopologicalSpace X] {A : Set X} : Topology.P3 A → interior A = interior (closure A) :=

@@ -1,0 +1,12 @@
+theorem P2_of_P1 : ∀ {A : Set X}, P1 A → P2 A :=
+theorem P3_of_P1 : ∀ {A : Set X}, P1 A → P3 A :=
+theorem P3_of_P2 : ∀ {A : Set X}, P2 A → P3 A :=
+theorem P1_iff_closure_eq : ∀ {A : Set X}, P1 A ↔ closure (interior A) = closure A :=
+theorem P3_iff_interior_closure_idem : ∀ {A : Set X}, P3 A ↔ interior (closure A) = interior A :=
+theorem P2_union : ∀ {A B : Set X}, P2 A → P2 B → P2 (A ∪ B) :=
+theorem P3_inter : ∀ {A B : Set X}, P3 A → P3 B → P3 (A ∩ B) :=
+theorem exists_dense_P2 : ∀ {A : Set X}, ∃ B, B ⊆ A ∧ P2 B :=
+theorem P1_of_closed : ∀ {A : Set X}, IsClosed A → P1 A :=
+theorem P3_of_open : ∀ {A : Set X}, IsOpen A → P3 A :=
+theorem P2_empty : P2 (∅ : Set X) :=
+theorem P3_univ : P3 (Set.univ : Set X) :=

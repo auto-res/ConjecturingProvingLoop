@@ -1,0 +1,43 @@
+{
+  "times": [
+    21.975589275360107,
+    36.249669313430786
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2239,
+      "prompt_tokens": 270,
+      "total_tokens": 2509,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2176,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 3697,
+      "prompt_tokens": 365,
+      "total_tokens": 4062,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3584,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {A : Set X} (h : P2 A) : P1 A :=\nby\n  unfold P1 P2 at *\n  exact h.trans (interior_subset _)",
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    P2 A → P1 A := by\n  intro h\n  intro x hx\n  have hx' : x ∈ interior (closure (interior A)) := h hx\n  exact\n    (interior_subset : interior (closure (interior A)) ⊆ closure (interior A)) hx'"
+  ],
+  "success": true
+}

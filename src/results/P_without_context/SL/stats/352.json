@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.69379210472107
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2693,
+      "prompt_tokens": 270,
+      "total_tokens": 2963,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2560,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P3 {A : Set X} : P2 A → P3 A := by\n  intro hP2\n  have hsubset : interior (closure (interior A)) ⊆ interior (closure A) := by\n    have h_closure : closure (interior A) ⊆ closure A := by\n      have : interior A ⊆ A := interior_subset\n      exact closure_mono this\n    exact interior_mono h_closure\n  exact Set.Subset.trans hP2 hsubset"
+  ],
+  "success": true
+}

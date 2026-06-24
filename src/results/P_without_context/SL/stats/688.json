@@ -1,0 +1,26 @@
+{
+  "times": [
+    25.80672812461853
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2770,
+      "prompt_tokens": 270,
+      "total_tokens": 3040,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2624,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem Topology.P2_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X}\n    (h : Topology.P2 (X := X) A) : Topology.P1 (X := X) A := by\n  dsimp [Topology.P2, Topology.P1] at *\n  intro x hx\n  have hx' : x ∈ interior (closure (interior A)) := h hx\n  have hsubset : interior (closure (interior A)) ⊆ closure (interior A) := interior_subset\n  exact hsubset hx'"
+  ],
+  "success": true
+}

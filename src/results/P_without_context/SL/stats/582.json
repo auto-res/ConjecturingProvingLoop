@@ -1,0 +1,43 @@
+{
+  "times": [
+    16.89298367500305,
+    12.03950572013855
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 2203,
+      "prompt_tokens": 270,
+      "total_tokens": 2473,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 2112,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 1363,
+      "prompt_tokens": 341,
+      "total_tokens": 1704,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1280,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro h\n  dsimp [Topology.P2] at h\n  dsimp [Topology.P1]\n  exact h.trans Set.interior_subset",
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 (X := X) A → Topology.P1 (X := X) A := by\n  intro h\n  exact Set.Subset.trans h interior_subset"
+  ],
+  "success": true
+}

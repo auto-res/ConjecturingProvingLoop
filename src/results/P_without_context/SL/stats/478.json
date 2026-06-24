@@ -1,0 +1,43 @@
+{
+  "times": [
+    15.676244258880615,
+    61.78196907043457
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1627,
+      "prompt_tokens": 270,
+      "total_tokens": 1897,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1536,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    },
+    {
+      "completion_tokens": 6290,
+      "prompt_tokens": 365,
+      "total_tokens": 6655,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 6144,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P1 A := by\n  intro h\n  dsimp [Topology.P2, Topology.P1] at *\n  exact Set.Subset.trans h (interior_subset _)",
+    "theorem P2_imp_P3 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → Topology.P3 A := by\n  intro hA\n  dsimp [Topology.P2, Topology.P3] at *\n  intro x hx\n  have hx' : x ∈ interior (closure (interior A)) := hA hx\n  have hsubset : interior (closure (interior A)) ⊆ interior (closure A) :=\n    interior_mono (closure_mono interior_subset)\n  exact hsubset hx'"
+  ],
+  "success": true
+}

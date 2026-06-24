@@ -1,0 +1,9 @@
+theorem P1_of_closure_interior_idempotent {A : Set X} : (closure (interior (closure (interior A))) = closure (interior A)) → P1 A :=
+theorem P1_monotone {A B : Set X} (hAB : A ⊆ B) (hB : P1 B) : P1 A :=
+theorem P1_union {A B : Set X} (hA : P1 A) (hB : P1 B) : P1 (A ∪ B) :=
+theorem P2_empty : P2 (∅ : Set X) :=
+theorem P2_implies_P1 {A : Set X} (h : P2 A) : P1 A :=
+theorem P3_of_P1_and_closure_eq {A : Set X} (h1 : P1 A) (h2 : closure A = closure (interior A)) : P3 A :=
+theorem P3_preimage_of_continuous {Y : Type*} [TopologicalSpace Y] {f : Y → X} (hf : Continuous f) {B : Set X} (hB : P3 B) : P3 (f ⁻¹' B) :=
+theorem P2_of_P3_complement {A : Set X} (h : P3 A) : P2 (Aᶜ) :=
+theorem P1_closure_eq_closure_interior {A : Set X} (h : P1 A) : closure (interior A) = closure A :=

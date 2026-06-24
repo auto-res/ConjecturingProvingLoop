@@ -1,0 +1,26 @@
+{
+  "times": [
+    23.34613609313965
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 3790,
+      "prompt_tokens": 270,
+      "total_tokens": 4060,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 3456,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_implies_P1_and_P3\n    {X : Type*} [TopologicalSpace X] {A : Set X} :\n    Topology.P2 A → (Topology.P1 A ∧ Topology.P3 A) := by\n  intro hP2\n  have hP1 : Topology.P1 A := by\n    dsimp [Topology.P1]\n    intro x hxA\n    have hxInt : x ∈ interior (closure (interior A)) := hP2 hxA\n    have hsubset : interior (closure (interior A)) ⊆ closure (interior A) := by\n      simpa using interior_subset (s := closure (interior A))\n    exact hsubset hxInt\n  have hP3 : Topology.P3 A := by\n    dsimp [Topology.P3]\n    intro x hxA\n    have hxInt : x ∈ interior (closure (interior A)) := hP2 hxA\n    have hcl_mono : closure (interior A) ⊆ closure A := by\n      have hsubset : interior A ⊆ A := by\n        simpa using interior_subset (s := A)\n      exact closure_mono hsubset\n    have hint_mono : interior (closure (interior A)) ⊆ interior (closure A) :=\n      interior_mono hcl_mono\n    exact hint_mono hxInt\n  exact And.intro hP1 hP3"
+  ],
+  "success": true
+}

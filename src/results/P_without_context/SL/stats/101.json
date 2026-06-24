@@ -1,0 +1,26 @@
+{
+  "times": [
+    9.532063961029053
+  ],
+  "api_usages": [
+    {
+      "completion_tokens": 1480,
+      "prompt_tokens": 270,
+      "total_tokens": 1750,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 1344,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      }
+    }
+  ],
+  "responses": [
+    "theorem P2_imp_P1 {X : Type*} [TopologicalSpace X] {A : Set X} :\n    P2 (A : Set X) → P1 A := by\n  intro hP2\n  unfold P2 P1 at *\n  intro x hxA\n  have hx_int : x ∈ interior (closure (interior A)) := hP2 hxA\n  have h_subset : interior (closure (interior A)) ⊆ closure (interior A) :=\n    interior_subset\n  exact h_subset hx_int"
+  ],
+  "success": true
+}
